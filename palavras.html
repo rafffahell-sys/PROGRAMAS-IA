@@ -51,10 +51,7 @@
     letter-spacing: 0.5px;
   }
 
-  .btn-group {
-    display: flex;
-    gap: 6px;
-  }
+  .btn-group { display: flex; gap: 6px; }
 
   button {
     padding: 8px 16px;
@@ -69,12 +66,7 @@
   }
 
   button:hover { border-color: #e91e63; color: #e91e63; }
-
-  button.active {
-    background: #e91e63;
-    border-color: #e91e63;
-    color: white;
-  }
+  button.active { background: #e91e63; border-color: #e91e63; color: white; }
 
   .btn-new {
     background: #880e4f !important;
@@ -92,9 +84,7 @@
     margin-bottom: 16px;
   }
 
-  .info-item {
-    text-align: center;
-  }
+  .info-item { text-align: center; }
 
   .info-item span {
     display: block;
@@ -103,10 +93,7 @@
     text-transform: uppercase;
   }
 
-  .info-item strong {
-    font-size: 1.3rem;
-    color: #880e4f;
-  }
+  .info-item strong { font-size: 1.3rem; color: #880e4f; }
 
   .game-area {
     display: flex;
@@ -125,10 +112,7 @@
     touch-action: none;
   }
 
-  #grid {
-    display: grid;
-    gap: 2px;
-  }
+  #grid { display: grid; gap: 2px; }
 
   .cell {
     display: flex;
@@ -145,9 +129,9 @@
     touch-action: none;
   }
 
-  .cell:hover { background: #fce4ec; transform: scale(1.05); }
+  .cell:hover  { background: #fce4ec; transform: scale(1.05); }
   .cell.selected { background: #f48fb1; color: white; border-color: #e91e63; }
-  .cell.found { background: #a5d6a7; color: white; border-color: #4caf50; }
+  .cell.found    { background: #a5d6a7; color: white; border-color: #4caf50; }
   .cell.found.selected { background: #81c784; }
 
   .word-panel {
@@ -329,6 +313,9 @@ const DIFFICULTIES = {
   }
 };
 
+// Todas as 8 direções usadas na varredura de verificação
+const ALL_DIRECTIONS = [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
+
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 let currentDifficulty = 'facil';
@@ -342,6 +329,28 @@ let timerInterval     = null;
 let seconds           = 0;
 let gridSize          = 12;
 let cellSize          = 38;
+
+// ─── NOVA FUNÇÃO: verifica se uma palavra existe fisicamente na grade ──────────
+// Percorre todas as células e todas as direções procurando a sequência exata.
+// Retorna true se encontrada, false caso contrário.
+function wordExistsInGrid(word) {
+  for (let r = 0; r < gridSize; r++) {
+    for (let c = 0; c < gridSize; c++) {
+      for (const [dr, dc] of ALL_DIRECTIONS) {
+        let match = true;
+        for (let i = 0; i < word.length; i++) {
+          const nr = r + dr * i;
+          const nc = c + dc * i;
+          if (nr < 0 || nr >= gridSize || nc < 0 || nc >= gridSize) { match = false; break; }
+          if (grid[nr][nc] !== word[i]) { match = false; break; }
+        }
+        if (match) return true;
+      }
+    }
+  }
+  return false;
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 function setDifficulty(d, btn) {
   currentDifficulty = d;
@@ -367,16 +376,26 @@ function newGame() {
   selecting     = false;
 
   const config = DIFFICULTIES[currentDifficulty];
-  gridSize     = config.gridSize;
-  cellSize     = currentDifficulty === 'facil' ? 42
-               : currentDifficulty === 'medio' ? 36 : 30;
+  gridSize = config.gridSize;
+  cellSize = currentDifficulty === 'facil' ? 42
+           : currentDifficulty === 'medio' ? 36 : 30;
 
   document.getElementById('diff-hint').textContent = config.hint;
   document.getElementById('timer').textContent = '00:00';
 
-  initGrid();
-  placeWords();
-  fillRandom();
+  // Tenta montar o jogo até que todas as palavras da lista existam na grade.
+  // O loop garante que não haverá nenhuma palavra "fantasma".
+  let attempts = 0;
+  do {
+    initGrid();
+    placeWords();
+    fillRandom();
+    attempts++;
+  } while (!validateAllWords() && attempts < 10);
+
+  // Auditoria final: remove da lista qualquer palavra que não seja localizável
+  placedWords = placedWords.filter(w => wordExistsInGrid(w));
+
   renderGrid();
   renderWordList();
   updateCounts();
@@ -387,6 +406,11 @@ function newGame() {
     const s = String(seconds % 60).padStart(2, '0');
     document.getElementById('timer').textContent = `${m}:${s}`;
   }, 1000);
+}
+
+// Retorna true somente se TODAS as palavras de placedWords forem encontráveis na grade
+function validateAllWords() {
+  return placedWords.every(w => wordExistsInGrid(w));
 }
 
 function initGrid() {
@@ -418,12 +442,13 @@ function placeWords() {
       for (const [r, c] of positions) {
         if (canPlace(w, r, c, dir)) {
           doPlace(w, r, c, dir);
-          placedWords.push(word);
+          placedWords.push(word); // guarda a versão original (para exibição e busca)
           placed = true;
           break;
         }
       }
     }
+    // Se não coube, a palavra simplesmente não entra na lista — sem registrar
   }
 }
 
@@ -465,20 +490,17 @@ function renderGrid() {
   for (let r = 0; r < gridSize; r++) {
     for (let c = 0; c < gridSize; c++) {
       const cell = document.createElement('div');
-      cell.className        = 'cell';
-      cell.style.width      = cellSize + 'px';
-      cell.style.height     = cellSize + 'px';
-      cell.style.fontSize   = (cellSize * 0.45) + 'px';
-      cell.dataset.r        = r;
-      cell.dataset.c        = c;
-      cell.textContent      = grid[r][c];
+      cell.className      = 'cell';
+      cell.style.width    = cellSize + 'px';
+      cell.style.height   = cellSize + 'px';
+      cell.style.fontSize = (cellSize * 0.45) + 'px';
+      cell.dataset.r      = r;
+      cell.dataset.c      = c;
+      cell.textContent    = grid[r][c];
 
-      // Eventos de mouse
       cell.addEventListener('mousedown', onStart);
       cell.addEventListener('mouseover', onMove);
       cell.addEventListener('mouseup',   onEnd);
-
-      // Eventos de touch — passive:false permite chamar preventDefault()
       cell.addEventListener('touchstart', onTouchStart, { passive: false });
       cell.addEventListener('touchmove',  onTouchMove,  { passive: false });
       cell.addEventListener('touchend',   onEnd,        { passive: false });
@@ -512,7 +534,7 @@ function onMove(e) {
 }
 
 function onTouchStart(e) {
-  e.preventDefault(); // impede scroll e "puxar para atualizar"
+  e.preventDefault();
   selecting     = true;
   selectedCells = [];
   clearHighlight();
@@ -523,7 +545,7 @@ function onTouchStart(e) {
 }
 
 function onTouchMove(e) {
-  e.preventDefault(); // impede scroll enquanto arrasta sobre a grade
+  e.preventDefault();
   if (!selecting) return;
   const touch = e.touches[0];
   const el = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -534,7 +556,7 @@ function onTouchMove(e) {
   if (isValidLine(r0, c0, r, c)) updateLineSelection(r0, c0, r, c);
 }
 
-function onEnd(e) {
+function onEnd() {
   if (!selecting) return;
   selecting = false;
   checkSelection();
@@ -552,12 +574,10 @@ function isValidLine(r0, c0, r1, c1) {
 function updateLineSelection(r0, c0, r1, c1) {
   clearHighlight();
   selectedCells = [];
-
   const dr = r1 - r0, dc = c1 - c0;
   let stepR = 0, stepC = 0;
   if (dr !== 0) stepR = dr / Math.abs(dr);
   if (dc !== 0) stepC = dc / Math.abs(dc);
-
   const steps = Math.max(Math.abs(dr), Math.abs(dc));
   for (let i = 0; i <= steps; i++) {
     const r = r0 + stepR * i, c = c0 + stepC * i;
@@ -582,22 +602,16 @@ function clearHighlight() {
 
 function checkSelection() {
   if (selectedCells.length < 2) return;
-
   const word    = selectedCells.map(([r, c]) => grid[r][c]).join('');
   const wordRev = word.split('').reverse().join('');
-
   const match = placedWords.find(w =>
     !foundWords.includes(w) && (w === word || w === wordRev)
   );
-
   if (match) {
     foundWords.push(match);
     selectedCells.forEach(([r, c]) => {
       const cell = getCell(r, c);
-      if (cell) {
-        cell.classList.remove('selected');
-        cell.classList.add('found');
-      }
+      if (cell) { cell.classList.remove('selected'); cell.classList.add('found'); }
     });
     markWordFound(match);
     updateCounts();
