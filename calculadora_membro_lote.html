@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de ATS - Membros</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #222222;
+      color: #e0e0e0;
+      font-family: 'Century Gothic', 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 10px;
+    }
+
+    h1 {
+      color: #FFD700;
+      font-size: 1.4rem;
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .card {
+      background: #2b2b2b;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      width: 100%;
+      max-width: 580px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      color: #FFD700;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .field-row {
+      display: flex;
+      align-items: center;
+      background: #333333;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .field-row label {
+      min-width: 200px;
+      font-size: 0.9rem;
+      color: #e0e0e0;
+    }
+
+    .field-row input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 0.95rem;
+      font-family: 'Century Gothic', sans-serif;
+      outline: none;
+      padding: 4px 0;
+    }
+
+    .field-row input::placeholder { color: #888; }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 16px 0 4px;
+    }
+
+    button {
+      padding: 9px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      font-family: 'Century Gothic', sans-serif;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    button:hover { opacity: 0.85; }
+
+    .btn-yellow { background: #FFD700; color: #000; }
+    .btn-green  { background: #4CAF50; color: #fff; }
+    .btn-gray   { background: #555;    color: #fff; }
+    .btn-red    { background: #dc3545; color: #fff; }
+
+    .result-label {
+      color: #FFD700;
+      font-size: 0.95rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    #resultado, #resultado-lote {
+      background: #1e1e1e;
+      border: 1px solid #FFD700;
+      border-radius: 6px;
+      padding: 12px;
+      font-family: 'Century Gothic', monospace;
+      font-size: 0.88rem;
+      color: #e0e0e0;
+      white-space: pre-wrap;
+      min-height: 80px;
+      max-height: 220px;
+      overflow-y: auto;
+      line-height: 1.7;
+    }
+
+    .instrucao {
+      font-size: 0.78rem;
+      color: #ccc;
+      text-align: center;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .arquivo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    #nome-arquivo {
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #444;
+      margin: 6px 0 14px;
+    }
+
+    footer {
+      background: #FFD700;
+      color: #222;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      width: 100%;
+      max-width: 580px;
+      border-radius: 0 0 10px 10px;
+      margin-top: -16px;
+      margin-bottom: 20px;
+    }
+
+    .erro { color: #ff6b6b; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1e1e1e; }
+    ::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+  <h1>📊 CALCULADORA DE ATS - MEMBROS</h1>
+
+  <!-- CÁLCULO INDIVIDUAL -->
+  <div class="card">
+    <div class="section-title">👤 CÁLCULO INDIVIDUAL</div>
+
+    <div class="field-row">
+      <label>Data de Início (DD/MM/AAAA):</label>
+      <input type="text" id="dataInicio" placeholder="DD/MM/AAAA" maxlength="10" oninput="mascararData(this)"/>
+    </div>
+
+    <div class="field-row">
+      <label>Data de Fim (DD/MM/AAAA):</label>
+      <input type="text" id="dataFim" placeholder="DD/MM/AAAA" maxlength="10" oninput="mascararData(this)"/>
+    </div>
+
+    <div class="field-row">
+      <label>Dias Averbados:</label>
+      <input type="number" id="averbados" placeholder="0" min="0" value="0"/>
+    </div>
+
+    <div class="field-row">
+      <label>Dias a Descontar:</label>
+      <input type="number" id="descontar" placeholder="0" min="0" value="0"/>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-yellow" onclick="calcularIndividual()">🧮 Calcular</button>
+      <button class="btn-yellow" onclick="limpar()">🗑️ Limpar</button>
+    </div>
+
+    <hr class="divider"/>
+
+    <div class="result-label">📄 RESULTADO:</div>
+    <div id="resultado">Aguardando cálculo...</div>
+  </div>
+
+  <!-- CÁLCULO EM LOTE -->
+  <div class="card">
+    <div class="section-title">📂 CÁLCULO EM LOTE</div>
+
+    <p class="instrucao">
+      Importe um arquivo <strong style="color:#FFD700">.txt</strong> separado por ponto e vírgula (;)<br/>
+      Formato: <em>matricula;nome;data_inicio;data_fim;averbados;faltas;percentual</em>
+    </p>
+
+    <div class="arquivo-row">
+      <button class="btn-gray" onclick="document.getElementById('inputArquivo').click()">📁 Escolher Arquivo</button>
+      <span id="nome-arquivo">Nenhum arquivo selecionado</span>
+      <input type="file" id="inputArquivo" accept=".txt,.csv" style="display:none" onchange="carregarArquivo(this)"/>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-green" onclick="processarLote()">⚙️ Processar Arquivo e Exibir</button>
+    </div>
+
+    <hr class="divider"/>
+
+    <div class="result-label">📄 RESULTADO DO LOTE:</div>
+    <div id="resultado-lote">Aguardando processamento...</div>
+  </div>
+
+  <footer>
+    Desenvolvido por Giovane Moura - Analista Contador
+  </footer>
+
+  <script>
+
+    let conteudoArquivo = null;
+
+    // Máscara de data DD/MM/AAAA
+    function mascararData(input) {
+      let v = input.value.replace(/\D/g, '');
+      if (v.length > 2)  v = v.slice(0,2) + '/' + v.slice(2);
+      if (v.length > 5)  v = v.slice(0,5) + '/' + v.slice(5);
+      input.value = v.slice(0, 10);
+    }
+
+    function parsearData(str) {
+      const partes = str.trim().split('/');
+      if (partes.length !== 3) return null;
+      const [d, m, a] = partes.map(Number);
+      const dt = new Date(a, m - 1, d);
+      if (isNaN(dt)) return null;
+      return dt;
+    }
+
+    function formatarData(date) {
+      const d = String(date.getDate()).padStart(2,'0');
+      const m = String(date.getMonth()+1).padStart(2,'0');
+      return `${d}/${m}/${date.getFullYear()}`;
+    }
+
+    function calcularATS(diasTotais) {
+      const diasPorQuinquenio = 1825;
+      const maxPercentual = 35;
+      const qtd = Math.floor(diasTotais / diasPorQuinquenio);
+      return Math.min(qtd * 5, maxPercentual);
+    }
+
+    function calcularIndividual() {
+      const resultDiv = document.getElementById('resultado');
+
+      const inicioStr = document.getElementById('dataInicio').value;
+      const fimStr    = document.getElementById('dataFim').value;
+
+      if (!inicioStr || !fimStr) {
+        resultDiv.innerHTML = '<span class="erro">⚠️ Por favor, preencha as datas de início e fim.</span>';
+        return;
+      }
+
+      const inicio = parsearData(inicioStr);
+      const fim    = parsearData(fimStr);
+
+      if (!inicio || !fim) {
+        resultDiv.innerHTML = '<span class="erro">⚠️ Formato de data inválido. Use DD/MM/AAAA.</span>';
+        return;
+      }
+
+      if (fim < inicio) {
+        resultDiv.innerHTML = '<span class="erro">⚠️ A data final deve ser posterior à data inicial.</span>';
+        return;
+      }
+
+      const msPerDay   = 1000 * 60 * 60 * 24;
+      const averbados  = parseInt(document.getElementById('averbados').value) || 0;
+      const descontar  = parseInt(document.getElementById('descontar').value)  || 0;
+
+      const periodoBruto = Math.round((fim - inicio) / msPerDay) + 1;
+      const diasTotais   = periodoBruto + averbados - descontar;
+
+      if (diasTotais < 0) {
+        resultDiv.innerHTML = '<span class="erro">⚠️ Total de dias negativos. Verifique os valores.</span>';
+        return;
+      }
+
+      const atsAtual      = calcularATS(diasTotais);
+      const maxPercentual = 35;
+      const diasPorQuinq  = 1825;
+
+      let linhas = [];
+      linhas.push(`📅 Período bruto: ${periodoBruto} dias`);
+      linhas.push(`➕ Dias Averbados: ${averbados}`);
+      linhas.push(`➖ Dias a Descontar: ${descontar}`);
+      linhas.push(`📊 Total ajustado: ${diasTotais} dias`);
+      linhas.push(`⏱ ATS atual: ${atsAtual}%`);
+
+      if (atsAtual < maxPercentual) {
+        const diasFaltantes  = diasPorQuinq - (diasTotais % diasPorQuinq);
+        const dataProximo    = new Date(fim.getTime() + diasFaltantes * msPerDay);
+        const proxPercentual = atsAtual + 5;
+        linhas.push(`☑ Próximo quinquênio (${proxPercentual}%) em: ${formatarData(dataProximo)}`);
+      } else {
+        linhas.push(`☑ Percentual máximo (${maxPercentual}%) atingido.`);
+      }
+
+      resultDiv.textContent = linhas.join('\n');
+    }
+
+    function limpar() {
+      document.getElementById('dataInicio').value = '';
+      document.getElementById('dataFim').value    = '';
+      document.getElementById('averbados').value  = '0';
+      document.getElementById('descontar').value  = '0';
+      document.getElementById('resultado').textContent = 'Aguardando cálculo...';
+    }
+
+    function carregarArquivo(input) {
+      const arquivo = input.files[0];
+      if (!arquivo) return;
+
+      document.getElementById('nome-arquivo').textContent = arquivo.name;
+      document.getElementById('nome-arquivo').style.color = '#FFD700';
+
+      const reader = new FileReader();
+      reader.onload = e => { conteudoArquivo = e.target.result; };
+      reader.readAsText(arquivo, 'utf-8');
+    }
+
+    function processarLote() {
+      const resultDiv = document.getElementById('resultado-lote');
+
+      if (!conteudoArquivo) {
+        resultDiv.innerHTML = '<span class="erro">⚠️ Selecione um arquivo primeiro.</span>';
+        return;
+      }
+
+      const linhas     = conteudoArquivo.split('\n');
+      const msPerDay   = 1000 * 60 * 60 * 24;
+      let processados  = 0;
+      let alterados    = 0;
+      let erros        = 0;
+      let saida        = '--- RESULTADO DO PROCESSAMENTO EM LOTE ---\n\n';
+
+      for (let linha of linhas) {
+        linha = linha.trim();
+        if (!linha) continue;
+
+        const colunas = linha.split(';');
+        if (colunas.length >= 7) {
+          const matricula          = colunas[0].trim();
+          const nome               = colunas[1].trim();
+          const strInicio          = colunas[2].trim();
+          const strFim             = colunas[3].trim();
+          const averbados          = parseInt(colunas[4].trim()) || 0;
+          const faltas             = parseInt(colunas[5].trim()) || 0;
+          const percentualStr      = colunas[6].trim().replace('%','');
+          const percentualInformado = parseInt(percentualStr) || 0;
+
+          const inicio = parsearData(strInicio);
+          const fim    = parsearData(strFim);
+
+          if (inicio && fim && fim >= inicio) {
+            const periodoBruto   = Math.round((fim - inicio) / msPerDay) + 1;
+            const diasTotais     = periodoBruto + averbados - faltas;
+            const atsCalculado   = calcularATS(diasTotais);
+
+            processados++;
+
+            if (atsCalculado !== percentualInformado) {
+              alterados++;
+              saida += `👤 ${nome} (Mat: ${matricula})\n`;
+              saida += `   De: ${percentualInformado}% ➔ Para: ${atsCalculado}%\n\n`;
+            }
+          } else {
+            erros++;
+          }
+        } else {
+          erros++;
+        }
+      }
+
+      if (alterados === 0 && erros === 0) {
+        saida += '✅ Nenhuma alteração de percentual identificada no lote.';
+      } else if (alterados === 0 && erros > 0) {
+        saida += `⚠️ Nenhuma alteração identificada, mas houve ${erros} erro(s) de formatação.`;
+      } else {
+        saida += `\n📊 Analisados: ${processados} | Alterações: ${alterados} | Erros: ${erros}`;
+      }
+
+      resultDiv.textContent = saida;
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') calcularIndividual();
+    });
+
+  </script>
+
+</body>
+</html>
