@@ -75,7 +75,17 @@
     padding: 8px 24px;
   }
 
-  .btn-new:hover { opacity: 0.85; }
+  .btn-gabarito {
+    background: #f57f17 !important;
+    border-color: #f57f17 !important;
+    color: white !important;
+    padding: 8px 20px;
+    margin-top: 12px;
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .btn-gabarito:hover { opacity: 0.85; border-color: #f57f17 !important; color: white !important; }
 
   .info-bar {
     display: flex;
@@ -124,15 +134,15 @@
     cursor: pointer;
     background: #f8f9fa;
     color: #333;
-    transition: background 0.15s, transform 0.1s;
+    transition: background 0.15s;
     border: 1px solid #eee;
     touch-action: none;
   }
 
-  .cell:hover  { background: #fce4ec; transform: scale(1.05); }
+  .cell:hover    { background: #fce4ec; }
   .cell.selected { background: #f48fb1; color: white; border-color: #e91e63; }
-  .cell.found    { background: #a5d6a7; color: white; border-color: #4caf50; }
-  .cell.found.selected { background: #81c784; }
+  .cell.found    { background: #a5d6a7; color: #1b5e20; border-color: #4caf50; font-weight: 900; }
+  .cell.gabarito { background: #66bb6a; color: white;  border-color: #2e7d32; font-weight: 900; }
 
   .word-panel {
     background: white;
@@ -259,6 +269,7 @@
   <div class="word-panel">
     <h3>📋 Palavras</h3>
     <ul class="word-list" id="word-list"></ul>
+    <button class="btn-gabarito" onclick="mostrarGabarito()">🔎 Ver Gabarito</button>
   </div>
 </div>
 
@@ -274,55 +285,49 @@
 </div>
 
 <script>
+// ─── TEMAS ────────────────────────────────────────────────────────────────────
 const THEMES = {
-  natureza: [
-    'ARVORE','FLOR','CHUVA','VENTO','PEDRA','FOLHA','RAIZ','TERRA',
-    'SEMENTE','GALHO','TRONCO','MATO','CAMPO','SERRA','SOL','MAR',
-    'RIO','LAGO','NEVE','BRISA'
-  ],
-  animais: [
-    'GATO','CACHORRO','PASSARO','COBRA','PEIXE','SAPO','TIGRE','LEAO',
-    'URSO','LOBO','RAPOSA','COELHO','MACACO','PATO','GALINHA','CAVALO',
-    'VACA','PORCO','RATO','BORBOLETA'
-  ],
-  cozinha: [
-    'PRATO','COLHER','FACA','GARFO','PANELA','FOGAO','FORNO','GELADEIRA',
-    'XICARA','COPO','TIGELA','TALHERES','TOALHA','GAVETA','ARMARIO',
-    'FILTRO','BULE','ASSADEIRA','ESCORREDOR','TEMPERO'
-  ]
+  natureza: ['ARVORE','FLOR','CHUVA','VENTO','PEDRA','FOLHA','RAIZ',
+             'TERRA','SEMENTE','GALHO','TRONCO','MATO','CAMPO','SERRA',
+             'SOL','MAR','RIO','LAGO','NEVE','BRISA'],
+  animais:  ['GATO','CACHORRO','PASSARO','COBRA','PEIXE','SAPO','TIGRE',
+             'LEAO','URSO','LOBO','RAPOSA','COELHO','MACACO','PATO',
+             'GALINHA','CAVALO','VACA','PORCO','RATO','BORBOLETA'],
+  cozinha:  ['PRATO','COLHER','FACA','GARFO','PANELA','FOGAO','FORNO',
+             'GELADEIRA','XICARA','COPO','TIGELA','TOALHA','GAVETA',
+             'ARMARIO','FILTRO','BULE','ASSADEIRA','TEMPERO','RALADOR','ESCUMADEIRA']
 };
 
+// ─── DIFICULDADES ─────────────────────────────────────────────────────────────
 const DIFFICULTIES = {
   facil: {
     gridSize: 12,
-    wordCount: 12,
-    directions: [[0,1],[1,0],[0,-1],[-1,0]],
-    hint: '⬆️ Fácil: palavras na horizontal e vertical'
+    // apenas horizontal (→) e vertical (↓) — as direções mais fáceis de enxergar
+    directions: [[0,1],[1,0]],
+    hint: '⬆️ Fácil: palavras da esquerda→direita e de cima→baixo'
   },
   medio: {
-    gridSize: 15,
-    wordCount: 13,
+    gridSize: 14,
     directions: [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]],
     hint: '↗️ Médio: palavras em todas as direções'
   },
   dificil: {
-    gridSize: 18,
-    wordCount: 15,
+    gridSize: 16,
     directions: [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]],
-    hint: '🔄 Difícil: palavras em todas as direções e ao contrário'
+    hint: '🔄 Difícil: todas as direções e palavras invertidas'
   }
 };
 
-// Todas as 8 direções usadas na varredura de verificação
-const ALL_DIRECTIONS = [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
-
+const ALL_DIRS = [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const WORD_LIMIT = 7; // máximo de palavras por jogo
 
+// ─── ESTADO ───────────────────────────────────────────────────────────────────
 let currentDifficulty = 'facil';
 let currentTheme      = 'natureza';
-let grid              = [];
-let placedWords       = [];
-let foundWords        = [];
+let grid              = [];   // grade de letras [row][col]
+let placedWords       = [];   // [{word, cells:[{r,c}]}]  — só entra se verificado
+let foundWords        = [];   // palavras já encontradas pelo jogador
 let selecting         = false;
 let selectedCells     = [];
 let timerInterval     = null;
@@ -330,28 +335,7 @@ let seconds           = 0;
 let gridSize          = 12;
 let cellSize          = 38;
 
-// ─── NOVA FUNÇÃO: verifica se uma palavra existe fisicamente na grade ──────────
-// Percorre todas as células e todas as direções procurando a sequência exata.
-// Retorna true se encontrada, false caso contrário.
-function wordExistsInGrid(word) {
-  for (let r = 0; r < gridSize; r++) {
-    for (let c = 0; c < gridSize; c++) {
-      for (const [dr, dc] of ALL_DIRECTIONS) {
-        let match = true;
-        for (let i = 0; i < word.length; i++) {
-          const nr = r + dr * i;
-          const nc = c + dc * i;
-          if (nr < 0 || nr >= gridSize || nc < 0 || nc >= gridSize) { match = false; break; }
-          if (grid[nr][nc] !== word[i]) { match = false; break; }
-        }
-        if (match) return true;
-      }
-    }
-  }
-  return false;
-}
-// ─────────────────────────────────────────────────────────────────────────────
-
+// ─── FUNÇÕES DE CONTROLE ──────────────────────────────────────────────────────
 function setDifficulty(d, btn) {
   currentDifficulty = d;
   document.querySelectorAll('#btn-facil,#btn-medio,#btn-dificil')
@@ -368,6 +352,7 @@ function setTheme(t, btn) {
   newGame();
 }
 
+// ─── NOVO JOGO ────────────────────────────────────────────────────────────────
 function newGame() {
   clearInterval(timerInterval);
   seconds       = 0;
@@ -377,24 +362,13 @@ function newGame() {
 
   const config = DIFFICULTIES[currentDifficulty];
   gridSize = config.gridSize;
-  cellSize = currentDifficulty === 'facil' ? 42
-           : currentDifficulty === 'medio' ? 36 : 30;
+  cellSize = currentDifficulty === 'facil' ? 40
+           : currentDifficulty === 'medio' ? 34 : 28;
 
   document.getElementById('diff-hint').textContent = config.hint;
   document.getElementById('timer').textContent = '00:00';
 
-  // Tenta montar o jogo até que todas as palavras da lista existam na grade.
-  // O loop garante que não haverá nenhuma palavra "fantasma".
-  let attempts = 0;
-  do {
-    initGrid();
-    placeWords();
-    fillRandom();
-    attempts++;
-  } while (!validateAllWords() && attempts < 10);
-
-  // Auditoria final: remove da lista qualquer palavra que não seja localizável
-  placedWords = placedWords.filter(w => wordExistsInGrid(w));
+  buildGame();   // monta grade e posiciona palavras com verificação embutida
 
   renderGrid();
   renderWordList();
@@ -408,51 +382,92 @@ function newGame() {
   }, 1000);
 }
 
-// Retorna true somente se TODAS as palavras de placedWords forem encontráveis na grade
-function validateAllWords() {
-  return placedWords.every(w => wordExistsInGrid(w));
-}
+// ─── CONSTRUÇÃO DO JOGO ───────────────────────────────────────────────────────
+// Filosofia: uma palavra SÓ é aceita depois de:
+//   1. ser fisicamente escrita na grade (doPlace)
+//   2. ser encontrada pela varredura (findWordInGrid) — confirmação independente
+// Se a varredura não confirmar, a palavra é removida da grade e descartada.
 
-function initGrid() {
-  grid = [];
-  for (let r = 0; r < gridSize; r++) {
-    grid.push(Array(gridSize).fill(''));
-  }
-}
+function buildGame() {
+  const config = DIFFICULTIES[currentDifficulty];
+  const pool   = [...THEMES[currentTheme]].sort(() => Math.random() - 0.5);
+  placedWords  = [];
 
-function placeWords() {
-  const config     = DIFFICULTIES[currentDifficulty];
-  const pool       = [...THEMES[currentTheme]].sort(() => Math.random() - 0.5);
-  const candidates = pool.slice(0, config.wordCount + 5);
-  placedWords      = [];
+  // Reinicia a grade vazia
+  grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
 
-  for (const word of candidates) {
-    if (placedWords.length >= config.wordCount) break;
+  for (const word of pool) {
+    if (placedWords.length >= WORD_LIMIT) break;
+
+    // No modo difícil, 50% das palavras são invertidas antes de tentar encaixar
+    const wordToPlace = (currentDifficulty === 'dificil' && Math.random() < 0.5)
+      ? word.split('').reverse().join('')
+      : word;
+
     const dirs = [...config.directions].sort(() => Math.random() - 0.5);
-
-    let w = word;
-    if (currentDifficulty === 'dificil' && Math.random() < 0.5) {
-      w = word.split('').reverse().join('');
-    }
-
     let placed = false;
+
+    outerLoop:
     for (const dir of dirs) {
-      if (placed) break;
-      const positions = getShuffledPositions();
+      const positions = shuffledPositions();
       for (const [r, c] of positions) {
-        if (canPlace(w, r, c, dir)) {
-          doPlace(w, r, c, dir);
-          placedWords.push(word); // guarda a versão original (para exibição e busca)
-          placed = true;
-          break;
+        if (canPlace(wordToPlace, r, c, dir)) {
+          // Escreve na grade
+          doPlace(wordToPlace, r, c, dir);
+
+          // ── VERIFICAÇÃO IMEDIATA ──────────────────────────────────────────
+          // Busca a palavra original (e também a invertida, para modo difícil)
+          // diretamente na grade recém-atualizada.
+          const foundCells = findWordInGrid(word);
+
+          if (foundCells) {
+            // Confirmado! Registra com as coordenadas reais encontradas.
+            placedWords.push({ word, cells: foundCells });
+            placed = true;
+            break outerLoop;
+          } else {
+            // A varredura não confirmou — desfaz a escrita e tenta outra posição
+            undoPlace(wordToPlace, r, c, dir);
+          }
         }
       }
     }
-    // Se não coube, a palavra simplesmente não entra na lista — sem registrar
+    // Se placed === false, a palavra simplesmente não entra — sem rastro, sem surpresa
   }
+
+  // Preenche o restante com letras aleatórias
+  fillRandom();
 }
 
-function getShuffledPositions() {
+// ─── BUSCA NA GRADE (retorna array de {r,c} ou null) ─────────────────────────
+// Procura a palavra E a palavra invertida em todas as 8 direções.
+// É a fonte da verdade — independente do método de posicionamento.
+function findWordInGrid(word) {
+  const variants = [word, word.split('').reverse().join('')];
+
+  for (const variant of variants) {
+    for (let r = 0; r < gridSize; r++) {
+      for (let c = 0; c < gridSize; c++) {
+        for (const [dr, dc] of ALL_DIRS) {
+          const cells = [];
+          let match = true;
+          for (let i = 0; i < variant.length; i++) {
+            const nr = r + dr * i;
+            const nc = c + dc * i;
+            if (nr < 0 || nr >= gridSize || nc < 0 || nc >= gridSize) { match = false; break; }
+            if (grid[nr][nc] !== variant[i]) { match = false; break; }
+            cells.push({ r: nr, c: nc });
+          }
+          if (match) return cells;
+        }
+      }
+    }
+  }
+  return null;
+}
+
+// ─── AUXILIARES DE GRADE ──────────────────────────────────────────────────────
+function shuffledPositions() {
   const pos = [];
   for (let r = 0; r < gridSize; r++)
     for (let c = 0; c < gridSize; c++)
@@ -470,8 +485,19 @@ function canPlace(word, r, c, [dr, dc]) {
 }
 
 function doPlace(word, r, c, [dr, dc]) {
-  for (let i = 0; i < word.length; i++) {
+  for (let i = 0; i < word.length; i++)
     grid[r + dr * i][c + dc * i] = word[i];
+}
+
+function undoPlace(word, r, c, [dr, dc]) {
+  // Só apaga células que não são compartilhadas com outra palavra já colocada
+  const usedCells = new Set();
+  placedWords.forEach(pw => pw.cells.forEach(cell => usedCells.add(`${cell.r},${cell.c}`)));
+
+  for (let i = 0; i < word.length; i++) {
+    const nr = r + dr * i, nc = c + dc * i;
+    if (!usedCells.has(`${nr},${nc}`))
+      grid[nr][nc] = '';
   }
 }
 
@@ -482,6 +508,26 @@ function fillRandom() {
         grid[r][c] = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
 }
 
+// ─── GABARITO ─────────────────────────────────────────────────────────────────
+function mostrarGabarito() {
+  placedWords.forEach(pw => {
+    pw.cells.forEach(({ r, c }) => {
+      const cell = getCell(r, c);
+      if (cell) {
+        cell.classList.remove('selected', 'found');
+        cell.classList.add('gabarito');
+      }
+    });
+    // Marca a palavra na lista também
+    document.querySelectorAll('#word-list li').forEach(li => {
+      if (li.dataset.word === pw.word) li.classList.add('found');
+    });
+  });
+  foundWords = placedWords.map(pw => pw.word);
+  updateCounts();
+}
+
+// ─── RENDERIZAÇÃO ─────────────────────────────────────────────────────────────
 function renderGrid() {
   const container = document.getElementById('grid');
   container.style.gridTemplateColumns = `repeat(${gridSize}, ${cellSize}px)`;
@@ -493,7 +539,7 @@ function renderGrid() {
       cell.className      = 'cell';
       cell.style.width    = cellSize + 'px';
       cell.style.height   = cellSize + 'px';
-      cell.style.fontSize = (cellSize * 0.45) + 'px';
+      cell.style.fontSize = (cellSize * 0.44) + 'px';
       cell.dataset.r      = r;
       cell.dataset.c      = c;
       cell.textContent    = grid[r][c];
@@ -512,123 +558,10 @@ function renderGrid() {
   document.addEventListener('mouseup', onEnd);
 }
 
-function getCell(r, c) {
-  return document.querySelector(`.cell[data-r="${r}"][data-c="${c}"]`);
-}
-
-function onStart(e) {
-  selecting     = true;
-  selectedCells = [];
-  clearHighlight();
-  const cell = e.currentTarget;
-  addToSelection(+cell.dataset.r, +cell.dataset.c);
-}
-
-function onMove(e) {
-  if (!selecting) return;
-  const r = +e.currentTarget.dataset.r;
-  const c = +e.currentTarget.dataset.c;
-  if (selectedCells.length === 0) return;
-  const [r0, c0] = selectedCells[0];
-  if (isValidLine(r0, c0, r, c)) updateLineSelection(r0, c0, r, c);
-}
-
-function onTouchStart(e) {
-  e.preventDefault();
-  selecting     = true;
-  selectedCells = [];
-  clearHighlight();
-  const touch = e.touches[0];
-  const el = document.elementFromPoint(touch.clientX, touch.clientY);
-  if (el && el.classList.contains('cell'))
-    addToSelection(+el.dataset.r, +el.dataset.c);
-}
-
-function onTouchMove(e) {
-  e.preventDefault();
-  if (!selecting) return;
-  const touch = e.touches[0];
-  const el = document.elementFromPoint(touch.clientX, touch.clientY);
-  if (!el || !el.classList.contains('cell')) return;
-  const r = +el.dataset.r, c = +el.dataset.c;
-  if (selectedCells.length === 0) return;
-  const [r0, c0] = selectedCells[0];
-  if (isValidLine(r0, c0, r, c)) updateLineSelection(r0, c0, r, c);
-}
-
-function onEnd() {
-  if (!selecting) return;
-  selecting = false;
-  checkSelection();
-  clearHighlight();
-  selectedCells = [];
-}
-
-function isValidLine(r0, c0, r1, c1) {
-  const dr = r1 - r0, dc = c1 - c0;
-  if (dr === 0 && dc === 0) return true;
-  if (dr === 0 || dc === 0) return true;
-  return Math.abs(dr) === Math.abs(dc);
-}
-
-function updateLineSelection(r0, c0, r1, c1) {
-  clearHighlight();
-  selectedCells = [];
-  const dr = r1 - r0, dc = c1 - c0;
-  let stepR = 0, stepC = 0;
-  if (dr !== 0) stepR = dr / Math.abs(dr);
-  if (dc !== 0) stepC = dc / Math.abs(dc);
-  const steps = Math.max(Math.abs(dr), Math.abs(dc));
-  for (let i = 0; i <= steps; i++) {
-    const r = r0 + stepR * i, c = c0 + stepC * i;
-    selectedCells.push([r, c]);
-    const cell = getCell(r, c);
-    if (cell && !cell.classList.contains('found'))
-      cell.classList.add('selected');
-  }
-}
-
-function addToSelection(r, c) {
-  selectedCells.push([r, c]);
-  const cell = getCell(r, c);
-  if (cell && !cell.classList.contains('found'))
-    cell.classList.add('selected');
-}
-
-function clearHighlight() {
-  document.querySelectorAll('.cell.selected')
-    .forEach(c => c.classList.remove('selected'));
-}
-
-function checkSelection() {
-  if (selectedCells.length < 2) return;
-  const word    = selectedCells.map(([r, c]) => grid[r][c]).join('');
-  const wordRev = word.split('').reverse().join('');
-  const match = placedWords.find(w =>
-    !foundWords.includes(w) && (w === word || w === wordRev)
-  );
-  if (match) {
-    foundWords.push(match);
-    selectedCells.forEach(([r, c]) => {
-      const cell = getCell(r, c);
-      if (cell) { cell.classList.remove('selected'); cell.classList.add('found'); }
-    });
-    markWordFound(match);
-    updateCounts();
-    if (foundWords.length === placedWords.length) showVictory();
-  }
-}
-
-function markWordFound(word) {
-  document.querySelectorAll('#word-list li').forEach(li => {
-    if (li.dataset.word === word) li.classList.add('found');
-  });
-}
-
 function renderWordList() {
   const ul = document.getElementById('word-list');
   ul.innerHTML = '';
-  [...placedWords].sort().forEach(w => {
+  [...placedWords].map(pw => pw.word).sort().forEach(w => {
     const li = document.createElement('li');
     li.textContent  = w;
     li.dataset.word = w;
@@ -641,6 +574,133 @@ function updateCounts() {
   document.getElementById('total-count').textContent = placedWords.length;
 }
 
+function getCell(r, c) {
+  return document.querySelector(`.cell[data-r="${r}"][data-c="${c}"]`);
+}
+
+// ─── INTERAÇÃO: MOUSE ─────────────────────────────────────────────────────────
+function onStart(e) {
+  selecting     = true;
+  selectedCells = [];
+  clearHighlight();
+  const cell = e.currentTarget;
+  addToSelection(+cell.dataset.r, +cell.dataset.c);
+}
+
+function onMove(e) {
+  if (!selecting) return;
+  const r = +e.currentTarget.dataset.r;
+  const c = +e.currentTarget.dataset.c;
+  if (!selectedCells.length) return;
+  const [r0, c0] = selectedCells[0];
+  if (isValidLine(r0, c0, r, c)) updateLineSelection(r0, c0, r, c);
+}
+
+// ─── INTERAÇÃO: TOUCH ─────────────────────────────────────────────────────────
+function onTouchStart(e) {
+  e.preventDefault(); // bloqueia scroll e "puxar para atualizar"
+  selecting     = true;
+  selectedCells = [];
+  clearHighlight();
+  const touch = e.touches[0];
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (el && el.classList.contains('cell'))
+    addToSelection(+el.dataset.r, +el.dataset.c);
+}
+
+function onTouchMove(e) {
+  e.preventDefault(); // bloqueia scroll enquanto arrasta
+  if (!selecting) return;
+  const touch = e.touches[0];
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (!el || !el.classList.contains('cell')) return;
+  const r = +el.dataset.r, c = +el.dataset.c;
+  if (!selectedCells.length) return;
+  const [r0, c0] = selectedCells[0];
+  if (isValidLine(r0, c0, r, c)) updateLineSelection(r0, c0, r, c);
+}
+
+function onEnd() {
+  if (!selecting) return;
+  selecting = false;
+  checkSelection();
+  clearHighlight();
+  selectedCells = [];
+}
+
+// ─── LÓGICA DE SELEÇÃO ────────────────────────────────────────────────────────
+function isValidLine(r0, c0, r1, c1) {
+  const dr = r1 - r0, dc = c1 - c0;
+  if (dr === 0 || dc === 0) return true;
+  return Math.abs(dr) === Math.abs(dc);
+}
+
+function updateLineSelection(r0, c0, r1, c1) {
+  clearHighlight();
+  selectedCells = [];
+  const dr = r1 - r0, dc = c1 - c0;
+  const stepR = dr === 0 ? 0 : dr / Math.abs(dr);
+  const stepC = dc === 0 ? 0 : dc / Math.abs(dc);
+  const steps = Math.max(Math.abs(dr), Math.abs(dc));
+  for (let i = 0; i <= steps; i++) {
+    const r = r0 + stepR * i, c = c0 + stepC * i;
+    selectedCells.push([r, c]);
+    const cell = getCell(r, c);
+    if (cell && !cell.classList.contains('found') && !cell.classList.contains('gabarito'))
+      cell.classList.add('selected');
+  }
+}
+
+function addToSelection(r, c) {
+  selectedCells.push([r, c]);
+  const cell = getCell(r, c);
+  if (cell && !cell.classList.contains('found') && !cell.classList.contains('gabarito'))
+    cell.classList.add('selected');
+}
+
+function clearHighlight() {
+  document.querySelectorAll('.cell.selected')
+    .forEach(c => c.classList.remove('selected'));
+}
+
+// ─── VERIFICAÇÃO DA SELEÇÃO ───────────────────────────────────────────────────
+// Compara a string selecionada com as coordenadas reais guardadas em placedWords.
+// Aceita tanto a direção normal quanto a inversa da seleção do jogador.
+function checkSelection() {
+  if (selectedCells.length < 2) return;
+
+  const selectedStr    = selectedCells.map(([r, c]) => grid[r][c]).join('');
+  const selectedStrRev = selectedStr.split('').reverse().join('');
+
+  for (const pw of placedWords) {
+    if (foundWords.includes(pw.word)) continue;
+
+    // Monta a string esperada a partir das células reais da palavra
+    const placedStr = pw.cells.map(({ r, c }) => grid[r][c]).join('');
+
+    if (selectedStr === placedStr || selectedStrRev === placedStr) {
+      // Confere também se as células selecionadas batem com as células da palavra
+      const selSet    = new Set(selectedCells.map(([r, c]) => `${r},${c}`));
+      const placedSet = new Set(pw.cells.map(({ r, c }) => `${r},${c}`));
+      const match     = [...placedSet].every(k => selSet.has(k));
+
+      if (match) {
+        foundWords.push(pw.word);
+        pw.cells.forEach(({ r, c }) => {
+          const cell = getCell(r, c);
+          if (cell) { cell.classList.remove('selected'); cell.classList.add('found'); }
+        });
+        document.querySelectorAll('#word-list li').forEach(li => {
+          if (li.dataset.word === pw.word) li.classList.add('found');
+        });
+        updateCounts();
+        if (foundWords.length === placedWords.length) showVictory();
+        return;
+      }
+    }
+  }
+}
+
 function showVictory() {
   clearInterval(timerInterval);
   const m = String(Math.floor(seconds / 60)).padStart(2, '0');
@@ -650,6 +710,7 @@ function showVictory() {
   document.getElementById('victory').classList.add('show');
 }
 
+// ─── INÍCIO ───────────────────────────────────────────────────────────────────
 newGame();
 </script>
 </body>
