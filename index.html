@@ -24,7 +24,7 @@
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       margin-bottom: 0.4rem;
       letter-spacing: 2px;
       text-align: center;
@@ -39,17 +39,18 @@
 
     .cards {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
       justify-content: center;
+      max-width: 1100px;
     }
 
     .card {
       background: rgba(255, 255, 255, 0.07);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 20px;
-      padding: 2.5rem 2rem;
-      width: 220px;
+      padding: 2.5rem 1.8rem;
+      width: 200px;
       text-align: center;
       text-decoration: none;
       color: #fff;
@@ -64,19 +65,19 @@
     }
 
     .card .icon {
-      font-size: 4rem;
+      font-size: 3.5rem;
       margin-bottom: 1rem;
       display: block;
     }
 
     .card .game-title {
-      font-size: 1.3rem;
+      font-size: 1.15rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
 
     .card .game-desc {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: #bbb;
       line-height: 1.5;
     }
@@ -90,7 +91,7 @@
 </head>
 <body>
 
-  <h1>💼 PAINEL DE PROGRAMAS - FOLHA DE PAGAMENTO</h1>
+  <h1>💼 PROGRAMAS - FOLHA DE PAGAMENTO</h1>
   <p class="subtitle">Escolha um programa para começar</p>
 
   <div class="cards">
@@ -98,12 +99,24 @@
     <a class="card" href="calculadora_ats.html">
       <span class="icon">📊</span>
       <div class="game-title">Calculadora ATS</div>
-      <div class="game-desc">Cálculo de Adicional por Tempo de Serviço - MEMBRO</div>
+      <div class="game-desc">Cálculo de Adicional por Tempo de Serviço - MPPA</div>
     </a>
-    
+
+    <a class="card" href="calculadora_membro_lote.html">
+      <span class="icon">👥</span>
+      <div class="game-title">Calculadora ATS Membros</div>
+      <div class="game-desc">Cálculo individual e em lote para Membros - Quinquênios</div>
+    </a>
+
+    <a class="card" href="Simulador_de_Contracheque.html">
+      <span class="icon">💰</span>
+      <div class="game-title">Simulador de Contracheque</div>
+      <div class="game-desc">Simulação de folha de pagamento para Servidor Público - RPPS</div>
+    </a>
+
     <a class="card" href="damas.html">
       <span class="icon">⚫</span>
-      <div class="game-title">Damas</div>
+      <div class="game-title">Damas Premium</div>
       <div class="game-desc">Jogador vs Jogador ou contra a IA com 4 níveis de dificuldade</div>
     </a>
 
@@ -113,21 +126,9 @@
       <div class="game-desc">Jogador vs Jogador ou desafie a inteligência artificial</div>
     </a>
 
-    <a class="card" href="calculadora_ats.html">
-      <span class="icon">📊</span>
-      <div class="game-title">Calculadora ATS</div>
-      <div class="game-desc">Cálculo de Adicional por Tempo de Serviço</div>
-    </a>
-
-     <a class="card" href="Simulador_de_Contracheque.html">
-      <span class="icon">💰</span>
-      <div class="game-title">Simulador de Contracheque</div>
-      <div class="game-desc">Simulação de folha de pagamento para Servidor Público</div>
-    </a>
-
   </div>
 
-  <div class="footer">By Rafael F. Lima & Giovane Moura · 2026</div>
+  <div class="footer">By Rafael F. Lima · 2026</div>
 
 </body>
 </html>
