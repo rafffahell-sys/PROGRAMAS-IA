@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de ATS - MPPA</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #1a1a1a;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 10px 0;
+    }
+
+    h1 {
+      color: #FFD700;
+      font-size: 1.4rem;
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .card {
+      background: #2d2d2d;
+      border: 2px solid #FFD700;
+      border-radius: 12px;
+      padding: 24px;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .section-title {
+      color: #FFD700;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .field-row {
+      display: flex;
+      align-items: center;
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .field-row label {
+      min-width: 140px;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .field-row input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      padding: 4px 0;
+    }
+
+    .field-row input::placeholder { color: #888; }
+
+    .field-row input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1) sepia(1) saturate(5) hue-rotate(0deg);
+      cursor: pointer;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #444;
+      margin: 20px 0;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    button:hover { opacity: 0.85; }
+
+    .btn-calcular { background: #FFD700; color: #1a1a1a; }
+    .btn-limpar   { background: #FFD700; color: #1a1a1a; }
+    .btn-sair     { background: #dc3545; color: #fff; }
+
+    .result-label {
+      color: #FFD700;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #resultado {
+      background: #1a1a1a;
+      border: 1px solid #FFD700;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: Consolas, monospace;
+      font-size: 0.88rem;
+      color: #fff;
+      white-space: pre-wrap;
+      min-height: 80px;
+      line-height: 1.7;
+    }
+
+    footer {
+      background: #FFD700;
+      color: #1a1a1a;
+      text-align: center;
+      padding: 12px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      width: 100%;
+      max-width: 560px;
+      border-radius: 0 0 12px 12px;
+      margin-bottom: 20px;
+    }
+
+    .erro { color: #ff6b6b; }
+  </style>
+</head>
+<body>
+
+  <h1>📊 CALCULADORA DE ATS - MPPA</h1>
+
+  <div class="card">
+    <div class="section-title">📅 PERÍODO DE TRABALHO</div>
+
+    <div class="field-row">
+      <label>Data de Início:</label>
+      <input type="date" id="dataInicio"/>
+    </div>
+
+    <div class="field-row">
+      <label>Data de Fim:</label>
+      <input type="date" id="dataFim"/>
+    </div>
+
+    <hr class="divider"/>
+
+    <div class="section-title">⚙️ AJUSTES (OPCIONAL)</div>
+
+    <div class="field-row">
+      <label>Dias Averbados:</label>
+      <input type="number" id="averbados" placeholder="0" min="0"/>
+    </div>
+
+    <div class="field-row">
+      <label>Dias a Descontar:</label>
+      <input type="number" id="descontar" placeholder="0" min="0"/>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-calcular" onclick="calcular()">🧮 Calcular</button>
+      <button class="btn-limpar"   onclick="limpar()">🗑️ Limpar</button>
+    </div>
+
+    <div class="result-label">📋 RESULTADO:</div>
+    <div id="resultado"></div>
+  </div>
+
+  <footer>
+    💡 Formato: DD/MM/AAAA • Desenvolvido via GEMINI IA, por Rafael F. Lima
+  </footer>
+
+  <script>
+    function calcular() {
+      const inicioVal = document.getElementById('dataInicio').value;
+      const fimVal    = document.getElementById('dataFim').value;
+      const resultDiv = document.getElementById('resultado');
+
+      if (!inicioVal || !fimVal) {
+        resultDiv.innerHTML = '<span class="erro">⚠️ Por favor, preencha as datas de início e fim.</span>';
+        return;
+      }
+
+      const inicio = new Date(inicioVal + 'T00:00:00');
+      const fim    = new Date(fimVal    + 'T00:00:00');
+
+      if (fim < inicio) {
+        resultDiv.innerHTML = '<span class="erro">⚠️ A data final deve ser posterior à data inicial.</span>';
+        return;
+      }
+
+      const msPerDay     = 1000 * 60 * 60 * 24;
+      const diasEfetivos = Math.round((fim - inicio) / msPerDay);
+      const acrescimos   = parseInt(document.getElementById('averbados').value) || 0;
+      const descontos    = parseInt(document.getElementById('descontar').value)  || 0;
+      const diasTotais   = diasEfetivos + acrescimos - descontos;
+
+      if (diasTotais < 0) {
+        resultDiv.innerHTML = '<span class="erro">⚠️ Total de dias negativos após ajustes. Verifique os valores.</span>';
+        return;
+      }
+
+      let linhas = [];
+      linhas.push(`📅 Período bruto: ${diasEfetivos} dias`);
+      if (acrescimos) linhas.push(`➕ Dias Averbados: ${acrescimos}`);
+      if (descontos)  linhas.push(`➖ Dias a Descontar: ${descontos}`);
+      if (acrescimos || descontos) linhas.push(`📊 Total ajustado: ${diasTotais} dias`);
+
+      let ats, proximoInfo;
+
+      if (diasTotais < 12045) {
+        const trienios     = Math.floor(diasTotais / 1095);
+        ats                = trienios * 5;
+        const diasNec      = (trienios + 1) * 1095;
+        const diasRest     = diasNec - diasTotais;
+        const dataProximo  = new Date(fim.getTime() + diasRest * msPerDay);
+        proximoInfo = `📈 Próximo triênio (${ats + 5}%) em: ${formatarData(dataProximo)}`;
+      } else if (diasTotais < 12410) {
+        ats = 55;
+        const diasPos11 = diasTotais - 12045;
+        if (diasPos11 >= 365) {
+          ats = 60;
+          proximoInfo = '✅ ATS máximo atingido: 60%';
+        } else {
+          const faltam      = 365 - diasPos11;
+          const dataProximo = new Date(fim.getTime() + faltam * msPerDay);
+          proximoInfo = `📈 Último aumento (60%) em: ${formatarData(dataProximo)}`;
+        }
+      } else {
+        ats = 60;
+        proximoInfo = '✅ ATS máximo atingido: 60%';
+      }
+
+      linhas.push(`💰 ATS atual: ${ats}%`);
+      linhas.push(proximoInfo);
+      linhas.push('━'.repeat(46));
+      linhas.push('🛠️ Desenvolvido via GEMINI IA, por Rafael F. Lima');
+      linhas.push('━'.repeat(46));
+
+      resultDiv.textContent = linhas.join('\n');
+    }
+
+    function formatarData(date) {
+      const d = String(date.getDate()).padStart(2, '0');
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const y = date.getFullYear();
+      return `${d}/${m}/${y}`;
+    }
+
+    function limpar() {
+      document.getElementById('dataInicio').value  = '';
+      document.getElementById('dataFim').value     = '';
+      document.getElementById('averbados').value   = '';
+      document.getElementById('descontar').value   = '';
+      document.getElementById('resultado').textContent = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') calcular();
+    });
+  </script>
+
+</body>
+</html>
