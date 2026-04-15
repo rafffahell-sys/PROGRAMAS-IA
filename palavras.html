@@ -122,6 +122,7 @@
     padding: 16px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     user-select: none;
+    touch-action: none;
   }
 
   #grid {
@@ -141,6 +142,7 @@
     color: #333;
     transition: background 0.15s, transform 0.1s;
     border: 1px solid #eee;
+    touch-action: none;
   }
 
   .cell:hover { background: #fce4ec; transform: scale(1.05); }
@@ -239,8 +241,8 @@
   <div class="control-group">
     <label>Dificuldade</label>
     <div class="btn-group">
-      <button id="btn-facil"  class="active" onclick="setDifficulty('facil',this)">Fácil</button>
-      <button id="btn-medio"  onclick="setDifficulty('medio',this)">Médio</button>
+      <button id="btn-facil"   class="active" onclick="setDifficulty('facil',this)">Fácil</button>
+      <button id="btn-medio"   onclick="setDifficulty('medio',this)">Médio</button>
       <button id="btn-dificil" onclick="setDifficulty('dificil',this)">Difícil</button>
     </div>
   </div>
@@ -343,28 +345,31 @@ let cellSize          = 38;
 
 function setDifficulty(d, btn) {
   currentDifficulty = d;
-  document.querySelectorAll('#btn-facil,#btn-medio,#btn-dificil').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#btn-facil,#btn-medio,#btn-dificil')
+    .forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   newGame();
 }
 
 function setTheme(t, btn) {
   currentTheme = t;
-  document.querySelectorAll('#btn-natureza,#btn-animais,#btn-cozinha').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#btn-natureza,#btn-animais,#btn-cozinha')
+    .forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   newGame();
 }
 
 function newGame() {
   clearInterval(timerInterval);
-  seconds      = 0;
-  foundWords   = [];
-  selectedCells= [];
-  selecting    = false;
+  seconds       = 0;
+  foundWords    = [];
+  selectedCells = [];
+  selecting     = false;
 
   const config = DIFFICULTIES[currentDifficulty];
   gridSize     = config.gridSize;
-  cellSize     = currentDifficulty === 'facil' ? 42 : currentDifficulty === 'medio' ? 36 : 30;
+  cellSize     = currentDifficulty === 'facil' ? 42
+               : currentDifficulty === 'medio' ? 36 : 30;
 
   document.getElementById('diff-hint').textContent = config.hint;
   document.getElementById('timer').textContent = '00:00';
@@ -378,8 +383,8 @@ function newGame() {
 
   timerInterval = setInterval(() => {
     seconds++;
-    const m = String(Math.floor(seconds/60)).padStart(2,'0');
-    const s = String(seconds%60).padStart(2,'0');
+    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const s = String(seconds % 60).padStart(2, '0');
     document.getElementById('timer').textContent = `${m}:${s}`;
   }, 1000);
 }
@@ -392,16 +397,15 @@ function initGrid() {
 }
 
 function placeWords() {
-  const config    = DIFFICULTIES[currentDifficulty];
-  const pool      = [...THEMES[currentTheme]].sort(() => Math.random()-0.5);
-  const candidates= pool.slice(0, config.wordCount + 5);
-  placedWords     = [];
+  const config     = DIFFICULTIES[currentDifficulty];
+  const pool       = [...THEMES[currentTheme]].sort(() => Math.random() - 0.5);
+  const candidates = pool.slice(0, config.wordCount + 5);
+  placedWords      = [];
 
   for (const word of candidates) {
     if (placedWords.length >= config.wordCount) break;
-    let dirs = [...config.directions].sort(() => Math.random()-0.5);
+    const dirs = [...config.directions].sort(() => Math.random() - 0.5);
 
-    // Em dificuldade difícil, metade das palavras pode ser invertida
     let w = word;
     if (currentDifficulty === 'dificil' && Math.random() < 0.5) {
       w = word.split('').reverse().join('');
@@ -414,7 +418,7 @@ function placeWords() {
       for (const [r, c] of positions) {
         if (canPlace(w, r, c, dir)) {
           doPlace(w, r, c, dir);
-          placedWords.push(word); // sempre guarda a versão original para exibição
+          placedWords.push(word);
           placed = true;
           break;
         }
@@ -427,22 +431,22 @@ function getShuffledPositions() {
   const pos = [];
   for (let r = 0; r < gridSize; r++)
     for (let c = 0; c < gridSize; c++)
-      pos.push([r,c]);
-  return pos.sort(() => Math.random()-0.5);
+      pos.push([r, c]);
+  return pos.sort(() => Math.random() - 0.5);
 }
 
-function canPlace(word, r, c, [dr,dc]) {
+function canPlace(word, r, c, [dr, dc]) {
   for (let i = 0; i < word.length; i++) {
-    const nr = r + dr*i, nc = c + dc*i;
+    const nr = r + dr * i, nc = c + dc * i;
     if (nr < 0 || nr >= gridSize || nc < 0 || nc >= gridSize) return false;
     if (grid[nr][nc] !== '' && grid[nr][nc] !== word[i]) return false;
   }
   return true;
 }
 
-function doPlace(word, r, c, [dr,dc]) {
+function doPlace(word, r, c, [dr, dc]) {
   for (let i = 0; i < word.length; i++) {
-    grid[r + dr*i][c + dc*i] = word[i];
+    grid[r + dr * i][c + dc * i] = word[i];
   }
 }
 
@@ -450,7 +454,7 @@ function fillRandom() {
   for (let r = 0; r < gridSize; r++)
     for (let c = 0; c < gridSize; c++)
       if (grid[r][c] === '')
-        grid[r][c] = ALPHABET[Math.floor(Math.random()*ALPHABET.length)];
+        grid[r][c] = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
 }
 
 function renderGrid() {
@@ -461,20 +465,23 @@ function renderGrid() {
   for (let r = 0; r < gridSize; r++) {
     for (let c = 0; c < gridSize; c++) {
       const cell = document.createElement('div');
-      cell.className   = 'cell';
-      cell.style.width = cell.style.height = cell.style.fontSize =
-        cellSize + 'px';
-      cell.style.fontSize = (cellSize * 0.45) + 'px';
-      cell.dataset.r   = r;
-      cell.dataset.c   = c;
-      cell.textContent = grid[r][c];
+      cell.className        = 'cell';
+      cell.style.width      = cellSize + 'px';
+      cell.style.height     = cellSize + 'px';
+      cell.style.fontSize   = (cellSize * 0.45) + 'px';
+      cell.dataset.r        = r;
+      cell.dataset.c        = c;
+      cell.textContent      = grid[r][c];
 
-      cell.addEventListener('mousedown',  onStart);
-      cell.addEventListener('mouseover',  onMove);
-      cell.addEventListener('mouseup',    onEnd);
-      cell.addEventListener('touchstart', onTouchStart, {passive:true});
-      cell.addEventListener('touchmove',  onTouchMove,  {passive:true});
-      cell.addEventListener('touchend',   onEnd);
+      // Eventos de mouse
+      cell.addEventListener('mousedown', onStart);
+      cell.addEventListener('mouseover', onMove);
+      cell.addEventListener('mouseup',   onEnd);
+
+      // Eventos de touch — passive:false permite chamar preventDefault()
+      cell.addEventListener('touchstart', onTouchStart, { passive: false });
+      cell.addEventListener('touchmove',  onTouchMove,  { passive: false });
+      cell.addEventListener('touchend',   onEnd,        { passive: false });
 
       container.appendChild(cell);
     }
@@ -500,14 +507,12 @@ function onMove(e) {
   const r = +e.currentTarget.dataset.r;
   const c = +e.currentTarget.dataset.c;
   if (selectedCells.length === 0) return;
-
-  const [r0,c0] = selectedCells[0];
-  if (isValidLine(r0,c0,r,c)) {
-    updateLineSelection(r0,c0,r,c);
-  }
+  const [r0, c0] = selectedCells[0];
+  if (isValidLine(r0, c0, r, c)) updateLineSelection(r0, c0, r, c);
 }
 
 function onTouchStart(e) {
+  e.preventDefault(); // impede scroll e "puxar para atualizar"
   selecting     = true;
   selectedCells = [];
   clearHighlight();
@@ -518,17 +523,18 @@ function onTouchStart(e) {
 }
 
 function onTouchMove(e) {
+  e.preventDefault(); // impede scroll enquanto arrasta sobre a grade
   if (!selecting) return;
   const touch = e.touches[0];
   const el = document.elementFromPoint(touch.clientX, touch.clientY);
   if (!el || !el.classList.contains('cell')) return;
   const r = +el.dataset.r, c = +el.dataset.c;
   if (selectedCells.length === 0) return;
-  const [r0,c0] = selectedCells[0];
-  if (isValidLine(r0,c0,r,c)) updateLineSelection(r0,c0,r,c);
+  const [r0, c0] = selectedCells[0];
+  if (isValidLine(r0, c0, r, c)) updateLineSelection(r0, c0, r, c);
 }
 
-function onEnd() {
+function onEnd(e) {
   if (!selecting) return;
   selecting = false;
   checkSelection();
@@ -536,48 +542,48 @@ function onEnd() {
   selectedCells = [];
 }
 
-function isValidLine(r0,c0,r1,c1) {
-  const dr = r1-r0, dc = c1-c0;
-  if (dr===0 && dc===0) return true;
-  if (dr===0) return true;
-  if (dc===0) return true;
+function isValidLine(r0, c0, r1, c1) {
+  const dr = r1 - r0, dc = c1 - c0;
+  if (dr === 0 && dc === 0) return true;
+  if (dr === 0 || dc === 0) return true;
   return Math.abs(dr) === Math.abs(dc);
 }
 
-function updateLineSelection(r0,c0,r1,c1) {
+function updateLineSelection(r0, c0, r1, c1) {
   clearHighlight();
   selectedCells = [];
 
-  const dr = r1-r0, dc = c1-c0;
+  const dr = r1 - r0, dc = c1 - c0;
   let stepR = 0, stepC = 0;
-  if (dr !== 0) stepR = dr/Math.abs(dr);
-  if (dc !== 0) stepC = dc/Math.abs(dc);
+  if (dr !== 0) stepR = dr / Math.abs(dr);
+  if (dc !== 0) stepC = dc / Math.abs(dc);
 
   const steps = Math.max(Math.abs(dr), Math.abs(dc));
   for (let i = 0; i <= steps; i++) {
-    const r = r0 + stepR*i, c = c0 + stepC*i;
-    selectedCells.push([r,c]);
-    const cell = getCell(r,c);
+    const r = r0 + stepR * i, c = c0 + stepC * i;
+    selectedCells.push([r, c]);
+    const cell = getCell(r, c);
     if (cell && !cell.classList.contains('found'))
       cell.classList.add('selected');
   }
 }
 
 function addToSelection(r, c) {
-  selectedCells.push([r,c]);
-  const cell = getCell(r,c);
+  selectedCells.push([r, c]);
+  const cell = getCell(r, c);
   if (cell && !cell.classList.contains('found'))
     cell.classList.add('selected');
 }
 
 function clearHighlight() {
-  document.querySelectorAll('.cell.selected').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.cell.selected')
+    .forEach(c => c.classList.remove('selected'));
 }
 
 function checkSelection() {
   if (selectedCells.length < 2) return;
 
-  const word = selectedCells.map(([r,c]) => grid[r][c]).join('');
+  const word    = selectedCells.map(([r, c]) => grid[r][c]).join('');
   const wordRev = word.split('').reverse().join('');
 
   const match = placedWords.find(w =>
@@ -586,9 +592,12 @@ function checkSelection() {
 
   if (match) {
     foundWords.push(match);
-    selectedCells.forEach(([r,c]) => {
-      const cell = getCell(r,c);
-      if (cell) { cell.classList.remove('selected'); cell.classList.add('found'); }
+    selectedCells.forEach(([r, c]) => {
+      const cell = getCell(r, c);
+      if (cell) {
+        cell.classList.remove('selected');
+        cell.classList.add('found');
+      }
     });
     markWordFound(match);
     updateCounts();
@@ -597,8 +606,7 @@ function checkSelection() {
 }
 
 function markWordFound(word) {
-  const items = document.querySelectorAll('#word-list li');
-  items.forEach(li => {
+  document.querySelectorAll('#word-list li').forEach(li => {
     if (li.dataset.word === word) li.classList.add('found');
   });
 }
@@ -621,14 +629,13 @@ function updateCounts() {
 
 function showVictory() {
   clearInterval(timerInterval);
-  const m = String(Math.floor(seconds/60)).padStart(2,'0');
-  const s = String(seconds%60).padStart(2,'0');
+  const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+  const s = String(seconds % 60).padStart(2, '0');
   document.getElementById('victory-msg').textContent =
     `Você encontrou todas as palavras em ${m}:${s}! 🌸`;
   document.getElementById('victory').classList.add('show');
 }
 
-// Iniciar
 newGame();
 </script>
 </body>
