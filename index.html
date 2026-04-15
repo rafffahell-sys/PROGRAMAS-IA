@@ -3,138 +3,209 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Programas</title>
+  <title>Programas - Folha de Pagamento</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      min-height: 100vh;
+      padding: 40px 20px 60px;
       color: #fff;
-      padding: 40px 20px;
     }
 
-    h1 {
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    header h1 {
       font-size: 2rem;
-      margin-bottom: 0.4rem;
-      letter-spacing: 2px;
-      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #e2e8f0;
     }
 
-    .subtitle {
+    header p {
+      margin-top: 8px;
+      color: #94a3b8;
       font-size: 0.95rem;
-      color: #aaa;
-      margin-bottom: 3rem;
-      text-align: center;
     }
 
-    .cards {
+    /* ── GRUPO ─────────────────────────────────────── */
+    .group {
+      max-width: 860px;
+      margin: 0 auto 48px;
+    }
+
+    .group-header {
       display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      max-width: 1100px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .group-header .badge {
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .badge-pro {
+      background: rgba(99, 179, 237, 0.15);
+      color: #63b3ed;
+      border: 1px solid rgba(99, 179, 237, 0.35);
+    }
+
+    .badge-rec {
+      background: rgba(154, 230, 180, 0.15);
+      color: #9ae6b4;
+      border: 1px solid rgba(154, 230, 180, 0.35);
+    }
+
+    .group-header h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    .group-header .line {
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── CARDS ─────────────────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 2.5rem 1.8rem;
-      width: 200px;
-      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 16px;
+      padding: 28px 22px;
       text-decoration: none;
-      color: #fff;
-      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
-      cursor: pointer;
+      color: inherit;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      background: rgba(255, 255, 255, 0.14);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .card .icon {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      display: block;
+      font-size: 2rem;
+      line-height: 1;
     }
 
-    .card .game-title {
-      font-size: 1.15rem;
+    .card h3 {
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      color: #e2e8f0;
     }
 
-    .card .game-desc {
+    .card p {
       font-size: 0.82rem;
-      color: #bbb;
+      color: #94a3b8;
       line-height: 1.5;
     }
 
-    .footer {
-      margin-top: 3.5rem;
+    /* Destaque de cor por grupo */
+    .card-pro:hover  { border-color: rgba(99, 179, 237, 0.5); }
+    .card-rec:hover  { border-color: rgba(154, 230, 180, 0.5); }
+
+    .card-pro .icon { filter: drop-shadow(0 0 8px rgba(99,179,237,0.4)); }
+    .card-rec .icon { filter: drop-shadow(0 0 8px rgba(154,230,180,0.4)); }
+
+    /* ── RODAPÉ ────────────────────────────────────── */
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #475569;
       font-size: 0.8rem;
-      color: #555;
     }
   </style>
 </head>
 <body>
 
-  <h1>💼 PROGRAMAS</h1>
-  <p class="subtitle">Escolha um programa para começar</p>
+<header>
+  <h1>💼 Programas</h1>
+  <p>Escolha um programa para começar</p>
+</header>
 
+<!-- ══ GRUPO PROFISSIONAL ══════════════════════════════ -->
+<div class="group">
+  <div class="group-header">
+    <span class="badge badge-pro">Profissional</span>
+    <h2>Folha de Pagamento</h2>
+    <div class="line"></div>
+  </div>
   <div class="cards">
 
-    <a class="card" href="calculadora_ats.html">
-      <span class="icon">📊</span>
-      <div class="game-title">Calculadora ATS Servidores</div>
-      <div class="game-desc">Cálculo de Adicional por Tempo de Serviço</div>
+    <a href="calculadora_ats.html" class="card card-pro">
+      <div class="icon">📊</div>
+      <h3>Calculadora ATS Servidores</h3>
+      <p>Cálculo de Adicional por Tempo de Serviço</p>
     </a>
 
-    <a class="card" href="calculadora_membro_lote.html">
-      <span class="icon">👥</span>
-      <div class="game-title">Calculadora ATS Membros</div>
-      <div class="game-desc">Cálculo individual e em lote para Membros - Quinquênios</div>
+    <a href="calculadora_membro_lote.html" class="card card-pro">
+      <div class="icon">👥</div>
+      <h3>Calculadora ATS Membros</h3>
+      <p>Cálculo individual e em lote para Membros — Quinquênios</p>
     </a>
 
-    <a class="card" href="Simulador_de_Contracheque.html">
-      <span class="icon">💰</span>
-      <div class="game-title">Simulador de Contracheque</div>
-      <div class="game-desc">Simulação de folha de pagamento para Servidor Público</div>
-    </a>
-
-    <a class="card" href="damas.html">
-      <span class="icon">⚫</span>
-      <div class="game-title">Damas</div>
-      <div class="game-desc">Jogador vs Jogador ou contra a IA com 4 níveis de dificuldade</div>
-    </a>
-
-    <a class="card" href="xadrez.html">
-      <span class="icon">♟️</span>
-      <div class="game-title">Xadrez</div>
-      <div class="game-desc">Jogador vs Jogador ou desafie a inteligência artificial</div>
-    </a>
-
-    <a class="card" href="palavras.html">
-      <span class="icon">♟️</span>
-      <div class="game-title">Caça-Palavras</div>
-      <div class="game-desc">Encontre todas as palavras escondidas na grade!</div>
+    <a href="Simulador_de_Contracheque.html" class="card card-pro">
+      <div class="icon">💰</div>
+      <h3>Simulador de Contracheque</h3>
+      <p>Simulação de folha de pagamento para Servidor Público</p>
     </a>
 
   </div>
+</div>
 
-  <div class="footer">By Rafael F. Lima & Giovane Moura· 2026</div>
+<!-- ══ GRUPO RECREATIVO ════════════════════════════════ -->
+<div class="group">
+  <div class="group-header">
+    <span class="badge badge-rec">Recreativo</span>
+    <h2>Jogos</h2>
+    <div class="line"></div>
+  </div>
+  <div class="cards">
+
+    <a href="damas.html" class="card card-rec">
+      <div class="icon">⚫</div>
+      <h3>Damas</h3>
+      <p>Jogador vs Jogador ou contra a IA com 4 níveis de dificuldade</p>
+    </a>
+
+    <a href="xadrez.html" class="card card-rec">
+      <div class="icon">♟️</div>
+      <h3>Xadrez</h3>
+      <p>Jogador vs Jogador ou desafie a inteligência artificial</p>
+    </a>
+
+    <a href="palavras.html" class="card card-rec">
+      <div class="icon">🔍</div>
+      <h3>Caça-Palavras</h3>
+      <p>Encontre todas as palavras escondidas na grade!</p>
+    </a>
+
+  </div>
+</div>
+
+<footer>By Rafael F. Lima & Giovane Moura · 2026</footer>
 
 </body>
 </html>
