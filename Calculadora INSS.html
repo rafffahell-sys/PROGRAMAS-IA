@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de INSS</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    max-width: 620px;
+    width: 100%;
+    padding: 32px;
+  }
+  h1 { font-size: 1.5rem; color: #1a1a2e; text-align: center; margin-bottom: 8px; }
+  .badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .tabs { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 24px; }
+  .tab {
+    flex: 1; padding: 10px; text-align: center; cursor: pointer;
+    font-size: 0.85rem; color: #666; transition: all 0.2s;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    line-height: 1.4;
+  }
+  .tab.active { color: #1565c0; border-bottom-color: #1565c0; font-weight: 600; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  label {
+    display: block; font-size: 0.8rem; font-weight: 600;
+    color: #555; margin-top: 18px; margin-bottom: 6px; letter-spacing: 0.03em;
+  }
+  .hint { font-size: 0.75rem; color: #aaa; margin-top: 4px; }
+  input[type="text"] {
+    width: 100%; padding: 12px 16px;
+    border: 1px solid #ddd; border-radius: 8px;
+    font-size: 1rem; outline: none; transition: border 0.2s;
+  }
+  input:focus { border-color: #1565c0; box-shadow: 0 0 0 3px rgba(21,101,192,0.1); }
+  .btn-row { display: flex; gap: 10px; margin-top: 24px; }
+  .btn-clear {
+    flex: 1; padding: 12px; border: 1px solid #ddd;
+    border-radius: 8px; background: white; cursor: pointer;
+    font-size: 0.95rem; color: #666; transition: all 0.2s;
+  }
+  .btn-clear:hover { background: #f5f5f5; }
+  .btn-calc {
+    flex: 2; padding: 12px; border: none;
+    border-radius: 8px; background: #1565c0; color: white;
+    cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: all 0.2s;
+  }
+  .btn-calc:hover { background: #0d47a1; }
+  .result-box {
+    margin-top: 24px; background: #f8f9ff;
+    border-radius: 12px; padding: 20px; display: none;
+  }
+  .result-box.show { display: block; }
+  .result-row {
+    display: flex; justify-content: space-between;
+    align-items: center; padding: 8px 0;
+    border-bottom: 1px solid #e8eaf6; font-size: 0.9rem; color: #444;
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-row.total {
+    font-weight: 700; color: #1565c0;
+    font-size: 1.05rem; padding-top: 14px; margin-top: 4px;
+  }
+  .result-row.aviso { color: #e65100; font-size: 0.82rem; }
+  .result-row span:last-child { font-weight: 500; white-space: nowrap; padding-left: 12px; }
+  .footer {
+    text-align: center; font-size: 0.72rem;
+    color: #bbb; margin-top: 24px; line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Calculadora de INSS</h1>
+  <div class="badge">✓ Truncamento a 2 casas decimais por faixa — compatível com eSocial / SEFIP</div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="trocarAba('normal')">
+      Cálculo Normal<br><small>Salário ➔ INSS</small>
+    </div>
+    <div class="tab" onclick="trocarAba('reverso')">
+      Cálculo Reverso<br><small>INSS ➔ Salário</small>
+    </div>
+  </div>
+
+  <!-- Painel Normal -->
+  <div id="panel-normal" class="panel active">
+    <label>VALOR DO SALÁRIO BRUTO</label>
+    <input type="text" id="salario-input" placeholder="Ex: 1.500,00" oninput="mascaraMoeda(this)">
+    <p class="hint">Salário bruto é o salário sem os descontos</p>
+
+    <div class="btn-row">
+      <button class="btn-clear" onclick="limpar('normal')">Limpar</button>
+      <button class="btn-calc" onclick="calcularNormal()">Calcular</button>
+    </div>
+    <div id="result-normal" class="result-box"></div>
+  </div>
+
+  <!-- Painel Reverso -->
+  <div id="panel-reverso" class="panel">
+    <label>VALOR DO DESCONTO DE INSS</label>
+    <input type="text" id="inss-input" placeholder="Ex: 53,17" oninput="mascaraMoeda(this)">
+    <p class="hint">Informe o valor exato descontado no contracheque</p>
+
+    <div class="btn-row">
+      <button class="btn-clear" onclick="limpar('reverso')">Limpar</button>
+      <button class="btn-calc" onclick="calcularReverso()">Calcular Salário</button>
+    </div>
+    <div id="result-reverso" class="result-box"></div>
+  </div>
+
+  <p class="footer">
+    * Tabela progressiva RGPS vigente a partir de 1º de janeiro de 2026.<br>
+    Aplica truncamento a 2 casas decimais em cada faixa, conforme comportamento
+    dos sistemas de folha de pagamento (eSocial / SEFIP).
+  </p>
+</div>
+
+<script>
+  // ─────────────────────────────────────────────
+  // Tabela progressiva RGPS 2026
+  // Portaria MPS vigente a partir de 01/01/2026
+  // ─────────────────────────────────────────────
+  const TABELA_2026 = [
+    { ate: 1621.00, taxa: 0.075, taxaExibicao: '7,5'  },
+    { ate: 2902.84, taxa: 0.09,  taxaExibicao: '9'    },
+    { ate: 4354.27, taxa: 0.12,  taxaExibicao: '12'   },
+    { ate: 8475.55, taxa: 0.14,  taxaExibicao: '14'   }
+  ];
+
+  // ─────────────────────────────────────────────
+  // REGRA DE ARREDONDAMENTO
+  //
+  // Os sistemas de folha (eSocial, SEFIP) utilizam
+  // TRUNCAMENTO a 2 casas decimais em cada faixa,
+  // não arredondamento ABNT.
+  //
+  // Exemplo: 709 × 7,5% = 53,175 → trunca → 53,17
+  // ─────────────────────────────────────────────
+  function truncar2(valor) {
+    return Math.floor(valor * 100) / 100;
+  }
+
+  // ─────────────────────────────────────────────
+  // Cálculo do INSS (progressivo por faixas)
+  // ─────────────────────────────────────────────
+  function calcINSS(salario) {
+    let baseAnterior = 0;
+    let totalINSS    = 0;
+    const detalhe    = [];
+
+    for (let i = 0; i < TABELA_2026.length; i++) {
+      const { ate, taxa, taxaExibicao } = TABELA_2026[i];
+      if (salario <= baseAnterior) break;
+
+      const baseFaixa = Math.min(salario, ate) - baseAnterior;
+      if (baseFaixa <= 0) { baseAnterior = ate; continue; }
+
+      const contrib = truncar2(baseFaixa * taxa);
+      totalINSS += contrib;
+
+      detalhe.push({
+        faixa:         i + 1,
+        base:          baseFaixa,
+        taxaExibicao:  taxaExibicao,
+        contrib:       contrib
+      });
+
+      baseAnterior = ate;
+    }
+
+    return {
+      total:   Math.round(totalINSS * 100) / 100,
+      detalhe: detalhe
+    };
+  }
+
+  // ─────────────────────────────────────────────
+  // Utilitários de formatação
+  // ─────────────────────────────────────────────
+  function formatBRL(v) {
+    return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function parseBRL(str) {
+    return parseFloat(str.replace(/\./g, '').replace(',', '.')) || 0;
+  }
+
+  function mascaraMoeda(el) {
+    const v = (parseInt(el.value.replace(/\D/g, '')) || 0) / 100;
+    el.value = v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  // ─────────────────────────────────────────────
+  // Cálculo Normal (Salário → INSS)
+  // ─────────────────────────────────────────────
+  function calcularNormal() {
+    const salario = parseBRL(document.getElementById('salario-input').value);
+    if (!salario || salario <= 0) {
+      alert('Informe um salário válido.');
+      return;
+    }
+
+    const teto       = TABELA_2026[TABELA_2026.length - 1].ate;
+    const salContrib = Math.min(salario, teto);
+    const { total, detalhe } = calcINSS(salContrib);
+
+    let html = '';
+
+    if (salario > teto) {
+      html += `<div class="result-row aviso">
+        <span>⚠️ Salário acima do teto (R$ ${formatBRL(teto)}) — contribuição calculada sobre o teto</span>
+      </div>`;
+    }
+
+    detalhe.forEach(d => {
+      html += `<div class="result-row">
+        <span>Faixa ${d.faixa} — ${d.taxaExibicao}% sobre R$ ${formatBRL(d.base)}</span>
+        <span>R$ ${formatBRL(d.contrib)}</span>
+      </div>`;
+    });
+
+    html += `<div class="result-row total">
+      <span>Total INSS a descontar</span>
+      <span>R$ ${formatBRL(total)}</span>
+    </div>`;
+
+    const box = document.getElementById('result-normal');
+    box.innerHTML = html;
+    box.classList.add('show');
+  }
+
+  // ─────────────────────────────────────────────
+  // Cálculo Reverso (INSS → Salário)
+  // Busca binária em centavos + média aritmética
+  // do intervalo compatível como Salário de
+  // Contribuição.
+  // ─────────────────────────────────────────────
+  function calcularReverso() {
+    const inssAlvo = parseBRL(document.getElementById('inss-input').value);
+    if (!inssAlvo || inssAlvo <= 0) {
+      alert('Informe um valor de INSS válido.');
+      return;
+    }
+
+    const tetoCentavos = Math.round(TABELA_2026[TABELA_2026.length - 1].ate * 100);
+    const inssMaximo   = calcINSS(tetoCentavos / 100).total;
+
+    const box = document.getElementById('result-reverso');
+
+    if (inssAlvo > inssMaximo) {
+      box.innerHTML = `<div class="result-row aviso">
+        ⚠️ INSS de R$ ${formatBRL(inssAlvo)} supera o máximo possível (R$ ${formatBRL(inssMaximo)}).
+      </div>`;
+      box.classList.add('show');
+      return;
+    }
+
+    // Busca binária em centavos
+    let baixo  = 0;
+    let alto   = tetoCentavos;
+    let achado = null;
+
+    while (baixo <= alto) {
+      const meio  = Math.floor((baixo + alto) / 2);
+      const { total } = calcINSS(meio / 100);
+      const diff  = Math.round((total - inssAlvo) * 100);
+
+      if (diff === 0) {
+        achado = meio;
+        alto   = meio - 1;
+      } else if (diff < 0) {
+        baixo = meio + 1;
+      } else {
+        alto  = meio - 1;
+      }
+    }
+
+    if (achado === null) {
+      box.innerHTML = `<div class="result-row aviso">
+        ⚠️ Nenhum salário produz exatamente R$ ${formatBRL(inssAlvo)} de INSS com esta tabela.
+      </div>`;
+      box.classList.add('show');
+      return;
+    }
+
+    // Expande para encontrar o limite superior do intervalo
+    let salMin = achado;
+    let salMax = achado;
+
+    while (salMax + 1 <= tetoCentavos) {
+      const { total } = calcINSS((salMax + 1) / 100);
+      if (Math.round(total * 100) !== Math.round(inssAlvo * 100)) break;
+      salMax++;
+    }
+
+    // Salário de Contribuição = média aritmética do intervalo
+    const mediaCentavos = (salMin + salMax) / 2;
+    const salContrib    = Math.round(mediaCentavos) / 100;
+
+    const { total, detalhe } = calcINSS(salContrib);
+
+    let html = '';
+
+    html += `<div class="result-row total">
+      <span>Salário de Contribuição</span>
+      <span>R$ ${formatBRL(salContrib)}</span>
+    </div>`;
+
+    detalhe.forEach(d => {
+      html += `<div class="result-row">
+        <span>Faixa ${d.faixa} — ${d.taxaExibicao}% sobre R$ ${formatBRL(d.base)}</span>
+        <span>R$ ${formatBRL(d.contrib)}</span>
+      </div>`;
+    });
+
+    html += `<div class="result-row total">
+      <span>INSS calculado</span>
+      <span>R$ ${formatBRL(total)}</span>
+    </div>`;
+
+    box.innerHTML = html;
+    box.classList.add('show');
+  }
+
+  // ─────────────────────────────────────────────
+  // Controles de interface
+  // ─────────────────────────────────────────────
+  function trocarAba(aba) {
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active',
+        (i === 0 && aba === 'normal') || (i === 1 && aba === 'reverso'));
+    });
+    document.getElementById('panel-normal').classList.toggle('active',  aba === 'normal');
+    document.getElementById('panel-reverso').classList.toggle('active', aba === 'reverso');
+  }
+
+  function limpar(modo) {
+    const inputId  = modo === 'normal' ? 'salario-input' : 'inss-input';
+    const resultId = modo === 'normal' ? 'result-normal' : 'result-reverso';
+    document.getElementById(inputId).value = '';
+    const box = document.getElementById(resultId);
+    box.innerHTML = '';
+    box.classList.remove('show');
+  }
+</script>
+</body>
+</html>
