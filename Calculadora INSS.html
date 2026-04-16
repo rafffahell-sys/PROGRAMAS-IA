@@ -89,7 +89,17 @@
   .result-row span:last-child { font-weight: 500; white-space: nowrap; padding-left: 12px; }
   .footer {
     text-align: center; font-size: 0.72rem;
-    color: #bbb; margin-top: 24px; line-height: 1.5;
+    color: #bbb; margin-top: 24px; line-height: 1.8;
+  }
+  .footer-dev {
+    text-align: center;
+    font-size: 0.70rem;
+    color: #c5cae9;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e8eaf6;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
   }
 </style>
 </head>
@@ -138,6 +148,10 @@
     Aplica truncamento a 2 casas decimais em cada faixa, conforme comportamento
     dos sistemas de folha de pagamento (eSocial / SEFIP).
   </p>
+
+  <p class="footer-dev">
+    Desenvolvido em Claude 4.6 Sonnet Thinking, por Rafael F. Lima
+  </p>
 </div>
 
 <script>
@@ -146,10 +160,10 @@
   // Portaria MPS vigente a partir de 01/01/2026
   // ─────────────────────────────────────────────
   const TABELA_2026 = [
-    { ate: 1621.00, taxa: 0.075, taxaExibicao: '7,5'  },
-    { ate: 2902.84, taxa: 0.09,  taxaExibicao: '9'    },
-    { ate: 4354.27, taxa: 0.12,  taxaExibicao: '12'   },
-    { ate: 8475.55, taxa: 0.14,  taxaExibicao: '14'   }
+    { ate: 1621.00, taxa: 0.075, taxaExibicao: '7,5' },
+    { ate: 2902.84, taxa: 0.09,  taxaExibicao: '9'   },
+    { ate: 4354.27, taxa: 0.12,  taxaExibicao: '12'  },
+    { ate: 8475.55, taxa: 0.14,  taxaExibicao: '14'  }
   ];
 
   // ─────────────────────────────────────────────
@@ -184,10 +198,10 @@
       totalINSS += contrib;
 
       detalhe.push({
-        faixa:         i + 1,
-        base:          baseFaixa,
-        taxaExibicao:  taxaExibicao,
-        contrib:       contrib
+        faixa:        i + 1,
+        base:         baseFaixa,
+        taxaExibicao: taxaExibicao,
+        contrib:      contrib
       });
 
       baseAnterior = ate;
