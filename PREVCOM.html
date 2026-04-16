@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora PREVCOM</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #1a1a1a;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 30px 16px 60px;
+    }
+
+    .container {
+      background-color: #2b2b2b;
+      border-radius: 16px;
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 640px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #FFD700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+
+    .section {
+      background-color: #222;
+      border-radius: 12px;
+      padding: 18px 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #FFD700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
+    }
+
+    .field-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .field-row label {
+      color: #ccc;
+      font-size: 0.88rem;
+      min-width: 110px;
+      white-space: nowrap;
+    }
+
+    .field-row input {
+      flex: 1;
+      background-color: #333;
+      border: 1px solid #444;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.92rem;
+      padding: 9px 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field-row input:focus {
+      border-color: #FFD700;
+    }
+
+    /* Rubricas table */
+    .rubrica-header {
+      display: grid;
+      grid-template-columns: 120px 1fr 44px;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .rubrica-header span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #FFD700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .rubrica-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 44px;
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+
+    .rubrica-row input {
+      background-color: #333;
+      border: 1px solid #444;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.9rem;
+      padding: 8px 10px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+
+    .rubrica-row input:focus {
+      border-color: #FFD700;
+    }
+
+    .rubrica-row input.match {
+      border-color: #4caf50;
+      background-color: #1e3a1e;
+    }
+
+    .rubrica-row input.no-match {
+      border-color: #e57373;
+      background-color: #3a1e1e;
+    }
+
+    .btn-remove {
+      background: #8B0000;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 7px 10px;
+      transition: background 0.2s;
+    }
+
+    .btn-remove:hover { background: #c0392b; }
+
+    .btn-add {
+      background: #333;
+      border: 1px dashed #FFD700;
+      border-radius: 8px;
+      color: #FFD700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 8px 16px;
+      margin-top: 4px;
+      width: 100%;
+      transition: background 0.2s;
+    }
+
+    .btn-add:hover { background: #3a3000; }
+
+    /* Percentual toggle */
+    .percentual-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .percentual-toggle label {
+      color: #ccc;
+      font-size: 0.88rem;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 22px;
+    }
+
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #444;
+      border-radius: 22px;
+      transition: .3s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #fff;
+      border-radius: 50%;
+      transition: .3s;
+    }
+
+    input:checked + .slider { background-color: #FFD700; }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    .percentual-field {
+      display: none;
+    }
+
+    .percentual-field.visible {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .percentual-field label {
+      color: #ccc;
+      font-size: 0.88rem;
+      min-width: 110px;
+    }
+
+    .percentual-field input {
+      width: 100px;
+      background-color: #333;
+      border: 1px solid #FFD700;
+      border-radius: 8px;
+      color: #FFD700;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      outline: none;
+    }
+
+    .percentual-field span { color: #aaa; font-size: 0.85rem; }
+
+    /* Teto info */
+    .teto-info {
+      font-size: 0.78rem;
+      color: #888;
+      text-align: right;
+      margin-top: 6px;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn-calc {
+      background: #FFD700;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 11px 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: background 0.2s;
+    }
+
+    .btn-calc:hover { background: #e6c200; }
+
+    .btn-clear {
+      background: #3a3a3a;
+      color: #ccc;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 11px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: background 0.2s;
+    }
+
+    .btn-clear:hover { background: #4a4a4a; }
+
+    /* Result */
+    .result-section {
+      margin-bottom: 18px;
+    }
+
+    .result-box {
+      background-color: #1a1a1a;
+      border: 1px solid #444;
+      border-radius: 10px;
+      padding: 16px;
+      min-height: 100px;
+      color: #ccc;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .result-box .result-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #FFD700;
+      margin-top: 6px;
+    }
+
+    .result-box .result-detail {
+      color: #aaa;
+      font-size: 0.82rem;
+      margin-top: 4px;
+    }
+
+    .result-box .result-warn {
+      color: #e57373;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .result-box .rubrica-list {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .result-box .rubrica-list span.ok { color: #4caf50; }
+    .result-box .rubrica-list span.nok { color: #e57373; }
+
+    /* Footer */
+    footer {
+      background: #FFD700;
+      color: #1a1a1a;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 10px 16px;
+      border-radius: 0 0 16px 16px;
+      margin: 0 -24px -28px;
+    }
+
+    @media (max-width: 480px) {
+      .rubrica-header, .rubrica-row {
+        grid-template-columns: 100px 1fr 36px;
+      }
+      .btn-calc, .btn-clear { font-size: 0.85rem; padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="title">
+    🧮 CALCULADORA PREVCOM
+  </div>
+
+  <!-- Rubricas Input -->
+  <div class="section">
+    <div class="section-title">📋 Rubricas do Servidor / Membro</div>
+
+    <div class="rubrica-header">
+      <span>Rubrica</span>
+      <span>Valor (R$)</span>
+      <span></span>
+    </div>
+
+    <div id="rubrica-list"></div>
+
+    <button class="btn-add" onclick="addRubrica()">+ Adicionar Rubrica</button>
+    <div class="teto-info">Teto da previdência: R$ 8.475,55</div>
+  </div>
+
+  <!-- Percentual -->
+  <div class="section">
+    <div class="section-title">⚙️ Alíquota (Opcional)</div>
+
+    <div class="percentual-toggle">
+      <label>Alíquota diferente de 8,5%?</label>
+      <label class="toggle-switch">
+        <input type="checkbox" id="toggle-perc" onchange="togglePercentual()"/>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="percentual-field" id="perc-field">
+      <label>Percentual:</label>
+      <input type="number" id="percentual" value="8.5" min="0" max="100" step="0.01"/>
+      <span>%</span>
+    </div>
+  </div>
+
+  <!-- Botões -->
+  <div class="btn-row">
+    <button class="btn-calc" onclick="calcular()">🧮 Calcular</button>
+    <button class="btn-clear" onclick="limpar()">🗑️ Limpar</button>
+  </div>
+
+  <!-- Resultado -->
+  <div class="result-section">
+    <div class="section-title" style="color:#FFD700; font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; display:flex; align-items:center; gap:8px;">
+      📄 RESULTADO:
+    </div>
+    <div class="result-box" id="resultado">
+      <span style="color:#555;">Preencha as rubricas e clique em Calcular.</span>
+    </div>
+  </div>
+
+  <footer>
+    🔐 Base 47 – PREVCOM &nbsp;•&nbsp; Desenvolvido via Inner AI, por Rafael F. Lima
+  </footer>
+</div>
+
+<script>
+  // Rubricas que compõem a Base 47 - PREVCOM
+  const BASE_RUBRICAS = new Set([
+    1117, 1120, 1126, 1150, 1187, 1273, 1317, 1321,
+    1425, 1428, 1513, 5039, 5052, 5218, 5219, 5253,
+    1165, 1314
+  ]);
+
+  const TETO = 8475.55;
+  let rowCount = 0;
+
+  function addRubrica(cod = '', val = '') {
+    rowCount++;
+    const id = rowCount;
+    const div = document.createElement('div');
+    div.className = 'rubrica-row';
+    div.id = 'row-' + id;
+    div.innerHTML = `
+      <input type="number" id="cod-${id}" placeholder="Ex: 1117" min="1"
+             onblur="highlightRubrica(${id})" oninput="highlightRubrica(${id})"
+             value="${cod}" />
+      <input type="text" id="val-${id}" placeholder="0,00"
+             value="${val}" oninput="formatarValor(this)" />
+      <button class="btn-remove" onclick="removeRubrica(${id})" title="Remover">✕</button>
+    `;
+    document.getElementById('rubrica-list').appendChild(div);
+  }
+
+  function removeRubrica(id) {
+    const el = document.getElementById('row-' + id);
+    if (el) el.remove();
+  }
+
+  function highlightRubrica(id) {
+    const codInput = document.getElementById('cod-' + id);
+    const cod = parseInt(codInput.value);
+    if (!codInput.value) {
+      codInput.className = '';
+      return;
+    }
+    if (BASE_RUBRICAS.has(cod)) {
+      codInput.className = 'match';
+    } else {
+      codInput.className = 'no-match';
+    }
+  }
+
+  function formatarValor(input) {
+    // Permite digitação livre, mas aceita vírgula como separador decimal
+    let v = input.value.replace(/[^\d,\.]/g, '');
+    input.value = v;
+  }
+
+  function parseMoeda(str) {
+    if (!str) return 0;
+    // Suporta formato "1.234,56" ou "1234.56" ou "1234,56"
+    str = str.trim();
+    // Se tiver vírgula após ponto: formato pt-BR 1.234,56
+    if (/\d\.\d{3},/.test(str)) {
+      str = str.replace(/\./g, '').replace(',', '.');
+    } else {
+      str = str.replace(',', '.');
+    }
+    return parseFloat(str) || 0;
+  }
+
+  function togglePercentual() {
+    const toggle = document.getElementById('toggle-perc');
+    const field = document.getElementById('perc-field');
+    if (toggle.checked) {
+      field.classList.add('visible');
+    } else {
+      field.classList.remove('visible');
+      document.getElementById('percentual').value = '8.5';
+    }
+  }
+
+  function calcular() {
+    const rows = document.getElementById('rubrica-list').querySelectorAll('.rubrica-row');
+
+    let somaBase = 0;
+    let detalhes = [];
+    let ignoradas = [];
+
+    rows.forEach(row => {
+      const idNum = row.id.replace('row-', '');
+      const codInput = document.getElementById('cod-' + idNum);
+      const valInput = document.getElementById('val-' + idNum);
+
+      const cod = parseInt(codInput.value);
+      const valor = parseMoeda(valInput.value);
+
+      if (!codInput.value) return;
+
+      if (BASE_RUBRICAS.has(cod)) {
+        somaBase += valor;
+        detalhes.push({ cod, valor, ok: true });
+      } else {
+        ignoradas.push({ cod, valor, ok: false });
+      }
+    });
+
+    if (detalhes.length === 0 && ignoradas.length === 0) {
+      document.getElementById('resultado').innerHTML =
+        '<span class="result-warn">⚠️ Nenhuma rubrica informada. Adicione ao menos uma rubrica.</span>';
+      return;
+    }
+
+    const percRaw = parseFloat(document.getElementById('percentual').value);
+    const perc = isNaN(percRaw) || percRaw <= 0 ? 8.5 : percRaw;
+
+    const base = somaBase - TETO;
+    const prevcom = base > 0 ? (base * perc) / 100 : 0;
+
+    // Formata valores
+    const fmtBRL = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    let html = '';
+
+    // Rubricas consideradas
+    if (detalhes.length > 0) {
+      html += '<div class="rubrica-list"><strong style="color:#FFD700;">Rubricas na base (consideradas):</strong><br>';
+      detalhes.forEach(d => {
+        html += `<span class="ok">✔ ${d.cod}</span> → ${fmtBRL(d.valor)}<br>`;
+      });
+      html += '</div>';
+    }
+
+    // Rubricas ignoradas
+    if (ignoradas.length > 0) {
+      html += '<div class="rubrica-list" style="margin-top:6px;"><strong style="color:#e57373;">Rubricas fora da base (ignoradas):</strong><br>';
+      ignoradas.forEach(d => {
+        html += `<span class="nok">✘ ${d.cod}</span> → ${fmtBRL(d.valor)}<br>`;
+      });
+      html += '</div>';
+    }
+
+    html += '<hr style="border-color:#333; margin:10px 0;"/>';
+
+    html += `<div style="line-height:1.9">`;
+    html += `<span style="color:#aaa;">Soma das rubricas na base:</span> <strong style="color:#fff;">${fmtBRL(somaBase)}</strong><br>`;
+    html += `<span style="color:#aaa;">Teto da previdência:</span> <strong style="color:#fff;">${fmtBRL(TETO)}</strong><br>`;
+    html += `<span style="color:#aaa;">Base de cálculo (soma − teto):</span> <strong style="color:#fff;">${fmtBRL(Math.max(base, 0))}</strong><br>`;
+    html += `<span style="color:#aaa;">Alíquota aplicada:</span> <strong style="color:#fff;">${perc.toFixed(2).replace('.', ',')}%</strong><br>`;
+    html += `</div>`;
+
+    if (base <= 0) {
+      html += `<div class="result-warn" style="margin-top:8px;">⚠️ A soma das rubricas na base não supera o teto da previdência. PREVCOM = R$ 0,00.</div>`;
+    } else {
+      html += `<div style="margin-top:10px; color:#ccc; font-size:0.85rem;">Valor do PREVCOM:</div>`;
+      html += `<div class="result-value">${fmtBRL(prevcom)}</div>`;
+      html += `<div class="result-detail">${fmtBRL(somaBase)} − ${fmtBRL(TETO)} = ${fmtBRL(base)} × ${perc.toFixed(2).replace('.', ',')}% = ${fmtBRL(prevcom)}</div>`;
+    }
+
+    document.getElementById('resultado').innerHTML = html;
+  }
+
+  function limpar() {
+    document.getElementById('rubrica-list').innerHTML = '';
+    rowCount = 0;
+    document.getElementById('resultado').innerHTML =
+      '<span style="color:#555;">Preencha as rubricas e clique em Calcular.</span>';
+    document.getElementById('toggle-perc').checked = false;
+    document.getElementById('perc-field').classList.remove('visible');
+    document.getElementById('percentual').value = '8.5';
+    // Adiciona uma linha vazia inicial
+    addRubrica();
+  }
+
+  // Inicializa com 3 linhas
+  addRubrica();
+  addRubrica();
+  addRubrica();
+</script>
+</body>
+</html>
