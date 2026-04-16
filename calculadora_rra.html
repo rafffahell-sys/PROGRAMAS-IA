@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Calculadora RRA - Sistema YELLOW</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #FFD700;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── ABAS ── */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #FFD700;
+  }
+
+  .tab {
+    padding: 10px 24px;
+    background: #2d2d2d;
+    color: #aaa;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.2s;
+  }
+
+  .tab.active {
+    background: #FFD700;
+    color: #1a1a1a;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── PAINEL ── */
+  .panel {
+    background: #2d2d2d;
+    border: 1px solid #FFD700;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  .panel h2 {
+    color: #FFD700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #444;
+  }
+
+  /* ── FORMULÁRIO ── */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .field label {
+    font-size: 0.78rem;
+    color: #FFD700;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .field input, .field select {
+    background: #1a1a1a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 9px 12px;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: #FFD700;
+  }
+
+  .field input::placeholder { color: #666; }
+
+  /* ── BOTÕES ── */
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .btn {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+
+  .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-primary { background: #28a745; color: #fff; }
+  .btn-yellow  { background: #FFD700; color: #1a1a1a; }
+  .btn-red     { background: #dc3545; color: #fff; }
+  .btn-blue    { background: #1e88e5; color: #fff; }
+
+  /* ── RESULTADO INDIVIDUAL ── */
+  .resultado {
+    display: none;
+    margin-top: 20px;
+  }
+
+  .resultado.show { display: block; }
+
+  .resultado-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .res-card {
+    background: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+
+  .res-card.destaque { border-color: #FFD700; }
+
+  .res-card .rotulo {
+    font-size: 0.72rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .res-card .valor {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #FFD700;
+  }
+
+  .res-card.verde .valor { color: #4caf50; }
+  .res-card.vermelho .valor { color: #ef5350; }
+
+  .tabela-detalhes {
+    margin-top: 14px;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.82rem;
+    color: #ccc;
+    line-height: 2;
+  }
+
+  .tabela-detalhes strong { color: #FFD700; }
+
+  /* ── LOG / LOTE ── */
+  .instrucao-box {
+    background: #1a1a1a;
+    border-left: 3px solid #FFD700;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    font-size: 0.82rem;
+    color: #ccc;
+    line-height: 1.8;
+  }
+
+  .instrucao-box strong { color: #FFD700; }
+
+  textarea {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 12px;
+    color: #fff;
+    font-family: 'Consolas', monospace;
+    font-size: 0.82rem;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+
+  textarea:focus { outline: none; border-color: #FFD700; }
+
+  .log-box {
+    background: #111;
+    border: 1px solid #FFD700;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.82rem;
+    color: #ccc;
+    min-height: 100px;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* ── TABELA LOTE ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 16px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+  }
+
+  thead tr { background: #FFD700; }
+  thead th { color: #1a1a1a; padding: 10px 12px; font-weight: 700; text-align: left; }
+  tbody tr { border-bottom: 1px solid #333; }
+  tbody tr:nth-child(even) { background: #222; }
+  tbody td { padding: 9px 12px; color: #ddd; }
+  tbody td.positivo { color: #4caf50; font-weight: 700; }
+  tbody td.negativo { color: #ef5350; }
+  tfoot tr { background: #333; }
+  tfoot td { padding: 10px 12px; font-weight: 700; color: #FFD700; }
+
+  /* ── RODAPÉ ── */
+  footer {
+    text-align: center;
+    background: #FFD700;
+    color: #1a1a1a;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+
+  /* ── VOLTAR ── */
+  .btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #FFD700;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+  }
+
+  .btn-voltar:hover { opacity: 0.7; }
+
+  @media (max-width: 500px) {
+    h1 { font-size: 1rem; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <a href="index.html" class="btn-voltar">← Voltar ao Início</a>
+
+  <h1>📊 Calculadora de RRA — Sistema YELLOW</h1>
+
+  <!-- ABAS -->
+  <div class="tabs">
+    <button class="tab active" onclick="trocarAba('individual', this)">🧮 Cálculo Individual</button>
+    <button class="tab"        onclick="trocarAba('lote', this)">📂 Processamento em Lote</button>
+    <button class="tab"        onclick="trocarAba('tabelas', this)">📋 Tabelas IRRF</button>
+  </div>
+
+  <!-- ══ ABA INDIVIDUAL ══════════════════════════════════════ -->
+  <div id="aba-individual" class="tab-content active">
+    <div class="panel">
+      <h2>📝 Dados do Cálculo</h2>
+      <div class="form-grid">
+        <div class="field">
+          <label>Matrícula (opcional)</label>
+          <input type="text" id="ind-matricula" placeholder="Ex: 123456"/>
+        </div>
+        <div class="field">
+          <label>Valor Bruto (R$)</label>
+          <input type="text" id="ind-bruto" placeholder="Ex: 15000,00"/>
+        </div>
+        <div class="field">
+          <label>Quantidade de Meses</label>
+          <input type="number" id="ind-meses" min="1" max="60" placeholder="Ex: 12"/>
+        </div>
+        <div class="field">
+          <label>Competência (MM/AAAA)</label>
+          <input type="text" id="ind-competencia" placeholder="Ex: 03/2025" maxlength="7"/>
+        </div>
+        <div class="field">
+          <label>Previdência (R$)</label>
+          <input type="text" id="ind-previdencia" placeholder="Ex: 1500,00 (ou 0)"/>
+        </div>
+        <div class="field">
+          <label>Pensão Alimentícia (R$)</label>
+          <input type="text" id="ind-pensao" placeholder="Ex: 0"/>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="calcularIndividual()">⚡ Calcular</button>
+        <button class="btn btn-yellow"  onclick="limparIndividual()">🗑️ Limpar</button>
+      </div>
+    </div>
+
+    <div class="resultado" id="resultado-individual">
+      <div class="panel">
+        <h2>✅ Resultado</h2>
+        <div class="resultado-grid">
+          <div class="res-card">
+            <div class="rotulo">Valor Bruto</div>
+            <div class="valor" id="res-bruto">—</div>
+          </div>
+          <div class="res-card vermelho">
+            <div class="rotulo">Previdência</div>
+            <div class="valor" id="res-prev">—</div>
+          </div>
+          <div class="res-card vermelho">
+            <div class="rotulo">Pensão Alimentícia</div>
+            <div class="valor" id="res-pensao">—</div>
+          </div>
+          <div class="res-card">
+            <div class="rotulo">Base de Cálculo</div>
+            <div class="valor" id="res-base">—</div>
+          </div>
+          <div class="res-card vermelho">
+            <div class="rotulo">IRRF Devido</div>
+            <div class="valor" id="res-irrf">—</div>
+          </div>
+          <div class="res-card destaque verde">
+            <div class="rotulo">Valor Líquido</div>
+            <div class="valor" id="res-liquido">—</div>
+          </div>
+        </div>
+        <div class="tabela-detalhes" id="res-detalhes"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ABA LOTE ════════════════════════════════════════════ -->
+  <div id="aba-lote" class="tab-content">
+    <div class="panel">
+      <h2>📋 Instruções</h2>
+      <div class="instrucao-box">
+        Cole os dados abaixo, um registro por linha, com campos separados por <strong>ponto e vírgula (;)</strong>.<br/>
+        <strong>Formato:</strong> Matricula ; Valor Bruto ; Qtd Meses ; Competência (MM/AAAA) ; Previdência ; Pensão<br/>
+        <strong>Exemplo:</strong> 123456 ; 15000,00 ; 12 ; 03/2025 ; 1500,00 ; 0<br/>
+        A primeira linha pode ser cabeçalho (será ignorada automaticamente).
+      </div>
+      <div class="field" style="margin-bottom:14px;">
+        <label>Dados de Entrada</label>
+        <textarea id="lote-entrada" rows="8"
+          placeholder="matricula;valor_bruto;qtd_meses;competencia;previdencia;pensao
+123456;15000,00;12;03/2025;1500,00;0
+789012;28000,00;24;01/2025;2800,00;500,00"></textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="processarLote()">⚡ Processar</button>
+        <button class="btn btn-blue"    onclick="exportarCSV()">💾 Exportar CSV</button>
+        <button class="btn btn-yellow"  onclick="limparLote()">🗑️ Limpar</button>
+      </div>
+    </div>
+
+    <div class="panel" id="lote-resultado-panel" style="display:none;">
+      <h2>📊 Resultado do Lote</h2>
+      <div class="log-box" id="lote-log"></div>
+      <div class="table-wrap">
+        <table id="lote-tabela">
+          <thead>
+            <tr>
+              <th>Matrícula</th>
+              <th>Valor Bruto</th>
+              <th>Previdência</th>
+              <th>Pensão</th>
+              <th>Base de Cálculo</th>
+              <th>IRRF Devido</th>
+              <th>Valor Líquido</th>
+            </tr>
+          </thead>
+          <tbody id="lote-tbody"></tbody>
+          <tfoot id="lote-tfoot"></tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ABA TABELAS ══════════════════════════════════════════ -->
+  <div id="aba-tabelas" class="tab-content">
+    <div class="panel">
+      <h2>📋 Tabelas IRRF Utilizadas</h2>
+      <div class="instrucao-box" style="margin-bottom:20px;">
+        O sistema seleciona automaticamente a tabela correta com base na <strong>competência</strong> informada.
+        No modo <strong>RRA</strong>, a base de cálculo mensal é obtida dividindo a base total pelo número de meses,
+        e o imposto mensal resultante é multiplicado de volta pelos meses para obter o total devido.
+      </div>
+
+      <div id="tabelas-container"></div>
+    </div>
+  </div>
+
+  <footer>🚀 Desenvolvido por Rafael F. Lima · Produzido para o Sistema YELLOW</footer>
+
+</div>
+
+<script>
+// ─── TABELAS IRRF ─────────────────────────────────────────────────────────────
+const TABELAS_IRRF = {
+  ate_04_2023: {
+    nome: "Até Abril/2023",
+    faixas:    [1903.98, 2826.65, 3751.05, 4664.68],
+    aliquotas: [0.0, 0.075, 0.15, 0.225, 0.275],
+    deducoes:  [0.0, 142.80, 354.80, 636.13, 869.36],
+    desconto_simplificado: 0.0
+  },
+  apos_05_2023: {
+    nome: "Maio/2023 a Dez/2023",
+    faixas:    [2112.00, 2826.65, 3751.05, 4664.68],
+    aliquotas: [0.0, 0.075, 0.15, 0.225, 0.275],
+    deducoes:  [0.0, 158.40, 370.40, 651.73, 884.96],
+    desconto_simplificado: 528.00
+  },
+  ano_2024: {
+    nome: "Ano 2024",
+    faixas:    [2259.20, 2826.65, 3751.05, 4664.68],
+    aliquotas: [0.0, 0.075, 0.15, 0.225, 0.275],
+    deducoes:  [0.0, 169.44, 381.44, 662.77, 896.00],
+    desconto_simplificado: 564.80
+  },
+  ano_2025: {
+    nome: "Ano 2025 / 2026",
+    faixas:    [2428.80, 2826.65, 3751.05, 4664.68],
+    aliquotas: [0.0, 0.075, 0.15, 0.225, 0.275],
+    deducoes:  [0.0, 182.16, 394.16, 675.49, 908.73],
+    desconto_simplificado: 0.0 // zerado para paridade com simulador RFB
+  }
+};
+
+function selecionarTabela(competencia) {
+  const partes = competencia.trim().split('/');
+  if (partes.length !== 2) return TABELAS_IRRF.ano_2025;
+  const mes = parseInt(partes[0]), ano = parseInt(partes[1]);
+  if (isNaN(mes) || isNaN(ano)) return TABELAS_IRRF.ano_2025;
+
+  if (ano < 2023)  return TABELAS_IRRF.ate_04_2023;
+  if (ano === 2023) return mes < 5 ? TABELAS_IRRF.ate_04_2023 : TABELAS_IRRF.apos_05_2023;
+  if (ano === 2024) return TABELAS_IRRF.ano_2024;
+  return TABELAS_IRRF.ano_2025;
+}
+
+// ─── CÁLCULO CENTRAL ──────────────────────────────────────────────────────────
+function arredondar(v) {
+  return Math.round(v * 100) / 100;
+}
+
+function calcularIRRF(valorBruto, numMeses, competencia, previdencia, pensao) {
+  const tabela = selecionarTabela(competencia);
+
+  // Cálculo por Deduções Legais
+  const baseTotalPadrao   = valorBruto - previdencia - pensao;
+  const baseMensalPadrao  = baseTotalPadrao / numMeses;
+
+  let faixaPadrao = tabela.faixas.length;
+  for (let i = 0; i < tabela.faixas.length; i++) {
+    if (baseMensalPadrao <= tabela.faixas[i]) { faixaPadrao = i; break; }
+  }
+
+  let irrfMensalPadrao = (baseMensalPadrao * tabela.aliquotas[faixaPadrao]) - tabela.deducoes[faixaPadrao];
+  if (irrfMensalPadrao < 0) irrfMensalPadrao = 0;
+  const impostoPadrao = arredondar(irrfMensalPadrao * numMeses);
+
+  // Cálculo Simplificado (somente quando desconto_simplificado > 0)
+  let impostoFinal = impostoPadrao;
+  let baseFinal    = baseTotalPadrao;
+  let metodo       = 'Deduções Legais';
+
+  if (tabela.desconto_simplificado > 0) {
+    const baseTotalSimpl  = Math.max(0, valorBruto - tabela.desconto_simplificado);
+    const baseMensalSimpl = baseTotalSimpl / numMeses;
+
+    let faixaSimpl = tabela.faixas.length;
+    for (let i = 0; i < tabela.faixas.length; i++) {
+      if (baseMensalSimpl <= tabela.faixas[i]) { faixaSimpl = i; break; }
+    }
+
+    let irrfMensalSimpl = (baseMensalSimpl * tabela.aliquotas[faixaSimpl]) - tabela.deducoes[faixaSimpl];
+    if (irrfMensalSimpl < 0) irrfMensalSimpl = 0;
+    const impostoSimpl = arredondar(irrfMensalSimpl * numMeses);
+
+    if (impostoSimpl < impostoPadrao) {
+      impostoFinal = impostoSimpl;
+      baseFinal    = baseTotalSimpl;
+      metodo       = 'Desconto Simplificado';
+    }
+  }
+
+  const liquido = arredondar(valorBruto - previdencia - pensao - impostoFinal);
+
+  // Identifica a faixa final para exibição
+  const baseMensalFinal = baseFinal / numMeses;
+  let faixaFinal = tabela.faixas.length;
+  for (let i = 0; i < tabela.faixas.length; i++) {
+    if (baseMensalFinal <= tabela.faixas[i]) { faixaFinal = i; break; }
+  }
+  const aliquotaFinal = (tabela.aliquotas[faixaFinal] * 100).toFixed(1) + '%';
+
+  return {
+    bruto: valorBruto,
+    previdencia,
+    pensao,
+    baseMensal: arredondar(baseMensalFinal),
+    baseTotal: arredondar(baseFinal),
+    irrf: impostoFinal,
+    liquido,
+    metodo,
+    aliquota: aliquotaFinal,
+    tabelaNome: tabela.nome
+  };
+}
+
+// ─── PARSE DE VALOR ───────────────────────────────────────────────────────────
+function parseValor(str) {
+  if (!str || str.trim() === '' || str.trim() === '0') return 0;
+  return parseFloat(str.trim().replace(/\./g, '').replace(',', '.')) || 0;
+}
+
+function fmt(v) {
+  return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+// ─── CÁLCULO INDIVIDUAL ───────────────────────────────────────────────────────
+function calcularIndividual() {
+  const bruto = parseValor(document.getElementById('ind-bruto').value);
+  const meses = parseInt(document.getElementById('ind-meses').value) || 0;
+  const comp  = document.getElementById('ind-competencia').value.trim();
+  const prev  = parseValor(document.getElementById('ind-previdencia').value);
+  const pensao= parseValor(document.getElementById('ind-pensao').value);
+
+  if (!bruto || bruto <= 0) { alert('Informe o Valor Bruto.'); return; }
+  if (!meses || meses < 1)  { alert('Informe a Quantidade de Meses (mínimo 1).'); return; }
+  if (!comp || !/
+^
+\d{2}\/\d{4}
+$
+/.test(comp)) { alert('Informe a Competência no formato MM/AAAA.'); return; }
+
+  const r = calcularIRRF(bruto, meses, comp, prev, pensao);
+
+  document.getElementById('res-bruto').textContent   = 'R$ ' + fmt(r.bruto);
+  document.getElementById('res-prev').textContent    = 'R$ ' + fmt(r.previdencia);
+  document.getElementById('res-pensao').textContent  = 'R$ ' + fmt(r.pensao);
+  document.getElementById('res-base').textContent    = 'R$ ' + fmt(r.baseTotal);
+  document.getElementById('res-irrf').textContent    = 'R$ ' + fmt(r.irrf);
+  document.getElementById('res-liquido').textContent = 'R$ ' + fmt(r.liquido);
+
+  document.getElementById('res-detalhes').innerHTML =
+    `<strong>Tabela utilizada:</strong> ${r.tabelaNome} &nbsp;|&nbsp;
+     <strong>Método:</strong> ${r.metodo} &nbsp;|&nbsp;
+     <strong>Alíquota efetiva:</strong> ${r.aliquota}<br/>
+     <strong>Base mensal (÷ ${meses} meses):</strong> R$ ${fmt(r.baseMensal)} &nbsp;|&nbsp;
+     <strong>Competência:</strong> ${comp}`;
+
+  document.getElementById('resultado-individual').classList.add('show');
+}
+
+function limparIndividual() {
+  ['ind-bruto','ind-meses','ind-competencia','ind-previdencia','ind-pensao','ind-matricula']
+    .forEach(id => document.getElementById(id).value = '');
+  document.getElementById('resultado-individual').classList.remove('show');
+}
+
+// ─── PROCESSAMENTO EM LOTE ────────────────────────────────────────────────────
+let loteResultados = [];
+
+function processarLote() {
+  const texto = document.getElementById('lote-entrada').value.trim();
+  if (!texto) { alert('Cole os dados antes de processar.'); return; }
+
+  const linhas = texto.split('\n').map(l => l.trim()).filter(l => l !== '');
+
+  // Detecta cabeçalho: se o primeiro campo não for numérico
+  let inicio = 0;
+  const primeiroCampo = linhas[0].split(';')[0].trim();
+  if (isNaN(parseFloat(primeiroCampo.replace(',', '.')))) inicio = 1;
+
+  loteResultados = [];
+  const erros = [];
+
+  for (let i = inicio; i < linhas.length; i++) {
+    const campos = linhas[i].split(';').map(c => c.trim());
+    if (campos.length < 6) { erros.push(`Linha ${i+1}: campos insuficientes.`); continue; }
+
+    const [mat, brutStr, mesStr, comp, prevStr, pensaoStr] = campos;
+    const bruto  = parseValor(brutStr);
+    const meses  = parseInt(mesStr) || 0;
+    const prev   = parseValor(prevStr);
+    const pensao = parseValor(pensaoStr);
+
+    if (!bruto || meses < 1 || !comp) {
+      erros.push(`Linha ${i+1} (${mat}): dados inválidos — ignorada.`);
+      continue;
+    }
+
+    const r = calcularIRRF(bruto, meses, comp, prev, pensao);
+    loteResultados.push({ mat, ...r });
+  }
+
+  // Log
+  let log = `✅ ${loteResultados.length} registro(s) processado(s).`;
+  if (erros.length) log += '\n⚠️ ' + erros.join('\n⚠️ ');
+
+  const totalBruto   = loteResultados.reduce((s, r) => s + r.bruto,  0);
+  const totalIRRF    = loteResultados.reduce((s, r) => s + r.irrf,   0);
+  const totalLiquido = loteResultados.reduce((s, r) => s + r.liquido,0);
+
+  log += `\n\n💰 Total Bruto: R$ ${fmt(arredondar(totalBruto))}`;
+  log += `\n🔻 Total IRRF:  R$ ${fmt(arredondar(totalIRRF))}`;
+  log += `\n✅ Total Líquido: R$ ${fmt(arredondar(totalLiquido))}`;
+
+  document.getElementById('lote-log').textContent = log;
+
+  // Tabela
+  const tbody = document.getElementById('lote-tbody');
+  tbody.innerHTML = '';
+  loteResultados.forEach(r => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${r.mat}</td>
+        <td>R$ ${fmt(r.bruto)}</td>
+        <td>R$ ${fmt(r.previdencia)}</td>
+        <td>R$ ${fmt(r.pensao)}</td>
+        <td>R$ ${fmt(r.baseTotal)}</td>
+        <td class="negativo">R$ ${fmt(r.irrf)}</td>
+        <td class="positivo">R$ ${fmt(r.liquido)}</td>
+      </tr>`;
+  });
+
+  document.getElementById('lote-tfoot').innerHTML = `
+    <tr>
+      <td colspan="1">TOTAIS</td>
+      <td>R$ ${fmt(arredondar(totalBruto))}</td>
+      <td colspan="2"></td>
+      <td></td>
+      <td>R$ ${fmt(arredondar(totalIRRF))}</td>
+      <td>R$ ${fmt(arredondar(totalLiquido))}</td>
+    </tr>`;
+
+  document.getElementById('lote-resultado-panel').style.display = 'block';
+}
+
+function exportarCSV() {
+  if (!loteResultados.length) { alert('Processe os dados primeiro.'); return; }
+
+  let csv = 'matricula;base_calculo;imposto_devido;valor_liquido\n';
+  loteResultados.forEach(r => {
+    csv += `${r.mat};${fmt(r.baseTotal)};${fmt(r.irrf)};${fmt(r.liquido)}\n`;
+  });
+
+  const blob = new Blob([csv], { type: 'text/plain;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'relatorio_rra.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function limparLote() {
+  document.getElementById('lote-entrada').value = '';
+  document.getElementById('lote-log').textContent = '';
+  document.getElementById('lote-tbody').innerHTML = '';
+  document.getElementById('lote-tfoot').innerHTML = '';
+  document.getElementById('lote-resultado-panel').style.display = 'none';
+  loteResultados = [];
+}
+
+// ─── ABA TABELAS ──────────────────────────────────────────────────────────────
+function renderizarTabelas() {
+  const container = document.getElementById('tabelas-container');
+  const periodos  = [
+    { chave: 'ate_04_2023',   vigencia: 'Até Abril/2023' },
+    { chave: 'apos_05_2023',  vigencia: 'Maio/2023 a Dezembro/2023' },
+    { chave: 'ano_2024',      vigencia: 'Janeiro/2024 a Dezembro/2024' },
+    { chave: 'ano_2025',      vigencia: 'Janeiro/2025 em diante (vigente)' }
+  ];
+
+  periodos.forEach(p => {
+    const t = TABELAS_IRRF[p.chave];
+    let linhas = '';
+    for (let i = 0; i <= t.faixas.length; i++) {
+      const de = i === 0 ? 'Até' : 'De ' + fmt(t.faixas[i-1]+0.01);
+      const ate = i < t.faixas.length ? fmt(t.faixas[i]) : 'Acima';
+      const aliq = (t.aliquotas[i]*100).toFixed(1) + '%';
+      const ded  = 'R$ ' + fmt(t.deducoes[i]);
+      linhas += `<tr><td>${de}</td><td>${ate}</td><td>${aliq}</td><td>${ded}</td></tr>`;
+    }
+    const simpl = t.desconto_simplificado > 0
+      ? `R$ ${fmt(t.desconto_simplificado)}`
+      : 'Não aplicável (zerado para cálculo RRA)';
+
+    container.innerHTML += `
+      <div class="panel" style="margin-bottom:16px;">
+        <h2>📅 ${p.vigencia}</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Base Mensal (De)</th><th>Base Mensal (Até)</th><th>Alíquota</th><th>Dedução</th></tr></thead>
+            <tbody>${linhas}</tbody>
+          </table>
+        </div>
+        <div style="margin-top:10px; font-size:0.8rem; color:#aaa;">
+          Desconto simplificado: <span style="color:#FFD700;">${simpl}</span>
+        </div>
+      </div>`;
+  });
+}
+
+// ─── ABAS ─────────────────────────────────────────────────────────────────────
+function trocarAba(nome, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('aba-' + nome).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ─── INICIALIZAÇÃO ────────────────────────────────────────────────────────────
+renderizarTabelas();
+</script>
+</body>
+</html>
