@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🚴 Acompanhamento Ciclismo</title>
+  <style>
+    /* --- Variáveis de Tema --- */
+    :root {
+      --primary-color: #e50012;
+      --secondary-color: #c0000a;
+      --background-color: #0a0a0a;
+      --card-bg: #1a0005;
+      --text-color: #f0f0f0;
+      --text-light: #bbb;
+      --border-color: #3a0010;
+      --header-gradient-start: var(--secondary-color);
+      --header-gradient-end: #1a0000;
+      --table-header-gradient-start: var(--secondary-color);
+      --table-header-gradient-end: #7a0005;
+      --table-row-even-bg: #0f0003;
+      --table-row-hover-bg: #1a0008;
+      --star-color-active: #FFD700;
+      --star-color-hover: #ffaa00;
+      --star-color-inactive: #333;
+      --highlight-row-bg: #1a0a00;
+      --highlight-row-border: #FFD700;
+      --progress-bar-bg: #1a0005;
+      --progress-bar-fill: var(--primary-color);
+    }
+
+    /* --- Tema Azul e Claro --- */
+    body.theme-blue-light {
+      --primary-color: #007bff;
+      --secondary-color: #0056b3;
+      --background-color: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-color: #343a40;
+      --text-light: #6c757d;
+      --border-color: #dee2e6;
+      --header-gradient-start: #007bff;
+      --header-gradient-end: #0056b3;
+      --table-header-gradient-start: #007bff;
+      --table-header-gradient-end: #0056b3;
+      --table-row-even-bg: #f2f2f2;
+      --table-row-hover-bg: #e9ecef;
+      --star-color-active: #ffc107;
+      --star-color-hover: #ffcd39;
+      --star-color-inactive: #adb5bd;
+      --highlight-row-bg: #fff3cd;
+      --highlight-row-border: #ffc107;
+      --progress-bar-bg: #e9ecef;
+      --progress-bar-fill: #007bff;
+    }
+
+    /* --- Tema Verde e Escuro --- */
+    body.theme-green-dark {
+      --primary-color: #28a745;
+      --secondary-color: #1e7e34;
+      --background-color: #1a1a1a;
+      --card-bg: #2a2a2a;
+      --text-color: #e0e0e0;
+      --text-light: #a0a0a0;
+      --border-color: #4a4a4a;
+      --header-gradient-start: #28a745;
+      --header-gradient-end: #1e7e34;
+      --table-header-gradient-start: #28a745;
+      --table-header-gradient-end: #1e7e34;
+      --table-row-even-bg: #222222;
+      --table-row-hover-bg: #333333;
+      --star-color-active: #ffeb3b;
+      --star-color-hover: #ffee58;
+      --star-color-inactive: #666666;
+      --highlight-row-bg: #3a3a2a;
+      --highlight-row-border: #ffeb3b;
+      --progress-bar-bg: #333333;
+      --progress-bar-fill: #28a745;
+    }
+
+    /* --- Estilos Gerais --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--background-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--header-gradient-start), var(--header-gradient-end));
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--primary-color);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: 1px; color: #fff; }
+
+    .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    .season-selector, .theme-selector {
+      background: var(--card-bg);
+      border: 2px solid var(--primary-color);
+      color: var(--text-color);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .btn-add-evento {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-add-evento:hover { background: var(--secondary-color); }
+
+    .stats-bar {
+      display: flex;
+      gap: 12px;
+      padding: 14px 32px;
+      background: var(--background-color);
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 18px;
+      min-width: 130px;
+      text-align: center;
+    }
+    .stat-card .num { font-size: 1.6rem; font-weight: 800; color: var(--primary-color); }
+    .stat-card .label { font-size: 0.72rem; color: var(--text-light); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .tabs {
+      display: flex;
+      padding: 14px 32px 0;
+      background: var(--background-color);
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 9px 22px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      color: var(--text-light);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: var(--text-color); background: var(--border-color); }
+    .tab-btn.active { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+
+    .tab-content { display: none; padding: 22px 32px; background: var(--background-color); }
+    .tab-content.active { display: block; }
+
+    .section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-left: 4px solid var(--primary-color);
+      padding-left: 10px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filters input, .filters select {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      outline: none;
+    }
+    .filters input:focus, .filters select:focus { border-color: var(--primary-color); }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    table { width: 100%; border-collapse: collapse; min-width: 1200px; }
+
+    thead tr { background: linear-gradient(90deg, var(--table-header-gradient-start), var(--table-header-gradient-end)); }
+    thead th {
+      padding: 12px 10px;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    tbody tr { border-bottom: 1px solid var(--border-color); transition: background 0.15s; }
+    tbody tr:nth-child(even) { background: var(--table-row-even-bg); }
+    tbody tr:hover { background: var(--table-row-hover-bg); }
+    tbody td { padding: 9px 10px; font-size: 0.85rem; vertical-align: middle; }
+
+    /* HIGHLIGHT linhas com 3 estrelas */
+    tbody tr.tres-estrelas { background: var(--highlight-row-bg) !important; border-left: 3px solid var(--highlight-row-border); }
+    tbody tr.tres-estrelas:hover { background: var(--table-row-hover-bg) !important; }
+
+    /* BADGES */
+    .badge-cat {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-Monumento   { background: var(--star-color-active); color: #000; }
+    .badge-Tour        { background: var(--border-color); color: var(--text-light); border: 1px solid var(--primary-color); }
+    .badge-Classica    { background: var(--secondary-color); color: #fff; }
+    .badge-Personalizado { background: #2a2a00; color: #ffee00; border: 1px solid #888800; }
+
+    .badge-M { background: #003a7a; color: #aad4ff; border: 1px solid #0060c0; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; }
+    .badge-F { background: #7a003a; color: #ffaad4; border: 1px solid #c00060; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; }
+
+    .badge-ano {
+      display: inline-block;
+      background: var(--card-bg);
+      color: var(--text-light);
+      border: 1px solid var(--border-color);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .inline-select, .inline-input {
+      background: var(--table-row-even-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 4px 7px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      width: 100%;
+      outline: none;
+    }
+    .inline-select:focus, .inline-input:focus { border-color: var(--primary-color); }
+
+    .mini-input {
+      background: var(--table-row-even-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 3px 5px;
+      border-radius: 4px;
+      font-size: 0.76rem;
+      width: 100%;
+      outline: none;
+    }
+    .mini-input:focus { border-color: var(--primary-color); }
+
+    .nota-input {
+      background: var(--table-row-even-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 0.76rem;
+      width: 100%;
+      outline: none;
+      resize: none;
+    }
+    .nota-input:focus { border-color: var(--primary-color); }
+
+    /* ===== ESTRELAS ===== */
+    .star-widget {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .star {
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--star-color-inactive);
+      transition: color 0.15s, transform 0.1s;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .star:hover { transform: scale(1.25); }
+    .star.ativa  { color: var(--star-color-active); }
+    .star.hover-preview { color: var(--star-color-hover); }
+
+    .star-label {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-left: 2px;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--card-bg);
+      border: 2px solid var(--primary-color);
+      border-radius: 14px;
+      padding: 28px;
+      width: 100%;
+      max-width: 540px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal h2 { color: var(--primary-color); margin-bottom: 20px; font-size: 1.1rem; }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+    .form-row label { font-size: 0.82rem; color: var(--text-light); }
+    .form-row input, .form-row select, .form-row textarea {
+      background: var(--table-row-even-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--primary-color); }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .modal-btns { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
+
+    /* CANAL */
+    .canal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .canal-card h3 { color: var(--primary-color); margin-bottom: 10px; font-size: 0.95rem; }
+    .canal-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .canal-tag {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .canal-tag:hover, .canal-tag.selected { background: var(--primary-color); border-color: var(--primary-color); color: #fff; }
+
+    /* ESTATÍSTICAS */
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; margin-bottom: 22px; }
+    .stat-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; }
+    .stat-box h4 { color: var(--primary-color); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .ranking-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 5px 0; border-bottom: 1px solid var(--border-color); font-size: 0.85rem;
+    }
+    .ranking-item:last-child { border-bottom: none; }
+    .ranking-num {
+      width: 22px; height: 22px; background: var(--primary-color); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 800; flex-shrink: 0;
+    }
+
+    /* Progress Bar for Stats */
+    .progress-bar-container {
+      margin-bottom: 10px;
+    }
+    .progress-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      margin-bottom: 4px;
+      color: var(--text-light);
+    }
+    .progress-bar-label span:last-child {
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+    .progress-bar {
+      background: var(--progress-bar-bg);
+      border-radius: 4px;
+      height: 5px;
+    }
+    .progress-bar-fill {
+      background: var(--progress-bar-fill);
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s;
+    }
+
+    .btn-save {
+      background: var(--primary-color); color: #fff; border: none;
+      padding: 9px 24px; border-radius: 6px;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-save:hover { background: var(--secondary-color); }
+
+    .btn-secondary {
+      background: var(--card-bg); color: var(--text-light); border: 1px solid var(--border-color);
+      padding: 9px 24px; border-radius: 6px;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    }
+    .btn-secondary:hover { background: var(--border-color); }
+
+    .btn-danger {
+      background: transparent; color: var(--primary-color); border: 1px solid var(--primary-color);
+      padding: 3px 8px; border-radius: 4px; font-size: 0.72rem; cursor: pointer;
+    }
+    .btn-danger:hover { background: var(--primary-color); color: #fff; }
+
+    .toast {
+      position: fixed; bottom: 28px; right: 28px;
+      background: var(--primary-color); color: #fff;
+      padding: 11px 22px; border-radius: 8px; font-weight: 700;
+      font-size: 0.88rem; z-index: 9999; opacity: 0;
+      transition: opacity 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
+
+    footer {
+      text-align: center; padding: 18px; color: var(--text-light);
+      font-size: 0.78rem; border-top: 1px solid var(--border-color); margin-top: 36px;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 14px; }
+      .tabs, .tab-content { padding: 10px; }
+      .stats-bar { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🚴 Ciclismo — Meu Acompanhamento</h1>
+  <div class="header-right">
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="color:#fff;font-size:0.85rem;font-weight:600">Temporada:</span>
+      <select class="season-selector" id="anoAtivo" onchange="trocarAno()">
+        <option value="2026">2026</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+      </select>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="color:#fff;font-size:0.85rem;font-weight:600">Tema:</span>
+      <select class="theme-selector" id="themeSelector" onchange="setTheme(this.value)">
+        <option value="red-dark">Vermelho e Preto</option>
+        <option value="blue-light">Azul e Claro</option>
+        <option value="green-dark">Verde e Escuro</option>
+      </select>
+    </div>
+    <button class="btn-add-evento" onclick="abrirModal()">+ Evento Personalizado</button>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="num" id="totalCorridas">0</div><div class="label">Total de Corridas</div></div>
+  <div class="stat-card"><div class="num" id="totalAssistidas">0</div><div class="label">Assistidas</div></div>
+  <div class="stat-card"><div class="num" id="totalNaoAssistidas">0</div><div class="label">Não Assistidas</div></div>
+  <div class="stat-card"><div class="num" id="pctAssistidas">0%</div><div class="label">Taxa de Assistência</div></div>
+  <div class="stat-card"><div class="num" id="totalMonumentos">0</div><div class="label">Monumentos Assistidos</div></div>
+  <div class="stat-card"><div class="num" id="totalTours">0</div><div class="label">Tours Assistidos</div></div>
+  <div class="stat-card">
+    <div class="num" id="totalTresEstrelas" style="color:var(--star-color-active)">0</div>
+    <div class="label">⭐⭐⭐ Favoritas</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="openTab('corridas', event)">📅 Calendário</button>
+  <button class="tab-btn" onclick="openTab('favoritas', event)">⭐ Favoritas</button>
+  <button class="tab-btn" onclick="openTab('canais', event)">📺 Canais</button>
+  <button class="tab-btn" onclick="openTab('estatisticas', event)">📊 Estatísticas</button>
+</div>
+
+<!-- ABA CORRIDAS -->
+<div id="tab-corridas" class="tab-content active">
+  <div class="filters">
+    <input type="text" id="searchInput" placeholder="🔍 Buscar corrida..." oninput="renderTabela()"/>
+    <select id="filtroAssistida" onchange="renderTabela()">
+      <option value="">Todas</option>
+      <option value="SIM">✅ Assistidas</option>
+      <option value="NAO">❌ Não Assistidas</option>
+    </select>
+    <select id="filtroCategoria" onchange="renderTabela()">
+      <option value="">Todas as Categorias</option>
+      <option value="Monumento">Monumentos</option>
+      <option value="Tour">Tours</option>
+      <option value="Clássica">Clássicas</option>
+      <option value="Personalizado">Personalizados</option>
+    </select>
+    <select id="filtroGenero" onchange="renderTabela()">
+      <option value="">Masc. + Fem.</option>
+      <option value="M">🔵 Masculino</option>
+      <option value="F">🔴 Feminino</option>
+    </select>
+    <select id="filtroEstrelas" onchange="renderTabela()">
+      <option value="">Todas as avaliações</option>
+      <option value="3">⭐⭐⭐ 3 estrelas</option>
+      <option value="2">⭐⭐ 2 estrelas</option>
+      <option value="1">⭐ 1 estrela</option>
+      <option value="0">Sem avaliação</option>
+    </select>
+    <button class="btn-save" onclick="salvarTudo()">💾 Salvar</button>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Corrida</th>
+          <th>Ano</th>
+          <th>Data</th>
+          <th>País</th>
+          <th>Categoria</th>
+          <th>Etapas</th>
+          <th>Gênero</th>
+          <th>⭐ Avaliação</th>
+          <th>Assistida</th>
+          <th>Canal</th>
+          <th>1º Lugar</th>
+          <th>Equipe 1º</th>
+          <th>2º Lugar</th>
+          <th>Equipe 2º</th>
+          <th>3º Lugar</th>
+          <th>Equipe 3º</th>
+          <th>Notas</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tbodyCorreidas"></tbody>
+    </table>
+  </div>
+  <button class="btn-save" onclick="salvarTudo()" style="margin-top:18px">💾 Salvar Tudo</button>
+</div>
+
+<!-- ABA FAVORITAS -->
+<div id="tab-favoritas" class="tab-content">
+  <p class="section-title">Minhas Corridas Favoritas ⭐⭐⭐</p>
+  <div id="favoritasConteudo"></div>
+</div>
+
+<!-- ABA CANAIS -->
+<div id="tab-canais" class="tab-content">
+  <p class="section-title">Canais de Transmissão</p>
+  <div class="canal-card">
+    <h3>Selecione os canais que você tem acesso</h3>
+    <div class="canal-list" id="canalList"></div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:10px">
+      <input type="text" id="novoCanal" placeholder="Adicionar canal personalizado..."
+        style="background:var(--table-row-even-bg);border:1px solid var(--border-color);color:var(--text-color);padding:7px 12px;border-radius:6px;font-size:0.88rem;outline:none;flex:1"/>
+      <button class="btn-save" style="margin:0" onclick="adicionarCanal()">+ Adicionar</button>
+    </div>
+  </div>
+  <div class="canal-card">
+    <h3>📺 Histórico por Canal</h3>
+    <div id="canalHistorico"></div>
+  </div>
+</div>
+
+<!-- ABA ESTATÍSTICAS -->
+<div id="tab-estatisticas" class="tab-content">
+  <p class="section-title">Resumo da Temporada <span id="anoEstat" style="color:var(--text-color);font-weight:400"></span></p>
+  <div class="stat-grid" id="estatGrid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h2>➕ Adicionar Evento Personalizado</h2>
+    <div class="form-row-2">
+      <div class="form-row">
+        <label>Nome da Corrida *</label>
+        <input type="text" id="m_nome" placeholder="Ex: Volta ao Algarve"/>
+      </div>
+      <div class="form-row">
+        <label>Ano *</label>
+        <select id="m_ano">
+          <option value="2026">2026</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-row">
+        <label>Data (ex: 10–15 Mar)</label>
+        <input type="text" id="m_data" placeholder="10–15 Mar"/>
+      </div>
+      <div class="form-row">
+        <label>País</label>
+        <input type="text" id="m_pais" placeholder="🇵🇹 Portugal"/>
+      </div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-row">
+        <label>Categoria</label>
+        <select id="m_cat">
+          <option value="Tour">Tour</option>
+          <option value="Clássica">Clássica</option>
+          <option value="Monumento">Monumento</option>
+          <option value="Personalizado">Personalizado</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Gênero</label>
+        <select id="m_genero">
+          <option value="M">🔵 Masculino</option>
+          <option value="F">🔴 Feminino</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Nº de Etapas</label>
+      <input type="number" id="m_etapas" min="1" value="1"/>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-save" onclick="adicionarEvento()">Salvar Evento</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>Desenvolvido por Rafael &mdash; Acompanhamento de Ciclismo 🚴</footer>
+
+<script>
+// ===================== UTILS =====================
+const meses = {
+  "Jan": 0, "Fev": 1, "Mar": 2, "Abr": 3, "Mai": 4, "Jun": 5,
+  "Jul": 6, "Ago": 7, "Set": 8, "Out": 9, "Nov": 10, "Dez": 11
+};
+
+function parseDateForSorting(dateStr, year) {
+  if (!dateStr || !year) return new Date(0); // Retorna uma data muito antiga para ficar no início
+
+  let day = 1;
+  let month = 0; // Default to January
+
+  const parts = dateStr.split(/–|-|\s/); // Split by '–', '-', or space
+
+  if (parts.length >= 2 && meses[parts[1]]) { // e.g., "18 Jan" or "18–23 Jan"
+    day = parseInt(parts[0]);
+    month = meses[parts[1]];
+  } else if (meses[parts[0]]) { // e.g., "Jan"
+    month = meses[parts[0]];
+  }
+
+  // Handle cases where day is not a number (e.g., "Set" for Vuelta Femenina)
+  if (isNaN(day)) day = 1;
+
+  return new Date(year, month, day);
+}
+
+// ===================== CALENDÁRIO BASE =====================
+const corridasBase2026 = [
+  // TOURS
+  { id:'b1',  nome:"Tour Down Under",         data:"18–23 Jan",  pais:"🇦🇺 Austrália",    cat:"Tour",      gen:"M", etapas:6,  fixo:true },
+  { id:'b2',  nome:"UAE Tour",                data:"16–21 Fev",  pais:"🇦🇪 Emirados",     cat:"Tour",      gen:"M", etapas:7,  fixo:true },
+  { id:'b3',  nome:"Paris-Nice",              data:"08–15 Mar",  pais:"🇫🇷 França",        cat:"Tour",      gen:"M", etapas:8,  fixo:true },
+  { id:'b4',  nome:"Tirreno-Adriatico",       data:"11–17 Mar",  pais:"🇮🇹 Itália",        cat:"Tour",      gen:"M", etapas:7,  fixo:true },
+  { id:'b5',  nome:"Volta a Catalunya",       data:"23–29 Mar",  pais:"🇪🇸 Espanha",       cat:"Tour",      gen:"M", etapas:7,  fixo:true },
+  { id:'b6',  nome:"Tour de Romandie",        data:"28 Abr–03 Mai", pais:"🇨🇭 Suíça",         cat:"Tour",      gen:"M", etapas:6,  fixo:true },
+  { id:'b7',  nome:"Giro d'Italia",           data:"09–31 Mai",  pais:"🇮🇹 Itália",        cat:"Tour",      gen:"M", etapas:21, fixo:true },
+  { id:'b8',  nome:"Critérium du Dauphiné",   data:"07–14 Jun",  pais:"🇫🇷 França",        cat:"Tour",      gen:"M", etapas:8,  fixo:true },
+  { id:'b9',  nome:"Tour de Suisse",          data:"14–21 Jun",  pais:"🇨🇭 Suíça",         cat:"Tour",      gen:"M", etapas:8,  fixo:true },
+  { id:'b10', nome:"Tour de France",          data:"04–26 Jul",  pais:"🇫🇷 França",        cat:"Tour",      gen:"M", etapas:21, fixo:true },
+  { id:'b11', nome:"Tour de Pologne",         data:"02–08 Ago",  pais:"🇵🇱 Polônia",       cat:"Tour",      gen:"M", etapas:7,  fixo:true },
+  { id:'b12', nome:"Vuelta a España",         data:"22 Ago–13 Set", pais:"🇪🇸 Espanha",       cat:"Tour",      gen:"M", etapas:21, fixo:true },
+  { id:'b13', nome:"Tour de France Femmes",   data:"20–27 Jul",  pais:"🇫🇷 França",        cat:"Tour",      gen:"F", etapas:8,  fixo:true },
+  { id:'b14', nome:"Giro Donne",              data:"Jun",        pais:"🇮🇹 Itália",        cat:"Tour",      gen:"F", etapas:10, fixo:true },
+  { id:'b15', nome:"Vuelta Femenina",         data:"Set",        pais:"🇪🇸 Espanha",       cat:"Tour",      gen:"F", etapas:8,  fixo:true },
+  // MONUMENTOS
+  { id:'b16', nome:"Milão-San Remo",          data:"22 Mar",     pais:"🇮🇹 Itália",        cat:"Monumento", gen:"M", etapas:1,  fixo:true },
+  { id:'b17', nome:"Tour das Flandres",       data:"05 Abr",     pais:"🇧🇪 Bélgica",       cat:"Monumento", gen:"M", etapas:1,  fixo:true },
+  { id:'b18', nome:"Paris-Roubaix",           data:"12 Abr",     pais:"🇫🇷 França",        cat:"Monumento", gen:"M", etapas:1,  fixo:true },
+  { id:'b19', nome:"Liège–Bastogne–Liège",    data:"26 Abr",     pais:"🇧🇪 Bélgica",       cat:"Monumento", gen:"M", etapas:1,  fixo:true },
+  { id:'b20', nome:"Il Lombardia",            data:"11 Out",     pais:"🇮🇹 Itália",        cat:"Monumento", gen:"M", etapas:1,  fixo:true },
+  { id:'b21', nome:"Milão-San Remo Fem.",     data:"22 Mar",     pais:"🇮🇹 Itália",        cat:"Monumento", gen:"F", etapas:1,  fixo:true },
+  { id:'b22', nome:"Tour das Flandres Fem.",  data:"06 Abr",     pais:"🇧🇪 Bélgica",       cat:"Monumento", gen:"F", etapas:1,  fixo:true },
+  { id:'b23', nome:"Paris-Roubaix Fem.",      data:"13 Abr",     pais:"🇫🇷 França",        cat:"Monumento", gen:"F", etapas:1,  fixo:true },
+  { id:'b24', nome:"Liège–Bastogne–Liège Fem.", data:"26 Abr",   pais:"🇧🇪 Bélgica",       cat:"Monumento", gen:"F", etapas:1,  fixo:true },
+  { id:'b25', nome:"Il Lombardia Fem.",       data:"11 Out",     pais:"🇮🇹 Itália",        cat:"Monumento", gen:"F", etapas:1,  fixo:true },
+  // CLÁSSICAS
+  { id:'b26', nome:"Omloop Het Nieuwsblad",   data:"01 Mar",     pais:"🇧🇪 Bélgica",       cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b27', nome:"Strade Bianche",          data:"07 Mar",     pais:"🇮🇹 Itália",        cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b28', nome:"E3 Saxo Bank Classic",    data:"28 Mar",     pais:"🇧🇪 Bélgica",       cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b29', nome:"Gent-Wevelgem",           data:"30 Mar",     pais:"🇧🇪 Bélgica",       cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b30', nome:"Dwars door Vlaanderen",   data:"01 Abr",     pais:"🇧🇪 Bélgica",       cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b31', nome:"Amstel Gold Race",        data:"19 Abr",     pais:"🇳🇱 Holanda",       cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b32', nome:"La Flèche Wallonne",      data:"22 Abr",     pais:"🇧🇪 Bélgica",       cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b33', nome:"Eschborn-Frankfurt",      data:"03 Mai",     pais:"🇩🇪 Alemanha",      cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b34', nome:"Clásica San Sebastián",   data:"01 Ago",     pais:"🇪🇸 Espanha",       cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b35', nome:"GP de Québec",            data:"12 Set",     pais:"🇨🇦 Canadá",        cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b36', nome:"GP de Montreal",          data:"13 Set",     pais:"🇨🇦 Canadá",        cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b37', nome:"Mundial Estrada UCI",     data:"20–27 Set",  pais:"🌍 Rwanda",          cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b38', nome:"Paris-Tours",             data:"04 Out",     pais:"🇫🇷 França",        cat:"Clássica",  gen:"M", etapas:1,  fixo:true },
+  { id:'b39', nome:"Strade Bianche Fem.",     data:"07 Mar",     pais:"🇮🇹 Itália",        cat:"Clássica",  gen:"F", etapas:1,  fixo:true },
+  { id:'b40', nome:"Amstel Gold Race Fem.",   data:"20 Abr",     pais:"🇳🇱 Holanda",       cat:"Clássica",  gen:"F", etapas:1,  fixo:true },
+  { id:'b41', nome:"La Flèche Wallonne Fem.", data:"23 Abr",     pais:"🇧🇪 Bélgica",       cat:"Clássica",  gen:"F", etapas:1,  fixo:true },
+];
+
+// Adiciona a data de ordenação para as corridas base
+corridasBase2026.forEach(c => {
+  c.sortDate = parseDateForSorting(c.data, 2026);
+});
+
+// ===================== ESTADO =====================
+let anoAtivo = '2026';
+let registros = {};
+let eventosPersonalizados = {};
+let canaisDisponiveis = [
+  "Eurosport","GCN+","SporTV","Globoplay","TV Cultura",
+  "Disney+","ESPN","Star+","Dazn","SBS","RAI Sports",
+  "Youtube (oficial)","Youtube (stream)","FloBikes"
+];
+let canaisSelecionados = [];
+let temaAtivo = 'red-dark'; // Tema padrão
+
+function chave(ano, id) { return `${ano}_${id}`; }
+
+function carregar() {
+  const r  = localStorage.getItem('ciclismo_registros');
+  const ep = localStorage.getItem('ciclismo_personalizados');
+  const c  = localStorage.getItem('ciclismo_canais');
+  const cs = localStorage.getItem('ciclismo_canaisSel');
+  const aa = localStorage.getItem('ciclismo_anoAtivo');
+  const ta = localStorage.getItem('ciclismo_temaAtivo');
+
+  if (r)  registros = JSON.parse(r);
+  if (ep) eventosPersonalizados = JSON.parse(ep);
+  if (c)  canaisDisponiveis = JSON.parse(c);
+  if (cs) canaisSelecionados = JSON.parse(cs);
+  if (aa) { anoAtivo = aa; document.getElementById('anoAtivo').value = aa; }
+  if (ta) { temaAtivo = ta; document.getElementById('themeSelector').value = ta; setTheme(ta); }
+  else setTheme(temaAtivo); // Aplica o tema padrão se não houver um salvo
+}
+
+function getCorridasDoAno(ano) {
+  let lista = ano === '2026' ? corridasBase2026.map(c => ({...c})) : [];
+  const extras = (eventosPersonalizados[ano] || []).map(e => ({
+    ...e,
+    sortDate: parseDateForSorting(e.data, parseInt(e.ano))
+  }));
+
+  // Combina e ordena por data
+  return [...lista, ...extras].sort((a, b) => a.sortDate - b.sortDate);
+}
+
+function garantirRegistro(ano, id) {
+  const k = chave(ano, id);
+  if (!registros[k]) {
+    registros[k] = { assistida:'', canal:'', p1:'', e1:'', p2:'', e2:'', p3:'', e3:'', nota:'', estrelas:0 };
+  }
+  if (registros[k].estrelas === undefined) registros[k].estrelas = 0;
+  return registros[k];
+}
+
+// ===================== TROCAR ANO =====================
+function trocarAno() {
+  salvarCamposAtivos();
+  anoAtivo = document.getElementById('anoAtivo').value;
+  localStorage.setItem('ciclismo_anoAtivo', anoAtivo);
+  renderTabela();
+  atualizarStats();
+}
+
+function salvarCamposAtivos() {
+  const corridas = getCorridasDoAno(anoAtivo);
+  corridas.forEach(c => {
+    const get = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
+    const k = chave(anoAtivo, c.id);
+    if (!registros[k]) registros[k] = {};
+    registros[k].assistida = get(`assistida_${c.id}`);
+    registros[k].canal     = get(`canal_${c.id}`);
+    registros[k].p1        = get(`p1_${c.id}`);
+    registros[k].e1        = get(`e1_${c.id}`);
+    registros[k].p2        = get(`p2_${c.id}`);
+    registros[k].e2        = get(`e2_${c.id}`);
+    registros[k].p3        = get(`p3_${c.id}`);
+    registros[k].e3        = get(`e3_${c.id}`);
+    registros[k].nota      = get(`nota_${c.id}`);
+    // estrelas salvas diretamente via setEstrela
+  });
+}
+
+// ===================== SALVAR =====================
+function salvarTudo() {
+  salvarCamposAtivos();
+  localStorage.setItem('ciclismo_registros', JSON.stringify(registros));
+  localStorage.setItem('ciclismo_personalizados', JSON.stringify(eventosPersonalizados));
+  localStorage.setItem('ciclismo_canais', JSON.stringify(canaisDisponiveis));
+  localStorage.setItem('ciclismo_canaisSel', JSON.stringify(canaisSelecionados));
+  localStorage.setItem('ciclismo_temaAtivo', temaAtivo); // Salva o tema ativo
+  atualizarStats();
+  renderHistoricoCanais();
+  mostrarToast('✅ Dados salvos com sucesso!');
+}
+
+function autoSave(id) {
+  const get = (key) => { const el = document.getElementById(`${key}_${id}`); return el ? el.value : ''; };
+  const k = chave(anoAtivo, id);
+  if (!registros[k]) registros[k] = {};
+  registros[k].assistida = get('assistida');
+  registros[k].canal     = get('canal');
+  registros[k].p1        = get('p1');
+  registros[k].e1        = get('e1');
+  registros[k].p2        = get('p2');
+  registros[k].e2        = get('e2');
+  registros[k].p3        = get('p3');
+  registros[k].e3        = get('e3');
+  registros[k].nota      = get('nota');
+  localStorage.setItem('ciclismo_registros', JSON.stringify(registros));
+  atualizarStats();
+}
+
+// ===================== ESTRELAS =====================
+function setEstrela(id, valor) {
+  const k = chave(anoAtivo, id);
+  if (!registros[k]) registros[k] = {};
+
+  // Se clicar na mesma estrela já selecionada, remove avaliação
+  if (registros[k].estrelas === valor) {
+    registros[k].estrelas = 0;
+  } else {
+    registros[k].estrelas = valor;
+  }
+
+  localStorage.setItem('ciclismo_registros', JSON.stringify(registros));
+  atualizarStarWidget(id, registros[k].estrelas);
+  atualizarStats();
+
+  // Highlight da linha
+  const tr = document.getElementById(`tr_${id}`);
+  if (tr) {
+    if (registros[k].estrelas === 3) tr.classList.add('tres-estrelas');
+    else tr.classList.remove('tres-estrelas');
+  }
+}
+
+function atualizarStarWidget(id, valor) {
+  for (let i = 1; i <= 3; i++) {
+    const el = document.getElementById(`star_${id}_${i}`);
+    if (el) {
+      el.classList.toggle('ativa', i <= valor);
+    }
+  }
+}
+
+function criarStarWidget(id, valorAtual) {
+  let html = '<div class="star-widget">';
+  for (let i = 1; i <= 3; i++) {
+    const ativa = i <= valorAtual ? ' ativa' : '';
+    html += `<span
+      class="star${ativa}"
+      id="star_${id}_${i}"
+      onclick="setEstrela('${id}', ${i})"
+      onmouseenter="previewStars('${id}', ${i})"
+      onmouseleave="resetPreviewStars('${id}')"
+      title="${i} estrela${i>1?'s':''}"
+    >★</span>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+function previewStars(id, n) {
+  for (let i = 1; i <= 3; i++) {
+    const el = document.getElementById(`star_${id}_${i}`);
+    if (el) el.style.color = i <= n ? 'var(--star-color-hover)' : 'var(--star-color-inactive)';
+  }
+}
+
+function resetPreviewStars(id) {
+  const k = chave(anoAtivo, id);
+  const val = registros[k]?.estrelas || 0;
+  for (let i = 1; i <= 3; i++) {
+    const el = document.getElementById(`star_${id}_${i}`);
+    if (el) el.style.color = i <= val ? 'var(--star-color-active)' : 'var(--star-color-inactive)';
+  }
+}
+
+// ===================== TABELA =====================
+function renderTabela() {
+  const busca     = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  const filtroAss = document.getElementById('filtroAssistida')?.value || '';
+  const filtroCat = document.getElementById('filtroCategoria')?.value || '';
+  const filtroGen = document.getElementById('filtroGenero')?.value || '';
+  const filtroEst = document.getElementById('filtroEstrelas')?.value || '';
+
+  const corridas = getCorridasDoAno(anoAtivo);
+  const tbody    = document.getElementById('tbodyCorreidas');
+  tbody.innerHTML = '';
+
+  const filtradas = corridas.filter(c => {
+    const r = garantirRegistro(anoAtivo, c.id);
+    if (busca && !c.nome.toLowerCase().includes(busca)) return false;
+    if (filtroAss && r.assistida !== filtroAss) return false;
+    if (filtroCat && c.cat !== filtroCat) return false;
+    if (filtroGen && c.gen !== filtroGen) return false;
+    if (filtroEst !== '') {
+      if (filtroEst === '0' && r.estrelas !== 0) return false;
+      if (filtroEst !== '0' && r.estrelas !== parseInt(filtroEst)) return false;
+    }
+    return true;
+  });
+
+  filtradas.forEach((c, idx) => {
+    const r = garantirRegistro(anoAtivo, c.id);
+    const ano = c.ano || anoAtivo;
+    const catCls = { 'Monumento':'Monumento','Tour':'Tour','Clássica':'Classica','Personalizado':'Personalizado' }[c.cat] || 'Classica';
+    const genBadge = c.gen === 'F' ? '<span class="badge-F">FEM</span>' : '<span class="badge-M">MASC</span>';
+    const canaisOptions = canaisDisponiveis.map(ch => `<option value="${ch}" ${r.canal===ch?'selected':''}>${ch}</option>`).join('');
+    const btnExcluir = !c.fixo ? `<button class="btn-danger" onclick="excluirEvento('${c.id}','${ano}')">✕</button>` : '';
+    const tresEst = r.estrelas === 3 ? ' tres-estrelas' : '';
+
+    const tr = document.createElement('tr');
+    tr.id = `tr_${c.id}`;
+    tr.className = tresEst;
+    tr.innerHTML = `
+      <td style="color:var(--text-light);font-size:0.78rem">${idx+1}</td>
+      <td style="font-weight:600;white-space:nowrap;max-width:180px">${c.nome}</td>
+      <td><span class="badge-ano">${ano}</span></td>
+      <td style="white-space:nowrap;color:var(--text-light);font-size:0.8rem">${c.data||'—'}</td>
+      <td style="white-space:nowrap;font-size:0.8rem">${c.pais||'—'}</td>
+      <td><span class="badge-cat badge-${catCls}">${c.cat}</span></td>
+      <td style="text-align:center;color:var(--text-light)">${c.etapas}</td>
+      <td>${genBadge}</td>
+      <td>${criarStarWidget(c.id, r.estrelas)}</td>
+      <td>
+        <select id="assistida_${c.id}" class="inline-select" style="min-width:88px" onchange="autoSave('${c.id}')">
+          <option value="" ${!r.assistida?'selected':''}>—</option>
+          <option value="SIM" ${r.assistida==='SIM'?'selected':''}>✅ SIM</option>
+          <option value="NAO" ${r.assistida==='NAO'?'selected':''}>❌ NÃO</option>
+        </select>
+      </td>
+      <td>
+        <select id="canal_${c.id}" class="inline-select" style="min-width:110px" onchange="autoSave('${c.id}')">
+          <option value="">— Canal —</option>
+          ${canaisOptions}
+        </select>
+      </td>
+      <td><input id="p1_${c.id}" class="mini-input" placeholder="Ciclista" value="${r.p1||''}" onchange="autoSave('${c.id}')"/></td>
+      <td><input id="e1_${c.id}" class="mini-input" placeholder="Equipe"   value="${r.e1||''}" onchange="autoSave('${c.id}')"/></td>
+      <td><input id="p2_${c.id}" class="mini-input" placeholder="Ciclista" value="${r.p2||''}" onchange="autoSave('${c.id}')"/></td>
+      <td><input id="e2_${c.id}" class="mini-input" placeholder="Equipe"   value="${r.e2||''}" onchange="autoSave('${c.id}')"/></td>
+      <td><input id="p3_${c.id}" class="mini-input" placeholder="Ciclista" value="${r.p3||''}" onchange="autoSave('${c.id}')"/></td>
+      <td><input id="e3_${c.id}" class="mini-input" placeholder="Equipe"   value="${r.e3||''}" onchange="autoSave('${c.id}')"/></td>
+      <td><input id="nota_${c.id}" class="nota-input" placeholder="Obs..." value="${r.nota||''}" onchange="autoSave('${c.id}')"/></td>
+      <td>${btnExcluir}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ===================== ABA FAVORITAS =====================
+function renderFavoritas() {
+  const div = document.getElementById('favoritasConteudo');
+  const corridas = getCorridasDoAno(anoAtivo);
+  const fav3 = corridas.filter(c => (garantirRegistro(anoAtivo, c.id).estrelas || 0) === 3);
+  const fav2 = corridas.filter(c => (garantirRegistro(anoAtivo, c.id).estrelas || 0) === 2);
+  const fav1 = corridas.filter(c => (garantirRegistro(anoAtivo, c.id).estrelas || 0) === 1);
+
+  const renderGrupo = (lista, titulo, cor) => {
+    if (!lista.length) return '';
+    const cards = lista.map(c => {
+      const r = garantirRegistro(anoAtivo, c.id);
+      const catCls = { 'Monumento':'Monumento','Tour':'Tour','Clássica':'Classica','Personalizado':'Personalizado' }[c.cat] || 'Classica';
+      return `
+        <div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:14px;min-width:220px;flex:1;max-width:300px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <span style="font-weight:700;font-size:0.9rem">${c.nome}</span>
+            <span class="badge-cat badge-${catCls}" style="margin-left:6px;flex-shrink:0">${c.cat}</span>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-light);margin-bottom:6px">${c.data||'—'} &bull; ${c.pais||'—'}</div>
+          ${r.p1 ? `<div style="font-size:0.82rem;margin-bottom:3px">🥇 <strong>${r.p1}</strong> ${r.e1?'— '+r.e1:''}</div>` : ''}
+          ${r.p2 ? `<div style="font-size:0.82rem;margin-bottom:3px">🥈 <strong>${r.p2}</strong> ${r.e2?'— '+r.e2:''}</div>` : ''}
+          ${r.p3 ? `<div style="font-size:0.82rem;margin-bottom:3px">🥉 <strong>${r.p3}</strong> ${r.e3?'— '+r.e3:''}</div>` : ''}
+          ${r.nota ? `<div style="font-size:0.78rem;color:var(--text-light);margin-top:6px;font-style:italic">"${r.nota}"</div>` : ''}
+          ${r.canal ? `<div style="font-size:0.75rem;color:var(--primary-color);margin-top:6px">📺 ${r.canal}</div>` : ''}
+        </div>`;
+    }).join('');
+    return `
+      <div style="margin-bottom:22px">
+        <div style="font-weight:700;font-size:0.95rem;color:${cor};margin-bottom:12px">${titulo} — ${lista.length} corrida(s)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">${cards}</div>
+      </div>`;
+  };
+
+  let html = renderGrupo(fav3, '⭐⭐⭐ As que mais gostei', 'var(--star-color-active)');
+  html += renderGrupo(fav2, '⭐⭐ Muito boas', '#C0C0C0');
+  html += renderGrupo(fav1, '⭐ Boas', '#cd7f32');
+
+  if (!fav3.length && !fav2.length && !fav1.length) {
+    html = '<p style="color:var(--text-light);font-size:0.9rem">Nenhuma corrida avaliada ainda. Clique nas estrelas ao lado de cada corrida no Calendário.</p>';
+  }
+
+  div.innerHTML = html;
+}
+
+// ===================== ESTATÍSTICAS =====================
+function atualizarStats() {
+  const corridas = getCorridasDoAno(anoAtivo);
+  const total = corridas.length;
+  let assistidas=0, nao=0, monAssist=0, tourAssist=0, tresEst=0;
+  corridas.forEach(c => {
+    const r = garantirRegistro(anoAtivo, c.id);
+    if (r.assistida === 'SIM') {
+      assistidas++;
+      if (c.cat === 'Monumento') monAssist++;
+      if (c.cat === 'Tour') tourAssist++;
+    }
+    if (r.assistida === 'NAO') nao++;
+    if ((r.estrelas||0) === 3) tresEst++;
+  });
+  const pct = total > 0 ? Math.round((assistidas/total)*100) : 0;
+  document.getElementById('totalCorridas').textContent      = total;
+  document.getElementById('totalAssistidas').textContent    = assistidas;
+  document.getElementById('totalNaoAssistidas').textContent = nao;
+  document.getElementById('pctAssistidas').textContent      = pct+'%';
+  document.getElementById('totalMonumentos').textContent    = monAssist;
+  document.getElementById('totalTours').textContent         = tourAssist;
+  document.getElementById('totalTresEstrelas').textContent  = tresEst;
+}
+
+function renderEstatisticas() {
+  const grid = document.getElementById('estatGrid');
+  document.getElementById('anoEstat').textContent = anoAtivo;
+  grid.innerHTML = '';
+  const corridas = getCorridasDoAno(anoAtivo);
+  const vencedores={}, equipes={}, canalCount={};
+  const catCount = {'Monumento':{t:0,a:0},'Tour':{t:0,a:0},'Clássica':{t:0,a:0},'Personalizado':{t:0,a:0}};
+  const genCount  = {'M':{t:0,a:0},'F':{t:0,a:0}};
+  const estCount  = {1:0, 2:0, 3:0};
+
+  corridas.forEach(c => {
+    const r = garantirRegistro(anoAtivo, c.id);
+    if (r.p1) vencedores[r.p1] = (vencedores[r.p1]||0)+1;
+    if (r.e1) equipes[r.e1]    = (equipes[r.e1]||0)+1;
+    if (r.canal && r.assistida==='SIM') canalCount[r.canal] = (canalCount[r.canal]||0)+1;
+    if (catCount[c.cat]) { catCount[c.cat].t++; if (r.assistida==='SIM') catCount[c.cat].a++; }
+    if (genCount[c.gen]) { genCount[c.gen].t++;  if (r.assistida==='SIM') genCount[c.gen].a++;  }
+    if (r.estrelas >= 1 && r.estrelas <= 3) estCount[r.estrelas]++;
+  });
+
+  const topCic = Object.entries(vencedores).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const topEq  = Object.entries(equipes).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const topCan = Object.entries(canalCount).sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+  const makeBox = (titulo, items, suf) => {
+    if (!items.length) return `<div class="stat-box"><h4>${titulo}</h4><p style="color:var(--text-light);font-size:0.82rem">Nenhum dado ainda</p></div>`;
+    return `<div class="stat-box"><h4>${titulo}</h4>${items.map((it,i)=>`
+      <div class="ranking-item">
+        <span class="ranking-num">${i+1}</span>
+        <span style="flex:1">${it[0]}</span>
+        <span style="color:var(--primary-color);font-weight:700">${it[1]} ${suf}</span>
+      </div>`).join('')}</div>`;
+  };
+
+  grid.innerHTML += makeBox('🏆 Mais Vitórias (1º lugar)', topCic, 'vit.');
+  grid.innerHTML += makeBox('🚴 Equipes mais vencedoras', topEq, 'vit.');
+  grid.innerHTML += makeBox('📺 Canais mais assistidos', topCan, 'prova(s)');
+
+  // Avaliações
+  let estHtml = '<div class="stat-box"><h4>⭐ Distribuição de Avaliações</h4>';
+  [[3,'⭐⭐⭐ 3 estrelas','var(--star-color-active)'],[2,'⭐⭐ 2 estrelas','#C0C0C0'],[1,'⭐ 1 estrela','#cd7f32']].forEach(([n, lbl, cor]) => {
+    const pct = corridas.length > 0 ? Math.round((estCount[n] / corridas.length) * 100) : 0;
+    estHtml += `
+      <div class="progress-bar-container">
+        <div class="progress-bar-label">
+          <span>${lbl}</span><span>${estCount[n]} (${pct}%)</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" style="width:${pct}%; background-color:${cor}"></div>
+        </div>
+      </div>`;
+  });
+  estHtml += '</div>';
+  grid.innerHTML += estHtml;
+
+  // Por categoria
+  let catHtml = '<div class="stat-box"><h4>📂 Por Categoria</h4>';
+  Object.entries(catCount).forEach(([cat, v]) => {
+    if (!v.t) return;
+    const pct = Math.round((v.a/v.t)*100);
+    catHtml += `
+      <div class="progress-bar-container">
+        <div class="progress-bar-label">
+          <span>${cat}</span><span>${v.a}/${v.t} (${pct}%)</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" style="width:${pct}%"></div>
+        </div>
+      </div>`;
+  });
+  catHtml += '</div>';
+  grid.innerHTML += catHtml;
+
+  // Por gênero
+  let genHtml = '<div class="stat-box"><h4>⚧ Por Gênero</h4>';
+  [['M','🔵 Masculino'],['F','🔴 Feminino']].forEach(([g, label]) => {
+    const v = genCount[g];
+    const pct = v.t > 0 ? Math.round((v.a/v.t)*100) : 0;
+    genHtml += `
+      <div class="progress-bar-container">
+        <div class="progress-bar-label">
+          <span>${label}</span><span>${v.a}/${v.t} (${pct}%)</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" style="width:${pct}%"></div>
+        </div>
+      </div>`;
+  });
+  genHtml += '</div>';
+  grid.innerHTML += genHtml;
+}
+
+// ===================== CANAIS =====================
+function renderCanais() {
+  const list = document.getElementById('canalList');
+  list.innerHTML = '';
+  canaisDisponiveis.forEach(c => {
+    const tag = document.createElement('div');
+    tag.className = 'canal-tag' + (canaisSelecionados.includes(c) ? ' selected' : '');
+    tag.textContent = c;
+    tag.onclick = () => {
+      if (canaisSelecionados.includes(c)) canaisSelecionados = canaisSelecionados.filter(x=>x!==c);
+      else canaisSelecionados.push(c);
+      localStorage.setItem('ciclismo_canaisSel', JSON.stringify(canaisSelecionados));
+      renderCanais();
+    };
+    list.appendChild(tag);
+  });
+}
+
+function adicionarCanal() {
+  const input = document.getElementById('novoCanal');
+  const val = input.value.trim();
+  if (!val || canaisDisponiveis.includes(val)) return;
+  canaisDisponiveis.push(val);
+  localStorage.setItem('ciclismo_canais', JSON.stringify(canaisDisponiveis));
+  input.value = '';
+  renderCanais();
+  renderTabela();
+}
+
+function renderHistoricoCanais() {
+  const div = document.getElementById('canalHistorico');
+  const corridas = getCorridasDoAno(anoAtivo);
+  const canalMap = {};
+
+  corridas.forEach(c => {
+    const r = garantirRegistro(anoAtivo, c.id);
+    if (r.canal) {
+      if (!canalMap[r.canal]) canalMap[r.canal] = [];
+      canalMap[r.canal].push({ nome: c.nome, assistida: r.assistida, gen: c.gen });
+    }
+  });
+
+  if (!Object.keys(canalMap).length) {
+    div.innerHTML = '<p style="color:var(--text-light);font-size:0.82rem">Nenhum canal registrado ainda.</p>';
+    return;
+  }
+
+  div.innerHTML = Object.entries(canalMap).map(([canal, corridas]) => `
+    <div style="margin-bottom:12px">
+      <div style="font-weight:700;color:var(--primary-color);margin-bottom:6px;font-size:0.88rem">
+        📺 ${canal} — ${corridas.length} corrida(s)
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${corridas.map(c => `
+          <span style="background:var(--card-bg);border:1px solid var(--border-color);padding:3px 10px;border-radius:12px;font-size:0.78rem;color:${c.assistida==='SIM'?'#6aff00':'var(--text-light)'}">
+            ${c.gen==='F'?'🔴':'🔵'} ${c.nome} ${c.assistida==='SIM'?'✅':''}
+          </span>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+// ===================== MODAL EVENTO PERSONALIZADO =====================
+function abrirModal() {
+  document.getElementById('m_ano').value = anoAtivo;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function fecharModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  ['m_nome','m_data','m_pais'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('m_etapas').value = 1;
+}
+
+function adicionarEvento() {
+  const nome   = document.getElementById('m_nome').value.trim();
+  const ano    = document.getElementById('m_ano').value;
+  const data   = document.getElementById('m_data').value.trim();
+  const pais   = document.getElementById('m_pais').value.trim();
+  const cat    = document.getElementById('m_cat').value;
+  const gen    = document.getElementById('m_genero').value;
+  const etapas = parseInt(document.getElementById('m_etapas').value) || 1;
+
+  if (!nome) { alert('Informe o nome da corrida.'); return; }
+
+  if (!eventosPersonalizados[ano]) eventosPersonalizados[ano] = [];
+
+  const novoId = 'p_' + Date.now();
+  eventosPersonalizados[ano].push({ id:novoId, nome, ano, data, pais, cat, gen, etapas, fixo:false });
+
+  localStorage.setItem('ciclismo_personalizados', JSON.stringify(eventosPersonalizados));
+  fecharModal();
+
+  // Se o ano do evento for o ativo, recarregar
+  if (ano === anoAtivo) renderTabela();
+  atualizarStats();
+  mostrarToast('✅ Evento adicionado!');
+}
+
+function excluirEvento(id, ano) {
+  if (!confirm('Remover este evento?')) return;
+  if (eventosPersonalizados[ano]) {
+    eventosPersonalizados[ano] = eventosPersonalizados[ano].filter(e => e.id !== id);
+    localStorage.setItem('ciclismo_personalizados', JSON.stringify(eventosPersonalizados));
+  }
+  renderTabela();
+  atualizarStats();
+}
+
+// ===================== ABAS =====================
+function openTab(nome, ev) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById(`tab-${nome}`).classList.add('active');
+  if (ev && ev.target) ev.target.classList.add('active');
+
+  if (nome === 'estatisticas') renderEstatisticas();
+  if (nome === 'canais') { renderCanais(); renderHistoricoCanais(); }
+  if (nome === 'favoritas') renderFavoritas();
+}
+
+// ===================== TEMAS =====================
+function setTheme(themeName) {
+  const body = document.body;
+  body.classList.remove('theme-red-dark', 'theme-blue-light', 'theme-green-dark'); // Remove todos os temas
+
+  // Adiciona o tema selecionado
+  if (themeName === 'red-dark') {
+    // Default theme, no class needed or add a specific one if desired
+  } else if (themeName === 'blue-light') {
+    body.classList.add('theme-blue-light');
+  } else if (themeName === 'green-dark') {
+    body.classList.add('theme-green-dark');
+  }
+  temaAtivo = themeName;
+  localStorage.setItem('ciclismo_temaAtivo', temaAtivo);
+  // Re-renderizar para aplicar cores em elementos dinâmicos se necessário
+  renderTabela();
+  renderFavoritas();
+  renderCanais();
+  renderHistoricoCanais();
+  renderEstatisticas();
+}
+
+// ===================== TOAST =====================
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Fechar modal clicando fora
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) fecharModal();
+});
+
+// ===================== INIT =====================
+carregar();
+renderTabela();
+atualizarStats();
+renderCanais();
+</script>
+</body>
+</html>
