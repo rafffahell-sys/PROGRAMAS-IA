@@ -302,9 +302,10 @@
 
   <!-- ABAS -->
   <div class="tabs">
-    <button class="tab active" onclick="trocarAba('individual', this)">🧮 Cálculo Individual</button>
-    <button class="tab"        onclick="trocarAba('lote', this)">📂 Processamento em Lote</button>
-    <button class="tab"        onclick="trocarAba('tabelas', this)">📋 Tabelas IRRF</button>
+    <!-- Removido o onclick inline -->
+    <button class="tab active" data-tab-target="individual">🧮 Cálculo Individual</button>
+    <button class="tab"        data-tab-target="lote">📂 Processamento em Lote</button>
+    <button class="tab"        data-tab-target="tabelas">📋 Tabelas IRRF</button>
   </div>
 
   <!-- ══ ABA INDIVIDUAL ══════════════════════════════════════ -->
@@ -763,9 +764,18 @@ function trocarAba(nome, btn) {
 }
 
 // ─── INICIALIZAÇÃO ────────────────────────────────────────────────────────────
-// A função renderizarTabelas é chamada aqui para garantir que as tabelas sejam carregadas
-// quando a página é inicializada.
-renderizarTabelas();
+// Adiciona os event listeners depois que o DOM estiver completamente carregado
+document.addEventListener('DOMContentLoaded', () => {
+  renderizarTabelas(); // Garante que as tabelas sejam renderizadas
+
+  // Adiciona event listeners para os botões das abas
+  document.querySelectorAll('.tab').forEach(button => {
+    button.addEventListener('click', function() {
+      const targetTab = this.dataset.tabTarget;
+      trocarAba(targetTab, this);
+    });
+  });
+});
 </script>
 </body>
 </html>
