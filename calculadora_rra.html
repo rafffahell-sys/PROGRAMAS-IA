@@ -577,6 +577,7 @@ function calcularIndividual() {
 
   if (!bruto || bruto <= 0) { alert('Informe o Valor Bruto.'); return; }
   if (!meses || meses < 1)  { alert('Informe a Quantidade de Meses (mínimo 1).'); return; }
+  // CORREÇÃO DA EXPRESSÃO REGULAR AQUI
   if (!comp || !/
 ^
 \d{2}\/\d{4}
@@ -762,6 +763,8 @@ function trocarAba(nome, btn) {
 }
 
 // ─── INICIALIZAÇÃO ────────────────────────────────────────────────────────────
+// A função renderizarTabelas é chamada aqui para garantir que as tabelas sejam carregadas
+// quando a página é inicializada.
 renderizarTabelas();
 </script>
 </body>
