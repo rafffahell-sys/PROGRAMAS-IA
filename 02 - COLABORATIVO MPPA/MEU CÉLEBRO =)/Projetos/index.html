@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <script src="auth-guard.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Programas - Folha de Pagamento</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.35);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --warning: #f59e0b;
+      --warning-glow: rgba(245, 158, 11, 0.25);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.25);
+      --info: #06b6d4;
+      --info-glow: rgba(6, 182, 212, 0.25);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+      padding: 40px 20px 60px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Marca d'Ã¡gua de Contabilidade (Caduceu Real) */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      background-image: url("caduceu_contabilidade.png");
+      background-repeat: repeat;
+      background-size: 200px 242px;
+      opacity: 0.04;
+    }
+    body.theme-light::before {
+      background-image: url("caduceu_contabilidade.png");
+      filter: invert(1);
+      opacity: 0.08;
+    }
+    body.theme-beige::before {
+      background-image: url("caduceu_contabilidade.png");
+      filter: invert(1) sepia(1) saturate(5) hue-rotate(340deg);
+      opacity: 0.08;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a5b4fc 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin-top: 8px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* â”€â”€ GRUPO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .group {
+      max-width: 860px;
+      margin: 0 auto 48px;
+    }
+
+    .group-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .group-header .badge {
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .badge-pro {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+    }
+
+    .badge-rec {
+      background: rgba(16, 185, 129, 0.15);
+      color: #a7f3d0;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .group-header h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .group-header .line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    /* â”€â”€ CARDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px 22px;
+      text-decoration: none;
+      color: var(--text-primary);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: transform 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-pro:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      background: rgba(99, 102, 241, 0.05);
+      box-shadow: 0 12px 35px rgba(99, 102, 241, 0.15);
+    }
+
+    .card-rec:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.05);
+      box-shadow: 0 12px 35px rgba(16, 185, 129, 0.15);
+    }
+
+    .card .icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .card p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .card-pro .icon { filter: drop-shadow(0 0 8px rgba(99,102,241,0.4)); }
+    .card-rec .icon { filter: drop-shadow(0 0 8px rgba(16,185,129,0.4)); }
+
+    /* â”€â”€ RODAPÃ‰ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 16px;
+      border-top: 1px solid var(--border-color);
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* â”€â”€ TEMAS ADICIONAIS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* Tema Claro */
+    body.theme-light {
+      --bg-color: #f1f5f9;
+      --card-bg: rgba(255, 255, 255, 0.65);
+      --border-color: rgba(15, 23, 42, 0.08);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --primary: #4f46e5;
+      --primary-glow: rgba(79, 70, 229, 0.15);
+      --success: #059669;
+      --success-glow: rgba(5, 150, 105, 0.15);
+      --warning: #d97706;
+      --warning-glow: rgba(217, 119, 6, 0.15);
+      --danger: #dc2626;
+      --danger-glow: rgba(220, 38, 38, 0.15);
+      --info: #0891b2;
+      --info-glow: rgba(8, 145, 178, 0.15);
+    }
+    
+    body.theme-light {
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(8, 145, 178, 0.04) 0%, transparent 40%);
+    }
+
+    body.theme-light .card-pro:hover {
+      border-color: rgba(79, 70, 229, 0.3);
+      background: rgba(79, 70, 229, 0.03);
+      box-shadow: 0 12px 35px rgba(79, 70, 229, 0.08);
+    }
+
+    body.theme-light .card-rec:hover {
+      border-color: rgba(5, 150, 105, 0.3);
+      background: rgba(5, 150, 105, 0.03);
+      box-shadow: 0 12px 35px rgba(5, 150, 105, 0.08);
+    }
+
+    /* Tema Bege */
+    body.theme-beige {
+      --bg-color: #faf6f0;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --border-color: rgba(120, 113, 108, 0.15);
+      --text-primary: #1c1917;
+      --text-secondary: #57534e;
+      --primary: #c2410c;
+      --primary-glow: rgba(194, 65, 12, 0.15);
+      --success: #15803d;
+      --success-glow: rgba(21, 128, 61, 0.15);
+      --warning: #b45309;
+      --warning-glow: rgba(180, 83, 9, 0.15);
+      --danger: #b91c1c;
+      --danger-glow: rgba(185, 28, 28, 0.15);
+      --info: #0369a1;
+      --info-glow: rgba(3, 105, 161, 0.15);
+    }
+    
+    body.theme-beige {
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(194, 65, 12, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(3, 105, 161, 0.04) 0%, transparent 40%);
+    }
+
+    body.theme-beige .card-pro:hover {
+      border-color: rgba(194, 65, 12, 0.3);
+      background: rgba(194, 65, 12, 0.03);
+      box-shadow: 0 12px 35px rgba(194, 65, 12, 0.08);
+    }
+
+    body.theme-beige .card-rec:hover {
+      border-color: rgba(21, 128, 61, 0.3);
+      background: rgba(21, 128, 61, 0.03);
+      box-shadow: 0 12px 35px rgba(21, 128, 61, 0.08);
+    }
+
+    /* Estilo do Alternador */
+    .theme-switcher {
+      display: inline-flex;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      padding: 4px;
+      border-radius: 12px;
+      margin-top: 15px;
+      backdrop-filter: blur(8px);
+    }
+    
+    body.theme-light .theme-switcher,
+    body.theme-beige .theme-switcher {
+      background: rgba(255, 255, 255, 0.6);
+    }
+    
+    .theme-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .theme-btn:hover {
+      color: var(--text-primary);
+    }
+    
+    .theme-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .theme-switcher.dashboard-switcher {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      margin-top: 0;
+      z-index: 100;
+      gap: 2px;
+      padding: 3px;
+      border-radius: 10px;
+    }
+    
+    .theme-switcher.dashboard-switcher .theme-btn {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      border-radius: 6px;
+      gap: 0;
+    }
+
+    .logout-container-fixed {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Alternador de Temas Discreto no Canto Superior Esquerdo -->
+<div class="theme-switcher dashboard-switcher">
+  <button onclick="changeTheme('dark')" id="btn-theme-dark" class="theme-btn active" title="Tema Escuro">ðŸŒŒ</button>
+  <button onclick="changeTheme('light')" id="btn-theme-light" class="theme-btn" title="Tema Claro">â˜€ï¸</button>
+  <button onclick="changeTheme('beige')" id="btn-theme-beige" class="theme-btn" title="Tema Bege">ðŸŒ¾</button>
+</div>
+
+<!-- BotÃ£o Sair Discreto no Canto Superior Direito -->
+<div class="logout-container-fixed">
+  <button onclick="logout()" class="theme-btn" style="background: var(--danger-glow); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; padding: 6px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">ðŸšª Sair</button>
+</div>
+
+<header>
+  <h1>ðŸ’¼ Programas</h1>
+  <p>Escolha um programa para comeÃ§ar</p>
+</header>
+
+<!-- â•â• GRUPO PROFISSIONAL â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="group">
+  <div class="group-header">
+    <span class="badge badge-pro">Profissional</span>
+    <h2>Folha de Pagamento</h2>
+    <div class="line"></div>
+  </div>
+  <div class="cards">
+
+    <a href="calculadora_ats.html" class="card card-pro">
+      <div class="icon">ðŸ“Š</div>
+      <h3>Calculadora ATS Servidores</h3>
+      <p>CÃ¡lculo de Adicional por Tempo de ServiÃ§o</p>
+    </a>
+
+    <a href="painel de tarefas2.html?v=7" class="card card-pro">
+      <div class="icon">ðŸ“Š</div>
+      <h3>Painel de Tarefas</h3>
+      <p>Acompanhe o andamento dos registros da Folha de Pagamento do mÃªs</p>
+    </a>
+
+    <a href="painel_agentes.html" class="card card-pro" style="border-color: rgba(99, 102, 241, 0.4); background: rgba(99, 102, 241, 0.05);">
+      <div class="icon">ðŸ¤–</div>
+      <h3>Painel de Agentes</h3>
+      <p>Acompanhe o andamento e prazos das automaÃ§Ãµes e bots (DiÃ¡rias, QDIP, Auditoria) de forma compartilhada</p>
+    </a>
+
+    <a href="calculadora_membro_lote.html" class="card card-pro">
+      <div class="icon">ðŸ‘¥</div>
+      <h3>Calculadora ATS Membros</h3>
+      <p>CÃ¡lculo individual e em lote para Membros â€” QuinquÃªnios</p>
+    </a>
+
+    <a href="Simulador_de_Contracheque.html" class="card card-pro">
+      <div class="icon">ðŸ’°</div>
+      <h3>Simulador de Contracheque</h3>
+      <p>SimulaÃ§Ã£o de folha de pagamento para Servidor PÃºblico</p>
+    </a>
+
+    <a href="Calculadora INSS.html" class="card card-pro">
+      <div class="icon">ðŸ§¾</div>
+      <h3>Calculadora INSS</h3>
+      <p>Efetua cÃ¡lculo de INSS e INSS reverso</p>
+    </a>
+
+    <a href="auditoria-matriculas.html" class="card card-pro">
+      <div class="icon">ðŸ§¾</div>
+      <h3>Verificador de MatrÃ­culas Repetidas</h3>
+      <p>Encontre as repetidas e seja felizzzz</p>
+    </a>
+
+    <a href="PREVCOM.html" class="card card-pro">
+      <div class="icon">ðŸ§¾</div>
+      <h3>Calculadora PREVCOM</h3>
+      <p>CÃ¡lculo de contribuiÃ§Ã£o previdenciÃ¡ria complementar</p>
+    </a>
+
+  </div>
+</div>
+
+<!-- â•â• GRUPO RECREATIVO â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="group" id="recreational-section">
+  <div class="group-header">
+    <span class="badge badge-rec">Recreativo</span>
+    <h2>Jogos</h2>
+    <div class="line"></div>
+  </div>
+  <div class="cards">
+
+    <a href="damas.html" class="card card-rec">
+      <div class="icon">âš«</div>
+      <h3>Damas</h3>
+      <p>Jogador vs Jogador ou contra a IA com 4 nÃ­veis de dificuldade</p>
+    </a>
+
+    <a href="xadrez.html" class="card card-rec">
+      <div class="icon">â™Ÿï¸</div>
+      <h3>Xadrez</h3>
+      <p>Jogador vs Jogador ou desafie a inteligÃªncia artificial</p>
+    </a>
+
+    <a href="palavras.html" class="card card-rec">
+      <div class="icon">ðŸ”</div>
+      <h3>CaÃ§a-Palavras</h3>
+      <p>Encontre todas as palavras escondidas na grade!</p>
+    </a>
+
+    <a href="Jogo da Forca.html" class="card card-rec">
+      <div class="icon">ðŸ”</div>
+      <h3>Jogo da Forca (EM DESENVOLVIMENTO)</h3>
+      <p>Descubra a palavra antes que seja tarde demais!</p>
+    </a>
+
+    <a href="ciclismo.html" class="card card-rec">
+      <div class="icon">ðŸš´</div>
+      <h3>Ciclismo</h3>
+      <p>Meu Acompanhamento de Ciclismo</p>
+    </a>
+
+    <a href="painel_patrimonial.html" class="card card-rec" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
+      <div class="icon">ðŸ¤–</div>
+      <h3>Meus Agentes Pessoais</h3>
+      <p>Monitore patrimônio, cotações automáticas, alertas no Telegram e agentes locais de investimento, viagens e backup</p>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  By Rafael F. Lima & Giovane Moura Â· Desenvolvido via Google Antigravity IA Agent Â· 2026
+</footer>
+
+<script>
+  function changeTheme(themeName) {
+    document.body.className = '';
+    if (themeName !== 'dark') {
+      document.body.classList.add('theme-' + themeName);
+    }
+    localStorage.setItem('mppa-portal-theme', themeName);
+    
+    // Atualizar botÃµes
+    document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById('btn-theme-' + themeName);
+    if (activeBtn) activeBtn.classList.add('active');
+  }
+
+  function logout() {
+    sessionStorage.removeItem('mppa_session_active');
+    window.location.replace('login.html');
+  }
+
+  // Inicializar tema e controle de visibilidade
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem('mppa-portal-theme') || 'dark';
+    changeTheme(savedTheme);
+
+    // Controle de acesso Ã  seÃ§Ã£o recreativa (somente Rafael)
+    const username = localStorage.getItem('mppa_username') || 'rafael';
+    const recSection = document.getElementById('recreational-section');
+    if (recSection && username !== 'rafael') {
+      recSection.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+

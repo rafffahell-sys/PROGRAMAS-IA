@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <script src="auth-guard.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Patrimonial Agêntico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#070b16;--panel:rgba(15,20,36,.74);--line:rgba(255,255,255,.08);--text:#f5f7ff;--muted:#9aa5be;--brand:#6ea8ff;--brand2:#53e0c1;--good:#29d391;--warn:#ffb84d;--bad:#ff6f87;--shadow:0 24px 60px rgba(0,0,0,.35)}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased}
+    body{min-height:100vh;background:radial-gradient(circle at 12% 16%,rgba(110,168,255,.12),transparent 30%),radial-gradient(circle at 88% 12%,rgba(83,224,193,.10),transparent 24%),linear-gradient(180deg,#050814 0%,#0a1020 100%);color:var(--text);padding:84px 20px 40px}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:url("caduceu_contabilidade.png");background-size:200px 242px;background-repeat:repeat;opacity:.035;z-index:-1}
+    .theme-light{--bg:#eef3fb;--panel:rgba(255,255,255,.74);--line:rgba(15,23,42,.08);--text:#0f172a;--muted:#55657f;--brand:#2563eb;--brand2:#0ea5e9;--good:#059669;--warn:#d97706;--bad:#dc2626;--shadow:0 18px 40px rgba(15,23,42,.10);background:linear-gradient(180deg,#eef3fb 0%,#f8fbff 100%)}
+    .topbar{position:fixed;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;gap:12px;z-index:30;pointer-events:none}
+    .theme-switcher,.logout{pointer-events:auto;display:inline-flex;align-items:center;gap:4px;padding:5px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid var(--line);backdrop-filter:blur(10px);box-shadow:var(--shadow)}
+    .theme-switcher button,.logout button,.btn{border:0;background:transparent;color:var(--muted);cursor:pointer;padding:6px 10px;font-size:.78rem;font-weight:700;border-radius:9px;transition:.2s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+    .theme-switcher button.active{background:var(--brand);color:#fff}
+    .logout button{background:rgba(255,91,106,.09);border:1px solid rgba(255,91,106,.38);color:#ff9cab}
+    .wrap{max-width:1380px;margin:0 auto}
+    .grid{display:grid;gap:18px}
+    .hero{grid-template-columns:1.2fr .8fr;margin-bottom:18px}
+    .layout{grid-template-columns:1.35fr .95fr}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);backdrop-filter:blur(16px)}
+    .pad{padding:22px}
+    .crumb{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(110,168,255,.10);border:1px solid rgba(110,168,255,.22);color:var(--brand);font-size:.76rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+    h1{margin-top:14px;font-size:clamp(2rem,4vw,3.6rem);line-height:.98;letter-spacing:-.04em;background:linear-gradient(135deg,#edf5ff 0%,var(--brand) 55%,var(--brand2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .theme-light h1{background:linear-gradient(135deg,#0f172a 0%,#2563eb 52%,#0ea5e9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .lead{margin-top:14px;color:var(--muted);max-width:760px;line-height:1.6}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.btn{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);padding:11px 14px;border-radius:14px;font-size:.88rem}.btn.primary{background:linear-gradient(135deg,var(--brand) 0%,var(--brand2) 100%);border-color:transparent;color:#04111f}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chip{border-radius:999px;padding:8px 12px;font-size:.8rem;font-weight:700;border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.03)}
+    .mini{display:grid;gap:12px;padding:18px}.mini .box{padding:18px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.label{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.value{margin-top:8px;font-size:1.7rem;font-weight:800}.note{margin-top:4px;color:var(--muted);font-size:.88rem;line-height:1.5}
+    .kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.kpi{padding:18px;min-height:128px}.kpi .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.kpi .title{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.kpi .big{margin-top:10px;font-size:1.6rem;font-weight:800;letter-spacing:-.03em}.kpi .sub{margin-top:6px;color:var(--muted);font-size:.86rem;line-height:1.45}.badge{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;font-size:.8rem;font-weight:800;white-space:nowrap}.good{color:#cdf9e5;background:rgba(41,211,145,.12)}.warn{color:#ffe4ad;background:rgba(255,184,77,.12)}.bad{color:#ffd1da;background:rgba(255,111,135,.12)}
+    .section-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:16px}.section-title h2{font-size:1.25rem;letter-spacing:-.03em}.section-title p{color:var(--muted);font-size:.9rem;line-height:1.5}
+    .chart{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px;align-items:end;min-height:250px}.bar{display:grid;gap:10px;justify-items:center}.track{width:100%;min-height:220px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.04);display:flex;align-items:end;overflow:hidden;padding:8px}.theme-light .track{background:rgba(15,23,42,.03);border-color:rgba(15,23,42,.05)}.fill{width:100%;border-radius:12px 12px 8px 8px;background:linear-gradient(180deg,rgba(83,224,193,.95),rgba(110,168,255,.95));box-shadow:0 10px 24px rgba(83,224,193,.18);min-height:18px}.month{font-size:.72rem;color:var(--muted);transform:rotate(-35deg)}
+    .two{grid-template-columns:1fr 1fr;gap:12px}.ring{width:228px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--brand) 0 40%,var(--brand2) 40% 62%,var(--warn) 62% 78%,var(--good) 78% 90%,var(--bad) 90% 100%);padding:18px;margin:0 auto;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}.ring::after{content:"";display:block;width:100%;height:100%;border-radius:50%;background:var(--panel);border:1px solid var(--line)}
+    .legend{display:grid;gap:10px}.legend-row{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:.92rem}.legend-left{display:flex;align-items:center;gap:10px}.swatch{width:10px;height:10px;border-radius:999px;background:var(--brand);box-shadow:0 0 0 4px rgba(110,168,255,.12)}
+    .table-wrap{overflow:auto;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.02)}table{width:100%;border-collapse:collapse;min-width:920px}thead th{text-align:left;padding:14px;color:var(--muted);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}tbody td{padding:14px;border-bottom:1px solid var(--line);vertical-align:middle;font-size:.92rem}tbody tr:hover{background:rgba(110,168,255,.06)}
+    .asset-name{font-weight:800;letter-spacing:-.02em}.subtle{color:var(--muted);font-size:.84rem;margin-top:4px;line-height:1.4}.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:7px 10px;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border:1px solid var(--line)}.crypto{color:#7ee8ff;background:rgba(14,165,233,.10)}.b3{color:#c9f2dc;background:rgba(41,211,145,.10)}.etf{color:#f8d58c;background:rgba(255,184,77,.10)}.bdr{color:#f0c0ff;background:rgba(190,109,255,.10)}.gain{font-weight:800;white-space:nowrap}.gain.pos{color:var(--good)}.gain.neg{color:var(--bad)}
+    .field{display:grid;gap:8px}.field label{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.field input,.field select,.field textarea{width:100%;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);padding:12px 14px;outline:none;font-size:.95rem}.theme-light .field input,.theme-light .field select,.theme-light .field textarea{background:rgba(255,255,255,.85)}.field textarea{min-height:88px;resize:vertical}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.full{grid-column:1/-1}.actions2{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.btn-file{cursor:pointer}
+    .agents{display:grid;gap:12px}.agent{padding:16px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.03);cursor:pointer}.agent:hover{transform:translateY(-2px);border-color:rgba(110,168,255,.28)}.agent h3{font-size:1rem;margin-bottom:6px}.agent p,.alert p{color:var(--muted);font-size:.88rem;line-height:1.5}.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .alerts{display:grid;gap:12px}.alert{border-radius:16px;border:1px solid var(--line);padding:14px;background:rgba(255,255,255,.03)}
+    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;z-index:60;background:rgba(9,13,24,.95);border:1px solid var(--line);color:#fff;border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);transition:.25s ease;min-width:280px;text-align:center}.theme-light .toast{background:rgba(255,255,255,.96);color:#0f172a}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    footer{margin:24px 0 0;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);text-align:center;font-size:.82rem;font-weight:700}
+    @media (max-width:1100px){.hero,.layout,.kpis{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}}@media (max-width:820px){body{padding-top:94px}.kpis,.layout,.two{grid-template-columns:1fr}.pad,.mini{padding:18px}.topbar{flex-direction:column;align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="theme-switcher">
+      <button id="theme-dark" class="active">🌌 Escuro</button>
+      <button id="theme-light">☀️ Claro</button>
+    </div>
+    <div class="logout"><button onclick="logout()">🚪 Sair</button></div>
+  </div>
+
+  <main class="wrap">
+    <section class="grid hero">
+      <div class="panel pad">
+        <span class="crumb">🤖 Agente patrimonial</span>
+        <h1>Seu patrimônio, organizado como um sistema de decisão.</h1>
+        <p class="lead">Painel para registrar ativos, acompanhar cotações automaticamente, destacar descontos abaixo do preço médio e montar alertas prontos para Telegram. O módulo já nasce preparado para Binance, Coinbase e importação B3/Investidor10.</p>
+        <div class="actions">
+          <a class="btn primary" href="#carteira">Ver carteira</a>
+          <button class="btn" onclick="syncMarket()">Sincronizar cotações</button>
+          <button class="btn" onclick="copyBestAlert()">Copiar alerta Telegram</button>
+        </div>
+        <div class="chips">
+          <span class="chip">Binance / Coinbase</span><span class="chip">Importação CSV B3</span><span class="chip">Alertas Telegram</span><span class="chip">Base local + sync automática</span>
+        </div>
+      </div>
+      <div class="panel mini">
+        <div class="box"><div class="label">Última sincronização</div><div class="value" id="last-sync">Aguardando</div><div class="note" id="sync-note">Conectando fontes e calculando o posicionamento.</div></div>
+        <div class="box"><div class="label">Radar de oportunidade</div><div class="value" id="opportunity-score">0</div><div class="note">Ativos abaixo do preço médio ou com desconto relevante.</div></div>
+      </div>
+    </section>
+
+    <section class="grid kpis" id="carteira">
+      <article class="panel kpi"><div class="top"><div><div class="title">Patrimônio total</div><div class="big" id="kpi-total">R$ 0,00</div></div><span class="badge good" id="kpi-pnl-pct">0,00%</span></div><div class="sub">Valor de aquisição e posição de mercado consolidados.</div></article>
+      <article class="panel kpi"><div class="top"><div><div class="title">Ganho / perda</div><div class="big" id="kpi-pnl">R$ 0,00</div></div><span class="badge warn" id="kpi-avg">PM</span></div><div class="sub">Mostra se a carteira está acima ou abaixo da base de custo.</div></article>
+      <article class="panel kpi"><div class="top"><div><div class="title">Oportunidades</div><div class="big" id="kpi-opps">0</div></div><span class="badge bad" id="kpi-alerts">alertas</span></div><div class="sub">Ativos com queda acima do gatilho configurado para Telegram.</div></article>
+      <article class="panel kpi"><div class="top"><div><div class="title">Cobertura automática</div><div class="big" id="kpi-auto">0</div></div><span class="badge good">online</span></div><div class="sub">Cotações vindas de Binance/Coinbase ou da importação B3.</div></article>
+    </section>
+
+    <section class="grid layout">
+      <div class="panel pad">
+        <div class="section-title"><div><h2>Evolução da carteira</h2><p>Curva visual do patrimônio e do efeito dos aportes.</p></div><span class="badge" id="market-status">Mercado sincronizado</span></div>
+        <div class="chart" id="evolution-chart"></div>
+        <div class="grid two" style="margin-top:16px;">
+          <div class="panel" style="padding:18px;"><div class="section-title" style="margin-bottom:10px;"><div><h2 style="font-size:1rem;">Distribuição por classe</h2><p style="font-size:.85rem;">Mix da carteira por categoria.</p></div></div><div class="ring" id="asset-ring"></div></div>
+          <div class="panel" style="padding:18px;"><div class="section-title" style="margin-bottom:10px;"><div><h2 style="font-size:1rem;">Mapa de alocação</h2><p style="font-size:.85rem;">Onde o capital está concentrado.</p></div></div><div class="legend" id="allocation-legend"></div></div>
+        </div>
+      </div>
+
+      <div class="grid" style="gap:18px;">
+        <article class="panel pad">
+          <div class="section-title"><div><h2>Entrada de ativos</h2><p>Registro manual e importação de carteira B3/Investidor10 em CSV.</p></div></div>
+          <div class="form-grid">
+            <div class="field"><label>Ticker</label><input id="assetTicker" placeholder="PETR4 / BTC / IVVB11"></div>
+            <div class="field"><label>Nome</label><input id="assetName" placeholder="Petrobras PN / Bitcoin"></div>
+            <div class="field"><label>Categoria</label><select id="assetCategory"><option>Ações</option><option>ETF</option><option>BDR</option><option>FII</option><option>Cripto</option><option>Renda Fixa</option><option>Outros</option></select></div>
+            <div class="field"><label>Fonte</label><select id="assetSource"><option value="manual">Manual / B3</option><option value="binance">Binance</option><option value="coinbase">Coinbase</option></select></div>
+            <div class="field"><label>Quantidade</label><input id="assetQty" inputmode="decimal" placeholder="100"></div>
+            <div class="field"><label>Preço médio (R$)</label><input id="assetAvg" inputmode="decimal" placeholder="32,50"></div>
+            <div class="field"><label>Preço atual (R$)</label><input id="assetPrice" inputmode="decimal" placeholder="35,20"></div>
+            <div class="field"><label>Gatilho (%)</label><input id="assetThreshold" inputmode="decimal" placeholder="5"></div>
+            <div class="field full"><label>Observação</label><textarea id="assetNote" placeholder="Ex.: posição B3, lote comprado em março."></textarea></div>
+          </div>
+          <div class="actions2">
+            <button class="btn primary" onclick="saveAsset()">Salvar ativo</button>
+            <label class="btn btn-file" for="csvImport">Importar CSV B3</label><input id="csvImport" type="file" accept=".csv,.txt" hidden>
+            <button class="btn" onclick="resetDefaults()">Recarregar base</button>
+          </div>
+          <p class="note" style="margin-top:12px;">CSV suporta colunas como ticker, nome, categoria, quantidade, preço médio, preço atual, fonte e observação.</p>
+        </article>
+
+        <article class="panel pad">
+          <div class="section-title"><div><h2>Configurações rápidas</h2><p>Ajuste o dólar, o gatilho global e o canal do Telegram.</p></div></div>
+          <div class="form-grid">
+            <div class="field"><label>USD/BRL</label><input id="usdRate" inputmode="decimal"></div>
+            <div class="field"><label>Gatilho global (%)</label><input id="globalAlert" inputmode="decimal"></div>
+            <div class="field full"><label>Canal Telegram</label><input id="telegramChannel" placeholder="@carteira_rafael"></div>
+            <div class="field full"><label>Observação</label><textarea id="telegramNote" placeholder="Ex.: disparar quando o ativo estiver abaixo do preço médio."></textarea></div>
+          </div>
+          <div class="actions2"><button class="btn primary" onclick="saveSettings()">Salvar preferências</button><button class="btn" onclick="syncMarket()">Sincronizar agora</button></div>
+        </article>
+
+        <article class="panel pad">
+          <div class="section-title"><div><h2>Integrações e agentes</h2><p>Blocos que replicam o seu fluxo de patrimônio, compra e acompanhamento.</p></div></div>
+          <div class="agents">
+            <div class="agent" onclick="openAgentModal('coletor-b3')"><h3>Coletor B3 e Investidor10</h3><p>Importa carteira por CSV, normaliza os ativos e prepara a base consolidada.</p><div class="meta"><span class="badge good">ativo</span><span class="badge">CSV / manual</span></div></div>
+            <div class="agent" onclick="openAgentModal('motor-cripto')"><h3>Motor Binance e Coinbase</h3><p>Busca cotações automáticas de criptoativos e converte os valores para a moeda da carteira.</p><div class="meta"><span class="badge good">online</span><span class="badge">auto-sync</span></div></div>
+            <div class="agent" onclick="openAgentModal('radar-oportunidades')"><h3>Radar de Oportunidades</h3><p>Destaca ativos abaixo do preço médio e prepara mensagens curtas para Telegram.</p><div class="meta"><span class="badge warn">monitorando</span><span class="badge">gatilho por desconto</span></div></div>
+          </div>
+        </article>
+
+        <article class="panel pad">
+          <div class="section-title"><div><h2>Alertas prontos para Telegram</h2><p>As mensagens são montadas automaticamente para os ativos com gatilho.</p></div><button class="btn" onclick="copyBestAlert()">Copiar texto</button></div>
+          <div class="alerts" id="alerts-feed"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel pad" style="margin-top:18px;">
+      <div class="section-title"><div><h2>Carteira consolidada</h2><p>Registre, revise e acompanhe ações, ETFs, BDRs e cripto em um único lugar.</p></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Ativo</th><th>Classe</th><th>Qtd.</th><th>PM</th><th>Preço atual</th><th>Mercado</th><th>P/L</th><th>Origem</th><th>Ações</th></tr></thead><tbody id="assets-table"></tbody></table></div>
+    </section>
+
+    <footer>Agente patrimonial agêntico · integrado ao portal pessoal de Rafael F. Lima</footer>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <script>
+    const STORE_A='patrimonio-agente-assets';
+    const STORE_S='patrimonio-agente-settings';
+    const STORE_T='mppa-portal-theme';
+    const defaults={usdRate:5.5,globalAlert:5,telegramChannel:'@carteira_rafael',telegramNote:'Disparar alerta quando o desconto ficar relevante.'};
+    const seed=[
+      {ticker:'PETR4',name:'Petrobras PN',category:'Ações',quantity:180,avgPrice:34.2,currentPrice:37.1,source:'manual',note:'Posição B3 principal.'},
+      {ticker:'VALE3',name:'Vale ON',category:'Ações',quantity:60,avgPrice:62.3,currentPrice:59.4,source:'manual',note:'Importado da carteira antiga.'},
+      {ticker:'IVVB11',name:'IVVB11',category:'ETF',quantity:12,avgPrice:128.5,currentPrice:123.8,source:'manual',note:'Exposição internacional.'},
+      {ticker:'HGLG11',name:'HGLG11',category:'FII',quantity:20,avgPrice:154.2,currentPrice:156.3,source:'manual',note:'Renda recorrente.'},
+      {ticker:'BTC',name:'Bitcoin',category:'Cripto',quantity:0.08,avgPrice:286000,currentPrice:null,source:'binance',note:'Sincronizado via Binance.'},
+      {ticker:'ETH',name:'Ethereum',category:'Cripto',quantity:0.55,avgPrice:15600,currentPrice:null,source:'coinbase',note:'Sincronizado via Coinbase.'}
+    ];
+    const agents={
+      'coletor-b3':['Coletor B3 e Investidor10','Importa carteira por CSV e normaliza a base consolidada.'],
+      'motor-cripto':['Motor Binance e Coinbase','Busca preços automáticos de cripto e converte para a moeda da carteira.'],
+      'radar-oportunidades':['Radar de Oportunidades','Destaca ativos abaixo do preço médio e prepara texto para Telegram.']
+    };
+    let assets=[],settings={},quotes={},lastSync=null;
+    const q=id=>document.getElementById(id);
+    const brl=v=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(v||0);
+    const pct=v=>`${(v||0).toFixed(2).replace('.',',')}%`;
+    const num=v=>{const n=Number(String(v??'').replace(/\./g,'').replace(',','.').replace(/[^\d.-]/g,''));return Number.isFinite(n)?n:0};
+    const save=()=>{localStorage.setItem(STORE_S,JSON.stringify(settings));localStorage.setItem(STORE_A,JSON.stringify(assets));};
+    const load=()=>{try{settings={...defaults,...JSON.parse(localStorage.getItem(STORE_S)||'{}')};assets=JSON.parse(localStorage.getItem(STORE_A)||'null')||structuredClone(seed)}catch{settings={...defaults};assets=structuredClone(seed)}};
+    const price=a=>a.currentPrice!=null&&a.currentPrice!==''?Number(a.currentPrice):(a.source==='binance'||a.source==='coinbase'?(quotes[a.ticker]?.usd||0)*settings.usdRate:Number(a.avgPrice||0));
+    const calc=a=>{const p=price(a),qty=Number(a.quantity||0),avg=Number(a.avgPrice||0),cost=qty*avg,mkt=qty*p,pnl=mkt-cost;return{p,qty,avg,cost,mkt,pnl,pct:cost?(pnl/cost)*100:0,disc:avg?((avg-p)/avg)*100:0}};
+    const cat=c=>/crip/i.test(c)?'crypto':/bdr/i.test(c)?'bdr':/etf/i.test(c)?'etf':'b3';
+    const toast=t=>{const el=q('toast');el.textContent=t;el.classList.add('show');clearTimeout(window.__t);window.__t=setTimeout(()=>el.classList.remove('show'),1600)};
+    const theme=t=>{document.body.classList.toggle('theme-light',t==='light');localStorage.setItem(STORE_T,t);q('theme-dark').classList.toggle('active',t!=='light');q('theme-light').classList.toggle('active',t==='light')};
+    const syncTheme=()=>theme(localStorage.getItem(STORE_T)||'dark');
+    const renderKPIs=()=>{const rows=assets.map(calc),cost=rows.reduce((s,i)=>s+i.cost,0),mkt=rows.reduce((s,i)=>s+i.mkt,0),pnl=mkt-cost,pctv=cost?(pnl/cost)*100:0,ops=rows.filter(i=>i.disc>=num(settings.globalAlert||0)).length,auto=assets.filter(a=>a.source!=='manual').length;q('kpi-total').textContent=brl(mkt);q('kpi-pnl').textContent=brl(pnl);q('kpi-pnl-pct').textContent=`${pnl>=0?'▲':'▼'} ${pct(Math.abs(pctv))}`;q('kpi-pnl-pct').className=`badge ${pnl>=0?'good':'bad'}`;q('kpi-avg').textContent=`PM ${brl(cost/Math.max(assets.reduce((s,a)=>s+Number(a.quantity||0),0),1))}`;q('kpi-opps').textContent=String(ops);q('kpi-alerts').textContent=`${ops} gatilhos`;q('kpi-auto').textContent=String(auto);q('opportunity-score').textContent=String(ops);q('last-sync').textContent=lastSync?lastSync.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'Aguardando';q('sync-note').textContent=auto?`Cotações automáticas ativas para ${auto} ativo(s).`:'Nenhum ativo automático nesta carteira ainda.'};
+    const renderChart=()=>{const mkt=assets.map(calc).reduce((s,i)=>s+i.mkt,0),base=Math.max(mkt*.66,1000),months=['07/25','08/25','09/25','10/25','11/25','12/25','01/26','02/26','03/26','04/26','05/26','06/26'];q('evolution-chart').innerHTML=Array.from({length:12},(_,i)=>{const p=(i+1)/12,l=Math.sin(p*Math.PI*1.2)*.06,h=Math.max(.2,(base+(mkt-base)*p+mkt*l)/mkt);return `<div class="bar"><div class="track"><div class="fill" style="height:${Math.min(100,Math.max(18,h*100))}%"></div></div><div class="month">${months[i]}</div></div>`}).join('')};
+    const renderAlloc=()=>{const by={};assets.forEach(a=>{const r=calc(a);by[a.category]=(by[a.category]||0)+r.mkt});const entries=Object.entries(by).sort((a,b)=>b[1]-a[1]),pal=['#6ea8ff','#53e0c1','#ffb84d','#29d391','#ff6f87','#c28bff'];q('allocation-legend').innerHTML=entries.map((e,i)=>`<div class="legend-row"><div class="legend-left"><span class="swatch" style="background:${pal[i%pal.length]}"></span><span>${e[0]}</span></div><strong>${brl(e[1])}</strong></div>`).join('');const total=entries.reduce((s,e)=>s+e[1],0)||1;let start=0;const stops=entries.map((e,i)=>{const part=e[1]/total*100,end=start+part;const seg=`${pal[i%pal.length]} ${start}% ${end}%`;start=end;return seg}).join(', ');if(stops)q('asset-ring').style.background=`conic-gradient(${stops})`};
+    const renderTable=()=>{q('assets-table').innerHTML=assets.map((a,i)=>{const r=calc(a),g=r.pnl>=0?'pos':'neg',src=a.source==='manual'?'manual':'auto';return `<tr><td><div class="asset-name">${a.ticker}</div><div class="subtle">${a.name||a.ticker}${a.note?`<br>${a.note}`:''}</div></td><td><span class="tag ${cat(a.category)}">${a.category}</span></td><td>${Number(a.quantity||0).toLocaleString('pt-BR')}</td><td>${brl(r.avg)}</td><td>${brl(r.p)}</td><td>${brl(r.mkt)}</td><td class="gain ${g}">${r.pnl>=0?'+':''}${brl(r.pnl)}<div class="subtle">${pct(r.pct)}</div></td><td><span class="badge ${src==='auto'?'good':''}">${src}</span></td><td><button class="btn" onclick="viewAsset(${i})">Ver</button> <button class="btn" onclick="copyAsset(${i})">Copiar</button></td></tr>`}).join('')};
+    const message=a=>{const r=calc(a),disc=Math.max(0,r.disc);return [`📉 Oportunidade patrimonial: ${a.ticker}`,`Classe: ${a.category}`,`Preço médio: ${brl(r.avg)}`,`Preço atual: ${brl(r.p)}`,`Desconto vs PM: ${pct(disc)}`,`Quantidade: ${Number(a.quantity||0).toLocaleString('pt-BR')}`,`Canal sugerido: ${settings.telegramChannel}`,settings.telegramNote?`Obs.: ${settings.telegramNote}`:''].filter(Boolean).join('\n')};
+    const renderAlerts=()=>{const list=assets.map(a=>({a,r:calc(a)})).filter(x=>x.r.disc>=num(settings.globalAlert||0)).sort((x,y)=>y.r.disc-x.r.disc);q('alerts-feed').innerHTML=list.length?list.slice(0,5).map(x=>`<div class="alert"><strong>${x.a.ticker} abaixo do PM</strong><p>${pct(x.r.disc)} abaixo do preço médio · ${brl(x.r.p)} agora</p><div class="actions2"><button class="btn primary" onclick="copyText(${JSON.stringify(message(x.a)).replace(/"/g,'&quot;')})">Copiar Telegram</button><button class="btn" onclick="viewAsset(${assets.findIndex(z=>z.ticker===x.a.ticker)})">Abrir ativo</button></div></div>`).join(''):`<div class="alert"><strong>Nenhum gatilho relevante no momento</strong><p>A carteira está dentro do intervalo configurado.</p></div>`;q('market-status').textContent=list.length?`${list.length} oportunidade(s)`:'Sem alertas críticos';q('market-status').className=`badge ${list.length?'warn':'good'}`};
+    const renderAgents=()=>{};
+    const renderAll=()=>{renderKPIs();renderChart();renderAlloc();renderTable();renderAlerts();save()};
+    async function syncMarket(){const usd=num(settings.usdRate||5.5);await Promise.allSettled(assets.map(async(a,i)=>{if(a.source==='manual')return;try{const base=a.ticker.toUpperCase().replace(/[^A-Z0-9]/g,'');let usdPrice=null;if(a.source==='binance'){const r=await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${base}USDT`);if(r.ok)usdPrice=Number((await r.json()).price)}else if(a.source==='coinbase'){const r=await fetch(`https://api.coinbase.com/v2/prices/${base}-USD/spot`);if(r.ok)usdPrice=Number((await r.json()).data.amount)}if(usdPrice&&Number.isFinite(usdPrice))assets[i].currentPrice=usdPrice*usd}catch(e){console.warn(e)}}));lastSync=new Date();renderAll();toast('Cotações sincronizadas com sucesso.')} 
+    function saveSettings(){settings.usdRate=num(q('usdRate').value)||5.5;settings.globalAlert=num(q('globalAlert').value)||5;settings.telegramChannel=q('telegramChannel').value.trim()||'@carteira_rafael';settings.telegramNote=q('telegramNote').value.trim();renderAll();toast('Preferências salvas.')}
+    function saveAsset(){const a={ticker:q('assetTicker').value.trim().toUpperCase(),name:q('assetName').value.trim()||q('assetTicker').value.trim().toUpperCase(),category:q('assetCategory').value,source:q('assetSource').value,quantity:num(q('assetQty').value),avgPrice:num(q('assetAvg').value),currentPrice:num(q('assetPrice').value)||null,threshold:num(q('assetThreshold').value)||num(settings.globalAlert||5),note:q('assetNote').value.trim()};if(!a.ticker||!a.quantity){toast('Informe ticker e quantidade.');return}const i=assets.findIndex(x=>x.ticker===a.ticker);if(i>=0)assets[i]={...assets[i],...a};else assets.unshift(a);renderAll();clearForm();toast('Ativo salvo na carteira.')}
+    function clearForm(){['assetTicker','assetName','assetQty','assetAvg','assetPrice','assetThreshold','assetNote'].forEach(id=>q(id).value='');q('assetCategory').value='Ações';q('assetSource').value='manual'}
+    function resetDefaults(){assets=structuredClone(seed);settings={...defaults};lastSync=null;renderAll();toast('Base padrão recarregada.')}
+    function parseCsv(text){const lines=String(text).trim().split(/\r?\n/).filter(Boolean);if(!lines.length)return[];const d=lines[0].includes(';')?';':',';const h=lines[0].split(d).map(s=>s.trim().toLowerCase());const idx=n=>h.indexOf(n);return lines.slice(1).map(line=>{const r=line.split(d).map(s=>s.trim().replace(/^"|"$/g,''));const get=(names,def='')=>{for(const n of names){const i=idx(n);if(i>=0)return r[i]}return def};return{ticker:(get(['ticker','ativo','papel'],r[0])||'').toUpperCase(),name:get(['nome','descricao','asset'],r[1]),category:get(['categoria','classe','tipo'],r[2]||'Ações'),quantity:num(get(['quantidade','qtd','qty'],r[3])),avgPrice:num(get(['preco medio','preço médio','pm','preco_medio'],r[4])),currentPrice:num(get(['preco atual','preço atual','preco_atual'],r[5]))||null,source:(get(['fonte','source'],r[6]||'manual')).toLowerCase(),note:get(['observacao','observação','obs','note'],r[8]||'')}}).filter(x=>x.ticker&&x.quantity)}
+    function importCsv(file){const fr=new FileReader();fr.onload=()=>{const rows=parseCsv(fr.result);if(!rows.length){toast('Não consegui ler o CSV.');return}rows.forEach(row=>{const i=assets.findIndex(x=>x.ticker===row.ticker);if(i>=0)assets[i]={...assets[i],...row};else assets.push(row)});renderAll();toast(`${rows.length} ativo(s) importado(s).`)};fr.readAsText(file,'UTF-8')}
+    function copyText(t){navigator.clipboard?.writeText(t).then(()=>toast('Texto copiado.')).catch(()=>toast('Não foi possível copiar automaticamente.'))}
+    function copyBestAlert(){const list=assets.map(a=>({a,r:calc(a)})).filter(x=>x.r.disc>=num(settings.globalAlert||0)).sort((x,y)=>y.r.disc-x.r.disc);copyText(list.length?message(list[0].a):'Sem alertas relevantes no momento.')} 
+    function copyAsset(i){copyText(message(assets[i]))}
+    function viewAsset(i){const a=assets[i],r=calc(a);toast(`${a.ticker} · ${a.category} · ${brl(r.mkt)} · ${r.pnl>=0?'+':''}${brl(r.pnl)} (${pct(r.pct)})`)}
+    function openAgentModal(id){const a=agents[id];if(!a)return;toast(`${a[0]}: ${a[1]}`)}
+    function applyTheme(t){document.body.classList.toggle('theme-light',t==='light');localStorage.setItem(STORE_T,t);q('theme-dark').classList.toggle('active',t!=='light');q('theme-light').classList.toggle('active',t==='light')}
+    function logout(){sessionStorage.removeItem('mppa_session_active');location.replace('login.html')}
+    function bind(){q('theme-dark').onclick=()=>applyTheme('dark');q('theme-light').onclick=()=>applyTheme('light');q('csvImport').addEventListener('change',e=>{const f=e.target.files?.[0];if(f)importCsv(f);e.target.value=''});q('usdRate').onchange=saveSettings;q('globalAlert').onchange=saveSettings;q('telegramChannel').onchange=saveSettings;q('telegramNote').onchange=saveSettings}
+    load();syncTheme();bind();q('usdRate').value=settings.usdRate;q('globalAlert').value=settings.globalAlert;q('telegramChannel').value=settings.telegramChannel;q('telegramNote').value=settings.telegramNote;renderAll();syncMarket();
+  </script>
+</body>
+</html>
