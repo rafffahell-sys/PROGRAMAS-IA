@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('section');
   const scrollspyOptions = {
     root: null,
-    threshold: 0.3, // Dispara quando 30% da seção estiver na tela
-    rootMargin: "-80px 0px 0px 0px" // Compensa a altura da navbar
+    threshold: 0.25, // Dispara quando 25% da seção estiver na tela
+    rootMargin: "-80px 0px 0px 0px"
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -82,37 +82,113 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================================================
-  // 5. TRATAMENTO DO FORMULÁRIO DE CONTATO (SIMULAÇÃO + WHATSAPP REDIRECT)
+  // 5. ANIMAÇÃO DE BARRAS DE ESTATÍSTICA (INSIGHTS)
+  // ==========================================================================
+  const chartSection = document.getElementById('insights');
+  const barFills = document.querySelectorAll('.animate-bar');
+
+  const chartObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        barFills.forEach(bar => {
+          const targetWidth = bar.getAttribute('data-width');
+          bar.style.width = targetWidth;
+        });
+        // Para rodar a animação apenas uma vez
+        chartObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  if (chartSection) {
+    chartObserver.observe(chartSection);
+  }
+
+  // ==========================================================================
+  // 6. MODAL DE LEITURA DO BLOG
+  // ==========================================================================
+  const blogModal = document.getElementById('blog-modal');
+  const blogModalClose = document.getElementById('blog-modal-close');
+  const blogModalBody = document.getElementById('blog-modal-body');
+
+  window.openPostModal = function(postId) {
+    const template = document.getElementById(`post-${postId}-template`);
+    if (!template) return;
+
+    // Clona o conteúdo do template
+    const clone = template.content.cloneNode(true);
+    
+    // Limpa o body e insere o novo conteúdo
+    blogModalBody.innerHTML = '';
+    blogModalBody.appendChild(clone);
+    
+    // Abre o modal
+    blogModal.classList.add('open');
+    body.style.overflow = 'hidden'; // Impede o scroll de fundo
+  };
+
+  function closePostModal() {
+    blogModal.classList.remove('open');
+    body.style.overflow = ''; // Restaura o scroll de fundo
+    // Pequeno delay para limpar os dados após fechar (efeito de fade-out)
+    setTimeout(() => {
+      blogModalBody.innerHTML = '';
+    }, 300);
+  }
+
+  if (blogModalClose) {
+    blogModalClose.addEventListener('click', closePostModal);
+  }
+
+  // Fechar clicando fora do conteúdo do modal
+  if (blogModal) {
+    blogModal.addEventListener('click', (e) => {
+      if (e.target === blogModal) {
+        closePostModal();
+      }
+    });
+  }
+
+  // Fechar pressionando tecla Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && blogModal.classList.contains('open')) {
+      closePostModal();
+    }
+  });
+
+  // ==========================================================================
+  // 7. TRATAMENTO DO FORMULÁRIO DE CONTATO (SIMULAÇÃO + WHATSAPP REDIRECT)
   // ==========================================================================
   const contactForm = document.getElementById('contact-form');
   const successMsg = document.getElementById('form-success');
 
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-    const name = document.getElementById('form-name').value;
-    const email = document.getElementById('form-email').value;
-    const service = document.getElementById('form-service').value;
-    const message = document.getElementById('form-message').value;
+      const name = document.getElementById('form-name').value;
+      const email = document.getElementById('form-email').value;
+      const service = document.getElementById('form-service').value;
+      const message = document.getElementById('form-message').value;
 
-    // 1. Mostrar feedback de envio bem-sucedido na tela
-    successMsg.style.display = 'block';
-    contactForm.reset();
+      // 1. Mostrar feedback de envio bem-sucedido na tela
+      successMsg.style.display = 'block';
+      contactForm.reset();
 
-    // Sumir feedback de sucesso após 5 segundos
-    setTimeout(() => {
-      successMsg.style.display = 'none';
-    }, 5000);
+      // Sumir feedback de sucesso após 5 segundos
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 5000);
 
-    // 2. Como recurso profissional alternativo, podemos abrir o WhatsApp pré-preenchido
-    // para garantir que a mensagem chegue de qualquer forma na hora.
-    const textFormatted = `Olá Daniel! Meu nome é ${encodeURIComponent(name)} (${encodeURIComponent(email)}). Tenho interesse no serviço de *${encodeURIComponent(service)}*. \n\nMensagem: ${encodeURIComponent(message)}`;
-    
-    // Pergunta opcional após simular o envio se o paciente deseja enviar via WhatsApp para resposta imediata
-    setTimeout(() => {
-      if (confirm("Deseja abrir o WhatsApp para enviar esta mensagem diretamente para o Dr. Daniel para um retorno mais rápido?")) {
-        window.open(`https://wa.me/5511961253511?text=${textFormatted}`, '_blank');
-      }
-    }, 800);
-  });
+      // 2. Formatar mensagem detalhada para WhatsApp
+      const textFormatted = `Olá Daniel! Meu nome é ${encodeURIComponent(name)} (${encodeURIComponent(email)}). Tenho interesse no serviço de *${encodeURIComponent(service)}*. \n\nMensagem: ${encodeURIComponent(message)}`;
+      
+      // Oferece abertura no WhatsApp com feedback imediato
+      setTimeout(() => {
+        if (confirm("Deseja abrir o WhatsApp para enviar esta mensagem diretamente para o Dr. Daniel para um retorno mais rápido?")) {
+          window.open(`https://wa.me/5511961253511?text=${textFormatted}`, '_blank');
+        }
+      }, 800);
+    });
+  }
 });
