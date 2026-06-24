@@ -460,14 +460,14 @@
   </div>
   <div class="cards">
 
-    <a href="ciclismo.html" class="card card-rec" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05);">
+    <a href="ciclismo.html" class="card card-rec rafael-only" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05);">
       <div class="icon">🚴</div>
       <h3>AppCiclismo</h3>
       <p>Desenvolvimento de aplicativo voltado para acompanhamento de rotas e treinos de ciclismo.</p>
       <span class="badge" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); align-self: flex-start; margin-top: 8px; font-size: 0.7rem;">Em Desenvolvimento</span>
     </a>
 
-    <div class="card card-rec" style="border-color: rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); cursor: default;">
+    <div class="card card-rec rafael-only" style="border-color: rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); cursor: default;">
       <div class="icon">🪙</div>
       <h3>Agente DCA Cripto</h3>
       <p>Acumulação inteligente de BTC e WBETH integrada ao Fear &amp; Greed Index na Binance.</p>
@@ -570,10 +570,13 @@
     const rafaelIdeasSection = document.getElementById('rafael-ideas-section');
     const recSection = document.getElementById('recreational-section');
     
-    // Painéis e Jogos são exclusivos do Rafael
+    // Painéis, Jogos e cards pessoais (ciclismo, cripto) são exclusivos do Rafael
     if (username !== 'rafael') {
       if (rafaelPanelsSection) rafaelPanelsSection.style.display = 'none';
       if (recSection) recSection.style.display = 'none';
+      document.querySelectorAll('.rafael-only').forEach(el => {
+        el.style.display = 'none';
+      });
     }
     
     // Seção de Ideias & Projetos é visível para Rafael, Tatiana e Giovane
