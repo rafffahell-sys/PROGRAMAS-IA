@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <script src="auth-guard.js"></script>
@@ -40,7 +40,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Marca d'Ã¡gua de Contabilidade (Caduceu Real) */
+    /* Marca d'água de Contabilidade (Caduceu Real) */
     body::before {
       content: "";
       position: fixed;
@@ -87,7 +87,7 @@
       font-weight: 500;
     }
 
-    /* â”€â”€ GRUPO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── GRUPO ─────────────────────────────────────── */
     .group {
       max-width: 860px;
       margin: 0 auto 48px;
@@ -133,7 +133,7 @@
       background: var(--border-color);
     }
 
-    /* â”€â”€ CARDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── CARDS ─────────────────────────────────────── */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -191,7 +191,7 @@
     .card-pro .icon { filter: drop-shadow(0 0 8px rgba(99,102,241,0.4)); }
     .card-rec .icon { filter: drop-shadow(0 0 8px rgba(16,185,129,0.4)); }
 
-    /* â”€â”€ RODAPÃ‰ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── RODAPÉ ────────────────────────────────────── */
     footer {
       text-align: center;
       margin-top: 40px;
@@ -205,7 +205,7 @@
       margin-right: auto;
     }
 
-    /* â”€â”€ TEMAS ADICIONAIS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── TEMAS ADICIONAIS ───────────────────────────── */
     /* Tema Claro */
     body.theme-light {
       --bg-color: #f1f5f9;
@@ -352,23 +352,23 @@
 
 <!-- Alternador de Temas Discreto no Canto Superior Esquerdo -->
 <div class="theme-switcher dashboard-switcher">
-  <button onclick="changeTheme('dark')" id="btn-theme-dark" class="theme-btn active" title="Tema Escuro">ðŸŒŒ</button>
-  <button onclick="changeTheme('light')" id="btn-theme-light" class="theme-btn" title="Tema Claro">â˜€ï¸</button>
-  <button onclick="changeTheme('beige')" id="btn-theme-beige" class="theme-btn" title="Tema Bege">ðŸŒ¾</button>
+  <button onclick="changeTheme('dark')" id="btn-theme-dark" class="theme-btn active" title="Tema Escuro">&#127776;</button>
+  <button onclick="changeTheme('light')" id="btn-theme-light" class="theme-btn" title="Tema Claro">&#9728;&#65039;</button>
+  <button onclick="changeTheme('beige')" id="btn-theme-beige" class="theme-btn" title="Tema Bege">&#127806;</button>
 </div>
 
-<!-- BotÃ£o Sair Discreto no Canto Superior Direito -->
+<!-- Botão Sair Discreto no Canto Superior Direito -->
 <div class="logout-container-fixed">
-  <button onclick="logout()" class="theme-btn" style="background: var(--danger-glow); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; padding: 6px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">ðŸšª Sair</button>
+  <button onclick="logout()" class="theme-btn" style="background: var(--danger-glow); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; padding: 6px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">&#128682; Sair</button>
 </div>
 
 <header>
-  <h1>ðŸ’¼ Programas</h1>
-  <p>Escolha um programa para comeÃ§ar</p>
+  <h1>&#128188; Programas</h1>
+  <p>Escolha um programa para começar</p>
 </header>
 
-<!-- â•â• GRUPO PROFISSIONAL â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-<div class="group">
+<!-- &#9552;&#9552; GRUPO PROFISSIONAL &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="group" id="professional-section">
   <div class="group-header">
     <span class="badge badge-pro">Profissional</span>
     <h2>Folha de Pagamento</h2>
@@ -377,57 +377,121 @@
   <div class="cards">
 
     <a href="calculadora_ats.html" class="card card-pro">
-      <div class="icon">ðŸ“Š</div>
+      <div class="icon">&#128202;</div>
       <h3>Calculadora ATS Servidores</h3>
-      <p>CÃ¡lculo de Adicional por Tempo de ServiÃ§o</p>
+      <p>Cálculo de Adicional por Tempo de Serviço</p>
     </a>
 
     <a href="painel de tarefas2.html?v=7" class="card card-pro">
-      <div class="icon">ðŸ“Š</div>
+      <div class="icon">&#128202;</div>
       <h3>Painel de Tarefas</h3>
-      <p>Acompanhe o andamento dos registros da Folha de Pagamento do mÃªs</p>
+      <p>Acompanhe o andamento dos registros da Folha de Pagamento do mês</p>
     </a>
 
     <a href="painel_agentes.html" class="card card-pro" style="border-color: rgba(99, 102, 241, 0.4); background: rgba(99, 102, 241, 0.05);">
-      <div class="icon">ðŸ¤–</div>
+      <div class="icon">&#129302;</div>
       <h3>Painel de Agentes</h3>
-      <p>Acompanhe o andamento e prazos das automaÃ§Ãµes e bots (DiÃ¡rias, QDIP, Auditoria) de forma compartilhada</p>
+      <p>Acompanhe o andamento e prazos das automações e bots (Diárias, QDIP, Auditoria) de forma compartilhada</p>
     </a>
 
     <a href="calculadora_membro_lote.html" class="card card-pro">
-      <div class="icon">ðŸ‘¥</div>
+      <div class="icon">&#128101;</div>
       <h3>Calculadora ATS Membros</h3>
-      <p>CÃ¡lculo individual e em lote para Membros â€” QuinquÃªnios</p>
+      <p>Cálculo individual e em lote para Membros — Quinquênios</p>
     </a>
 
     <a href="Simulador_de_Contracheque.html" class="card card-pro">
-      <div class="icon">ðŸ’°</div>
+      <div class="icon">&#128176;</div>
       <h3>Simulador de Contracheque</h3>
-      <p>SimulaÃ§Ã£o de folha de pagamento para Servidor PÃºblico</p>
+      <p>Simulação de folha de pagamento para Servidor Público</p>
     </a>
 
     <a href="Calculadora INSS.html" class="card card-pro">
-      <div class="icon">ðŸ§¾</div>
+      <div class="icon">&#129506;</div>
       <h3>Calculadora INSS</h3>
-      <p>Efetua cÃ¡lculo de INSS e INSS reverso</p>
+      <p>Efetua cálculo de INSS e INSS reverso</p>
     </a>
 
     <a href="auditoria-matriculas.html" class="card card-pro">
-      <div class="icon">ðŸ§¾</div>
-      <h3>Verificador de MatrÃ­culas Repetidas</h3>
+      <div class="icon">&#129506;</div>
+      <h3>Verificador de Matrículas Repetidas</h3>
       <p>Encontre as repetidas e seja felizzzz</p>
     </a>
 
     <a href="PREVCOM.html" class="card card-pro">
-      <div class="icon">ðŸ§¾</div>
+      <div class="icon">&#129506;</div>
       <h3>Calculadora PREVCOM</h3>
-      <p>CÃ¡lculo de contribuiÃ§Ã£o previdenciÃ¡ria complementar</p>
+      <p>Cálculo de contribuição previdenciária complementar</p>
     </a>
 
   </div>
 </div>
 
-<!-- â•â• GRUPO RECREATIVO â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- &#9552;&#9552; GRUPO DE PAIN&Eacute;IS &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="group" id="rafael-panels-section">
+  <div class="group-header">
+    <span class="badge" style="background: rgba(6, 182, 212, 0.15); color: #a5f3fc; border: 1px solid rgba(6, 182, 212, 0.35);">Painéis</span>
+    <h2>Painéis principais</h2>
+    <div class="line"></div>
+  </div>
+  <div class="cards">
+
+    <a href="painel_pessoal.html" class="card card-rec rafael-only-card" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
+      <div class="icon">&#129302;</div>
+      <h3>Meus Agentes Pessoais</h3>
+      <p>Monitore os bots particulares do Rafael, como Binance, Coinbase, investimentos, viagens e backup.</p>
+    </a>
+
+    <a href="painel_patrimonial.html" class="card card-rec rafael-only-card" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
+      <div class="icon">&#128176;</div>
+      <h3>Painel Patrimonial</h3>
+      <p>Acompanhe carteira, cotações automáticas e alertas de oportunidade no Telegram.</p>
+    </a>
+
+  </div>
+</div>
+
+<!-- &#9552;&#9552; GRUPO DE IDEIAS E PROJETOS EM ANDAMENTO &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="group" id="rafael-ideas-section">
+  <div class="group-header">
+    <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.35);">Ideias &amp; Projetos</span>
+    <h2>Projetos em Andamento &amp; Backlog</h2>
+    <div class="line"></div>
+  </div>
+  <div class="cards">
+
+    <a href="ciclismo.html" class="card card-rec" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05);">
+      <div class="icon">🚴</div>
+      <h3>AppCiclismo</h3>
+      <p>Desenvolvimento de aplicativo voltado para acompanhamento de rotas e treinos de ciclismo.</p>
+      <span class="badge" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); align-self: flex-start; margin-top: 8px; font-size: 0.7rem;">Em Desenvolvimento</span>
+    </a>
+
+    <div class="card card-rec" style="border-color: rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); cursor: default;">
+      <div class="icon">🪙</div>
+      <h3>Agente DCA Cripto</h3>
+      <p>Acumulação inteligente de BTC e WBETH integrada ao Fear &amp; Greed Index na Binance.</p>
+      <span class="badge" style="background: rgba(255, 255, 255, 0.06); color: var(--text-secondary); border: 1px solid var(--border-color); align-self: flex-start; margin-top: 8px; font-size: 0.7rem;">Não Iniciado</span>
+    </div>
+
+    <div class="card card-rec" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05); cursor: default;">
+      <div class="icon">⏰</div>
+      <h3>Agente do Ponto (Módulo Plantões)</h3>
+      <p>Desenvolvimento do módulo de Plantões do Servidor (fechamento e apuração de folha).</p>
+      <span class="badge" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); align-self: flex-start; margin-top: 8px; font-size: 0.7rem;">Em Desenvolvimento</span>
+    </div>
+
+    <div class="card card-rec" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05); cursor: default;">
+      <div class="icon">📈</div>
+      <h3>Agente de Promoção de Servidores</h3>
+      <p>Agente para automação e apuração de promoção dos servidores, construído pelo Giovane via Codex.</p>
+      <span class="badge" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); align-self: flex-start; margin-top: 8px; font-size: 0.7rem;">Em Desenvolvimento</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- &#9552;&#9552; GRUPO RECREATIVO &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="group" id="recreational-section">
   <div class="group-header">
     <span class="badge badge-rec">Recreativo</span>
@@ -437,46 +501,40 @@
   <div class="cards">
 
     <a href="damas.html" class="card card-rec">
-      <div class="icon">âš«</div>
+      <div class="icon">&#9899;</div>
       <h3>Damas</h3>
-      <p>Jogador vs Jogador ou contra a IA com 4 nÃ­veis de dificuldade</p>
+      <p>Jogador vs Jogador ou contra a IA com 4 níveis de dificuldade</p>
     </a>
 
     <a href="xadrez.html" class="card card-rec">
-      <div class="icon">â™Ÿï¸</div>
+      <div class="icon">&#9823;&#65039;</div>
       <h3>Xadrez</h3>
-      <p>Jogador vs Jogador ou desafie a inteligÃªncia artificial</p>
+      <p>Jogador vs Jogador ou desafie a inteligência artificial</p>
     </a>
 
     <a href="palavras.html" class="card card-rec">
-      <div class="icon">ðŸ”</div>
-      <h3>CaÃ§a-Palavras</h3>
+      <div class="icon">&#128269;</div>
+      <h3>Caça-Palavras</h3>
       <p>Encontre todas as palavras escondidas na grade!</p>
     </a>
 
     <a href="Jogo da Forca.html" class="card card-rec">
-      <div class="icon">ðŸ”</div>
+      <div class="icon">&#128269;</div>
       <h3>Jogo da Forca (EM DESENVOLVIMENTO)</h3>
       <p>Descubra a palavra antes que seja tarde demais!</p>
     </a>
 
     <a href="ciclismo.html" class="card card-rec">
-      <div class="icon">ðŸš´</div>
+      <div class="icon">&#128692;</div>
       <h3>Ciclismo</h3>
       <p>Meu Acompanhamento de Ciclismo</p>
-    </a>
-
-    <a href="painel_patrimonial.html" class="card card-rec" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
-      <div class="icon">ðŸ¤–</div>
-      <h3>Meus Agentes Pessoais</h3>
-      <p>Monitore patrimônio, cotações automáticas, alertas no Telegram e agentes locais de investimento, viagens e backup</p>
     </a>
 
   </div>
 </div>
 
 <footer>
-  By Rafael F. Lima & Giovane Moura Â· Desenvolvido via Google Antigravity IA Agent Â· 2026
+  By Rafael F. Lima & Giovane Moura · Desenvolvido via Google Gemini Antigravity IA Agent · 2026
 </footer>
 
 <script>
@@ -487,13 +545,16 @@
     }
     localStorage.setItem('mppa-portal-theme', themeName);
     
-    // Atualizar botÃµes
+    // Atualizar botões
     document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.getElementById('btn-theme-' + themeName);
     if (activeBtn) activeBtn.classList.add('active');
   }
 
   function logout() {
+    if (window.firebaseServices && window.firebaseServices.auth) {
+      window.firebaseServices.auth.signOut().catch(() => {});
+    }
     sessionStorage.removeItem('mppa_session_active');
     window.location.replace('login.html');
   }
@@ -503,17 +564,53 @@
     const savedTheme = localStorage.getItem('mppa-portal-theme') || 'dark';
     changeTheme(savedTheme);
 
-    // Controle de acesso Ã  seÃ§Ã£o recreativa (somente Rafael)
-    const username = localStorage.getItem('mppa_username') || 'rafael';
+    // Controle de acesso às seções privadas
+    const username = (localStorage.getItem('mppa_username') || '').toLowerCase();
+    const rafaelPanelsSection = document.getElementById('rafael-panels-section');
+    const rafaelIdeasSection = document.getElementById('rafael-ideas-section');
     const recSection = document.getElementById('recreational-section');
-    if (recSection && username !== 'rafael') {
-      recSection.style.display = 'none';
+    
+    // Painéis e Jogos são exclusivos do Rafael
+    if (username !== 'rafael') {
+      if (rafaelPanelsSection) rafaelPanelsSection.style.display = 'none';
+      if (recSection) recSection.style.display = 'none';
+    }
+    
+    // Seção de Ideias & Projetos é visível para Rafael, Tatiana e Giovane
+    if (!['rafael', 'tatiana', 'giovane'].includes(username)) {
+      if (rafaelIdeasSection) rafaelIdeasSection.style.display = 'none';
     }
   });
 </script>
 
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+  import { getAuth } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+  import { getFirestore } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: 'AIzaSyBX96KFoYDjsJwQmc6ADiMHkSpowidGOjc',
+    authDomain: 'programas-ia.firebaseapp.com',
+    projectId: 'programas-ia',
+    storageBucket: 'programas-ia.firebasestorage.app',
+    messagingSenderId: '313873101712',
+    appId: '1:313873101712:web:bbb55c7923f1c57fbb7915',
+    measurementId: 'G-NTE5VMZDHW'
+  };
+
+  const firebaseApp = initializeApp(firebaseConfig);
+  const firebaseAuth = getAuth(firebaseApp);
+  const firebaseDb = getFirestore(firebaseApp);
+
+  window.firebaseServices = {
+    app: firebaseApp,
+    auth: firebaseAuth,
+    db: firebaseDb,
+    config: firebaseConfig
+  };
+
+  window.firebaseReady = true;
+</script>
+
 </body>
 </html>
-
-
-
