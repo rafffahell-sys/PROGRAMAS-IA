@@ -1,27 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
-  // 1. GERENCIAMENTO DE TEMA (CLARO/ESCURO)
-  // ==========================================================================
-  const themeToggle = document.getElementById('theme-toggle');
-  const body = document.body;
-
-  // Carregar tema preferido do localStorage
-  const savedTheme = localStorage.getItem('daniel-site-theme') || 'light';
-  if (savedTheme === 'dark') {
-    body.classList.add('theme-dark');
-  } else {
-    body.classList.remove('theme-dark');
-  }
-
-  // Evento de clique para alternar
-  themeToggle.addEventListener('click', () => {
-    body.classList.toggle('theme-dark');
-    const isDark = body.classList.contains('theme-dark');
-    localStorage.setItem('daniel-site-theme', isDark ? 'dark' : 'light');
-  });
-
-  // ==========================================================================
-  // 2. NAVBAR SCROLL EFFECT
+  // 1. NAVBAR SCROLL EFFECT
   // ==========================================================================
   const navbar = document.querySelector('.navbar');
   window.addEventListener('scroll', () => {
@@ -98,30 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   revealElements.forEach(el => revealObserver.observe(el));
 
   // ==========================================================================
-  // 5. ANIMAÇÃO DE BARRAS DE ESTATÍSTICA (INSIGHTS)
-  // ==========================================================================
-  const chartSection = document.getElementById('insights');
-  const barFills = document.querySelectorAll('.animate-bar');
-
-  const chartObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        barFills.forEach(bar => {
-          const targetWidth = bar.getAttribute('data-width');
-          bar.style.width = targetWidth;
-        });
-        // Para rodar a animação apenas uma vez
-        chartObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  if (chartSection) {
-    chartObserver.observe(chartSection);
-  }
-
-  // ==========================================================================
-  // 6. MODAL DE LEITURA DO BLOG
+  // 5. MODAL DE LEITURA DO BLOG
   // ==========================================================================
   const blogModal = document.getElementById('blog-modal');
   const blogModalClose = document.getElementById('blog-modal-close');
@@ -173,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================================================
-  // 7. TRATAMENTO DO FORMULÁRIO DE CONTATO (SIMULAÇÃO + WHATSAPP REDIRECT)
+  // 6. TRATAMENTO DO FORMULÁRIO DE CONTATO (SIMULAÇÃO + WHATSAPP REDIRECT)
   // ==========================================================================
   const contactForm = document.getElementById('contact-form');
   const successMsg = document.getElementById('form-success');
