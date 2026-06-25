@@ -9,7 +9,7 @@
   <!-- Fontes Premium -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   
   <!-- CSS Principal -->
   <link rel="stylesheet" href="style.css">
@@ -35,10 +35,11 @@
       
       <div class="nav-actions">
         <!-- Alternador de Tema -->
-        <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
+        <a href="https://www.linkedin.com/in/danielfernandes" target="_blank" class="nav-link">LinkedIn</a>
+          <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
         
         <a href="https://wa.me/5511961253511?text=Olá%20Daniel,%20gostaria%20de%20saber%20mais%20informações%20sobre%20os%20atendimentos%20clínicos." target="_blank" class="btn-cta btn-nav">Agendar Consulta</a>
         
@@ -53,10 +54,10 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="home" class="hero-section">
+  <section id="home" class="hero-section reveal">
     <div class="hero-bg-accent-1"></div>
     <div class="hero-bg-accent-2"></div>
-    <div class="container hero-container">
+    <div class="container hero-container" style="font-family: 'Inter', var(--font-sans);">
       <div class="hero-content">
         <span class="hero-tag">Acolhimento &amp; Escuta Ativa</span>
         <h1 class="hero-title">Espaço seguro para o seu desenvolvimento emocional</h1>
@@ -71,7 +72,7 @@
       </div>
       <div class="hero-visual">
         <div class="hero-image-wrapper">
-          <img src="minimalist_mental_balance.png" alt="Equilíbrio Mental - Gravura Conceitual" class="hero-img">
+          <img src="assets/hero-premium.jpg" alt="Banner premium de psicologia" class="hero-img">
           <div class="hero-card-overlay">
             <div class="overlay-icon">✨</div>
             <div>
@@ -85,7 +86,7 @@
   </section>
 
   <!-- Sobre Mim / Abordagem -->
-  <section id="about" class="about-section">
+  <section id="about" class="about-section reveal">
     <div class="container">
       <div class="section-header">
         <span class="sub-title">Biografia</span>
@@ -143,7 +144,7 @@
   </section>
 
   <!-- Serviços / Especialidades -->
-  <section id="services" class="services-section">
+  <section id="services" class="services-section reveal">
     <div class="container">
       <div class="section-header text-center">
         <span class="sub-title">Especialidades</span>
@@ -188,7 +189,7 @@
   </section>
 
   <!-- Seção de Eficácia e Gráficos -->
-  <section id="insights" class="insights-section">
+  <section id="insights" class="insights-section reveal">
     <div class="container">
       <div class="section-header text-center">
         <span class="sub-title">Dados Científicos</span>
@@ -204,9 +205,13 @@
           <div class="chart-container">
             <!-- Bar 1 -->
             <div class="chart-bar-group">
-              <div class="bar-info">
-                <span>Redução da Ansiedade &amp; Estresse</span>
-                <span class="bar-value">78%</span>
+               <div class="bar-info">
+                 <span>Redução da Ansiedade &amp; Estresse</span>
+                 <span class="bar-value">78%</span>
+               </div>
+               <div class="chart-image">
+                 <img src="assets/graph_efficiency.png" alt="Gráfico de eficácia da psicoterapia" class="efficiency-graph" />
+               </div>
               </div>
               <div class="bar-track">
                 <div class="bar-fill animate-bar" data-width="78%"></div>
@@ -247,13 +252,20 @@
         </div>
         
         <div class="insights-commentary">
-          <div class="quote-icon">“</div>
-          <h3>A Psicoterapia como Investimento em Si</h3>
-          <p>Diferente de soluções temporárias ou automedicação, o processo terapêutico fundamentado na escuta psicanalítica promove mudanças estruturais na forma como o indivíduo lida com o sofrimento e com seus vínculos interpessoais.</p>
-          <p>A melhora dos sintomas de ansiedade e sono é reflexo da reorganização emocional e da conquista de um espaço neutro para falar daquilo que muitas vezes não encontra voz no cotidiano.</p>
-          <div class="commentary-author">
-            <strong>Daniel Fernandes Cardoso</strong>
-            <span>Especialista em Psicologia Clínica</span>
+          <div class="commentary-content-wrapper">
+            <div class="commentary-symbol-col">
+                <img src="assets/psy-symbol.png" alt="Símbolo de Psicologia Psi 3D" class="commentary-3d-img">
+            </div>
+            <div class="commentary-text-col">
+              <div class="quote-icon"></div>
+              <h3>&ldquo;A Psicoterapia como Investimento em Si&rdquo;</h3>
+              <p>Diferente de soluções temporárias ou automedicação, o processo terapêutico fundamentado na escuta psicanalítica promove mudanças estruturais na forma como o indivíduo lida com o sofrimento e com seus vínculos interpessoais.</p>
+              <p>A melhora dos sintomas de ansiedade e sono é reflexo da reorganização emocional e da conquista de um espaço neutro para falar daquilo que muitas vezes não encontra voz no cotidiano.</p>
+              <div class="commentary-author">
+                <strong>Daniel Fernandes Cardoso</strong>
+                <span>Especialista em Psicologia Clínica</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -261,7 +273,7 @@
   </section>
 
   <!-- Seção do Blog (Compilado & Conservado) -->
-  <section id="blog" class="blog-section">
+  <section id="blog" class="blog-section reveal">
     <div class="container">
       <div class="section-header text-center">
         <span class="sub-title">Reflexões Clínicas</span>
@@ -307,7 +319,7 @@
   </section>
 
   <!-- Contato & Agendamento -->
-  <section id="contact" class="contact-section">
+  <section id="contact" class="contact-section reveal">
     <div class="container">
       <div class="section-header">
         <span class="sub-title">Atendimento</span>
@@ -553,5 +565,10 @@
 
   <!-- Script Principal -->
   <script src="script.js"></script>
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-text">© 2026 Daniel Fernandes Cardoso. Todos os direitos reservados. · Desenvolvido por Rafael F. Lima via Google Gemini Antigravity IA Agent</p>
+  </div>
+</footer>
 </body>
 </html>

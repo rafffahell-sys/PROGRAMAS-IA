@@ -7,18 +7,24 @@
   --font-sans: 'Outfit', sans-serif;
   --font-serif: 'Playfair Display', serif;
 
-  /* Tema Claro (Padrão para Clínicas) */
-  --bg-primary: #fafaf9; /* Warm off-white */
-  --bg-secondary: #f5f5f4; /* Subtle gray-beige */
-  --text-primary: #1c1917; /* Slate dark */
-  --text-secondary: #57534e; /* Warm charcoal */
-  --accent: #115e59; /* Sage Teal */
-  --accent-light: rgba(17, 94, 89, 0.08);
-  --accent-glow: rgba(17, 94, 89, 0.15);
-  --border-color: rgba(28, 25, 23, 0.08);
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --navbar-bg: rgba(250, 250, 249, 0.8);
-  --shadow: 0 10px 30px rgba(28, 25, 23, 0.05);
+  /* Tema Claro (Luxury Clinic Warm Bege Premium) */
+  --bg-primary: #F5E6D3; /* Bege premium */
+  --bg-secondary: #ebdcd0; /* Sandstone/areia de contraste rico e elegante */
+  --text-primary: #2d241d; /* Marrom-espresso profundo de excelente contraste e conforto */
+  --text-secondary: #685a4e; /* Capuccino suave para textos secundários premium */
+  --accent: #11534c; /* Verde floresta/sálvia clínico profundo */
+  --accent-light: rgba(17, 83, 76, 0.06);
+  --accent-glow: rgba(17, 83, 76, 0.12);
+  --border-color: rgba(104, 90, 78, 0.18); /* Bordas terrosas sutis */
+  --card-bg: rgba(255, 255, 255, 0.97); /* Cards brancos puros flutuando no fundo bege */
+  --navbar-bg: rgba(246, 241, 235, 0.85); /* Translúcido com o tom de fundo */
+  --shadow: 0 12px 36px rgba(104, 90, 78, 0.08); /* Sombra suave terrosa */
+  --accent-light: rgba(17, 83, 76, 0.06);
+  --accent-glow: rgba(17, 83, 76, 0.12);
+  --border-color: rgba(104, 90, 78, 0.18); /* Bordas terrosas sutis */
+  --card-bg: rgba(255, 255, 255, 0.97); /* Cards brancos puros flutuando no fundo bege */
+  --navbar-bg: rgba(246, 241, 235, 0.85); /* Translúcido com o tom de fundo */
+  --shadow: 0 12px 36px rgba(104, 90, 78, 0.08); /* Sombra suave terrosa */
 }
 
 body.theme-dark {
@@ -55,6 +61,26 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.4s ease, color 0.4s ease;
   overflow-x: hidden;
+}
+
+/* Marca d'água de Psicologia (Símbolo Psi) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('assets/psy-symbol.png');
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  transition: background-image 0.4s ease;
+}
+
+body.theme-dark::before {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="50%" y="50%" font-size="50" fill="%232dd4bf" opacity="0.012" text-anchor="middle" dominant-baseline="middle" font-family="serif">Ψ</text></svg>');
 }
 
 .container {
@@ -107,6 +133,28 @@ h1, h2, h3, h4 {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.02);
   transition: padding 0.3s ease, background 0.4s ease;
   padding: 20px 0;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Bar animation */
+.animate-bar {
+  width: 0;
+  height: 100%;
+  background: var(--accent);
+  transition: width 1.2s ease-out;
+}
+[data-width] {
+  width: var(--data-width);
 }
 
 .navbar.scrolled {
@@ -688,6 +736,37 @@ section {
   padding-left: 20px;
 }
 
+.commentary-content-wrapper {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.commentary-symbol-col {
+  flex: 0 0 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.commentary-3d-img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.12));
+  animation: floatPsi 6s ease-in-out infinite;
+}
+
+@keyframes floatPsi {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.commentary-text-col {
+  flex: 1;
+  position: relative;
+}
+
 .quote-icon {
   font-family: var(--font-serif);
   font-size: 8rem;
@@ -1246,6 +1325,16 @@ body.theme-dark .form-success-msg {
   
   .blog-modal-body h2 {
     font-size: 1.8rem;
+  }
+
+  .commentary-content-wrapper {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .commentary-symbol-col {
+    flex: 0 0 auto;
   }
 }
 

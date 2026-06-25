@@ -82,6 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================================================
+  // 4. REVEAL ANIMATION (FADE-IN AO SCROLL)
+  // ==========================================================================
+  const revealElements = document.querySelectorAll('.reveal');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // ==========================================================================
   // 5. ANIMAÇÃO DE BARRAS DE ESTATÍSTICA (INSIGHTS)
   // ==========================================================================
   const chartSection = document.getElementById('insights');

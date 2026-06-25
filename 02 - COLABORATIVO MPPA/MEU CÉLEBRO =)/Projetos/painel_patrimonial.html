@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <script src="auth-guard.js"></script>
@@ -48,19 +48,23 @@
 <body>
   <div class="topbar">
     <div class="theme-switcher">
-      <button id="theme-dark" class="active">🌌 Escuro</button>
-      <button id="theme-light">☀️ Claro</button>
+      <button id="theme-dark" class="active"> Escuro</button>
+      <button id="theme-light"> Claro</button>
     </div>
-    <div class="logout"><button onclick="logout()">🚪 Sair</button></div>
+    <div class="logout"><button onclick="logout()"> Sair</button></div>
   </div>
 
   <main class="wrap">
     <section class="grid hero">
       <div class="panel pad">
-        <span class="crumb">🤖 Agente patrimonial</span>
+        <span class="crumb"> Agente patrimonial</span>
+        <div style="margin-top: 14px; background: rgba(245, 158, 11, 0.1); border: 1px dashed rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 8px; color: #ffe4ad; font-size: 0.85rem; font-weight: 500; line-height: 1.4;">
+          <span>⚠️ <b>Painel em Desenvolvimento:</b> A sincronização automática e testes do Firebase/Firestore estão em fase de homologação. Use a exportação manual de backups em JSON como salvaguarda de segurança.</span>
+        </div>
         <h1>Seu patrimônio, organizado como um sistema de decisão.</h1>
         <p class="lead">Painel para registrar ativos, acompanhar cotações automaticamente, destacar descontos abaixo do preço médio e montar alertas prontos para Telegram. O módulo já nasce preparado para Binance, Coinbase e importação B3/Investidor10.</p>
         <div class="actions">
+          <a class="btn" href="index.html"> Voltar ao painel principal</a>
           <a class="btn primary" href="#carteira">Ver carteira</a>
           <button class="btn" onclick="syncMarket()">Sincronizar cotações</button>
           <button class="btn" onclick="copyBestAlert()">Copiar alerta Telegram</button>
@@ -72,6 +76,7 @@
       <div class="panel mini">
         <div class="box"><div class="label">Última sincronização</div><div class="value" id="last-sync">Aguardando</div><div class="note" id="sync-note">Conectando fontes e calculando o posicionamento.</div></div>
         <div class="box"><div class="label">Radar de oportunidade</div><div class="value" id="opportunity-score">0</div><div class="note">Ativos abaixo do preço médio ou com desconto relevante.</div></div>
+        <div class="box"><div class="label">Cloud Firestore</div><div class="value" id="cloud-status">Aguardando</div><div class="note" id="cloud-note">Teste de gravação e leitura do documento do Rafael.</div><div class="actions2"><button class="btn primary" onclick="runCloudSync()">Testar nuvem</button></div></div>
       </div>
     </section>
 
@@ -126,6 +131,14 @@
         </article>
 
         <article class="panel pad">
+          <div class="section-title"><div><h2>Backup seguro</h2><p>Exporta e restaura a carteira em JSON. Esse arquivo pode ser enviado ao Google Drive com segurança.</p></div></div>
+          <div class="actions2">
+            <button class="btn primary" onclick="exportBackup()">Baixar backup JSON</button>
+            <label class="btn btn-file" for="backupImport">Restaurar backup</label><input id="backupImport" type="file" accept="application/json,.json" hidden>
+          </div>
+          <p class="note" style="margin-top:12px;">Esse backup contém ativos, preferências e a última sincronização. É a base mais segura para nuvem.</p>
+        </article>
+        <article class="panel pad">
           <div class="section-title"><div><h2>Integrações e agentes</h2><p>Blocos que replicam o seu fluxo de patrimônio, compra e acompanhamento.</p></div></div>
           <div class="agents">
             <div class="agent" onclick="openAgentModal('coletor-b3')"><h3>Coletor B3 e Investidor10</h3><p>Importa carteira por CSV, normaliza os ativos e prepara a base consolidada.</p><div class="meta"><span class="badge good">ativo</span><span class="badge">CSV / manual</span></div></div>
@@ -146,7 +159,7 @@
       <div class="table-wrap"><table><thead><tr><th>Ativo</th><th>Classe</th><th>Qtd.</th><th>PM</th><th>Preço atual</th><th>Mercado</th><th>P/L</th><th>Origem</th><th>Ações</th></tr></thead><tbody id="assets-table"></tbody></table></div>
     </section>
 
-    <footer>Agente patrimonial agêntico · integrado ao portal pessoal de Rafael F. Lima</footer>
+    <footer>By Rafael F. Lima · Desenvolvido via OpenAI Codex Code IA Agent · 2026</footer>
   </main>
 
   <div class="toast" id="toast"></div>
@@ -154,6 +167,14 @@
     const STORE_A='patrimonio-agente-assets';
     const STORE_S='patrimonio-agente-settings';
     const STORE_T='mppa-portal-theme';
+    const STORE_META='patrimonio-agente-meta';
+    const BACKUP_FILE_PREFIX='patrimonio-agente-backup';
+    const downloadBackup=data=>{try{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`${BACKUP_FILE_PREFIX}-${data.savedAt.slice(0,10)}.json`;a.style.display='none';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}catch(e){console.warn(e)}};
+    function exportBackup(){const data=snapshot();downloadBackup(data);writeMeta({...readMeta(),lastBackupAt:data.savedAt});toast('Backup JSON gerado.')} 
+    function importBackup(file){const fr=new FileReader();fr.onload=async()=>{try{const data=JSON.parse(fr.result);if(!data||!Array.isArray(data.assets)){toast('Backup inválido.');return}assets=data.assets;settings={...defaults,...(data.settings||{})};lastSync=data.lastSync?new Date(data.lastSync):null;renderAll();await save(true);toast('Backup restaurado com sucesso.')}catch(e){toast('Não consegui ler o backup.')}};fr.readAsText(file,'UTF-8')}
+    const DB_NAME='patrimonio-agente-db';
+    const DB_STORE='snapshots';
+    const BACKUP_INTERVAL_DAYS=15;
     const defaults={usdRate:5.5,globalAlert:5,telegramChannel:'@carteira_rafael',telegramNote:'Disparar alerta quando o desconto ficar relevante.'};
     const seed=[
       {ticker:'PETR4',name:'Petrobras PN',category:'Ações',quantity:180,avgPrice:34.2,currentPrice:37.1,source:'manual',note:'Posição B3 principal.'},
@@ -175,13 +196,18 @@
     const num=v=>{const n=Number(String(v??'').replace(/\./g,'').replace(',','.').replace(/[^\d.-]/g,''));return Number.isFinite(n)?n:0};
     const save=()=>{localStorage.setItem(STORE_S,JSON.stringify(settings));localStorage.setItem(STORE_A,JSON.stringify(assets));};
     const load=()=>{try{settings={...defaults,...JSON.parse(localStorage.getItem(STORE_S)||'{}')};assets=JSON.parse(localStorage.getItem(STORE_A)||'null')||structuredClone(seed)}catch{settings={...defaults};assets=structuredClone(seed)}};
+    async function cloudSave(kind){const { doc, setDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js');const db=window.firebaseServices?.db;if(!db)return false;const ref=doc(db,'patrimonio','rafael');const payload={owner:'rafael',ownerEmail:'raffahell@gmail.com',updatedAt:serverTimestamp(),savedAt:new Date().toISOString(),assets,settings,lastSync:lastSync?lastSync.toISOString():null,source:'painel_patrimonial',kind};await setDoc(ref,payload,{merge:true});return true}
+    async function cloudLoad(){const { doc, getDoc } = await import('https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js');const db=window.firebaseServices?.db;if(!db)return false;const snap=await getDoc(doc(db,'patrimonio','rafael'));if(!snap.exists())return false;const data=snap.data()||{};if(Array.isArray(data.assets))assets=data.assets;if(data.settings&&typeof data.settings==='object')settings={...defaults,...data.settings};if(data.lastSync)lastSync=new Date(data.lastSync);save();return true}
     const price=a=>a.currentPrice!=null&&a.currentPrice!==''?Number(a.currentPrice):(a.source==='binance'||a.source==='coinbase'?(quotes[a.ticker]?.usd||0)*settings.usdRate:Number(a.avgPrice||0));
     const calc=a=>{const p=price(a),qty=Number(a.quantity||0),avg=Number(a.avgPrice||0),cost=qty*avg,mkt=qty*p,pnl=mkt-cost;return{p,qty,avg,cost,mkt,pnl,pct:cost?(pnl/cost)*100:0,disc:avg?((avg-p)/avg)*100:0}};
     const cat=c=>/crip/i.test(c)?'crypto':/bdr/i.test(c)?'bdr':/etf/i.test(c)?'etf':'b3';
     const toast=t=>{const el=q('toast');el.textContent=t;el.classList.add('show');clearTimeout(window.__t);window.__t=setTimeout(()=>el.classList.remove('show'),1600)};
     const theme=t=>{document.body.classList.toggle('theme-light',t==='light');localStorage.setItem(STORE_T,t);q('theme-dark').classList.toggle('active',t!=='light');q('theme-light').classList.toggle('active',t==='light')};
     const syncTheme=()=>theme(localStorage.getItem(STORE_T)||'dark');
-    const renderKPIs=()=>{const rows=assets.map(calc),cost=rows.reduce((s,i)=>s+i.cost,0),mkt=rows.reduce((s,i)=>s+i.mkt,0),pnl=mkt-cost,pctv=cost?(pnl/cost)*100:0,ops=rows.filter(i=>i.disc>=num(settings.globalAlert||0)).length,auto=assets.filter(a=>a.source!=='manual').length;q('kpi-total').textContent=brl(mkt);q('kpi-pnl').textContent=brl(pnl);q('kpi-pnl-pct').textContent=`${pnl>=0?'▲':'▼'} ${pct(Math.abs(pctv))}`;q('kpi-pnl-pct').className=`badge ${pnl>=0?'good':'bad'}`;q('kpi-avg').textContent=`PM ${brl(cost/Math.max(assets.reduce((s,a)=>s+Number(a.quantity||0),0),1))}`;q('kpi-opps').textContent=String(ops);q('kpi-alerts').textContent=`${ops} gatilhos`;q('kpi-auto').textContent=String(auto);q('opportunity-score').textContent=String(ops);q('last-sync').textContent=lastSync?lastSync.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'Aguardando';q('sync-note').textContent=auto?`Cotações automáticas ativas para ${auto} ativo(s).`:'Nenhum ativo automático nesta carteira ainda.'};
+    const snapshot=()=>({savedAt:new Date().toISOString(),assets,settings,lastSync:lastSync?lastSync.toISOString():null});
+    const readMeta=()=>{try{return JSON.parse(localStorage.getItem(STORE_META)||'{}')}catch{return{}}};
+    const writeMeta=data=>{localStorage.setItem(STORE_META,JSON.stringify(data||{}))};
+    const renderKPIs=()=>{const rows=assets.map(calc),cost=rows.reduce((s,i)=>s+i.cost,0),mkt=rows.reduce((s,i)=>s+i.mkt,0),pnl=mkt-cost,pctv=cost?(pnl/cost)*100:0,ops=rows.filter(i=>i.disc>=num(settings.globalAlert||0)).length,auto=assets.filter(a=>a.source!=='manual').length;q('kpi-total').textContent=brl(mkt);q('kpi-pnl').textContent=brl(pnl);q('kpi-pnl-pct').textContent=`${pnl>=0?'':''} ${pct(Math.abs(pctv))}`;q('kpi-pnl-pct').className=`badge ${pnl>=0?'good':'bad'}`;q('kpi-avg').textContent=`PM ${brl(cost/Math.max(assets.reduce((s,a)=>s+Number(a.quantity||0),0),1))}`;q('kpi-opps').textContent=String(ops);q('kpi-alerts').textContent=`${ops} gatilhos`;q('kpi-auto').textContent=String(auto);q('opportunity-score').textContent=String(ops);q('last-sync').textContent=lastSync?lastSync.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'Aguardando';q('sync-note').textContent=auto?`Cotações automáticas ativas para ${auto} ativo(s).`:'Nenhum ativo automático nesta carteira ainda.'};
     const renderChart=()=>{const mkt=assets.map(calc).reduce((s,i)=>s+i.mkt,0),base=Math.max(mkt*.66,1000),months=['07/25','08/25','09/25','10/25','11/25','12/25','01/26','02/26','03/26','04/26','05/26','06/26'];q('evolution-chart').innerHTML=Array.from({length:12},(_,i)=>{const p=(i+1)/12,l=Math.sin(p*Math.PI*1.2)*.06,h=Math.max(.2,(base+(mkt-base)*p+mkt*l)/mkt);return `<div class="bar"><div class="track"><div class="fill" style="height:${Math.min(100,Math.max(18,h*100))}%"></div></div><div class="month">${months[i]}</div></div>`}).join('')};
     const renderAlloc=()=>{const by={};assets.forEach(a=>{const r=calc(a);by[a.category]=(by[a.category]||0)+r.mkt});const entries=Object.entries(by).sort((a,b)=>b[1]-a[1]),pal=['#6ea8ff','#53e0c1','#ffb84d','#29d391','#ff6f87','#c28bff'];q('allocation-legend').innerHTML=entries.map((e,i)=>`<div class="legend-row"><div class="legend-left"><span class="swatch" style="background:${pal[i%pal.length]}"></span><span>${e[0]}</span></div><strong>${brl(e[1])}</strong></div>`).join('');const total=entries.reduce((s,e)=>s+e[1],0)||1;let start=0;const stops=entries.map((e,i)=>{const part=e[1]/total*100,end=start+part;const seg=`${pal[i%pal.length]} ${start}% ${end}%`;start=end;return seg}).join(', ');if(stops)q('asset-ring').style.background=`conic-gradient(${stops})`};
     const renderTable=()=>{q('assets-table').innerHTML=assets.map((a,i)=>{const r=calc(a),g=r.pnl>=0?'pos':'neg',src=a.source==='manual'?'manual':'auto';return `<tr><td><div class="asset-name">${a.ticker}</div><div class="subtle">${a.name||a.ticker}${a.note?`<br>${a.note}`:''}</div></td><td><span class="tag ${cat(a.category)}">${a.category}</span></td><td>${Number(a.quantity||0).toLocaleString('pt-BR')}</td><td>${brl(r.avg)}</td><td>${brl(r.p)}</td><td>${brl(r.mkt)}</td><td class="gain ${g}">${r.pnl>=0?'+':''}${brl(r.pnl)}<div class="subtle">${pct(r.pct)}</div></td><td><span class="badge ${src==='auto'?'good':''}">${src}</span></td><td><button class="btn" onclick="viewAsset(${i})">Ver</button> <button class="btn" onclick="copyAsset(${i})">Copiar</button></td></tr>`}).join('')};
@@ -189,22 +215,42 @@
     const renderAlerts=()=>{const list=assets.map(a=>({a,r:calc(a)})).filter(x=>x.r.disc>=num(settings.globalAlert||0)).sort((x,y)=>y.r.disc-x.r.disc);q('alerts-feed').innerHTML=list.length?list.slice(0,5).map(x=>`<div class="alert"><strong>${x.a.ticker} abaixo do PM</strong><p>${pct(x.r.disc)} abaixo do preço médio · ${brl(x.r.p)} agora</p><div class="actions2"><button class="btn primary" onclick="copyText(${JSON.stringify(message(x.a)).replace(/"/g,'&quot;')})">Copiar Telegram</button><button class="btn" onclick="viewAsset(${assets.findIndex(z=>z.ticker===x.a.ticker)})">Abrir ativo</button></div></div>`).join(''):`<div class="alert"><strong>Nenhum gatilho relevante no momento</strong><p>A carteira está dentro do intervalo configurado.</p></div>`;q('market-status').textContent=list.length?`${list.length} oportunidade(s)`:'Sem alertas críticos';q('market-status').className=`badge ${list.length?'warn':'good'}`};
     const renderAgents=()=>{};
     const renderAll=()=>{renderKPIs();renderChart();renderAlloc();renderTable();renderAlerts();save()};
+    const applyCloudStatus=(state,note)=>{q('cloud-status').textContent=state;q('cloud-note').textContent=note};
+    async function runCloudSync(){if(!window.firebaseServices||!window.firebaseServices.db){applyCloudStatus('Indisponível','Firebase ainda não carregou nesta página.');toast('Firebase indisponível.');return}try{const ok=await cloudSave('sync-inicial');if(!ok){applyCloudStatus('Sem login','Não foi possível abrir a conexão com a nuvem.');toast('Não consegui conectar ao Firebase.');return}const { doc, getDoc } = await import('https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js');const snap=await getDoc(doc(window.firebaseServices.db,'patrimonio','rafael'));if(!snap.exists()){throw new Error('Documento não encontrado após salvar');}const data=snap.data()||{};applyCloudStatus('Conectado',`Gravado e lido em ${new Date().toLocaleString('pt-BR')}`);writeMeta({...readMeta(),lastCloudSync:new Date().toISOString(),lastCloudDoc:'patrimonio/rafael'});toast(`Nuvem OK: ${data.ownerEmail||'rafael'}`)}catch(error){console.error('Erro no teste Firestore:',error);applyCloudStatus('Falhou','Não foi possível gravar ou ler o documento no Firestore.');toast('Falha ao testar o Firestore.');}}
     async function syncMarket(){const usd=num(settings.usdRate||5.5);await Promise.allSettled(assets.map(async(a,i)=>{if(a.source==='manual')return;try{const base=a.ticker.toUpperCase().replace(/[^A-Z0-9]/g,'');let usdPrice=null;if(a.source==='binance'){const r=await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${base}USDT`);if(r.ok)usdPrice=Number((await r.json()).price)}else if(a.source==='coinbase'){const r=await fetch(`https://api.coinbase.com/v2/prices/${base}-USD/spot`);if(r.ok)usdPrice=Number((await r.json()).data.amount)}if(usdPrice&&Number.isFinite(usdPrice))assets[i].currentPrice=usdPrice*usd}catch(e){console.warn(e)}}));lastSync=new Date();renderAll();toast('Cotações sincronizadas com sucesso.')} 
-    function saveSettings(){settings.usdRate=num(q('usdRate').value)||5.5;settings.globalAlert=num(q('globalAlert').value)||5;settings.telegramChannel=q('telegramChannel').value.trim()||'@carteira_rafael';settings.telegramNote=q('telegramNote').value.trim();renderAll();toast('Preferências salvas.')}
-    function saveAsset(){const a={ticker:q('assetTicker').value.trim().toUpperCase(),name:q('assetName').value.trim()||q('assetTicker').value.trim().toUpperCase(),category:q('assetCategory').value,source:q('assetSource').value,quantity:num(q('assetQty').value),avgPrice:num(q('assetAvg').value),currentPrice:num(q('assetPrice').value)||null,threshold:num(q('assetThreshold').value)||num(settings.globalAlert||5),note:q('assetNote').value.trim()};if(!a.ticker||!a.quantity){toast('Informe ticker e quantidade.');return}const i=assets.findIndex(x=>x.ticker===a.ticker);if(i>=0)assets[i]={...assets[i],...a};else assets.unshift(a);renderAll();clearForm();toast('Ativo salvo na carteira.')}
+    async function saveSettings(){settings.usdRate=num(q('usdRate').value)||5.5;settings.globalAlert=num(q('globalAlert').value)||5;settings.telegramChannel=q('telegramChannel').value.trim()||'@carteira_rafael';settings.telegramNote=q('telegramNote').value.trim();renderAll();await save();await cloudSave('settings');toast('Preferências salvas.')}
+    async function saveAsset(){const a={ticker:q('assetTicker').value.trim().toUpperCase(),name:q('assetName').value.trim()||q('assetTicker').value.trim().toUpperCase(),category:q('assetCategory').value,source:q('assetSource').value,quantity:num(q('assetQty').value),avgPrice:num(q('assetAvg').value),currentPrice:num(q('assetPrice').value)||null,threshold:num(q('assetThreshold').value)||num(settings.globalAlert||5),note:q('assetNote').value.trim()};if(!a.ticker||!a.quantity){toast('Informe ticker e quantidade.');return}const i=assets.findIndex(x=>x.ticker===a.ticker);if(i>=0)assets[i]={...assets[i],...a};else assets.unshift(a);renderAll();clearForm();await save();await cloudSave('asset');toast('Ativo salvo na carteira.')}
     function clearForm(){['assetTicker','assetName','assetQty','assetAvg','assetPrice','assetThreshold','assetNote'].forEach(id=>q(id).value='');q('assetCategory').value='Ações';q('assetSource').value='manual'}
-    function resetDefaults(){assets=structuredClone(seed);settings={...defaults};lastSync=null;renderAll();toast('Base padrão recarregada.')}
-    function parseCsv(text){const lines=String(text).trim().split(/\r?\n/).filter(Boolean);if(!lines.length)return[];const d=lines[0].includes(';')?';':',';const h=lines[0].split(d).map(s=>s.trim().toLowerCase());const idx=n=>h.indexOf(n);return lines.slice(1).map(line=>{const r=line.split(d).map(s=>s.trim().replace(/^"|"$/g,''));const get=(names,def='')=>{for(const n of names){const i=idx(n);if(i>=0)return r[i]}return def};return{ticker:(get(['ticker','ativo','papel'],r[0])||'').toUpperCase(),name:get(['nome','descricao','asset'],r[1]),category:get(['categoria','classe','tipo'],r[2]||'Ações'),quantity:num(get(['quantidade','qtd','qty'],r[3])),avgPrice:num(get(['preco medio','preço médio','pm','preco_medio'],r[4])),currentPrice:num(get(['preco atual','preço atual','preco_atual'],r[5]))||null,source:(get(['fonte','source'],r[6]||'manual')).toLowerCase(),note:get(['observacao','observação','obs','note'],r[8]||'')}}).filter(x=>x.ticker&&x.quantity)}
-    function importCsv(file){const fr=new FileReader();fr.onload=()=>{const rows=parseCsv(fr.result);if(!rows.length){toast('Não consegui ler o CSV.');return}rows.forEach(row=>{const i=assets.findIndex(x=>x.ticker===row.ticker);if(i>=0)assets[i]={...assets[i],...row};else assets.push(row)});renderAll();toast(`${rows.length} ativo(s) importado(s).`)};fr.readAsText(file,'UTF-8')}
-    function copyText(t){navigator.clipboard?.writeText(t).then(()=>toast('Texto copiado.')).catch(()=>toast('Não foi possível copiar automaticamente.'))}
+    async function resetDefaults(){assets=structuredClone(seed);settings={...defaults};lastSync=null;renderAll();await save(true);await cloudSave('reset');toast('Base padrão recarregada.')}
+    function parseCsv(text){const lines=String(text).trim().split(/\r?\n/).filter(Boolean);if(!lines.length)return[];const d=lines[0].includes(';')?';':',';const h=lines[0].split(d).map(s=>s.trim().toLowerCase());const idx=n=>h.indexOf(n);return lines.slice(1).map(line=>{const r=line.split(d).map(s=>s.trim().replace(/^"|"$/g,''));const get=(names,def='')=>{for(const n of names){const i=idx(n);if(i>=0)return r[i]}return def};return{ticker:(get(['ticker','ativo','papel'],r[0])||'').toUpperCase(),name:get(['nome','descricao','asset'],r[1]),category:get(['categoria','classe','tipo'],r[2]||'Ações'),quantity:num(get(['quantidade','qtd','qty'],r[3])),avgPrice:num(get(['preco medio','preço médio','pm','preco_medio'],r[4])),currentPrice:num(get(['preco atual','preço atual','preco_atual'],r[5]))||null,source:(get(['fonte','source'],r[6]||'manual')).toLowerCase(),note:get(['observacao','observao','obs','note'],r[8]||'')}}).filter(x=>x.ticker&&x.quantity)}
+    function importCsv(file){const fr=new FileReader();fr.onload=()=>{const rows=parseCsv(fr.result);if(!rows.length){toast('No consegui ler o CSV.');return}rows.forEach(row=>{const i=assets.findIndex(x=>x.ticker===row.ticker);if(i>=0)assets[i]={...assets[i],...row};else assets.push(row)});renderAll();toast(`${rows.length} ativo(s) importado(s).`)};fr.readAsText(file,'UTF-8')}
+    function copyText(t){navigator.clipboard?.writeText(t).then(()=>toast('Texto copiado.')).catch(()=>toast('No foi possvel copiar automaticamente.'))}
     function copyBestAlert(){const list=assets.map(a=>({a,r:calc(a)})).filter(x=>x.r.disc>=num(settings.globalAlert||0)).sort((x,y)=>y.r.disc-x.r.disc);copyText(list.length?message(list[0].a):'Sem alertas relevantes no momento.')} 
     function copyAsset(i){copyText(message(assets[i]))}
-    function viewAsset(i){const a=assets[i],r=calc(a);toast(`${a.ticker} · ${a.category} · ${brl(r.mkt)} · ${r.pnl>=0?'+':''}${brl(r.pnl)} (${pct(r.pct)})`)}
+    function viewAsset(i){const a=assets[i],r=calc(a);toast(`${a.ticker}  ${a.category}  ${brl(r.mkt)}  ${r.pnl>=0?'+':''}${brl(r.pnl)} (${pct(r.pct)})`)}
     function openAgentModal(id){const a=agents[id];if(!a)return;toast(`${a[0]}: ${a[1]}`)}
     function applyTheme(t){document.body.classList.toggle('theme-light',t==='light');localStorage.setItem(STORE_T,t);q('theme-dark').classList.toggle('active',t!=='light');q('theme-light').classList.toggle('active',t==='light')}
-    function logout(){sessionStorage.removeItem('mppa_session_active');location.replace('login.html')}
-    function bind(){q('theme-dark').onclick=()=>applyTheme('dark');q('theme-light').onclick=()=>applyTheme('light');q('csvImport').addEventListener('change',e=>{const f=e.target.files?.[0];if(f)importCsv(f);e.target.value=''});q('usdRate').onchange=saveSettings;q('globalAlert').onchange=saveSettings;q('telegramChannel').onchange=saveSettings;q('telegramNote').onchange=saveSettings}
-    load();syncTheme();bind();q('usdRate').value=settings.usdRate;q('globalAlert').value=settings.globalAlert;q('telegramChannel').value=settings.telegramChannel;q('telegramNote').value=settings.telegramNote;renderAll();syncMarket();
+    function logout(){if(window.firebaseServices?.auth){window.firebaseServices.auth.signOut().catch(()=>{})}sessionStorage.removeItem('mppa_session_active');location.replace('login.html')}
+    function bind(){q('theme-dark').onclick=()=>applyTheme('dark');q('theme-light').onclick=()=>applyTheme('light');q('csvImport').addEventListener('change',e=>{const f=e.target.files?.[0];if(f)importCsv(f);e.target.value=''});q('backupImport').addEventListener('change',e=>{const f=e.target.files?.[0];if(f)importBackup(f);e.target.value=''});q('usdRate').onchange=saveSettings;q('globalAlert').onchange=saveSettings;q('telegramChannel').onchange=saveSettings;q('telegramNote').onchange=saveSettings;window.runCloudSync=runCloudSync}
+    (async()=>{await load();syncTheme();bind();q('usdRate').value=settings.usdRate;q('globalAlert').value=settings.globalAlert;q('telegramChannel').value=settings.telegramChannel;q('telegramNote').value=settings.telegramNote;applyCloudStatus('Pronto','Clique em “Testar nuvem” para gravar e ler o documento no Firestore.');renderAll();requestAnimationFrame(()=>{setTimeout(async()=>{try{if(await cloudLoad()){applyCloudStatus('Sincronizado','Dados carregados do Firestore.');renderAll();}await syncMarket()}catch(e){console.warn(e)}},700)})})();
+  </script>
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+    import { getAuth } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
+    const firebaseConfig = {
+      apiKey: 'AIzaSyBX96KFoYDjsJwQmc6ADiMHkSpowidGOjc',
+      authDomain: 'programas-ia.firebaseapp.com',
+      projectId: 'programas-ia',
+      storageBucket: 'programas-ia.firebasestorage.app',
+      messagingSenderId: '313873101712',
+      appId: '1:313873101712:web:bbb55c7923f1c57fbb7915',
+      measurementId: 'G-NTE5VMZDHW'
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    window.firebaseServices = { app, auth, db };
   </script>
 </body>
 </html>
