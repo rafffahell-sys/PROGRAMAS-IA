@@ -120,6 +120,10 @@ Adicionado em **20/06/2026** para proteger as informações sensíveis de folha.
 ### Mecânica
 - **`auth-guard.js`** — script executado sincronamente no `<head>` de todas as páginas. Redireciona instantaneamente para `login.html` se não houver sessão ativa (`sessionStorage: mppa_session_active`).
 - **`login.html`** — tela premium com seleção de usuário por avatar + validação de senha via **SHA-256** (Web Crypto API). Senha padrão: `mppa2026`.
+- [[Configuração do Site rafffahell.com.br]]
+- [[Integração Firebase e KeyValue do Portal]]
+- [[Repositório PROGRAMAS-IA]]
+- [[Pessoal]]
 - **Controle de acesso recreativo:** A seção "Jogos" em `index.html` é exibida **somente para o usuário Rafael** — para Tatiana e Giovane o bloco é completamente ocultado.
 - **Seção de Ideias & Projetos Compartilhada (Atualização em 24/06/2026):**
   - O bloco de **Ideias & Projetos (Projetos em Andamento & Backlog)** agora é visível para os três logins ativos (Rafael, Tatiana e Giovane).
