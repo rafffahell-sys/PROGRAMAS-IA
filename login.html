@@ -1,80 +1,434 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acesso Restrito - Portal Folha</title>
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            background: radial-gradient(circle at top, #121827, #0b0f19 55%);
-            color: #e5e7eb;
-            font-family: Arial, sans-serif;
-        }
-        .card {
-            width: min(420px, calc(100vw - 32px));
-            background: rgba(17, 24, 39, 0.92);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 28px;
-            box-shadow: 0 20px 60px rgba(0,0,0,.35);
-        }
-        h1 { margin: 0 0 8px; font-size: 28px; }
-        p { margin: 0 0 20px; color: #9ca3af; }
-        input, button {
-            width: 100%;
-            box-sizing: border-box;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.12);
-            padding: 14px 16px;
-            font-size: 16px;
-        }
-        input { background: rgba(0,0,0,.18); color: #fff; outline: none; margin-bottom: 14px; }
-        button {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: #fff;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .error { min-height: 20px; color: #fca5a5; margin-top: 10px; }
-        .hint { font-size: 12px; color: #94a3b8; margin-top: 16px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Acesso Restrito - Portal Folha RH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.35);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.25);
+      --success: #10b981;
+    }
+
+    body.theme-light {
+      --bg-color: #f1f5f9;
+      --card-bg: rgba(255, 255, 255, 0.65);
+      --border-color: rgba(15, 23, 42, 0.08);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --primary: #4f46e5;
+      --primary-glow: rgba(79, 70, 229, 0.15);
+      --danger: #dc2626;
+      --danger-glow: rgba(220, 38, 38, 0.15);
+    }
+    body.theme-light {
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(8, 145, 178, 0.04) 0%, transparent 40%) !important;
+    }
+    body.theme-light .avatar-option {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+    body.theme-light .password-input {
+      background: rgba(255, 255, 255, 0.8);
+      color: #0f172a;
+    }
+
+    body.theme-beige {
+      --bg-color: #faf6f0;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --border-color: rgba(120, 113, 108, 0.15);
+      --text-primary: #1c1917;
+      --text-secondary: #57534e;
+      --primary: #c2410c;
+      --primary-glow: rgba(194, 65, 12, 0.15);
+      --danger: #b91c1c;
+      --danger-glow: rgba(185, 28, 28, 0.15);
+    }
+    body.theme-beige {
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(194, 65, 12, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(3, 105, 161, 0.04) 0%, transparent 40%) !important;
+    }
+    body.theme-beige .avatar-option {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+    body.theme-beige .password-input {
+      background: rgba(255, 255, 255, 0.8);
+      color: #1c1917;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .login-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 420px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      text-align: center;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .lock-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a5b4fc 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    body.theme-beige h2 {
+      background: linear-gradient(135deg, #c2410c 0%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+
+    .avatars-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .avatar-option {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 14px 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .avatar-option:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    body.theme-light .avatar-option:hover,
+    body.theme-beige .avatar-option:hover {
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .avatar-option.active {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.05);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    body.theme-light .avatar-option.active {
+      background: rgba(79, 70, 229, 0.05);
+    }
+    body.theme-beige .avatar-option.active {
+      background: rgba(194, 65, 12, 0.05);
+    }
+
+    .avatar-icon { font-size: 2rem; }
+    .avatar-name { font-size: 0.78rem; font-weight: 700; color: var(--text-primary); }
+
+    .input-group {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .input-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .password-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: white;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .password-input:focus { border-color: var(--primary); }
+
+    .login-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .login-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px var(--primary-glow);
+    }
+
+    .login-btn:active { transform: translateY(1px); }
+
+    .alert-box {
+      background: rgba(239, 68, 68, 0.05);
+      border: 1px dashed rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 12px;
+      display: none;
+      font-size: 0.9rem;
+      animation: shake 0.25s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
+    }
+
+    .theme-switcher {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      gap: 6px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 4px;
+      backdrop-filter: blur(8px);
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .theme-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    .theme-switcher.login-switcher {
+      padding: 3px;
+      border-radius: 10px;
+    }
+
+    .theme-switcher.login-switcher .theme-btn {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      border-radius: 6px;
+      gap: 0;
+    }
+  </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Portal de Ferramentas</h1>
-        <p>Identifique-se para acessar os pain�is.</p>
-        <input id="password" type="password" placeholder="Digite sua senha..." autofocus>
-        <button id="enter">Entrar</button>
-        <div class="error" id="error"></div>
-        <div class="hint">Ap�s validar, voc� ser� levado direto ao painel pessoal.</div>
+
+<div class="theme-switcher login-switcher">
+  <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')" title="Tema Escuro">🌌</button>
+  <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Tema Claro">☀️</button>
+  <button class="theme-btn" id="btn-beige" onclick="setTheme('beige')" title="Tema Bege">🌾</button>
+</div>
+
+<div class="login-container">
+  <div class="lock-icon">🔒</div>
+  <h2>Portal de Ferramentas</h2>
+  <div class="subtitle">Identifique-se para acessar as calculadoras e painéis</div>
+
+  <div class="avatars-container">
+    <div class="avatar-option active" id="option-rafael" onclick="selectUser('rafael')">
+      <div class="avatar-icon">👨‍💼</div>
+      <div class="avatar-name">Rafael</div>
     </div>
+    <div class="avatar-option" id="option-tatiana" onclick="selectUser('tatiana')">
+      <div class="avatar-icon">👩‍💼</div>
+      <div class="avatar-name">Tatiana</div>
+    </div>
+    <div class="avatar-option" id="option-giovane" onclick="selectUser('giovane')">
+      <div class="avatar-icon">👨‍💻</div>
+      <div class="avatar-name">Giovane</div>
+    </div>
+  </div>
 
-    <script>
-        const VALID_PASSWORD = 'rafael';
-        const passwordEl = document.getElementById('password');
-        const errorEl = document.getElementById('error');
-        const enterBtn = document.getElementById('enter');
+  <input type="hidden" id="username" value="rafael">
 
-        function login() {
-            const value = (passwordEl.value || '').trim();
-            if (value !== VALID_PASSWORD) {
-                errorEl.textContent = 'Senha incorreta.';
-                return;
-            }
+  <div class="input-group">
+    <label class="input-label" for="password">Senha de Acesso</label>
+    <input type="password" id="password" class="password-input" placeholder="Digite sua senha..." onkeydown="checkEnter(event)">
+  </div>
 
-            sessionStorage.setItem('mppa_session_active', '1');
-            localStorage.setItem('mppa_username', 'rafael');
-            window.location.replace('./painel_pessoal.html');
-        }
+  <button class="login-btn" onclick="tryLogin()">Entrar</button>
 
-        enterBtn.addEventListener('click', login);
-        passwordEl.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') login();
-        });
-    </script>
+  <div class="alert-box" id="error-alert">⚠️ Senha incorreta! Tente novamente.</div>
+</div>
+
+<script>
+  const PASSWORD_HASHES = {
+    rafael: "86c2fa4f2ab6125ac1c01be2e322250e6720397fa93bea143a13d23c6217aa1b",
+    tatiana: "4787f82eb904b153198673aa56ae220c7d4940159d17404bf93f0bb1a43e98cd",
+    giovane: "4787f82eb904b153198673aa56ae220c7d4940159d17404bf93f0bb1a43e98cd"
+  };
+  const RAFAEL_ADMIN_EMAIL = 'raffahell@gmail.com';
+
+  const savedTheme = localStorage.getItem('mppa-portal-theme') || 'dark';
+  if (savedTheme !== 'dark') {
+    document.body.classList.add('theme-' + savedTheme);
+  }
+
+  const loginReason = new URLSearchParams(window.location.search).get('reason');
+  if (loginReason === 'idle') {
+    const alertEl = document.getElementById('error-alert');
+    alertEl.textContent = '⚠️ Sua sessão foi encerrada por inatividade. Entre novamente para continuar.';
+    alertEl.style.display = 'block';
+  }
+
+  function setTheme(theme) {
+    document.body.classList.remove('theme-light', 'theme-beige');
+    if (theme !== 'dark') {
+      document.body.classList.add('theme-' + theme);
+    }
+    localStorage.setItem('mppa-portal-theme', theme);
+
+    document.querySelectorAll('.theme-switcher .theme-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('btn-' + theme).classList.add('active');
+  }
+
+  function selectUser(user) {
+    document.getElementById('username').value = user;
+    document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('active'));
+    document.getElementById('option-' + user).classList.add('active');
+
+    document.getElementById('error-alert').style.display = 'none';
+    const pwd = document.getElementById('password');
+    pwd.value = '';
+    pwd.focus();
+  }
+
+  function checkEnter(event) {
+    if (event.key === 'Enter') {
+      tryLogin();
+    }
+  }
+
+  async function sha256(str) {
+    const msgUint8 = new TextEncoder().encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function tryLogin() {
+    const user = document.getElementById('username').value;
+    const pwd = document.getElementById('password').value;
+    const alertEl = document.getElementById('error-alert');
+
+    alertEl.style.display = 'none';
+
+    if (!pwd) {
+      alertEl.textContent = '⚠️ Por favor, digite sua senha de acesso.';
+      alertEl.style.display = 'block';
+      return;
+    }
+
+    const computedHash = await sha256(pwd);
+    const expectedHash = PASSWORD_HASHES[user];
+
+    if (computedHash === expectedHash) {
+      sessionStorage.setItem('mppa_session_active', 'true');
+      localStorage.setItem('mppa_username', user);
+      localStorage.setItem('mppa_auth_method', 'portal');
+      localStorage.setItem('mppa_auth_email', RAFAEL_ADMIN_EMAIL);
+      localStorage.setItem('mppa_auth_provider', 'portal-local');
+      window.location.replace('./painel_pessoal.html');
+    } else {
+      alertEl.textContent = '⚠️ Senha incorreta! Tente novamente.';
+      alertEl.style.display = 'block';
+      alertEl.style.animation = 'none';
+      alertEl.offsetHeight;
+      alertEl.style.animation = null;
+    }
+  }
+
+  window.onload = () => {
+    document.getElementById('password').focus();
+    document.getElementById('btn-' + savedTheme).classList.add('active');
+  }
+</script>
+
 </body>
 </html>
