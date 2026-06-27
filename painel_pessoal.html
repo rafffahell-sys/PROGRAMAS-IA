@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <script>
-        // Verificação de autenticação e acesso exclusivo para o Rafael
+        // VerificaÃ§Ã£o de autenticaÃ§Ã£o e acesso exclusivo para o Rafael
         if (!sessionStorage.getItem('mppa_session_active')) {
             window.location.replace('login.html');
         } else {
             const username = localStorage.getItem('mppa_username') || '';
             if (username.toLowerCase() !== 'rafael') {
-                window.location.replace('index.html');
+                window.location.replace('index.html?entry=panel&v=20260627');
             }
         }
     </script>
@@ -23,7 +23,7 @@
             --border-color: rgba(255, 255, 255, 0.08);
             --text-primary: #f3f4f6;
             --text-secondary: #9ca3af;
-            --primary: #10b981; /* Verde esmeralda como primário para recreativo/pessoal */
+            --primary: #10b981; /* Verde esmeralda como primÃ¡rio para recreativo/pessoal */
             --primary-glow: rgba(16, 185, 129, 0.35);
             --success: #10b981;
             --success-glow: rgba(16, 185, 129, 0.25);
@@ -54,7 +54,7 @@
             padding: 2.5rem;
         }
 
-        /* Marca d'água de Contabilidade (Caduceu Real) */
+        /* Marca d'Ã¡gua de Contabilidade (Caduceu Real) */
         body::before {
             content: "";
             position: fixed;
@@ -561,7 +561,7 @@
             width: 100%;
         }
 
-        /* ── TEMAS ADICIONAIS ───────────────────────────── */
+        /* â”€â”€ TEMAS ADICIONAIS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         body.theme-light {
             --bg-color: #f1f5f9;
             --card-bg: rgba(255, 255, 255, 0.65);
@@ -754,7 +754,7 @@
     <button onclick="changeTheme('beige')" id="btn-theme-beige" class="theme-btn" title="Tema Bege">&#127806;</button>
 </div>
 
-<!-- Botão Sair Discreto no Canto Superior Direito -->
+<!-- BotÃ£o Sair Discreto no Canto Superior Direito -->
 <div class="logout-container-fixed">
     <button onclick="logout()" class="theme-btn" style="background: var(--danger-glow); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; padding: 6px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">&#128682; Sair</button>
 </div>
@@ -766,7 +766,7 @@
                 <a href="index.html" class="back-button">&#8592; Voltar ao Portal</a>
             </div>
             <h1>Painel de Agentes Pessoais</h1>
-            <p>Monitore a atividade, relatórios de investimentos e sade dos seus robôs locais</p>
+            <p>Monitore a atividade, relatÃ³rios de investimentos e sade dos seus robÃ´s locais</p>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;">
             <div class="sync-section">
@@ -778,7 +778,7 @@
 
     <div class="metrics-grid">
         <div class="metric-card premium-focus">
-            <div class="metric-title">Saúde Geral</div>
+            <div class="metric-title">SaÃºde Geral</div>
             <div class="metric-val" id="metric-health-score" style="color: #86efac;">0/10</div>
             <div class="metric-desc" id="metric-health-desc">Aguardando leitura dos agentes.</div>
             <div class="metric-chip" id="metric-health-chip">Frota em observao</div>
@@ -820,57 +820,57 @@
         </div>
     </div>
 
-    <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">&#129302; Meus Robôs Pessoais</h2>
+    <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">&#129302; Meus RobÃ´s Pessoais</h2>
     
     <div class="agents-grid">
         <!-- BOT DCA BINANCE -->
         <div class="agent-card" onclick="abrirModal('binance-dca')">
-            <div class="agent-avatar">🪙</div>
+            <div class="agent-avatar">ðŸª™</div>
             <div class="agent-details">
                 <h3>Bot DCA Binance Inteligente <span class="agent-tag periodic">A cada 4h</span></h3>
-                <p class="agent-desc">Executa compras recorrentes (DCA) inteligentes de USDC na Binance de acordo com o limite de cotação de dólar parametrizado.</p>
+                <p class="agent-desc">Executa compras recorrentes (DCA) inteligentes de USDC na Binance de acordo com o limite de cotaÃ§Ã£o de dÃ³lar parametrizado.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: A cada 4 horas (Windows Task Scheduler)</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>binance-dca</code></div>
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: A cada 4 horas (Windows Task Scheduler)</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>binance-dca</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator none" id="status-binance-dca">Sem Dados</span>
-                <div class="action-needed-box" id="box-binance-dca">Nenhum log de execução recebido do Alienware.</div>
+                <div class="action-needed-box" id="box-binance-dca">Nenhum log de execuÃ§Ã£o recebido do Alienware.</div>
             </div>
         </div>
 
         <!-- BOT COINBASE MONITOR -->
         <div class="agent-card" onclick="abrirModal('coinbase-monitor')">
-            <div class="agent-avatar">📈</div>
+            <div class="agent-avatar">ðŸ“ˆ</div>
             <div class="agent-details">
-                <h3>Bot Coinbase Monitor <span class="agent-tag periodic">Periódico</span></h3>
-                <p class="agent-desc">Analisa e monitora a variação da carteira Coinbase, gerando resumos de variação diária dos criptoativos guardados.</p>
+                <h3>Bot Coinbase Monitor <span class="agent-tag periodic">PeriÃ³dico</span></h3>
+                <p class="agent-desc">Analisa e monitora a variaÃ§Ã£o da carteira Coinbase, gerando resumos de variaÃ§Ã£o diÃ¡ria dos criptoativos guardados.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Periódico (Windows Task Scheduler)</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>coinbase-monitor</code></div>
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: PeriÃ³dico (Windows Task Scheduler)</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>coinbase-monitor</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator none" id="status-coinbase-monitor">Sem Dados</span>
-                <div class="action-needed-box" id="box-coinbase-monitor">Nenhum log de execução recebido do Alienware.</div>
+                <div class="action-needed-box" id="box-coinbase-monitor">Nenhum log de execuÃ§Ã£o recebido do Alienware.</div>
             </div>
         </div>
 
         <!-- BOT SITE DANIEL -->
         <div class="agent-card" onclick="abrirModal('site-daniel')">
-            <div class="agent-avatar">🌐</div>
+            <div class="agent-avatar">ðŸŒ</div>
             <div class="agent-details">
                 <h3>Bot Site Daniel <span class="agent-tag periodic">Sob demanda</span></h3>
-                <p class="agent-desc">Mantém o site institucional do Daniel organizado e com acesso rápido às versões publicadas e materiais de apoio do projeto.</p>
+                <p class="agent-desc">MantÃ©m o site institucional do Daniel organizado e com acesso rÃ¡pido Ã s versÃµes publicadas e materiais de apoio do projeto.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Sob demanda</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>site-daniel</code></div>
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: Sob demanda</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>site-daniel</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator healthy" id="status-site-daniel">Publicado</span>
-                <div class="action-needed-box success" id="box-site-daniel">✓ Site do Daniel já está publicado e pode ser revisado quando necessário.</div>
+                <div class="action-needed-box success" id="box-site-daniel">âœ“ Site do Daniel jÃ¡ estÃ¡ publicado e pode ser revisado quando necessÃ¡rio.</div>
             </div>
         </div>
 
@@ -879,15 +879,15 @@
             <div class="agent-avatar"></div>
             <div class="agent-details">
                 <h3>Bot Investimentos 09h Premarket <span class="agent-tag daily">Todo dia 9h</span></h3>
-                <p class="agent-desc">Compila dados do pré-mercado de ações nacionais e internacionais e envia um relatório matinal.</p>
+                <p class="agent-desc">Compila dados do prÃ©-mercado de aÃ§Ãµes nacionais e internacionais e envia um relatÃ³rio matinal.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Diariamente às 09:00</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>invest-09h</code></div>
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: Diariamente Ã s 09:00</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>invest-09h</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator none" id="status-invest-09h">Sem Dados</span>
-                <div class="action-needed-box" id="box-invest-09h">Nenhum log de execução recebido do Alienware.</div>
+                <div class="action-needed-box" id="box-invest-09h">Nenhum log de execuÃ§Ã£o recebido do Alienware.</div>
             </div>
         </div>
 
@@ -896,15 +896,15 @@
             <div class="agent-avatar">&#128347;</div>
             <div class="agent-details">
                 <h3>Bot Investimentos 13h Parcial <span class="agent-tag daily">Todo dia 13h</span></h3>
-                <p class="agent-desc">Apura os resultados parciais das ações do Ibovespa e envia uma visão rápida do rendimento no meio do pregão.</p>
+                <p class="agent-desc">Apura os resultados parciais das aÃ§Ãµes do Ibovespa e envia uma visÃ£o rÃ¡pida do rendimento no meio do pregÃ£o.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Diariamente às 13:00</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>invest-13h</code></div>
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: Diariamente Ã s 13:00</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>invest-13h</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator none" id="status-invest-13h">Sem Dados</span>
-                <div class="action-needed-box" id="box-invest-13h">Nenhum log de execução recebido do Alienware.</div>
+                <div class="action-needed-box" id="box-invest-13h">Nenhum log de execuÃ§Ã£o recebido do Alienware.</div>
             </div>
         </div>
 
@@ -913,32 +913,32 @@
             <div class="agent-avatar">&#127774;</div>
             <div class="agent-details">
                 <h3>Bot Investimentos 18h Fechamento <span class="agent-tag daily">Todo dia 18h</span></h3>
-                <p class="agent-desc">Processa o fechamento diário do mercado financeiro e compila os rendimentos totais consolidados no dia.</p>
+                <p class="agent-desc">Processa o fechamento diÃ¡rio do mercado financeiro e compila os rendimentos totais consolidados no dia.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Diariamente às 18:00</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>invest-18h</code></div>
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: Diariamente Ã s 18:00</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>invest-18h</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator none" id="status-invest-18h">Sem Dados</span>
-                <div class="action-needed-box" id="box-invest-18h">Nenhum log de execução recebido do Alienware.</div>
+                <div class="action-needed-box" id="box-invest-18h">Nenhum log de execuÃ§Ã£o recebido do Alienware.</div>
             </div>
         </div>
 
-        <!-- BOT MANUTENÇÃO PREVENTIVA -->
+        <!-- BOT MANUTENÃ‡ÃƒO PREVENTIVA -->
         <div class="agent-card" onclick="abrirModal('manutencao')">
             <div class="agent-avatar">&#128295;</div>
             <div class="agent-details">
-                <h3>Bot Manutenção Preventiva <span class="agent-tag daily">Todo dia 00h</span></h3>
-                <p class="agent-desc">Monitora preventivamente a integridade e o funcionamento de outros bots do sistema, alertando sobre possíveis falhas, paradas ou travamentos.</p>
+                <h3>Bot ManutenÃ§Ã£o Preventiva <span class="agent-tag daily">Todo dia 00h</span></h3>
+                <p class="agent-desc">Monitora preventivamente a integridade e o funcionamento de outros bots do sistema, alertando sobre possÃ­veis falhas, paradas ou travamentos.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Diariamente às 00:00 (Windows Task Scheduler)</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>manutencao</code></div>
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: Diariamente Ã s 00:00 (Windows Task Scheduler)</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>manutencao</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator none" id="status-manutencao">Sem Dados</span>
-                <div class="action-needed-box" id="box-manutencao">Nenhum log de execução recebido do Alienware.</div>
+                <div class="action-needed-box" id="box-manutencao">Nenhum log de execuÃ§Ã£o recebido do Alienware.</div>
             </div>
         </div>
 
@@ -946,16 +946,16 @@
         <div class="agent-card" onclick="abrirModal('viagens-monitor')">
             <div class="agent-avatar">&#9992;&#65039;</div>
             <div class="agent-details">
-                <h3>Bot Viagens Monitoramento <span class="agent-tag periodic">Periódico</span></h3>
-                <p class="agent-desc">Efetua busca automatizada de passagens aéreas e trechos promocionais para os destinos cadastrados no Obsidian.</p>
+                <h3>Bot Viagens Monitoramento <span class="agent-tag periodic">PeriÃ³dico</span></h3>
+                <p class="agent-desc">Efetua busca automatizada de passagens aÃ©reas e trechos promocionais para os destinos cadastrados no Obsidian.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Periódico (Windows Task Scheduler)</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>viagens-monitor</code></div>
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: PeriÃ³dico (Windows Task Scheduler)</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>viagens-monitor</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator none" id="status-viagens-monitor">Sem Dados</span>
-                <div class="action-needed-box" id="box-viagens-monitor">Nenhum log de execução recebido do Alienware.</div>
+                <div class="action-needed-box" id="box-viagens-monitor">Nenhum log de execuÃ§Ã£o recebido do Alienware.</div>
             </div>
         </div>
 
@@ -964,16 +964,16 @@
             <div class="agent-avatar">&#128190;</div>
             <div class="agent-details">
                 <h3>Agente de Backup MPPA <span class="agent-tag periodic">Mensal</span></h3>
-                <p class="agent-desc">Compacta o repositório local, gera ZIP, manifesto JSON e espelho preparado para Google Drive com status no painel.</p>
+                <p class="agent-desc">Compacta o repositÃ³rio local, gera ZIP, manifesto JSON e espelho preparado para Google Drive com status no painel.</p>
                 <div class="agent-meta">
-                <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Último dia do mês às 23:50</div>
-                    <div class="meta-item"><span class="meta-icon">&#128193;</span> Saída: Backups/GoogleDrive/Backup_Competencia_YYYY_MM</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>agente-backup</code></div>
+                <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: Ãšltimo dia do mÃªs Ã s 23:50</div>
+                    <div class="meta-item"><span class="meta-icon">&#128193;</span> SaÃ­da: Backups/GoogleDrive/Backup_Competencia_YYYY_MM</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>agente-backup</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator none" id="status-agente-backup">Sem Dados</span>
-                <div class="action-needed-box" id="box-agente-backup">Nenhum log de execução recebido do Alienware.</div>
+                <div class="action-needed-box" id="box-agente-backup">Nenhum log de execuÃ§Ã£o recebido do Alienware.</div>
             </div>
         </div>
 
@@ -982,53 +982,53 @@
             <div class="agent-avatar">&#9729;&#65039;</div>
             <div class="agent-details">
                 <h3>Agente de Backup Cloud <span class="agent-tag periodic">Quinzenal</span></h3>
-                <p class="agent-desc">Cria backup em JSON, ZIP, relatório e pasta espelhada para sincronização segura com a nuvem do Google Drive.</p>
+                <p class="agent-desc">Cria backup em JSON, ZIP, relatÃ³rio e pasta espelhada para sincronizaÃ§Ã£o segura com a nuvem do Google Drive.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: A cada 15 dias</div>
-                    <div class="meta-item"><span class="meta-icon">&#128193;</span> Saída: Backups/GoogleDrive/Backup_Competencia_YYYY_MM</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>agente-backup-cloud</code></div>
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> ExecuÃ§Ã£o: A cada 15 dias</div>
+                    <div class="meta-item"><span class="meta-icon">&#128193;</span> SaÃ­da: Backups/GoogleDrive/Backup_Competencia_YYYY_MM</div>
+                    <div class="meta-item"><span class="meta-icon">ðŸ”‘</span> ID: <code>agente-backup-cloud</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator healthy" id="status-agente-backup-cloud">Ativo / Agendado</span>
-                <div class="action-needed-box" id="box-agente-backup-cloud">Nenhum log de execução recebido do Alienware.</div>
+                <div class="action-needed-box" id="box-agente-backup-cloud">Nenhum log de execuÃ§Ã£o recebido do Alienware.</div>
             </div>
         </div>
     </div>
 
     <footer>
-        By Rafael F. Lima · Desenvolvido via OpenAI Codex Code IA Agent · 2026
+        By Rafael F. Lima Â· Desenvolvido via OpenAI Codex Code IA Agent Â· 2026
     </footer>
 </div>
 
-<!-- MODAL PARA EXIBIR SATISFAÇÃO / LOG DO BOT -->
+<!-- MODAL PARA EXIBIR SATISFAÃ‡ÃƒO / LOG DO BOT -->
 <div class="modal-overlay" id="modal-overlay" onclick="fecharModalExterno(event)">
     <div class="modal-content">
-        <button class="modal-close" onclick="fecharModal()">×</button>
+        <button class="modal-close" onclick="fecharModal()">Ã—</button>
         <div class="modal-header">
             <div class="agent-avatar" id="modal-avatar">&#129302;</div>
             <div>
-                <h3 class="modal-title" id="modal-title">Nome do Robô</h3>
+                <h3 class="modal-title" id="modal-title">Nome do RobÃ´</h3>
                 <span class="agent-tag" id="modal-tag" style="display: inline-block; margin-top: 4px;">Periodicidade</span>
             </div>
         </div>
         <div class="modal-body">
             <div class="info-row">
-                <span>Último Processamento</span>
+                <span>Ãšltimo Processamento</span>
                 <span id="modal-timestamp" style="font-weight: 700;">--/--/-- --:--</span>
             </div>
             <div class="info-row">
-                <span>Status da Execução</span>
+                <span>Status da ExecuÃ§Ã£o</span>
                 <span id="modal-status-badge">--</span>
             </div>
             
-            <h4 style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-top: 0.5rem;">Satisfação do Agente:</h4>
+            <h4 style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-top: 0.5rem;">SatisfaÃ§Ã£o do Agente:</h4>
             <div class="log-section" id="modal-satisfacao">
                 Aguardando logs...
             </div>
             
             <div id="modal-extra-section" style="display: none;">
-                <h4 style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-top: 0.5rem;">Dados Extraídos:</h4>
+                <h4 style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-top: 0.5rem;">Dados ExtraÃ­dos:</h4>
                 <div class="log-section" id="modal-extra-data" style="max-height: 120px; font-family: monospace; font-size: 0.8rem;">
                     {}
                 </div>
@@ -1054,20 +1054,20 @@
         'viagens-monitor': null,
         'agente-backup': null,
         'agente-backup-cloud': null,
-        'site-daniel': { status: 'healthy', s: 'healthy', lastProcessed: 'Publicado', note: 'Site do Daniel publicado e disponível para acompanhamento.' }
+        'site-daniel': { status: 'healthy', s: 'healthy', lastProcessed: 'Publicado', note: 'Site do Daniel publicado e disponÃ­vel para acompanhamento.' }
     };
 
     const botsDetails = {
-        'binance-dca': { name: "Bot DCA Binance Inteligente", avatar: "🪙", tag: "A cada 4h", tagClass: "periodic" },
-        'coinbase-monitor': { name: "Bot Coinbase Monitor", avatar: "📈", tag: "Periódico", tagClass: "periodic" },
+        'binance-dca': { name: "Bot DCA Binance Inteligente", avatar: "ðŸª™", tag: "A cada 4h", tagClass: "periodic" },
+        'coinbase-monitor': { name: "Bot Coinbase Monitor", avatar: "ðŸ“ˆ", tag: "PeriÃ³dico", tagClass: "periodic" },
         'invest-09h': { name: "Bot Investimentos 09h Premarket", avatar: "", tag: "Todo dia 9h", tagClass: "daily" },
         'invest-13h': { name: "Bot Investimentos 13h Parcial", avatar: "&#128347;", tag: "Todo dia 13h", tagClass: "daily" },
         'invest-18h': { name: "Bot Investimentos 18h Fechamento", avatar: "&#127774;", tag: "Todo dia 18h", tagClass: "daily" },
-        'manutencao': { name: "Bot Manutenção Preventiva", avatar: "&#128295;", tag: "Todo dia 00h", tagClass: "daily" },
-        'viagens-monitor': { name: "Bot Viagens Monitoramento", avatar: "&#9992;&#65039;", tag: "Periódico", tagClass: "periodic" },
+        'manutencao': { name: "Bot ManutenÃ§Ã£o Preventiva", avatar: "&#128295;", tag: "Todo dia 00h", tagClass: "daily" },
+        'viagens-monitor': { name: "Bot Viagens Monitoramento", avatar: "&#9992;&#65039;", tag: "PeriÃ³dico", tagClass: "periodic" },
         'agente-backup': { name: "Agente de Backup MPPA", avatar: "&#128190;", tag: "Mensal", tagClass: "periodic" },
         'agente-backup-cloud': { name: "Agente de Backup Cloud", avatar: "&#9729;&#65039;", tag: "Quinzenal", tagClass: "periodic" },
-        'site-daniel': { name: "Bot Site Daniel", avatar: "🌐", tag: "Sob demanda", tagClass: "periodic" }
+        'site-daniel': { name: "Bot Site Daniel", avatar: "ðŸŒ", tag: "Sob demanda", tagClass: "periodic" }
     };
 
     function updateSummaryMetrics() {
@@ -1096,7 +1096,7 @@
         const score = `${counts.healthy}/${total}`;
         const healthPct = total ? Math.round((counts.healthy / total) * 100) : 0;
         const severity = counts.danger > 0 ? 'danger' : healthPct >= 80 ? 'healthy' : healthPct >= 50 ? 'pending' : 'danger';
-        const chipText = severity === 'healthy' ? 'Frota em ordem' : severity === 'pending' ? 'Atenção parcial' : 'Requer revisão';
+        const chipText = severity === 'healthy' ? 'Frota em ordem' : severity === 'pending' ? 'AtenÃ§Ã£o parcial' : 'Requer revisÃ£o';
         if (totalEl) totalEl.innerHTML = `${total} <span style="font-size: 1rem; color: var(--text-secondary)">cards</span>`;
         if (scheduledEl) scheduledEl.innerHTML = `${scheduled} <span style="font-size: 1rem; color: var(--text-secondary)">ativos</span>`;
         if (healthyEl) healthyEl.innerHTML = `${counts.healthy} <span style="font-size: 1rem; color: var(--text-secondary)">online</span>`;
@@ -1104,7 +1104,7 @@
         if (dangerEl) dangerEl.innerHTML = `${counts.danger} <span style="font-size: 1rem; color: var(--text-secondary)">ateno</span>`;
         if (healthScoreEl) healthScoreEl.textContent = score;
         if (healthScoreEl) healthScoreEl.style.color = severity === 'healthy' ? '#86efac' : severity === 'pending' ? '#fcd34d' : '#fda4af';
-        if (healthDescEl) healthDescEl.textContent = healthPct >= 80 ? `Frota saudável: ${healthPct}% dos agentes respondendo.` : healthPct >= 50 ? `Saúde moderada: ${healthPct}% respondendo; vale checar os pendentes.` : `Atenção: apenas ${healthPct}% respondendo agora.`;
+        if (healthDescEl) healthDescEl.textContent = healthPct >= 80 ? `Frota saudÃ¡vel: ${healthPct}% dos agentes respondendo.` : healthPct >= 50 ? `SaÃºde moderada: ${healthPct}% respondendo; vale checar os pendentes.` : `AtenÃ§Ã£o: apenas ${healthPct}% respondendo agora.`;
         if (healthChipEl) healthChipEl.textContent = `${chipText}  ${counts.healthy} online`;
     }
 
@@ -1149,7 +1149,7 @@
         return str;
     }
 
-    // Inicialização da página
+    // InicializaÃ§Ã£o da pÃ¡gina
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem('mppa-portal-theme') || 'dark';
         changeTheme(savedTheme);
@@ -1226,10 +1226,10 @@
         if (latestTime) {
             const formattedTime = latestTime.toLocaleDateString('pt-BR') + ' ' + latestTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
             lastUpdateEl.textContent = formattedTime;
-            lastUpdateDescEl.textContent = `Último relatório de bot processado em nuvem.`;
+            lastUpdateDescEl.textContent = `Ãšltimo relatÃ³rio de bot processado em nuvem.`;
         } else {
             lastUpdateEl.textContent = "Sem Registros";
-            lastUpdateDescEl.textContent = "Nenhum bot reportou satisfação ainda nesta chave.";
+            lastUpdateDescEl.textContent = "Nenhum bot reportou satisfaÃ§Ã£o ainda nesta chave.";
         }
     }
 
@@ -1245,13 +1245,13 @@
         statusIndicator.className = `status-indicator ${status}`;
         
         let statusLabel = "Ativo / OK";
-        if (status === "warning") statusLabel = "Atenção / Alerta";
+        if (status === "warning") statusLabel = "AtenÃ§Ã£o / Alerta";
         if (status === "danger") statusLabel = "Falha / Parado";
         statusIndicator.textContent = statusLabel;
 
-        // Atualiza caixa de satisfação compacta
+        // Atualiza caixa de satisfaÃ§Ã£o compacta
         boxEl.className = `action-needed-box ${status}`;
-        boxEl.textContent = satisfacao || "Robô rodou sem emitir mensagem detalhada.";
+        boxEl.textContent = satisfacao || "RobÃ´ rodou sem emitir mensagem detalhada.";
     }
 
     function atualizarCardSemDados(botId) {
@@ -1262,7 +1262,7 @@
         statusIndicator.className = "status-indicator none";
         statusIndicator.textContent = "Aguardando";
         boxEl.className = "action-needed-box";
-        boxEl.textContent = "Aguardando relatório de execução do Alienware local.";
+        boxEl.textContent = "Aguardando relatÃ³rio de execuÃ§Ã£o do Alienware local.";
     }
 
     // Gerenciamento do Modal
@@ -1295,11 +1295,11 @@
             statusBadgeEl.className = `status-indicator ${status}`;
             statusBadgeEl.style.display = "inline-flex";
             let statusLabel = "Sucesso / Executado";
-            if (status === "warning") statusLabel = "Atenção (Sem compra/Operação)";
-            if (status === "danger") statusLabel = "Erro / Falha crítica";
+            if (status === "warning") statusLabel = "AtenÃ§Ã£o (Sem compra/OperaÃ§Ã£o)";
+            if (status === "danger") statusLabel = "Erro / Falha crÃ­tica";
             statusBadgeEl.textContent = statusLabel;
             
-            satisfacaoEl.textContent = satisfacao || "Nenhuma mensagem de satisfação fornecida.";
+            satisfacaoEl.textContent = satisfacao || "Nenhuma mensagem de satisfaÃ§Ã£o fornecida.";
             
             if (extra && Object.keys(extra).length > 0) {
                 extraSection.style.display = "block";
@@ -1311,7 +1311,7 @@
             timestampEl.textContent = "Sem registros";
             statusBadgeEl.className = "status-indicator none";
             statusBadgeEl.textContent = "Nunca rodou";
-            satisfacaoEl.textContent = `Este robô ainda não enviou nenhum log para a chave de sincronia "${syncKey}".\n\nCertifique-se de configurar a chamada HTTP POST no script local do robô para atualizar o status automaticamente.`;
+            satisfacaoEl.textContent = `Este robÃ´ ainda nÃ£o enviou nenhum log para a chave de sincronia "${syncKey}".\n\nCertifique-se de configurar a chamada HTTP POST no script local do robÃ´ para atualizar o status automaticamente.`;
             extraSection.style.display = "none";
         }
 
@@ -1328,7 +1328,7 @@
         }
     }
 
-    // Funções de Temas e Sessão
+    // FunÃ§Ãµes de Temas e SessÃ£o
     function changeTheme(themeName) {
         document.body.className = '';
         if (themeName !== 'dark') {
@@ -1336,7 +1336,7 @@
         }
         localStorage.setItem('mppa-portal-theme', themeName);
         
-        // Atualizar botões
+        // Atualizar botÃµes
         document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
         const activeBtn = document.getElementById('btn-theme-' + themeName);
         if (activeBtn) activeBtn.classList.add('active');
@@ -1370,15 +1370,15 @@
                     <span class="badge badge-success">Ativo</span>
                 </div>
                 <p class="card-description">
-                    Agente de cria��o de textos para blog na �rea de psicologia.
-                    Programado para gerar e enviar os conte�dos para
-                    <strong>ds4daniel@icloud.com</strong> toda sexta-feira �s
+                    Agente de criação de textos para blog na área de psicologia.
+                    Programado para gerar e enviar os conteúdos para
+                    <strong>ds4daniel@icloud.com</strong> toda sexta-feira às
                     <strong>16h</strong>, a partir do Alienware.
                 </p>
                 <div class="card-footer">
                     <span class="card-tag">Psicologia</span>
                     <span class="card-tag">Blog</span>
-                    <span class="card-tag">Envio autom�tico</span>
+                    <span class="card-tag">Envio automático</span>
                 </div>
             </div>
         `);
