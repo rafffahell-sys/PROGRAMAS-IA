@@ -749,6 +749,23 @@
                     </div>
                 </div>
 
+                <!-- AGENTE SITE DANIEL -->
+                <div class="agent-card">
+                    <div class="agent-avatar">🌐</div>
+                    <div class="agent-details">
+                        <h3>Agente Site Daniel <span class="agent-tag monthly">Ativo</span></h3>
+                        <p class="agent-desc">Mantém o site institucional do Daniel sincronizado com o conteúdo publicado, destacando o card de acesso rápido e o fluxo de atualização visual do portal.</p>
+                        <div class="agent-meta">
+                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Sob demanda</div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: <code>site_daniel/</code></div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator healthy" id="status-site-daniel">Publicado</span>
+                        <div class="action-needed-box success" id="box-site-daniel">✓ Site do Daniel já está publicado e acessível no portal.</div>
+                    </div>
+                </div>
+
                 <!-- AGENTE QDIP -->
                 <div class="agent-card">
                     <div class="agent-avatar">📑</div>
@@ -998,6 +1015,15 @@
                     </div>
                 </div>
 
+                <!-- CHECK 2C -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-site-daniel" onchange="toggleCheck('site-daniel')">
+                    <div class="checklist-info">
+                        <h4>Agente Site Daniel</h4>
+                        <p>Manter o site institucional sincronizado e o card de acesso rápido visível no painel.</p>
+                    </div>
+                </div>
+
                 <!-- CHECK 3 -->
                 <div class="checklist-item">
                     <input type="checkbox" class="checklist-checkbox" id="check-abono" onchange="toggleCheck('abono')">
@@ -1076,6 +1102,7 @@
         diarias: false,
         qdip: false,
         'blog-daniel': false,
+        'site-daniel': true,
         abono: false,
         teto3: false,
         rra: false,
@@ -1111,7 +1138,7 @@
             document.getElementById('sync-key').value = syncKey;
         }
 
-        ['diarias', 'qdip', 'blog-daniel', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
+        ['diarias', 'qdip', 'blog-daniel', 'site-daniel', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
             const val = localStorage.getItem('mppa-check-' + item) === 'true';
             localState[item] = val;
             document.getElementById('check-' + item).checked = val;
@@ -1142,7 +1169,7 @@
                     const state = JSON.parse(fromHex(hexValue));
                     localState = state;
                     
-                    ['diarias', 'qdip', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
+                    ['diarias', 'qdip', 'blog-daniel', 'site-daniel', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
                         const checked = !!state[item];
                         document.getElementById('check-' + item).checked = checked;
                         updateUI(item, checked);
@@ -1207,6 +1234,8 @@
             boxEl.textContent = "⚠️ Inserir arquivos XML/XLS da competência na pasta IGEPPS após o fechamento mensal da folha.";
         } else if (item === 'blog-daniel') {
             boxEl.textContent = "⚠️ Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta às 16:00.";
+        } else if (item === 'site-daniel') {
+            boxEl.textContent = "⚠️ Card de acesso rápido do Daniel e sincronização visual do site institucional.";
         } else if (item === 'teto3') {
             boxEl.textContent = "⚠️ Salvar planilha ou PDF de vantagens (GAO) na Inbox para auditoria do teto de 35%.";
         } else if (item === 'rra') {
@@ -1254,6 +1283,11 @@
             deadlineEl.style.color = "var(--info)";
             deadlineEl.innerHTML = "Sexta <span style='font-size: 1.2rem; font-weight: 500'>16:00</span>";
             descEl.textContent = "Geração e envio por e-mail do Blog Daniel (Agente Blog Daniel)";
+        } else if (!document.getElementById('check-site-daniel').checked) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--success)";
+            deadlineEl.innerHTML = "Site <span style='font-size: 1.2rem; font-weight: 500'>Daniel</span>";
+            descEl.textContent = "Card de acesso rápido e sincronização do site institucional do Daniel";
         } else if (!checkTeto3) {
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--info)";
