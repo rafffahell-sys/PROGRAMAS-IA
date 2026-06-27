@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>
+        // Verificação de autenticação e acesso exclusivo para o Rafael
+        if (!sessionStorage.getItem('mppa_session_active')) {
+            window.location.replace('login.html');
+        } else {
+            const username = localStorage.getItem('mppa_username') || '';
+            if (username.toLowerCase() !== 'rafael') {
+                window.location.replace('index.html');
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Agentes Pessoais - Rafael</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --primary: #10b981; /* Verde esmeralda como primário para recreativo/pessoal */
+            --primary-glow: rgba(16, 185, 129, 0.35);
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.25);
+            --warning: #f59e0b;
+            --warning-glow: rgba(245, 158, 11, 0.25);
+            --danger: #ef4444;
+            --danger-glow: rgba(239, 68, 68, 0.25);
+            --info: #06b6d4;
+            --info-glow: rgba(6, 182, 212, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding: 2.5rem;
+        }
+
+        /* Marca d'água de Contabilidade (Caduceu Real) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image: url("caduceu_contabilidade.png");
+            background-repeat: repeat;
+            background-size: 200px 242px;
+            opacity: 0.04;
+        }
+        body.theme-light::before {
+            background-image: url("caduceu_contabilidade.png");
+            filter: invert(1);
+            opacity: 0.08;
+        }
+        body.theme-beige::before {
+            background-image: url("caduceu_contabilidade.png");
+            filter: invert(1) sepia(1) saturate(5) hue-rotate(340deg);
+            opacity: 0.08;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a7f3d0 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title p {
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.2s;
+        }
+
+        .back-button:hover {
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sync-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+        }
+
+        .sync-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .sync-input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+            width: 180px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .sync-input:focus {
+            border-color: var(--primary);
+        }
+
+        /* METRICS ROW */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 1.5rem;
+            backdrop-filter: blur(14px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -20% -55% -20%;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 68%);
+            pointer-events: none;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.16);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+        }
+
+        .metric-card.premium-focus {
+            border-color: rgba(16, 185, 129, 0.35);
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0.13), rgba(16, 185, 129, 0.04));
+            box-shadow: 0 18px 50px rgba(16, 185, 129, 0.10);
+        }
+
+        .metric-card.premium-focus .metric-title {
+            color: #bbf7d0;
+        }
+
+        .metric-card.premium-focus .metric-val {
+            font-size: 2.35rem;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            margin-top: 0.35rem;
+        }
+
+        .metric-card.premium-focus .metric-desc {
+            color: rgba(236, 253, 245, 0.88);
+        }
+
+        .metric-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-secondary);
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .metric-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-val {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            color: #fff;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .metric-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* AGENTS CARDS GRID */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .agent-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.75rem;
+            backdrop-filter: blur(12px);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .agent-card:hover {
+            transform: scale(1.01);
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.08);
+        }
+
+        .agent-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .agent-details h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .agent-tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .agent-tag.periodic {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: #22d3ee;
+        }
+
+        .agent-tag.daily {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+        }
+
+        .agent-tag.weekly {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+        }
+
+        .agent-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .agent-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-icon {
+            color: var(--primary);
+        }
+
+        .agent-status-section {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        .status-indicator {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.35rem 0.75rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .status-indicator.healthy {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-indicator.pending {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .status-indicator.danger {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .status-indicator.none {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+
+        .action-needed-box {
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
+            max-width: 250px;
+            text-align: left;
+        }
+
+        .action-needed-box.success {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px dashed rgba(16, 185, 129, 0.25);
+            color: #a7f3d0;
+        }
+
+        .action-needed-box.warning {
+            background: rgba(245, 158, 11, 0.05);
+            border: 1px dashed rgba(245, 158, 11, 0.25);
+            color: #fde68a;
+        }
+
+        .action-needed-box.danger {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px dashed rgba(239, 68, 68, 0.25);
+            color: #fca5a5;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        body.theme-light .modal-content {
+            background: #ffffff;
+        }
+        body.theme-beige .modal-content {
+            background: #faf6f0;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .log-section {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #f3f4f6;
+            max-height: 250px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        body.theme-light .log-section {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+        body.theme-beige .log-section {
+            background: #faf6f0;
+            color: #1c1917;
+            border-color: rgba(120, 113, 108, 0.3);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .info-row span:first-child {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        /* ── TEMAS ADICIONAIS ───────────────────────────── */
+        body.theme-light {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.65);
+            --border-color: rgba(15, 23, 42, 0.08);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --primary: #059669;
+            --primary-glow: rgba(5, 150, 105, 0.15);
+            --success: #059669;
+            --success-glow: rgba(5, 150, 105, 0.15);
+            --warning: #d97706;
+            --warning-glow: rgba(217, 119, 6, 0.15);
+            --danger: #dc2626;
+            --danger-glow: rgba(220, 38, 38, 0.15);
+            --info: #0891b2;
+            --info-glow: rgba(8, 145, 178, 0.15);
+        }
+        
+        body.theme-light {
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(5, 150, 105, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(8, 145, 178, 0.04) 0%, transparent 40%);
+        }
+
+        body.theme-light .agent-card:hover {
+            border-color: rgba(5, 150, 105, 0.3);
+            box-shadow: 0 8px 30px rgba(5, 150, 105, 0.06);
+        }
+
+        body.theme-light .agent-avatar {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        body.theme-light .sync-input {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        body.theme-light .metric-val {
+            color: var(--text-primary);
+        }
+
+        body.theme-light .agent-tag.periodic {
+            background: rgba(8, 145, 178, 0.08);
+            color: #0891b2;
+        }
+        
+        body.theme-light .agent-tag.daily {
+            background: rgba(217, 119, 6, 0.08);
+            color: #d97706;
+        }
+
+        body.theme-light .agent-tag.weekly {
+            background: rgba(79, 70, 229, 0.08);
+            color: #4f46e5;
+        }
+
+        body.theme-beige {
+            --bg-color: #faf6f0;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(120, 113, 108, 0.15);
+            --text-primary: #1c1917;
+            --text-secondary: #57534e;
+            --primary: #c2410c;
+            --primary-glow: rgba(194, 65, 12, 0.15);
+            --success: #15803d;
+            --success-glow: rgba(21, 128, 61, 0.15);
+            --warning: #b45309;
+            --warning-glow: rgba(180, 83, 9, 0.15);
+            --danger: #b91c1c;
+            --danger-glow: rgba(185, 28, 28, 0.15);
+            --info: #0369a1;
+            --info-glow: rgba(3, 105, 161, 0.15);
+        }
+        
+        body.theme-beige {
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(194, 65, 12, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(3, 105, 161, 0.04) 0%, transparent 40%);
+        }
+
+        body.theme-beige .agent-card:hover {
+            border-color: rgba(194, 65, 12, 0.3);
+            box-shadow: 0 8px 30px rgba(194, 65, 12, 0.06);
+        }
+
+        body.theme-beige .agent-avatar {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        body.theme-beige .sync-input {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        body.theme-beige .metric-val {
+            color: var(--text-primary);
+        }
+
+        body.theme-beige .agent-tag.periodic {
+            background: rgba(3, 105, 161, 0.08);
+            color: #0369a1;
+        }
+        
+        body.theme-beige .agent-tag.daily {
+            background: rgba(180, 83, 9, 0.08);
+            color: #b45309;
+        }
+
+        body.theme-beige .agent-tag.weekly {
+            background: rgba(194, 65, 12, 0.08);
+            color: #c2410c;
+        }
+
+        /* Estilo do Alternador */
+        .theme-switcher {
+            display: inline-flex;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            padding: 4px;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+        }
+        
+        body.theme-light .theme-switcher,
+        body.theme-beige .theme-switcher {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .theme-btn:hover {
+            color: var(--text-primary);
+        }
+        
+        .theme-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .theme-switcher.dashboard-switcher {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            margin-top: 0;
+            z-index: 100;
+            gap: 2px;
+            padding: 3px;
+            border-radius: 10px;
+        }
+        
+        .theme-switcher.dashboard-switcher .theme-btn {
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            gap: 0;
+        }
+
+        .logout-container-fixed {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Alternador de Temas Discreto no Canto Superior Esquerdo -->
+<div class="theme-switcher dashboard-switcher">
+    <button onclick="changeTheme('dark')" id="btn-theme-dark" class="theme-btn active" title="Tema Escuro">&#127776;</button>
+    <button onclick="changeTheme('light')" id="btn-theme-light" class="theme-btn" title="Tema Claro">&#9728;&#65039;</button>
+    <button onclick="changeTheme('beige')" id="btn-theme-beige" class="theme-btn" title="Tema Bege">&#127806;</button>
+</div>
+
+<!-- Botão Sair Discreto no Canto Superior Direito -->
+<div class="logout-container-fixed">
+    <button onclick="logout()" class="theme-btn" style="background: var(--danger-glow); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; padding: 6px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">&#128682; Sair</button>
+</div>
+
+<div class="container">
+    <header>
+        <div class="header-title">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                <a href="index.html" class="back-button">&#8592; Voltar ao Portal</a>
+            </div>
+            <h1>Painel de Agentes Pessoais</h1>
+            <p>Monitore a atividade, relatórios de investimentos e sade dos seus robôs locais</p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;">
+            <div class="sync-section">
+                <span class="sync-label">Chave de Sincronia:</span>
+                <input type="text" class="sync-input" id="sync-key" value="mppa-rafael-pessoal" onchange="alterarChaveSincronia()">
+            </div>
+        </div>
+    </header>
+
+    <div class="metrics-grid">
+        <div class="metric-card premium-focus">
+            <div class="metric-title">Saúde Geral</div>
+            <div class="metric-val" id="metric-health-score" style="color: #86efac;">0/9</div>
+            <div class="metric-desc" id="metric-health-desc">Aguardando leitura dos agentes.</div>
+            <div class="metric-chip" id="metric-health-chip">Frota em observao</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Total de Agentes</div>
+            <div class="metric-val" id="metric-total-agents">9 <span style="font-size: 1rem; color: var(--text-secondary)">cards</span></div>
+            <div class="metric-desc">Inventrio completo dos robs monitorados neste portal.</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Agentes Agendados</div>
+            <div class="metric-val" id="metric-scheduled-agents">0 <span style="font-size: 1rem; color: var(--text-secondary)">ativos</span></div>
+            <div class="metric-desc">Robs com rotina automtica ou recorrente j configurada.</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Agentes Respondendo</div>
+            <div class="metric-val" id="metric-healthy-agents">0 <span style="font-size: 1rem; color: var(--text-secondary)">online</span></div>
+            <div class="metric-desc">Card com retorno recente ou status explcito de ativo.</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Aguardando</div>
+            <div class="metric-val" id="metric-pending-agents">0 <span style="font-size: 1rem; color: var(--text-secondary)">parados</span></div>
+            <div class="metric-desc">Sem resposta recente, ainda sem confirmao de execuo.</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Com Alerta</div>
+            <div class="metric-val" id="metric-danger-agents">0 <span style="font-size: 1rem; color: var(--text-secondary)">ateno</span></div>
+            <div class="metric-desc">Status de falha, risco ou problema de execuo.</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">ltima Atualizao</div>
+            <div class="metric-val" id="last-update-time" style="font-size: 1.6rem; color: var(--info);">Carregando...</div>
+            <div class="metric-desc" id="last-update-desc">Buscando status dos bots na nuvem</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Sincronizao em Nuvem</div>
+            <div class="metric-val" id="sync-status" style="font-size: 1.2rem; color: var(--success)">Ativa</div>
+            <div class="metric-desc">Atualizado via API KeyValue.</div>
+        </div>
+    </div>
+
+    <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">&#129302; Meus Robôs Pessoais</h2>
+    
+    <div class="agents-grid">
+        <!-- BOT DCA BINANCE -->
+        <div class="agent-card" onclick="abrirModal('binance-dca')">
+            <div class="agent-avatar">🪙</div>
+            <div class="agent-details">
+                <h3>Bot DCA Binance Inteligente <span class="agent-tag periodic">A cada 4h</span></h3>
+                <p class="agent-desc">Executa compras recorrentes (DCA) inteligentes de USDC na Binance de acordo com o limite de cotação de dólar parametrizado.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: A cada 4 horas (Windows Task Scheduler)</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>binance-dca</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator none" id="status-binance-dca">Sem Dados</span>
+                <div class="action-needed-box" id="box-binance-dca">Nenhum log de execução recebido do Alienware.</div>
+            </div>
+        </div>
+
+        <!-- BOT COINBASE MONITOR -->
+        <div class="agent-card" onclick="abrirModal('coinbase-monitor')">
+            <div class="agent-avatar">📈</div>
+            <div class="agent-details">
+                <h3>Bot Coinbase Monitor <span class="agent-tag periodic">Periódico</span></h3>
+                <p class="agent-desc">Analisa e monitora a variação da carteira Coinbase, gerando resumos de variação diária dos criptoativos guardados.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Periódico (Windows Task Scheduler)</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>coinbase-monitor</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator none" id="status-coinbase-monitor">Sem Dados</span>
+                <div class="action-needed-box" id="box-coinbase-monitor">Nenhum log de execução recebido do Alienware.</div>
+            </div>
+        </div>
+
+        <!-- BOT SITE DANIEL -->
+        <div class="agent-card" onclick="abrirModal('site-daniel')">
+            <div class="agent-avatar">🌐</div>
+            <div class="agent-details">
+                <h3>Bot Site Daniel <span class="agent-tag periodic">Sob demanda</span></h3>
+                <p class="agent-desc">Mantém o site institucional do Daniel organizado e com acesso rápido às versões publicadas e materiais de apoio do projeto.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Sob demanda</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>site-daniel</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator healthy" id="status-site-daniel">Publicado</span>
+                <div class="action-needed-box success" id="box-site-daniel">✓ Site do Daniel já está publicado e pode ser revisado quando necessário.</div>
+            </div>
+        </div>
+
+        <!-- BOT INVESTIMENTOS 09H PREMARKET -->
+        <div class="agent-card" onclick="abrirModal('invest-09h')">
+            <div class="agent-avatar"></div>
+            <div class="agent-details">
+                <h3>Bot Investimentos 09h Premarket <span class="agent-tag daily">Todo dia 9h</span></h3>
+                <p class="agent-desc">Compila dados do pré-mercado de ações nacionais e internacionais e envia um relatório matinal.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Diariamente às 09:00</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>invest-09h</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator none" id="status-invest-09h">Sem Dados</span>
+                <div class="action-needed-box" id="box-invest-09h">Nenhum log de execução recebido do Alienware.</div>
+            </div>
+        </div>
+
+        <!-- BOT INVESTIMENTOS 13H PARCIAL -->
+        <div class="agent-card" onclick="abrirModal('invest-13h')">
+            <div class="agent-avatar">&#128347;</div>
+            <div class="agent-details">
+                <h3>Bot Investimentos 13h Parcial <span class="agent-tag daily">Todo dia 13h</span></h3>
+                <p class="agent-desc">Apura os resultados parciais das ações do Ibovespa e envia uma visão rápida do rendimento no meio do pregão.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Diariamente às 13:00</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>invest-13h</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator none" id="status-invest-13h">Sem Dados</span>
+                <div class="action-needed-box" id="box-invest-13h">Nenhum log de execução recebido do Alienware.</div>
+            </div>
+        </div>
+
+        <!-- BOT INVESTIMENTOS 18H FECHAMENTO -->
+        <div class="agent-card" onclick="abrirModal('invest-18h')">
+            <div class="agent-avatar">&#127774;</div>
+            <div class="agent-details">
+                <h3>Bot Investimentos 18h Fechamento <span class="agent-tag daily">Todo dia 18h</span></h3>
+                <p class="agent-desc">Processa o fechamento diário do mercado financeiro e compila os rendimentos totais consolidados no dia.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Diariamente às 18:00</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>invest-18h</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator none" id="status-invest-18h">Sem Dados</span>
+                <div class="action-needed-box" id="box-invest-18h">Nenhum log de execução recebido do Alienware.</div>
+            </div>
+        </div>
+
+        <!-- BOT MANUTENÇÃO PREVENTIVA -->
+        <div class="agent-card" onclick="abrirModal('manutencao')">
+            <div class="agent-avatar">&#128295;</div>
+            <div class="agent-details">
+                <h3>Bot Manutenção Preventiva <span class="agent-tag daily">Todo dia 00h</span></h3>
+                <p class="agent-desc">Monitora preventivamente a integridade e o funcionamento de outros bots do sistema, alertando sobre possíveis falhas, paradas ou travamentos.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Diariamente às 00:00 (Windows Task Scheduler)</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>manutencao</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator none" id="status-manutencao">Sem Dados</span>
+                <div class="action-needed-box" id="box-manutencao">Nenhum log de execução recebido do Alienware.</div>
+            </div>
+        </div>
+
+        <!-- BOT VIAGENS MONITORAMENTO -->
+        <div class="agent-card" onclick="abrirModal('viagens-monitor')">
+            <div class="agent-avatar">&#9992;&#65039;</div>
+            <div class="agent-details">
+                <h3>Bot Viagens Monitoramento <span class="agent-tag periodic">Periódico</span></h3>
+                <p class="agent-desc">Efetua busca automatizada de passagens aéreas e trechos promocionais para os destinos cadastrados no Obsidian.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Periódico (Windows Task Scheduler)</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>viagens-monitor</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator none" id="status-viagens-monitor">Sem Dados</span>
+                <div class="action-needed-box" id="box-viagens-monitor">Nenhum log de execução recebido do Alienware.</div>
+            </div>
+        </div>
+
+        <!-- AGENTE DE BACKUP MPPA -->
+        <div class="agent-card" onclick="abrirModal('agente-backup')">
+            <div class="agent-avatar">&#128190;</div>
+            <div class="agent-details">
+                <h3>Agente de Backup MPPA <span class="agent-tag periodic">Mensal</span></h3>
+                <p class="agent-desc">Compacta o repositório local, gera ZIP, manifesto JSON e espelho preparado para Google Drive com status no painel.</p>
+                <div class="agent-meta">
+                <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Último dia do mês às 23:50</div>
+                    <div class="meta-item"><span class="meta-icon">&#128193;</span> Saída: Backups/GoogleDrive/Backup_Competencia_YYYY_MM</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>agente-backup</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator none" id="status-agente-backup">Sem Dados</span>
+                <div class="action-needed-box" id="box-agente-backup">Nenhum log de execução recebido do Alienware.</div>
+            </div>
+        </div>
+
+        <!-- AGENTE DE BACKUP CLOUD -->
+        <div class="agent-card" onclick="abrirModal('agente-backup-cloud')">
+            <div class="agent-avatar">&#9729;&#65039;</div>
+            <div class="agent-details">
+                <h3>Agente de Backup Cloud <span class="agent-tag periodic">Quinzenal</span></h3>
+                <p class="agent-desc">Cria backup em JSON, ZIP, relatório e pasta espelhada para sincronização segura com a nuvem do Google Drive.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: A cada 15 dias</div>
+                    <div class="meta-item"><span class="meta-icon">&#128193;</span> Saída: Backups/GoogleDrive/Backup_Competencia_YYYY_MM</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>agente-backup-cloud</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator healthy" id="status-agente-backup-cloud">Ativo / Agendado</span>
+                <div class="action-needed-box" id="box-agente-backup-cloud">Nenhum log de execução recebido do Alienware.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        By Rafael F. Lima · Desenvolvido via OpenAI Codex Code IA Agent · 2026
+    </footer>
+</div>
+
+<!-- MODAL PARA EXIBIR SATISFAÇÃO / LOG DO BOT -->
+<div class="modal-overlay" id="modal-overlay" onclick="fecharModalExterno(event)">
+    <div class="modal-content">
+        <button class="modal-close" onclick="fecharModal()">×</button>
+        <div class="modal-header">
+            <div class="agent-avatar" id="modal-avatar">&#129302;</div>
+            <div>
+                <h3 class="modal-title" id="modal-title">Nome do Robô</h3>
+                <span class="agent-tag" id="modal-tag" style="display: inline-block; margin-top: 4px;">Periodicidade</span>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="info-row">
+                <span>Último Processamento</span>
+                <span id="modal-timestamp" style="font-weight: 700;">--/--/-- --:--</span>
+            </div>
+            <div class="info-row">
+                <span>Status da Execução</span>
+                <span id="modal-status-badge">--</span>
+            </div>
+            
+            <h4 style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-top: 0.5rem;">Satisfação do Agente:</h4>
+            <div class="log-section" id="modal-satisfacao">
+                Aguardando logs...
+            </div>
+            
+            <div id="modal-extra-section" style="display: none;">
+                <h4 style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-top: 0.5rem;">Dados Extraídos:</h4>
+                <div class="log-section" id="modal-extra-data" style="max-height: 120px; font-family: monospace; font-size: 0.8rem;">
+                    {}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const BUCKET_URL = "https://keyvalue.immanuel.co/api/KeyVal/";
+    let syncKey = "mppa-rafael-pessoal";
+
+    // Cache local dos estados dos bots
+    const SCHEDULED_BOTS = new Set(['binance-dca','coinbase-monitor','invest-09h','invest-13h','invest-18h','manutencao','viagens-monitor','agente-backup','agente-backup-cloud']);
+
+    let botsState = {
+        'binance-dca': null,
+        'coinbase-monitor': null,
+        'invest-09h': null,
+        'invest-13h': null,
+        'invest-18h': null,
+        'manutencao': null,
+        'viagens-monitor': null,
+        'agente-backup': null,
+        'agente-backup-cloud': null
+    };
+
+    const botsDetails = {
+        'binance-dca': { name: "Bot DCA Binance Inteligente", avatar: "🪙", tag: "A cada 4h", tagClass: "periodic" },
+        'coinbase-monitor': { name: "Bot Coinbase Monitor", avatar: "📈", tag: "Periódico", tagClass: "periodic" },
+        'invest-09h': { name: "Bot Investimentos 09h Premarket", avatar: "", tag: "Todo dia 9h", tagClass: "daily" },
+        'invest-13h': { name: "Bot Investimentos 13h Parcial", avatar: "&#128347;", tag: "Todo dia 13h", tagClass: "daily" },
+        'invest-18h': { name: "Bot Investimentos 18h Fechamento", avatar: "&#127774;", tag: "Todo dia 18h", tagClass: "daily" },
+        'manutencao': { name: "Bot Manutenção Preventiva", avatar: "&#128295;", tag: "Todo dia 00h", tagClass: "daily" },
+        'viagens-monitor': { name: "Bot Viagens Monitoramento", avatar: "&#9992;&#65039;", tag: "Periódico", tagClass: "periodic" },
+        'agente-backup': { name: "Agente de Backup MPPA", avatar: "&#128190;", tag: "Mensal", tagClass: "periodic" },
+        'agente-backup-cloud': { name: "Agente de Backup Cloud", avatar: "&#9729;&#65039;", tag: "Quinzenal", tagClass: "periodic" }
+    };
+
+    function updateSummaryMetrics() {
+        const ids = Object.keys(botsState);
+        const total = ids.length;
+        const scheduled = ids.filter(id => SCHEDULED_BOTS.has(id)).length;
+        const counts = { healthy: 0, pending: 0, danger: 0 };
+
+        ids.forEach(id => {
+            const data = botsState[id];
+            const status = data?.status || data?.s || 'none';
+            if (status === 'healthy') counts.healthy += 1;
+            else if (status === 'pending' || status === 'none') counts.pending += 1;
+            else if (status === 'danger') counts.danger += 1;
+            else if (status === 'warning') counts.healthy += 1;
+        });
+
+        const totalEl = document.getElementById('metric-total-agents');
+        const scheduledEl = document.getElementById('metric-scheduled-agents');
+        const healthyEl = document.getElementById('metric-healthy-agents');
+        const pendingEl = document.getElementById('metric-pending-agents');
+        const dangerEl = document.getElementById('metric-danger-agents');
+        const healthScoreEl = document.getElementById('metric-health-score');
+        const healthDescEl = document.getElementById('metric-health-desc');
+        const healthChipEl = document.getElementById('metric-health-chip');
+        const score = `${counts.healthy}/${total}`;
+        const healthPct = total ? Math.round((counts.healthy / total) * 100) : 0;
+        const severity = counts.danger > 0 ? 'danger' : healthPct >= 80 ? 'healthy' : healthPct >= 50 ? 'pending' : 'danger';
+        const chipText = severity === 'healthy' ? 'Frota em ordem' : severity === 'pending' ? 'Atenção parcial' : 'Requer revisão';
+        if (totalEl) totalEl.innerHTML = `${total} <span style="font-size: 1rem; color: var(--text-secondary)">cards</span>`;
+        if (scheduledEl) scheduledEl.innerHTML = `${scheduled} <span style="font-size: 1rem; color: var(--text-secondary)">ativos</span>`;
+        if (healthyEl) healthyEl.innerHTML = `${counts.healthy} <span style="font-size: 1rem; color: var(--text-secondary)">online</span>`;
+        if (pendingEl) pendingEl.innerHTML = `${counts.pending} <span style="font-size: 1rem; color: var(--text-secondary)">parados</span>`;
+        if (dangerEl) dangerEl.innerHTML = `${counts.danger} <span style="font-size: 1rem; color: var(--text-secondary)">ateno</span>`;
+        if (healthScoreEl) healthScoreEl.textContent = score;
+        if (healthScoreEl) healthScoreEl.style.color = severity === 'healthy' ? '#86efac' : severity === 'pending' ? '#fcd34d' : '#fda4af';
+        if (healthDescEl) healthDescEl.textContent = healthPct >= 80 ? `Frota saudável: ${healthPct}% dos agentes respondendo.` : healthPct >= 50 ? `Saúde moderada: ${healthPct}% respondendo; vale checar os pendentes.` : `Atenção: apenas ${healthPct}% respondendo agora.`;
+        if (healthChipEl) healthChipEl.textContent = `${chipText}  ${counts.healthy} online`;
+    }
+
+    function formatarData(str) {
+        if (!str) return "Desconhecido";
+        // Se vier no formato DD-MM HH:MM (ex: 20-06 16:15)
+        if (str.match(/^\d{2}-\d{2}\s\d{2}:\d{2}$/)) {
+            const parts = str.split(' ');
+            const dateParts = parts[0].split('-');
+            const currentYear = new Date().getFullYear();
+            return `${dateParts[0]}/${dateParts[1]}/${currentYear} ${parts[1]}`;
+        }
+        try {
+            const cleanStr = str.replace(' ', 'T');
+            const date = new Date(cleanStr);
+            if (isNaN(date.getTime())) {
+                const alternative = new Date(str.replace(/-/g, '/'));
+                if (isNaN(alternative.getTime())) return str; // Retorna bruta se falhar
+                return alternative.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            }
+            return date.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        } catch (e) {
+            return str;
+        }
+    }
+
+    function toHex(str) {
+        let hex = '';
+        for(let i=0; i<str.length; i++) {
+            hex += str.charCodeAt(i).toString(16).padStart(2, '0');
+        }
+        return hex;
+    }
+
+    function fromHex(hex) {
+        if (!hex) return '';
+        let cleanHex = hex.replace(/^"|"$/g, '');
+        let str = '';
+        for(let i=0; i<cleanHex.length; i+=2) {
+            str += String.fromCharCode(parseInt(cleanHex.substr(i, 2), 16));
+        }
+        return str;
+    }
+
+    // Inicialização da página
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('mppa-portal-theme') || 'dark';
+        changeTheme(savedTheme);
+
+        const salvaKey = localStorage.getItem('mppa-personal-sync-key');
+        if (salvaKey) {
+            syncKey = salvaKey;
+            document.getElementById('sync-key').value = syncKey;
+        }
+
+        buscarStatusTodosBots();
+        // Polling a cada 30 segundos
+        setInterval(buscarStatusTodosBots, 30000);
+    });
+
+    function alterarChaveSincronia() {
+        const novaKey = document.getElementById('sync-key').value.trim().replace(/[^a-zA-Z0-9-_]/g, '');
+        if (novaKey) {
+            syncKey = novaKey;
+            localStorage.setItem('mppa-personal-sync-key', syncKey);
+            buscarStatusTodosBots();
+        }
+    }
+
+    async function buscarStatusTodosBots() {
+        let latestTime = null;
+        let successCount = 0;
+        
+        const promises = Object.keys(botsState).map(async (botId) => {
+            try {
+                const response = await fetch(`${BUCKET_URL}GetValue/${syncKey}/${botId}`, { cache: 'no-store' });
+                if (response.ok) {
+                    const hexValue = await response.json();
+                    if (hexValue && hexValue !== "") {
+                        const botData = JSON.parse(fromHex(hexValue));
+                        botsState[botId] = botData;
+                        atualizarCardUI(botId, botData);
+                        
+                        const timestampVal = botData.timestamp || botData.t;
+                        if (timestampVal) {
+                            let parseStr = timestampVal;
+                            if (timestampVal.match(/^\d{2}-\d{2}\s\d{2}:\d{2}$/)) {
+                                const currentYear = new Date().getFullYear();
+                                const parts = timestampVal.split(' ');
+                                const dateParts = parts[0].split('-');
+                                parseStr = `${currentYear}-${dateParts[1]}-${dateParts[0]}T${parts[1]}`;
+                            } else {
+                                parseStr = parseStr.replace(' ', 'T');
+                            }
+                            const date = new Date(parseStr);
+                            if (!isNaN(date.getTime())) {
+                                if (!latestTime || date > latestTime) {
+                                    latestTime = date;
+                                }
+                            }
+                        }
+                        successCount++;
+                    } else {
+                        atualizarCardSemDados(botId);
+                    }
+                }
+            } catch (e) {
+                console.warn(`Erro ao puxar dados do bot ${botId}:`, e);
+            }
+        });
+
+        await Promise.all(promises);
+
+        updateSummaryMetrics();
+
+        const lastUpdateEl = document.getElementById('last-update-time');
+        const lastUpdateDescEl = document.getElementById('last-update-desc');
+        
+        if (latestTime) {
+            const formattedTime = latestTime.toLocaleDateString('pt-BR') + ' ' + latestTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            lastUpdateEl.textContent = formattedTime;
+            lastUpdateDescEl.textContent = `Último relatório de bot processado em nuvem.`;
+        } else {
+            lastUpdateEl.textContent = "Sem Registros";
+            lastUpdateDescEl.textContent = "Nenhum bot reportou satisfação ainda nesta chave.";
+        }
+    }
+
+    function atualizarCardUI(botId, data) {
+        const statusIndicator = document.getElementById(`status-${botId}`);
+        const boxEl = document.getElementById(`box-${botId}`);
+        if (!statusIndicator || !boxEl) return;
+
+        const status = data.status || data.s;
+        const satisfacao = data.satisfacao || data.m;
+
+        // Atualiza status badge
+        statusIndicator.className = `status-indicator ${status}`;
+        
+        let statusLabel = "Ativo / OK";
+        if (status === "warning") statusLabel = "Atenção / Alerta";
+        if (status === "danger") statusLabel = "Falha / Parado";
+        statusIndicator.textContent = statusLabel;
+
+        // Atualiza caixa de satisfação compacta
+        boxEl.className = `action-needed-box ${status}`;
+        boxEl.textContent = satisfacao || "Robô rodou sem emitir mensagem detalhada.";
+    }
+
+    function atualizarCardSemDados(botId) {
+        const statusIndicator = document.getElementById(`status-${botId}`);
+        const boxEl = document.getElementById(`box-${botId}`);
+        if (!statusIndicator || !boxEl) return;
+
+        statusIndicator.className = "status-indicator none";
+        statusIndicator.textContent = "Aguardando";
+        boxEl.className = "action-needed-box";
+        boxEl.textContent = "Aguardando relatório de execução do Alienware local.";
+    }
+
+    // Gerenciamento do Modal
+    function abrirModal(botId) {
+        const data = botsState[botId];
+        const details = botsDetails[botId];
+        
+        document.getElementById('modal-avatar').textContent = details.avatar;
+        document.getElementById('modal-title').textContent = details.name;
+        
+        const tagEl = document.getElementById('modal-tag');
+        tagEl.className = `agent-tag ${details.tagClass}`;
+        tagEl.textContent = details.tag;
+
+        const timestampEl = document.getElementById('modal-timestamp');
+        const statusBadgeEl = document.getElementById('modal-status-badge');
+        const satisfacaoEl = document.getElementById('modal-satisfacao');
+        const extraSection = document.getElementById('modal-extra-section');
+        const extraDataEl = document.getElementById('modal-extra-data');
+
+        if (data) {
+            const timestamp = data.timestamp || data.t;
+            const status = data.status || data.s;
+            const satisfacao = data.satisfacao || data.m;
+            const extra = data.extra || data.e;
+
+            timestampEl.textContent = formatarData(timestamp);
+            
+            // Badge do status
+            statusBadgeEl.className = `status-indicator ${status}`;
+            statusBadgeEl.style.display = "inline-flex";
+            let statusLabel = "Sucesso / Executado";
+            if (status === "warning") statusLabel = "Atenção (Sem compra/Operação)";
+            if (status === "danger") statusLabel = "Erro / Falha crítica";
+            statusBadgeEl.textContent = statusLabel;
+            
+            satisfacaoEl.textContent = satisfacao || "Nenhuma mensagem de satisfação fornecida.";
+            
+            if (extra && Object.keys(extra).length > 0) {
+                extraSection.style.display = "block";
+                extraDataEl.textContent = JSON.stringify(extra, null, 2);
+            } else {
+                extraSection.style.display = "none";
+            }
+        } else {
+            timestampEl.textContent = "Sem registros";
+            statusBadgeEl.className = "status-indicator none";
+            statusBadgeEl.textContent = "Nunca rodou";
+            satisfacaoEl.textContent = `Este robô ainda não enviou nenhum log para a chave de sincronia "${syncKey}".\n\nCertifique-se de configurar a chamada HTTP POST no script local do robô para atualizar o status automaticamente.`;
+            extraSection.style.display = "none";
+        }
+
+        document.getElementById('modal-overlay').classList.add('active');
+    }
+
+    function fecharModal() {
+        document.getElementById('modal-overlay').classList.remove('active');
+    }
+
+    function fecharModalExterno(e) {
+        if (e.target.id === 'modal-overlay') {
+            fecharModal();
+        }
+    }
+
+    // Funções de Temas e Sessão
+    function changeTheme(themeName) {
+        document.body.className = '';
+        if (themeName !== 'dark') {
+            document.body.classList.add('theme-' + themeName);
+        }
+        localStorage.setItem('mppa-portal-theme', themeName);
+        
+        // Atualizar botões
+        document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.getElementById('btn-theme-' + themeName);
+        if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function logout() {
+        sessionStorage.removeItem('mppa_session_active');
+        window.location.replace('login.html');
+    }
+</script>
+</body>
+</html>
