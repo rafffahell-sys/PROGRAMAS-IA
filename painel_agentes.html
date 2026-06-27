@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script src="auth-guard.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Agentes - Recursos Humanos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.35);
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.25);
+            --warning: #f59e0b;
+            --warning-glow: rgba(245, 158, 11, 0.25);
+            --danger: #ef4444;
+            --danger-glow: rgba(239, 68, 68, 0.25);
+            --info: #06b6d4;
+            --info-glow: rgba(6, 182, 212, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding: 2.5rem;
+        }
+
+        /* Marca d'água de Contabilidade (Caduceu Real) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image: url("caduceu_contabilidade.png");
+            background-repeat: repeat;
+            background-size: 200px 242px;
+            opacity: 0.04;
+        }
+        body.theme-light::before {
+            background-image: url("caduceu_contabilidade.png");
+            filter: invert(1);
+            opacity: 0.08;
+        }
+        body.theme-beige::before {
+            background-image: url("caduceu_contabilidade.png");
+            filter: invert(1) sepia(1) saturate(5) hue-rotate(340deg);
+            opacity: 0.08;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5b4fc 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title p {
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.2s;
+        }
+
+        .back-button:hover {
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sync-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+        }
+
+        .sync-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .sync-input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+            width: 180px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .sync-input:focus {
+            border-color: var(--primary);
+        }
+
+        /* METRICS ROW */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .metric-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-val {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            color: #fff;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .metric-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* CHECKLIST WIDGET */
+        .main-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .checklist-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            height: fit-content;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .checklist-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-secondary);
+            border-radius: 6px;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            margin-top: 0.15rem;
+        }
+
+        .checklist-checkbox:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .checklist-checkbox:checked::after {
+            content: "✓";
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .checklist-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .checklist-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* AGENTS CARDS GRID */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .agent-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.75rem;
+            backdrop-filter: blur(12px);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agent-card:hover {
+            transform: scale(1.01);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.08);
+        }
+
+        .agent-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .agent-details h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .agent-tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .agent-tag.monthly {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: #22d3ee;
+        }
+
+        .agent-tag.demand {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+        }
+
+        .agent-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .agent-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-icon {
+            color: var(--primary);
+        }
+
+        .agent-status-section {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        .status-indicator {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.35rem 0.75rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .status-indicator.healthy {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-indicator.pending {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .action-needed-box {
+            font-size: 0.8rem;
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px dashed rgba(239, 68, 68, 0.25);
+            color: #fca5a5;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
+            max-width: 250px;
+            text-align: left;
+        }
+
+        .action-needed-box.success {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px dashed rgba(16, 185, 129, 0.25);
+            color: #a7f3d0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        /* ── TEMAS ADICIONAIS ───────────────────────────── */
+        /* Tema Claro */
+        body.theme-light {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.65);
+            --border-color: rgba(15, 23, 42, 0.08);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --primary: #4f46e5;
+            --primary-glow: rgba(79, 70, 229, 0.15);
+            --success: #059669;
+            --success-glow: rgba(5, 150, 105, 0.15);
+            --warning: #d97706;
+            --warning-glow: rgba(217, 119, 6, 0.15);
+            --danger: #dc2626;
+            --danger-glow: rgba(220, 38, 38, 0.15);
+            --info: #0891b2;
+            --info-glow: rgba(8, 145, 178, 0.15);
+        }
+        
+        body.theme-light {
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(8, 145, 178, 0.04) 0%, transparent 40%);
+        }
+
+        body.theme-light .agent-card:hover {
+            border-color: rgba(79, 70, 229, 0.3);
+            box-shadow: 0 8px 30px rgba(79, 70, 229, 0.06);
+        }
+
+        body.theme-light .checklist-item {
+            border-bottom-color: rgba(15, 23, 42, 0.05);
+        }
+
+        body.theme-light .agent-avatar {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        body.theme-light .sync-input {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        body.theme-light .metric-val {
+            color: var(--text-primary);
+        }
+
+        body.theme-light .rubrics-copy-section {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        body.theme-light .rubrics-copy-section input {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-primary);
+        }
+
+        body.theme-light .agent-tag.monthly {
+            background: rgba(6, 182, 212, 0.08);
+            color: #0891b2;
+        }
+        
+        body.theme-light .agent-tag.demand {
+            background: rgba(245, 158, 11, 0.08);
+            color: #d97706;
+        }
+
+        body.theme-light .action-needed-box {
+            background: rgba(220, 38, 38, 0.05);
+            color: #b91c1c;
+            border-color: rgba(220, 38, 38, 0.2);
+        }
+        
+        body.theme-light .action-needed-box.success {
+            background: rgba(5, 150, 105, 0.05);
+            color: #047857;
+            border-color: rgba(5, 150, 105, 0.2);
+        }
+
+        /* Tema Bege */
+        body.theme-beige {
+            --bg-color: #faf6f0;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(120, 113, 108, 0.15);
+            --text-primary: #1c1917;
+            --text-secondary: #57534e;
+            --primary: #c2410c;
+            --primary-glow: rgba(194, 65, 12, 0.15);
+            --success: #15803d;
+            --success-glow: rgba(21, 128, 61, 0.15);
+            --warning: #b45309;
+            --warning-glow: rgba(180, 83, 9, 0.15);
+            --danger: #b91c1c;
+            --danger-glow: rgba(185, 28, 28, 0.15);
+            --info: #0369a1;
+            --info-glow: rgba(3, 105, 161, 0.15);
+        }
+        
+        body.theme-beige {
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(194, 65, 12, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(3, 105, 161, 0.04) 0%, transparent 40%);
+        }
+
+        body.theme-beige .agent-card:hover {
+            border-color: rgba(194, 65, 12, 0.3);
+            box-shadow: 0 8px 30px rgba(194, 65, 12, 0.06);
+        }
+
+        body.theme-beige .checklist-item {
+            border-bottom-color: rgba(120, 113, 108, 0.08);
+        }
+
+        body.theme-beige .agent-avatar {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        body.theme-beige .sync-input {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        body.theme-beige .metric-val {
+            color: var(--text-primary);
+        }
+
+        body.theme-beige .rubrics-copy-section {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        body.theme-beige .rubrics-copy-section input {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-primary);
+        }
+
+        body.theme-beige .agent-tag.monthly {
+            background: rgba(3, 105, 161, 0.08);
+            color: #0369a1;
+        }
+        
+        body.theme-beige .agent-tag.demand {
+            background: rgba(180, 83, 9, 0.08);
+            color: #b45309;
+        }
+
+        body.theme-beige .action-needed-box {
+            background: rgba(185, 28, 28, 0.05);
+            color: #b91c1c;
+            border-color: rgba(185, 28, 28, 0.2);
+        }
+        
+        body.theme-beige .action-needed-box.success {
+            background: rgba(21, 128, 61, 0.05);
+            color: #166534;
+            border-color: rgba(21, 128, 61, 0.2);
+        }
+
+        /* Estilo do Alternador */
+        .theme-switcher {
+            display: inline-flex;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            padding: 4px;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+        }
+        
+        body.theme-light .theme-switcher,
+        body.theme-beige .theme-switcher {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .theme-btn:hover {
+            color: var(--text-primary);
+        }
+        
+        .theme-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .theme-switcher.dashboard-switcher {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            margin-top: 0;
+            z-index: 100;
+            gap: 2px;
+            padding: 3px;
+            border-radius: 10px;
+        }
+        
+        .theme-switcher.dashboard-switcher .theme-btn {
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            gap: 0;
+        }
+
+        .logout-container-fixed {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Alternador de Temas Discreto no Canto Superior Esquerdo -->
+<div class="theme-switcher dashboard-switcher">
+    <button onclick="changeTheme('dark')" id="btn-theme-dark" class="theme-btn active" title="Tema Escuro">🌌</button>
+    <button onclick="changeTheme('light')" id="btn-theme-light" class="theme-btn" title="Tema Claro">☀️</button>
+    <button onclick="changeTheme('beige')" id="btn-theme-beige" class="theme-btn" title="Tema Bege">🌾</button>
+</div>
+
+<!-- Botão Sair Discreto no Canto Superior Direito -->
+<div class="logout-container-fixed">
+    <button onclick="logout()" class="theme-btn" style="background: var(--danger-glow); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; padding: 6px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">🚪 Sair</button>
+</div>
+
+<div class="container">
+    <header>
+        <div class="header-title">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                <a href="index.html" class="back-button">← Voltar ao Portal</a>
+            </div>
+            <h1>Painel de Agentes</h1>
+            <p>Acompanhamento de prazos e relatórios para a equipe da folha de pagamento (Rafael, Giovane, Tati)</p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;">
+            <div class="sync-section">
+                <span class="sync-label">Chave de Sincronia:</span>
+                <input type="text" class="sync-input" id="sync-key" value="mppa-folha-rh" onchange="alterarChaveSincronia()">
+            </div>
+        </div>
+    </header>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-title">Agentes Ativos no Trabalho</div>
+            <div class="metric-val">10 <span style="font-size: 1rem; color: var(--text-secondary)">Sistemas</span></div>
+            <div class="metric-desc">Focado nos agentes de Diárias, QDIP, Abono, Teto 3, RRA, PVTAC, Ponto, Ponto Retroativo, Devoluções e Backup.</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Próximo Prazo Crítico</div>
+            <div class="metric-val" id="next-deadline" style="color: var(--warning);">Dia 01 <span style="font-size: 1.2rem; font-weight: 500">23:59</span></div>
+            <div class="metric-desc">Carga das diárias da informática (Agente de Diárias)</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Sincronização em Nuvem</div>
+            <div class="metric-val" id="sync-status" style="font-size: 1.2rem; color: var(--success)">Ativa</div>
+            <div class="metric-desc" id="sync-desc">Sincronizado via Nuvem (Sem necessidade de apps instalados).</div>
+        </div>
+    </div>
+
+    <div class="main-section">
+        <!-- AGENTS LIST -->
+        <div>
+            <h2 class="section-title">🤖 Nossos Agentes da Folha</h2>
+            <div class="agents-grid">
+                
+                <!-- BOT DIARIAS -->
+                <div class="agent-card">
+                    <div class="agent-avatar">📅</div>
+                    <div class="agent-details">
+                        <h3>Agente de Diárias <span class="agent-tag monthly">Mensal</span></h3>
+                        <p class="agent-desc">Converte a planilha de diárias brutas enviada pela informática no arquivo tabulado de 13 colunas exigido para importação direta no sistema MENTORH.</p>
+                        <div class="agent-meta">
+                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Todo dia 2 às 07:00</div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: <code>INBOX/bot diarias/</code></div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-diarias">Aguardando Input</span>
+                        <div class="action-needed-box" id="box-diarias">⚠️ A planilha da informática deve ser salva na pasta do bot até o dia 01 às 23:59.</div>
+                    </div>
+                </div>
+
+                <!-- AGENTE BLOG DANIEL -->
+                <div class="agent-card">
+                    <div class="agent-avatar">📝</div>
+                    <div class="agent-details">
+                        <h3>Agente Blog Daniel <span class="agent-tag monthly">Semanal</span></h3>
+                        <p class="agent-desc">Gera rascunhos de artigos para o blog de psicologia e saúde mental, com tom didático, acolhedor e baseado em evidências, enviando o texto por e-mail toda sexta-feira às 16:00 para revisão antes da publicação.</p>
+                        <div class="agent-meta">
+                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Toda sexta às 16:00</div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: <code>INBOX/BLOG DANIEL/</code> + e-mail</div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-blog-daniel">Aguardando Configuração</span>
+                        <div class="action-needed-box" id="box-blog-daniel">⚠️ Conectar a senha de app do Gmail e confirmar o e-mail de destino do Daniel para ativar os envios semanais.</div>
+                    </div>
+                </div>
+
+                <!-- AGENTE QDIP -->
+                <div class="agent-card">
+                    <div class="agent-avatar">📑</div>
+                    <div class="agent-details">
+                        <h3>Agente QDIP <span class="agent-tag monthly">Mensal</span></h3>
+                        <p class="agent-desc">Processa arquivos XML/XLS da folha de pagamento do MENTORH e compila históricos previdenciários analíticos do IGEPPS para Aposentados, Pensionistas e Ativos.</p>
+                        <div class="agent-meta">
+                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Mensal (Pós-Fechamento da Folha)</div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: <code>INBOX/IGEPPS/</code></div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-qdip">Aguardando Input</span>
+                        <div class="action-needed-box" id="box-qdip">⚠️ Inserir arquivos XML/XLS da competência na pasta IGEPPS após o fechamento mensal da folha.</div>
+                    </div>
+                </div>
+
+                <!-- AUDITOR ABONO PERM X PREV -->
+                <div class="agent-card">
+                    <div class="agent-avatar">🛡️</div>
+                    <div class="agent-details">
+                        <h3>Agente do Abono de Permanência <span class="agent-tag demand">Sob Demanda</span></h3>
+                        <p class="agent-desc">Cruza e audita lançamentos da folha de pagamento, comparando o desconto previdenciário com o valor de Abono de Permanência pago, apontando inconsistências de valores.</p>
+                        
+                        <!-- Rubrics Copy Section -->
+                        <div class="rubrics-copy-section" style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Rubricas para Relatório MENTORH:</span>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <input type="text" id="rubricas-abono" readonly value="1055;1062;5201;5203;1431;1032;3135;5157;5198;5199;5197;1297;1183" style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 8px; color: var(--text-primary); font-size: 0.8rem; font-family: monospace;" />
+                                <button onclick="copiarRubricas(this, 'rubricas-abono')" style="background: var(--primary); border: none; border-radius: 6px; color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 10px var(--primary-glow)'" onmouseout="this.style.boxShadow='none'">Copiar</button>
+                            </div>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 5px;">* Emita o relatório no MENTORH contendo estas rubricas para permitir a auditoria automática do agente.</small>
+                        </div>
+
+                        <div class="agent-meta" style="margin-top: 12px;">
+                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Sob Demanda (Instantâneo)</div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: PDF no <code>MEU CÉLEBRO =)/Inbox/</code></div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-abono">Aguardando Input</span>
+                        <div class="action-needed-box" id="box-abono">⚠️ Salvar PDF da folha normal na Inbox para auditoria cruzada de abonos.</div>
+                    </div>
+                </div>
+
+                <!-- AUDITOR TETO 3 GAO -->
+                <div class="agent-card">
+                    <div class="agent-avatar">🛡️</div>
+                    <div class="agent-details">
+                        <h3>Agente Teto 3 (GAO) <span class="agent-tag demand">Sob Demanda</span></h3>
+                        <p class="agent-desc">Audita e identifica membros cujas vantagens cumulativas indenizatórias extrapolaram o teto constitucional de 35% de seu subsídio, gerando o arquivo de importação do redutor 5283.</p>
+                        
+                        <!-- Rubrics Copy Section -->
+                        <div class="rubrics-copy-section" style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Rubricas de Controle:</span>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <input type="text" id="rubricas-teto3" readonly value="1317;5279;5280;5281;5282;5285;5283" style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 8px; color: var(--text-primary); font-size: 0.8rem; font-family: monospace;" />
+                                <button onclick="copiarRubricas(this, 'rubricas-teto3')" style="background: var(--primary); border: none; border-radius: 6px; color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 10px var(--primary-glow)'" onmouseout="this.style.boxShadow='none'">Copiar</button>
+                            </div>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 5px;">* Salve a planilha ou PDF com as rubricas de subsídio (1317), vantagens (5279 a 5285) e redutor (5283).</small>
+                        </div>
+
+                        <div class="agent-meta" style="margin-top: 12px;">
+                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Sob Demanda (Instantâneo)</div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: PDF ou Excel no <code>MEU CÉLEBRO =)/Inbox/</code></div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-teto3">Aguardando Input</span>
+                        <div class="action-needed-box" id="box-teto3">⚠️ Salvar planilha ou PDF GAO no diretório <code>MEU CÉLEBRO =)/Inbox</code> para auditoria do teto de 35%.</div>
+                    </div>
+                </div>
+
+                <!-- AGENTE RRA -->
+                <div class="agent-card">
+                    <div class="agent-avatar">📊</div>
+                    <div class="agent-details">
+                        <h3>Agente RRA <span class="agent-tag demand">Sob Demanda</span></h3>
+                        <p class="agent-desc">Apura o imposto de renda sobre Rendimentos Recebidos Acumuladamente (RRA), com suporte a tabelas progressivas históricas de IRRF. Permite o cálculo de base, deduções legais e líquido.</p>
+                        
+                        <!-- Format Copy Section -->
+                        <div class="rubrics-copy-section" style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Layout de Importação em Lote (CSV):</span>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <input type="text" id="layout-rra" readonly value="matricula;valor_bruto;qtd_meses;competencia;previdencia;pensao" style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 8px; color: var(--text-primary); font-size: 0.8rem; font-family: monospace;" />
+                                <button onclick="copiarRubricas(this, 'layout-rra')" style="background: var(--primary); border: none; border-radius: 6px; color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 12px var(--primary-glow)'" onmouseout="this.style.boxShadow='none'">Copiar</button>
+                            </div>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 5px;">* Ordene as colunas e salve como CSV ou copie e cole para calcular em lote.</small>
+                        </div>
+
+                        <div style="margin-top: 12px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                            <a href="calculadora_rra.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary); border: none; border-radius: 8px; color: #fff; padding: 8px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 12px var(--primary-glow)'" onmouseout="this.style.boxShadow='none'">⚡ Abrir Calculadora RRA</a>
+                            <div class="agent-meta" style="margin-top: 0;">
+                                <div class="meta-item" style="margin-top: 0;"><span class="meta-icon">⏰</span> Execução: Sob Demanda (Instantâneo)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-rra">Aguardando Input</span>
+                        <div class="action-needed-box" id="box-rra">⚠️ Colar os dados no importador em lote ou preencher o formulário para apuração do RRA.</div>
+                    </div>
+                </div>
+
+                <!-- AGENTE PVTAC -->
+                <div class="agent-card">
+                    <div class="agent-avatar">⚖️</div>
+                    <div class="agent-details">
+                        <h3>Agente PVTAC <span class="agent-tag monthly">Mensal</span></h3>
+                        <p class="agent-desc">Efetua auditoria e análise comparativa da rubrica 05278 - PVTAC (Parcela de Valorização por Tempo de Antiguidade na Carreira), identificando variações de percentual e controle de saídas de membros.</p>
+                        <div class="agent-meta" style="margin-top: 12px;">
+                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Mensal (Pós-Fechamento da Folha)</div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: PDF no <code>INBOX/</code></div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-pvtac">Aguardando Input</span>
+                        <div class="action-needed-box" id="box-pvtac">⚠️ Salvar os PDFs do PVTAC de Maio e Junho na Inbox para auditoria comparativa.</div>
+                    </div>
+                </div>
+
+                <!-- AGENTE DO PONTO -->
+                <div class="agent-card">
+                    <div class="agent-avatar">⏰</div>
+                    <div class="agent-details">
+                        <h3>Agente do Ponto <span class="agent-tag monthly">Mensal</span></h3>
+                        <p class="agent-desc">Processa o fechamento do ponto eletrônico dos servidores do MPPA para calcular e exportar descontos de folha (MENTORH).</p>
+                        
+                        <!-- Modular Info & Input Section -->
+                        <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Módulo Ativo:</span>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block;">📍 Módulo Faltas - Mês Atual</span>
+                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--warning); display: block; margin-top: 4px;">⚠️ Desenvolvimento pausado no Módulo: Plantões Servidor</span>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">* Outros módulos do agente do ponto (como plantões, parametrização de férias, licenças e afastamentos) serão adicionados futuramente.</small>
+                        </div>
+
+                        <div class="agent-meta" style="margin-top: 12px;">
+                            <div class="meta-item"><span class="meta-icon">📥</span> Entrada Exigida: <code>Planilha do Ponto (.xlsx)</code></div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Pasta: <code>INBOX/PROJETO PONTO - ANALISE E IMPORTAÇÃO/ARQUIVOS INPUT/</code></div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-ponto">Aguardando Input</span>
+                        <div class="action-needed-box" id="box-ponto">⚠️ Salvar planilha de faltas do mês de referência na pasta ARQUIVOS INPUT para iniciar o cálculo.</div>
+                    </div>
+                </div>
+
+                <!-- AGENTE DO PONTO - FALTAS RETROATIVAS -->
+                <div class="agent-card">
+                    <div class="agent-avatar">⏱️</div>
+                    <div class="agent-details">
+                        <h3>Agente do Ponto - Faltas Retroativas <span class="agent-tag demand">Sob Demanda</span></h3>
+                        <p class="agent-desc">Processa a apuração e cálculo de descontos de faltas de competências anteriores (retroativas). Realiza busca inteligente nas prévias de cada mês correspondente para identificar a Base 6 e calcula o desconto proporcional de vencimentos, vantagens e vale alimentação.</p>
+                        
+                        <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Módulo Ativo:</span>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block;">📍 Módulo Faltas Retroativas</span>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">* Gera a minuta de despacho (.md) e o arquivo Word (.docx) formatado na Inbox.</small>
+                        </div>
+
+                        <div class="agent-meta" style="margin-top: 12px;">
+                            <div class="meta-item"><span class="meta-icon">📥</span> Entradas Exigidas: <code>Ponto Consolidado (.pdf) e Prévia do Servidor (.xlsx/.pdf)</code></div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Pasta: <code>INBOX/ e INBOX/PROJETO PONTO - ANALISE E IMPORTAÇÃO/PREVIA SERVIDOR/</code></div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-ponto-retroativo">Aguardando Input</span>
+                        <div class="action-needed-box" id="box-ponto-retroativo">⚠️ Salvar o PDF do ponto (com as faltas retroativas) e as prévias dos servidores na Inbox para processamento.</div>
+                    </div>
+                </div>
+
+                <!-- AGENTE DO PONTO - DEVOLUÇÕES -->
+                <div class="agent-card">
+                    <div class="agent-avatar">🔄</div>
+                    <div class="agent-details">
+                        <h3>Agente do Ponto - Devoluções <span class="agent-tag monthly">Mensal</span></h3>
+                        <p class="agent-desc">Processa a planilha de devolução de faltas e de auxílio alimentação dos membros. Calcula valores a devolver, gerencia o incremento dinâmico de fatores para evitar repetições no MENTORH e gera os arquivos formatados (.xlsx e .txt) para importação direta.</p>
+                        
+                        <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Módulo Ativo:</span>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block;">📍 Módulo Devolução de Faltas e Alimentação</span>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">* Utiliza as rubricas 1192 (Devolução Faltas) e 1289 (Devolução Aux. Alimentação) com fatores dinâmicos para a mesma matrícula.</small>
+                        </div>
+
+                        <div class="agent-meta" style="margin-top: 12px;">
+                            <div class="meta-item"><span class="meta-icon">📥</span> Entrada Exigida: <code>Planilha de Devoluções (.xlsx)</code></div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Pasta: <code>INBOX/PROJETO PONTO - ANALISE E IMPORTAÇÃO/ARQUIVOS INPUT/</code></div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator pending" id="status-ponto-devolucoes">Aguardando Input</span>
+                        <div class="action-needed-box" id="box-ponto-devolucoes">⚠️ Salvar planilha de devoluções (ex: 3.DEVOLUÇÕES...) na pasta ARQUIVOS INPUT para iniciar o processamento.</div>
+                    </div>
+                </div>
+
+                <!-- AGENTE DE BACKUP -->
+                <div class="agent-card">
+                    <div class="agent-avatar">💾</div>
+                    <div class="agent-details">
+                        <h3>Agente de Backup <span class="agent-tag monthly">Mensal</span></h3>
+                        <p class="agent-desc">Realiza o fechamento mensal da competência. Compacta ferramentas, contextos e repositório de códigos em um arquivo compactado (ZIP) e gera o relatório de auditoria detalhado (Markdown) no Google Drive.</p>
+                        <div class="agent-meta">
+                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Último dia do mês às 23:50</div>
+                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: <code>Backups/</code> e <code>Projetos/</code> no Cérebro</div>
+                        </div>
+                    </div>
+                    <div class="agent-status-section">
+                        <span class="status-indicator healthy" id="status-backup">Ativo / Agendado</span>
+                        <div class="action-needed-box success" id="box-backup">✓ Agendamento automatizado no Windows Task Scheduler para rodar no final de cada mês.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RIGHT SIDEBAR (USER CHECKLIST) -->
+        <div>
+            <h2 class="section-title">📋 Checklist de Entradas</h2>
+            <div class="checklist-container">
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.4;">
+                    Marque as tarefas conforme enviar os relatórios/arquivos para as pastas de processamento.
+                </p>
+
+                <!-- CHECK 1 -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-diarias" onchange="toggleCheck('diarias')">
+                    <div class="checklist-info">
+                        <h4>Agente de Diárias</h4>
+                        <p>Upload do arquivo bruto da informática na pasta <code>INBOX/bot diarias</code>.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 2 -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-qdip" onchange="toggleCheck('qdip')">
+                    <div class="checklist-info">
+                        <h4>Agente QDIP</h4>
+                        <p>Copiar os relatórios de fechamento da folha no diretório <code>INBOX/IGEPPS</code>.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 2B -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-blog-daniel" onchange="toggleCheck('blog-daniel')">
+                    <div class="checklist-info">
+                        <h4>Agente Blog Daniel</h4>
+                        <p>Gerar e revisar o rascunho semanal e disparar o e-mail de sexta às 16:00.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 2C -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-site-daniel" onchange="toggleCheck('site-daniel')">
+                    <div class="checklist-info">
+                        <h4>Agente Site Daniel</h4>
+                        <p>Manter o site institucional sincronizado e o card de acesso rápido visível no painel.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 3 -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-abono" onchange="toggleCheck('abono')">
+                    <div class="checklist-info">
+                        <h4>Agente do Abono de Permanência</h4>
+                        <p>Salvar PDF da folha normal na pasta compartilhada <code>MEU CÉLEBRO =)/Inbox</code>.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 4 -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-teto3" onchange="toggleCheck('teto3')">
+                    <div class="checklist-info">
+                        <h4>Agente Teto 3 (GAO)</h4>
+                        <p>Salvar planilha ou PDF GAO no diretório <code>MEU CÉLEBRO =)/Inbox</code>.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 5 -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-rra" onchange="toggleCheck('rra')">
+                    <div class="checklist-info">
+                        <h4>Agente RRA</h4>
+                        <p>Processamento dos dados de RRA via formulário individual ou importador em lote.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 6 -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-pvtac" onchange="toggleCheck('pvtac')">
+                    <div class="checklist-info">
+                        <h4>Agente PVTAC</h4>
+                        <p>Upload dos PDFs do PVTAC (Maio e Junho) na pasta <code>INBOX/</code>.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 7 -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-ponto" onchange="toggleCheck('ponto')">
+                    <div class="checklist-info">
+                        <h4>Agente do Ponto</h4>
+                        <p>Upload da planilha de faltas na pasta <code>ARQUIVOS INPUT</code>.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 8 -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-ponto-retroativo" onchange="toggleCheck('ponto-retroativo')">
+                    <div class="checklist-info">
+                        <h4>Agente do Ponto - Faltas Retroativas</h4>
+                        <p>Salvar o PDF do ponto e prévias dos servidores correspondentes na pasta <code>INBOX</code>.</p>
+                    </div>
+                </div>
+
+                <!-- CHECK 9 -->
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check-ponto-devolucoes" onchange="toggleCheck('ponto-devolucoes')">
+                    <div class="checklist-info">
+                        <h4>Agente do Ponto - Devoluções</h4>
+                        <p>Upload da planilha de devolução de faltas na pasta <code>ARQUIVOS INPUT</code>.</p>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+    <footer>
+        By Rafael F. Lima & Giovane Moura · Desenvolvido via Google Gemini Antigravity IA Agent · 2026
+    </footer>
+</div>
+
+<script>
+    const BUCKET_URL = "https://keyvalue.immanuel.co/api/KeyVal/";
+    let syncKey = "mppa-folha-rh";
+    
+    let localState = {
+        diarias: false,
+        qdip: false,
+        'blog-daniel': false,
+        'site-daniel': true,
+        abono: false,
+        teto3: false,
+        rra: false,
+        pvtac: false,
+        ponto: false,
+        'ponto-retroativo': false,
+        'ponto-devolucoes': false
+    };
+
+    function toHex(str) {
+      let hex = '';
+      for(let i=0; i<str.length; i++) {
+        hex += str.charCodeAt(i).toString(16).padStart(2, '0');
+      }
+      return hex;
+    }
+
+    function fromHex(hex) {
+      if (!hex) return '';
+      let cleanHex = hex.replace(/^"|"$/g, '');
+      let str = '';
+      for(let i=0; i<cleanHex.length; i+=2) {
+        str += String.fromCharCode(parseInt(cleanHex.substr(i, 2), 16));
+      }
+      return str;
+    }
+
+    // Inicialização da página
+    document.addEventListener("DOMContentLoaded", () => {
+        const salvaKey = localStorage.getItem('mppa-sync-key');
+        if (salvaKey) {
+            syncKey = salvaKey;
+            document.getElementById('sync-key').value = syncKey;
+        }
+
+        ['diarias', 'qdip', 'blog-daniel', 'site-daniel', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
+            const val = localStorage.getItem('mppa-check-' + item) === 'true';
+            localState[item] = val;
+            document.getElementById('check-' + item).checked = val;
+            updateUI(item, val);
+        });
+
+        puxarEstadoNuvem();
+        setInterval(puxarEstadoNuvem, 10000);
+    });
+
+    function alterarChaveSincronia() {
+        const novaKey = document.getElementById('sync-key').value.trim().replace(/[^a-zA-Z0-9-_]/g, '');
+        if (novaKey) {
+            syncKey = novaKey;
+            localStorage.setItem('mppa-sync-key', syncKey);
+            puxarEstadoNuvem();
+        }
+    }
+
+    async function puxarEstadoNuvem() {
+        const statusEl = document.getElementById('sync-status');
+        const descEl = document.getElementById('sync-desc');
+        try {
+            const response = await fetch(`${BUCKET_URL}GetValue/${syncKey}/agentes`, { cache: 'no-store' });
+            if (response.ok) {
+                const hexValue = await response.json();
+                if (hexValue && hexValue !== "") {
+                    const state = JSON.parse(fromHex(hexValue));
+                    localState = state;
+                    
+                    ['diarias', 'qdip', 'blog-daniel', 'site-daniel', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
+                        const checked = !!state[item];
+                        document.getElementById('check-' + item).checked = checked;
+                        updateUI(item, checked);
+                    });
+                } else {
+                    gravarEstadoNuvem();
+                }
+                
+                statusEl.textContent = "Sincronizado ✓";
+                statusEl.style.color = "var(--success)";
+                descEl.textContent = "Sincronia ativa em nuvem com Tati e Giovane.";
+            }
+        } catch (e) {
+            console.warn("Falha de conexão com a nuvem, operando offline:", e);
+            statusEl.textContent = "Offline (Local)";
+            statusEl.style.color = "var(--warning)";
+            descEl.textContent = "Não foi possível conectar. Alterações serão salvas localmente.";
+        }
+    }
+
+    async function gravarEstadoNuvem() {
+        try {
+            const hexVal = toHex(JSON.stringify(localState));
+            await fetch(`${BUCKET_URL}UpdateValue/${syncKey}/agentes/${hexVal}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: ""
+            });
+        } catch (e) {
+            console.error("Erro ao gravar estado na nuvem:", e);
+        }
+    }
+
+    // EVENTOS DE TELA
+    function toggleCheck(item) {
+        const checked = document.getElementById('check-' + item).checked;
+        localStorage.setItem('mppa-check-' + item, checked);
+        localState[item] = checked;
+        
+        updateUI(item, checked);
+        gravarEstadoNuvem();
+    }
+
+    function updateUI(item, isChecked) {
+        const statusEl = document.getElementById('status-' + item);
+        const boxEl = document.getElementById('box-' + item);
+        
+        if (!statusEl || !boxEl) return;
+        
+        if (isChecked) {
+            statusEl.className = "status-indicator healthy";
+            statusEl.textContent = "Pronto / Processado";
+            boxEl.className = "action-needed-box success";
+            boxEl.textContent = "✓ Relatório ou arquivo de entrada já providenciado nesta competência.";
+        } else {
+            statusEl.className = "status-indicator pending";
+            statusEl.textContent = "Aguardando Input";
+            boxEl.className = "action-needed-box";
+            if (item === 'diarias') {
+                boxEl.textContent = "⚠️ A planilha da informática deve ser salva na pasta do bot até o dia 01 às 23:59.";
+        } else if (item === 'qdip') {
+            boxEl.textContent = "⚠️ Inserir arquivos XML/XLS da competência na pasta IGEPPS após o fechamento mensal da folha.";
+        } else if (item === 'blog-daniel') {
+            boxEl.textContent = "⚠️ Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta às 16:00.";
+        } else if (item === 'site-daniel') {
+            boxEl.textContent = "⚠️ Card de acesso rápido do Daniel e sincronização visual do site institucional.";
+        } else if (item === 'teto3') {
+            boxEl.textContent = "⚠️ Salvar planilha ou PDF de vantagens (GAO) na Inbox para auditoria do teto de 35%.";
+        } else if (item === 'rra') {
+            boxEl.textContent = "⚠️ Colar os dados no importador em lote ou preencher o formulário para apuração do RRA.";
+            } else if (item === 'pvtac') {
+                boxEl.textContent = "⚠️ Salvar os PDFs do PVTAC de Maio e Junho na Inbox para auditoria comparativa.";
+            } else if (item === 'ponto') {
+                boxEl.textContent = "⚠️ Salvar planilha de faltas do mês de referência na pasta ARQUIVOS INPUT para iniciar o cálculo.";
+            } else if (item === 'ponto-retroativo') {
+                boxEl.textContent = "⚠️ Salvar o PDF do ponto (com faltas retroativas) e as prévias dos servidores na Inbox para processamento.";
+            } else if (item === 'ponto-devolucoes') {
+                boxEl.textContent = "⚠️ Salvar a planilha de devoluções (3.DEVOLUÇÕES...) na pasta ARQUIVOS INPUT para iniciar o processamento.";
+            } else {
+                boxEl.textContent = "⚠️ Salvar PDF da folha normal na Inbox para auditoria cruzada de abonos.";
+            }
+        }
+
+        updateNextDeadline();
+    }
+
+    function updateNextDeadline() {
+        const checkDiarias = document.getElementById('check-diarias').checked;
+        const checkQdip = document.getElementById('check-qdip').checked;
+        const checkTeto3 = document.getElementById('check-teto3').checked;
+        const checkRra = document.getElementById('check-rra').checked;
+        const checkPvtac = document.getElementById('check-pvtac').checked;
+        const checkPonto = document.getElementById('check-ponto').checked;
+        const checkPontoRetroativo = document.getElementById('check-ponto-retroativo').checked;
+        const checkPontoDevolucoes = document.getElementById('check-ponto-devolucoes').checked;
+        const deadlineEl = document.getElementById('next-deadline');
+        const descEl = deadlineEl.nextElementSibling;
+        
+        if (!checkDiarias) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--warning)";
+            deadlineEl.innerHTML = "Dia 01 <span style='font-size: 1.2rem; font-weight: 500'>23:59</span>";
+            descEl.textContent = "Carga das diárias da informática (Agente de Diárias)";
+        } else if (!checkQdip) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--primary)";
+            deadlineEl.innerHTML = "Fechamento <span style='font-size: 1.2rem; font-weight: 500'>Folha</span>";
+            descEl.textContent = "Carga de arquivos de folha no IGEPPS (Agente QDIP)";
+        } else if (!document.getElementById('check-blog-daniel').checked) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--info)";
+            deadlineEl.innerHTML = "Sexta <span style='font-size: 1.2rem; font-weight: 500'>16:00</span>";
+            descEl.textContent = "Geração e envio por e-mail do Blog Daniel (Agente Blog Daniel)";
+        } else if (!document.getElementById('check-site-daniel').checked) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--success)";
+            deadlineEl.innerHTML = "Site <span style='font-size: 1.2rem; font-weight: 500'>Daniel</span>";
+            descEl.textContent = "Card de acesso rápido e sincronização do site institucional do Daniel";
+        } else if (!checkTeto3) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--info)";
+            deadlineEl.innerHTML = "Pré-Fechamento <span style='font-size: 1.2rem; font-weight: 500'>GAO</span>";
+            descEl.textContent = "Auditoria de teto 35% de vantagens (Agente Teto 3)";
+        } else if (!checkRra) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--info)";
+            deadlineEl.innerHTML = "Apurar RRA <span style='font-size: 1.2rem; font-weight: 500'>Lote</span>";
+            descEl.textContent = "Processamento e apuração do IRRF sobre RRA (Agente RRA)";
+        } else if (!checkPvtac) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--primary)";
+            deadlineEl.innerHTML = "Auditar <span style='font-size: 1.2rem; font-weight: 500'>PVTAC</span>";
+            descEl.textContent = "Comparar relatórios mensais de PVTAC dos Membros (Agente PVTAC)";
+        } else if (!checkPonto) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--info)";
+            deadlineEl.innerHTML = "Calcular <span style='font-size: 1.2rem; font-weight: 500'>Ponto</span>";
+            descEl.textContent = "Processar planilha de faltas e gerar arquivos MENTORH (Agente do Ponto)";
+        } else if (!checkPontoRetroativo) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--danger)";
+            deadlineEl.innerHTML = "Ponto <span style='font-size: 1.2rem; font-weight: 500'>Retroativo</span>";
+            descEl.textContent = "Calcular faltas de meses anteriores e gerar despacho (Agente do Ponto)";
+        } else if (!checkPontoDevolucoes) {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--info)";
+            deadlineEl.innerHTML = "Devolução <span style='font-size: 1.2rem; font-weight: 500'>Ponto</span>";
+            descEl.textContent = "Processar planilha de devoluções de faltas e alimentação (Agente do Ponto)";
+        } else {
+            deadlineEl.className = "metric-val";
+            deadlineEl.style.color = "var(--success)";
+            deadlineEl.innerHTML = "Tudo OK! <span style='font-size: 1.2rem; font-weight: 500'>✓</span>";
+            descEl.textContent = "Todos os relatórios da folha deste mês foram enviados!";
+        }
+    }
+
+    function copiarRubricas(btn, inputId) {
+        const input = document.getElementById(inputId);
+        input.select();
+        input.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(input.value).then(() => {
+            const originalText = btn.textContent;
+            btn.textContent = "Copiado! ✓";
+            btn.style.background = "var(--success)";
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = "var(--primary)";
+            }, 2000);
+        }).catch(err => {
+            console.error("Erro ao copiar rubricas: ", err);
+        });
+    }
+
+    function changeTheme(themeName) {
+        document.body.className = '';
+        if (themeName !== 'dark') {
+            document.body.classList.add('theme-' + themeName);
+        }
+        localStorage.setItem('mppa-portal-theme', themeName);
+        
+        // Atualizar botões
+        document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.getElementById('btn-theme-' + themeName);
+        if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function logout() {
+        sessionStorage.removeItem('mppa_session_active');
+        window.location.replace('login.html');
+    }
+
+    // Inicializar tema
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('mppa-portal-theme') || 'dark';
+        changeTheme(savedTheme);
+    });
+</script>
+</body>
+</html>

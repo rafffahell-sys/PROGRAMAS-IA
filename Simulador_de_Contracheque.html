@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador de Contracheque</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.35);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --warning: #f59e0b;
+      --warning-glow: rgba(245, 158, 11, 0.25);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.25);
+      --info: #06b6d4;
+      --info-glow: rgba(6, 182, 212, 0.25);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 20px;
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.2s;
+      align-self: flex-start;
+    }
+
+    .back-button:hover {
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .topo {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      border-radius: 16px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+
+    .topo h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a5b4fc 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .topo p {
+      font-size: .9rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .comp {
+      background: rgba(99, 102, 241, 0.05);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      padding: 12px 20px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .comp b {
+      font-size: .88rem;
+      color: #a5b4fc;
+    }
+
+    .comp select, .comp input[type=number] {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: .88rem;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.25);
+      font-weight: 700;
+      outline: none;
+      color-scheme: dark;
+    }
+
+    .comp select:focus, .comp input:focus {
+      border-color: var(--primary);
+    }
+
+    .bloco {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+    }
+
+    .sec {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--info);
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .linha {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .linha label {
+      flex: 1;
+      min-width: 210px;
+      font-size: .9rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .linha label small {
+      display: block;
+      font-size: .75rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
+    .linha input[type=number], .sl input[type=number] {
+      width: 165px;
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: .88rem;
+      background: rgba(0, 0, 0, 0.2);
+      color: #fff;
+      outline: none;
+    }
+
+    .linha input[type=number]:focus, .sl input[type=number]:focus {
+      border-color: var(--primary);
+    }
+
+    .linha.dest input[type=number] {
+      border-color: var(--warning);
+      background: rgba(245, 158, 11, 0.05);
+      color: var(--warning);
+    }
+
+    .vvbox {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .vvt {
+      font-weight: 700;
+      font-size: .87rem;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+    }
+
+    .vvf {
+      font-size: .78rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .vvl {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .vvl input[type=number] {
+      width: 130px;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #fff;
+      outline: none;
+    }
+
+    .vvl input[type=number]:focus {
+      border-color: var(--primary);
+    }
+
+    .vvr {
+      font-weight: 700;
+      color: var(--success);
+      font-size: .95rem;
+      min-width: 120px;
+    }
+
+    .sl {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sl label {
+      flex: 1;
+      min-width: 210px;
+      font-size: .9rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .sl label small {
+      display: block;
+      font-size: .75rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
+    .sl input[type=number] {
+      width: 100px;
+    }
+
+    .sfx {
+      font-size: .78rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      min-width: 135px;
+    }
+
+    .sdv {
+      width: 145px;
+      padding: 8px 12px;
+      background: rgba(6, 182, 212, 0.05);
+      border: 1px dashed var(--info);
+      border-radius: 8px;
+      font-size: .88rem;
+      color: #22d3ee;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .ck {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: .9rem;
+      color: var(--text-primary);
+    }
+
+    .ck input[type=checkbox] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .info {
+      background: rgba(6, 182, 212, 0.05);
+      border-left: 4px solid var(--info);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: .82rem;
+      color: #22d3ee;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .info-warn {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 4px solid var(--warning);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: .82rem;
+      color: #fbbf24;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .ti {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .8rem;
+      margin-top: 6px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .ti th {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-primary);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .ti td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+    }
+
+    .ti tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    .ti tr.hl td {
+      background: var(--warning-glow) !important;
+      color: #fff;
+      font-weight: 700;
+      border-top: 1px solid var(--warning);
+      border-bottom: 1px solid var(--warning);
+    }
+
+    .tabela-titulo {
+      font-size: .8rem;
+      font-weight: 700;
+      margin: 18px 0 8px 0;
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tabela-titulo.az {
+      background: rgba(6, 182, 212, 0.1);
+      color: #22d3ee;
+      border: 1px solid rgba(6, 182, 212, 0.2);
+    }
+
+    .tabela-titulo.vd {
+      background: rgba(16, 185, 129, 0.1);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .btnc {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      letter-spacing: .02em;
+      transition: all 0.2s;
+    }
+
+    .btnc:hover {
+      background: #4f46e5;
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    #secRes {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .rcards {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .rcard {
+      flex: 1;
+      min-width: 155px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .rcard .rl {
+      font-size: .75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-weight: 700;
+    }
+
+    .rcard .rv {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-top: 6px;
+    }
+
+    .cb .rv { color: #a5b4fc; }
+    .cd .rv { color: var(--danger); }
+    .cl .rv { color: var(--success); }
+
+    .rwrap {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .rbk {
+      flex: 1;
+      min-width: 265px;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .rbt {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .prv .rbt { color: var(--success); border-bottom-color: rgba(16, 185, 129, 0.2); }
+    .dsc .rbt { color: var(--danger); border-bottom-color: rgba(239, 68, 68, 0.2); }
+
+    .rr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      font-size: .86rem;
+    }
+
+    .rr:last-child { border-bottom: none; }
+
+    .rrd { color: var(--text-secondary); }
+
+    .rrv { font-weight: 600; color: var(--text-primary); }
+
+    .rtot {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 2px solid var(--border-color);
+      font-weight: 800;
+      font-size: .95rem;
+    }
+
+    .vg { color: var(--success) !important; }
+    .vr { color: var(--danger) !important; }
+
+    .badge {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+      margin-left: 8px;
+      vertical-align: middle;
+      text-transform: uppercase;
+    }
+
+    .badge.az { background: rgba(6, 182, 212, 0.1); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.2); }
+    .badge.vd { background: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2); }
+
+    .disc {
+      text-align: center;
+      font-size: .78rem;
+      color: var(--text-secondary);
+      margin-top: 18px;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: .8rem;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-top: 1.5rem;
+    }
+
+    footer strong { color: #a5b4fc; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="index.html" class="back-button">← Voltar ao Portal</a>
+
+  <div class="topo">
+    <h1>💼 Simulador de Contracheque</h1>
+    <p>Simulação de folha de pagamento — Servidor Público (RPPS)</p>
+  </div>
+
+<div class="comp">
+  <b>&#128197; Competência:</b>
+  <select id="cMes">
+    <option value="1">Janeiro</option><option value="2">Fevereiro</option>
+    <option value="3">Março</option><option value="4">Abril</option>
+    <option value="5">Maio</option><option value="6">Junho</option>
+    <option value="7">Julho</option><option value="8">Agosto</option>
+    <option value="9">Setembro</option><option value="10">Outubro</option>
+    <option value="11">Novembro</option><option value="12">Dezembro</option>
+  </select>
+  <input type="number" id="cAno" value="2026" min="2020" max="2099" style="width:82px">
+</div>
+
+<!-- VERBAS FIXAS -->
+<div class="bloco">
+  <div class="sec">Verbas Fixas</div>
+  <div class="linha">
+    <label>Vencimento Base</label>
+    <input type="number" id="fVenc" min="0" step="0.01" placeholder="0,00">
+  </div>
+  <div class="linha">
+    <label>Grat. Escolaridade</label>
+    <input type="number" id="fGrat" min="0" step="0.01" placeholder="0,00">
+  </div>
+  <div class="linha">
+    <label>Grat. Vb. Incorp.<small>Compõe a base do IRRF</small></label>
+    <input type="number" id="fGratVb" min="0" step="0.01" placeholder="0,00">
+  </div>
+  <div class="linha">
+    <label>Ad. Tempo de Serviço<small>% aplicado sobre (Venc. + Grat. Escol. + Grat. Vb. Incorp.)</small></label>
+    <input type="number" id="fAtsP" min="0" max="100" step="0.01" placeholder="%">
+  </div>
+  <div class="linha">
+    <label>Grupo de Trabalho<small>Compõe a base do IRRF</small></label>
+    <input type="number" id="fGT" min="0" step="0.01" placeholder="0,00">
+  </div>
+  <div class="linha">
+    <label>Aux. Alimentação<small>Não entra na base do IRRF</small></label>
+    <input type="number" id="fAlim" min="0" step="0.01" placeholder="0,00">
+  </div>
+  <div class="sl">
+    <label>Auxílio Saúde<small>Informe sua idade — valor carregado automaticamente ao calcular</small></label>
+    <input type="number" id="fIdade" min="0" max="120" placeholder="Idade">
+    <span class="sfx" id="sFaixa"></span>
+    <div class="sdv" id="sVal">—</div>
+  </div>
+</div>
+
+<!-- VERBAS VARIÁVEIS -->
+<div class="bloco">
+  <div class="sec">Verbas Variáveis do Mês</div>
+  <div class="vvbox">
+    <div class="vvt">&#9201; Horas Extras</div>
+    <div class="vvf">(Venc. + Grat. Escol. + ATS + Grat. Vb. Incorp.) ÷ 180 × 1,5 × horas</div>
+    <div class="vvl">
+      <input type="number" id="fHE" min="0" step="1" placeholder="qtd. horas">
+      <span class="vvr" id="dHE">R$ 0,00</span>
+    </div>
+  </div>
+  <div class="vvbox">
+    <div class="vvt">&#127973; Plantões</div>
+    <div class="vvf">R$ 709,00 por dia de plantão</div>
+    <div class="vvl">
+      <input type="number" id="fPlan" min="0" step="1" placeholder="qtd. dias">
+      <span class="vvr" id="dPlan">R$ 0,00</span>
+    </div>
+  </div>
+</div>
+
+<!-- IRRF -->
+<div class="bloco">
+  <div class="sec">Opções para Cálculo do IRRF</div>
+
+  <div class="ck">
+    <input type="checkbox" id="chkFP" checked>
+    <label for="chkFP">Deduzir FUNPREV/FINANPREV da base do IRRF</label>
+  </div>
+  <div class="linha">
+    <label>Dependentes para IRRF<small>R$ 189,59 deduzido por dependente</small></label>
+    <input type="number" id="fDep" min="0" step="1" placeholder="0">
+  </div>
+  <div class="linha">
+    <label>FUNPREV/FINANPREV (desconto fixo)</label>
+    <input type="number" id="fFP" min="0" step="0.01" placeholder="0,00">
+  </div>
+  <div class="linha dest">
+    <label>Ded. Simplif. Difer. (base IRRF)
+      <small>Valor da linha "D.Simplif. Difer." da Memória de Cálculo do seu sistema de folha</small>
+    </label>
+    <input type="number" id="fDSimplif" min="0" step="0.01" placeholder="0,00">
+  </div>
+
+  <div class="info">
+    O sistema aplica <strong>automaticamente</strong> a tabela correta conforme a renda bruta remuneratória:<br>
+    &bull; <strong>Até R$ 7.350,00</strong> → Tabela padrão + Regra 2026 (desconto progressivo)<br>
+    &bull; <strong>Acima de R$ 7.350,00</strong> → Tabela específica 2026 (Receita Federal), sem desconto progressivo
+  </div>
+
+  <div class="info-warn">
+    <strong>&#9888; D.Simplif. Difer.:</strong> caso sua Memória de Cálculo exiba esta linha, informe o valor para que o resultado coincida exatamente com o sistema oficial.
+  </div>
+
+  <!-- TABELA ATÉ 7.350 -->
+  <div class="tabela-titulo az">&#128196; Tabela IRRF 2026 — Renda bruta até R$ 7.350,00 (com Regra 2026)</div>
+  <table class="ti" id="tA">
+    <thead><tr><th>Base de Cálculo</th><th>Alíquota</th><th>Parcela a Deduzir</th></tr></thead>
+    <tbody>
+      <tr id="a0"><td>Até R$ 2.259,20</td><td>Isento</td><td>—</td></tr>
+      <tr id="a1"><td>R$ 2.259,21 a R$ 2.826,65</td><td>7,5%</td><td>R$ 169,44</td></tr>
+      <tr id="a2"><td>R$ 2.826,66 a R$ 3.751,05</td><td>15%</td><td>R$ 381,44</td></tr>
+      <tr id="a3"><td>R$ 3.751,06 a R$ 4.664,68</td><td>22,5%</td><td>R$ 662,77</td></tr>
+      <tr id="a4"><td>Acima de R$ 4.664,68</td><td>27,5%</td><td>R$ 908,73</td></tr>
+    </tbody>
+  </table>
+
+  <!-- TABELA ACIMA DE 7.350 -->
+  <div class="tabela-titulo vd" style="margin-top:14px">&#128196; Tabela IRRF 2026 — Renda bruta acima de R$ 7.350,00 (Receita Federal)</div>
+  <table class="ti" id="tB">
+    <thead><tr><th>Base de Cálculo</th><th>Alíquota</th><th>Parcela a Deduzir</th></tr></thead>
+    <tbody>
+      <tr id="b0"><td>Até R$ 2.428,80</td><td>Isento</td><td>—</td></tr>
+      <tr id="b1"><td>R$ 2.428,81 a R$ 2.826,65</td><td>7,5%</td><td>R$ 182,16</td></tr>
+      <tr id="b2"><td>R$ 2.826,66 a R$ 3.751,05</td><td>15%</td><td>R$ 394,16</td></tr>
+      <tr id="b3"><td>R$ 3.751,06 a R$ 4.664,68</td><td>22,5%</td><td>R$ 675,49</td></tr>
+      <tr id="b4"><td>Acima de R$ 4.664,68</td><td>27,5%</td><td>R$ 908,73</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:.73rem;color:#999;margin-top:6px">A linha destacada em amarelo indica a faixa aplicada ao seu cálculo.</p>
+</div>
+
+<!-- BOTÃO -->
+<div class="bloco">
+  <button class="btnc" id="btnCalc">Calcular Contracheque</button>
+</div>
+
+<!-- RESULTADO -->
+<div id="secRes">
+  <div style="background:#fff;padding:14px 22px;border-bottom:1px solid #dde">
+    <div class="sec" style="margin:0">
+      RESULTADO — <span id="rComp" style="color:#1a3c5e"></span>
+      <span class="badge" id="badgeTabela"></span>
+    </div>
+  </div>
+  <div class="bloco">
+    <div class="rcards">
+      <div class="rcard cb"><div class="rl">Total Bruto</div><div class="rv" id="rBruto">—</div></div>
+      <div class="rcard cd"><div class="rl">Total Descontos</div><div class="rv" id="rDesc">—</div></div>
+      <div class="rcard cl"><div class="rl">Salário Líquido</div><div class="rv" id="rLiq">—</div></div>
+    </div>
+    <div class="rwrap">
+      <div class="rbk prv">
+        <div class="rbt">&#10003; Proventos</div>
+        <div class="rr"><span class="rrd">Vencimento Base</span><span class="rrv" id="pVenc">—</span></div>
+        <div class="rr"><span class="rrd">Grat. Escolaridade</span><span class="rrv" id="pGrat">—</span></div>
+        <div class="rr"><span class="rrd">Grat. Vb. Incorp.</span><span class="rrv" id="pGratVb">—</span></div>
+        <div class="rr"><span class="rrd">Ad. Tempo de Serviço</span><span class="rrv" id="pATS">—</span></div>
+        <div class="rr"><span class="rrd">Grupo de Trabalho</span><span class="rrv" id="pGT">—</span></div>
+        <div class="rr"><span class="rrd">Horas Extras</span><span class="rrv" id="pHE">—</span></div>
+        <div class="rr"><span class="rrd" id="pPlanLbl">Plantão (0 dias)</span><span class="rrv" id="pPlan">—</span></div>
+        <div class="rr"><span class="rrd">Aux. Alimentação</span><span class="rrv" id="pAlim">—</span></div>
+        <div class="rr"><span class="rrd">Auxílio Saúde</span><span class="rrv" id="pSaude">—</span></div>
+        <div class="rr rtot"><span class="rrd">Total Proventos</span><span class="rrv vg" id="pTotal">—</span></div>
+      </div>
+      <div class="rbk dsc">
+        <div class="rbt">&#10007; Descontos</div>
+        <div class="rr"><span class="rrd">FUNPREV/FINANPREV</span><span class="rrv" id="dFP">—</span></div>
+        <div class="rr"><span class="rrd">Base IRRF (após deduções)</span><span class="rrv" id="dBase">—</span></div>
+        <div class="rr"><span class="rrd">IRRF (bruto)</span><span class="rrv" id="dIRRFb">—</span></div>
+        <div class="rr"><span class="rrd" id="dRegraLbl">Desconto Regra 2026</span><span class="rrv" id="dRegra">—</span></div>
+        <div class="rr"><span class="rrd">IRRF líquido</span><span class="rrv" id="dIRRFl">—</span></div>
+        <div class="rr rtot"><span class="rrd">Total Descontos</span><span class="rrv vr" id="dTotal">—</span></div>
+      </div>
+    </div>
+    <p class="disc">Este simulador é uma ferramenta de apoio. Valores finais podem variar conforme ajustes na folha de pagamento oficial.</p>
+  </div>
+</div>
+
+</div>
+  <footer>Desenvolvido por Giovane Moura & Rafael F. Lima, via Google Gemini Antigravity IA Agent.</footer>
+
+<script type="text/javascript">
+var MESES = ["Janeiro","Fevereiro","Mar\u00e7o","Abril","Maio","Junho",
+             "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+
+var TAB_SAUDE = [
+  {mn:0,  mx:18,  vl:914.00,  tx:"0 a 18 anos"},
+  {mn:19, mx:23,  vl:1075.00, tx:"19 a 23 anos"},
+  {mn:24, mx:28,  vl:1265.00, tx:"24 a 28 anos"},
+  {mn:29, mx:33,  vl:1488.00, tx:"29 a 33 anos"},
+  {mn:34, mx:38,  vl:1751.00, tx:"34 a 38 anos"},
+  {mn:39, mx:43,  vl:2060.00, tx:"39 a 43 anos"},
+  {mn:44, mx:48,  vl:2424.00, tx:"44 a 48 anos"},
+  {mn:49, mx:53,  vl:2851.00, tx:"49 a 53 anos"},
+  {mn:54, mx:58,  vl:3355.00, tx:"54 a 58 anos"},
+  {mn:59, mx:999, vl:3947.00, tx:"59 anos ou mais"}
+];
+
+// Tabela A — até R$ 7.350 (com Regra 2026)
+var TAB_A = [
+  {lim:2259.20, aliq:0,     ded:0},
+  {lim:2826.65, aliq:0.075, ded:169.44},
+  {lim:3751.05, aliq:0.15,  ded:381.44},
+  {lim:4664.68, aliq:0.225, ded:662.77},
+  {lim:999999,  aliq:0.275, ded:908.73}
+];
+
+// Tabela B — acima de R$ 7.350 (Receita Federal 2026)
+var TAB_B = [
+  {lim:2428.80, aliq:0,     ded:0},
+  {lim:2826.65, aliq:0.075, ded:182.16},
+  {lim:3751.05, aliq:0.15,  ded:394.16},
+  {lim:4664.68, aliq:0.225, ded:675.49},
+  {lim:999999,  aliq:0.275, ded:908.73}
+];
+
+function lerNum(id) {
+  var el = document.getElementById(id);
+  if (!el) return 0;
+  var v = parseFloat(el.value);
+  if (isNaN(v) || v < 0) return 0;
+  return v;
+}
+
+function moeda(v) {
+  if (isNaN(v) || v === null || v === undefined) v = 0;
+  var neg = (v < 0);
+  v = Math.abs(v);
+  var s = v.toFixed(2).split(".");
+  var int = s[0];
+  var dec = s[1];
+  var res = "";
+  var cnt = 0;
+  for (var i = int.length - 1; i >= 0; i--) {
+    cnt++;
+    res = int[i] + res;
+    if (cnt % 3 === 0 && i !== 0) res = "." + res;
+  }
+  return (neg ? "-" : "") + "R$ " + res + "," + dec;
+}
+
+function escrever(id, txt) {
+  var el = document.getElementById(id);
+  if (el) el.textContent = txt;
+}
+
+function buscarSaude(idade) {
+  for (var i = 0; i < TAB_SAUDE.length; i++) {
+    if (idade >= TAB_SAUDE[i].mn && idade <= TAB_SAUDE[i].mx) return TAB_SAUDE[i];
+  }
+  return null;
+}
+
+function aplicarTabela(base, tabela) {
+  for (var i = 0; i < tabela.length; i++) {
+    if (base <= tabela[i].lim) {
+      var bruto = Math.max(0, base * tabela[i].aliq - tabela[i].ded);
+      return {bruto: bruto, faixa: i};
+    }
+  }
+  return {bruto: 0, faixa: 0};
+}
+
+function limparDestaques() {
+  var ids = ["a0","a1","a2","a3","a4","b0","b1","b2","b3","b4"];
+  for (var i = 0; i < ids.length; i++) {
+    var tr = document.getElementById(ids[i]);
+    if (tr) tr.className = "";
+  }
+}
+
+function destacar(prefixo, idx) {
+  limparDestaques();
+  var tr = document.getElementById(prefixo + idx);
+  if (tr) tr.className = "hl";
+}
+
+function calcular() {
+  var mes      = parseInt(document.getElementById("cMes").value, 10);
+  var ano      = document.getElementById("cAno").value;
+  var venc     = lerNum("fVenc");
+  var grat     = lerNum("fGrat");
+  var gratVb   = lerNum("fGratVb");
+  var atsP     = lerNum("fAtsP");
+  var gt       = lerNum("fGT");
+  var alim     = lerNum("fAlim");
+  var horas    = lerNum("fHE");
+  var dias     = lerNum("fPlan");
+  var dep      = lerNum("fDep");
+  var fp       = lerNum("fFP");
+  var dSimplif = lerNum("fDSimplif");
+  var dedFP    = document.getElementById("chkFP").checked;
+
+  var idadeEl  = document.getElementById("fIdade");
+  var idadeStr = idadeEl ? idadeEl.value.trim() : "";
+  var idadeNum = parseFloat(idadeStr);
+  var temIdade = (idadeStr !== "" && !isNaN(idadeNum) && idadeNum >= 0);
+
+  // ATS = (Venc + Grat + GratVb) * (% / 100)
+  var ats = (venc + grat + gratVb) * (atsP / 100);
+
+  // Auxílio Saúde
+  var auxSaude = 0;
+  if (temIdade) {
+    var si = buscarSaude(idadeNum);
+    if (si) {
+      auxSaude = si.vl;
+      escrever("sFaixa", "Faixa: " + si.tx);
+      escrever("sVal", moeda(auxSaude));
+    } else {
+      escrever("sFaixa", "Fora da faixa");
+      escrever("sVal", moeda(0));
+    }
+  } else {
+    escrever("sFaixa", "");
+    escrever("sVal", "—");
+  }
+
+  // Horas Extras
+  var he = 0;
+  if (horas > 0) {
+    he = (venc + grat + ats + gratVb) / 180 * 1.5 * horas;
+  }
+
+  // Plantão
+  var plan = dias * 709;
+
+  escrever("dHE",   moeda(he));
+  escrever("dPlan", moeda(plan));
+
+  // Total Proventos
+  var totalProv = venc + grat + gratVb + ats + gt + he + plan + alim + auxSaude;
+
+  // Renda bruta remuneratória (base para escolha da tabela e Regra 2026)
+  var rendaBruta = venc + grat + gratVb + ats + gt + he + plan;
+
+  // ─── SELEÇÃO DA TABELA IRRF ──────────────────────────────────────────────
+  // Acima de R$ 7.350: Tabela B (Receita Federal 2026), sem Regra 2026
+  // Até R$ 7.350: Tabela A + Regra 2026
+  var usaTabB = (rendaBruta > 7350.00);
+
+  // Base IRRF
+  var baseIRRF = rendaBruta;
+  if (dedFP)  { baseIRRF = baseIRRF - fp; }
+  baseIRRF = baseIRRF - (dep * 189.59);
+  baseIRRF = baseIRRF - dSimplif;
+  if (baseIRRF < 0) { baseIRRF = 0; }
+
+  var ri;
+  var desc2026 = 0;
+  var irrfLiq  = 0;
+
+  if (usaTabB) {
+    // Tabela B — sem Regra 2026
+    ri = aplicarTabela(baseIRRF, TAB_B);
+    desc2026 = 0;
+    irrfLiq  = ri.bruto;
+    destacar("b", ri.faixa);
+  } else {
+    // Tabela A — com Regra 2026
+    ri = aplicarTabela(baseIRRF, TAB_A);
+    desc2026 = Math.max(0, 978.62 - rendaBruta * 0.133145);
+    irrfLiq  = Math.max(0, ri.bruto - desc2026);
+    destacar("a", ri.faixa);
+  }
+
+  var totalDesc = fp + irrfLiq;
+  var liquido   = totalProv - totalDesc;
+
+  // ─── RESULTADO ───────────────────────────────────────────────────────────
+  escrever("rComp",   MESES[mes - 1] + "/" + ano);
+
+  var badge = document.getElementById("badgeTabela");
+  if (badge) {
+    badge.textContent = usaTabB ? "Tabela acima de R$ 7.350" : "Tabela até R$ 7.350";
+    badge.className   = "badge " + (usaTabB ? "vd" : "az");
+  }
+
+  escrever("rBruto", moeda(totalProv));
+  escrever("rDesc",  moeda(totalDesc));
+  escrever("rLiq",   moeda(liquido));
+
+  escrever("pVenc",   moeda(venc));
+  escrever("pGrat",   moeda(grat));
+  escrever("pGratVb", moeda(gratVb));
+  escrever("pATS",    moeda(ats));
+  escrever("pGT",     moeda(gt));
+  escrever("pHE",     moeda(he));
+  escrever("pPlanLbl","Plant\u00e3o (" + Math.round(dias) + " dia" + (dias !== 1 ? "s" : "") + ")");
+  escrever("pPlan",   moeda(plan));
+  escrever("pAlim",   moeda(alim));
+  escrever("pSaude",  moeda(auxSaude));
+  escrever("pTotal",  moeda(totalProv));
+
+  escrever("dFP",    moeda(fp));
+  escrever("dBase",  moeda(baseIRRF));
+  escrever("dIRRFb", moeda(ri.bruto));
+
+  var regraLbl = document.getElementById("dRegraLbl");
+  if (regraLbl) {
+    regraLbl.textContent = usaTabB ? "Regra 2026 (n\u00e3o aplic\u00e1vel)" : "Desconto Regra 2026";
+  }
+  escrever("dRegra", usaTabB ? "R$ 0,00" : "- " + moeda(desc2026));
+  escrever("dIRRFl", moeda(irrfLiq));
+  escrever("dTotal", moeda(totalDesc));
+
+  var secRes = document.getElementById("secRes");
+  secRes.style.display = "block";
+  setTimeout(function() { secRes.scrollIntoView({behavior:"smooth"}); }, 60);
+}
+
+window.onload = function() {
+  var d = new Date();
+  var mes = document.getElementById("cMes");
+  var ano = document.getElementById("cAno");
+  if (mes) mes.value = d.getMonth() + 1;
+  if (ano) ano.value = d.getFullYear();
+  var btn = document.getElementById("btnCalc");
+  if (btn) btn.onclick = function() { calcular(); return false; };
+};
+</script>
+</body>
+</html>
