@@ -1053,7 +1053,8 @@
         'manutencao': null,
         'viagens-monitor': null,
         'agente-backup': null,
-        'agente-backup-cloud': null
+        'agente-backup-cloud': null,
+        'site-daniel': { status: 'healthy', s: 'healthy', lastProcessed: 'Publicado', note: 'Site do Daniel publicado e disponível para acompanhamento.' }
     };
 
     const botsDetails = {
@@ -1065,7 +1066,8 @@
         'manutencao': { name: "Bot Manutenção Preventiva", avatar: "&#128295;", tag: "Todo dia 00h", tagClass: "daily" },
         'viagens-monitor': { name: "Bot Viagens Monitoramento", avatar: "&#9992;&#65039;", tag: "Periódico", tagClass: "periodic" },
         'agente-backup': { name: "Agente de Backup MPPA", avatar: "&#128190;", tag: "Mensal", tagClass: "periodic" },
-        'agente-backup-cloud': { name: "Agente de Backup Cloud", avatar: "&#9729;&#65039;", tag: "Quinzenal", tagClass: "periodic" }
+        'agente-backup-cloud': { name: "Agente de Backup Cloud", avatar: "&#9729;&#65039;", tag: "Quinzenal", tagClass: "periodic" },
+        'site-daniel': { name: "Bot Site Daniel", avatar: "🌐", tag: "Sob demanda", tagClass: "periodic" }
     };
 
     function updateSummaryMetrics() {
