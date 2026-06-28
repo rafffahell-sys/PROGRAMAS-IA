@@ -874,7 +874,22 @@
             </div>
         </div>
 
-        <!-- BOT INVESTIMENTOS 09H PREMARKET -->
+        <!-- AGENTE CRIPTOMOEDAS -->
+        <div class="agent-card" onclick="abrirModal(''agente-criptomoedas'')">
+            <div class="agent-avatar">🪙</div>
+            <div class="agent-details">
+                <h3>Agente Criptomoedas <span class="agent-tag periodic">A cada 4h</span></h3>
+                <p class="agent-desc">Monitora as posições Raydium CLMM na Solana, gera snapshot exato dos NFTs da pool, identifica estado em range e envia o resumo para o Telegram e para o painel.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: A cada 4 horas</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>agente-criptomoedas</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator caution" id="status-agente-criptomoedas">Aguardando Input</span>
+                <div class="action-needed-box warning" id="box-agente-criptomoedas">Aguardando primeiro snapshot da Raydium CLMM.</div>
+            </div>
+        </div>        <!-- BOT INVESTIMENTOS 09H PREMARKET -->
         <div class="agent-card" onclick="abrirModal('invest-09h')">
             <div class="agent-avatar"></div>
             <div class="agent-details">
@@ -1067,7 +1082,7 @@
         'viagens-monitor': { name: "Bot Viagens Monitoramento", avatar: "&#9992;&#65039;", tag: "Periódico", tagClass: "periodic" },
         'agente-backup': { name: "Agente de Backup MPPA", avatar: "&#128190;", tag: "Mensal", tagClass: "periodic" },
         'agente-backup-cloud': { name: "Agente de Backup Cloud", avatar: "&#9729;&#65039;", tag: "Quinzenal", tagClass: "periodic" },
-        'site-daniel': { name: "Agente Blog Daniel", avatar: "📝", tag: "Semanal", tagClass: "periodic" }
+        'site-daniel': { name: "Agente Blog Daniel", avatar: "📝", tag: "Semanal", tagClass: "periodic" },`r`n        'agente-criptomoedas': { name: "Agente Criptomoedas", avatar: "🪙", tag: "A cada 4h", tagClass: "periodic" },`r`n        'raydium-clmm': { name: "Bot Raydium CLMM", avatar: "🧭", tag: "A cada 4h", tagClass: "periodic" }
     };
 
     function updateSummaryMetrics() {
@@ -1348,6 +1363,12 @@
     }</script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
