@@ -870,7 +870,7 @@
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator caution" id="status-site-daniel">Aguardando Input</span>
-                <div class="action-needed-box success" id="box-site-daniel">⚠️ Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta às 16:00.</div>
+                <div class="action-needed-box warning" id="box-site-daniel">⚠️ Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta às 16:00.</div>
             </div>
         </div>
 
@@ -1054,7 +1054,7 @@
         'viagens-monitor': null,
         'agente-backup': null,
         'agente-backup-cloud': null,
-        'site-daniel': { status: 'healthy', s: 'healthy', lastProcessed: 'Publicado', note: 'Site do Daniel publicado e disponível para acompanhamento.' }
+        'site-daniel': { status: 'warning', s: 'warning', lastProcessed: 'Aguardando Input', note: 'Agente Blog Daniel aguardando confirmação de agenda e credencial de envio.' }
     };
 
     const botsDetails = {
@@ -1348,6 +1348,7 @@
     }</script>
 </body>
 </html>
+
 
 
 

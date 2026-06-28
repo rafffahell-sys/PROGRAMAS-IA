@@ -255,12 +255,12 @@
       </a>
     </section>
 
-    <div class="section-title" style="margin-top: 26px;">
+    <div class="section-title" id="ideas-title" style="margin-top: 26px;">
       <span class="tag gold">Ideias & Projetos</span>
       <h2>Projetos em Andamento & Backlog</h2>
     </div>
 
-    <section class="grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+    <section class="grid" id="ideas-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
       <a class="card highlight" href="./painel_pessoal.html">
         <div class="icon">🧠</div>
         <h3>Painel de Agentes Pessoais</h3>
@@ -268,12 +268,12 @@
       </a>
     </section>
 
-    <div class="section-title" style="margin-top: 26px;">
+    <div class="section-title" id="games-title" style="margin-top: 26px;">
       <span class="tag gold">Lazer</span>
       <h2>Jogos</h2>
     </div>
 
-    <section class="grid" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+    <section class="grid" id="games-grid" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
       <a class="card" href="./damas.html">
         <div class="icon">♟️</div>
         <h3>Damas</h3>
@@ -293,8 +293,25 @@
       </a>
     </section>
     <div class="footer">By Rafael F. Lima · Desenvolvido via Google Antigravity IA Agent · 2026</div>
+    <script>
+      const currentUser = (localStorage.getItem('mppa_username') || '').toLowerCase();
+      const isRafael = currentUser === 'rafael';
+      if (!isRafael) {
+        const ideasTitle = document.getElementById('ideas-title');
+        const ideasGrid = document.getElementById('ideas-grid');
+        const gamesTitle = document.getElementById('games-title');
+        const gamesGrid = document.getElementById('games-grid');
+        if (ideasTitle) ideasTitle.style.display = 'none';
+        if (ideasGrid) ideasGrid.style.display = 'none';
+        if (gamesTitle) gamesTitle.style.display = 'none';
+        if (gamesGrid) gamesGrid.style.display = 'none';
+      }
+    </script>
   </main>
 </body>
 </html>
+
+
+
 
 

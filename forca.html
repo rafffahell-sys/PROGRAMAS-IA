@@ -5,19 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jogo da Forca</title>
   <style>
-    body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:Arial,sans-serif;background:linear-gradient(180deg,#0b1020,#070b13);color:#eef2ff;padding:24px;text-align:center}
-    .box{max-width:620px;padding:28px;border:1px solid rgba(255,255,255,.1);border-radius:20px;background:rgba(18,24,38,.85);box-shadow:0 20px 50px rgba(0,0,0,.25)}
-    a{color:#93c5fd}
-    h1{margin:0 0 12px}
-    p{line-height:1.55;color:#cbd5e1}
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1020, #070b13);
+      color: #eef2ff;
+      padding: 24px;
+      text-align: center;
+    }
+    .portal-link {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      color: #eef2ff;
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    }
+    .portal-link:hover { transform: translateY(-1px); }
+    .box {
+      max-width: 620px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px;
+      background: rgba(18,24,38,.85);
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    }
+    h1 { margin: 0 0 12px; }
+    p { line-height: 1.55; color: #cbd5e1; }
+    a.inline { color: #93c5fd; }
   </style>
 </head>
 <body>
+  <a class="portal-link" href="./index.html">← Voltar ao Portal</a>
   <div class="box">
     <h1>Jogo da Forca</h1>
     <p>Em desenvolvimento.</p>
     <p>Por enquanto, este espaço está reservado para o jogo da forca que será adicionado em breve.</p>
-    <p><a href="./index.html">Voltar ao Portal</a></p>
+    <p><a class="inline" href="./index.html">Voltar ao Portal</a></p>
   </div>
 </body>
 </html>

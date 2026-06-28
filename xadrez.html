@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xadrez - Jogo Completo</title>
     <style>
+        .portal-link { position: fixed; top: 18px; left: 18px; z-index: 9999; display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; border-radius: 12px; text-decoration: none; font-weight: 700; color: #eef2ff; background: rgba(15, 23, 42, 0.78); border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 8px 24px rgba(0,0,0,0.22); }
+        .portal-link:hover { transform: translateY(-1px); }
         * {
             margin: 0;
             padding: 0;
@@ -242,17 +244,18 @@
     </style>
 </head>
 <body>
+    <a class="portal-link" href="./index.html">← Voltar ao Portal</a>
     <div class="container">
         <div class="header">
-            <h1>♔ Xadrez ♚</h1>
+            <h1>â™” Xadrez â™š</h1>
         </div>
 
         <div class="game-controls">
             <div class="mode-selector">
-                <button class="btn-secondary active" id="hvh-mode">👤 vs 👤</button>
-                <button class="btn-secondary" id="hvm-mode">👤 vs 🤖</button>
+                <button class="btn-secondary active" id="hvh-mode">ðŸ‘¤ vs ðŸ‘¤</button>
+                <button class="btn-secondary" id="hvm-mode">ðŸ‘¤ vs ðŸ¤–</button>
             </div>
-            <button class="btn-primary" id="new-game">🔄 Novo Jogo</button>
+            <button class="btn-primary" id="new-game">ðŸ”„ Novo Jogo</button>
         </div>
 
         <div class="game-info">
@@ -275,26 +278,26 @@
         </div>
 
         <div class="status-message" id="status-message">
-            Bem-vindo! Selecione uma peça branca para começar.
+            Bem-vindo! Selecione uma peÃ§a branca para comeÃ§ar.
         </div>
 
         <div class="captured-pieces">
             <div class="captured-box">
-                <h4>Peças Brancas Capturadas</h4>
+                <h4>PeÃ§as Brancas Capturadas</h4>
                 <div class="captured-pieces-list" id="captured-white"></div>
             </div>
             <div class="captured-box">
-                <h4>Peças Pretas Capturadas</h4>
+                <h4>PeÃ§as Pretas Capturadas</h4>
                 <div class="captured-pieces-list" id="captured-black"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Peças Unicode
+        // PeÃ§as Unicode
         const pieces = {
-            'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
-            'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+            'K': 'â™”', 'Q': 'â™•', 'R': 'â™–', 'B': 'â™—', 'N': 'â™˜', 'P': 'â™™',
+            'k': 'â™š', 'q': 'â™›', 'r': 'â™œ', 'b': 'â™', 'n': 'â™ž', 'p': 'â™Ÿ'
         };
 
         // Estado inicial do tabuleiro
@@ -377,7 +380,7 @@
             }
         }
 
-        // Verificar se a peça pertence ao jogador atual
+        // Verificar se a peÃ§a pertence ao jogador atual
         function isCurrentPlayerPiece(piece) {
             if (currentPlayer === 'white') {
                 return piece === piece.toUpperCase();
@@ -403,7 +406,7 @@
             board[toRow][toCol] = piece;
             board[fromRow][fromCol] = '';
 
-            // Promoção de peão
+            // PromoÃ§Ã£o de peÃ£o
             if (piece === 'P' && toRow === 0) {
                 board[toRow][toCol] = 'Q';
             } else if (piece === 'p' && toRow === 7) {
@@ -418,7 +421,7 @@
             checkGameStatus();
         }
 
-        // Obter movimentos válidos
+        // Obter movimentos vÃ¡lidos
         function getValidMoves(row, col) {
             const piece = board[row][col];
             if (!piece) return [];
@@ -450,7 +453,7 @@
             return moves;
         }
 
-        // Movimentos do peão
+        // Movimentos do peÃ£o
         function getPawnMoves(row, col, piece) {
             const moves = [];
             const direction = piece === 'P' ? -1 : 1;
@@ -581,12 +584,12 @@
             return moves;
         }
 
-        // Verificar se a posição é válida
+        // Verificar se a posiÃ§Ã£o Ã© vÃ¡lida
         function isValidPosition(row, col) {
             return row >= 0 && row < 8 && col >= 0 && col < 8;
         }
 
-        // Verificar se é peça oponente
+        // Verificar se Ã© peÃ§a oponente
         function isOpponentPiece(piece1, piece2) {
             return (piece1 === piece1.toUpperCase()) !== (piece2 === piece2.toUpperCase());
         }
@@ -599,7 +602,7 @@
             squares[index].classList.add('selected');
         }
 
-        // Destacar movimentos válidos
+        // Destacar movimentos vÃ¡lidos
         function highlightValidMoves(row, col) {
             const validMoves = getValidMoves(row, col);
             const squares = document.querySelectorAll('.square');
@@ -653,7 +656,7 @@
             }
         }
 
-        // Valor das peças para IA
+        // Valor das peÃ§as para IA
         function getPieceValue(piece) {
             const values = { 'p': 1, 'n': 3, 'b': 3, 'r': 5, 'q': 9, 'k': 100 };
             return values[piece.toLowerCase()] || 0;
@@ -674,11 +677,11 @@
             const statusMsg = document.getElementById('status-message');
 
             if (!kingExists.white) {
-                statusMsg.textContent = '🏆 Pretas vencem! Xeque-mate!';
+                statusMsg.textContent = 'ðŸ† Pretas vencem! Xeque-mate!';
                 statusMsg.className = 'status-message checkmate';
                 gameOver = true;
             } else if (!kingExists.black) {
-                statusMsg.textContent = '🏆 Brancas vencem! Xeque-mate!';
+                statusMsg.textContent = 'ðŸ† Brancas vencem! Xeque-mate!';
                 statusMsg.className = 'status-message checkmate';
                 gameOver = true;
             } else {
@@ -687,13 +690,13 @@
             }
         }
 
-        // Atualizar informações do jogo
+        // Atualizar informaÃ§Ãµes do jogo
         function updateGameInfo() {
             document.getElementById('current-turn').textContent = currentPlayer === 'white' ? 'Brancas' : 'Pretas';
             document.getElementById('move-count').textContent = Math.floor(moveCount / 2);
         }
 
-        // Atualizar peças capturadas
+        // Atualizar peÃ§as capturadas
         function updateCapturedPieces() {
             document.getElementById('captured-white').innerHTML = capturedWhite.map(p => pieces[p]).join(' ');
             document.getElementById('captured-black').innerHTML = capturedBlack.map(p => pieces[p]).join(' ');
@@ -720,7 +723,7 @@
             initBoard();
             updateGameInfo();
             updateCapturedPieces();
-            document.getElementById('status-message').textContent = 'Bem-vindo! Selecione uma peça branca para começar.';
+            document.getElementById('status-message').textContent = 'Bem-vindo! Selecione uma peÃ§a branca para comeÃ§ar.';
             document.getElementById('status-message').className = 'status-message';
         });
 
@@ -734,7 +737,7 @@
 
         document.getElementById('hvm-mode').addEventListener('click', () => {
             gameMode = 'hvm';
-            document.getElementById('game-mode').textContent = 'Humano vs Máquina';
+            document.getElementById('game-mode').textContent = 'Humano vs MÃ¡quina';
             document.getElementById('hvm-mode').classList.add('active');
             document.getElementById('hvh-mode').classList.remove('active');
         });
@@ -745,3 +748,5 @@
     </script>
 </body>
 </html>
+
+
