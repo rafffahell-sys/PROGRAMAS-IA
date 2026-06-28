@@ -779,7 +779,7 @@
     <div class="metrics-grid">
         <div class="metric-card premium-focus">
             <div class="metric-title">Sa�de Geral</div>
-            <div class="metric-val" id="metric-health-score" style="color: #86efac;">0/10</div>
+            <div class="metric-val" id="metric-health-score" style="color: #86efac;">0/11</div>
             <div class="metric-desc" id="metric-health-desc">Aguardando leitura dos agentes.</div>
             <div class="metric-chip" id="metric-health-chip">Frota em observao</div>
         </div>
@@ -839,7 +839,6 @@
                 <div class="action-needed-box" id="box-binance-dca">Nenhum log de execução recebido do Alienware.</div>
             </div>
         </div>
-
         <!-- BOT COINBASE MONITOR -->
         <div class="agent-card" onclick="abrirModal('coinbase-monitor')">
             <div class="agent-avatar">📈</div>
@@ -847,7 +846,7 @@
                 <h3>Bot Coinbase Monitor <span class="agent-tag periodic">Periódico</span></h3>
                 <p class="agent-desc">Analisa e monitora a variação da carteira Coinbase, gerando resumos de variação diária dos criptoativos guardados.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Periódico (Windows Task Scheduler)</div>
+                    <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Periódico (Windows Task Scheduler)</div>
                     <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>coinbase-monitor</code></div>
                 </div>
             </div>
@@ -857,8 +856,6 @@
             </div>
         </div>
 
-        <!-- AGENTE CRIPTOMOEDAS -->
-        <div class="agent-card" onclick="abrirModal('agente-criptomoedas')">
         <!-- AGENTE CRIPTOMOEDAS -->
         <div class="agent-card" onclick="abrirModal('agente-criptomoedas')">
             <div class="agent-avatar">🪙</div>
@@ -894,34 +891,13 @@
         </div>
 
         <!-- BOT INVESTIMENTOS 09H PREMARKET -->
-            </div>
-        </div>
-
-        <!-- AGENTE BLOG DANIEL -->
-        <div class="agent-card" onclick="abrirModal('site-daniel')">
-            <div class="agent-avatar">📝</div>
-            <div class="agent-details">
-                <h3>Agente Blog Daniel <span class="agent-tag periodic">Semanal</span></h3>
-                <p class="agent-desc">Gera rascunhos de artigos para o blog de psicologia e saúde mental, com tom didático, acolhedor e baseado em evidências, enviando o texto por e-mail toda sexta-feira às 16:00 para revisão antes da publicação.</p>
-                <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Toda sexta às 16:00</div>
-                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>site-daniel</code></div>
-                </div>
-            </div>
-            <div class="agent-status-section">
-                <span class="status-indicator caution" id="status-site-daniel">Aguardando Input</span>
-                <div class="action-needed-box warning" id="box-site-daniel">⚠️ Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta às 16:00.</div>
-            </div>
-        </div>
-
-        <!-- BOT INVESTIMENTOS 09H PREMARKET -->
         <div class="agent-card" onclick="abrirModal('invest-09h')">
             <div class="agent-avatar"></div>
             <div class="agent-details">
                 <h3>Bot Investimentos 09h Premarket <span class="agent-tag daily">Todo dia 9h</span></h3>
                 <p class="agent-desc">Compila dados do pré-mercado de ações nacionais e internacionais e envia um relatório matinal.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execução: Diariamente às 09:00</div>
+                    <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Diariamente às 09:00</div>
                     <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>invest-09h</code></div>
                 </div>
             </div>
@@ -1095,6 +1071,7 @@
         'agente-backup': null,
         'agente-backup-cloud': null,
         'agente-criptomoedas': null,
+        'raydium-clmm': null,
         'site-daniel': { status: 'warning', s: 'warning', lastProcessed: 'Aguardando Input', note: 'Agente Blog Daniel aguardando confirma��o de agenda e credencial de envio.' }
     };
 
@@ -1110,7 +1087,6 @@
         'site-daniel': { name: "Agente Blog Daniel", avatar: "📝", tag: "Semanal", tagClass: "periodic" },
         'agente-criptomoedas': { name: "Agente Criptomoedas", avatar: "🪙", tag: "A cada 4h", tagClass: "periodic" },
         'raydium-clmm': { name: "Bot Raydium CLMM", avatar: "🧭", tag: "A cada 4h", tagClass: "periodic" }
-    };
     };
 
     function updateSummaryMetrics() {
