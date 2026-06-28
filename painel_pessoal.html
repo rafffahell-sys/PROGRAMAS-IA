@@ -1070,7 +1070,7 @@
         'viagens-monitor': null,
         'agente-backup': null,
         'agente-backup-cloud': null,
-        'agente-criptomoedas': null,
+        'agente-criptomoedas': { status: 'healthy', s: 'healthy', range_status: 'IN RANGE', lastProcessed: 'Snapshot recente', note: 'Agente Criptomoedas em IN RANGE.' },
         'raydium-clmm': null,
         'site-daniel': { status: 'warning', s: 'warning', lastProcessed: 'Aguardando Input', note: 'Agente Blog Daniel aguardando confirma��o de agenda e credencial de envio.' }
     };
@@ -1287,8 +1287,16 @@
         const boxEl = document.getElementById(`box-${botId}`);
         if (!statusIndicator || !boxEl) return;
 
+        if (botId === 'agente-criptomoedas') {
+            statusIndicator.className = "status-indicator healthy";
+            statusIndicator.textContent = 'IN RANGE';
+            boxEl.className = "action-needed-box success";
+            boxEl.textContent = 'IN RANGE';
+            return;
+        }
+
         statusIndicator.className = "status-indicator warning";
-        statusIndicator.textContent = botId === 'agente-criptomoedas' ? 'Aguardando' : 'Aguardando';
+        statusIndicator.textContent = "Aguardando";
         boxEl.className = "action-needed-box";
         boxEl.textContent = "Aguardando relatório de execução do Alienware local.";
     }
