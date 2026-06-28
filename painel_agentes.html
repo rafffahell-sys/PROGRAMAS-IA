@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <script src="auth-guard.js"></script>
@@ -44,7 +44,7 @@
             padding: 2.5rem;
         }
 
-        /* Marca d'água de Contabilidade (Caduceu Real) */
+        /* Marca d'Ã¡gua de Contabilidade (Caduceu Real) */
         body::before {
             content: "";
             position: fixed;
@@ -267,7 +267,7 @@
         }
 
         .checklist-checkbox:checked::after {
-            content: "✓";
+            content: "âœ“";
             color: white;
             font-size: 12px;
             font-weight: bold;
@@ -434,7 +434,7 @@
             width: 100%;
         }
 
-        /* ── TEMAS ADICIONAIS ───────────────────────────── */
+        /* â”€â”€ TEMAS ADICIONAIS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         /* Tema Claro */
         body.theme-light {
             --bg-color: #f1f5f9;
@@ -664,24 +664,24 @@
 
 <!-- Alternador de Temas Discreto no Canto Superior Esquerdo -->
 <div class="theme-switcher dashboard-switcher">
-    <button onclick="changeTheme('dark')" id="btn-theme-dark" class="theme-btn active" title="Tema Escuro">🌌</button>
-    <button onclick="changeTheme('light')" id="btn-theme-light" class="theme-btn" title="Tema Claro">☀️</button>
-    <button onclick="changeTheme('beige')" id="btn-theme-beige" class="theme-btn" title="Tema Bege">🌾</button>
+    <button onclick="changeTheme('dark')" id="btn-theme-dark" class="theme-btn active" title="Tema Escuro">ðŸŒŒ</button>
+    <button onclick="changeTheme('light')" id="btn-theme-light" class="theme-btn" title="Tema Claro">â˜€ï¸</button>
+    <button onclick="changeTheme('beige')" id="btn-theme-beige" class="theme-btn" title="Tema Bege">ðŸŒ¾</button>
 </div>
 
-<!-- Botão Sair Discreto no Canto Superior Direito -->
+<!-- BotÃ£o Sair Discreto no Canto Superior Direito -->
 <div class="logout-container-fixed">
-    <button onclick="logout()" class="theme-btn" style="background: var(--danger-glow); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; padding: 6px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">🚪 Sair</button>
+    <button onclick="logout()" class="theme-btn" style="background: var(--danger-glow); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; padding: 6px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">ðŸšª Sair</button>
 </div>
 
 <div class="container">
     <header>
         <div class="header-title">
             <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                <a href="index.html" class="back-button">← Voltar ao Portal</a>
+                <a href="index.html" class="back-button">â† Voltar ao Portal</a>
             </div>
             <h1>Painel de Agentes</h1>
-            <p>Acompanhamento de prazos e relatórios para a equipe da folha de pagamento (Rafael, Giovane, Tati)</p>
+            <p>Acompanhamento de prazos e relatÃ³rios para a equipe da folha de pagamento (Rafael, Giovane, Tati)</p>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;">
             <div class="sync-section">
@@ -695,15 +695,15 @@
         <div class="metric-card">
             <div class="metric-title">Agentes Ativos no Trabalho</div>
             <div class="metric-val">10 <span style="font-size: 1rem; color: var(--text-secondary)">Sistemas</span></div>
-            <div class="metric-desc">Focado nos agentes de Diárias, QDIP, Abono, Teto 3, RRA, PVTAC, Ponto, Ponto Retroativo, Devoluções e Backup.</div>
+            <div class="metric-desc">Focado nos agentes de DiÃ¡rias, QDIP, Abono, Teto 3, RRA, PVTAC, Ponto, Ponto Retroativo, DevoluÃ§Ãµes e Backup.</div>
         </div>
         <div class="metric-card">
-            <div class="metric-title">Próximo Prazo Crítico</div>
+            <div class="metric-title">PrÃ³ximo Prazo CrÃ­tico</div>
             <div class="metric-val" id="next-deadline" style="color: var(--warning);">Dia 01 <span style="font-size: 1.2rem; font-weight: 500">23:59</span></div>
-            <div class="metric-desc">Carga das diárias da informática (Agente de Diárias)</div>
+            <div class="metric-desc">Carga das diÃ¡rias da informÃ¡tica (Agente de DiÃ¡rias)</div>
         </div>
         <div class="metric-card">
-            <div class="metric-title">Sincronização em Nuvem</div>
+            <div class="metric-title">SincronizaÃ§Ã£o em Nuvem</div>
             <div class="metric-val" id="sync-status" style="font-size: 1.2rem; color: var(--success)">Ativa</div>
             <div class="metric-desc" id="sync-desc">Sincronizado via Nuvem (Sem necessidade de apps instalados).</div>
         </div>
@@ -712,126 +712,109 @@
     <div class="main-section">
         <!-- AGENTS LIST -->
         <div>
-            <h2 class="section-title">🤖 Nossos Agentes da Folha</h2>
+            <h2 class="section-title">ðŸ¤– Nossos Agentes da Folha</h2>
             <div class="agents-grid">
                 
                 <!-- BOT DIARIAS -->
                 <div class="agent-card">
-                    <div class="agent-avatar">📅</div>
+                    <div class="agent-avatar">ðŸ“…</div>
                     <div class="agent-details">
-                        <h3>Agente de Diárias <span class="agent-tag monthly">Mensal</span></h3>
-                        <p class="agent-desc">Converte a planilha de diárias brutas enviada pela informática no arquivo tabulado de 13 colunas exigido para importação direta no sistema MENTORH.</p>
+                        <h3>Agente de DiÃ¡rias <span class="agent-tag monthly">Mensal</span></h3>
+                        <p class="agent-desc">Converte a planilha de diÃ¡rias brutas enviada pela informÃ¡tica no arquivo tabulado de 13 colunas exigido para importaÃ§Ã£o direta no sistema MENTORH.</p>
                         <div class="agent-meta">
-                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Todo dia 2 às 07:00</div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: <code>INBOX/bot diarias/</code></div>
+                            <div class="meta-item"><span class="meta-icon">â°</span> ExecuÃ§Ã£o: Todo dia 2 Ã s 07:00</div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“‚</span> Destino: <code>INBOX/bot diarias/</code></div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator pending" id="status-diarias">Aguardando Input</span>
-                        <div class="action-needed-box" id="box-diarias">⚠️ A planilha da informática deve ser salva na pasta do bot até o dia 01 às 23:59.</div>
-                    </div>
-                </div>
-
-                <!-- AGENTE BLOG DANIEL -->
-                <div class="agent-card">
-                    <div class="agent-avatar">📝</div>
-                    <div class="agent-details">
-                        <h3>Agente Blog Daniel <span class="agent-tag monthly">Semanal</span></h3>
-                        <p class="agent-desc">Gera rascunhos de artigos para o blog de psicologia e saúde mental, com tom didático, acolhedor e baseado em evidências, enviando o texto por e-mail toda sexta-feira às 16:00 para revisão antes da publicação.</p>
-                        <div class="agent-meta">
-                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Toda sexta às 16:00</div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: <code>INBOX/BLOG DANIEL/</code> + e-mail</div>
-                        </div>
-                    </div>
-                    <div class="agent-status-section">
-                        <span class="status-indicator pending" id="status-blog-daniel">Aguardando Configuração</span>
-                        <div class="action-needed-box" id="box-blog-daniel">⚠️ Conectar a senha de app do Gmail e confirmar o e-mail de destino do Daniel para ativar os envios semanais.</div>
+                        <div class="action-needed-box" id="box-diarias">âš ï¸ A planilha da informÃ¡tica deve ser salva na pasta do bot atÃ© o dia 01 Ã s 23:59.</div>
                     </div>
                 </div>
 
                 <!-- AGENTE QDIP -->
                 <div class="agent-card">
-                    <div class="agent-avatar">📑</div>
+                    <div class="agent-avatar">ðŸ“‘</div>
                     <div class="agent-details">
                         <h3>Agente QDIP <span class="agent-tag monthly">Mensal</span></h3>
-                        <p class="agent-desc">Processa arquivos XML/XLS da folha de pagamento do MENTORH e compila históricos previdenciários analíticos do IGEPPS para Aposentados, Pensionistas e Ativos.</p>
+                        <p class="agent-desc">Processa arquivos XML/XLS da folha de pagamento do MENTORH e compila histÃ³ricos previdenciÃ¡rios analÃ­ticos do IGEPPS para Aposentados, Pensionistas e Ativos.</p>
                         <div class="agent-meta">
-                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Mensal (Pós-Fechamento da Folha)</div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: <code>INBOX/IGEPPS/</code></div>
+                            <div class="meta-item"><span class="meta-icon">â°</span> ExecuÃ§Ã£o: Mensal (PÃ³s-Fechamento da Folha)</div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“‚</span> Destino: <code>INBOX/IGEPPS/</code></div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator pending" id="status-qdip">Aguardando Input</span>
-                        <div class="action-needed-box" id="box-qdip">⚠️ Inserir arquivos XML/XLS da competência na pasta IGEPPS após o fechamento mensal da folha.</div>
+                        <div class="action-needed-box" id="box-qdip">âš ï¸ Inserir arquivos XML/XLS da competÃªncia na pasta IGEPPS apÃ³s o fechamento mensal da folha.</div>
                     </div>
                 </div>
 
                 <!-- AUDITOR ABONO PERM X PREV -->
                 <div class="agent-card">
-                    <div class="agent-avatar">🛡️</div>
+                    <div class="agent-avatar">ðŸ›¡ï¸</div>
                     <div class="agent-details">
-                        <h3>Agente do Abono de Permanência <span class="agent-tag demand">Sob Demanda</span></h3>
-                        <p class="agent-desc">Cruza e audita lançamentos da folha de pagamento, comparando o desconto previdenciário com o valor de Abono de Permanência pago, apontando inconsistências de valores.</p>
+                        <h3>Agente do Abono de PermanÃªncia <span class="agent-tag demand">Sob Demanda</span></h3>
+                        <p class="agent-desc">Cruza e audita lanÃ§amentos da folha de pagamento, comparando o desconto previdenciÃ¡rio com o valor de Abono de PermanÃªncia pago, apontando inconsistÃªncias de valores.</p>
                         
                         <!-- Rubrics Copy Section -->
                         <div class="rubrics-copy-section" style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
-                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Rubricas para Relatório MENTORH:</span>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">ðŸ“‹ Rubricas para RelatÃ³rio MENTORH:</span>
                             <div style="display: flex; gap: 8px; align-items: center;">
                                 <input type="text" id="rubricas-abono" readonly value="1055;1062;5201;5203;1431;1032;3135;5157;5198;5199;5197;1297;1183" style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 8px; color: var(--text-primary); font-size: 0.8rem; font-family: monospace;" />
                                 <button onclick="copiarRubricas(this, 'rubricas-abono')" style="background: var(--primary); border: none; border-radius: 6px; color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 10px var(--primary-glow)'" onmouseout="this.style.boxShadow='none'">Copiar</button>
                             </div>
-                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 5px;">* Emita o relatório no MENTORH contendo estas rubricas para permitir a auditoria automática do agente.</small>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 5px;">* Emita o relatÃ³rio no MENTORH contendo estas rubricas para permitir a auditoria automÃ¡tica do agente.</small>
                         </div>
 
                         <div class="agent-meta" style="margin-top: 12px;">
-                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Sob Demanda (Instantâneo)</div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: PDF no <code>MEU CÉLEBRO =)/Inbox/</code></div>
+                            <div class="meta-item"><span class="meta-icon">â°</span> ExecuÃ§Ã£o: Sob Demanda (InstantÃ¢neo)</div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“‚</span> Destino: PDF no <code>MEU CÃ‰LEBRO =)/Inbox/</code></div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator pending" id="status-abono">Aguardando Input</span>
-                        <div class="action-needed-box" id="box-abono">⚠️ Salvar PDF da folha normal na Inbox para auditoria cruzada de abonos.</div>
+                        <div class="action-needed-box" id="box-abono">âš ï¸ Salvar PDF da folha normal na Inbox para auditoria cruzada de abonos.</div>
                     </div>
                 </div>
 
                 <!-- AUDITOR TETO 3 GAO -->
                 <div class="agent-card">
-                    <div class="agent-avatar">🛡️</div>
+                    <div class="agent-avatar">ðŸ›¡ï¸</div>
                     <div class="agent-details">
                         <h3>Agente Teto 3 (GAO) <span class="agent-tag demand">Sob Demanda</span></h3>
-                        <p class="agent-desc">Audita e identifica membros cujas vantagens cumulativas indenizatórias extrapolaram o teto constitucional de 35% de seu subsídio, gerando o arquivo de importação do redutor 5283.</p>
+                        <p class="agent-desc">Audita e identifica membros cujas vantagens cumulativas indenizatÃ³rias extrapolaram o teto constitucional de 35% de seu subsÃ­dio, gerando o arquivo de importaÃ§Ã£o do redutor 5283.</p>
                         
                         <!-- Rubrics Copy Section -->
                         <div class="rubrics-copy-section" style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
-                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Rubricas de Controle:</span>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">ðŸ“‹ Rubricas de Controle:</span>
                             <div style="display: flex; gap: 8px; align-items: center;">
                                 <input type="text" id="rubricas-teto3" readonly value="1317;5279;5280;5281;5282;5285;5283" style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 8px; color: var(--text-primary); font-size: 0.8rem; font-family: monospace;" />
                                 <button onclick="copiarRubricas(this, 'rubricas-teto3')" style="background: var(--primary); border: none; border-radius: 6px; color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 10px var(--primary-glow)'" onmouseout="this.style.boxShadow='none'">Copiar</button>
                             </div>
-                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 5px;">* Salve a planilha ou PDF com as rubricas de subsídio (1317), vantagens (5279 a 5285) e redutor (5283).</small>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 5px;">* Salve a planilha ou PDF com as rubricas de subsÃ­dio (1317), vantagens (5279 a 5285) e redutor (5283).</small>
                         </div>
 
                         <div class="agent-meta" style="margin-top: 12px;">
-                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Sob Demanda (Instantâneo)</div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: PDF ou Excel no <code>MEU CÉLEBRO =)/Inbox/</code></div>
+                            <div class="meta-item"><span class="meta-icon">â°</span> ExecuÃ§Ã£o: Sob Demanda (InstantÃ¢neo)</div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“‚</span> Destino: PDF ou Excel no <code>MEU CÃ‰LEBRO =)/Inbox/</code></div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator pending" id="status-teto3">Aguardando Input</span>
-                        <div class="action-needed-box" id="box-teto3">⚠️ Salvar planilha ou PDF GAO no diretório <code>MEU CÉLEBRO =)/Inbox</code> para auditoria do teto de 35%.</div>
+                        <div class="action-needed-box" id="box-teto3">âš ï¸ Salvar planilha ou PDF GAO no diretÃ³rio <code>MEU CÃ‰LEBRO =)/Inbox</code> para auditoria do teto de 35%.</div>
                     </div>
                 </div>
 
                 <!-- AGENTE RRA -->
                 <div class="agent-card">
-                    <div class="agent-avatar">📊</div>
+                    <div class="agent-avatar">ðŸ“Š</div>
                     <div class="agent-details">
                         <h3>Agente RRA <span class="agent-tag demand">Sob Demanda</span></h3>
-                        <p class="agent-desc">Apura o imposto de renda sobre Rendimentos Recebidos Acumuladamente (RRA), com suporte a tabelas progressivas históricas de IRRF. Permite o cálculo de base, deduções legais e líquido.</p>
+                        <p class="agent-desc">Apura o imposto de renda sobre Rendimentos Recebidos Acumuladamente (RRA), com suporte a tabelas progressivas histÃ³ricas de IRRF. Permite o cÃ¡lculo de base, deduÃ§Ãµes legais e lÃ­quido.</p>
                         
                         <!-- Format Copy Section -->
                         <div class="rubrics-copy-section" style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
-                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Layout de Importação em Lote (CSV):</span>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">ðŸ“‹ Layout de ImportaÃ§Ã£o em Lote (CSV):</span>
                             <div style="display: flex; gap: 8px; align-items: center;">
                                 <input type="text" id="layout-rra" readonly value="matricula;valor_bruto;qtd_meses;competencia;previdencia;pensao" style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 8px; color: var(--text-primary); font-size: 0.8rem; font-family: monospace;" />
                                 <button onclick="copiarRubricas(this, 'layout-rra')" style="background: var(--primary); border: none; border-radius: 6px; color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 12px var(--primary-glow)'" onmouseout="this.style.boxShadow='none'">Copiar</button>
@@ -840,123 +823,123 @@
                         </div>
 
                         <div style="margin-top: 12px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                            <a href="calculadora_rra.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary); border: none; border-radius: 8px; color: #fff; padding: 8px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 12px var(--primary-glow)'" onmouseout="this.style.boxShadow='none'">⚡ Abrir Calculadora RRA</a>
+                            <a href="calculadora_rra.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary); border: none; border-radius: 8px; color: #fff; padding: 8px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 12px var(--primary-glow)'" onmouseout="this.style.boxShadow='none'">âš¡ Abrir Calculadora RRA</a>
                             <div class="agent-meta" style="margin-top: 0;">
-                                <div class="meta-item" style="margin-top: 0;"><span class="meta-icon">⏰</span> Execução: Sob Demanda (Instantâneo)</div>
+                                <div class="meta-item" style="margin-top: 0;"><span class="meta-icon">â°</span> ExecuÃ§Ã£o: Sob Demanda (InstantÃ¢neo)</div>
                             </div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator pending" id="status-rra">Aguardando Input</span>
-                        <div class="action-needed-box" id="box-rra">⚠️ Colar os dados no importador em lote ou preencher o formulário para apuração do RRA.</div>
+                        <div class="action-needed-box" id="box-rra">âš ï¸ Colar os dados no importador em lote ou preencher o formulÃ¡rio para apuraÃ§Ã£o do RRA.</div>
                     </div>
                 </div>
 
                 <!-- AGENTE PVTAC -->
                 <div class="agent-card">
-                    <div class="agent-avatar">⚖️</div>
+                    <div class="agent-avatar">âš–ï¸</div>
                     <div class="agent-details">
                         <h3>Agente PVTAC <span class="agent-tag monthly">Mensal</span></h3>
-                        <p class="agent-desc">Efetua auditoria e análise comparativa da rubrica 05278 - PVTAC (Parcela de Valorização por Tempo de Antiguidade na Carreira), identificando variações de percentual e controle de saídas de membros.</p>
+                        <p class="agent-desc">Efetua auditoria e anÃ¡lise comparativa da rubrica 05278 - PVTAC (Parcela de ValorizaÃ§Ã£o por Tempo de Antiguidade na Carreira), identificando variaÃ§Ãµes de percentual e controle de saÃ­das de membros.</p>
                         <div class="agent-meta" style="margin-top: 12px;">
-                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Mensal (Pós-Fechamento da Folha)</div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: PDF no <code>INBOX/</code></div>
+                            <div class="meta-item"><span class="meta-icon">â°</span> ExecuÃ§Ã£o: Mensal (PÃ³s-Fechamento da Folha)</div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“‚</span> Destino: PDF no <code>INBOX/</code></div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator pending" id="status-pvtac">Aguardando Input</span>
-                        <div class="action-needed-box" id="box-pvtac">⚠️ Salvar os PDFs do PVTAC de Maio e Junho na Inbox para auditoria comparativa.</div>
+                        <div class="action-needed-box" id="box-pvtac">âš ï¸ Salvar os PDFs do PVTAC de Maio e Junho na Inbox para auditoria comparativa.</div>
                     </div>
                 </div>
 
                 <!-- AGENTE DO PONTO -->
                 <div class="agent-card">
-                    <div class="agent-avatar">⏰</div>
+                    <div class="agent-avatar">â°</div>
                     <div class="agent-details">
                         <h3>Agente do Ponto <span class="agent-tag monthly">Mensal</span></h3>
-                        <p class="agent-desc">Processa o fechamento do ponto eletrônico dos servidores do MPPA para calcular e exportar descontos de folha (MENTORH).</p>
+                        <p class="agent-desc">Processa o fechamento do ponto eletrÃ´nico dos servidores do MPPA para calcular e exportar descontos de folha (MENTORH).</p>
                         
                         <!-- Modular Info & Input Section -->
                         <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
-                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Módulo Ativo:</span>
-                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block;">📍 Módulo Faltas - Mês Atual</span>
-                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--warning); display: block; margin-top: 4px;">⚠️ Desenvolvimento pausado no Módulo: Plantões Servidor</span>
-                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">* Outros módulos do agente do ponto (como plantões, parametrização de férias, licenças e afastamentos) serão adicionados futuramente.</small>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">ðŸ“‹ MÃ³dulo Ativo:</span>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block;">ðŸ“ MÃ³dulo Faltas - MÃªs Atual</span>
+                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--warning); display: block; margin-top: 4px;">âš ï¸ Desenvolvimento pausado no MÃ³dulo: PlantÃµes Servidor</span>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">* Outros mÃ³dulos do agente do ponto (como plantÃµes, parametrizaÃ§Ã£o de fÃ©rias, licenÃ§as e afastamentos) serÃ£o adicionados futuramente.</small>
                         </div>
 
                         <div class="agent-meta" style="margin-top: 12px;">
-                            <div class="meta-item"><span class="meta-icon">📥</span> Entrada Exigida: <code>Planilha do Ponto (.xlsx)</code></div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Pasta: <code>INBOX/PROJETO PONTO - ANALISE E IMPORTAÇÃO/ARQUIVOS INPUT/</code></div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“¥</span> Entrada Exigida: <code>Planilha do Ponto (.xlsx)</code></div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“‚</span> Pasta: <code>INBOX/PROJETO PONTO - ANALISE E IMPORTAÃ‡ÃƒO/ARQUIVOS INPUT/</code></div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator pending" id="status-ponto">Aguardando Input</span>
-                        <div class="action-needed-box" id="box-ponto">⚠️ Salvar planilha de faltas do mês de referência na pasta ARQUIVOS INPUT para iniciar o cálculo.</div>
+                        <div class="action-needed-box" id="box-ponto">âš ï¸ Salvar planilha de faltas do mÃªs de referÃªncia na pasta ARQUIVOS INPUT para iniciar o cÃ¡lculo.</div>
                     </div>
                 </div>
 
                 <!-- AGENTE DO PONTO - FALTAS RETROATIVAS -->
                 <div class="agent-card">
-                    <div class="agent-avatar">⏱️</div>
+                    <div class="agent-avatar">â±ï¸</div>
                     <div class="agent-details">
                         <h3>Agente do Ponto - Faltas Retroativas <span class="agent-tag demand">Sob Demanda</span></h3>
-                        <p class="agent-desc">Processa a apuração e cálculo de descontos de faltas de competências anteriores (retroativas). Realiza busca inteligente nas prévias de cada mês correspondente para identificar a Base 6 e calcula o desconto proporcional de vencimentos, vantagens e vale alimentação.</p>
+                        <p class="agent-desc">Processa a apuraÃ§Ã£o e cÃ¡lculo de descontos de faltas de competÃªncias anteriores (retroativas). Realiza busca inteligente nas prÃ©vias de cada mÃªs correspondente para identificar a Base 6 e calcula o desconto proporcional de vencimentos, vantagens e vale alimentaÃ§Ã£o.</p>
                         
                         <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
-                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Módulo Ativo:</span>
-                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block;">📍 Módulo Faltas Retroativas</span>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">ðŸ“‹ MÃ³dulo Ativo:</span>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block;">ðŸ“ MÃ³dulo Faltas Retroativas</span>
                             <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">* Gera a minuta de despacho (.md) e o arquivo Word (.docx) formatado na Inbox.</small>
                         </div>
 
                         <div class="agent-meta" style="margin-top: 12px;">
-                            <div class="meta-item"><span class="meta-icon">📥</span> Entradas Exigidas: <code>Ponto Consolidado (.pdf) e Prévia do Servidor (.xlsx/.pdf)</code></div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Pasta: <code>INBOX/ e INBOX/PROJETO PONTO - ANALISE E IMPORTAÇÃO/PREVIA SERVIDOR/</code></div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“¥</span> Entradas Exigidas: <code>Ponto Consolidado (.pdf) e PrÃ©via do Servidor (.xlsx/.pdf)</code></div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“‚</span> Pasta: <code>INBOX/ e INBOX/PROJETO PONTO - ANALISE E IMPORTAÃ‡ÃƒO/PREVIA SERVIDOR/</code></div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator pending" id="status-ponto-retroativo">Aguardando Input</span>
-                        <div class="action-needed-box" id="box-ponto-retroativo">⚠️ Salvar o PDF do ponto (com as faltas retroativas) e as prévias dos servidores na Inbox para processamento.</div>
+                        <div class="action-needed-box" id="box-ponto-retroativo">âš ï¸ Salvar o PDF do ponto (com as faltas retroativas) e as prÃ©vias dos servidores na Inbox para processamento.</div>
                     </div>
                 </div>
 
-                <!-- AGENTE DO PONTO - DEVOLUÇÕES -->
+                <!-- AGENTE DO PONTO - DEVOLUÃ‡Ã•ES -->
                 <div class="agent-card">
-                    <div class="agent-avatar">🔄</div>
+                    <div class="agent-avatar">ðŸ”„</div>
                     <div class="agent-details">
-                        <h3>Agente do Ponto - Devoluções <span class="agent-tag monthly">Mensal</span></h3>
-                        <p class="agent-desc">Processa a planilha de devolução de faltas e de auxílio alimentação dos membros. Calcula valores a devolver, gerencia o incremento dinâmico de fatores para evitar repetições no MENTORH e gera os arquivos formatados (.xlsx e .txt) para importação direta.</p>
+                        <h3>Agente do Ponto - DevoluÃ§Ãµes <span class="agent-tag monthly">Mensal</span></h3>
+                        <p class="agent-desc">Processa a planilha de devoluÃ§Ã£o de faltas e de auxÃ­lio alimentaÃ§Ã£o dos membros. Calcula valores a devolver, gerencia o incremento dinÃ¢mico de fatores para evitar repetiÃ§Ãµes no MENTORH e gera os arquivos formatados (.xlsx e .txt) para importaÃ§Ã£o direta.</p>
                         
                         <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border-color); border-radius: 8px; width: 100%;">
-                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">📋 Módulo Ativo:</span>
-                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block;">📍 Módulo Devolução de Faltas e Alimentação</span>
-                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">* Utiliza as rubricas 1192 (Devolução Faltas) e 1289 (Devolução Aux. Alimentação) com fatores dinâmicos para a mesma matrícula.</small>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--info); display: block; margin-bottom: 6px; text-transform: uppercase;">ðŸ“‹ MÃ³dulo Ativo:</span>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block;">ðŸ“ MÃ³dulo DevoluÃ§Ã£o de Faltas e AlimentaÃ§Ã£o</span>
+                            <small style="display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">* Utiliza as rubricas 1192 (DevoluÃ§Ã£o Faltas) e 1289 (DevoluÃ§Ã£o Aux. AlimentaÃ§Ã£o) com fatores dinÃ¢micos para a mesma matrÃ­cula.</small>
                         </div>
 
                         <div class="agent-meta" style="margin-top: 12px;">
-                            <div class="meta-item"><span class="meta-icon">📥</span> Entrada Exigida: <code>Planilha de Devoluções (.xlsx)</code></div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Pasta: <code>INBOX/PROJETO PONTO - ANALISE E IMPORTAÇÃO/ARQUIVOS INPUT/</code></div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“¥</span> Entrada Exigida: <code>Planilha de DevoluÃ§Ãµes (.xlsx)</code></div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“‚</span> Pasta: <code>INBOX/PROJETO PONTO - ANALISE E IMPORTAÃ‡ÃƒO/ARQUIVOS INPUT/</code></div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator pending" id="status-ponto-devolucoes">Aguardando Input</span>
-                        <div class="action-needed-box" id="box-ponto-devolucoes">⚠️ Salvar planilha de devoluções (ex: 3.DEVOLUÇÕES...) na pasta ARQUIVOS INPUT para iniciar o processamento.</div>
+                        <div class="action-needed-box" id="box-ponto-devolucoes">âš ï¸ Salvar planilha de devoluÃ§Ãµes (ex: 3.DEVOLUÃ‡Ã•ES...) na pasta ARQUIVOS INPUT para iniciar o processamento.</div>
                     </div>
                 </div>
 
                 <!-- AGENTE DE BACKUP -->
                 <div class="agent-card">
-                    <div class="agent-avatar">💾</div>
+                    <div class="agent-avatar">ðŸ’¾</div>
                     <div class="agent-details">
                         <h3>Agente de Backup <span class="agent-tag monthly">Mensal</span></h3>
-                        <p class="agent-desc">Realiza o fechamento mensal da competência. Compacta ferramentas, contextos e repositório de códigos em um arquivo compactado (ZIP) e gera o relatório de auditoria detalhado (Markdown) no Google Drive.</p>
+                        <p class="agent-desc">Realiza o fechamento mensal da competÃªncia. Compacta ferramentas, contextos e repositÃ³rio de cÃ³digos em um arquivo compactado (ZIP) e gera o relatÃ³rio de auditoria detalhado (Markdown) no Google Drive.</p>
                         <div class="agent-meta">
-                            <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Último dia do mês às 23:50</div>
-                            <div class="meta-item"><span class="meta-icon">📂</span> Destino: <code>Backups/</code> e <code>Projetos/</code> no Cérebro</div>
+                            <div class="meta-item"><span class="meta-icon">â°</span> ExecuÃ§Ã£o: Ãšltimo dia do mÃªs Ã s 23:50</div>
+                            <div class="meta-item"><span class="meta-icon">ðŸ“‚</span> Destino: <code>Backups/</code> e <code>Projetos/</code> no CÃ©rebro</div>
                         </div>
                     </div>
                     <div class="agent-status-section">
                         <span class="status-indicator healthy" id="status-backup">Ativo / Agendado</span>
-                        <div class="action-needed-box success" id="box-backup">✓ Agendamento automatizado no Windows Task Scheduler para rodar no final de cada mês.</div>
+                        <div class="action-needed-box success" id="box-backup">âœ“ Agendamento automatizado no Windows Task Scheduler para rodar no final de cada mÃªs.</div>
                     </div>
                 </div>
 
@@ -965,18 +948,18 @@
 
         <!-- RIGHT SIDEBAR (USER CHECKLIST) -->
         <div>
-            <h2 class="section-title">📋 Checklist de Entradas</h2>
+            <h2 class="section-title">ðŸ“‹ Checklist de Entradas</h2>
             <div class="checklist-container">
                 <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.4;">
-                    Marque as tarefas conforme enviar os relatórios/arquivos para as pastas de processamento.
+                    Marque as tarefas conforme enviar os relatÃ³rios/arquivos para as pastas de processamento.
                 </p>
 
                 <!-- CHECK 1 -->
                 <div class="checklist-item">
                     <input type="checkbox" class="checklist-checkbox" id="check-diarias" onchange="toggleCheck('diarias')">
                     <div class="checklist-info">
-                        <h4>Agente de Diárias</h4>
-                        <p>Upload do arquivo bruto da informática na pasta <code>INBOX/bot diarias</code>.</p>
+                        <h4>Agente de DiÃ¡rias</h4>
+                        <p>Upload do arquivo bruto da informÃ¡tica na pasta <code>INBOX/bot diarias</code>.</p>
                     </div>
                 </div>
 
@@ -985,16 +968,7 @@
                     <input type="checkbox" class="checklist-checkbox" id="check-qdip" onchange="toggleCheck('qdip')">
                     <div class="checklist-info">
                         <h4>Agente QDIP</h4>
-                        <p>Copiar os relatórios de fechamento da folha no diretório <code>INBOX/IGEPPS</code>.</p>
-                    </div>
-                </div>
-
-                <!-- CHECK 2B -->
-                <div class="checklist-item">
-                    <input type="checkbox" class="checklist-checkbox" id="check-blog-daniel" onchange="toggleCheck('blog-daniel')">
-                    <div class="checklist-info">
-                        <h4>Agente Blog Daniel</h4>
-                        <p>Gerar e revisar o rascunho semanal e disparar o e-mail de sexta às 16:00.</p>
+                        <p>Copiar os relatÃ³rios de fechamento da folha no diretÃ³rio <code>INBOX/IGEPPS</code>.</p>
                     </div>
                 </div>
 
@@ -1003,7 +977,7 @@
                     <input type="checkbox" class="checklist-checkbox" id="check-site-daniel" onchange="toggleCheck('site-daniel')">
                     <div class="checklist-info">
                         <h4>Agente Site Daniel</h4>
-                        <p>Manter o site institucional sincronizado e o card de acesso rápido visível no painel.</p>
+                        <p>Manter o site institucional sincronizado e o card de acesso rÃ¡pido visÃ­vel no painel.</p>
                     </div>
                 </div>
 
@@ -1011,8 +985,8 @@
                 <div class="checklist-item">
                     <input type="checkbox" class="checklist-checkbox" id="check-abono" onchange="toggleCheck('abono')">
                     <div class="checklist-info">
-                        <h4>Agente do Abono de Permanência</h4>
-                        <p>Salvar PDF da folha normal na pasta compartilhada <code>MEU CÉLEBRO =)/Inbox</code>.</p>
+                        <h4>Agente do Abono de PermanÃªncia</h4>
+                        <p>Salvar PDF da folha normal na pasta compartilhada <code>MEU CÃ‰LEBRO =)/Inbox</code>.</p>
                     </div>
                 </div>
 
@@ -1021,7 +995,7 @@
                     <input type="checkbox" class="checklist-checkbox" id="check-teto3" onchange="toggleCheck('teto3')">
                     <div class="checklist-info">
                         <h4>Agente Teto 3 (GAO)</h4>
-                        <p>Salvar planilha ou PDF GAO no diretório <code>MEU CÉLEBRO =)/Inbox</code>.</p>
+                        <p>Salvar planilha ou PDF GAO no diretÃ³rio <code>MEU CÃ‰LEBRO =)/Inbox</code>.</p>
                     </div>
                 </div>
 
@@ -1030,7 +1004,7 @@
                     <input type="checkbox" class="checklist-checkbox" id="check-rra" onchange="toggleCheck('rra')">
                     <div class="checklist-info">
                         <h4>Agente RRA</h4>
-                        <p>Processamento dos dados de RRA via formulário individual ou importador em lote.</p>
+                        <p>Processamento dos dados de RRA via formulÃ¡rio individual ou importador em lote.</p>
                     </div>
                 </div>
 
@@ -1057,7 +1031,7 @@
                     <input type="checkbox" class="checklist-checkbox" id="check-ponto-retroativo" onchange="toggleCheck('ponto-retroativo')">
                     <div class="checklist-info">
                         <h4>Agente do Ponto - Faltas Retroativas</h4>
-                        <p>Salvar o PDF do ponto e prévias dos servidores correspondentes na pasta <code>INBOX</code>.</p>
+                        <p>Salvar o PDF do ponto e prÃ©vias dos servidores correspondentes na pasta <code>INBOX</code>.</p>
                     </div>
                 </div>
 
@@ -1065,15 +1039,15 @@
                 <div class="checklist-item">
                     <input type="checkbox" class="checklist-checkbox" id="check-ponto-devolucoes" onchange="toggleCheck('ponto-devolucoes')">
                     <div class="checklist-info">
-                        <h4>Agente do Ponto - Devoluções</h4>
-                        <p>Upload da planilha de devolução de faltas na pasta <code>ARQUIVOS INPUT</code>.</p>
+                        <h4>Agente do Ponto - DevoluÃ§Ãµes</h4>
+                        <p>Upload da planilha de devoluÃ§Ã£o de faltas na pasta <code>ARQUIVOS INPUT</code>.</p>
                     </div>
                 </div>
                 </div>
         </div>
     </div>
     <footer>
-        By Rafael F. Lima & Giovane Moura · Desenvolvido via Google Gemini Antigravity IA Agent · 2026
+        By Rafael F. Lima & Giovane Moura Â· Desenvolvido via Google Gemini Antigravity IA Agent Â· 2026
     </footer>
 </div>
 
@@ -1084,7 +1058,6 @@
     let localState = {
         diarias: false,
         qdip: false,
-        'blog-daniel': false,
         'site-daniel': true,
         abono: false,
         teto3: false,
@@ -1113,7 +1086,7 @@
       return str;
     }
 
-    // Inicialização da página
+    // InicializaÃ§Ã£o da pÃ¡gina
     document.addEventListener("DOMContentLoaded", () => {
         const salvaKey = localStorage.getItem('mppa-sync-key');
         if (salvaKey) {
@@ -1121,7 +1094,7 @@
             document.getElementById('sync-key').value = syncKey;
         }
 
-        ['diarias', 'qdip', 'blog-daniel', 'site-daniel', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
+        ['diarias', 'qdip', 'site-daniel', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
             const val = localStorage.getItem('mppa-check-' + item) === 'true';
             localState[item] = val;
             document.getElementById('check-' + item).checked = val;
@@ -1152,7 +1125,7 @@
                     const state = JSON.parse(fromHex(hexValue));
                     localState = state;
                     
-                    ['diarias', 'qdip', 'blog-daniel', 'site-daniel', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
+                    ['diarias', 'qdip', 'site-daniel', 'abono', 'teto3', 'rra', 'pvtac', 'ponto', 'ponto-retroativo', 'ponto-devolucoes'].forEach(item => {
                         const checked = !!state[item];
                         document.getElementById('check-' + item).checked = checked;
                         updateUI(item, checked);
@@ -1161,15 +1134,15 @@
                     gravarEstadoNuvem();
                 }
                 
-                statusEl.textContent = "Sincronizado ✓";
+                statusEl.textContent = "Sincronizado âœ“";
                 statusEl.style.color = "var(--success)";
                 descEl.textContent = "Sincronia ativa em nuvem com Tati e Giovane.";
             }
         } catch (e) {
-            console.warn("Falha de conexão com a nuvem, operando offline:", e);
+            console.warn("Falha de conexÃ£o com a nuvem, operando offline:", e);
             statusEl.textContent = "Offline (Local)";
             statusEl.style.color = "var(--warning)";
-            descEl.textContent = "Não foi possível conectar. Alterações serão salvas localmente.";
+            descEl.textContent = "NÃ£o foi possÃ­vel conectar. AlteraÃ§Ãµes serÃ£o salvas localmente.";
         }
     }
 
@@ -1206,33 +1179,33 @@
             statusEl.className = "status-indicator healthy";
             statusEl.textContent = "Pronto / Processado";
             boxEl.className = "action-needed-box success";
-            boxEl.textContent = "✓ Relatório ou arquivo de entrada já providenciado nesta competência.";
+            boxEl.textContent = "âœ“ RelatÃ³rio ou arquivo de entrada jÃ¡ providenciado nesta competÃªncia.";
         } else {
             statusEl.className = "status-indicator pending";
             statusEl.textContent = "Aguardando Input";
             boxEl.className = "action-needed-box";
             if (item === 'diarias') {
-                boxEl.textContent = "⚠️ A planilha da informática deve ser salva na pasta do bot até o dia 01 às 23:59.";
+                boxEl.textContent = "âš ï¸ A planilha da informÃ¡tica deve ser salva na pasta do bot atÃ© o dia 01 Ã s 23:59.";
         } else if (item === 'qdip') {
-            boxEl.textContent = "⚠️ Inserir arquivos XML/XLS da competência na pasta IGEPPS após o fechamento mensal da folha.";
-        } else if (item === 'blog-daniel') {
-            boxEl.textContent = "⚠️ Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta às 16:00.";
+            boxEl.textContent = "âš ï¸ Inserir arquivos XML/XLS da competÃªncia na pasta IGEPPS apÃ³s o fechamento mensal da folha.";
+
+            boxEl.textContent = "âš ï¸ Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta Ã s 16:00.";
         } else if (item === 'site-daniel') {
-            boxEl.textContent = "⚠️ Card de acesso rápido do Daniel e sincronização visual do site institucional.";
+            boxEl.textContent = "âš ï¸ Card de acesso rÃ¡pido do Daniel e sincronizaÃ§Ã£o visual do site institucional.";
         } else if (item === 'teto3') {
-            boxEl.textContent = "⚠️ Salvar planilha ou PDF de vantagens (GAO) na Inbox para auditoria do teto de 35%.";
+            boxEl.textContent = "âš ï¸ Salvar planilha ou PDF de vantagens (GAO) na Inbox para auditoria do teto de 35%.";
         } else if (item === 'rra') {
-            boxEl.textContent = "⚠️ Colar os dados no importador em lote ou preencher o formulário para apuração do RRA.";
+            boxEl.textContent = "âš ï¸ Colar os dados no importador em lote ou preencher o formulÃ¡rio para apuraÃ§Ã£o do RRA.";
             } else if (item === 'pvtac') {
-                boxEl.textContent = "⚠️ Salvar os PDFs do PVTAC de Maio e Junho na Inbox para auditoria comparativa.";
+                boxEl.textContent = "âš ï¸ Salvar os PDFs do PVTAC de Maio e Junho na Inbox para auditoria comparativa.";
             } else if (item === 'ponto') {
-                boxEl.textContent = "⚠️ Salvar planilha de faltas do mês de referência na pasta ARQUIVOS INPUT para iniciar o cálculo.";
+                boxEl.textContent = "âš ï¸ Salvar planilha de faltas do mÃªs de referÃªncia na pasta ARQUIVOS INPUT para iniciar o cÃ¡lculo.";
             } else if (item === 'ponto-retroativo') {
-                boxEl.textContent = "⚠️ Salvar o PDF do ponto (com faltas retroativas) e as prévias dos servidores na Inbox para processamento.";
+                boxEl.textContent = "âš ï¸ Salvar o PDF do ponto (com faltas retroativas) e as prÃ©vias dos servidores na Inbox para processamento.";
             } else if (item === 'ponto-devolucoes') {
-                boxEl.textContent = "⚠️ Salvar a planilha de devoluções (3.DEVOLUÇÕES...) na pasta ARQUIVOS INPUT para iniciar o processamento.";
+                boxEl.textContent = "âš ï¸ Salvar a planilha de devoluÃ§Ãµes (3.DEVOLUÃ‡Ã•ES...) na pasta ARQUIVOS INPUT para iniciar o processamento.";
             } else {
-                boxEl.textContent = "⚠️ Salvar PDF da folha normal na Inbox para auditoria cruzada de abonos.";
+                boxEl.textContent = "âš ï¸ Salvar PDF da folha normal na Inbox para auditoria cruzada de abonos.";
             }
         }
 
@@ -1255,37 +1228,32 @@
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--warning)";
             deadlineEl.innerHTML = "Dia 01 <span style='font-size: 1.2rem; font-weight: 500'>23:59</span>";
-            descEl.textContent = "Carga das diárias da informática (Agente de Diárias)";
+            descEl.textContent = "Carga das diÃ¡rias da informÃ¡tica (Agente de DiÃ¡rias)";
         } else if (!checkQdip) {
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--primary)";
             deadlineEl.innerHTML = "Fechamento <span style='font-size: 1.2rem; font-weight: 500'>Folha</span>";
             descEl.textContent = "Carga de arquivos de folha no IGEPPS (Agente QDIP)";
-        } else if (!document.getElementById('check-blog-daniel').checked) {
-            deadlineEl.className = "metric-val";
-            deadlineEl.style.color = "var(--info)";
-            deadlineEl.innerHTML = "Sexta <span style='font-size: 1.2rem; font-weight: 500'>16:00</span>";
-            descEl.textContent = "Geração e envio por e-mail do Blog Daniel (Agente Blog Daniel)";
         } else if (!document.getElementById('check-site-daniel').checked) {
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--success)";
             deadlineEl.innerHTML = "Site <span style='font-size: 1.2rem; font-weight: 500'>Daniel</span>";
-            descEl.textContent = "Card de acesso rápido e sincronização do site institucional do Daniel";
+            descEl.textContent = "Card de acesso rÃ¡pido e sincronizaÃ§Ã£o do site institucional do Daniel";
         } else if (!checkTeto3) {
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--info)";
-            deadlineEl.innerHTML = "Pré-Fechamento <span style='font-size: 1.2rem; font-weight: 500'>GAO</span>";
+            deadlineEl.innerHTML = "PrÃ©-Fechamento <span style='font-size: 1.2rem; font-weight: 500'>GAO</span>";
             descEl.textContent = "Auditoria de teto 35% de vantagens (Agente Teto 3)";
         } else if (!checkRra) {
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--info)";
             deadlineEl.innerHTML = "Apurar RRA <span style='font-size: 1.2rem; font-weight: 500'>Lote</span>";
-            descEl.textContent = "Processamento e apuração do IRRF sobre RRA (Agente RRA)";
+            descEl.textContent = "Processamento e apuraÃ§Ã£o do IRRF sobre RRA (Agente RRA)";
         } else if (!checkPvtac) {
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--primary)";
             deadlineEl.innerHTML = "Auditar <span style='font-size: 1.2rem; font-weight: 500'>PVTAC</span>";
-            descEl.textContent = "Comparar relatórios mensais de PVTAC dos Membros (Agente PVTAC)";
+            descEl.textContent = "Comparar relatÃ³rios mensais de PVTAC dos Membros (Agente PVTAC)";
         } else if (!checkPonto) {
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--info)";
@@ -1299,13 +1267,13 @@
         } else if (!checkPontoDevolucoes) {
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--info)";
-            deadlineEl.innerHTML = "Devolução <span style='font-size: 1.2rem; font-weight: 500'>Ponto</span>";
-            descEl.textContent = "Processar planilha de devoluções de faltas e alimentação (Agente do Ponto)";
+            deadlineEl.innerHTML = "DevoluÃ§Ã£o <span style='font-size: 1.2rem; font-weight: 500'>Ponto</span>";
+            descEl.textContent = "Processar planilha de devoluÃ§Ãµes de faltas e alimentaÃ§Ã£o (Agente do Ponto)";
         } else {
             deadlineEl.className = "metric-val";
             deadlineEl.style.color = "var(--success)";
-            deadlineEl.innerHTML = "Tudo OK! <span style='font-size: 1.2rem; font-weight: 500'>✓</span>";
-            descEl.textContent = "Todos os relatórios da folha deste mês foram enviados!";
+            deadlineEl.innerHTML = "Tudo OK! <span style='font-size: 1.2rem; font-weight: 500'>âœ“</span>";
+            descEl.textContent = "Todos os relatÃ³rios da folha deste mÃªs foram enviados!";
         }
     }
 
@@ -1315,7 +1283,7 @@
         input.setSelectionRange(0, 99999);
         navigator.clipboard.writeText(input.value).then(() => {
             const originalText = btn.textContent;
-            btn.textContent = "Copiado! ✓";
+            btn.textContent = "Copiado! âœ“";
             btn.style.background = "var(--success)";
             setTimeout(() => {
                 btn.textContent = originalText;
@@ -1333,7 +1301,7 @@
         }
         localStorage.setItem('mppa-portal-theme', themeName);
         
-        // Atualizar botões
+        // Atualizar botÃµes
         document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
         const activeBtn = document.getElementById('btn-theme-' + themeName);
         if (activeBtn) activeBtn.classList.add('active');
