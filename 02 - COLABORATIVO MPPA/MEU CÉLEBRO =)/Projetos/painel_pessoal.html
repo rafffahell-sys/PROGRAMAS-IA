@@ -1346,43 +1346,6 @@
         sessionStorage.removeItem('mppa_session_active');
         window.location.replace('login.html');
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const titleExists = Array.from(document.querySelectorAll('h1, h2, h3, .card-title, .agent-title'))
-            .some(el => (el.textContent || '').trim() === 'Agente Blog Daniel');
-        if (titleExists) return;
-
-        const target =
-            document.querySelector('[data-agent-cards]') ||
-            document.querySelector('.agents-grid') ||
-            document.querySelector('.cards-grid') ||
-            document.querySelector('.grid-cards') ||
-            document.querySelector('.grid') ||
-            document.querySelector('main .container') ||
-            document.querySelector('.container');
-
-        if (!target) return;
-
-        target.insertAdjacentHTML('beforeend', `
-            <div class="card agente-card">
-                <div class="card-header">
-                    <h3>Agente Blog Daniel</h3>
-                    <span class="badge badge-success">Ativo</span>
-                </div>
-                <p class="card-description">
-                    Agente de criação de textos para blog na área de psicologia.
-                    Programado para gerar e enviar os conteúdos para
-                    <strong>ds4daniel@icloud.com</strong> toda sexta-feira às
-                    <strong>16h</strong>, a partir do Alienware.
-                </p>
-                <div class="card-footer">
-                    <span class="card-tag">Psicologia</span>
-                    <span class="card-tag">Blog</span>
-                    <span class="card-tag">Envio automático</span>
-                </div>
-            </div>
-        `);
-    });
 </script>
 </body>
 </html>

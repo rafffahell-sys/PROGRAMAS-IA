@@ -859,21 +859,15 @@
 
         <!-- AGENTE CRIPTOMOEDAS -->
         <div class="agent-card" onclick="abrirModal('agente-criptomoedas')">
-<<<<<<< HEAD
+        <!-- AGENTE CRIPTOMOEDAS -->
+        <div class="agent-card" onclick="abrirModal('agente-criptomoedas')">
             <div class="agent-avatar">🪙</div>
-=======
-<<<<<<< HEAD
-            <div class="agent-avatar">&#128176;</div>
-=======
-            <div class="agent-avatar">🪙</div>
->>>>>>> 8df2020 (Ajusta agente criptomoedas e painel)
->>>>>>> 89279f9 (Fix duplicate crypto agent card and polish bot logs)
             <div class="agent-details">
                 <h3>Agente Criptomoedas <span class="agent-tag periodic">A cada 4h</span></h3>
                 <p class="agent-desc">Monitora as posições Raydium CLMM na Solana, gera snapshot exato dos NFTs da pool, identifica estado em range e envia o resumo para o Telegram e para o painel.</p>
                 <div class="agent-meta">
                     <div class="meta-item"><span class="meta-icon">⏰</span> Execução: A cada 4 horas</div>
-                    <div class="meta-item"><span class="meta-icon">??</span> ID: <code>agente-criptomoedas</code></div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>agente-criptomoedas</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
@@ -884,18 +878,39 @@
 
         <!-- AGENTE BLOG DANIEL -->
         <div class="agent-card" onclick="abrirModal('site-daniel')">
-            <div class="agent-avatar">&#128221;</div>
+            <div class="agent-avatar">📝</div>
             <div class="agent-details">
                 <h3>Agente Blog Daniel <span class="agent-tag periodic">Semanal</span></h3>
-                <p class="agent-desc">Gera rascunhos de artigos para o blog de psicologia e sa�de mental, com tom did�tico, acolhedor e baseado em evid�ncias, enviando o texto por e-mail toda sexta-feira �s 16:00 para revis�o antes da publica��o.</p>
+                <p class="agent-desc">Gera rascunhos de artigos para o blog de psicologia e saúde mental, com tom didático, acolhedor e baseado em evidências, enviando o texto por e-mail toda sexta-feira às 16:00 para revisão antes da publicação.</p>
                 <div class="agent-meta">
-                    <div class="meta-item"><span class="meta-icon">&#9200;</span> Execu��o: Toda sexta �s 16:00</div>
-                    <div class="meta-item"><span class="meta-icon">??</span> ID: <code>site-daniel</code></div>
+                    <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Toda sexta às 16:00</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>site-daniel</code></div>
                 </div>
             </div>
             <div class="agent-status-section">
                 <span class="status-indicator caution" id="status-site-daniel">Aguardando Input</span>
-                <div class="action-needed-box warning" id="box-site-daniel">?? Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta �s 16:00.</div>
+                <div class="action-needed-box warning" id="box-site-daniel">⚠️ Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta às 16:00.</div>
+            </div>
+        </div>
+
+        <!-- BOT INVESTIMENTOS 09H PREMARKET -->
+            </div>
+        </div>
+
+        <!-- AGENTE BLOG DANIEL -->
+        <div class="agent-card" onclick="abrirModal('site-daniel')">
+            <div class="agent-avatar">📝</div>
+            <div class="agent-details">
+                <h3>Agente Blog Daniel <span class="agent-tag periodic">Semanal</span></h3>
+                <p class="agent-desc">Gera rascunhos de artigos para o blog de psicologia e saúde mental, com tom didático, acolhedor e baseado em evidências, enviando o texto por e-mail toda sexta-feira às 16:00 para revisão antes da publicação.</p>
+                <div class="agent-meta">
+                    <div class="meta-item"><span class="meta-icon">⏰</span> Execução: Toda sexta às 16:00</div>
+                    <div class="meta-item"><span class="meta-icon">🔑</span> ID: <code>site-daniel</code></div>
+                </div>
+            </div>
+            <div class="agent-status-section">
+                <span class="status-indicator caution" id="status-site-daniel">Aguardando Input</span>
+                <div class="action-needed-box warning" id="box-site-daniel">⚠️ Confirmar a agenda semanal do blog e a senha de app do Gmail para os envios de sexta às 16:00.</div>
             </div>
         </div>
 
@@ -1088,26 +1103,14 @@
         'binance-dca': { name: "Bot DCA Binance Inteligente", avatar: "🪙", tag: "A cada 4h", tagClass: "periodic" },
         'coinbase-monitor': { name: "Bot Coinbase Monitor", avatar: "📈", tag: "Periódico", tagClass: "periodic" },
         'invest-09h': { name: "Bot Investimentos 09h Premarket", avatar: "", tag: "Todo dia 9h", tagClass: "daily" },
-        'invest-13h': { name: "Bot Investimentos 13h Parcial", avatar: "&#128347;", tag: "Todo dia 13h", tagClass: "daily" },
-        'invest-18h': { name: "Bot Investimentos 18h Fechamento", avatar: "&#127774;", tag: "Todo dia 18h", tagClass: "daily" },
         'manutencao': { name: "Bot Manutenção Preventiva", avatar: "&#128295;", tag: "Todo dia 00h", tagClass: "daily" },
         'viagens-monitor': { name: "Bot Viagens Monitoramento", avatar: "&#9992;&#65039;", tag: "Periódico", tagClass: "periodic" },
         'agente-backup': { name: "Agente de Backup MPPA", avatar: "&#128190;", tag: "Mensal", tagClass: "periodic" },
         'agente-backup-cloud': { name: "Agente de Backup Cloud", avatar: "&#9729;&#65039;", tag: "Quinzenal", tagClass: "periodic" },
-<<<<<<< HEAD
         'site-daniel': { name: "Agente Blog Daniel", avatar: "📝", tag: "Semanal", tagClass: "periodic" },
         'agente-criptomoedas': { name: "Agente Criptomoedas", avatar: "🪙", tag: "A cada 4h", tagClass: "periodic" },
         'raydium-clmm': { name: "Bot Raydium CLMM", avatar: "🧭", tag: "A cada 4h", tagClass: "periodic" }
-=======
-<<<<<<< HEAD
-        'agente-criptomoedas': { name: "Agente Criptomoedas", avatar: "&#128176;", tag: "A cada 4h", tagClass: "periodic" },
-        'site-daniel': { name: "Agente Blog Daniel", avatar: "&#128221;", tag: "Semanal", tagClass: "periodic" }
-=======
-        'site-daniel': { name: "Agente Blog Daniel", avatar: "📝", tag: "Semanal", tagClass: "periodic" },
-        'agente-criptomoedas': { name: "Agente Criptomoedas", avatar: "🪙", tag: "A cada 4h", tagClass: "periodic" },
-        'raydium-clmm': { name: "Bot Raydium CLMM", avatar: "🧭", tag: "A cada 4h", tagClass: "periodic" }
->>>>>>> 8df2020 (Ajusta agente criptomoedas e painel)
->>>>>>> 89279f9 (Fix duplicate crypto agent card and polish bot logs)
+    };
     };
 
     function updateSummaryMetrics() {
