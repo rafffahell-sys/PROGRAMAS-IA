@@ -5,18 +5,184 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>🌍 VIAGEM SUL/SP/PARAGUAI 2026/2027</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap');
+
+  :root {
+    --gramado: #7c3aed;
+    --gramado-glow: rgba(124,58,237,0.3);
+    --sp: #3b82f6;
+    --sp-glow: rgba(59,130,246,0.3);
+    --foz: #10b981;
+    --foz-glow: rgba(16,185,129,0.3);
+    --py: #f59e0b;
+    --py-glow: rgba(245,158,11,0.3);
+    --gold: #fbbf24;
+    --bg: #0a0a12;
+    --text: #e8e6e3;
+    --text-dim: rgba(255,255,255,0.55);
+  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #0a0a12;
-    color: #e8e6e3;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.7;
+    overflow-x: hidden;
   }
 
-  ::selection { background: #7c3aed; color: #fff; }
+  /* === NOISE TEXTURE === */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  ::selection { background: var(--gramado); color: #fff; }
+
+  /* === PROGRESS BAR — FIXED TOP === */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(10,10,18,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.78em;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .progress-bar.visible { transform: translateY(0); }
+  .progress-bar .p-day { font-weight: 700; color: var(--gold); white-space: nowrap; }
+  .progress-bar .p-loc { color: var(--text-dim); white-space: nowrap; }
+  .progress-bar .p-track {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    min-width: 60px;
+  }
+  .progress-bar .p-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--gramado), var(--sp), var(--foz), var(--py));
+    transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1);
+    width: 0%;
+  }
+  .progress-bar .p-pct { color: var(--text-dim); font-size: 0.85em; min-width: 36px; text-align: right; }
+
+  /* === SECTION NAV DOTS === */
+  .section-nav {
+    position: fixed;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .section-nav a {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative;
+  }
+  .section-nav a:hover,
+  .section-nav a.active {
+    background: var(--gramado);
+    border-color: var(--gramado);
+    box-shadow: 0 0 12px var(--gramado-glow);
+    transform: scale(1.4);
+  }
+  .section-nav a .dot-label {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.65em;
+    color: rgba(255,255,255,0.5);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    background: rgba(10,10,18,0.8);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .section-nav a:hover .dot-label { opacity: 1; }
+  .section-nav a:nth-child(2) { border-color: rgba(59,130,246,0.3); }
+  .section-nav a:nth-child(2).active { background: var(--sp); border-color: var(--sp); box-shadow: 0 0 12px var(--sp-glow); }
+  .section-nav a:nth-child(3) { border-color: rgba(16,185,129,0.3); }
+  .section-nav a:nth-child(3).active { background: var(--foz); border-color: var(--foz); box-shadow: 0 0 12px var(--foz-glow); }
+  .section-nav a:nth-child(4) { border-color: rgba(245,158,11,0.3); }
+  .section-nav a:nth-child(4).active { background: var(--py); border-color: var(--py); box-shadow: 0 0 12px var(--py-glow); }
+
+  /* === BACK TO TOP === */
+  .back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 999;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(124,58,237,0.08));
+    border: 1px solid rgba(124,58,237,0.15);
+    color: var(--text);
+    font-size: 1.2em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .back-to-top:hover {
+    background: linear-gradient(135deg, rgba(124,58,237,0.35), rgba(124,58,237,0.15));
+    border-color: rgba(124,58,237,0.3);
+    box-shadow: 0 4px 25px var(--gramado-glow);
+    transform: translateY(-3px) scale(1.05);
+  }
+
+  /* === SCROLL REVEAL === */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.35s; }
+  .reveal-delay-4 { transition-delay: 0.5s; }
 
   /* ============================================================
      COVER — CINEMATOGRAPHIC
@@ -38,23 +204,31 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(74,35,122,0.3) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(16,185,129,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(245,158,11,0.06) 0%, transparent 60%);
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(74,35,122,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(16,185,129,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(245,158,11,0.08) 0%, transparent 60%);
   }
 
-  /* Mountain SVG watermark */
+  /* Parallax layers */
+  .cover .parallax-bg {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+  }
+  .cover .parallax-bg.layer-1 { transform: translateY(0); }
+  .cover .parallax-bg.layer-2 { transform: translateY(0); }
+
   .cover .mountain-scene {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50%;
-    opacity: 0.2;
+    height: 55%;
+    opacity: 0.25;
   }
   .cover .mountain-scene svg { width: 100%; height: 100%; }
 
-  /* Stars — more prominent */
+  /* Stars enhanced */
   .cover .stars {
     position: absolute;
     inset: 0;
@@ -76,15 +250,38 @@
       radial-gradient(2px 2px at 80% 50%, rgba(255,255,255,0.7), transparent),
       radial-gradient(1px 1px at 90% 65%, rgba(255,255,255,0.3), transparent),
       radial-gradient(1.5px 1.5px at 5% 70%, #fff, transparent),
-      radial-gradient(1px 1px at 65% 75%, rgba(255,255,255,0.4), transparent);
+      radial-gradient(1px 1px at 65% 75%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 30% 85%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 75% 90%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 45% 95%, rgba(255,255,255,0.4), transparent);
     background-size: 100% 100%;
-    opacity: 0.8;
+    opacity: 0.9;
   }
+
+  /* Twinkle animation for some stars */
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  .cover .star-twinkle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  .cover .star-twinkle:nth-child(1) { top: 12%; left: 15%; animation-delay: 0s; }
+  .cover .star-twinkle:nth-child(2) { top: 25%; left: 75%; animation-delay: 1s; width: 4px; height: 4px; }
+  .cover .star-twinkle:nth-child(3) { top: 8%; left: 55%; animation-delay: 2s; }
+  .cover .star-twinkle:nth-child(4) { top: 40%; left: 30%; animation-delay: 0.5s; width: 2px; height: 2px; }
+  .cover .star-twinkle:nth-child(5) { top: 20%; left: 88%; animation-delay: 1.5s; }
 
   @keyframes shooting {
     0% { transform: translateX(0) translateY(0); opacity: 1; }
     60% { opacity: 1; }
-    100% { transform: translateX(400px) translateY(250px); opacity: 0; }
+    100% { transform: translateX(500px) translateY(300px); opacity: 0; }
   }
   .cover .shooting-star {
     position: absolute;
@@ -105,26 +302,39 @@
     background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
     right: 3px;
   }
-  .cover .shooting-star:nth-child(2) {
+  .cover .shooting-star:nth-child(8) {
     top: 35%; left: 60%;
     animation-delay: 2.5s;
     animation-duration: 6s;
   }
+  .cover .shooting-star:nth-child(9) {
+    top: 12%; left: 75%;
+    animation-delay: 4s;
+    animation-duration: 4.5s;
+  }
+
+  /* Gradient animation for title */
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
   .cover h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4em, 6vw, 4.5em);
-    font-weight: 900;
-    letter-spacing: 4px;
-    background: linear-gradient(135deg, #fff 30%, #a78bfa 70%, #f59e0b 100%);
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.6em, 6.5vw, 5em);
+    font-weight: 400;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #fff 20%, #a78bfa 40%, #f59e0b 60%, #a78bfa 80%, #fff 100%);
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: gradient-shift 8s ease infinite;
     margin-bottom: 14px;
     position: relative;
     z-index: 2;
-    text-shadow: none;
-    filter: drop-shadow(0 4px 20px rgba(74,35,122,0.3));
+    filter: drop-shadow(0 4px 30px rgba(74,35,122,0.3));
   }
 
   .cover .subtitle {
@@ -134,14 +344,16 @@
     position: relative;
     z-index: 2;
     letter-spacing: 1px;
+    font-style: italic;
   }
   .cover .divider-line {
-    width: 80px;
+    width: 120px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #7c3aed, transparent);
+    background: linear-gradient(90deg, transparent, var(--gramado), var(--gold), transparent);
     margin: 18px auto;
     position: relative;
     z-index: 2;
+    border-radius: 2px;
   }
   .cover .dates {
     display: inline-block;
@@ -171,10 +383,54 @@
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 24px;
-    font-size: 2em;
-    opacity: 0.25;
+    gap: 28px;
+    font-size: 2.4em;
+    opacity: 0.3;
     z-index: 2;
+  }
+  .cover .flags span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    animation: flag-wave 3s ease-in-out infinite;
+  }
+  .cover .flags span:nth-child(2) { animation-delay: 0.5s; }
+  .cover .flags span:nth-child(3) { animation-delay: 1s; }
+  @keyframes flag-wave {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-4px) rotate(3deg); }
+    75% { transform: translateY(-2px) rotate(-2deg); }
+  }
+
+  /* Scroll indicator */
+  .cover .scroll-indicator {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.4;
+    animation: float-down 2s ease-in-out infinite;
+  }
+  @keyframes float-down {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  .cover .scroll-indicator span {
+    font-size: 0.7em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .cover .scroll-indicator .arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid rgba(255,255,255,0.3);
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    transform: rotate(45deg);
   }
 
   /* ============================================================
@@ -192,9 +448,127 @@
     position: absolute;
     left: 50%; top: 0; bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, #7c3aed, #10b981, #f59e0b, #ef4444);
-    opacity: 0.3;
+    background: linear-gradient(to bottom, var(--gramado), var(--sp), var(--foz), var(--py));
+    opacity: 0.35;
     transform: translateX(-50%);
+  }
+
+  /* ============================================================
+     ROUTE MAP
+     ============================================================ */
+  .route-map-section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .route-map-container {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .route-map-container h3 {
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4em;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .route-map-container h3 small {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.5em;
+    color: var(--text-dim);
+    display: block;
+    font-weight: 400;
+    margin-top: 4px;
+  }
+  .route-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ============================================================
+     SECTION WATERMARKS
+     ============================================================ */
+  .sec-gramado, .sec-sp, .sec-foz, .sec-py { position: relative; }
+  .sec-gramado .wm, .sec-sp .wm, .sec-foz .wm, .sec-py .wm {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .sec-gramado .wm svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; opacity: 0.09; }
+  .sec-sp .wm svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; opacity: 0.08; }
+  .sec-foz .wm svg { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 85%; height: 65%; opacity: 0.08; }
+  .sec-py .wm svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; opacity: 0.09; }
+
+  /* ============================================================
+     SNOWFLAKES (Gramado section only)
+     ============================================================ */
+  .snow-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  @keyframes snowfall {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(calc(100vh)) rotate(360deg); opacity: 0; }
+  }
+  .snowflake {
+    position: absolute;
+    top: -10px;
+    color: #fff;
+    font-size: 0.8em;
+    opacity: 0;
+    animation: snowfall linear infinite;
+  }
+  .snowflake:nth-child(1) { left: 5%; font-size: 0.6em; animation-duration: 12s; animation-delay: 0s; }
+  .snowflake:nth-child(2) { left: 15%; font-size: 0.9em; animation-duration: 15s; animation-delay: 2s; }
+  .snowflake:nth-child(3) { left: 25%; font-size: 0.5em; animation-duration: 10s; animation-delay: 4s; }
+  .snowflake:nth-child(4) { left: 35%; font-size: 1em; animation-duration: 18s; animation-delay: 1s; }
+  .snowflake:nth-child(5) { left: 45%; font-size: 0.7em; animation-duration: 13s; animation-delay: 3s; }
+  .snowflake:nth-child(6) { left: 55%; font-size: 0.85em; animation-duration: 16s; animation-delay: 5s; }
+  .snowflake:nth-child(7) { left: 65%; font-size: 0.55em; animation-duration: 11s; animation-delay: 2.5s; }
+  .snowflake:nth-child(8) { left: 75%; font-size: 0.95em; animation-duration: 14s; animation-delay: 0.5s; }
+  .snowflake:nth-child(9) { left: 85%; font-size: 0.65em; animation-duration: 17s; animation-delay: 3.5s; }
+  .snowflake:nth-child(10) { left: 92%; font-size: 0.75em; animation-duration: 12s; animation-delay: 1.5s; }
+  .snowflake:nth-child(11) { left: 10%; font-size: 1.1em; animation-duration: 20s; animation-delay: 6s; }
+  .snowflake:nth-child(12) { left: 50%; font-size: 0.5em; animation-duration: 9s; animation-delay: 4.5s; }
+  .snowflake:nth-child(13) { left: 70%; font-size: 0.8em; animation-duration: 14s; animation-delay: 7s; }
+  .snowflake:nth-child(14) { left: 30%; font-size: 0.6em; animation-duration: 11s; animation-delay: 5.5s; }
+  .snowflake:nth-child(15) { left: 80%; font-size: 0.9em; animation-duration: 16s; animation-delay: 2s; }
+
+  /* ============================================================
+     FIREWORKS (Réveillon)
+     ============================================================ */
+  @keyframes firework {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-200px) scale(0); opacity: 0; }
+  }
+  @keyframes firework-spark {
+    0% { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--fx), var(--fy)) scale(0); opacity: 0; }
+  }
+  .fireworks-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .firework-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    animation: firework-spark 1.2s ease-out forwards;
   }
 
   /* ============================================================
@@ -216,7 +590,7 @@
   }
   .part-divider .badge {
     display: inline-block;
-    background: linear-gradient(135deg, #5b21b6, #7c3aed);
+    background: linear-gradient(135deg, #5b21b6, var(--gramado));
     color: #fff;
     font-size: 0.7em;
     font-weight: 700;
@@ -228,10 +602,10 @@
     box-shadow: 0 4px 15px rgba(124,58,237,0.25);
   }
   .part-divider h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.6em, 3vw, 2.2em);
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8em, 3vw, 2.4em);
     color: #f0edea;
-    font-weight: 700;
+    font-weight: 400;
   }
   .part-divider .part-dates {
     font-size: 0.9em;
@@ -241,97 +615,12 @@
   }
 
   /* ============================================================
-     SECTION WATERMARKS — VISÍVEIS E ELEGANTES
-     ============================================================ */
-
-  /* ---- GRAMADO: PINHEIROS E MONTANHAS ---- */
-  .sec-gramado {
-    position: relative;
-  }
-  .sec-gramado .wm {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .sec-gramado .wm svg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.07;
-  }
-
-  /* ---- SÃO PAULO: SKYLINE ---- */
-  .sec-sp {
-    position: relative;
-  }
-  .sec-sp .wm {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .sec-sp .wm svg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-    opacity: 0.06;
-  }
-
-  /* ---- FOZ: CACHOEIRA ---- */
-  .sec-foz {
-    position: relative;
-  }
-  .sec-foz .wm {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .sec-foz .wm svg {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 60%;
-    opacity: 0.06;
-  }
-
-  /* ---- PARAGUAI: CIUDAD DEL ESTE ---- */
-  .sec-py {
-    position: relative;
-  }
-  .sec-py .wm {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .sec-py .wm svg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    opacity: 0.07;
-  }
-
-  /* ============================================================
      DAY CARD — PREMIUM GLASSMORPHISM
      ============================================================ */
   .day-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 24px;
     padding: 36px 40px;
@@ -339,33 +628,52 @@
     box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
     position: relative;
     z-index: 2;
-    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.5s ease, border-color 0.5s ease;
     overflow: hidden;
   }
   .day-card:hover {
-    transform: translateY(-6px) scale(1.005);
-    box-shadow: 0 16px 60px rgba(124,58,237,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(-8px) scale(1.008);
+    box-shadow: 0 20px 70px rgba(124,58,237,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
     border-color: rgba(124,58,237,0.2);
   }
 
+  /* Gradient border effect on hover */
   .day-card::before {
     content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(124,58,237,0), rgba(124,58,237,0.15), rgba(245,158,11,0), rgba(124,58,237,0));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  .day-card:hover::before { opacity: 1; }
+
+  .day-card .day-accent {
     position: absolute;
     top: 0;
     left: 0;
     width: 4px;
     height: 100%;
-    background: linear-gradient(to bottom, #7c3aed, #a78bfa);
+    background: linear-gradient(to bottom, var(--gramado), #a78bfa);
     border-radius: 4px 0 0 4px;
+    transition: box-shadow 0.5s ease;
   }
-  .day-card:nth-child(even)::before {
-    left: auto;
-    right: 0;
-    border-radius: 0 4px 4px 0;
-    background: linear-gradient(to bottom, #f59e0b, #fbbf24);
-  }
+  .day-card:hover .day-accent { box-shadow: 0 0 20px var(--gramado-glow); }
 
-  /* Subtle light corner accent */
+  .day-card .day-accent.acc-sp { background: linear-gradient(to bottom, var(--sp), #93c5fd); }
+  .day-card:hover .day-accent.acc-sp { box-shadow: 0 0 20px var(--sp-glow); }
+  .day-card .day-accent.acc-foz { background: linear-gradient(to bottom, var(--foz), #34d399); }
+  .day-card:hover .day-accent.acc-foz { box-shadow: 0 0 20px var(--foz-glow); }
+  .day-card .day-accent.acc-py { background: linear-gradient(to bottom, var(--py), #fbbf24); }
+  .day-card:hover .day-accent.acc-py { box-shadow: 0 0 20px var(--py-glow); }
+
+  /* Subtle corner glow */
   .day-card::after {
     content: '';
     position: absolute;
@@ -373,7 +681,7 @@
     right: -50%;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 100% 0%, rgba(124,58,237,0.04), transparent 70%);
+    background: radial-gradient(circle at 100% 0%, rgba(124,58,237,0.05), transparent 70%);
     pointer-events: none;
   }
 
@@ -388,18 +696,34 @@
     margin-bottom: 14px;
   }
   .day-card .day-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6em;
-    font-weight: 700;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8em;
+    font-weight: 400;
     color: #f0edea;
     letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .day-card .day-number .day-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(124,58,237,0.05));
+    border: 1px solid rgba(124,58,237,0.12);
+    font-size: 0.5em;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #a78bfa;
   }
   .day-card .day-number .day-date {
     font-family: 'Inter', sans-serif;
-    font-size: 0.45em;
+    font-size: 0.4em;
     font-weight: 400;
     color: #a78bfa;
-    margin-left: 10px;
     letter-spacing: 0;
   }
   .day-card .day-icon { font-size: 1.6em; }
@@ -410,17 +734,27 @@
     top: 38px;
     width: 16px;
     height: 16px;
-    background: #7c3aed;
-    border: 3px solid #0a0a12;
+    background: var(--gramado);
+    border: 3px solid var(--bg);
     border-radius: 50%;
     z-index: 3;
     box-shadow: 0 0 0 4px rgba(124,58,237,0.2);
+    animation: pulse-dot 3s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(124,58,237,0.2); }
+    50% { box-shadow: 0 0 0 8px rgba(124,58,237,0.08); }
   }
   .day-card:nth-child(even) .day-dot {
     left: auto;
     right: -44px;
-    background: #f59e0b;
+    background: var(--py);
     box-shadow: 0 0 0 4px rgba(245,158,11,0.2);
+    animation-name: pulse-dot-gold;
+  }
+  @keyframes pulse-dot-gold {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(245,158,11,0.2); }
+    50% { box-shadow: 0 0 0 8px rgba(245,158,11,0.08); }
   }
 
   .day-card h3 {
@@ -518,6 +852,17 @@
     display: block;
   }
 
+  /* Natal glow */
+  .day-card .highlight.christmas-glow {
+    border-color: rgba(245,158,11,0.2);
+    box-shadow: 0 0 30px rgba(245,158,11,0.08), inset 0 0 30px rgba(245,158,11,0.03);
+    animation: christmas-pulse 4s ease-in-out infinite;
+  }
+  @keyframes christmas-pulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(245,158,11,0.08), inset 0 0 30px rgba(245,158,11,0.03); }
+    50% { box-shadow: 0 0 50px rgba(245,158,11,0.15), inset 0 0 40px rgba(245,158,11,0.05); }
+  }
+
   .hotel-box {
     background: linear-gradient(135deg, rgba(124,58,237,0.06), rgba(124,58,237,0.02));
     border: 1px dashed rgba(124,58,237,0.15);
@@ -529,7 +874,6 @@
   .hotel-box .hotel-name { font-weight: 700; color: #c4b5d6; }
   .hotel-box .hotel-detail { font-size: 0.88em; color: rgba(255,255,255,0.5); }
 
-  /* Activity Grid */
   .activity-grid {
     display: flex;
     flex-wrap: wrap;
@@ -544,20 +888,37 @@
     padding: 16px 12px;
     border-radius: 16px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
     cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .activity-grid .act-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(124,58,237,0.08), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
   .activity-grid .act-card:hover {
     background: rgba(124,58,237,0.1);
-    transform: translateY(-3px);
-    border-color: rgba(124,58,237,0.2);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transform: translateY(-5px) scale(1.03);
+    border-color: rgba(124,58,237,0.25);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.3);
   }
-  .activity-grid .act-card .act-icon { font-size: 2em; margin-bottom: 6px; }
-  .activity-grid .act-card .act-name { font-weight: 600; font-size: 0.85em; color: #e8e6e3; }
-  .activity-grid .act-card .act-desc { font-size: 0.72em; color: rgba(255,255,255,0.45); }
+  .activity-grid .act-card:hover::before { opacity: 1; }
+  .activity-grid .act-card .act-icon {
+    font-size: 2em;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+  }
+  .activity-grid .act-card:hover .act-icon { transform: scale(1.2); }
+  .activity-grid .act-card .act-name { font-weight: 600; font-size: 0.85em; color: #e8e6e3; position: relative; z-index: 1; }
+  .activity-grid .act-card .act-desc { font-size: 0.72em; color: rgba(255,255,255,0.45); position: relative; z-index: 1; }
 
-  /* Summary & Reservation boxes */
   .summary-box, .flight-summary, .reservation-box {
     background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
     backdrop-filter: blur(20px);
@@ -596,24 +957,59 @@
     color: #c4b5d6;
   }
 
-  /* Price highlight */
   .price-val {
     font-weight: 700;
     color: #fbbf24;
   }
 
   /* ============================================================
-     RESPONSIVE — MOBILE FIRST
+     TOOLTIP
      ============================================================ */
+  [data-tip] {
+    position: relative;
+    cursor: help;
+  }
+  [data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10,10,18,0.95);
+    color: var(--text);
+    font-size: 0.75em;
+    padding: 6px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
 
-  /* Tablets small & phones */
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
   @media (max-width: 768px) {
+    .progress-bar { padding: 6px 12px; font-size: 0.7em; gap: 8px; }
+    .progress-bar .p-pct { display: none; }
+    .section-nav { right: 8px; gap: 8px; }
+    .section-nav a { width: 8px; height: 8px; }
+    .section-nav a .dot-label { display: none; }
+    .back-to-top { width: 38px; height: 38px; font-size: 1em; bottom: 16px; right: 14px; }
+
     .cover { padding: 50px 16px 40px; min-height: 80vh; }
-    .cover h1 { font-size: 2em; letter-spacing: 2px; }
+    .cover h1 { font-size: 2em; letter-spacing: 1px; }
     .cover .subtitle { font-size: 0.95em; }
     .cover .dates { font-size: 0.85em; padding: 10px 20px; }
-    .cover .flags { font-size: 1.4em; gap: 14px; }
+    .cover .flags { font-size: 1.6em; gap: 16px; bottom: 20px; }
     .cover .mountain-scene { height: 35%; }
+    .cover .scroll-indicator { bottom: 60px; }
+
+    .route-map-container { padding: 16px; border-radius: 16px; }
+    .route-map-container h3 { font-size: 1.1em; }
 
     .timeline-container { padding: 16px 10px 40px; }
     .timeline-container::before { left: 14px; }
@@ -629,12 +1025,9 @@
       border-radius: 16px;
     }
     .day-card .day-dot { display: none; }
-    .day-card::before { width: 3px; border-radius: 3px 0 0 3px; }
-    .day-card:nth-child(even)::before {
-      left: 0; right: auto;
-      background: linear-gradient(to bottom, #7c3aed, #a78bfa);
-    }
-    .day-card .day-number { font-size: 1.2em; }
+    .day-card .day-accent { width: 3px; border-radius: 3px 0 0 3px; }
+    .day-card .day-number { font-size: 1.3em; }
+    .day-card .day-number .day-badge { width: 32px; height: 32px; font-size: 0.45em; }
     .day-card h3 { font-size: 1em; }
     .day-card ul li { font-size: 0.88em; padding: 4px 0 4px 20px; }
     .day-card .highlight { padding: 12px 14px; font-size: 0.88em; }
@@ -646,11 +1039,7 @@
     .hotel-box { padding: 12px 14px; font-size: 0.85em; }
 
     .activity-grid { gap: 8px; }
-    .activity-grid .act-card {
-      min-width: 80px;
-      padding: 12px 8px;
-      border-radius: 12px;
-    }
+    .activity-grid .act-card { min-width: 80px; padding: 12px 8px; border-radius: 12px; }
     .activity-grid .act-card .act-icon { font-size: 1.4em; }
     .activity-grid .act-card .act-name { font-size: 0.75em; }
     .activity-grid .act-card .act-desc { font-size: 0.65em; }
@@ -672,14 +1061,12 @@
     .footer { padding: 30px 16px 24px; font-size: 0.75em; }
     .footer .route-cities { font-size: 0.72em; }
 
-    /* Watermarks mais sutis no mobile */
     .sec-gramado .wm svg,
     .sec-sp .wm svg,
     .sec-foz .wm svg,
     .sec-py .wm svg { opacity: 0.04 !important; }
   }
 
-  /* Very small phones */
   @media (max-width: 380px) {
     .cover h1 { font-size: 1.6em; }
     .cover .subtitle { font-size: 0.85em; }
@@ -691,7 +1078,6 @@
     .activity-grid .act-card .act-desc { display: none; }
   }
 
-  /* Fast tap feedback for touch devices */
   @media (hover: none) {
     .day-card:hover,
     .activity-grid .act-card:hover {
@@ -702,9 +1088,9 @@
       transform: scale(0.98);
       transition: transform 0.1s;
     }
+    .activity-grid .act-card:active { transform: scale(0.95); }
   }
 
-  /* Footer */
   .footer {
     text-align: center;
     padding: 50px 20px 40px;
@@ -721,7 +1107,6 @@
     margin-top: 6px;
   }
 
-  /* CONFIRMADA badge */
   .confirmed {
     display: inline-flex;
     align-items: center;
@@ -740,65 +1125,160 @@
 </head>
 <body>
 
-<!-- ===== COVER ===== -->
-<div class="cover">
-  <div class="bg-layer"></div>
-  <div class="stars"></div>
-  <div class="shooting-star"></div>
-  <div class="shooting-star"></div>
+<!-- ===== PROGRESS BAR ===== -->
+<div class="progress-bar" id="progressBar">
+  <span class="p-day" id="pDay">Dia 1</span>
+  <span class="p-loc" id="pLoc">Gramado</span>
+  <div class="p-track"><div class="p-fill" id="pFill"></div></div>
+  <span class="p-pct" id="pPct">0%</span>
+</div>
 
-  <div class="mountain-scene">
-    <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice">
-      <defs>
-        <linearGradient id="mg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(255,255,255,0)" />
-          <stop offset="100%" stop-color="rgba(124,58,237,0.08)" />
-        </linearGradient>
-      </defs>
-      <path d="M0,600 L0,420 Q80,380 160,400 Q240,420 320,370 Q400,320 480,350 Q560,380 640,330 Q720,280 800,310 Q880,340 960,290 Q1040,240 1120,270 Q1200,300 1280,250 Q1360,200 1440,230 L1440,600 Z" fill="url(#mg)"/>
-      <path d="M0,600 L0,470 Q100,440 200,455 Q300,470 450,420 Q600,370 750,400 Q900,430 1050,380 Q1200,330 1350,360 Q1420,375 1440,360 L1440,600 Z" fill="url(#mg)" opacity="0.7"/>
-      <path d="M0,600 L0,520 Q120,495 240,510 Q360,525 500,490 Q640,455 780,475 Q920,495 1060,460 Q1200,425 1320,450 Q1400,462 1440,450 L1440,600 Z" fill="url(#mg)" opacity="0.5"/>
-      <path d="M0,600 L0,560 Q150,540 300,550 Q450,560 600,535 Q750,510 900,525 Q1050,540 1200,515 Q1350,490 1440,505 L1440,600 Z" fill="rgba(255,255,255,0.03)"/>
-      <!-- Pine trees -->
-      <g fill="rgba(255,255,255,0.03)" transform="translate(100,370)">
-        <polygon points="0,50 15,10 30,50"/>
-        <polygon points="15,60 0,60 30,60"/>
-      </g>
-      <g fill="rgba(255,255,255,0.03)" transform="translate(300,340)">
-        <polygon points="0,50 15,10 30,50"/>
-        <polygon points="15,60 0,60 30,60"/>
-      </g>
-      <g fill="rgba(255,255,255,0.03)" transform="translate(500,380)">
-        <polygon points="0,50 18,8 36,50"/>
-        <polygon points="18,60 0,60 36,60"/>
-      </g>
-      <g fill="rgba(255,255,255,0.03)" transform="translate(750,340)">
-        <polygon points="0,50 15,10 30,50"/>
-        <polygon points="15,60 0,60 30,60"/>
-      </g>
-      <g fill="rgba(255,255,255,0.03)" transform="translate(950,300)">
-        <polygon points="0,50 20,8 40,50"/>
-        <polygon points="20,60 0,60 40,60"/>
-      </g>
-      <g fill="rgba(255,255,255,0.03)" transform="translate(1150,260)">
-        <polygon points="0,50 15,10 30,50"/>
-        <polygon points="15,60 0,60 30,60"/>
-      </g>
-      <g fill="rgba(255,255,255,0.03)" transform="translate(1300,290)">
-        <polygon points="0,50 15,10 30,50"/>
-        <polygon points="15,60 0,60 30,60"/>
-      </g>
-    </svg>
+<!-- ===== SECTION NAV ===== -->
+<nav class="section-nav" id="sectionNav">
+  <a href="#cover" class="active" data-section="cover"><span class="dot-label">Início</span></a>
+  <a href="#part-gramado" data-section="gramado"><span class="dot-label">Gramado</span></a>
+  <a href="#part-sp" data-section="sp"><span class="dot-label">São Paulo</span></a>
+  <a href="#part-foz" data-section="foz"><span class="dot-label">Foz</span></a>
+  <a href="#part-py" data-section="py"><span class="dot-label">Paraguai</span></a>
+</nav>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">↑</button>
+
+<!-- ===== COVER ===== -->
+<section class="cover" id="cover">
+  <div class="bg-layer"></div>
+  <div class="parallax-bg layer-1">
+    <div class="stars"></div>
+    <div class="star-twinkle"></div>
+    <div class="star-twinkle"></div>
+    <div class="star-twinkle"></div>
+    <div class="star-twinkle"></div>
+    <div class="star-twinkle"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
   </div>
 
-  <div class="flags">🇧🇷&nbsp;&nbsp;&nbsp;🇦🇷&nbsp;&nbsp;&nbsp;🇵🇾</div>
+  <div class="parallax-bg layer-2">
+    <div class="mountain-scene">
+      <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice">
+        <defs>
+          <linearGradient id="mg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+            <stop offset="100%" stop-color="rgba(124,58,237,0.08)" />
+          </linearGradient>
+        </defs>
+        <path d="M0,600 L0,420 Q80,380 160,400 Q240,420 320,370 Q400,320 480,350 Q560,380 640,330 Q720,280 800,310 Q880,340 960,290 Q1040,240 1120,270 Q1200,300 1280,250 Q1360,200 1440,230 L1440,600 Z" fill="url(#mg)"/>
+        <path d="M0,600 L0,470 Q100,440 200,455 Q300,470 450,420 Q600,370 750,400 Q900,430 1050,380 Q1200,330 1350,360 Q1420,375 1440,360 L1440,600 Z" fill="url(#mg)" opacity="0.7"/>
+        <path d="M0,600 L0,520 Q120,495 240,510 Q360,525 500,490 Q640,455 780,475 Q920,495 1060,460 Q1200,425 1320,450 Q1400,462 1440,450 L1440,600 Z" fill="url(#mg)" opacity="0.5"/>
+        <path d="M0,600 L0,560 Q150,540 300,550 Q450,560 600,535 Q750,510 900,525 Q1050,540 1200,515 Q1350,490 1440,505 L1440,600 Z" fill="rgba(255,255,255,0.03)"/>
+        <g fill="rgba(255,255,255,0.03)" transform="translate(100,370)">
+          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
+        </g>
+        <g fill="rgba(255,255,255,0.03)" transform="translate(300,340)">
+          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
+        </g>
+        <g fill="rgba(255,255,255,0.03)" transform="translate(500,380)">
+          <polygon points="0,50 18,8 36,50"/><polygon points="18,60 0,60 36,60"/>
+        </g>
+        <g fill="rgba(255,255,255,0.03)" transform="translate(750,340)">
+          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
+        </g>
+        <g fill="rgba(255,255,255,0.03)" transform="translate(950,300)">
+          <polygon points="0,50 20,8 40,50"/><polygon points="20,60 0,60 40,60"/>
+        </g>
+        <g fill="rgba(255,255,255,0.03)" transform="translate(1150,260)">
+          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
+        </g>
+        <g fill="rgba(255,255,255,0.03)" transform="translate(1300,290)">
+          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
+        </g>
+      </svg>
+    </div>
+  </div>
 
-  <h1>VIAGEM SUL / SP / PARAGUAI</h1>
-  <div class="subtitle">✨ Uma aventura de mãe e filho pelo Brasil e suas fronteiras ✨</div>
-  <div class="divider-line"></div>
-  <div class="dates">✈ 18 de Dezembro de 2026 → 07 de Janeiro de 2027</div>
-  <div class="travelers">👩‍👦 Rafael &amp; Mamãe · 21 dias · 3 países · 4 destinos</div>
-</div>
+  <div class="flags">
+    <span data-tip="Brasil">🇧🇷</span>
+    <span data-tip="Argentina">🇦🇷</span>
+    <span data-tip="Paraguai">🇵🇾</span>
+  </div>
+
+  <h1 class="reveal visible">VIAGEM SUL / SP / PARAGUAI</h1>
+  <div class="subtitle reveal visible reveal-delay-1">✨ Uma aventura de mãe e filho pelo Brasil e suas fronteiras ✨</div>
+  <div class="divider-line reveal visible reveal-delay-2"></div>
+  <div class="dates reveal visible reveal-delay-2">✈ 18 de Dezembro de 2026 → 07 de Janeiro de 2027</div>
+  <div class="travelers reveal visible reveal-delay-3">👩‍👦 Rafael &amp; Mamãe · 21 dias · 3 países · 4 destinos</div>
+
+  <div class="scroll-indicator">
+    <span>Rolar</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ===== ROUTE MAP ===== -->
+<section class="route-map-section reveal" id="routeMap">
+  <div class="route-map-container">
+    <h3>🗺️ Mapa da Rota <small>Belém → Gramado → São Paulo → Foz do Iguaçu → Ciudad del Este → Belém</small></h3>
+    <svg class="route-svg" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="route-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#7c3aed"/>
+          <stop offset="33%" stop-color="#3b82f6"/>
+          <stop offset="66%" stop-color="#10b981"/>
+          <stop offset="100%" stop-color="#f59e0b"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Background map outline (simplified Brazil) -->
+      <path d="M120,60 Q200,40 300,50 Q400,60 450,80 Q500,100 520,140 Q530,170 500,200 Q470,230 440,250 Q400,270 360,280 Q320,290 280,310 Q240,330 200,340 Q160,350 140,330 Q120,310 110,280 Q100,250 105,220 Q110,190 115,160 Q118,130 120,100 Z" fill="rgba(124,58,237,0.04)" stroke="rgba(124,58,237,0.08)" stroke-width="1"/>
+      <!-- Route lines -->
+      <path d="M140,290 L450,180 L530,220 L470,300 L440,320 L530,340" fill="none" stroke="url(#route-grad)" stroke-width="2.5" stroke-dasharray="8,6" opacity="0.7"/>
+      <!-- Return line -->
+      <path d="M530,340 L470,300 L530,220 L450,180 L140,290" fill="none" stroke="rgba(245,158,11,0.15)" stroke-width="1.5" stroke-dasharray="4,6"/>
+      <!-- City dots -->
+      <circle cx="140" cy="290" r="8" fill="#7c3aed" filter="url(#glow)"/>
+      <text x="140" y="278" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="600">Belém</text>
+      <circle cx="450" cy="180" r="8" fill="#7c3aed" filter="url(#glow)"/>
+      <text x="450" y="168" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="600">Gramado</text>
+      <circle cx="530" cy="220" r="8" fill="#3b82f6" filter="url(#glow)"/>
+      <text x="530" y="208" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">São Paulo</text>
+      <circle cx="470" cy="300" r="8" fill="#10b981" filter="url(#glow)"/>
+      <text x="470" y="288" text-anchor="middle" fill="#34d399" font-size="11" font-weight="600">Foz do Iguaçu</text>
+      <circle cx="440" cy="320" r="8" fill="#f59e0b" filter="url(#glow)"/>
+      <text x="440" y="310" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">Ciudad del Este</text>
+      <!-- Pulse animation on dots -->
+      <circle cx="140" cy="290" r="12" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.4">
+        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="450" cy="180" r="12" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.4">
+        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+      </circle>
+      <circle cx="530" cy="220" r="12" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.4">
+        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="1s"/>
+        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" begin="1s"/>
+      </circle>
+      <circle cx="470" cy="300" r="12" fill="none" stroke="#10b981" stroke-width="1" opacity="0.4">
+        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+      </circle>
+      <circle cx="440" cy="320" r="12" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.4">
+        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="2s"/>
+        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" begin="2s"/>
+      </circle>
+      <!-- Airplane icons -->
+      <text x="300" y="230" font-size="16" opacity="0.3">✈️</text>
+      <text x="500" y="200" font-size="14" opacity="0.25">✈️</text>
+      <text x="510" y="270" font-size="14" opacity="0.2">✈️</text>
+      <text x="300" y="320" font-size="14" opacity="0.15">✈️</text>
+    </svg>
+  </div>
+</section>
 
 <!-- ===== TIMELINE ===== -->
 <div class="timeline-container">
@@ -806,7 +1286,7 @@
   <!-- ================================================================ -->
   <!-- PARTE 1 — GRAMADO                                                 -->
   <!-- ================================================================ -->
-  <div class="sec-gramado">
+  <div class="sec-gramado" id="part-gramado">
   <div class="wm">
     <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
       <defs>
@@ -815,62 +1295,93 @@
           <stop offset="100%" stop-color="rgba(124,58,237,0.06)"/>
         </linearGradient>
       </defs>
-      <!-- Mountain range -->
       <path d="M0,600 Q150,400 300,500 Q450,350 600,450 Q750,300 900,400 Q1050,250 1200,350 L1200,800 L0,800 Z" fill="rgba(124,58,237,0.03)"/>
-      <!-- Pine trees repeating pattern -->
-      <g fill="rgba(124,58,237,0.025)" transform="translate(50,480)">
+      <!-- Detailed pine trees -->
+      <g fill="rgba(124,58,237,0.03)" transform="translate(50,480)">
         <polygon points="0,60 18,0 36,60"/><rect x="12" y="60" width="12" height="10"/>
+        <polygon points="9,35 18,15 27,35"/>
       </g>
-      <g fill="rgba(124,58,237,0.025)" transform="translate(120,500)">
+      <g fill="rgba(124,58,237,0.03)" transform="translate(120,500)">
         <polygon points="0,55 15,5 30,55"/><rect x="10" y="55" width="10" height="8"/>
       </g>
-      <g fill="rgba(124,58,237,0.025)" transform="translate(220,470)">
+      <g fill="rgba(124,58,237,0.03)" transform="translate(220,470)">
         <polygon points="0,60 20,0 40,60"/><rect x="14" y="60" width="12" height="10"/>
+        <polygon points="10,35 20,15 30,35"/>
       </g>
-      <g fill="rgba(124,58,237,0.025)" transform="translate(350,490)">
+      <g fill="rgba(124,58,237,0.03)" transform="translate(350,490)">
         <polygon points="0,55 16,5 32,55"/><rect x="11" y="55" width="10" height="8"/>
       </g>
-      <g fill="rgba(124,58,237,0.025)" transform="translate(480,460)">
+      <g fill="rgba(124,58,237,0.03)" transform="translate(480,460)">
         <polygon points="0,60 20,0 40,60"/><rect x="14" y="60" width="12" height="10"/>
+        <polygon points="10,35 20,15 30,35"/>
       </g>
-      <g fill="rgba(124,58,237,0.025)" transform="translate(600,490)">
+      <g fill="rgba(124,58,237,0.03)" transform="translate(600,490)">
         <polygon points="0,50 14,5 28,50"/><rect x="9" y="50" width="10" height="8"/>
       </g>
-      <g fill="rgba(124,58,237,0.025)" transform="translate(720,475)">
+      <g fill="rgba(124,58,237,0.03)" transform="translate(720,475)">
         <polygon points="0,58 18,0 36,58"/><rect x="12" y="58" width="12" height="10"/>
+        <polygon points="9,34 18,14 27,34"/>
       </g>
-      <g fill="rgba(124,58,237,0.025)" transform="translate(850,495)">
+      <g fill="rgba(124,58,237,0.03)" transform="translate(850,495)">
         <polygon points="0,50 14,5 28,50"/><rect x="9" y="50" width="10" height="8"/>
       </g>
-      <g fill="rgba(124,58,237,0.025)" transform="translate(980,465)">
+      <g fill="rgba(124,58,237,0.03)" transform="translate(980,465)">
         <polygon points="0,60 20,0 40,60"/><rect x="14" y="60" width="12" height="10"/>
+        <polygon points="10,35 20,15 30,35"/>
       </g>
-      <g fill="rgba(124,58,237,0.025)" transform="translate(1100,485)">
+      <g fill="rgba(124,58,237,0.03)" transform="translate(1100,485)">
         <polygon points="0,55 16,5 32,55"/><rect x="11" y="55" width="10" height="8"/>
       </g>
       <!-- Christmas ornaments -->
-      <circle cx="200" cy="430" r="3" fill="rgba(245,158,11,0.04)"/>
-      <circle cx="450" cy="420" r="3" fill="rgba(245,158,11,0.04)"/>
-      <circle cx="700" cy="440" r="3" fill="rgba(245,158,11,0.04)"/>
-      <circle cx="950" cy="425" r="3" fill="rgba(245,158,11,0.04)"/>
-      <circle cx="350" cy="450" r="2.5" fill="rgba(239,68,68,0.035)"/>
-      <circle cx="580" cy="445" r="2.5" fill="rgba(239,68,68,0.035)"/>
-      <circle cx="820" cy="455" r="2.5" fill="rgba(239,68,68,0.035)"/>
+      <circle cx="200" cy="430" r="4" fill="rgba(245,158,11,0.05)"/>
+      <circle cx="450" cy="420" r="4" fill="rgba(245,158,11,0.05)"/>
+      <circle cx="700" cy="440" r="4" fill="rgba(245,158,11,0.05)"/>
+      <circle cx="950" cy="425" r="4" fill="rgba(245,158,11,0.05)"/>
+      <circle cx="350" cy="450" r="3" fill="rgba(239,68,68,0.04)"/>
+      <circle cx="580" cy="445" r="3" fill="rgba(239,68,68,0.04)"/>
+      <circle cx="820" cy="455" r="3" fill="rgba(239,68,68,0.04)"/>
+      <!-- Snowflake icons -->
+      <text x="150" y="380" font-size="20" fill="rgba(255,255,255,0.03)">❄</text>
+      <text x="400" y="370" font-size="16" fill="rgba(255,255,255,0.025)">❄</text>
+      <text x="650" y="390" font-size="18" fill="rgba(255,255,255,0.025)">❄</text>
+      <text x="900" y="375" font-size="14" fill="rgba(255,255,255,0.02)">❄</text>
+      <text x="1050" y="395" font-size="22" fill="rgba(255,255,255,0.02)">❄</text>
+      <!-- Star of Bethlehem -->
+      <text x="600" y="350" font-size="28" fill="rgba(245,158,11,0.035)">⭐</text>
     </svg>
   </div>
+  <!-- Snowflakes -->
+  <div class="snow-container">
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+  </div>
 
-  <div class="part-divider">
+  <div class="part-divider reveal">
     <div class="badge">Parte 1</div>
     <h2>🏔️ Gramado &amp; Serra Gaúcha</h2>
     <div class="part-dates">18 a 26 de Dezembro · 8 dias</div>
   </div>
 
   <!-- DAY 1 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-1">
+    <div class="day-accent"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 1 <span class="day-date">· 18/12 (Sex)</span></span>
-      <span class="day-icon">✈️</span>
+      <span class="day-number"><span class="day-badge">01</span> Dia 1 <span class="day-date">· 18/12 (Sex)</span></span>
+      <span class="day-icon" data-tip="Voo de ida">✈️</span>
     </div>
     <h3>Belém ✈ Porto Alegre</h3>
     <div class="flight-block">
@@ -897,11 +1408,12 @@
   </div>
 
   <!-- DAY 2 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-2">
+    <div class="day-accent"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 2 <span class="day-date">· 19/12 (Sáb)</span></span>
-      <span class="day-icon">🚗</span>
+      <span class="day-number"><span class="day-badge">02</span> Dia 2 <span class="day-date">· 19/12 (Sáb)</span></span>
+      <span class="day-icon" data-tip="Transfer para a serra">🚗</span>
     </div>
     <h3>Porto Alegre → Gramado</h3>
     <div class="highlight">
@@ -915,11 +1427,12 @@
   </div>
 
   <!-- DAY 3 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-3">
+    <div class="day-accent"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 3 <span class="day-date">· 20/12 (Dom)</span></span>
-      <span class="day-icon">🏡</span>
+      <span class="day-number"><span class="day-badge">03</span> Dia 3 <span class="day-date">· 20/12 (Dom)</span></span>
+      <span class="day-icon" data-tip="Check-in">🏡</span>
     </div>
     <h3>Check-in &amp; Centro de Gramado</h3>
     <ul>
@@ -930,11 +1443,12 @@
   </div>
 
   <!-- DAY 4 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-4">
+    <div class="day-accent"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 4 <span class="day-date">· 21/12 (Seg)</span></span>
-      <span class="day-icon">🎄</span>
+      <span class="day-number"><span class="day-badge">04</span> Dia 4 <span class="day-date">· 21/12 (Seg)</span></span>
+      <span class="day-icon" data-tip="Natal em Gramado">🎄</span>
     </div>
     <h3>Gramado — Os Clássicos</h3>
     <ul>
@@ -951,11 +1465,12 @@
   </div>
 
   <!-- DAY 5 -->
-  <div class="day-card">
+  <div class="day-card reveal">
+    <div class="day-accent"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 5 <span class="day-date">· 22/12 (Ter)</span></span>
-      <span class="day-icon">🏞️</span>
+      <span class="day-number"><span class="day-badge">05</span> Dia 5 <span class="day-date">· 22/12 (Ter)</span></span>
+      <span class="day-icon" data-tip="Cidade irmã">🏞️</span>
     </div>
     <h3>🌲 Canela — A Cidade Irmã</h3>
     <div class="activity-grid">
@@ -967,11 +1482,12 @@
   </div>
 
   <!-- DAY 6 -->
-  <div class="day-card">
+  <div class="day-card reveal">
+    <div class="day-accent"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 6 <span class="day-date">· 23/12 (Qua)</span></span>
-      <span class="day-icon">🍷</span>
+      <span class="day-number"><span class="day-badge">06</span> Dia 6 <span class="day-date">· 23/12 (Qua)</span></span>
+      <span class="day-icon" data-tip="Vale dos Vinhedos">🍷</span>
     </div>
     <h3>Bento Gonçalves &amp; Vale dos Vinhedos</h3>
     <ul>
@@ -983,14 +1499,15 @@
   </div>
 
   <!-- DAY 7 — CEIA DE NATAL -->
-  <div class="day-card">
+  <div class="day-card reveal">
+    <div class="day-accent"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 7 <span class="day-date">· 24/12 (Qui)</span></span>
-      <span class="day-icon">🎅</span>
+      <span class="day-number"><span class="day-badge">07</span> Dia 7 <span class="day-date">· 24/12 (Qui)</span></span>
+      <span class="day-icon" data-tip="🎄 Véspera de Natal">🎅</span>
     </div>
     <h3>✨ Véspera de Natal — Ceia Especial</h3>
-    <div class="highlight gold">
+    <div class="highlight gold christmas-glow">
       <strong>🎄 CEIA DE NATAL — Hotel Fioreze Primo</strong><br>
       Reserva nº 34.521 · 2 adultos · Salão de eventos do hotel<br>
       ⏰ <strong>20:00</strong><br>
@@ -999,11 +1516,12 @@
   </div>
 
   <!-- DAY 8 -->
-  <div class="day-card">
+  <div class="day-card reveal">
+    <div class="day-accent"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 8 <span class="day-date">· 25/12 (Sex) 🎄</span></span>
-      <span class="day-icon">☕</span>
+      <span class="day-number"><span class="day-badge">08</span> Dia 8 <span class="day-date">· 25/12 (Sex) 🎄</span></span>
+      <span class="day-icon" data-tip="Natal">☕</span>
     </div>
     <h3>Natal — Dia Leve &amp; Chocolates</h3>
     <ul>
@@ -1014,11 +1532,12 @@
   </div>
 
   <!-- DAY 9 -->
-  <div class="day-card">
+  <div class="day-card reveal">
+    <div class="day-accent"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 9 <span class="day-date">· 26/12 (Sáb)</span></span>
-      <span class="day-icon">✈️</span>
+      <span class="day-number"><span class="day-badge">09</span> Dia 9 <span class="day-date">· 26/12 (Sáb)</span></span>
+      <span class="day-icon" data-tip="Voo para SP">✈️</span>
     </div>
     <h3>Gramado → São Paulo</h3>
     <div class="hotel-box">
@@ -1041,7 +1560,7 @@
   <!-- ================================================================ -->
   <!-- PARTE 2 — SÃO PAULO                                              -->
   <!-- ================================================================ -->
-  <div class="sec-sp">
+  <div class="sec-sp" id="part-sp">
   <div class="wm">
     <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice">
       <defs>
@@ -1050,58 +1569,67 @@
           <stop offset="100%" stop-color="rgba(59,130,246,0.04)"/>
         </linearGradient>
       </defs>
-      <!-- Skyline buildings -->
-      <g fill="rgba(59,130,246,0.025)">
+      <!-- Skyline buildings with iconic shapes -->
+      <g fill="rgba(59,130,246,0.03)">
+        <!-- MASP-like (distinctive shape) -->
         <rect x="50" y="200" width="40" height="300" rx="2"/>
         <rect x="110" y="150" width="35" height="350" rx="2"/>
         <rect x="165" y="180" width="30" height="320" rx="2"/>
-        <rect x="210" y="120" width="45" height="380" rx="2"/>
-        <rect x="275" y="170" width="35" height="330" rx="2"/>
-        <rect x="330" y="100" width="50" height="400" rx="2"/>
-        <rect x="400" y="140" width="40" height="360" rx="2"/>
-        <rect x="460" y="200" width="30" height="300" rx="2"/>
-        <rect x="510" y="160" width="45" height="340" rx="2"/>
-        <rect x="575" y="110" width="55" height="390" rx="2"/>
-        <rect x="650" y="180" width="35" height="320" rx="2"/>
-        <rect x="705" y="130" width="40" height="370" rx="2"/>
-        <rect x="765" y="200" width="30" height="300" rx="2"/>
-        <rect x="815" y="150" width="50" height="350" rx="2"/>
-        <rect x="885" y="180" width="35" height="320" rx="2"/>
-        <rect x="940" y="120" width="40" height="380" rx="2"/>
-        <rect x="1000" y="170" width="35" height="330" rx="2"/>
-        <rect x="1055" y="140" width="45" height="360" rx="2"/>
-        <rect x="1120" y="190" width="40" height="310" rx="2"/>
+        <!-- Copan-like (wavy) -->
+        <path d="M210,120 Q225,115 240,120 L240,500 L210,500 Z"/>
+        <rect x="255" y="170" width="35" height="330" rx="2"/>
+        <!-- FIESP-like -->
+        <rect x="310" y="100" width="50" height="400" rx="2"/>
+        <rect x="330" y="120" width="10" height="380"/>
+        <rect x="380" y="140" width="40" height="360" rx="2"/>
+        <rect x="440" y="200" width="30" height="300" rx="2"/>
+        <rect x="490" y="160" width="45" height="340" rx="2"/>
+        <!-- Banespa-like (taller) -->
+        <rect x="555" y="90" width="45" height="410" rx="2"/>
+        <rect x="575" y="110" width="5" height="390"/>
+        <rect x="630" y="180" width="35" height="320" rx="2"/>
+        <rect x="685" y="130" width="40" height="370" rx="2"/>
+        <rect x="745" y="200" width="30" height="300" rx="2"/>
+        <rect x="795" y="150" width="50" height="350" rx="2"/>
+        <rect x="865" y="180" width="35" height="320" rx="2"/>
+        <rect x="920" y="120" width="40" height="380" rx="2"/>
+        <rect x="980" y="170" width="35" height="330" rx="2"/>
+        <rect x="1035" y="140" width="45" height="360" rx="2"/>
+        <rect x="1100" y="190" width="40" height="310" rx="2"/>
       </g>
-      <!-- Windows on some buildings -->
-      <g fill="rgba(255,200,50,0.02)">
-        <rect x="340" y="120" width="4" height="4" rx="1"/>
-        <rect x="340" y="140" width="4" height="4" rx="1"/>
-        <rect x="340" y="160" width="4" height="4" rx="1"/>
-        <rect x="355" y="130" width="4" height="4" rx="1"/>
-        <rect x="355" y="150" width="4" height="4" rx="1"/>
-        <rect x="585" y="130" width="4" height="4" rx="1"/>
-        <rect x="585" y="150" width="4" height="4" rx="1"/>
-        <rect x="600" y="140" width="4" height="4" rx="1"/>
-        <rect x="825" y="170" width="4" height="4" rx="1"/>
-        <rect x="840" y="190" width="4" height="4" rx="1"/>
-        <rect x="950" y="140" width="4" height="4" rx="1"/>
-        <rect x="950" y="160" width="4" height="4" rx="1"/>
+      <!-- Lit windows -->
+      <g fill="rgba(255,200,50,0.03)">
+        <rect x="320" y="120" width="4" height="4" rx="1"/>
+        <rect x="320" y="140" width="4" height="4" rx="1"/>
+        <rect x="320" y="160" width="4" height="4" rx="1"/>
+        <rect x="340" y="130" width="4" height="4" rx="1"/>
+        <rect x="340" y="150" width="4" height="4" rx="1"/>
+        <rect x="565" y="110" width="4" height="4" rx="1"/>
+        <rect x="565" y="130" width="4" height="4" rx="1"/>
+        <rect x="585" y="120" width="4" height="4" rx="1"/>
+        <rect x="805" y="170" width="4" height="4" rx="1"/>
+        <rect x="820" y="190" width="4" height="4" rx="1"/>
+        <rect x="930" y="140" width="4" height="4" rx="1"/>
+        <rect x="930" y="160" width="4" height="4" rx="1"/>
+        <rect x="695" y="150" width="4" height="4" rx="1"/>
+        <rect x="695" y="170" width="4" height="4" rx="1"/>
       </g>
     </svg>
   </div>
 
-  <div class="part-divider">
+  <div class="part-divider reveal">
     <div class="badge">Parte 2</div>
     <h2>🌆 São Paulo</h2>
     <div class="part-dates">26 de Dezembro a 01 de Janeiro · 6 dias</div>
   </div>
 
   <!-- DAY 9b -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-1">
+    <div class="day-accent acc-sp"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 9 <span class="day-date">· 26/12 (Sáb)</span></span>
-      <span class="day-icon">🏨</span>
+      <span class="day-number"><span class="day-badge">09</span> Dia 9 <span class="day-date">· 26/12 (Sáb)</span></span>
+      <span class="day-icon" data-tip="Chegada em SP">🏨</span>
     </div>
     <h3>Chegada a São Paulo</h3>
     <div class="hotel-box">
@@ -1112,11 +1640,12 @@
   </div>
 
   <!-- DAYS 10-13 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-2">
+    <div class="day-accent acc-sp"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dias 10 a 13 <span class="day-date">· 27 a 30/12</span></span>
-      <span class="day-icon">🏛️</span>
+      <span class="day-number"><span class="day-badge">10-13</span> Dias 10 a 13 <span class="day-date">· 27 a 30/12</span></span>
+      <span class="day-icon" data-tip="Explorando SP">🏛️</span>
     </div>
     <h3>Explorando São Paulo</h3>
     <div class="activity-grid">
@@ -1134,13 +1663,17 @@
   </div>
 
   <!-- DAY 14 — RÉVEILLON -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-3" id="reveillon-card">
+    <div class="day-accent acc-sp"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 14 <span class="day-date">· 31/12 (Qui)</span></span>
-      <span class="day-icon">🥂</span>
+      <span class="day-number"><span class="day-badge">14</span> Dia 14 <span class="day-date">· 31/12 (Qui)</span></span>
+      <span class="day-icon" data-tip="🎆 Réveillon!">🥂</span>
     </div>
     <h3>🎆 Réveillon na Paulista</h3>
+    <div class="fireworks-container" id="fireworksContainer">
+      <!-- Fireworks generated by JS -->
+    </div>
     <div class="highlight gold">
       <strong>🎆 ANO NOVO NA AVENIDA PAULISTA</strong><br>
       Um dos réveillons mais emblemáticos do Brasil!
@@ -1152,11 +1685,12 @@
   </div>
 
   <!-- DAY 15 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-4">
+    <div class="day-accent acc-sp"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 15 <span class="day-date">· 01/01 (Sex) 🎉</span></span>
-      <span class="day-icon">✈️</span>
+      <span class="day-number"><span class="day-badge">15</span> Dia 15 <span class="day-date">· 01/01 (Sex) 🎉</span></span>
+      <span class="day-icon" data-tip="Voo para Foz">✈️</span>
     </div>
     <h3>São Paulo → Foz do Iguaçu</h3>
     <div class="flight-block">
@@ -1176,7 +1710,7 @@
   <!-- ================================================================ -->
   <!-- PARTE 3 — FOZ / ARGENTINA                                        -->
   <!-- ================================================================ -->
-  <div class="sec-foz">
+  <div class="sec-foz" id="part-foz">
   <div class="wm">
     <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
       <defs>
@@ -1184,34 +1718,53 @@
           <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
           <stop offset="100%" stop-color="rgba(16,185,129,0.05)"/>
         </linearGradient>
+        <linearGradient id="rainbow" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="rgba(255,0,0,0.03)"/>
+          <stop offset="25%" stop-color="rgba(255,165,0,0.03)"/>
+          <stop offset="50%" stop-color="rgba(255,255,0,0.03)"/>
+          <stop offset="75%" stop-color="rgba(0,255,0,0.03)"/>
+          <stop offset="100%" stop-color="rgba(0,0,255,0.03)"/>
+        </linearGradient>
       </defs>
       <!-- Waterfall / cliffs -->
-      <path d="M200,50 Q250,80 300,100 Q350,120 300,200 Q250,280 350,350 Q450,420 400,500 Q350,580 450,600 L800,600 L800,0 Z" fill="rgba(16,185,129,0.025)"/>
-      <path d="M350,80 Q400,100 450,120 Q500,140 450,220 Q400,300 500,370 Q600,440 550,520 Q500,600 600,600 L0,600 L0,0 Z" fill="rgba(16,185,129,0.015)"/>
+      <path d="M150,50 Q220,80 280,100 Q340,120 300,220 Q260,320 380,400 Q500,480 450,560 Q400,600 500,600 L800,600 L800,0 Z" fill="rgba(16,185,129,0.03)"/>
+      <path d="M350,80 Q420,100 480,120 Q540,140 500,240 Q460,340 580,420 Q700,500 650,570 Q600,600 700,600 L0,600 L0,0 Z" fill="rgba(16,185,129,0.02)"/>
+      <!-- Rainbow arc -->
+      <path d="M100,450 Q400,200 700,450" fill="none" stroke="url(#rainbow)" stroke-width="8" opacity="0.4"/>
+      <path d="M120,460 Q400,230 680,460" fill="none" stroke="url(#rainbow)" stroke-width="4" opacity="0.2"/>
       <!-- Water spray dots -->
-      <circle cx="340" cy="250" r="4" fill="rgba(255,255,255,0.03)"/>
-      <circle cx="360" cy="270" r="3" fill="rgba(255,255,255,0.02)"/>
-      <circle cx="380" cy="290" r="5" fill="rgba(255,255,255,0.02)"/>
-      <circle cx="320" cy="280" r="2" fill="rgba(255,255,255,0.03)"/>
-      <circle cx="400" cy="310" r="3" fill="rgba(255,255,255,0.02)"/>
+      <circle cx="340" cy="250" r="5" fill="rgba(255,255,255,0.04)"/>
+      <circle cx="360" cy="270" r="4" fill="rgba(255,255,255,0.03)"/>
+      <circle cx="380" cy="290" r="6" fill="rgba(255,255,255,0.03)"/>
+      <circle cx="320" cy="280" r="3" fill="rgba(255,255,255,0.04)"/>
+      <circle cx="400" cy="310" r="4" fill="rgba(255,255,255,0.03)"/>
+      <circle cx="350" cy="300" r="3" fill="rgba(255,255,255,0.025)"/>
+      <circle cx="370" cy="320" r="5" fill="rgba(255,255,255,0.02)"/>
+      <circle cx="310" cy="260" r="3" fill="rgba(255,255,255,0.03)"/>
       <!-- Birds -->
-      <path d="M500,80 Q510,75 520,80 Q530,75 540,80" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1.5"/>
-      <path d="M550,60 Q560,55 570,60 Q580,55 590,60" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1.5"/>
+      <path d="M520,80 Q530,75 540,80 Q550,75 560,80" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
+      <path d="M570,60 Q580,55 590,60 Q600,55 610,60" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1.5"/>
+      <path d="M490,100 Q500,95 510,100 Q520,95 530,100" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1.5"/>
+      <!-- Tropical leaves -->
+      <text x="80" y="500" font-size="30" fill="rgba(16,185,129,0.025)">🌿</text>
+      <text x="700" y="480" font-size="25" fill="rgba(16,185,129,0.02)">🌴</text>
+      <text x="650" y="520" font-size="20" fill="rgba(16,185,129,0.02)">🌿</text>
     </svg>
   </div>
 
-  <div class="part-divider">
+  <div class="part-divider reveal">
     <div class="badge">Parte 3</div>
     <h2>🌊 Foz do Iguaçu &amp; Argentina</h2>
     <div class="part-dates">01 a 04 de Janeiro · 3 dias</div>
   </div>
 
   <!-- DAY 16 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-1">
+    <div class="day-accent acc-foz"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 16 <span class="day-date">· 02/01 (Sáb)</span></span>
-      <span class="day-icon">🌊</span>
+      <span class="day-number"><span class="day-badge">16</span> Dia 16 <span class="day-date">· 02/01 (Sáb)</span></span>
+      <span class="day-icon" data-tip="Cataratas!">🌊</span>
     </div>
     <h3>Cataratas do Iguaçu — O Dia Mais Esperado</h3>
     <div class="activity-grid">
@@ -1229,11 +1782,12 @@
   </div>
 
   <!-- DAY 17 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-2">
+    <div class="day-accent acc-foz"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 17 <span class="day-date">· 03/01 (Dom)</span></span>
-      <span class="day-icon">🏗️</span>
+      <span class="day-number"><span class="day-badge">17</span> Dia 17 <span class="day-date">· 03/01 (Dom)</span></span>
+      <span class="day-icon" data-tip="Itaipu">🏗️</span>
     </div>
     <h3>Itaipu &amp; Roteiro Cultural</h3>
     <ul>
@@ -1244,11 +1798,12 @@
   </div>
 
   <!-- DAY 18 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-3">
+    <div class="day-accent acc-foz"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 18 <span class="day-date">· 04/01 (Seg)</span></span>
-      <span class="day-icon">🇦🇷</span>
+      <span class="day-number"><span class="day-badge">18</span> Dia 18 <span class="day-date">· 04/01 (Seg)</span></span>
+      <span class="day-icon" data-tip="Argentina!">🇦🇷</span>
     </div>
     <h3>🇦🇷 Puerto Iguazú — Argentina</h3>
     <ul>
@@ -1265,7 +1820,7 @@
   <!-- ================================================================ -->
   <!-- PARTE 4 — PARAGUAI                                               -->
   <!-- ================================================================ -->
-  <div class="sec-py">
+  <div class="sec-py" id="part-py">
   <div class="wm">
     <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice">
       <defs>
@@ -1275,7 +1830,7 @@
         </linearGradient>
       </defs>
       <!-- Modern CDE skyline -->
-      <g fill="rgba(245,158,11,0.025)">
+      <g fill="rgba(245,158,11,0.03)">
         <rect x="30" y="180" width="30" height="320" rx="2"/>
         <rect x="75" y="140" width="25" height="360" rx="2"/>
         <rect x="115" y="200" width="35" height="300" rx="2"/>
@@ -1300,29 +1855,35 @@
         <rect x="1095" y="150" width="35" height="350" rx="2"/>
         <rect x="1145" y="170" width="35" height="330" rx="2"/>
       </g>
+      <!-- Ponte da Amizade -->
+      <path d="M0,350 Q200,330 400,340 Q600,350 800,340 Q1000,330 1200,350" fill="none" stroke="rgba(245,158,11,0.04)" stroke-width="6"/>
+      <path d="M0,360 Q200,340 400,350 Q600,360 800,350 Q1000,340 1200,360" fill="none" stroke="rgba(245,158,11,0.025)" stroke-width="3"/>
       <!-- Accent windows -->
-      <g fill="rgba(255,200,50,0.02)">
+      <g fill="rgba(255,200,50,0.025)">
         <rect x="275" y="120" width="4" height="4" rx="1"/>
         <rect x="275" y="140" width="4" height="4" rx="1"/>
         <rect x="845" y="120" width="4" height="4" rx="1"/>
         <rect x="845" y="140" width="4" height="4" rx="1"/>
         <rect x="845" y="160" width="4" height="4" rx="1"/>
+        <rect x="535" y="130" width="4" height="4" rx="1"/>
+        <rect x="535" y="150" width="4" height="4" rx="1"/>
       </g>
     </svg>
   </div>
 
-  <div class="part-divider">
+  <div class="part-divider reveal">
     <div class="badge">Parte 4</div>
     <h2>🇵🇾 Paraguai</h2>
     <div class="part-dates">04 a 07 de Janeiro · 3 dias</div>
   </div>
 
   <!-- DAY 19 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-1">
+    <div class="day-accent acc-py"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 19 <span class="day-date">· 05/01 (Ter)</span></span>
-      <span class="day-icon">🛍️</span>
+      <span class="day-number"><span class="day-badge">19</span> Dia 19 <span class="day-date">· 05/01 (Ter)</span></span>
+      <span class="day-icon" data-tip="Compras no PY">🛍️</span>
     </div>
     <h3>🇵🇾 Ciudad del Este — Compras</h3>
     <div class="hotel-box">
@@ -1338,11 +1899,12 @@
   </div>
 
   <!-- DAY 20 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-2">
+    <div class="day-accent acc-py"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 20 <span class="day-date">· 06/01 (Qua)</span></span>
-      <span class="day-icon">🌿</span>
+      <span class="day-number"><span class="day-badge">20</span> Dia 20 <span class="day-date">· 06/01 (Qua)</span></span>
+      <span class="day-icon" data-tip="Salto del Monday">🌿</span>
     </div>
     <h3>Presidente Franco — Salto del Monday</h3>
     <ul>
@@ -1353,11 +1915,12 @@
   </div>
 
   <!-- DAY 21 -->
-  <div class="day-card">
+  <div class="day-card reveal reveal-delay-3">
+    <div class="day-accent acc-py"></div>
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number">Dia 21 <span class="day-date">· 07/01 (Qui)</span></span>
-      <span class="day-icon">🏠</span>
+      <span class="day-number"><span class="day-badge">21</span> Dia 21 <span class="day-date">· 07/01 (Qui)</span></span>
+      <span class="day-icon" data-tip="Retorno para casa">🏠</span>
     </div>
     <h3>🇧🇷 Retorno — Foz do Iguaçu → Belém</h3>
     <div class="flight-block">
@@ -1381,12 +1944,12 @@
   <!-- ================================================================ -->
   <!-- SUMMARY                                                          -->
   <!-- ================================================================ -->
-  <div class="part-divider" style="margin-top:60px;">
+  <div class="part-divider reveal" style="margin-top:60px;">
     <div class="badge">Resumo</div>
     <h2>📊 Panorama Geral</h2>
   </div>
 
-  <div class="summary-box">
+  <div class="summary-box reveal">
     <table>
       <thead><tr><th>Etapa</th><th>Datas</th><th>Base</th><th style="text-align:center;">Dias</th><th style="text-align:right;">Valor</th></tr></thead>
       <tbody>
@@ -1439,12 +2002,12 @@
   </div>
 
   <!-- FLIGHT CARD -->
-  <div class="part-divider" style="margin-top:40px;">
+  <div class="part-divider reveal" style="margin-top:40px;">
     <div class="badge">Voos</div>
     <h2>📋 Cartão de Embarque</h2>
   </div>
 
-  <div class="flight-summary">
+  <div class="flight-summary reveal">
     <div style="display:flex;flex-wrap:wrap;gap:16px;">
       <div style="flex:1;min-width:170px;background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.08);border-radius:14px;padding:16px;">
         <div style="font-size:0.75em;color:#a78bfa;font-weight:600;text-transform:uppercase;letter-spacing:1px;">18/12</div>
@@ -1470,12 +2033,12 @@
   </div>
 
   <!-- RESERVATIONS -->
-  <div class="part-divider" style="margin-top:40px;">
+  <div class="part-divider reveal" style="margin-top:40px;">
     <div class="badge">Reservas</div>
     <h2>📄 Confirmações</h2>
   </div>
 
-  <div class="reservation-box">
+  <div class="reservation-box reveal">
     <div style="display:flex;flex-wrap:wrap;gap:24px;">
       <div style="flex:1;min-width:200px;">
         <div style="font-weight:700;color:#c4b5d6;">🏨 Hotel Fioreze Primo</div>
@@ -1511,11 +2074,202 @@
 </div> <!-- /timeline-container -->
 
 <!-- FOOTER -->
-<div class="footer">
+<div class="footer reveal">
   Feito com <span class="hearts">♥</span> por Rafael para sua mãe<br>
   Boa viagem! 🌟<br>
   <div class="route-cities">Gramado · Canela · Bento Gonçalves · São Paulo · Foz do Iguaçu · Puerto Iguazú · Ciudad del Este · Presidente Franco</div>
 </div>
 
+<script>
+(function() {
+  'use strict';
+
+  // ============================================================
+  // SCROLL REVEAL — Intersection Observer
+  // ============================================================
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // ============================================================
+  // PROGRESS BAR
+  // ============================================================
+  const progressBar = document.getElementById('progressBar');
+  const pDay = document.getElementById('pDay');
+  const pLoc = document.getElementById('pLoc');
+  const pFill = document.getElementById('pFill');
+  const pPct = document.getElementById('pPct');
+
+  // Day location mapping
+  const dayLocations = {
+    1: 'Belém ✈ POA', 2: 'Porto Alegre → Gramado', 3: 'Gramado',
+    4: 'Gramado', 5: 'Canela', 6: 'Bento Gonçalves',
+    7: 'Gramado 🎄', 8: 'Gramado 🎄', 9: 'Gramado → SP',
+    10: 'São Paulo', 11: 'São Paulo', 12: 'São Paulo',
+    13: 'São Paulo', 14: 'São Paulo 🥂', 15: 'SP → Foz',
+    16: 'Foz do Iguaçu', 17: 'Foz do Iguaçu', 18: 'Puerto Iguazú 🇦🇷',
+    19: 'Ciudad del Este 🇵🇾', 20: 'Presidente Franco', 21: 'Foz → Belém 🏠'
+  };
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+
+    // Show progress bar after scrolling past cover
+    if (scrollTop > window.innerHeight * 0.6) {
+      progressBar.classList.add('visible');
+    } else {
+      progressBar.classList.remove('visible');
+    }
+
+    // Calculate current day based on scroll position
+    const totalDays = 21;
+    const currentDay = Math.max(1, Math.min(totalDays, Math.ceil((progress / 100) * totalDays)));
+    const location = dayLocations[currentDay] || 'Viagem';
+
+    pDay.textContent = 'Dia ' + currentDay;
+    pLoc.textContent = '· ' + location;
+    pFill.style.width = progress + '%';
+    pPct.textContent = Math.round(progress) + '%';
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  // ============================================================
+  // BACK TO TOP
+  // ============================================================
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > window.innerHeight) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  // ============================================================
+  // SECTION NAV — Active dot
+  // ============================================================
+  const navLinks = document.querySelectorAll('.section-nav a');
+  const sections = ['cover', 'part-gramado', 'part-sp', 'part-foz', 'part-py'];
+
+  function updateNav() {
+    const scrollY = window.scrollY + 120;
+    let activeIdx = 0;
+    sections.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el && scrollY >= el.offsetTop) {
+        activeIdx = i;
+      }
+    });
+    navLinks.forEach((link, i) => {
+      link.classList.toggle('active', i === activeIdx);
+    });
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+
+  // ============================================================
+  // FIREWORKS — Réveillon card
+  // ============================================================
+  function createFireworks() {
+    const container = document.getElementById('fireworksContainer');
+    if (!container) return;
+
+    const colors = ['#f43f5e', '#fbbf24', '#34d399', '#60a5fa', '#a78bfa', '#f97316', '#ec4899'];
+
+    function burst(cx, cy) {
+      const particleCount = 20 + Math.floor(Math.random() * 20);
+      for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement('div');
+        p.className = 'firework-particle';
+        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.3;
+        const dist = 60 + Math.random() * 80;
+        const x = Math.cos(angle) * dist;
+        const y = Math.sin(angle) * dist;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        p.style.cssText = `
+          left: ${cx}px; top: ${cy}px;
+          background: ${color};
+          box-shadow: 0 0 6px ${color};
+          --fx: ${x}px; --fy: ${y}px;
+          width: ${2 + Math.random() * 4}px;
+          height: ${2 + Math.random() * 4}px;
+          animation-duration: ${0.8 + Math.random() * 0.6}s;
+        `;
+        container.appendChild(p);
+        setTimeout(() => p.remove(), 1500);
+      }
+    }
+
+    // Create bursts periodically
+    let fireworkInterval = setInterval(() => {
+      if (document.hidden) return;
+      const rect = container.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        const cx = 50 + Math.random() * (container.offsetWidth - 100);
+        const cy = 20 + Math.random() * (container.offsetHeight * 0.4);
+        burst(cx, cy);
+        // Sometimes double burst
+        if (Math.random() > 0.5) {
+          setTimeout(() => {
+            burst(50 + Math.random() * (container.offsetWidth - 100), 20 + Math.random() * (container.offsetHeight * 0.4));
+          }, 200);
+        }
+      }
+    }, 800);
+
+    // Cleanup if element leaves DOM
+    const observer = new MutationObserver(() => {
+      if (!document.body.contains(container)) {
+        clearInterval(fireworkInterval);
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  // Start fireworks when reveal section is visible
+  const revealCard = document.getElementById('reveillon-card');
+  if (revealCard) {
+    const fwObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          createFireworks();
+          fwObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    fwObserver.observe(revealCard);
+  }
+
+  // ============================================================
+  // PARALLAX — Cover
+  // ============================================================
+  const parallaxLayers = document.querySelectorAll('.parallax-bg');
+  window.addEventListener('scroll', function() {
+    const scrollY = window.scrollY;
+    parallaxLayers.forEach((layer, i) => {
+      const speed = 0.15 + (i * 0.1);
+      layer.style.transform = 'translateY(' + (scrollY * speed) + 'px)';
+    });
+  }, { passive: true });
+
+  // ============================================================
+  // INITIAL CALL
+  // ============================================================
+  updateProgress();
+  updateNav();
+
+})();
+</script>
 </body>
 </html>
