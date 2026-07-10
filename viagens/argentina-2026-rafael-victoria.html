@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>💕 Argentina 2026 — Rafael & Victoria</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #e11d48;
+    --rose-soft: #fb7185;
+    --rose-glow: rgba(225,29,72,0.35);
+    --gold: #fbbf24;
+    --gold-soft: #fcd34d;
+    --cream: #fdf2f0;
+    --bg: #0a0a12;
+    --bg-card: rgba(255,255,255,0.03);
+    --text: #f1ecea;
+    --text-dim: rgba(255,255,255,0.5);
+    --ba: #e11d48;
+    --ba-glow: rgba(225,29,72,0.25);
+    --bariloche: #38bdf8;
+    --bariloche-glow: rgba(56,189,248,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  ::selection { background: var(--rose); color: #fff; }
+
+  /* === PROGRESS BAR === */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(10,10,18,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.78em;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .progress-bar.visible { transform: translateY(0); }
+  .progress-bar .p-day { font-weight: 700; color: var(--gold); white-space: nowrap; }
+  .progress-bar .p-loc { color: var(--text-dim); white-space: nowrap; }
+  .progress-bar .p-track { flex: 1; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; min-width: 60px; }
+  .progress-bar .p-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--rose), var(--bariloche), var(--rose)); transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); width: 0%; }
+  .progress-bar .p-pct { color: var(--text-dim); font-size: 0.85em; min-width: 36px; text-align: right; }
+
+  /* === SECTION NAV === */
+  .section-nav {
+    position: fixed;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .section-nav a {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative;
+  }
+  .section-nav a:hover, .section-nav a.active { background: var(--rose); border-color: var(--rose); box-shadow: 0 0 12px var(--rose-glow); transform: scale(1.4); }
+  .section-nav a .dot-label {
+    position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+    font-size: 0.65em; color: rgba(255,255,255,0.5); white-space: nowrap;
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    background: rgba(10,10,18,0.8); padding: 2px 8px; border-radius: 6px;
+  }
+  .section-nav a:hover .dot-label { opacity: 1; }
+
+  /* === BACK TO TOP === */
+  .back-to-top {
+    position: fixed; bottom: 24px; right: 20px; z-index: 999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, rgba(225,29,72,0.2), rgba(225,29,72,0.08));
+    border: 1px solid rgba(225,29,72,0.15); color: var(--text); font-size: 1.2em;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(20px) scale(0.8);
+    transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .back-to-top:hover { background: linear-gradient(135deg, rgba(225,29,72,0.35), rgba(225,29,72,0.15)); border-color: rgba(225,29,72,0.3); box-shadow: 0 4px 25px var(--rose-glow); transform: translateY(-3px) scale(1.05); }
+
+  /* === SCROLL REVEAL === */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.35s; }
+  .reveal-delay-4 { transition-delay: 0.5s; }
+
+  /* ============================================================
+     COVER — ROMANTIC CINEMATIC
+     ============================================================ */
+  .cover {
+    position: relative; min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 80px 40px; background: #050508; overflow: hidden;
+  }
+
+  .cover .bg-layer {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(225,29,72,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(251,191,36,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(56,189,248,0.08) 0%, transparent 60%);
+  }
+
+  /* Floating hearts */
+  @keyframes float-heart {
+    0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-100px) rotate(720deg) scale(1.2); opacity: 0; }
+  }
+  .floating-heart {
+    position: absolute; font-size: 1.2em; opacity: 0; pointer-events: none;
+    animation: float-heart linear infinite;
+  }
+  .floating-heart:nth-child(1) { left: 5%; font-size: 0.8em; animation-duration: 14s; animation-delay: 0s; }
+  .floating-heart:nth-child(2) { left: 15%; font-size: 1.1em; animation-duration: 18s; animation-delay: 3s; }
+  .floating-heart:nth-child(3) { left: 25%; font-size: 0.6em; animation-duration: 12s; animation-delay: 5s; }
+  .floating-heart:nth-child(4) { left: 40%; font-size: 1em; animation-duration: 16s; animation-delay: 2s; }
+  .floating-heart:nth-child(5) { left: 55%; font-size: 0.9em; animation-duration: 20s; animation-delay: 7s; }
+  .floating-heart:nth-child(6) { left: 65%; font-size: 1.2em; animation-duration: 15s; animation-delay: 1s; }
+  .floating-heart:nth-child(7) { left: 75%; font-size: 0.7em; animation-duration: 13s; animation-delay: 4s; }
+  .floating-heart:nth-child(8) { left: 85%; font-size: 1em; animation-duration: 17s; animation-delay: 6s; }
+  .floating-heart:nth-child(9) { left: 92%; font-size: 0.8em; animation-duration: 19s; animation-delay: 2.5s; }
+  .floating-heart:nth-child(10) { left: 32%; font-size: 0.5em; animation-duration: 11s; animation-delay: 8s; }
+  .floating-heart:nth-child(11) { left: 70%; font-size: 0.6em; animation-duration: 14s; animation-delay: 3.5s; }
+  .floating-heart:nth-child(12) { left: 48%; font-size: 0.9em; animation-duration: 16s; animation-delay: 5.5s; }
+
+  .cover .stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 15%, #fff, transparent),
+      radial-gradient(1px 1px at 22% 8%, #fff, transparent),
+      radial-gradient(2px 2px at 35% 22%, #fff, transparent),
+      radial-gradient(1px 1px at 48% 5%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 60% 18%, #fff, transparent),
+      radial-gradient(1px 1px at 73% 10%, #fff, transparent),
+      radial-gradient(2px 2px at 85% 25%, #fff, transparent),
+      radial-gradient(1px 1px at 92% 8%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 15% 40%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 55% 45%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 70% 38%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 25% 55%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 50% 60%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 80% 50%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 90% 65%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 5% 70%, #fff, transparent),
+      radial-gradient(1px 1px at 65% 75%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 30% 85%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 75% 90%, rgba(255,255,255,0.3), transparent);
+    background-size: 100% 100%;
+    opacity: 0.9;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
+  }
+  .cover .star-twinkle {
+    position: absolute; width: 3px; height: 3px; background: #fff;
+    border-radius: 50%; box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  .cover .star-twinkle:nth-child(1) { top: 12%; left: 15%; animation-delay: 0s; }
+  .cover .star-twinkle:nth-child(2) { top: 25%; left: 75%; animation-delay: 1s; width: 4px; height: 4px; }
+  .cover .star-twinkle:nth-child(3) { top: 8%; left: 55%; animation-delay: 2s; }
+  .cover .star-twinkle:nth-child(4) { top: 40%; left: 30%; animation-delay: 0.5s; width: 2px; height: 2px; }
+  .cover .star-twinkle:nth-child(5) { top: 20%; left: 88%; animation-delay: 1.5s; }
+
+  @keyframes shooting {
+    0% { transform: translateX(0) translateY(0); opacity: 1; }
+    60% { opacity: 1; }
+    100% { transform: translateX(500px) translateY(300px); opacity: 0; }
+  }
+  .cover .shooting-star {
+    position: absolute; top: 18%; left: 25%;
+    width: 3px; height: 3px; background: #fff; border-radius: 50%;
+    box-shadow: 0 0 8px 3px rgba(255,255,255,0.9);
+    animation: shooting 5s ease-in-out infinite;
+  }
+  .cover .shooting-star::after {
+    content: ''; position: absolute; top: 50%; transform: translateY(-50%);
+    width: 100px; height: 1px;
+    background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
+    right: 3px;
+  }
+  .cover .shooting-star:nth-child(8) { top: 35%; left: 60%; animation-delay: 2.5s; animation-duration: 6s; }
+  .cover .shooting-star:nth-child(9) { top: 12%; left: 75%; animation-delay: 4s; animation-duration: 4.5s; }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(225,29,72,0.3)); }
+    50% { filter: drop-shadow(0 0 60px rgba(225,29,72,0.6)); }
+  }
+
+  .cover .hearts-divider {
+    font-size: 1.4em; margin-bottom: 8px; position: relative; z-index: 2;
+    animation: pulse-glow 3s ease-in-out infinite;
+    letter-spacing: 6px;
+  }
+
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6em, 6vw, 4.5em);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 15%, var(--rose-soft) 35%, var(--gold) 55%, var(--rose-soft) 75%, #fff 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 8s ease infinite;
+    margin-bottom: 6px;
+    position: relative; z-index: 2;
+    filter: drop-shadow(0 4px 30px rgba(225,29,72,0.3));
+  }
+
+  .cover .names {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.4em, 3vw, 2.2em);
+    color: var(--gold-soft);
+    position: relative; z-index: 2;
+    margin-bottom: 2px;
+    font-weight: 700;
+  }
+  .cover .names .ampersand {
+    color: var(--rose-soft);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    padding: 0 8px;
+  }
+
+  .cover .subtitle {
+    font-size: clamp(0.9em, 1.8vw, 1.2em);
+    font-weight: 300;
+    opacity: 0.85;
+    position: relative; z-index: 2;
+    letter-spacing: 3px;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  .cover .divider-line {
+    width: 160px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--rose), var(--gold), var(--rose), transparent);
+    margin: 14px auto;
+    position: relative; z-index: 2;
+    border-radius: 2px;
+  }
+
+  .cover .dates {
+    display: inline-block;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-size: 1em;
+    margin-top: 6px;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative; z-index: 2;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  .cover .scroll-indicator {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.4;
+    animation: float-down 2s ease-in-out infinite;
+  }
+  @keyframes float-down {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  .cover .scroll-indicator span {
+    font-size: 0.7em; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .cover .scroll-indicator .arrow {
+    width: 20px; height: 20px;
+    border-right: 2px solid rgba(255,255,255,0.3);
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    transform: rotate(45deg);
+  }
+
+  /* ============================================================
+     TIMELINE
+     ============================================================ */
+  .timeline-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px 24px 80px;
+    position: relative;
+  }
+
+  .timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--rose), var(--bariloche), var(--rose));
+    opacity: 0.3;
+    transform: translateX(-50%);
+  }
+
+  /* ============================================================
+     ROUTE MAP
+     ============================================================ */
+  .route-map-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .route-map-container {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .route-map-container h3 {
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4em;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .route-map-container h3 small {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.5em;
+    color: var(--text-dim);
+    display: block;
+    font-weight: 400;
+    margin-top: 4px;
+  }
+  .route-svg { width: 100%; height: auto; }
+
+  /* ============================================================
+     PART DIVIDER
+     ============================================================ */
+  .part-divider {
+    text-align: center;
+    margin: 70px 0 45px;
+    position: relative;
+    z-index: 2;
+  }
+  .part-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 5%; right: 5%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(225,29,72,0.2), transparent);
+    z-index: -1;
+  }
+  .part-divider .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #9f1239, var(--rose));
+    color: #fff;
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 20px;
+  }
+  .part-divider h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6em, 3.5vw, 2.4em);
+    margin: 10px 0 4px;
+  }
+  .part-divider .part-sub {
+    color: var(--text-dim);
+    font-size: 0.85em;
+    letter-spacing: 2px;
+  }
+
+  /* ============================================================
+     DAY CARD
+     ============================================================ */
+  .day-card {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 50px;
+    position: relative;
+    align-items: flex-start;
+  }
+  .day-card:nth-child(even) { flex-direction: row-reverse; }
+
+  .day-card .day-number {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -8px;
+    z-index: 3;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    font-weight: 800;
+    border: 2px solid;
+    background: var(--bg);
+  }
+  .day-card .day-number.ba-day { border-color: var(--rose); color: var(--rose); box-shadow: 0 0 15px rgba(225,29,72,0.2); }
+  .day-card .day-number.fly-day { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 15px rgba(251,191,36,0.2); }
+  .day-card .day-number.bariloche-day { border-color: var(--bariloche); color: var(--bariloche); box-shadow: 0 0 15px rgba(56,189,248,0.2); }
+
+  .day-card .day-spacer {
+    width: calc(50% - 55px);
+    flex-shrink: 0;
+  }
+
+  .day-card .day-content {
+    width: calc(50% - 55px);
+    flex-shrink: 0;
+    background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 24px;
+    transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative;
+  }
+  .day-card .day-content:hover {
+    transform: translateY(-4px);
+    border-color: rgba(225,29,72,0.2);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .day-card:nth-child(even) .day-content:hover {
+    border-color: rgba(56,189,248,0.2);
+  }
+
+  .day-card .day-content .day-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .day-card .day-content .day-header .day-label {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2em;
+    color: var(--text);
+  }
+  .day-card .day-content .day-header .day-date {
+    font-size: 0.78em;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.05);
+    padding: 2px 10px;
+    border-radius: 12px;
+  }
+  .day-card .day-content .day-header .day-icon {
+    font-size: 1.4em;
+  }
+
+  .day-card .day-content .day-city {
+    font-size: 0.85em;
+    color: var(--rose-soft);
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .day-card .day-content .day-city.bariloche-city { color: var(--bariloche); }
+
+  .day-card .day-content .day-activities {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .day-card .day-content .day-activities .activity {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.88em;
+    line-height: 1.5;
+  }
+  .day-card .day-content .day-activities .activity .period {
+    font-weight: 600;
+    min-width: 70px;
+    color: var(--gold-soft);
+    font-size: 0.82em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .day-card .day-content .day-activities .activity .desc {
+    color: var(--text);
+    opacity: 0.85;
+  }
+  .day-card .day-content .day-activities .activity .desc em {
+    font-style: normal;
+    color: var(--rose-soft);
+  }
+  .day-card .day-content .day-activities .activity .desc em.blue { color: var(--bariloche); }
+
+  .day-card .day-content .day-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .day-card .day-content .day-tags .tag {
+    font-size: 0.68em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--text-dim);
+  }
+  .day-card .day-content .day-tags .tag.reserved {
+    background: rgba(225,29,72,0.1);
+    border-color: rgba(225,29,72,0.2);
+    color: var(--rose-soft);
+  }
+  .day-card .day-content .day-tags .tag.highlight {
+    background: rgba(251,191,36,0.1);
+    border-color: rgba(251,191,36,0.2);
+    color: var(--gold-soft);
+  }
+
+  /* ============================================================
+     HOTEL CARD
+     ============================================================ */
+  .hotel-info-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hotel-info-card .h-icon { font-size: 1.4em; }
+  .hotel-info-card .h-details { flex: 1; }
+  .hotel-info-card .h-details .h-name { font-weight: 600; font-size: 0.9em; }
+  .hotel-info-card .h-details .h-name .check { color: #22c55e; }
+  .hotel-info-card .h-details .h-addr { font-size: 0.78em; color: var(--text-dim); }
+
+  /* ============================================================
+     RESERVATION CARD
+     ============================================================ */
+  .reservation-card {
+    background: linear-gradient(135deg, rgba(225,29,72,0.06), rgba(225,29,72,0.02));
+    border: 1px solid rgba(225,29,72,0.1);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .reservation-card .rc-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .reservation-card .rc-header .rc-icon { font-size: 1.6em; }
+  .reservation-card .rc-header .rc-title { font-weight: 700; font-size: 1em; }
+  .reservation-card .rc-header .rc-badge {
+    font-size: 0.65em;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: rgba(34,197,94,0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34,197,94,0.2);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .reservation-card .rc-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+    font-size: 0.82em;
+  }
+  .reservation-card .rc-details .rc-detail {
+    display: flex;
+    gap: 6px;
+    color: var(--text-dim);
+  }
+  .reservation-card .rc-details .rc-detail strong { color: var(--text); font-weight: 500; }
+
+  /* ============================================================
+     SPECIAL MESSAGE
+     ============================================================ */
+  .love-message {
+    max-width: 700px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 40px 30px;
+    background: linear-gradient(145deg, rgba(225,29,72,0.06), rgba(225,29,72,0.02));
+    border: 1px solid rgba(225,29,72,0.1);
+    border-radius: 24px;
+    position: relative;
+  }
+  .love-message::before {
+    content: '💕';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    filter: drop-shadow(0 0 20px rgba(225,29,72,0.5));
+  }
+  .love-message h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8em;
+    color: var(--rose-soft);
+    margin-bottom: 10px;
+  }
+  .love-message p {
+    font-size: 0.95em;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    margin-top: 40px;
+  }
+  .footer p {
+    font-size: 0.8em;
+    color: var(--text-dim);
+  }
+  .footer .footer-hearts {
+    font-size: 1.2em;
+    margin-bottom: 6px;
+    letter-spacing: 4px;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 768px) {
+    .timeline-container::before { left: 24px; }
+    .day-card { flex-direction: column !important; gap: 0; }
+    .day-card .day-spacer { display: none; }
+    .day-card .day-content { width: 100%; }
+    .day-card .day-number {
+      left: 24px;
+      top: -8px;
+      transform: none;
+      width: 40px;
+      height: 40px;
+      font-size: 0.7em;
+    }
+    .day-card .day-content { margin-left: 16px; }
+    .reservation-card .rc-details { grid-template-columns: 1fr; }
+    .section-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- === PROGRESS BAR === -->
+<div class="progress-bar" id="progressBar">
+  <span class="p-day" id="pDay">Argentina 2026</span>
+  <span class="p-loc" id="pLoc">Rafael & Victoria</span>
+  <div class="p-track"><div class="p-fill" id="pFill"></div></div>
+  <span class="p-pct" id="pPct">0%</span>
+</div>
+
+<!-- === BACK TO TOP === -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ============================================================
+     COVER
+     ============================================================ -->
+<section class="cover" id="cover">
+  <div class="bg-layer"></div>
+  <div class="stars"></div>
+  <div class="star-twinkle"></div>
+  <div class="star-twinkle"></div>
+  <div class="star-twinkle"></div>
+  <div class="star-twinkle"></div>
+  <div class="star-twinkle"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+
+  <!-- Floating Hearts -->
+  <span class="floating-heart">💕</span>
+  <span class="floating-heart">💖</span>
+  <span class="floating-heart">💕</span>
+  <span class="floating-heart">💗</span>
+  <span class="floating-heart">💖</span>
+  <span class="floating-heart">💕</span>
+  <span class="floating-heart">💗</span>
+  <span class="floating-heart">💖</span>
+  <span class="floating-heart">💕</span>
+  <span class="floating-heart">💗</span>
+  <span class="floating-heart">💖</span>
+  <span class="floating-heart">💕</span>
+
+  <div class="hearts-divider">💕 ❤️ 💕</div>
+  <h1>Argentina 2026</h1>
+  <div class="names">
+    Rafael <span class="ampersand">&</span> Victoria
+  </div>
+  <p class="subtitle">Uma viagem romântica pelos lugares mais lindos da Argentina</p>
+  <div class="divider-line"></div>
+  <div class="dates">🇧🇷 28 de Julho → 11 de Agosto · 15 dias 🇦🇷</div>
+
+  <div class="scroll-indicator">
+    <span>Rolar</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ROUTE MAP
+     ============================================================ -->
+<div class="route-map-section reveal" id="mapa">
+  <div class="route-map-container">
+    <h3>🗺️ Mapa da Rota
+      <small>Belém → Buenos Aires → Bariloche → Buenos Aires → Belém</small>
+    </h3>
+    <svg class="route-svg" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#e11d48"/>
+          <stop offset="30%" stop-color="#fbbf24"/>
+          <stop offset="60%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#e11d48"/>
+        </linearGradient>
+        <filter id="routeGlow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Dotted arc route -->
+      <path d="M 80,250 Q 400,50 800,150"
+        fill="none" stroke="url(#routeGrad)" stroke-width="2" stroke-dasharray="6,6" opacity="0.6"/>
+
+      <!-- Belém -->
+      <circle cx="60" cy="260" r="12" fill="#0a0a12" stroke="#e11d48" stroke-width="2.5" filter="url(#routeGlow)"/>
+      <text x="60" y="282" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">Belém</text>
+
+      <!-- Buenos Aires -->
+      <circle cx="300" cy="180" r="16" fill="#0a0a12" stroke="#e11d48" stroke-width="3" filter="url(#routeGlow)"/>
+      <text x="300" y="212" text-anchor="middle" fill="#fb7185" font-size="13" font-weight="600">Buenos Aires</text>
+      <text x="300" y="228" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="10">28 Jul → 4 Ago · 10-11 Ago</text>
+
+      <!-- Bariloche -->
+      <circle cx="600" cy="80" r="16" fill="#0a0a12" stroke="#38bdf8" stroke-width="3" filter="url(#routeGlow)"/>
+      <text x="600" y="112" text-anchor="middle" fill="#38bdf8" font-size="13" font-weight="600">Bariloche</text>
+      <text x="600" y="128" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="10">5 → 9 de Agosto</text>
+
+      <!-- Flight icons -->
+      <g transform="translate(170, 210) rotate(-35)">
+        <text font-size="18" fill="rgba(251,191,36,0.5)">✈️</text>
+      </g>
+      <g transform="translate(450, 120) rotate(25)">
+        <text font-size="18" fill="rgba(251,191,36,0.5)">✈️</text>
+      </g>
+      <g transform="translate(750, 200) rotate(-10)">
+        <text font-size="18" fill="rgba(251,191,36,0.5)">✈️</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<!-- ============================================================
+     TIMELINE
+     ============================================================ -->
+<div class="timeline-container" id="itinerario">
+
+  <!-- === PART 1: BUENOS AIRES === -->
+  <div class="part-divider reveal">
+    <span class="badge">Parte 1</span>
+    <h2>🇦🇷 Buenos Aires</h2>
+    <p class="part-sub">28 de Julho → 4 de Agosto · 8 dias na capital portenha</p>
+  </div>
+
+  <!-- DAY 1 — 28/07 -->
+  <div class="day-card reveal" data-day="1">
+    <div class="day-number fly-day">01</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">✈️</span>
+        <span class="day-label">Dia 1 — Chegada a Buenos Aires</span>
+        <span class="day-date">28/07 (Ter)</span>
+      </div>
+      <div class="day-city">Belém → Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity"><span class="period">Manhã</span><span class="desc">✈️ Voo Belém → GRU → Buenos Aires (AEP)</span></div>
+        <div class="activity"><span class="period">Tarde</span><span class="desc">✈️ Conexão em GRU · Chegada a Buenos Aires</span></div>
+        <div class="activity"><span class="period">Noite</span><span class="desc">🌙 <em>Chegada em Buenos Aires</em> — Instalação no hotel</span></div>
+      </div>
+      <div class="hotel-info-card">
+        <span class="h-icon">🏨</span>
+        <div class="h-details">
+          <div class="h-name">NH Latino Buenos Aires <span class="check">✓ Confirmada</span></div>
+          <div class="h-addr">📍 Suipacha, 309 · Microcentro · 4 estrelas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 — 29/07 -->
+  <div class="day-card reveal" data-day="2">
+    <div class="day-number ba-day">02</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">🏛️</span>
+        <span class="day-label">Dia 2 — City Tour + Don Julio</span>
+        <span class="day-date">29/07 (Qua)</span>
+      </div>
+      <div class="day-city">Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc"><strong>City Tour Plus</strong> 08:45 → 13:30 — Recoleta (Flor Metálica), Plaza de Mayo, Casa Rosada, <em>Catedral Metropolitana</em>, San Telmo, Caminito, La Bombonera, Puerto Madero</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">☕ <em>Café Tortoni</em> — O café mais famoso de Buenos Aires, fundado em 1858</span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🥩 <em>Don Julio</em> 19:00 — Um dos melhores parrillas do mundo! 🏆</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Reservado — Aguiar Turismo</span>
+        <span class="tag highlight">⭐ Imperdível</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 — 30/07 -->
+  <div class="day-card reveal" data-day="3">
+    <div class="day-number ba-day">03</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">🍷</span>
+        <span class="day-label">Dia 3 — Vinícola + Mirador Obelisco + Hard Rock</span>
+        <span class="day-date">30/07 (Qui)</span>
+      </div>
+      <div class="day-city">Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc"><strong>Buenos Aires Wine Experience</strong> 10:45 → 15:45 — Passeio privativo à <em>Estância Vigil</em> · Degustação de 3 vinhos com sommelier + Almoço de 3 passos</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">🏛️ <em>Mirador Obelisco</em> 18:00 — Vista panorâmica de Buenos Aires do alto</span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🎸 <em>Hard Rock Cafe Puerto Madero</em> 20:30 — Jantar temático · 2 pessoas</span>
+        </div>
+      </div>
+      <div class="reservation-card">
+        <div class="rc-header">
+          <span class="rc-icon">🎫</span>
+          <span class="rc-title">Mirador Obelisco — Vista Panorâmica</span>
+          <span class="rc-badge">✓ Confirmado</span>
+        </div>
+        <div class="rc-details">
+          <span class="rc-detail"><strong>Código:</strong> BK-20260606-6193E6D3</span>
+          <span class="rc-detail"><strong>Data:</strong> 30/07/2026 · 18:00</span>
+          <span class="rc-detail"><strong>Rafael:</strong> ID 3319495</span>
+          <span class="rc-detail"><strong>Victoria:</strong> ID 01664848223</span>
+          <span class="rc-detail"><strong>Categoria:</strong> Estrangeiro - Adulto</span>
+          <span class="rc-detail"><strong>Valor:</strong> $ 36.000,00 (cada)</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Reservado — Aguiar Turismo</span>
+        <span class="tag reserved">✅ Hard Rock — Confirmado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 — 31/07 -->
+  <div class="day-card reveal" data-day="4">
+    <div class="day-number ba-day">04</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">🚤</span>
+        <span class="day-label">Dia 4 — Delta Tigre + Rooftop</span>
+        <span class="day-date">31/07 (Sex)</span>
+      </div>
+      <div class="day-city">Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc"><strong>Delta Tigre</strong> 08:45 → 14:00 — Passeio de barco pelos rios e ilhas do Delta do Paraná · Cenário paradisíaco 🌿</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">🌅 <em>Sunset</em> 16:00 → 18:00 — Pôr do sol especial</span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🍸 <em>Rooftop Trade Sky Bar</em> — Reservar · Vista panorâmica de Buenos Aires à noite ✨</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Reservado — Aguiar Turismo</span>
+        <span class="tag highlight">🌅 Sunset incluso</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 — 01/08 -->
+  <div class="day-card reveal" data-day="5">
+    <div class="day-number ba-day">05</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">🏘️</span>
+        <span class="day-label">Dia 5 — Campanópolis + San Telmo</span>
+        <span class="day-date">01/08 (Sáb)</span>
+      </div>
+      <div class="day-city">Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc"><strong>Campanópolis</strong> 08:00 → 14:00 — Aldeia medieval construída com materiais reciclados · Um lugar mágico e único 🏰</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">🥟 Almoço em San Telmo — <em>El Hornero</em> · Passeio pela Feira de San Telmo</span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🍽️ <em>Villegas Puerto Madero</em> · Passeio por Puerto Madero à noite</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Reservado — Aguiar Turismo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 — 02/08 -->
+  <div class="day-card reveal" data-day="6">
+    <div class="day-number ba-day">06</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">🎭</span>
+        <span class="day-label">Dia 6 — San Telmo + Fogón Asado</span>
+        <span class="day-date">02/08 (Dom)</span>
+      </div>
+      <div class="day-city">Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc">🎪 <em>Feira de San Telmo</em> — A famosa feira de antiguidades · Escultura da Mafalda 📸</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">☕ Livre para explorar · Cafés e boutiques pelos bairros</span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🔥 <em>Fogón Asado</em> 19:40 — Parrilla autêntica argentina! 🥩</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7 — 03/08 -->
+  <div class="day-card reveal" data-day="7">
+    <div class="day-number ba-day">07</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">⚽</span>
+        <span class="day-label">Dia 7 — La Boca + La Cabrera</span>
+        <span class="day-date">03/08 (Seg)</span>
+      </div>
+      <div class="day-city">Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc">🎨 <em>Caminito</em> — O bairro mais colorido de Buenos Aires · Almoço · Fachada do La Bombonera</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">🌆 Livre para explorar</span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🥩 <em>La Cabrera Palermo</em> 20:30 — Um dos parrillas mais premiados de Buenos Aires! ⭐</span>
+        </div>
+      </div>
+      <div class="reservation-card">
+        <div class="rc-header">
+          <span class="rc-icon">🥩</span>
+          <span class="rc-title">La Cabrera Palermo</span>
+          <span class="rc-badge">✓ Confirmado</span>
+        </div>
+        <div class="rc-details">
+          <span class="rc-detail"><strong>Data:</strong> 03/08/2026</span>
+          <span class="rc-detail"><strong>Hora:</strong> 20:30</span>
+          <span class="rc-detail"><strong>Pessoas:</strong> 2</span>
+          <span class="rc-detail"><strong>A nome de:</strong> Rafael Lima</span>
+          <span class="rc-detail"><strong>Setor:</strong> Salón</span>
+          <span class="rc-detail"><strong>Tolerância:</strong> 15 min</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ La Cabrera — Confirmado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 8 — 04/08 -->
+  <div class="day-card reveal" data-day="8">
+    <div class="day-number ba-day">08</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">📚</span>
+        <span class="day-label">Dia 8 — Livraria El Ateneo + Tango</span>
+        <span class="day-date">04/08 (Ter)</span>
+      </div>
+      <div class="day-city">Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc">🛍️ <em>Calle Florida</em> — A rua mais famosa de compras de BA</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">📖 <em>El Ateneo Grand Splendid</em> — A livraria mais linda do mundo! (antigo teatro) 🎭 <em>Galerías Pacífico</em></span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">💃 <em>Tango Porteño</em> 20:15 — Jantar show de tango! A noite mais romântica 💕</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag highlight">💕 Noite Romântica</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- === PART 2: BARILOCHE === -->
+  <div class="part-divider reveal">
+    <span class="badge">Parte 2</span>
+    <h2>🏔️ Bariloche</h2>
+    <p class="part-sub">5 a 9 de Agosto · Neve, lagos e paisagens de tirar o fôlego</p>
+  </div>
+
+  <!-- DAY 9 — 05/08 -->
+  <div class="day-card reveal" data-day="9">
+    <div class="day-number fly-day">09</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">✈️</span>
+        <span class="day-label">Dia 9 — Voo para Bariloche</span>
+        <span class="day-date">05/08 (Qua)</span>
+      </div>
+      <div class="day-city bariloche-city">🏔️ Buenos Aires → Bariloche</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc">✈️ Voo <em>Aerolíneas Argentinas 1674</em> — AEP 10:05 → BRC 12:30</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">🏔️ <em>Chegada em Bariloche</em> — Acomodação no hotel com vista para o lago Nahuel Huapi</span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🌲 Explorar o centro de Bariloche · Fondue e chocolate 🍫</span>
+        </div>
+      </div>
+      <div class="hotel-info-card">
+        <span class="h-icon">🏨</span>
+        <div class="h-details">
+          <div class="h-name">Cacique Inacayal Lake Hotel & Spa <span class="check">✓ Confirmada</span></div>
+          <div class="h-addr">📍 Bariloche · Vista para o Lago Nahuel Huapi</div>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Voo Decolar — Confirmado</span>
+        <span class="tag reserved">✅ Voo Flybondi FO 5246 (18:35→20:50) — Alternativo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 10 — 06/08 -->
+  <div class="day-card reveal" data-day="10">
+    <div class="day-number bariloche-day">10</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">🏞️</span>
+        <span class="day-label">Dia 10 — Circuito Chico + Patagônia Sunset</span>
+        <span class="day-date">06/08 (Qui)</span>
+      </div>
+      <div class="day-city bariloche-city">Bariloche</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc"><strong>Circuito Chico</strong> 08:30 → 13:00 — Tour pelos principais mirantes: Cerro Campanario, Puerto Pañuelo, Lago Moreno 🏞️</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">🏔️ <em>Cerro Catedral</em> — Centro de esqui ·缆车 Vista panorâmica</span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🌅 <strong>Patagônia Sunset</strong> 17:00 → 21:00 — Pôr do sol patagônico inesquecível! 💕</span>
+        </div>
+      </div>
+      <div class="reservation-card">
+        <div class="rc-header">
+          <span class="rc-icon">🏞️</span>
+          <span class="rc-title">Passeios Destino Sul (Active Patagonia)</span>
+          <span class="rc-badge">✓ Pago</span>
+        </div>
+        <div class="rc-details">
+          <span class="rc-detail"><strong>Pedido:</strong> #000000515</span>
+          <span class="rc-detail"><strong>Total:</strong> R$ 3.734,00</span>
+          <span class="rc-detail"><strong>Circuito Chico:</strong> R$ 300,00 (2 pax)</span>
+          <span class="rc-detail"><strong>Patagônia Sunset:</strong> R$ 980,00</span>
+          <span class="rc-detail"><strong>San Martín 7 Lagos:</strong> R$ 684,00</span>
+          <span class="rc-detail"><strong>Nieve al Límite:</strong> R$ 1.530,00</span>
+          <span class="rc-detail"><strong>Roupa Neve:</strong> R$ 240,00</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Destino Sul — Pago</span>
+        <span class="tag highlight">🌅 Sunset Romântico</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 11 — 07/08 -->
+  <div class="day-card reveal" data-day="11">
+    <div class="day-number bariloche-day">11</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">🚐</span>
+        <span class="day-label">Dia 11 — Rota dos 7 Lagos</span>
+        <span class="day-date">07/08 (Sex)</span>
+      </div>
+      <div class="day-city bariloche-city">Bariloche → San Martín de los Andes</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Dia</span>
+          <span class="desc"><strong>San Martín de los Andes pela Rota dos 7 Lagos</strong> 08:00 — Uma das estradas mais lindas do mundo! 7 lagos cristalinos, floresta andina e paisagens de cinema 🏞️💙</span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🌅 Retorno a Bariloche · Jantar romântico</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Destino Sul — Pago</span>
+        <span class="tag highlight">🚐 Tour de dia inteiro</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 12 — 08/08 -->
+  <div class="day-card reveal" data-day="12">
+    <div class="day-number bariloche-day">12</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">❄️</span>
+        <span class="day-label">Dia 12 — Nieve al Límite</span>
+        <span class="day-date">08/08 (Sáb)</span>
+      </div>
+      <div class="day-city bariloche-city">Bariloche — Neve! ❄️</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Dia</span>
+          <span class="desc"><strong>Nieve al Límite</strong> 10:00 → 17:00 — Experiência completa na neve! ⛷️❄️</span>
+        </div>
+        <div class="activity">
+          <span class="period">Extra</span>
+          <span class="desc">👕 <em>Buscar roupa de neve</em> — Conjunto clássico alugado (1 dia, R$ 240)</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Destino Sul — Pago</span>
+        <span class="tag highlight">❄️ Neve!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 13 — 09/08 -->
+  <div class="day-card reveal" data-day="13">
+    <div class="day-number fly-day">13</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">✈️</span>
+        <span class="day-label">Dia 13 — Retorno a Buenos Aires</span>
+        <span class="day-date">09/08 (Dom)</span>
+      </div>
+      <div class="day-city bariloche-city">Bariloche → Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc">✈️ Voo <em>Aerolíneas Argentinas 1669</em> — BRC 10:00 → AEP 12:05</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">👕 <em>Devolver roupa de neve</em> · 🌆 <em>Chegada em BA</em></span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🌙 Instalação no hotel em Buenos Aires</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Voo Decolar — Confirmado</span>
+        <span class="tag reserved">✅ Voo Flybondi FO 5245 (16:55→19:00) — Alternativo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- === PART 3: ÚLTIMOS DIAS EM BA === -->
+  <div class="part-divider reveal">
+    <span class="badge">Parte 3</span>
+    <h2>💕 Últimos Dias em Buenos Aires</h2>
+    <p class="part-sub">10 a 11 de Agosto · O grand finale romântico</p>
+  </div>
+
+  <!-- DAY 14 — 10/08 -->
+  <div class="day-card reveal" data-day="14">
+    <div class="day-number ba-day">14</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">💃</span>
+        <span class="day-label">Dia 14 — Madero Tango Black</span>
+        <span class="day-date">10/08 (Seg)</span>
+      </div>
+      <div class="day-city">Buenos Aires</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc">☀️ Dia livre — Passear pelos cafés de Palermo ou Recoleta</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">🛍️ Últimas compras · Presentes · Passeio pela <em>Feira de Recoleta</em></span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">💃 <em>Madero Tango Cena Show Black</em> 19:00 — Jantar show de tango de despedida! A última noite romântica na Argentina 💕✨</span>
+        </div>
+      </div>
+      <div class="reservation-card">
+        <div class="rc-header">
+          <span class="rc-icon">💃</span>
+          <span class="rc-title">Madero Tango Cena Show Black</span>
+          <span class="rc-badge">✓ Reservado</span>
+        </div>
+        <div class="rc-details">
+          <span class="rc-detail"><strong>Data:</strong> 10/08/2026</span>
+          <span class="rc-detail"><strong>Hora:</strong> 19:00</span>
+          <span class="rc-detail"><strong>2 pessoas</strong></span>
+          <span class="rc-detail"><strong>Reserva:</strong> Aguiar Turismo</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag reserved">✅ Aguiar Turismo — Pago</span>
+        <span class="tag highlight">💕 Última noite romântica</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 15 — 11/08 -->
+  <div class="day-card reveal" data-day="15">
+    <div class="day-number fly-day">15</div>
+    <div class="day-spacer"></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-icon">✈️</span>
+        <span class="day-label">Dia 15 — Retorno ao Brasil</span>
+        <span class="day-date">11/08 (Ter)</span>
+      </div>
+      <div class="day-city">Buenos Aires → Belém</div>
+      <div class="day-activities">
+        <div class="activity">
+          <span class="period">Manhã</span>
+          <span class="desc">☕ Café de despedida · Check-out</span>
+        </div>
+        <div class="activity">
+          <span class="period">Tarde</span>
+          <span class="desc">✈️ <em>Voo Buenos Aires → GRU → Belém</em></span>
+        </div>
+        <div class="activity">
+          <span class="period">Noite</span>
+          <span class="desc">🏠 Chegada em Belém · Fim de uma viagem inesquecível 💕🇦🇷</span>
+        </div>
+      </div>
+      <div class="day-tags">
+        <span class="tag highlight">🇧🇷 Volta ao lar</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       LOVE MESSAGE
+       ============================================================ -->
+  <div class="love-message reveal">
+    <h3>Rafael & Victoria</h3>
+    <p>
+      Que esta viagem seja o início de muitas aventuras juntos.<br>
+      Buenos Aires, com seus tangos e parrillas. Bariloche, com sua neve e lagos cristalinos.<br>
+      Cada momento ao seu lado será inesquecível. 💕<br><br>
+      <em style="color:var(--rose-soft); font-family:'Dancing Script',cursive; font-size:1.3em;">
+        "Viajar ao seu lado é descobrir que o destino mais bonito é você."
+      </em>
+    </p>
+    <div style="font-size:2em; margin-top:16px; letter-spacing:8px;">💕❄️💃🥩🏔️💕</div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer-hearts">💕 ❤️ 💕</div>
+  <p>Argentina 2026 — Uma viagem romântica de Rafael & Victoria<br>
+  Criado com 💕 por Rafael para sua amada Victoria</p>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+  // === SCROLL REVEAL ===
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // === PROGRESS BAR ===
+  const progressBar = document.getElementById('progressBar');
+  const pFill = document.getElementById('pFill');
+  const pPct = document.getElementById('pPct');
+
+  let lastPct = 0;
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min(100, Math.round((scrollTop / docHeight) * 100)) : 0;
+
+    if (scrollTop > 200) {
+      progressBar.classList.add('visible');
+    } else {
+      progressBar.classList.remove('visible');
+    }
+
+    pFill.style.width = pct + '%';
+    pPct.textContent = pct + '%';
+    lastPct = pct;
+
+    // Back to top button
+    const backBtn = document.getElementById('backToTop');
+    if (scrollTop > 600) {
+      backBtn.classList.add('visible');
+    } else {
+      backBtn.classList.remove('visible');
+    }
+  });
+
+  // === SECTION NAV DOTS ===
+  const days = document.querySelectorAll('.day-card');
+  const navContainer = document.createElement('div');
+  navContainer.className = 'section-nav';
+  const sections = [
+    { id: 'cover', label: 'Início' },
+    { id: 'mapa', label: 'Mapa' },
+    { id: 'itinerario', label: 'Roteiro' },
+  ];
+
+  sections.forEach((s, i) => {
+    const a = document.createElement('a');
+    a.href = '#' + s.id;
+    a.innerHTML = `<span class="dot-label">${s.label}</span>`;
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(s.id).scrollIntoView({ behavior: 'smooth' });
+    });
+    navContainer.appendChild(a);
+  });
+
+  // Highlight active nav dot
+  const navDots = navContainer.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY + 100;
+    navDots.forEach((dot, i) => {
+      const section = document.getElementById(sections[i].id);
+      if (section) {
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
+        if (scrollPos >= top && scrollPos < bottom) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      }
+    });
+  });
+
+  document.body.appendChild(navContainer);
+
+  // === SMOOTH SCROLL FOR ALL ANCHOR LINKS ===
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
