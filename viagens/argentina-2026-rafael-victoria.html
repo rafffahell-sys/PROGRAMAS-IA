@@ -169,43 +169,62 @@
   .cover .stars {
     position: absolute; inset: 0;
     background-image:
-      radial-gradient(1.5px 1.5px at 10% 15%, #fff, transparent),
-      radial-gradient(1px 1px at 22% 8%, #fff, transparent),
-      radial-gradient(2px 2px at 35% 22%, #fff, transparent),
-      radial-gradient(1px 1px at 48% 5%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 60% 18%, #fff, transparent),
-      radial-gradient(1px 1px at 73% 10%, #fff, transparent),
-      radial-gradient(2px 2px at 85% 25%, #fff, transparent),
-      radial-gradient(1px 1px at 92% 8%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 15% 40%, rgba(255,255,255,0.7), transparent),
-      radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(2px 2px at 55% 45%, rgba(255,255,255,0.8), transparent),
-      radial-gradient(1px 1px at 70% 38%, rgba(255,255,255,0.6), transparent),
-      radial-gradient(1.5px 1.5px at 25% 55%, rgba(255,255,255,0.4), transparent),
-      radial-gradient(1px 1px at 50% 60%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(2px 2px at 80% 50%, rgba(255,255,255,0.7), transparent),
-      radial-gradient(1px 1px at 90% 65%, rgba(255,255,255,0.3), transparent),
-      radial-gradient(1.5px 1.5px at 5% 70%, #fff, transparent),
-      radial-gradient(1px 1px at 65% 75%, rgba(255,255,255,0.4), transparent),
-      radial-gradient(2px 2px at 30% 85%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(1px 1px at 75% 90%, rgba(255,255,255,0.3), transparent);
+      /* Small heart-colored dots scattered */
+      radial-gradient(2px 2px at 10% 15%, #fb7185, transparent),
+      radial-gradient(1.5px 1.5px at 22% 8%, #f43f5e, transparent),
+      radial-gradient(3px 3px at 35% 22%, #fb7185, transparent),
+      radial-gradient(1.5px 1.5px at 48% 5%, #f43f5e, transparent),
+      radial-gradient(2px 2px at 60% 18%, #fb7185, transparent),
+      radial-gradient(1.5px 1.5px at 73% 10%, #f43f5e, transparent),
+      radial-gradient(3px 3px at 85% 25%, #fb7185, transparent),
+      radial-gradient(1.5px 1.5px at 92% 8%, #f43f5e, transparent),
+      radial-gradient(2px 2px at 15% 40%, rgba(251,113,133,0.7), transparent),
+      radial-gradient(1.5px 1.5px at 40% 35%, rgba(244,63,94,0.5), transparent),
+      radial-gradient(3px 3px at 55% 45%, rgba(251,113,133,0.8), transparent),
+      radial-gradient(1.5px 1.5px at 70% 38%, rgba(244,63,94,0.6), transparent),
+      /* Heart cluster 1 - top left */
+      radial-gradient(4px 4px at 8% 20%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 14% 20%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 11% 25%, #f43f5e, transparent),
+      /* Heart cluster 2 - center right */
+      radial-gradient(4px 4px at 78% 15%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 84% 15%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 81% 20%, #f43f5e, transparent),
+      /* Heart cluster 3 - bottom left */
+      radial-gradient(4px 4px at 20% 75%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 26% 75%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 23% 80%, #f43f5e, transparent),
+      /* Heart cluster 4 - bottom right */
+      radial-gradient(4px 4px at 72% 70%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 78% 70%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 75% 75%, #f43f5e, transparent),
+      /* Heart cluster 5 - center */
+      radial-gradient(4px 4px at 45% 55%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 51% 55%, #f43f5e, transparent),
+      radial-gradient(4px 4px at 48% 60%, #f43f5e, transparent),
+      /* Extra sparkle */
+      radial-gradient(2px 2px at 30% 50%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 65% 85%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(2px 2px at 5% 90%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(2px 2px at 90% 80%, rgba(255,255,255,0.4), transparent);
     background-size: 100% 100%;
     opacity: 0.9;
   }
 
   @keyframes twinkle {
-    0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
+    0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); }
   }
   .cover .star-twinkle {
-    position: absolute; width: 3px; height: 3px; background: #fff;
-    border-radius: 50%; box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
-    animation: twinkle 3s ease-in-out infinite;
+    position: absolute; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; animation: twinkle 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(251,113,133,0.8));
+    color: #fb7185;
   }
-  .cover .star-twinkle:nth-child(1) { top: 12%; left: 15%; animation-delay: 0s; }
-  .cover .star-twinkle:nth-child(2) { top: 25%; left: 75%; animation-delay: 1s; width: 4px; height: 4px; }
-  .cover .star-twinkle:nth-child(3) { top: 8%; left: 55%; animation-delay: 2s; }
-  .cover .star-twinkle:nth-child(4) { top: 40%; left: 30%; animation-delay: 0.5s; width: 2px; height: 2px; }
-  .cover .star-twinkle:nth-child(5) { top: 20%; left: 88%; animation-delay: 1.5s; }
+  .cover .star-twinkle:nth-child(1) { top: 10%; left: 12%; animation-delay: 0s; font-size: 16px; }
+  .cover .star-twinkle:nth-child(2) { top: 22%; left: 72%; animation-delay: 1s; font-size: 20px; color: #f43f5e; }
+  .cover .star-twinkle:nth-child(3) { top: 6%; left: 52%; animation-delay: 2s; font-size: 14px; }
+  .cover .star-twinkle:nth-child(4) { top: 38%; left: 28%; animation-delay: 0.5s; font-size: 12px; }
+  .cover .star-twinkle:nth-child(5) { top: 18%; left: 85%; animation-delay: 1.5s; font-size: 18px; color: #f43f5e; }
 
   @keyframes shooting {
     0% { transform: translateX(0) translateY(0); opacity: 1; }
@@ -214,15 +233,13 @@
   }
   .cover .shooting-star {
     position: absolute; top: 18%; left: 25%;
-    width: 3px; height: 3px; background: #fff; border-radius: 50%;
-    box-shadow: 0 0 8px 3px rgba(255,255,255,0.9);
+    width: 3px; height: 3px; background: #fb7185; border-radius: 50%;
+    box-shadow: 0 0 8px 3px rgba(251,113,133,0.9);
     animation: shooting 5s ease-in-out infinite;
   }
   .cover .shooting-star::after {
-    content: ''; position: absolute; top: 50%; transform: translateY(-50%);
-    width: 100px; height: 1px;
-    background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
-    right: 3px;
+    content: '❤️'; position: absolute; top: 50%; transform: translateY(-50%) scale(0.6);
+    right: 3px; font-size: 10px; opacity: 0.7;
   }
   .cover .shooting-star:nth-child(8) { top: 35%; left: 60%; animation-delay: 2.5s; animation-duration: 6s; }
   .cover .shooting-star:nth-child(9) { top: 12%; left: 75%; animation-delay: 4s; animation-duration: 4.5s; }
@@ -729,11 +746,11 @@
 <section class="cover" id="cover">
   <div class="bg-layer"></div>
   <div class="stars"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
+  <div class="star-twinkle">💕</div>
+  <div class="star-twinkle">💗</div>
+  <div class="star-twinkle">💖</div>
+  <div class="star-twinkle">💕</div>
+  <div class="star-twinkle">💗</div>
   <div class="shooting-star"></div>
   <div class="shooting-star"></div>
   <div class="shooting-star"></div>
