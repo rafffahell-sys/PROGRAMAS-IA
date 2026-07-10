@@ -259,6 +259,29 @@
     letter-spacing: 6px;
   }
 
+  .cover .couple-photo {
+    width: 130px; height: 130px; border-radius: 50%;
+    object-fit: cover; border: 3px solid rgba(251,113,133,0.4);
+    box-shadow: 0 0 40px rgba(225,29,72,0.3), 0 0 80px rgba(225,29,72,0.1);
+    position: relative; z-index: 2; margin-bottom: 10px;
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .cover .couple-photo:hover { transform: scale(1.05); }
+
+  .section-banner {
+    max-width: 700px; margin: 20px auto 30px; border-radius: 20px;
+    overflow: hidden; border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .section-banner img { width: 100%; height: auto; display: block; }
+
+  .romantic-img {
+    max-width: 450px; margin: 20px auto; border-radius: 20px;
+    border: 2px solid rgba(225,29,72,0.15);
+    box-shadow: 0 8px 30px rgba(225,29,72,0.15);
+    display: block;
+  }
+
   .cover h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.6em, 6vw, 4.5em);
@@ -770,6 +793,7 @@
   <span class="floating-heart">💕</span>
 
   <div class="hearts-divider">💕 ❤️ 💕</div>
+  <img src="img/victoria-bear.jpg" alt="Rafael & Victoria" class="couple-photo">
   <h1>Argentina 2026</h1>
   <div class="names">
     Rafael <span class="ampersand">&</span> Victoria
@@ -848,6 +872,9 @@
     <span class="badge">Parte 1</span>
     <h2>🇦🇷 Buenos Aires</h2>
     <p class="part-sub">28 de Julho → 4 de Agosto · 8 dias na capital portenha</p>
+  </div>
+  <div class="section-banner reveal">
+    <img src="img/casal-passeio.jpg" alt="Rafael & Victoria em Buenos Aires">
   </div>
 
   <!-- DAY 1 — 28/07 -->
@@ -1392,6 +1419,7 @@
        LOVE MESSAGE
        ============================================================ -->
   <div class="love-message reveal">
+    <img src="img/casal-jantar.jpg" alt="Jantar romântico" class="romantic-img">
     <h3>Rafael & Victoria</h3>
     <p>
       Que esta viagem seja o início de muitas aventuras juntos.<br>
