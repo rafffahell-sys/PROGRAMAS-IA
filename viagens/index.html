@@ -66,7 +66,13 @@
   .hero .hero-bg {
     position: absolute;
     inset: 0;
-    background: url('casal-hero.webp') center 40% / cover no-repeat;
+    overflow: hidden;
+  }
+  .hero .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
     filter: brightness(0.35) saturate(0.9);
     transform: scale(1.05);
     transition: transform 0.1s ease;
@@ -541,7 +547,13 @@
 
 <!-- ==================== HERO ==================== -->
 <section class="hero">
-  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg">
+    <picture>
+      <source media="(max-width: 640px)" srcset="casal-hero-mobile.webp">
+      <source media="(max-width: 1200px)" srcset="casal-hero-tablet.webp">
+      <img src="casal-hero.webp" alt="" aria-hidden="true" id="heroBg">
+    </picture>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-vignette"></div>
 
