@@ -289,6 +289,8 @@
   .flag-br { background: linear-gradient(135deg, #009739 0%, #009739 33%, #fedf00 33%, #fedf00 50%, #002776 50%, #002776 66%, #fedf00 66%, #fedf00 100%); }
   .flag-co { background: repeating-linear-gradient(0deg, #fcd116 0px, #fcd116 20px, #003893 20px, #003893 28px, #ce1126 28px, #ce1126 36px); }
   .flag-fr { background: repeating-linear-gradient(90deg, #002395 0px, #002395 28px, #fff 28px, #fff 56px, #ed2939 56px, #ed2939 84px); }
+  .flag-nl { background: repeating-linear-gradient(0deg, #c1121f 0px, #c1121f 20px, #fff 20px, #fff 40px, #003da5 40px, #003da5 60px); }
+  .flag-pt { background: repeating-linear-gradient(90deg, #006600 0px, #006600 30px, #ffcc00 30px, #ffcc00 40px, #ce1126 40px, #ce1126 70px, #ffcc00 70px, #ffcc00 80px, #006600 80px, #006600 110px); }
 
   .trip-card .card-banner .banner-content {
     position: absolute;
@@ -450,6 +452,18 @@
   .card-alter:hover { border-color: rgba(245,158,11,0.25); box-shadow: 0 20px 60px rgba(245,158,11,0.08); }
   .card-alter .banner-content .trip-year-badge { background: rgba(16,185,129,0.3); border-color: rgba(16,185,129,0.2); }
 
+  .card-holanda .banner-bg {
+    background: linear-gradient(135deg, #1a0a2e 0%, #c1121f 30%, #fff 50%, #c1121f 70%, #003da5 100%);
+  }
+  .card-holanda:hover { border-color: rgba(193,18,31,0.25); box-shadow: 0 20px 60px rgba(193,18,31,0.08); }
+  .card-holanda .banner-content .trip-year-badge { background: rgba(193,18,31,0.3); border-color: rgba(193,18,31,0.2); }
+
+  .card-portugal .banner-bg {
+    background: linear-gradient(135deg, #0f3b1e 0%, #006600 30%, #ffcc00 50%, #006600 70%, #ce1126 100%);
+  }
+  .card-portugal:hover { border-color: rgba(0,102,0,0.25); box-shadow: 0 20px 60px rgba(0,102,0,0.08); }
+  .card-portugal .banner-content .trip-year-badge { background: rgba(0,102,0,0.3); border-color: rgba(0,102,0,0.2); }
+
   /* === SCROLL REVEAL === */
   .reveal {
     opacity: 0;
@@ -545,6 +559,8 @@
   .card-colombia::before { background: linear-gradient(135deg, rgba(245,158,11,0.2), transparent 60%); }
   .card-franca::before { background: linear-gradient(135deg, rgba(59,130,246,0.2), transparent 60%); }
   .card-alter::before { background: linear-gradient(135deg, rgba(16,185,129,0.2), transparent 60%); }
+  .card-holanda::before { background: linear-gradient(135deg, rgba(193,18,31,0.2), transparent 60%); }
+  .card-portugal::before { background: linear-gradient(135deg, rgba(0,102,0,0.2), transparent 60%); }
   .trip-card:hover::before { opacity: 1; }
 </style>
 </head>
@@ -567,7 +583,7 @@
   <p class="subtitle">Rafael · Victoria · Samar — Explorando o mundo juntos</p>
   <div class="explore-badge">
     <span>🌍</span>
-    <span>7 aventuras · 6 destinos · 3 continentes</span>
+    <span>9 aventuras · 8 destinos · 4 continentes</span>
   </div>
 
   <div class="scroll-indicator">
@@ -810,6 +826,94 @@
         <div class="card-footer">
           <span class="status"><span class="dot planning"></span> Em planejamento</span>
           <span class="cta-text">Ver detalhes →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ===== 2029 ===== -->
+  <div class="year-section reveal">
+    <div class="year-header">
+      <h2>2029</h2>
+      <div class="year-line"></div>
+      <span class="year-count">1 viagem</span>
+    </div>
+    <div class="trips-grid">
+
+      <!-- Holanda & Bélgica 2029 -->
+      <a href="#" class="trip-card card-holanda reveal reveal-delay-1" style="cursor:default;opacity:0.7;">
+        <div class="card-banner">
+          <div class="banner-bg"></div>
+          <div class="flag-watermark flag-nl"></div>
+          <div class="banner-overlay"></div>
+          <div class="banner-content">
+            <span class="trip-year-badge">2029</span>
+            <span class="trip-title-banner">🇳🇱🇧🇪 Holanda & Bélgica</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="trip-name">Tulipas, Canais & Chocolate</div>
+          <div class="trip-meta">
+            <span><span class="meta-icon">📅</span> Em definição</span>
+            <span><span class="meta-icon">👥</span> Rafael, Victoria</span>
+          </div>
+          <div class="trip-desc">
+            Amsterdam, Bruges, Brussels, Kinderdijk, e a primavera europeia. Canais holandeses, tulipas, waffles e chocolates belgas.
+          </div>
+          <div class="trip-tags">
+            <span class="tag">🌷 Amsterdam</span>
+            <span class="tag">🏘️ Bruges</span>
+            <span class="tag">🍫 Bruxelas</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="status"><span class="dot planning"></span> Em planejamento</span>
+          <span class="cta-text">Em breve →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ===== 2030 ===== -->
+  <div class="year-section reveal">
+    <div class="year-header">
+      <h2>2030</h2>
+      <div class="year-line"></div>
+      <span class="year-count">1 viagem</span>
+    </div>
+    <div class="trips-grid">
+
+      <!-- Portugal 2030 -->
+      <a href="#" class="trip-card card-portugal reveal reveal-delay-1" style="cursor:default;opacity:0.7;">
+        <div class="card-banner">
+          <div class="banner-bg"></div>
+          <div class="flag-watermark flag-pt"></div>
+          <div class="banner-overlay"></div>
+          <div class="banner-content">
+            <span class="trip-year-badge">2030</span>
+            <span class="trip-title-banner">🇵🇹 Portugal</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="trip-name">Lisboa, Porto & Algarve</div>
+          <div class="trip-meta">
+            <span><span class="meta-icon">📅</span> Em definição</span>
+            <span><span class="meta-icon">👥</span> Rafael, Victoria</span>
+          </div>
+          <div class="trip-desc">
+            Descobrindo Portugal: Lisboa, Porto, Algarve, Sintra, fado, pastéis de nata e os melhores vinhos portugueses.
+          </div>
+          <div class="trip-tags">
+            <span class="tag">🏛️ Lisboa</span>
+            <span class="tag">🍷 Porto</span>
+            <span class="tag">🏖️ Algarve</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="status"><span class="dot planning"></span> Em planejamento</span>
+          <span class="cta-text">Em breve →</span>
         </div>
       </a>
 
