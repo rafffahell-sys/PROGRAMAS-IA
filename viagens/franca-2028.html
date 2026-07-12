@@ -37,9 +37,11 @@
     left: 18%;
     width: min(45vw, 350px);
     height: auto;
-    opacity: 0.18;
+    opacity: 0.25;
     z-index: 1;
     pointer-events: none;
+    mix-blend-mode: multiply;
+    filter: brightness(1.4) contrast(0.9);
   }
   @media (max-width: 768px) {
     .hero .hero-heart { opacity: 0.1; }
