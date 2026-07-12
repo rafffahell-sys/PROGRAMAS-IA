@@ -750,20 +750,26 @@
 
   /* === BACK LINK === */
   .back-link {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px 24px 0;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
   }
   .back-link a {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--text-dim);
+    color: rgba(255,255,255,0.6);
     text-decoration: none;
-    font-size: 0.82em;
+    font-size: 0.78em;
+    background: rgba(10,10,18,0.6);
+    backdrop-filter: blur(12px);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.06);
     transition: all 0.3s;
   }
-  .back-link a:hover { color: var(--cyan-soft); gap: 10px; }
+  .back-link a:hover { color: #fff; border-color: rgba(255,255,255,0.15); gap: 10px; }
 
   /* === FOOTER === */
   .site-footer {
@@ -895,8 +901,8 @@
 </section>
 
 <!-- ==================== BACK LINK ==================== -->
-<div class="back-link reveal">
-  <a href="index.html">← Voltar ao dashboard de viagens</a>
+<div class="back-link">
+  <a href="index.html">← Dashboard</a>
 </div>
 
 <!-- ==================== SUMMARY BAR ==================== -->
