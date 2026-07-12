@@ -117,7 +117,29 @@
   .back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); }
   .back-to-top:hover { background: linear-gradient(135deg, rgba(225,29,72,0.35), rgba(225,29,72,0.15)); border-color: rgba(225,29,72,0.3); box-shadow: 0 4px 25px var(--rose-glow); transform: translateY(-3px) scale(1.05); }
 
-  /* === SCROLL REVEAL === */
+  /* === BACK LINK === */
+  .back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+  }
+  .back-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.78em;
+    background: rgba(10,10,18,0.6);
+    backdrop-filter: blur(12px);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.3s;
+  }
+  .back-link a:hover { color: #fff; border-color: rgba(255,255,255,0.15); gap: 10px; }
+
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.1s; }
@@ -751,6 +773,11 @@
 </style>
 </head>
 <body>
+
+<!-- === BACK LINK === -->
+<div class="back-link reveal">
+  <a href="index.html">← Dashboard</a>
+</div>
 
 <!-- === PROGRESS BAR === -->
 <div class="progress-bar" id="progressBar">

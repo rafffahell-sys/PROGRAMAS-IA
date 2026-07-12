@@ -169,6 +169,29 @@
     transform: translateY(-3px) scale(1.05);
   }
 
+  /* === BACK LINK === */
+  .back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+  }
+  .back-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.78em;
+    background: rgba(10,10,18,0.6);
+    backdrop-filter: blur(12px);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.3s;
+  }
+  .back-link a:hover { color: #fff; border-color: rgba(255,255,255,0.15); gap: 10px; }
+
   /* === SCROLL REVEAL === */
   .reveal {
     opacity: 0;
@@ -1125,7 +1148,12 @@
 </head>
 <body>
 
-<!-- ===== PROGRESS BAR ===== -->
+<!-- === BACK LINK === -->
+<div class="back-link reveal">
+  <a href="index.html">← Dashboard</a>
+</div>
+
+<!-- === PROGRESS BAR === -->
 <div class="progress-bar" id="progressBar">
   <span class="p-day" id="pDay">Dia 1</span>
   <span class="p-loc" id="pLoc">Gramado</span>
