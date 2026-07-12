@@ -51,70 +51,37 @@
 
   ::selection { background: var(--argentina); color: #fff; }
 
-  /* === HERO / COVER === */
+  /* === HERO WITH IMAGE BACKGROUND === */
   .hero {
     position: relative;
-    min-height: 85vh;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 60px 24px 100px;
-    background: #050508;
     overflow: hidden;
   }
-
-  .hero .bg-glow {
+  .hero .hero-bg {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 80% 50% at 50% 100%, rgba(6,182,212,0.15) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 40% at 20% 60%, rgba(225,29,72,0.1) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 80% 50%, rgba(124,58,237,0.08) 0%, transparent 60%);
+    background: url('casal-hero.webp') center 40% / cover no-repeat;
+    filter: brightness(0.35) saturate(0.9);
+    transform: scale(1.05);
+    transition: transform 0.1s ease;
   }
-
-  .hero .stars {
+  .hero .hero-overlay {
     position: absolute;
     inset: 0;
-    background-image:
-      radial-gradient(1.5px 1.5px at 10% 15%, #fff, transparent),
-      radial-gradient(1px 1px at 22% 8%, #fff, transparent),
-      radial-gradient(2px 2px at 35% 22%, #fff, transparent),
-      radial-gradient(1px 1px at 48% 5%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 60% 18%, #fff, transparent),
-      radial-gradient(1px 1px at 73% 10%, #fff, transparent),
-      radial-gradient(2px 2px at 85% 25%, #fff, transparent),
-      radial-gradient(1px 1px at 92% 8%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 15% 40%, rgba(255,255,255,0.7), transparent),
-      radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(2px 2px at 55% 45%, rgba(255,255,255,0.8), transparent),
-      radial-gradient(1px 1px at 70% 38%, rgba(255,255,255,0.6), transparent),
-      radial-gradient(1.5px 1.5px at 25% 55%, rgba(255,255,255,0.4), transparent),
-      radial-gradient(1px 1px at 50% 60%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(2px 2px at 80% 50%, rgba(255,255,255,0.7), transparent),
-      radial-gradient(1px 1px at 90% 65%, rgba(255,255,255,0.3), transparent);
-    background-size: 100% 100%;
-    opacity: 0.8;
+    background: linear-gradient(to top, rgba(10,10,18,0.85) 0%, rgba(10,10,18,0.1) 50%, rgba(10,10,18,0.3) 100%);
   }
-
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-  .star-twinkle {
+  .hero .hero-vignette {
     position: absolute;
-    width: 3px; height: 3px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
-    animation: twinkle 3s ease-in-out infinite;
+    inset: 0;
+    box-shadow: inset 0 0 150px rgba(0,0,0,0.5);
+    pointer-events: none;
   }
-  .star-twinkle:nth-child(1) { top: 12%; left: 15%; animation-delay: 0s; }
-  .star-twinkle:nth-child(2) { top: 25%; left: 75%; animation-delay: 1s; width: 4px; height: 4px; }
-  .star-twinkle:nth-child(3) { top: 8%; left: 55%; animation-delay: 2s; }
-  .star-twinkle:nth-child(4) { top: 38%; left: 30%; animation-delay: 0.5s; width: 2px; height: 2px; }
-  .star-twinkle:nth-child(5) { top: 20%; left: 88%; animation-delay: 1.5s; }
 
   @keyframes gradient-shift {
     0% { background-position: 0% 50%; }
@@ -538,24 +505,6 @@
     opacity: 0.5;
   }
 
-  /* === ORBITAL ANIMATION === */
-  @keyframes orbit {
-    0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
-  }
-  .hero .orbital-dot {
-    position: absolute;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--uruguai);
-    box-shadow: 0 0 12px var(--uruguai-glow);
-    animation: orbit 20s linear infinite;
-    z-index: 1;
-    opacity: 0.4;
-  }
-  .hero .orbital-dot:nth-child(6) { animation-duration: 25s; width: 4px; height: 4px; background: var(--argentina); }
-  .hero .orbital-dot:nth-child(7) { animation-duration: 30s; animation-direction: reverse; width: 5px; height: 5px; background: var(--sul); }
-
   /* === RESPONSIVE === */
   @media (max-width: 768px) {
     .trips-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -592,15 +541,9 @@
 
 <!-- ==================== HERO ==================== -->
 <section class="hero">
-  <div class="bg-glow"></div>
-  <div class="stars"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="orbital-dot"></div>
-  <div class="orbital-dot"></div>
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
 
   <h1>Nossas Viagens</h1>
   <div class="divider"></div>
@@ -744,7 +687,7 @@
           <div class="trip-name">A Grande Aventura: Gramado → SP → Foz → Paraguai</div>
           <div class="trip-meta">
             <span><span class="meta-icon">📅</span> 18 Dez — 07 Jan · 21 dias</span>
-            <span><span class="meta-icon">👥</span> Rafael</span>
+            <span><span class="meta-icon">👥</span> Rafael, Samar</span>
           </div>
           <div class="trip-desc">
             Uma jornada épica de 21 dias! Serra Gaúcha (Gramado, Canela, Bento Gonçalves), São Paulo (Paulista, Liberdade, Réveillon), Foz do Iguaçu (Cataratas) e Ciudad del Este.
@@ -885,6 +828,9 @@
     } else {
       btn.classList.remove('visible');
     }
+    // Parallax hero
+    const heroBg = document.getElementById('heroBg');
+    if (heroBg) heroBg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.06}px)`;
   });
 </script>
 
