@@ -302,6 +302,23 @@
     background: linear-gradient(to top, rgba(10,10,18,0.9) 0%, rgba(10,10,18,0.1) 60%, rgba(10,10,18,0.2) 100%);
   }
 
+  /* Subtle country flag watermark on banners */
+  .trip-card .card-banner .flag-watermark {
+    position: absolute;
+    top: 0; right: 0;
+    width: 160px; height: 160px;
+    opacity: 0.08;
+    pointer-events: none;
+    border-radius: 0 0 0 100%;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .flag-ar { background: linear-gradient(135deg, #75aadb 0%, #75aadb 33%, #fff 33%, #fff 50%, #75aadb 50%, #75aadb 66%, #fff 66%, #fff 83%, #75aadb 83%, #75aadb 100%); }
+  .flag-uy { background: linear-gradient(135deg, #fff 0%, #fff 20%, #0038a8 20%, #0038a8 40%, #fff 40%, #fff 60%, #0038a8 60%, #0038a8 80%, #fff 80%, #fff 100%); }
+  .flag-br { background: linear-gradient(135deg, #009739 0%, #009739 33%, #fedf00 33%, #fedf00 50%, #002776 50%, #002776 66%, #fedf00 66%, #fedf00 83%, #009739 83%, #009739 100%); }
+  .flag-co { background: linear-gradient(135deg, #fcd116 0%, #fcd116 33%, #003893 33%, #003893 40%, #ce1126 40%, #ce1126 100%); }
+  .flag-fr { background: linear-gradient(135deg, #002395 0%, #002395 33%, #fff 33%, #fff 40%, #ed2939 40%, #ed2939 100%); }
+
   .trip-card .card-banner .banner-content {
     position: absolute;
     bottom: 16px;
@@ -410,7 +427,8 @@
   }
   .trip-card .card-footer .status .dot.confirmed { background: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,0.4); }
   .trip-card .card-footer .status .dot.planning { background: var(--gold); box-shadow: 0 0 8px rgba(251,191,36,0.3); }
-  .trip-card .card-footer .status .dot.done { background: #64748b; }
+  .trip-card .card-footer .status .dot.ongoing { background: #3b82f6; box-shadow: 0 0 8px rgba(59,130,246,0.4); animation: pulse-dot 2s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%,100% { transform: scale(1); } 50% { transform: scale(1.4); } }
   .trip-card .card-footer .cta-text {
     font-size: 0.7em;
     color: var(--text-muted);
@@ -609,6 +627,7 @@
       <a href="argentina-2026-rafael-victoria.html" class="trip-card card-argentina reveal reveal-delay-1">
         <div class="card-banner">
           <div class="banner-bg"></div>
+          <div class="flag-watermark flag-ar"></div>
           <div class="banner-overlay"></div>
           <div class="banner-content">
             <span class="trip-year-badge">Julho 2026</span>
@@ -628,11 +647,11 @@
             <span class="tag">🇦🇷 Buenos Aires</span>
             <span class="tag">🏔️ Bariloche</span>
             <span class="tag">💃 Tango</span>
-            <span class="tag highlight">✨ Realizada</span>
+            <span class="tag highlight">✅ Confirmada</span>
           </div>
         </div>
         <div class="card-footer">
-          <span class="status"><span class="dot done"></span> Realizada</span>
+          <span class="status"><span class="dot confirmed"></span> Confirmada</span>
           <span class="cta-text">Ver detalhes →</span>
         </div>
       </a>
@@ -641,6 +660,7 @@
       <a href="uruguai-2026-rafael-victoria-samar.html" class="trip-card card-uruguai reveal reveal-delay-2">
         <div class="card-banner">
           <div class="banner-bg"></div>
+          <div class="flag-watermark flag-uy"></div>
           <div class="banner-overlay"></div>
           <div class="banner-content">
             <span class="trip-year-badge">Novembro 2026</span>
@@ -674,6 +694,7 @@
       <a href="roteiro-viagem-2026-2027.html" class="trip-card card-sul reveal reveal-delay-3">
         <div class="card-banner">
           <div class="banner-bg"></div>
+          <div class="flag-watermark flag-br"></div>
           <div class="banner-overlay"></div>
           <div class="banner-content">
             <span class="trip-year-badge">Dez 2026 — Jan 2027</span>
@@ -694,11 +715,11 @@
             <span class="tag">🏙️ São Paulo</span>
             <span class="tag">🌊 Foz do Iguaçu</span>
             <span class="tag">🛍️ Paraguai</span>
-            <span class="tag highlight">🎉 Planejada</span>
+            <span class="tag highlight">✅ Confirmada</span>
           </div>
         </div>
         <div class="card-footer">
-          <span class="status"><span class="dot planning"></span> Em planejamento</span>
+          <span class="status"><span class="dot confirmed"></span> Confirmada</span>
           <span class="cta-text">Ver detalhes →</span>
         </div>
       </a>
@@ -719,6 +740,7 @@
       <a href="#" class="trip-card card-colombia reveal reveal-delay-1" style="cursor:default;opacity:0.7;">
         <div class="card-banner">
           <div class="banner-bg"></div>
+          <div class="flag-watermark flag-co"></div>
           <div class="banner-overlay"></div>
           <div class="banner-content">
             <span class="trip-year-badge">2027</span>
@@ -762,6 +784,7 @@
       <a href="#" class="trip-card card-franca reveal reveal-delay-1" style="cursor:default;opacity:0.7;">
         <div class="card-banner">
           <div class="banner-bg"></div>
+          <div class="flag-watermark flag-fr"></div>
           <div class="banner-overlay"></div>
           <div class="banner-content">
             <span class="trip-year-badge">2028</span>
@@ -784,7 +807,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <span class="status"><span class="dot planning"></span> Sonho</span>
+          <span class="status"><span class="dot planning"></span> Em planejamento</span>
           <span class="cta-text">Em breve →</span>
         </div>
       </a>
