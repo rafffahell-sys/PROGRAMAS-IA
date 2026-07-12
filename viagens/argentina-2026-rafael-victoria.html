@@ -157,11 +157,20 @@
   }
 
   .cover .bg-layer {
-    position: absolute; inset: 0;
+    position: absolute;
+    inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(225,29,72,0.25) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(251,191,36,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(56,189,248,0.08) 0%, transparent 60%);
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(225,29,72,0.2) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(56,189,248,0.08) 0%, transparent 60%);
+  }
+  .cover .bg-image {
+    position: absolute;
+    inset: 0;
+    background: url('argentina-obelisco.webp') center 30% / cover no-repeat;
+    filter: brightness(0.3) saturate(0.8);
+  }
+  @media (max-width: 768px) {
+    .cover .bg-image { background-size: contain; background-color: #050508; }
   }
 
   /* Floating hearts */
@@ -795,6 +804,7 @@
      ============================================================ -->
 <section class="cover" id="cover">
   <div class="bg-layer"></div>
+  <div class="bg-image"></div>
   <div class="stars"></div>
   <div class="star-twinkle">💕</div>
   <div class="star-twinkle">💗</div>
