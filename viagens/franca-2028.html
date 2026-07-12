@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>🇫🇷 França 2028 — Rafael & Victoria</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --france: #3b82f6;
+    --france-soft: #60a5fa;
+    --france-glow: rgba(59,130,246,0.3);
+    --gold: #fbbf24;
+    --rouge: #ef4444;
+    --bg: #0a0a12;
+    --text: #e8e6e3;
+    --text-dim: rgba(255,255,255,0.55);
+    --text-muted: rgba(255,255,255,0.3);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 256px 256px; }
+  ::selection { background: var(--france); color: #fff; }
+
+  .back-link { position: fixed; top: 20px; left: 20px; z-index: 100; }
+  .back-link a { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.78em; background: rgba(10,10,18,0.6); backdrop-filter: blur(12px); padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.3s; }
+  .back-link a:hover { color: #fff; border-color: rgba(255,255,255,0.15); gap: 10px; }
+
+  .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; overflow: hidden; }
+  .hero .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+  .hero .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; filter: brightness(0.3) saturate(1.1); transform: scale(1.05); transition: transform 0.1s ease; }
+  @media (max-width: 768px) { .hero .hero-bg img { object-fit: contain; background: #050508; object-position: center; } }
+  .hero .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,18,0.85) 0%, rgba(10,10,18,0.1) 50%, rgba(10,10,18,0.3) 100%); }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.8em, 7vw, 5em); font-weight: 400; background: linear-gradient(135deg, #fff 20%, #3b82f6 40%, #ef4444 60%, #fff 80%); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shift 8s ease infinite; margin-bottom: 8px; position: relative; z-index: 2; filter: drop-shadow(0 4px 30px rgba(0,0,0,0.5)); }
+  @keyframes shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  .hero .subtitle { font-size: clamp(0.85em, 1.4vw, 1.1em); font-weight: 300; opacity: 0.85; position: relative; z-index: 2; letter-spacing: 1px; font-style: italic; }
+  .hero .divider { width: 140px; height: 2px; background: linear-gradient(90deg, transparent, var(--france), var(--rouge), transparent); margin: 14px auto; position: relative; z-index: 2; border-radius: 2px; }
+  .hero .info-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; position: relative; z-index: 2; }
+  .hero .info-chips .chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.06); backdrop-filter: blur(12px); padding: 8px 18px; border-radius: 50px; font-size: 0.76em; border: 1px solid rgba(255,255,255,0.06); }
+  .hero .flags { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; gap: 24px; font-size: 2em; opacity: 0.2; z-index: 2; }
+  .scroll-indicator { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: 0.3; animation: float 2.5s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
+  .scroll-indicator span { font-size: 0.6em; letter-spacing: 3px; text-transform: uppercase; }
+  .scroll-indicator .arrow { width: 16px; height: 16px; border-right: 2px solid rgba(255,255,255,0.3); border-bottom: 2px solid rgba(255,255,255,0.3); transform: rotate(45deg); }
+
+  .summary-bar { max-width: 960px; margin: -40px auto 40px; padding: 0 24px; position: relative; z-index: 5; }
+  .summary-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; overflow: hidden; backdrop-filter: blur(16px); }
+  .summary-item { padding: 18px 14px; text-align: center; background: rgba(255,255,255,0.02); }
+  .summary-item .s-value { font-size: 1.3em; font-weight: 700; color: var(--france-soft); }
+  .summary-item .s-label { font-size: 0.68em; color: var(--text-dim); margin-top: 2px; }
+
+  .section-heading { max-width: 960px; margin: 0 auto; padding: 0 24px 10px; }
+  .section-heading h3 { font-family: 'DM Serif Display', serif; font-size: 1.2em; color: #fff; display: flex; align-items: center; gap: 10px; }
+  .section-heading .sh-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(59,130,246,0.2), transparent); }
+
+  .content-card { max-width: 960px; margin: 0 auto 24px; padding: 0 24px; }
+  .content-inner { background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 28px; }
+
+  .route-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+  .route-stop { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 14px; text-align: center; }
+  .route-stop .rs-icon { font-size: 1.5em; }
+  .route-stop .rs-city { font-size: 0.82em; font-weight: 600; color: #fff; margin-top: 4px; }
+  .route-stop .rs-days { font-size: 0.65em; color: var(--text-dim); }
+  .route-stop .rs-dur { font-size: 0.6em; color: var(--text-muted); margin-top: 2px; background: rgba(255,255,255,0.03); padding: 2px 8px; border-radius: 4px; display: inline-block; }
+
+  .week-section { margin-bottom: 28px; }
+  .week-title { font-family: 'DM Serif Display', serif; font-size: 1em; color: var(--france-soft); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .week-title .wt-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(59,130,246,0.15), transparent); }
+
+  .day-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+  .day-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 14px; padding: 16px; transition: all 0.3s; }
+  .day-item:hover { border-color: rgba(59,130,246,0.1); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+  .day-item .di-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .day-item .di-num { font-family: 'DM Serif Display', serif; font-size: 1.1em; color: var(--france-soft); line-height: 1; }
+  .day-item .di-title { font-size: 0.88em; font-weight: 600; color: #fff; }
+  .day-item .di-desc { font-size: 0.75em; color: var(--text-dim); margin-top: 4px; }
+  .day-item .di-cost { font-size: 0.65em; color: var(--gold); margin-top: 4px; display: inline-block; background: rgba(251,191,36,0.06); padding: 1px 8px; border-radius: 4px; }
+  .day-item .di-transport { font-size: 0.6em; color: var(--text-muted); margin-top: 2px; }
+
+  .cost-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .cost-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 14px; padding: 18px; }
+  .cost-item .ci-value { font-size: 1.2em; font-weight: 700; color: var(--france-soft); }
+  .cost-item .ci-label { font-size: 0.7em; color: var(--text-dim); margin-top: 2px; }
+  .cost-item .ci-detail { font-size: 0.65em; color: var(--text-muted); margin-top: 4px; }
+
+  /* Timeline */
+  .tl { max-width: 960px; margin: 0 auto; padding: 10px 24px 40px; }
+  .tl-weeks { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .tl-week { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; }
+  .tl-week .tw-num { font-family: 'DM Serif Display', serif; font-size: 0.9em; color: var(--france-soft); min-width: 60px; }
+  .tl-week .tw-cities { font-size: 0.78em; color: var(--text-dim); flex: 1; }
+  .tl-week .tw-days { font-size: 0.65em; color: var(--text-muted); white-space: nowrap; }
+
+  .day-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; margin-top: 12px; }
+  .day-cell { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 12px 14px; }
+  .day-cell .dc-header { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+  .day-cell .dc-num { font-family: 'DM Serif Display', serif; font-size: 0.85em; color: var(--france-soft); }
+  .day-cell .dc-title { font-size: 0.78em; font-weight: 600; color: #fff; }
+  .day-cell .dc-desc { font-size: 0.68em; color: var(--text-dim); }
+  .day-cell .dc-tag { font-size: 0.55em; padding: 1px 8px; border-radius: 3px; background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.08); color: var(--france-soft); display: inline-block; margin-top: 3px; }
+
+  .site-footer { text-align: center; padding: 28px 24px; border-top: 1px solid rgba(255,255,255,0.04); max-width: 960px; margin: 0 auto; }
+  .site-footer p { font-size: 0.7em; color: var(--text-muted); }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.35s; }
+
+  @media (max-width: 768px) {
+    .hero { min-height: 70vh; padding: 50px 20px 60px; }
+    .route-grid { grid-template-columns: repeat(3, 1fr); }
+    .day-grid { grid-template-columns: 1fr; }
+    .day-gallery { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="back-link"><a href="index.html">← Dashboard</a></div>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-bg">
+    <picture>
+      <source media="(max-width: 640px)" srcset="franca-hero-mobile.jpg">
+      <img src="franca-hero.jpg" alt="" aria-hidden="true" id="heroBg">
+    </picture>
+  </div>
+  <div class="hero-overlay"></div>
+
+  <h1>🇫🇷 França 2028</h1>
+  <div class="divider"></div>
+  <p class="subtitle">Rafael & Victoria — 25 dias pelo hexágono</p>
+  <div class="info-chips">
+    <span class="chip">📅 Mai — Jun 2028 · 25 dias</span>
+    <span class="chip">✈️ Air France · Trem TGV</span>
+    <span class="chip">🗺️ Paris → Alsácia → Lyon → Marselha → Côte d'Azur</span>
+    <span class="chip">💰 ~$3.640 em atrações</span>
+  </div>
+
+  <div class="flags"><span>🇧🇷</span><span>🇫🇷</span><span>🇧🇷</span></div>
+  <div class="scroll-indicator"><span>Roteiro</span><div class="arrow"></div></div>
+</section>
+
+<!-- ==================== SUMMARY ==================== -->
+<div class="summary-bar reveal">
+  <div class="summary-inner">
+    <div class="summary-item"><div class="s-value">25</div><div class="s-label">Dias</div></div>
+    <div class="summary-item"><div class="s-value">8</div><div class="s-label">Cidades</div></div>
+    <div class="summary-item"><div class="s-value">2</div><div class="s-label">Viajantes</div></div>
+    <div class="summary-item"><div class="s-value">~$3.640</div><div class="s-label">Atrações</div></div>
+    <div class="summary-item"><div class="s-value">4</div><div class="s-label">Regiões</div></div>
+  </div>
+</div>
+
+<!-- ==================== ROUTE ==================== -->
+<div class="section-heading reveal"><h3>🗺️ Rota <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-1">
+  <div class="content-inner">
+    <div class="route-grid">
+      <div class="route-stop"><div class="rs-icon">🗼</div><div class="rs-city">Paris</div><div class="rs-days">9 dias</div><div class="rs-dur">✈️ FOR→CDG 8h45</div></div>
+      <div class="route-stop"><div class="rs-icon">🏘️</div><div class="rs-city">Alsácia</div><div class="rs-days">5 dias</div><div class="rs-dur">🚄 TGV 1h45</div></div>
+      <div class="route-stop"><div class="rs-icon">🍽️</div><div class="rs-city">Lyon</div><div class="rs-days">3 dias</div><div class="rs-dur">🚄 TGV ~4h</div></div>
+      <div class="route-stop"><div class="rs-icon">⚓</div><div class="rs-city">Marselha</div><div class="rs-days">3 dias</div><div class="rs-dur">🚄 TGV 1h40</div></div>
+      <div class="route-stop"><div class="rs-icon">🌊</div><div class="rs-city">Côte d'Azur</div><div class="rs-days">4 dias</div><div class="rs-dur">🚄 2h30</div></div>
+      <div class="route-stop"><div class="rs-icon">🗼</div><div class="rs-city">Paris</div><div class="rs-days">1 dia</div><div class="rs-dur">✈️ NCE→CDG 1h35</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== COST ==================== -->
+<div class="section-heading reveal"><h3>💰 Estimativa de Custos <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-1">
+  <div class="content-inner">
+    <div class="cost-summary">
+      <div class="cost-item"><div class="ci-value">$600</div><div class="ci-label">Voo FOR→CDG (ida)</div><div class="ci-detail">Air France · 8h45</div></div>
+      <div class="cost-item"><div class="ci-value">$600</div><div class="ci-label">Voo CDG→FOR (volta)</div><div class="ci-detail">Air France · 8h45</div></div>
+      <div class="cost-item"><div class="ci-value">$360</div><div class="ci-label">Trens TGV/TER</div><div class="ci-detail">Paris → Alsácia → Lyon → Marselha → Nice</div></div>
+      <div class="cost-item"><div class="ci-value">~$2.080</div><div class="ci-label">Atrações & Passeios</div><div class="ci-detail">Louvre, Versalhes, Disney, Moulin Rouge, Mont Saint Michel, etc.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== WEEK 1 ==================== -->
+<div class="section-heading reveal"><h3>📋 Roteiro Completo <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-1">
+  <div class="content-inner">
+    <div class="week-section">
+      <div class="week-title">Semana 1 · Paris <span class="wt-line"></span></div>
+      <div class="day-gallery">
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D1</span><span class="dc-title">✈️ Chegada</span></div><div class="dc-desc">Voo Fortaleza → Paris (8h45). Check-in, caminhada leve pelos arredores.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D2</span><span class="dc-title">🎨 Louvre + Garnier</span></div><div class="dc-desc">Visita guiada ao Louvre (3h). Ingresso Ópera Garnier. $115,27</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D3</span><span class="dc-title">🗼 Torre + Moulin Rouge</span></div><div class="dc-desc">Almoço no Madame Brasserie na Torre Eiffel. Noite no Moulin Rouge. $265,57</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D4</span><span class="dc-title">👑 Versalhes</span></div><div class="dc-desc">Dia inteiro no Palácio de Versalhes. Ônibus incluso. $62,00</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D5</span><span class="dc-title">🏰 Disney Paris</span></div><div class="dc-desc">Dia inteiro na Disneyland Paris. Trem RER. $134,00</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D6</span><span class="dc-title">⚽ PSG + Paradis Latin</span></div><div class="dc-desc">Tour Parc des Princes. Noite: Cabaret Paradis Latin. $135,72</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D7</span><span class="dc-title">🎾 Roland Garros</span></div><div class="dc-desc">Tênis em Roland Garros ou exploração livre. $185,00</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D8</span><span class="dc-title">⛪ Mont Saint Michel</span></div><div class="dc-desc">Excursão dia inteiro. Ônibus ida/volta. $170,00</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D9</span><span class="dc-title">🏰 Castelos do Loire</span></div><div class="dc-desc">Excursão pelos Castelos do Loire. Ônibus. $182,47</div></div>
+      </div>
+    </div>
+
+    <div class="week-section">
+      <div class="week-title">Semana 2 · Alsácia & Lyon <span class="wt-line"></span></div>
+      <div class="day-gallery">
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D10</span><span class="dc-title">🚄 Paris → Estrasburgo</span></div><div class="dc-desc">Trem TGV 1h45 ($120). Explore Petite France e Catedral.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D11</span><span class="dc-title">🍷 Rota do Vinho</span></div><div class="dc-desc">Excursão Colmar + Eguisheim + vilas alsacianas. Ônibus. $147,00</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D12</span><span class="dc-title">🏘️ Alsácia livre</span></div><div class="dc-desc">Explore Estrasburgo (Parlamento Europeu) ou trem para Riquewihr.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D13</span><span class="dc-title">😌 Dia tranquilo</span></div><div class="dc-desc">Compras, revisitar favoritos, relaxar na Alsácia.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D14</span><span class="dc-title">🚄 Alsácia → Lyon</span></div><div class="dc-desc">Trem TGV ~4h ($100). Chegada, explore Presqu'île e Place Bellecour.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D15</span><span class="dc-title">🏞️ Annecy</span></div><div class="dc-desc">Trem TER ida/volta (2x$40). Lago, Palais de l'Isle, ruas charmosas.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D16</span><span class="dc-title">🍴 Lyon gastronômica</span></div><div class="dc-desc">Vieux Lyon, Basílica Fourvière. Cruzeiro jantar. $76,51</div></div>
+      </div>
+    </div>
+
+    <div class="week-section">
+      <div class="week-title">Semana 3 · Marselha & Côte d'Azur <span class="wt-line"></span></div>
+      <div class="day-gallery">
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D17</span><span class="dc-title">🚄 Lyon → Marselha</span></div><div class="dc-desc">Trem TGV 1h40 ($60). Explore Vieux Port.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D18</span><span class="dc-title">⛪ Marselha</span></div><div class="dc-desc">Notre-Dame de la Garde, Le Panier, MuCEM.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D19</span><span class="dc-title">🌊 Calanques</span></div><div class="dc-desc">Passeio de barco pelas Calanques ou explorar Marselha.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D20</span><span class="dc-title">🚄 Marselha → Nice</span></div><div class="dc-desc">Trem 2h30 ($40). Promenade des Anglais, Cidade Velha.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D21</span><span class="dc-title">🛥️ Saint Tropez</span></div><div class="dc-desc">Excursão Saint Tropez ida/volta. Ônibus. $150,00</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D22</span><span class="dc-title">🎬 Cannes + Antibes</span></div><div class="dc-desc">Excursão Cannes, Antibes, Saint-Paul-de-Vence. $77,00</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D23</span><span class="dc-title">😎 Dia livre Nice</span></div><div class="dc-desc">Praia, Museu Matisse, Chagall, ou passear.</div></div>
+      </div>
+    </div>
+
+    <div class="week-section">
+      <div class="week-title">Semana 4 · Retorno <span class="wt-line"></span></div>
+      <div class="day-gallery">
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D24</span><span class="dc-title">✈️ Nice → Paris</span></div><div class="dc-desc">Voo Air France 1h35 ($100). Noite livre.</div></div>
+        <div class="day-cell"><div class="dc-header"><span class="dc-num">D25</span><span class="dc-title">🇧🇷 Partida</span></div><div class="dc-desc">Check-out. Voo Paris → Fortaleza (8h45). Fim da viagem!</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer"><p>🇫🇷 França 2028 · 25 dias · Rafael & Victoria · ✈️🗼🥐</p></footer>
+
+<script>
+  const observer = new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting)i.target.classList.add('visible')})},{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  window.addEventListener('scroll',()=>{const b=document.getElementById('heroBg');if(b)b.style.transform=`scale(1.05) translateY(${window.scrollY*0.06}px)`});
+</script>
+</body>
+</html>
