@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>🇺🇾 Uruguai 2026 — Rafael, Victoria & Samar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #06b6d4;
+    --cyan-soft: #22d3ee;
+    --cyan-glow: rgba(6,182,212,0.3);
+    --teal: #0e7490;
+    --gold: #fbbf24;
+    --bg: #0a0a12;
+    --bg-card: rgba(255,255,255,0.03);
+    --text: #e8e6e3;
+    --text-dim: rgba(255,255,255,0.55);
+    --text-muted: rgba(255,255,255,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  ::selection { background: var(--cyan); color: #fff; }
+
+  /* === PROGRESS BAR === */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(10,10,18,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.78em;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .progress-bar.visible { transform: translateY(0); }
+  .progress-bar .p-day { font-weight: 700; color: var(--gold); white-space: nowrap; }
+  .progress-bar .p-loc { color: var(--text-dim); white-space: nowrap; }
+  .progress-bar .p-track { flex: 1; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; min-width: 60px; }
+  .progress-bar .p-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--cyan), var(--teal)); transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); width: 0%; }
+  .progress-bar .p-pct { color: var(--text-dim); font-size: 0.85em; min-width: 36px; text-align: right; }
+
+  /* === NAV DOTS === */
+  .section-nav {
+    position: fixed;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .section-nav a {
+    display: block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative;
+  }
+  .section-nav a:hover, .section-nav a.active {
+    background: var(--cyan);
+    border-color: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan-glow);
+    transform: scale(1.4);
+  }
+  .section-nav a .dot-label {
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.65em;
+    color: rgba(255,255,255,0.5);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    background: rgba(10,10,18,0.8);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .section-nav a:hover .dot-label { opacity: 1; }
+
+  /* === SCROLL REVEAL === */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.35s; }
+  .reveal-delay-4 { transition-delay: 0.5s; }
+
+  /* === COVER / HERO === */
+  .cover {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 40px;
+    background: #050508;
+    overflow: hidden;
+  }
+
+  .cover .bg-layer {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(6,182,212,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(14,116,144,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(251,191,36,0.06) 0%, transparent 60%);
+  }
+
+  /* Waves at bottom */
+  .cover .wave-bg {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    height: 30%;
+    opacity: 0.12;
+  }
+  .cover .wave-bg svg { width: 100%; height: 100%; }
+
+  .cover .stars {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 15%, #fff, transparent),
+      radial-gradient(1px 1px at 22% 8%, #fff, transparent),
+      radial-gradient(2px 2px at 35% 22%, #fff, transparent),
+      radial-gradient(1px 1px at 48% 5%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 60% 18%, #fff, transparent),
+      radial-gradient(1px 1px at 73% 10%, #fff, transparent),
+      radial-gradient(2px 2px at 85% 25%, #fff, transparent),
+      radial-gradient(1px 1px at 92% 8%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 15% 40%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 55% 45%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 70% 38%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 25% 55%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 50% 60%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 80% 50%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 90% 65%, rgba(255,255,255,0.3), transparent);
+    background-size: 100% 100%;
+    opacity: 0.85;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  .star-twinkle {
+    position: absolute;
+    width: 3px; height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  .star-twinkle:nth-child(1) { top: 12%; left: 15%; animation-delay: 0s; }
+  .star-twinkle:nth-child(2) { top: 22%; left: 75%; animation-delay: 1s; width: 4px; height: 4px; }
+  .star-twinkle:nth-child(3) { top: 8%; left: 55%; animation-delay: 2s; }
+  .star-twinkle:nth-child(4) { top: 35%; left: 30%; animation-delay: 0.5s; width: 2px; height: 2px; }
+  .star-twinkle:nth-child(5) { top: 18%; left: 88%; animation-delay: 1.5s; }
+  .star-twinkle:nth-child(6) { top: 45%; left: 60%; animation-delay: 0.8s; }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8em, 7vw, 5.5em);
+    font-weight: 400;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #fff 20%, #22d3ee 40%, #fbbf24 60%, #22d3ee 80%, #fff 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 8s ease infinite;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 4px 30px rgba(6,182,212,0.2));
+  }
+
+  .cover .subtitle {
+    font-size: clamp(0.8em, 1.5vw, 1.1em);
+    font-weight: 300;
+    opacity: 0.8;
+    position: relative;
+    z-index: 2;
+    letter-spacing: 1px;
+    font-style: italic;
+  }
+
+  .cover .subtitle .highlight-name {
+    color: var(--cyan-soft);
+  }
+
+  .cover .divider-line {
+    width: 140px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--gold), transparent);
+    margin: 16px auto;
+    position: relative;
+    z-index: 2;
+    border-radius: 2px;
+  }
+
+  .cover .info-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+    position: relative;
+    z-index: 2;
+  }
+  .cover .info-bar .info-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.82em;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .cover .flags {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 28px;
+    font-size: 2.4em;
+    opacity: 0.25;
+    z-index: 2;
+  }
+  .cover .flags span {
+    display: inline-block;
+    animation: flag-wave 3s ease-in-out infinite;
+  }
+  .cover .flags span:nth-child(2) { animation-delay: 0.5s; }
+  .cover .flags span:nth-child(3) { animation-delay: 1s; }
+  @keyframes flag-wave {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-4px) rotate(3deg); }
+    75% { transform: translateY(-2px) rotate(-2deg); }
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.35;
+    animation: float-down 2s ease-in-out infinite;
+  }
+  @keyframes float-down {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  .scroll-indicator span {
+    font-size: 0.65em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .scroll-indicator .arrow {
+    width: 18px; height: 18px;
+    border-right: 2px solid rgba(255,255,255,0.3);
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    transform: rotate(45deg);
+  }
+
+  /* === SUMMARY STATS === */
+  .summary-bar {
+    max-width: 960px;
+    margin: -40px auto 40px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 5;
+  }
+  .summary-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(16px);
+    background-clip: padding-box;
+  }
+  .summary-item {
+    padding: 20px 16px;
+    text-align: center;
+    background: rgba(255,255,255,0.02);
+  }
+  .summary-item .s-value {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--cyan-soft);
+  }
+  .summary-item .s-label {
+    font-size: 0.72em;
+    color: var(--text-dim);
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  /* === TIMELINE CONTAINER === */
+  .timeline-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+    position: relative;
+  }
+
+  .timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--cyan), var(--teal), var(--gold));
+    opacity: 0.3;
+    transform: translateX(-50%);
+  }
+
+  /* === DAY CARD === */
+  .day-card {
+    position: relative;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .day-card .day-marker {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  .day-card .day-marker .day-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--cyan);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 20px var(--cyan-glow);
+  }
+  .day-card:nth-child(6) .day-marker .day-dot { background: var(--gold); box-shadow: 0 0 20px rgba(251,191,36,0.3); }
+
+  .day-card .day-content {
+    width: calc(50% - 35px);
+    position: relative;
+  }
+
+  /* Left */
+  .day-card:nth-child(odd) .day-content {
+    margin-left: 0;
+    margin-right: auto;
+  }
+  /* Right */
+  .day-card:nth-child(even) .day-content {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .day-card .day-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .day-card .day-header .day-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6em;
+    font-weight: 400;
+    color: var(--cyan-soft);
+    line-height: 1;
+  }
+  .day-card .day-header .day-date {
+    font-size: 0.78em;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.04);
+    padding: 2px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .day-card .day-body {
+    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(4px);
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .day-card .day-body:hover {
+    border-color: rgba(6,182,212,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .day-card .day-body .day-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .day-card .day-body .day-section {
+    margin-bottom: 10px;
+  }
+  .day-card .day-body .day-section:last-child { margin-bottom: 0; }
+  .day-card .day-body .day-section .sec-label {
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cyan);
+    margin-bottom: 2px;
+  }
+  .day-card .day-body .day-section .sec-value {
+    font-size: 0.88em;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .day-card .day-body .day-section .sec-value.highlight {
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .day-card .day-body .day-section .sec-value.danger {
+    color: #fb7185;
+  }
+
+  .day-card .day-body .day-section .sec-value .tag-link {
+    display: inline-block;
+    font-size: 0.85em;
+    color: var(--cyan-soft);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(6,182,212,0.2);
+    transition: all 0.2s;
+  }
+  .day-card .day-body .day-section .sec-value .tag-link:hover { color: #fff; border-color: var(--cyan); }
+
+  /* === MOBILE TIMELINE === */
+  @media (max-width: 768px) {
+    .timeline-container::before { left: 20px; }
+    .day-card .day-marker { left: 20px; }
+    .day-card .day-content {
+      width: calc(100% - 45px);
+      margin-left: auto !important;
+      margin-right: 0 !important;
+    }
+    .cover { padding: 60px 24px 80px; }
+    .cover h1 { font-size: 2.2em; }
+    .cover .info-bar .info-chip { font-size: 0.72em; padding: 6px 14px; }
+    .summary-bar { margin-top: -20px; }
+    .summary-inner { grid-template-columns: repeat(3, 1fr); }
+    .section-nav { display: none; }
+  }
+
+  /* === HOTEL INFO === */
+  .hotel-card {
+    max-width: 960px;
+    margin: 20px auto 40px;
+    padding: 0 24px;
+  }
+  .hotel-inner {
+    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+  }
+  .hotel-inner .h-icon {
+    font-size: 2.5em;
+    opacity: 0.6;
+  }
+  .hotel-inner .h-info { flex: 1; min-width: 200px; }
+  .hotel-inner .h-info .h-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15em;
+    color: #fff;
+  }
+  .hotel-inner .h-info .h-detail {
+    font-size: 0.82em;
+    color: var(--text-dim);
+  }
+  .hotel-inner .h-info .h-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+  }
+  .hotel-inner .h-info .h-tags .h-tag {
+    font-size: 0.65em;
+    padding: 2px 10px;
+    border-radius: 4px;
+    background: rgba(6,182,212,0.08);
+    border: 1px solid rgba(6,182,212,0.12);
+    color: var(--cyan-soft);
+  }
+
+  /* === BOOKING INFO === */
+  .booking-card {
+    max-width: 960px;
+    margin: 20px auto 40px;
+    padding: 0 24px;
+  }
+  .booking-inner {
+    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .booking-inner h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15em;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .booking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .booking-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 14px;
+    padding: 18px;
+    transition: all 0.3s ease;
+  }
+  .booking-item:hover {
+    border-color: rgba(6,182,212,0.1);
+    background: rgba(255,255,255,0.03);
+  }
+  .booking-item .b-icon { font-size: 1.5em; margin-bottom: 6px; }
+  .booking-item .b-title { font-size: 0.82em; font-weight: 600; color: #fff; }
+  .booking-item .b-desc { font-size: 0.75em; color: var(--text-dim); margin-top: 4px; }
+  .booking-item .b-price { font-size: 0.82em; font-weight: 700; color: var(--gold); margin-top: 6px; }
+  .booking-item .b-confirmed {
+    font-size: 0.65em;
+    color: #22c55e;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* === VOUCHER SECTION === */
+  .voucher-section {
+    max-width: 960px;
+    margin: 20px auto 40px;
+    padding: 0 24px;
+  }
+  .voucher-section h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15em;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .voucher-grid {
+    display: grid;
+    gap: 12px;
+  }
+  .voucher-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 14px 18px;
+    transition: all 0.3s;
+  }
+  .voucher-item:hover { border-color: rgba(6,182,212,0.1); }
+  .voucher-item .v-left { display: flex; align-items: center; gap: 12px; }
+  .voucher-item .v-left .v-icon { font-size: 1.3em; opacity: 0.6; }
+  .voucher-item .v-left .v-info .v-name { font-size: 0.82em; color: #fff; }
+  .voucher-item .v-left .v-info .v-detail { font-size: 0.7em; color: var(--text-dim); }
+  .voucher-item .v-right { text-align: right; }
+  .voucher-item .v-right .v-price { font-size: 0.85em; font-weight: 600; color: var(--gold); }
+  .voucher-item .v-right .v-paid { font-size: 0.65em; color: #22c55e; }
+
+  /* === FLIGHT INFO === */
+  .flight-card {
+    max-width: 960px;
+    margin: 20px auto 40px;
+    padding: 0 24px;
+  }
+  .flight-inner {
+    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .flight-inner h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .flight-legs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .flight-leg {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .flight-leg .fl-airline {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--cyan-soft);
+    min-width: 40px;
+  }
+  .flight-leg .fl-route {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .flight-leg .fl-route .fl-from,
+  .flight-leg .fl-route .fl-to {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #fff;
+  }
+  .flight-leg .fl-route .fl-arrow {
+    color: var(--text-dim);
+    font-size: 0.7em;
+  }
+  .flight-leg .fl-route .fl-time {
+    font-size: 0.75em;
+    color: var(--text-dim);
+  }
+  .flight-leg .fl-dur {
+    font-size: 0.72em;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.03);
+    padding: 2px 10px;
+    border-radius: 6px;
+  }
+  .flight-leg .fl-code {
+    font-size: 0.65em;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.03);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* === BACK TO TOP === */
+  .back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 999;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(6,182,212,0.08));
+    border: 1px solid rgba(6,182,212,0.15);
+    color: var(--text);
+    font-size: 1.2em;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .back-to-top:hover {
+    background: linear-gradient(135deg, rgba(6,182,212,0.35), rgba(6,182,212,0.15));
+    border-color: rgba(6,182,212,0.3);
+    box-shadow: 0 4px 25px var(--cyan-glow);
+    transform: translateY(-3px) scale(1.05);
+  }
+
+  /* === BACK LINK === */
+  .back-link {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 24px 0;
+  }
+  .back-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.82em;
+    transition: all 0.3s;
+  }
+  .back-link a:hover { color: var(--cyan-soft); gap: 10px; }
+
+  /* === FOOTER === */
+  .site-footer {
+    text-align: center;
+    padding: 30px 24px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .site-footer p {
+    font-size: 0.72em;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* === SECTION HEADINGS === */
+  .section-heading {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 10px;
+  }
+  .section-heading h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-heading .sh-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(6,182,212,0.2), transparent);
+  }
+
+  /* Passengers */
+  .passengers {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .passengers .pax {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8em;
+    background: rgba(255,255,255,0.05);
+    padding: 4px 14px 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  /* response */
+  @media (max-width: 480px) {
+    .summary-inner { grid-template-columns: repeat(2, 1fr); }
+    .booking-grid { grid-template-columns: 1fr; }
+    .flight-leg { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== PROGRESS BAR ==================== -->
+<div class="progress-bar" id="progressBar">
+  <span class="p-day" id="pDay">Dia 1</span>
+  <span class="p-loc" id="pLoc">Montevidéu</span>
+  <div class="p-track"><div class="p-fill" id="pFill"></div></div>
+  <span class="p-pct" id="pPct">0%</span>
+</div>
+
+<!-- ==================== SECTION NAV ==================== -->
+<nav class="section-nav" id="sectionNav">
+  <a href="#day1" class="active"><span class="dot-label">Dia 1 · Chegada</span></a>
+  <a href="#day2"><span class="dot-label">Dia 2 · Punta del Este</span></a>
+  <a href="#day3"><span class="dot-label">Dia 3 · Colonia</span></a>
+  <a href="#day4"><span class="dot-label">Dia 4 · Montevidéu</span></a>
+  <a href="#day5"><span class="dot-label">Dia 5 · Pizzorno</span></a>
+  <a href="#day6"><span class="dot-label">Dia 6 · Retorno</span></a>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="cover" id="top">
+  <div class="bg-layer"></div>
+  <div class="stars"></div>
+  <div class="star-twinkle"></div>
+  <div class="star-twinkle"></div>
+  <div class="star-twinkle"></div>
+  <div class="star-twinkle"></div>
+  <div class="star-twinkle"></div>
+  <div class="star-twinkle"></div>
+
+  <!-- Wave SVG -->
+  <div class="wave-bg">
+    <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
+      <path d="M0,150 C300,300 600,0 900,150 C1050,225 1150,100 1200,150 L1200,300 L0,300 Z" fill="var(--cyan)" opacity="0.3"/>
+      <path d="M0,200 C200,100 400,250 600,200 C800,150 1000,250 1200,200 L1200,300 L0,300 Z" fill="var(--teal)" opacity="0.2"/>
+    </svg>
+  </div>
+
+  <h1>🇺🇾 Uruguai 2026</h1>
+  <div class="divider-line"></div>
+  <p class="subtitle" style="margin-bottom:4px;">44 anos de <span class="highlight-name">Little</span></p>
+  <p class="subtitle" style="font-size:clamp(0.72em,1.2vw,0.9em);opacity:0.6;">Rafael · Victoria · Samar</p>
+
+  <div class="info-bar">
+    <span class="info-chip">📅 01 a 06 de Novembro · 6 dias</span>
+    <span class="info-chip">🏨 Dazzler by Wyndham Montevideo</span>
+    <span class="info-chip">✈️ Gol Linhas Aéreas</span>
+    <span class="info-chip">💰 R$ 4.257,00 em passeios</span>
+  </div>
+
+  <div class="passengers">
+    <span class="pax">👤 Rafael</span>
+    <span class="pax">👤 Victoria</span>
+    <span class="pax">👤 Samar</span>
+  </div>
+
+  <div class="flags">
+    <span>🇧🇷</span>
+    <span>🇺🇾</span>
+    <span>🇧🇷</span>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Roteiro</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ==================== BACK LINK ==================== -->
+<div class="back-link reveal">
+  <a href="index.html">← Voltar ao dashboard de viagens</a>
+</div>
+
+<!-- ==================== SUMMARY BAR ==================== -->
+<div class="summary-bar reveal reveal-delay-1">
+  <div class="summary-inner">
+    <div class="summary-item">
+      <div class="s-value">6</div>
+      <div class="s-label">Dias de Viagem</div>
+    </div>
+    <div class="summary-item">
+      <div class="s-value">5</div>
+      <div class="s-label">Cidades / Destinos</div>
+    </div>
+    <div class="summary-item">
+      <div class="s-value">3</div>
+      <div class="s-label">Viajantes</div>
+    </div>
+    <div class="summary-item">
+      <div class="s-value">4</div>
+      <div class="s-label">Passeios Contratados</div>
+    </div>
+    <div class="summary-item">
+      <div class="s-value">R$ 4.257</div>
+      <div class="s-label">Total em Passeios</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FLIGHTS ==================== -->
+<div class="section-heading reveal"><h3>✈️ Voos <span class="sh-line"></span></h3></div>
+<div class="flight-card reveal reveal-delay-1">
+  <div class="flight-inner">
+    <div class="flight-legs">
+
+      <div class="flight-leg">
+        <span class="fl-airline">G3</span>
+        <div class="fl-route">
+          <span class="fl-from">BEL 03:20</span>
+          <span class="fl-arrow">→</span>
+          <span class="fl-to">GRU 06:55</span>
+          <span class="fl-time">Dom 01/11</span>
+        </div>
+        <span class="fl-dur">3h35</span>
+        <span class="fl-code">G3 1519</span>
+      </div>
+
+      <div class="flight-leg">
+        <span class="fl-airline">G3</span>
+        <div class="fl-route">
+          <span class="fl-from">GRU 09:15</span>
+          <span class="fl-arrow">→</span>
+          <span class="fl-to">MVD 12:15</span>
+          <span class="fl-time">Dom 01/11</span>
+        </div>
+        <span class="fl-dur">3h00</span>
+        <span class="fl-code">G3 7630</span>
+      </div>
+
+      <div style="text-align:center;font-size:0.72em;color:var(--text-muted);padding:8px 0;">⏱ Conexão em GRU · 2h20</div>
+
+      <div class="flight-leg">
+        <span class="fl-airline">G3</span>
+        <div class="fl-route">
+          <span class="fl-from">MVD 02:50</span>
+          <span class="fl-arrow">→</span>
+          <span class="fl-to">GIG 05:35</span>
+          <span class="fl-time">Sex 06/11</span>
+        </div>
+        <span class="fl-dur">2h45</span>
+        <span class="fl-code">G3 7683</span>
+      </div>
+
+      <div class="flight-leg">
+        <span class="fl-airline">G3</span>
+        <div class="fl-route">
+          <span class="fl-from">GIG 08:30</span>
+          <span class="fl-arrow">→</span>
+          <span class="fl-to">BEL 12:00</span>
+          <span class="fl-time">Sex 06/11</span>
+        </div>
+        <span class="fl-dur">3h30</span>
+        <span class="fl-code">G3 2006</span>
+      </div>
+
+      <div style="text-align:center;font-size:0.72em;color:var(--text-muted);padding:8px 0;">⏱ Conexão em GIG · 2h55 · Reserva: <strong style="color:var(--text-dim);">87506347800</strong></div>
+
+    </div>
+    <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
+      <span style="font-size:0.65em;background:rgba(255,255,255,0.03);padding:3px 12px;border-radius:6px;color:var(--text-dim);">🎒 Mochila + Bagagem de mão + 1 mala 23kg por adulto</span>
+      <span style="font-size:0.65em;background:rgba(255,255,255,0.03);padding:3px 12px;border-radius:6px;color:var(--text-dim);">✅ Web Check-in: CPIQPS</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HOTEL ==================== -->
+<div class="section-heading reveal"><h3>🏨 Hospedagem <span class="sh-line"></span></h3></div>
+<div class="hotel-card reveal reveal-delay-1">
+  <div class="hotel-inner">
+    <div class="h-icon">🏨</div>
+    <div class="h-info">
+      <div class="h-name">Dazzler by Wyndham Montevideo</div>
+      <div class="h-detail">⭐ 4 estrelas · 21 de Setiembre 2752, Montevidéu, Uruguai</div>
+      <div class="h-detail">📅 Check-in: 01 Nov (14:00) · Check-out: 06 Nov (10:00) · 5 noites · 2 quartos</div>
+      <div class="h-detail">🛏️ Quarto 1: Rafael Lima (casal) · Quarto 2: Samar Passos (solteiro)</div>
+      <div class="h-tags">
+        <span class="h-tag">Wi-Fi Grátis</span>
+        <span class="h-tag">Café da Manhã</span>
+        <span class="h-tag">Piscina Sazonal</span>
+        <span class="h-tag">Academia</span>
+        <span class="h-tag">Restaurante</span>
+        <span class="h-tag">Estacionamento</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BOOKINGS ==================== -->
+<div class="section-heading reveal"><h3>🎫 Passeios Contratados <span class="sh-line"></span></h3></div>
+<div class="booking-card reveal reveal-delay-1">
+  <div class="booking-inner">
+    <div class="booking-grid">
+      <div class="booking-item">
+        <div class="b-icon">🌊</div>
+        <div class="b-title">Combo 3 Cidades</div>
+        <div class="b-desc">Punta del Este + Colonia + Montevidéu · 3 adultos</div>
+        <div class="b-price">R$ 2.037,00</div>
+        <div class="b-confirmed">✅ Pago via Pix · Pedido #18285</div>
+      </div>
+      <div class="booking-item">
+        <div class="b-icon">🍷</div>
+        <div class="b-title">Bodega Pizzorno c/ Almoço</div>
+        <div class="b-desc">Visita guiada + degustação + almoço harmonizado 3 tempos</div>
+        <div class="b-price">R$ 2.220,00</div>
+        <div class="b-confirmed">✅ Pago via Pix · Pedido #18307</div>
+      </div>
+      <div class="booking-item">
+        <div class="b-icon">🍽️</div>
+        <div class="b-title">PRIMOSEUM Restaurant</div>
+        <div class="b-desc">Jantar especial · 05/11 às 20:30</div>
+        <div class="b-price">A confirmar</div>
+        <div class="b-confirmed">⏳ Pendente</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== VOUCHERS / PAGAMENTOS ==================== -->
+<div class="section-heading reveal"><h3>💰 Comprovantes <span class="sh-line"></span></h3></div>
+<div class="voucher-section reveal reveal-delay-1">
+  <div class="booking-inner" style="padding:20px 28px;">
+    <div class="voucher-grid">
+      <div class="voucher-item">
+        <div class="v-left">
+          <span class="v-icon">🏖️</span>
+          <div class="v-info">
+            <div class="v-name">Combo 3 Cidades — Brasileiros no Uruguai</div>
+            <div class="v-detail">Punta del Este · Colonia · Montevidéu · 3 adultos</div>
+          </div>
+        </div>
+        <div class="v-right">
+          <div class="v-price">R$ 2.037,00</div>
+          <div class="v-paid">✅ Pago em 21/06/2026</div>
+        </div>
+      </div>
+      <div class="voucher-item">
+        <div class="v-left">
+          <span class="v-icon">🍷</span>
+          <div class="v-info">
+            <div class="v-name">Bodega Pizzorno Visita e Almoço</div>
+            <div class="v-detail">Reserva #18306 · 05/11/2026 · 3 adultos</div>
+          </div>
+        </div>
+        <div class="v-right">
+          <div class="v-price">R$ 2.220,00</div>
+          <div class="v-paid">✅ Pago em 22/06/2026</div>
+        </div>
+      </div>
+      <div class="voucher-item">
+        <div class="v-left">
+          <span class="v-icon">🏨</span>
+          <div class="v-info">
+            <div class="v-name">Dazzler by Wyndham Montevideo</div>
+            <div class="v-detail">5 noites · 2 quartos · Check-in 01/11</div>
+          </div>
+        </div>
+        <div class="v-right">
+          <div class="v-price">Pré-pago</div>
+          <div class="v-paid">✅ Cartão MasterCard ***5693</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TIMELINE ==================== -->
+<div class="section-heading reveal"><h3>📋 Roteiro Completo <span class="sh-line"></span></h3></div>
+<div class="timeline-container">
+
+  <!-- DAY 1 -->
+  <div class="day-card" id="day1">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">01</span>
+        <span class="day-date">Dom · 01/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">✈️ Belém → Montevidéu</div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã</div>
+          <div class="sec-value">
+            <strong>Embarque em Belém</strong><br>
+            Gol 1519 · BEL 03:20 → GRU 06:55<br>
+            Conexão em Guarulhos (2h20)<br>
+            Gol 7630 · GRU 09:15 → MVD 12:15
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌤️ Tarde</div>
+          <div class="sec-value highlight">✅ Chegada em Montevidéu<br>Check-in no Dazzler by Wyndham Montevideo (14:00)<br>Primeiro passeio pela cidade</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre — Jantar por conta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" id="day2">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">02</span>
+        <span class="day-date">Seg · 02/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">🏖️ Punta del Este</div>
+        <div class="day-section">
+          <div class="sec-label">📍 Pickup</div>
+          <div class="sec-value">08:45 no Dazzler by Wyndham Montevideo (recepção)</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã + 🌤️ Tarde</div>
+          <div class="sec-value highlight">🚌 City Tour Punta del Este · Dia inteiro (08:45 ~ 18:00)</div>
+          <div class="sec-value" style="margin-top:4px;">
+            <strong>Inclui:</strong> transfer ida/volta · guia bilíngue (português/espanhol) · parada em Piriápolis · península de Punta del Este · Casapueblo (foto externa)<br>
+            <strong>Não inclui:</strong> ingresso Casapueblo · almoço · bebidas
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Organizado por</div>
+          <div class="sec-value"><a class="tag-link" href="https://brasileirosnouruguai.com.br" target="_blank">Brasileiros no Uruguai</a></div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" id="day3">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">03</span>
+        <span class="day-date">Ter · 03/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">🏛️ Colonia del Sacramento</div>
+        <div class="day-section">
+          <div class="sec-label">📍 Pickup</div>
+          <div class="sec-value">08:15 no Dazzler by Wyndham Montevideo (recepção)</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã + 🌤️ Tarde</div>
+          <div class="sec-value highlight">🚌 City Tour Colonia del Sacramento · Dia inteiro (08:15 ~ 17:30)</div>
+          <div class="sec-value" style="margin-top:4px;">
+            <strong>Inclui:</strong> transfer ida/volta · guia bilíngue · visita guiada ao Barrio Histórico · Calle de los Suspiros · Faro · Plaza Mayor · muralhas portuguesas · vista para Buenos Aires<br>
+            <strong>Não inclui:</strong> almoço · entrada no Faro (~US$ 1) · museus (~US$ 4)
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" id="day4">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">04</span>
+        <span class="day-date">Qua · 04/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">🏙️ Montevidéu + Mercado do Porto</div>
+        <div class="day-section">
+          <div class="sec-label">📍 Pickup</div>
+          <div class="sec-value">08:15 no Dazzler by Wyndham Montevideo (recepção)</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã</div>
+          <div class="sec-value highlight">🚐 City Tour Montevidéu (08:15 ~ 12:30)</div>
+          <div class="sec-value" style="margin-top:4px;">
+            <strong>Inclui:</strong> transfer em van compartilhada · guia bilíngue · Ciudad Vieja · Plaza Independencia · Palácio Salvo · Rambla · Pocitos · Carrasco
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌤️ Tarde</div>
+          <div class="sec-value highlight">🍖 Almoço no Mercado do Porto — <em>"El Palanque"</em></div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card" id="day5">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">05</span>
+        <span class="day-date">Qui · 05/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title" style="color:var(--gold);">🎂 44 Anos de Little!</div>
+        <div class="day-section">
+          <div class="sec-label">📍 Pickup</div>
+          <div class="sec-value">09:20 no Dazzler by Wyndham Montevideo (recepção)</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã + 🌤️ Tarde</div>
+          <div class="sec-value highlight">🍷 Bodega Pizzorno com Almoço Harmonizado (09:20 ~ 16:30)</div>
+          <div class="sec-value" style="margin-top:4px;">
+            <strong>Inclui:</strong> transfer ida/volta · guia bilíngue · visita guiada (vinhedos, barricas, tanques) · degustação de vinhos selecionados · almoço harmonizado de 3 tempos · café e sobremesa<br>
+            <strong>Não inclui:</strong> compra de vinhos na loja · bebidas extras
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value danger" style="color:#fb7185;font-weight:600;">⭐ Jantar no Restaurante PRIMOSEUM — 20:30</div>
+          <div class="sec-value" style="margin-top:4px;">
+            <a class="tag-link" href="https://www.primuseum.com" target="_blank">primuseum.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card" id="day6">
+    <div class="day-marker"><div class="day-dot" style="background:var(--gold);box-shadow:0 0 20px rgba(251,191,36,0.3);"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">06</span>
+        <span class="day-date">Sex · 06/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">✈️ Retorno a Belém</div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Madrugada</div>
+          <div class="sec-value">
+            <strong>Check-out (10:00)</strong> · Seguir para o Aeroporto de Carrasco (MVD)<br>
+            Gol 7683 · MVD 02:50 → GIG 05:35<br>
+            Conexão no Rio de Janeiro (2h55)<br>
+            Gol 2006 · GIG 08:30 → BEL 12:00
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌤️ Tarde</div>
+          <div class="sec-value highlight">✅ Chegada em Belém — Fim da viagem!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== IMPORTANT NOTES ==================== -->
+<div class="section-heading reveal"><h3>📌 Informações Importantes <span class="sh-line"></span></h3></div>
+<div class="hotel-card reveal" style="margin-top:0;">
+  <div class="hotel-inner" style="flex-direction:column;align-items:flex-start;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;width:100%;">
+      <div>
+        <div style="font-size:0.7em;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;">🆘 Emergência</div>
+        <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">
+          Central 24h: <strong>+55 11 98953-6808</strong><br>
+          Suporte: <strong>(11) 93047-0524</strong><br>
+          Consultora: Adriana
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.7em;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;">📄 Documentação</div>
+        <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">
+          RG em bom estado ou Passaporte<br>
+          Voucher impresso ou digital
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.7em;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;">💧 Dicas</div>
+        <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">
+          Passeios acontecem mesmo com chuva<br>
+          Aguardar o guia na recepção (10 min antes)<br>
+          Atraso máximo de 10 min na pickup
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.7em;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;">🏦 Agência</div>
+        <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">
+          Brasileiros Pelo Mundo<br>
+          CNPJ: 15.343.169/0001-11<br>
+          Cadastur: 26.075639.10.0001-4
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <p>🇺🇾 Uruguai 2026 · 44 anos de Little · Rafael, Victoria & Samar · 💙</p>
+</footer>
+
+<!-- ==================== BACK TO TOP ==================== -->
+<button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">↑</button>
+
+<script>
+  // === SCROLL REVEAL ===
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // === PROGRESS BAR ===
+  const dayMeta = [
+    { id: 'day1', label: 'Dia 1 · Chegada', loc: 'Montevidéu' },
+    { id: 'day2', label: 'Dia 2 · Punta del Este', loc: 'Punta del Este' },
+    { id: 'day3', label: 'Dia 3 · Colonia', loc: 'Colonia del Sacramento' },
+    { id: 'day4', label: 'Dia 4 · Montevidéu', loc: 'Montevidéu' },
+    { id: 'day5', label: 'Dia 5 · Pizzorno 🎂', loc: 'Bodega Pizzorno' },
+    { id: 'day6', label: 'Dia 6 · Retorno', loc: 'Montevidéu ✈ Belém' },
+  ];
+
+  const pBar = document.getElementById('progressBar');
+  const pDay = document.getElementById('pDay');
+  const pLoc = document.getElementById('pLoc');
+  const pFill = document.getElementById('pFill');
+  const pPct = document.getElementById('pPct');
+
+  let progressVisible = false;
+  let lastActiveIdx = -1;
+
+  function updateProgress() {
+    const scrollY = window.scrollY;
+    const winH = window.innerHeight;
+
+    // Show bar after hero
+    const heroH = document.querySelector('.cover').offsetHeight;
+    if (scrollY > heroH - 100 && !progressVisible) {
+      pBar.classList.add('visible');
+      progressVisible = true;
+    } else if (scrollY <= heroH - 100 && progressVisible) {
+      pBar.classList.remove('visible');
+      progressVisible = false;
+    }
+
+    // Find active day
+    let activeIdx = -1;
+    for (let i = dayMeta.length - 1; i >= 0; i--) {
+      const el = document.getElementById(dayMeta[i].id);
+      if (el && el.getBoundingClientRect().top < winH * 0.6) {
+        activeIdx = i;
+        break;
+      }
+    }
+
+    if (activeIdx >= 0 && activeIdx !== lastActiveIdx) {
+      lastActiveIdx = activeIdx;
+      pDay.textContent = dayMeta[activeIdx].label;
+      pLoc.textContent = dayMeta[activeIdx].loc;
+    }
+
+    // Progress %
+    const totalH = document.querySelector('.timeline-container').offsetHeight;
+    const timelineTop = document.querySelector('.timeline-container').getBoundingClientRect().top;
+    const scrolled = Math.max(0, Math.min(1, (winH - timelineTop) / (totalH - winH + 200)));
+    const pct = Math.round(scrolled * 100);
+    pFill.style.width = pct + '%';
+    pPct.textContent = pct + '%';
+
+    // Nav dots
+    document.querySelectorAll('.section-nav a').forEach((a, i) => {
+      a.classList.toggle('active', i === activeIdx);
+    });
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+
+  // === BACK TO TOP ===
+  window.addEventListener('scroll', () => {
+    const btn = document.querySelector('.back-to-top');
+    if (window.scrollY > 600) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+</script>
+
+</body>
+</html>
