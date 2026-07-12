@@ -38,10 +38,12 @@
     transform: translate(-50%, -50%);
     width: min(60vw, 500px);
     height: auto;
-    opacity: 0.06;
+    opacity: 0.15;
     z-index: 1;
     pointer-events: none;
-    filter: grayscale(0.3);
+  }
+  @media (max-width: 768px) {
+    .hero .hero-heart { opacity: 0.1; }
   }
   .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.8em, 7vw, 5em); font-weight: 400; background: linear-gradient(135deg, #fff 20%, #3b82f6 40%, #ef4444 60%, #fff 80%); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shift 8s ease infinite; margin-bottom: 8px; position: relative; z-index: 2; filter: drop-shadow(0 4px 30px rgba(0,0,0,0.5)); }
   @keyframes shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
