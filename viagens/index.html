@@ -471,6 +471,12 @@
   .card-franca:hover { border-color: rgba(59,130,246,0.25); box-shadow: 0 20px 60px rgba(59,130,246,0.08); }
   .card-franca .banner-content .trip-year-badge { background: rgba(59,130,246,0.3); border-color: rgba(59,130,246,0.2); }
 
+  .card-alter .banner-bg {
+    background: linear-gradient(135deg, #0f2b1a 0%, #065f46 20%, #10b981 45%, #fbbf24 70%, #f59e0b 100%);
+  }
+  .card-alter:hover { border-color: rgba(245,158,11,0.25); box-shadow: 0 20px 60px rgba(245,158,11,0.08); }
+  .card-alter .banner-content .trip-year-badge { background: rgba(16,185,129,0.3); border-color: rgba(16,185,129,0.2); }
+
   /* === SCROLL REVEAL === */
   .reveal {
     opacity: 0;
@@ -578,6 +584,7 @@
   .card-sul::before { background: linear-gradient(135deg, rgba(124,58,237,0.2), transparent 60%); }
   .card-colombia::before { background: linear-gradient(135deg, rgba(245,158,11,0.2), transparent 60%); }
   .card-franca::before { background: linear-gradient(135deg, rgba(59,130,246,0.2), transparent 60%); }
+  .card-alter::before { background: linear-gradient(135deg, rgba(16,185,129,0.2), transparent 60%); }
   .trip-card:hover::before { opacity: 1; }
 </style>
 </head>
@@ -600,7 +607,7 @@
   <p class="subtitle">Rafael · Victoria · Samar — Explorando o mundo juntos</p>
   <div class="explore-badge">
     <span>🌍</span>
-    <span>5 aventuras · 4 destinos · 3 continentes</span>
+    <span>6 aventuras · 5 destinos · 3 continentes</span>
   </div>
 
   <div class="scroll-indicator">
@@ -617,7 +624,7 @@
     <div class="year-header">
       <h2>2026</h2>
       <div class="year-line"></div>
-      <span class="year-count">3 viagens</span>
+      <span class="year-count">4 viagens</span>
     </div>
     <div class="trips-grid">
 
@@ -645,6 +652,40 @@
             <span class="tag">🇦🇷 Buenos Aires</span>
             <span class="tag">🏔️ Bariloche</span>
             <span class="tag">💃 Tango</span>
+            <span class="tag highlight">✅ Confirmada</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="status"><span class="dot confirmed"></span> Confirmada</span>
+          <span class="cta-text">Ver detalhes →</span>
+        </div>
+      </a>
+
+      <!-- Alter do Chão 2026 -->
+      <a href="alter-do-chao-2026.html" class="trip-card card-alter reveal reveal-delay-2">
+        <div class="card-banner">
+          <div class="banner-bg"></div>
+          <div class="flag-watermark flag-br"></div>
+          <div class="banner-overlay"></div>
+          <div class="banner-content">
+            <span class="trip-year-badge">Setembro 2026</span>
+            <span class="trip-title-banner">🌴 Alter do Chão</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="trip-name">Caribe Amazônico — Ilha do Amor</div>
+          <div class="trip-meta">
+            <span><span class="meta-icon">📅</span> 25 Set — 27 Set · 3 dias</span>
+            <span><span class="meta-icon">👥</span> Rafael, Victoria</span>
+            <span><span class="meta-icon">🏨</span> Pousada Ocazum Ilha do Amor</span>
+          </div>
+          <div class="trip-desc">
+            Um fim de semana no Caribe Amazônico! Praias de água doce, o coração da Ilha do Amor, e almoço especial na casa do Saulo.
+          </div>
+          <div class="trip-tags">
+            <span class="tag">🏖️ Ilha do Amor</span>
+            <span class="tag">🌊 Rio Tapajós</span>
+            <span class="tag">🍽️ Casa do Saulo</span>
             <span class="tag highlight">✅ Confirmada</span>
           </div>
         </div>

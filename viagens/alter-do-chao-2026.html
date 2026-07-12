@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>🌴 Alter do Chão 2026 — Rafael & Victoria</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f59e0b;
+    --sand-soft: #fbbf24;
+    --sand-glow: rgba(245,158,11,0.3);
+    --river: #06b6d4;
+    --green: #10b981;
+    --bg: #0a0a12;
+    --text: #e8e6e3;
+    --text-dim: rgba(255,255,255,0.55);
+    --text-muted: rgba(255,255,255,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  ::selection { background: var(--sand); color: #fff; }
+
+  /* === BACK LINK === */
+  .back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+  }
+  .back-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.82em;
+    background: rgba(10,10,18,0.6);
+    backdrop-filter: blur(12px);
+    padding: 8px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.3s;
+  }
+  .back-link a:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+
+  /* === HERO WITH HEART IMAGE === */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 24px;
+    overflow: hidden;
+  }
+
+  .hero .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('alter-do-chao-heart.webp') center 30% / cover no-repeat;
+    filter: brightness(0.4) saturate(1.2);
+    transform: scale(1.05);
+    transition: transform 0.1s ease;
+  }
+
+  .hero .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,18,0.85) 0%, rgba(10,10,18,0.2) 50%, rgba(10,10,18,0.4) 100%);
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5em, 6vw, 4.5em);
+    font-weight: 400;
+    background: linear-gradient(135deg, #fff 20%, #fbbf24 50%, #06b6d4 80%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 8s ease infinite;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 4px 30px rgba(0,0,0,0.5));
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .hero .subtitle {
+    font-size: clamp(0.9em, 1.4vw, 1.1em);
+    font-weight: 300;
+    opacity: 0.85;
+    position: relative;
+    z-index: 2;
+    letter-spacing: 1px;
+    font-style: italic;
+  }
+
+  .hero .divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--sand), var(--river), transparent);
+    margin: 14px auto;
+    position: relative;
+    z-index: 2;
+    border-radius: 2px;
+  }
+
+  .hero .info-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero .info-chips .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.78em;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .hero .heart-quote {
+    position: relative;
+    z-index: 2;
+    margin-top: 24px;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.1em, 2vw, 1.4em);
+    color: var(--sand-soft);
+    opacity: 0.7;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.3;
+    animation: float-down 2.5s ease-in-out infinite;
+  }
+  @keyframes float-down {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+  }
+  .scroll-indicator span { font-size: 0.6em; letter-spacing: 3px; text-transform: uppercase; }
+  .scroll-indicator .arrow { width: 16px; height: 16px; border-right: 2px solid rgba(255,255,255,0.3); border-bottom: 2px solid rgba(255,255,255,0.3); transform: rotate(45deg); }
+
+  /* === SUMMARY === */
+  .summary-bar {
+    max-width: 960px;
+    margin: -40px auto 40px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 5;
+  }
+  .summary-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(16px);
+  }
+  .summary-item { padding: 18px 14px; text-align: center; background: rgba(255,255,255,0.02); }
+  .summary-item .s-value { font-size: 1.3em; font-weight: 700; color: var(--sand-soft); }
+  .summary-item .s-label { font-size: 0.68em; color: var(--text-dim); margin-top: 2px; }
+
+  /* === SECTION === */
+  .section-heading {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 10px;
+  }
+  .section-heading h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-heading .sh-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(245,158,11,0.2), transparent);
+  }
+
+  /* === CARDS === */
+  .content-card {
+    max-width: 960px;
+    margin: 0 auto 28px;
+    padding: 0 24px;
+  }
+  .content-inner {
+    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 28px;
+  }
+
+  /* === FLIGHTS === */
+  .flight-legs { display: flex; flex-direction: column; gap: 12px; }
+  .flight-leg {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 14px;
+    padding: 14px 18px;
+  }
+  .flight-leg .fl-airline { font-size: 0.9em; font-weight: 700; color: var(--sand-soft); min-width: 36px; }
+  .flight-leg .fl-route { flex: 1; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .flight-leg .fl-route .fl-from, .flight-leg .fl-route .fl-to { font-size: 0.85em; font-weight: 600; color: #fff; }
+  .flight-leg .fl-route .fl-arrow { color: var(--text-dim); font-size: 0.7em; }
+  .flight-leg .fl-route .fl-time { font-size: 0.75em; color: var(--text-dim); }
+  .flight-leg .fl-dur { font-size: 0.72em; color: var(--text-muted); background: rgba(255,255,255,0.03); padding: 2px 10px; border-radius: 6px; }
+  .flight-leg .fl-code { font-size: 0.65em; color: var(--text-muted); background: rgba(255,255,255,0.03); padding: 2px 8px; border-radius: 4px; }
+
+  /* === HOTEL === */
+  .hotel-info { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .hotel-info .h-icon { font-size: 2em; opacity: 0.5; }
+  .hotel-info .h-details { flex: 1; min-width: 200px; }
+  .hotel-info .h-details .h-name { font-family: 'DM Serif Display', serif; font-size: 1.1em; color: #fff; }
+  .hotel-info .h-details .h-addr { font-size: 0.8em; color: var(--text-dim); }
+  .hotel-info .h-details .h-meta { font-size: 0.78em; color: var(--text-dim); margin-top: 4px; }
+  .hotel-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .hotel-tags .ht { font-size: 0.62em; padding: 2px 10px; border-radius: 4px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.12); color: var(--sand-soft); }
+
+  /* === DAY TIMELINE === */
+  .timeline-container { max-width: 960px; margin: 0 auto; padding: 10px 24px 40px; position: relative; }
+  .timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--sand), var(--river), var(--green));
+    opacity: 0.25;
+    transform: translateX(-50%);
+  }
+
+  .day-card { position: relative; margin-bottom: 36px; width: 100%; }
+  .day-card .day-marker {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  .day-card .day-marker .day-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--sand);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 16px var(--sand-glow);
+  }
+  .day-card:last-child .day-marker .day-dot { background: var(--river); box-shadow: 0 0 16px rgba(6,182,212,0.3); }
+
+  .day-card .day-content { width: calc(50% - 35px); position: relative; }
+  .day-card:nth-child(odd) .day-content { margin-left: 0; margin-right: auto; }
+  .day-card:nth-child(even) .day-content { margin-left: auto; margin-right: 0; }
+
+  .day-card .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .day-card .day-header .day-num { font-family: 'DM Serif Display', serif; font-size: 1.4em; font-weight: 400; color: var(--sand-soft); line-height: 1; }
+  .day-card .day-header .day-date { font-size: 0.75em; color: var(--text-dim); background: rgba(255,255,255,0.04); padding: 2px 12px; border-radius: 6px; }
+
+  .day-card .day-body {
+    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 22px;
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .day-card .day-body:hover { border-color: rgba(245,158,11,0.15); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+
+  .day-card .day-body .day-title { font-family: 'DM Serif Display', serif; font-size: 1.05em; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .day-card .day-body .day-section { margin-bottom: 8px; }
+  .day-card .day-body .day-section:last-child { margin-bottom: 0; }
+  .day-card .day-body .day-section .sec-label { font-size: 0.65em; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--sand); margin-bottom: 2px; }
+  .day-card .day-body .day-section .sec-value { font-size: 0.85em; color: var(--text-dim); line-height: 1.5; }
+  .day-card .day-body .day-section .sec-value.highlight { color: var(--sand-soft); font-weight: 500; }
+  .day-card .day-body .day-section .sec-value .tag-link { color: var(--river); text-decoration: none; border-bottom: 1px dashed rgba(6,182,212,0.2); }
+
+  /* === BOOKING === */
+  .booking-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .booking-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .booking-item .b-icon { font-size: 1.3em; margin-bottom: 4px; }
+  .booking-item .b-title { font-size: 0.8em; font-weight: 600; color: #fff; }
+  .booking-item .b-desc { font-size: 0.72em; color: var(--text-dim); margin-top: 3px; }
+  .booking-item .b-price { font-size: 0.8em; font-weight: 700; color: var(--sand-soft); margin-top: 4px; }
+  .booking-item .b-confirmed { font-size: 0.62em; color: #22c55e; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+
+  /* === HEART IMAGE INLINE === */
+  .heart-section {
+    max-width: 960px;
+    margin: 0 auto 28px;
+    padding: 0 24px;
+  }
+  .heart-inner {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  .heart-inner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .heart-caption {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(0.9em, 1.5vw, 1.2em);
+    color: rgba(255,255,255,0.8);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+    padding: 6px 20px;
+    border-radius: 50px;
+    white-space: nowrap;
+  }
+
+  /* === FOOTER === */
+  .site-footer { text-align: center; padding: 28px 24px; border-top: 1px solid rgba(255,255,255,0.04); max-width: 960px; margin: 0 auto; }
+  .site-footer p { font-size: 0.7em; color: var(--text-muted); }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .timeline-container::before { left: 18px; }
+    .day-card .day-marker { left: 18px; }
+    .day-card .day-content { width: calc(100% - 40px); margin-left: auto !important; margin-right: 0 !important; }
+    .flight-leg { flex-direction: column; align-items: flex-start; }
+    .summary-inner { grid-template-columns: repeat(3, 1fr); }
+    .hero { min-height: 80vh; }
+    .back-link { top: 12px; left: 12px; }
+    .back-link a { font-size: 0.72em; padding: 6px 14px; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<div class="back-link">
+  <a href="index.html">← Dashboard</a>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-bg" id="parallaxBg"></div>
+  <div class="hero-overlay"></div>
+
+  <h1>🌴 Alter do Chão</h1>
+  <div class="divider"></div>
+  <p class="subtitle">Rafael & Victoria — Um fim de semana no Caribe Amazônico</p>
+  <div class="info-chips">
+    <span class="chip">📅 25 a 27 de Setembro · 3 dias</span>
+    <span class="chip">✈️ Gol Linhas Aéreas</span>
+    <span class="chip">🏨 Pousada Ocazum Ilha do Amor</span>
+    <span class="chip">💰 R$ 1.360 hospedagem</span>
+  </div>
+  <div class="heart-quote">♥ O amor está no ar — e no coração do Pará</div>
+
+  <div class="scroll-indicator">
+    <span>Roteiro</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ==================== SUMMARY ==================== -->
+<div class="summary-bar reveal">
+  <div class="summary-inner">
+    <div class="summary-item"><div class="s-value">3</div><div class="s-label">Dias</div></div>
+    <div class="summary-item"><div class="s-value">2</div><div class="s-label">Viajantes</div></div>
+    <div class="summary-item"><div class="s-value">2</div><div class="s-label">Noites</div></div>
+    <div class="summary-item"><div class="s-value">R$ 1.360</div><div class="s-label">Hospedagem</div></div>
+  </div>
+</div>
+
+<!-- ==================== HEART IMAGE ==================== -->
+<div class="heart-section reveal reveal-delay-1">
+  <div class="heart-inner">
+    <img src="alter-do-chao-heart.webp" alt="Coração de videira em Alter do Chão" loading="lazy">
+    <div class="heart-caption">♥ O coração da Ilha do Amor</div>
+  </div>
+</div>
+
+<!-- ==================== FLIGHTS ==================== -->
+<div class="section-heading reveal"><h3>✈️ Voos <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-1">
+  <div class="content-inner">
+    <div class="flight-legs">
+      <div class="flight-leg">
+        <span class="fl-airline">G3</span>
+        <div class="fl-route">
+          <span class="fl-from">BEL 13:10</span>
+          <span class="fl-arrow">→</span>
+          <span class="fl-to">STM 14:40</span>
+          <span class="fl-time">Sex 25/09</span>
+        </div>
+        <span class="fl-dur">1h30</span>
+        <span class="fl-code">G3 1730 · Direto</span>
+      </div>
+      <div class="flight-leg" style="opacity:0.5;border-style:dashed;">
+        <div class="fl-route" style="justify-content:center;">
+          <span style="font-size:0.78em;color:var(--text-dim);">🚗 Transfer Alter do Chão ≈ 40min</span>
+        </div>
+      </div>
+      <div class="flight-leg">
+        <span class="fl-airline">G3</span>
+        <div class="fl-route">
+          <span class="fl-from">STM 15:20</span>
+          <span class="fl-arrow">→</span>
+          <span class="fl-to">BEL 16:40</span>
+          <span class="fl-time">Dom 27/09</span>
+        </div>
+        <span class="fl-dur">1h20</span>
+        <span class="fl-code">G3 1731 · Direto</span>
+      </div>
+    </div>
+    <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
+      <span style="font-size:0.62em;background:rgba(255,255,255,0.03);padding:3px 12px;border-radius:6px;color:var(--text-dim);">🎫 Reserva: JLRHXC</span>
+      <span style="font-size:0.62em;background:rgba(255,255,255,0.03);padding:3px 12px;border-radius:6px;color:var(--text-dim);">🎒 Mochila + Bagagem mão + 23kg despachada</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HOTEL ==================== -->
+<div class="section-heading reveal"><h3>🏨 Hospedagem <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-1">
+  <div class="content-inner">
+    <div class="hotel-info">
+      <div class="h-icon">🏡</div>
+      <div class="h-details">
+        <div class="h-name">Pousada Ocazum Ilha do Amor</div>
+        <div class="h-addr">📍 Tv. Antônio Agostinho Lobato, 559, Alter do Chão, CEP 68109-000</div>
+        <div class="h-meta">📅 Check-in: Sex 25/09 (14:00-22:00) · Check-out: Dom 27/09 (10:00-11:00)</div>
+        <div class="h-meta">🛏️ Quarto Quádruplo Superior · 2 adultos · Café da manhã incluso</div>
+        <div class="h-meta">📞 +55 93 99123-2885 · Confirmação: 5447.906.067 · PIN: 9956</div>
+        <div class="hotel-tags">
+          <span class="ht">Wi-Fi Grátis</span>
+          <span class="ht">Ar-condicionado</span>
+          <span class="ht">Micro-ondas</span>
+          <span class="ht">Frigobar</span>
+          <span class="ht">Cozinha compacta</span>
+          <span class="ht">Vista do Jardim</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BOOKINGS ==================== -->
+<div class="section-heading reveal"><h3>💰 Reservas e Pagamentos <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-1">
+  <div class="content-inner">
+    <div class="booking-grid">
+      <div class="booking-item">
+        <div class="b-icon">✈️</div>
+        <div class="b-title">GOL — Ida e Volta</div>
+        <div class="b-desc">BEL→STM 25/09 13:10 · STM→BEL 27/09 15:20<br>Assentos: 7A (ida) · 6B (volta)</div>
+        <div class="b-price">Pago</div>
+        <div class="b-confirmed">✅ Reserva JLRHXC · Confirmada</div>
+      </div>
+      <div class="booking-item">
+        <div class="b-icon">🏡</div>
+        <div class="b-title">Pousada Ocazum Ilha do Amor</div>
+        <div class="b-desc">2 noites · Quarto Quádruplo Superior · Café da manhã</div>
+        <div class="b-price">R$ 1.360</div>
+        <div class="b-confirmed">✅ Booking 5447.906.067 · Pré-pago 50%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TIMELINE ==================== -->
+<div class="section-heading reveal"><h3>📋 Roteiro <span class="sh-line"></span></h3></div>
+<div class="timeline-container">
+
+  <!-- DAY 1 -->
+  <div class="day-card" id="day1">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">01</span>
+        <span class="day-date">Sex · 25/09</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">✈️ Belém → Alter do Chão</div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Tarde</div>
+          <div class="sec-value highlight">✅ Voo G3 1730 · BEL 13:10 → STM 14:40</div>
+          <div class="sec-value">🚗 Transfer para Alter do Chão (≈ 40min)</div>
+          <div class="sec-value highlight">✅ Check-in Pousada Ocazum Ilha do Amor (14:00-22:00)</div>
+          <div class="sec-value">🏖️ Tarde livre — Praia do Cajueiro / Ilha do Amor</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre — Jantar em Alter do Chão</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" id="day2">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">02</span>
+        <span class="day-date">Sáb · 26/09</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">🌊 Praia & Almoço na Casa do Saulo</div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã</div>
+          <div class="sec-value">🏖️ Praia livre — Ilha do Amor ou Praia do Cajueiro</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌤️ Almoço</div>
+          <div class="sec-value highlight" style="color:#f59e0b;font-weight:600;">🍽️ Almoço na casa do Saulo</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌤️ Tarde</div>
+          <div class="sec-value">🏖️ Praia livre / Passeio pelo centro de Alter do Chão</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre — Jantar à beira do Tapajós</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" id="day3">
+    <div class="day-marker"><div class="day-dot" style="background:var(--river);box-shadow:0 0 16px rgba(6,182,212,0.3);"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">03</span>
+        <span class="day-date">Dom · 27/09</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">✈️ Retorno a Belém</div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã</div>
+          <div class="sec-value">🏖️ Último mergulho no Rio Tapajós</div>
+          <div class="sec-value highlight">✅ Check-out Pousada Ocazum (10:00-11:00)</div>
+          <div class="sec-value">🚗 Transfer para Aeroporto de Santarém (STM)</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌤️ Tarde</div>
+          <div class="sec-value highlight">✅ Voo G3 1731 · STM 15:20 → BEL 16:40</div>
+          <div class="sec-value">✅ Chegada em Belém — Fim da viagem!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <p>🌴 Alter do Chão 2026 · Rafael & Victoria · ♥</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Parallax
+  window.addEventListener('scroll', () => {
+    const bg = document.getElementById('parallaxBg');
+    if (bg) bg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.08}px)`;
+  });
+</script>
+
+</body>
+</html>
