@@ -305,19 +305,18 @@
   /* Subtle country flag watermark on banners */
   .trip-card .card-banner .flag-watermark {
     position: absolute;
-    top: 0; right: 0;
-    width: 160px; height: 160px;
-    opacity: 0.08;
+    inset: 0;
+    opacity: 0.07;
     pointer-events: none;
-    border-radius: 0 0 0 100%;
-    overflow: hidden;
     z-index: 1;
+    mask-image: radial-gradient(ellipse 100% 80% at 80% 20%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 100% 80% at 80% 20%, black 30%, transparent 70%);
   }
-  .flag-ar { background: linear-gradient(135deg, #75aadb 0%, #75aadb 33%, #fff 33%, #fff 50%, #75aadb 50%, #75aadb 66%, #fff 66%, #fff 83%, #75aadb 83%, #75aadb 100%); }
-  .flag-uy { background: linear-gradient(135deg, #fff 0%, #fff 20%, #0038a8 20%, #0038a8 40%, #fff 40%, #fff 60%, #0038a8 60%, #0038a8 80%, #fff 80%, #fff 100%); }
-  .flag-br { background: linear-gradient(135deg, #009739 0%, #009739 33%, #fedf00 33%, #fedf00 50%, #002776 50%, #002776 66%, #fedf00 66%, #fedf00 83%, #009739 83%, #009739 100%); }
-  .flag-co { background: linear-gradient(135deg, #fcd116 0%, #fcd116 33%, #003893 33%, #003893 40%, #ce1126 40%, #ce1126 100%); }
-  .flag-fr { background: linear-gradient(135deg, #002395 0%, #002395 33%, #fff 33%, #fff 40%, #ed2939 40%, #ed2939 100%); }
+  .flag-ar { background: linear-gradient(135deg, #75aadb 0%, #75aadb 33.33%, #fff 33.33%, #fff 66.66%, #75aadb 66.66%, #75aadb 100%); }
+  .flag-uy { background: repeating-linear-gradient(180deg, #fff 0px, #fff 20px, #0038a8 20px, #0038a8 40px); }
+  .flag-br { background: linear-gradient(135deg, #009739 0%, #009739 33.33%, #fedf00 33.33%, #fedf00 50%, #002776 50%, #002776 66.66%, #fedf00 66.66%, #fedf00 100%); }
+  .flag-co { background: linear-gradient(0deg, #ce1126 0%, #ce1126 25%, #003893 25%, #003893 50%, #fcd116 50%, #fcd116 100%); }
+  .flag-fr { background: linear-gradient(90deg, #002395 0%, #002395 33.33%, #fff 33.33%, #fff 66.66%, #ed2939 66.66%, #ed2939 100%); }
 
   .trip-card .card-banner .banner-content {
     position: absolute;
