@@ -306,17 +306,16 @@
   .trip-card .card-banner .flag-watermark {
     position: absolute;
     inset: 0;
-    opacity: 0.07;
+    opacity: 0.25;
     pointer-events: none;
     z-index: 1;
-    mask-image: radial-gradient(ellipse 100% 80% at 80% 20%, black 30%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse 100% 80% at 80% 20%, black 30%, transparent 70%);
+    background-blend-mode: overlay;
   }
-  .flag-ar { background: linear-gradient(135deg, #75aadb 0%, #75aadb 33.33%, #fff 33.33%, #fff 66.66%, #75aadb 66.66%, #75aadb 100%); }
-  .flag-uy { background: repeating-linear-gradient(180deg, #fff 0px, #fff 20px, #0038a8 20px, #0038a8 40px); }
-  .flag-br { background: linear-gradient(135deg, #009739 0%, #009739 33.33%, #fedf00 33.33%, #fedf00 50%, #002776 50%, #002776 66.66%, #fedf00 66.66%, #fedf00 100%); }
-  .flag-co { background: linear-gradient(0deg, #ce1126 0%, #ce1126 25%, #003893 25%, #003893 50%, #fcd116 50%, #fcd116 100%); }
-  .flag-fr { background: linear-gradient(90deg, #002395 0%, #002395 33.33%, #fff 33.33%, #fff 66.66%, #ed2939 66.66%, #ed2939 100%); }
+  .flag-ar { background: repeating-linear-gradient(135deg, #75aadb 0px, #75aadb 30px, #fff 30px, #fff 60px); }
+  .flag-uy { background: repeating-linear-gradient(0deg, #fff 0px, #fff 18px, #0038a8 18px, #0038a8 36px); }
+  .flag-br { background: linear-gradient(135deg, #009739 0%, #009739 33%, #fedf00 33%, #fedf00 50%, #002776 50%, #002776 66%, #fedf00 66%, #fedf00 100%); }
+  .flag-co { background: repeating-linear-gradient(0deg, #fcd116 0px, #fcd116 20px, #003893 20px, #003893 28px, #ce1126 28px, #ce1126 36px); }
+  .flag-fr { background: repeating-linear-gradient(90deg, #002395 0px, #002395 28px, #fff 28px, #fff 56px, #ed2939 56px, #ed2939 84px); }
 
   .trip-card .card-banner .banner-content {
     position: absolute;
