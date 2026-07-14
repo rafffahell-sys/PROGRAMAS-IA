@@ -5,211 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>🌍 VIAGEM SUL/SP/PARAGUAI 2026/2027</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap');
-
-  :root {
-    --gramado: #7c3aed;
-    --gramado-glow: rgba(124,58,237,0.3);
-    --sp: #3b82f6;
-    --sp-glow: rgba(59,130,246,0.3);
-    --foz: #10b981;
-    --foz-glow: rgba(16,185,129,0.3);
-    --py: #f59e0b;
-    --py-glow: rgba(245,158,11,0.3);
-    --gold: #fbbf24;
-    --bg: #0a0a12;
-    --text: #e8e6e3;
-    --text-dim: rgba(255,255,255,0.55);
-  }
-
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a12;
+    color: #e8e6e3;
     line-height: 1.7;
-    overflow-x: hidden;
   }
-
-  /* === NOISE TEXTURE === */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0.035;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 256px 256px;
-  }
-
-  ::selection { background: var(--gramado); color: #fff; }
-
-  /* === PROGRESS BAR — FIXED TOP === */
-  .progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: rgba(10,10,18,0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    padding: 8px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 0.78em;
-    transform: translateY(-100%);
-    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  .progress-bar.visible { transform: translateY(0); }
-  .progress-bar .p-day { font-weight: 700; color: var(--gold); white-space: nowrap; }
-  .progress-bar .p-loc { color: var(--text-dim); white-space: nowrap; }
-  .progress-bar .p-track {
-    flex: 1;
-    height: 4px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 4px;
-    overflow: hidden;
-    min-width: 60px;
-  }
-  .progress-bar .p-fill {
-    height: 100%;
-    border-radius: 4px;
-    background: linear-gradient(90deg, var(--gramado), var(--sp), var(--foz), var(--py));
-    transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1);
-    width: 0%;
-  }
-  .progress-bar .p-pct { color: var(--text-dim); font-size: 0.85em; min-width: 36px; text-align: right; }
-
-  /* === SECTION NAV DOTS === */
-  .section-nav {
-    position: fixed;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .section-nav a {
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.12);
-    border: 1.5px solid rgba(255,255,255,0.08);
-    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-    position: relative;
-  }
-  .section-nav a:hover,
-  .section-nav a.active {
-    background: var(--gramado);
-    border-color: var(--gramado);
-    box-shadow: 0 0 12px var(--gramado-glow);
-    transform: scale(1.4);
-  }
-  .section-nav a .dot-label {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.65em;
-    color: rgba(255,255,255,0.5);
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    background: rgba(10,10,18,0.8);
-    padding: 2px 8px;
-    border-radius: 6px;
-  }
-  .section-nav a:hover .dot-label { opacity: 1; }
-  .section-nav a:nth-child(2) { border-color: rgba(59,130,246,0.3); }
-  .section-nav a:nth-child(2).active { background: var(--sp); border-color: var(--sp); box-shadow: 0 0 12px var(--sp-glow); }
-  .section-nav a:nth-child(3) { border-color: rgba(16,185,129,0.3); }
-  .section-nav a:nth-child(3).active { background: var(--foz); border-color: var(--foz); box-shadow: 0 0 12px var(--foz-glow); }
-  .section-nav a:nth-child(4) { border-color: rgba(245,158,11,0.3); }
-  .section-nav a:nth-child(4).active { background: var(--py); border-color: var(--py); box-shadow: 0 0 12px var(--py-glow); }
-
-  /* === BACK TO TOP === */
-  .back-to-top {
-    position: fixed;
-    bottom: 24px;
-    right: 20px;
-    z-index: 999;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(124,58,237,0.08));
-    border: 1px solid rgba(124,58,237,0.15);
-    color: var(--text);
-    font-size: 1.2em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(20px) scale(0.8);
-    transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  }
-  .back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); }
-  .back-to-top:hover {
-    background: linear-gradient(135deg, rgba(124,58,237,0.35), rgba(124,58,237,0.15));
-    border-color: rgba(124,58,237,0.3);
-    box-shadow: 0 4px 25px var(--gramado-glow);
-    transform: translateY(-3px) scale(1.05);
-  }
-
-  /* === BACK LINK === */
-  .back-link {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
-  }
-  .back-link a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-    font-size: 0.78em;
-    background: rgba(10,10,18,0.6);
-    backdrop-filter: blur(12px);
-    padding: 8px 16px;
-    border-radius: 50px;
-    border: 1px solid rgba(255,255,255,0.06);
-    transition: all 0.3s;
-  }
-  .back-link a:hover { color: #fff; border-color: rgba(255,255,255,0.15); gap: 10px; }
-
-  /* === SCROLL REVEAL === */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.35s; }
-  .reveal-delay-4 { transition-delay: 0.5s; }
-
-  /* ============================================================
-     COVER — CINEMATOGRAPHIC
-     ============================================================ */
+  ::selection { background: #7c3aed; color: #fff; }
   .cover {
     position: relative;
     min-height: 100vh;
@@ -222,48 +26,17 @@
     background: #050508;
     overflow: hidden;
   }
-
   .cover .bg-layer {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(124,58,237,0.2) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(74,35,122,0.3) 0%, transparent 70%),
       radial-gradient(ellipse 60% 40% at 20% 80%, rgba(16,185,129,0.08) 0%, transparent 60%),
       radial-gradient(ellipse 50% 40% at 80% 70%, rgba(245,158,11,0.06) 0%, transparent 60%);
   }
-  .cover .bg-image {
-    position: absolute;
-    inset: 0;
-    background: url('sul-ponte.jpg') center 30% / cover no-repeat;
-    filter: brightness(0.3) saturate(0.9);
-  }
-  @media (max-width: 768px) {
-    .cover .bg-image { background-size: contain; background-color: #050508; }
-  }
-
-  /* Parallax layers */
-  .cover .parallax-bg {
-    position: absolute;
-    inset: 0;
-    will-change: transform;
-  }
-  .cover .parallax-bg.layer-1 { transform: translateY(0); }
-  .cover .parallax-bg.layer-2 { transform: translateY(0); }
-
-  .cover .mountain-scene {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 55%;
-    opacity: 0.25;
-  }
+  .cover .mountain-scene { position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; opacity: 0.2; }
   .cover .mountain-scene svg { width: 100%; height: 100%; }
-
-  /* Stars enhanced */
   .cover .stars {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background-image:
       radial-gradient(1.5px 1.5px at 10% 15%, #fff, transparent),
       radial-gradient(1px 1px at 22% 8%, #fff, transparent),
@@ -282,1306 +55,494 @@
       radial-gradient(2px 2px at 80% 50%, rgba(255,255,255,0.7), transparent),
       radial-gradient(1px 1px at 90% 65%, rgba(255,255,255,0.3), transparent),
       radial-gradient(1.5px 1.5px at 5% 70%, #fff, transparent),
-      radial-gradient(1px 1px at 65% 75%, rgba(255,255,255,0.4), transparent),
-      radial-gradient(2px 2px at 30% 85%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(1px 1px at 75% 90%, rgba(255,255,255,0.3), transparent),
-      radial-gradient(1.5px 1.5px at 45% 95%, rgba(255,255,255,0.4), transparent);
+      radial-gradient(1px 1px at 65% 75%, rgba(255,255,255,0.4), transparent);
     background-size: 100% 100%;
-    opacity: 0.9;
+    opacity: 0.8;
   }
-
-  /* Twinkle animation for some stars */
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-  .cover .star-twinkle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
-    animation: twinkle 3s ease-in-out infinite;
-  }
-  .cover .star-twinkle:nth-child(1) { top: 12%; left: 15%; animation-delay: 0s; }
-  .cover .star-twinkle:nth-child(2) { top: 25%; left: 75%; animation-delay: 1s; width: 4px; height: 4px; }
-  .cover .star-twinkle:nth-child(3) { top: 8%; left: 55%; animation-delay: 2s; }
-  .cover .star-twinkle:nth-child(4) { top: 40%; left: 30%; animation-delay: 0.5s; width: 2px; height: 2px; }
-  .cover .star-twinkle:nth-child(5) { top: 20%; left: 88%; animation-delay: 1.5s; }
-
   @keyframes shooting {
     0% { transform: translateX(0) translateY(0); opacity: 1; }
     60% { opacity: 1; }
-    100% { transform: translateX(500px) translateY(300px); opacity: 0; }
+    100% { transform: translateX(400px) translateY(250px); opacity: 0; }
   }
   .cover .shooting-star {
-    position: absolute;
-    top: 18%;
-    left: 25%;
-    width: 3px;
-    height: 3px;
+    position: absolute; top: 18%; left: 25%;
+    width: 3px; height: 3px;
     background: #fff;
     border-radius: 50%;
     box-shadow: 0 0 8px 3px rgba(255,255,255,0.9);
     animation: shooting 5s ease-in-out infinite;
   }
   .cover .shooting-star::after {
-    content: '';
-    position: absolute;
-    top: 50%; transform: translateY(-50%);
+    content: ''; position: absolute; top: 50%; transform: translateY(-50%);
     width: 100px; height: 1px;
     background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
     right: 3px;
   }
-  .cover .shooting-star:nth-child(8) {
-    top: 35%; left: 60%;
-    animation-delay: 2.5s;
-    animation-duration: 6s;
-  }
-  .cover .shooting-star:nth-child(9) {
-    top: 12%; left: 75%;
-    animation-delay: 4s;
-    animation-duration: 4.5s;
-  }
-
-  /* Gradient animation for title */
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
+  .cover .shooting-star:nth-child(2) { top: 35%; left: 60%; animation-delay: 2.5s; animation-duration: 6s; }
   .cover h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.6em, 6.5vw, 5em);
-    font-weight: 400;
-    letter-spacing: 2px;
-    background: linear-gradient(135deg, #fff 20%, #a78bfa 40%, #f59e0b 60%, #a78bfa 80%, #fff 100%);
-    background-size: 300% 300%;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4em, 6vw, 4.5em);
+    font-weight: 900;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #fff 30%, #a78bfa 70%, #f59e0b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradient-shift 8s ease infinite;
     margin-bottom: 14px;
-    position: relative;
-    z-index: 2;
-    filter: drop-shadow(0 4px 30px rgba(74,35,122,0.3));
+    position: relative; z-index: 2;
+    filter: drop-shadow(0 4px 20px rgba(74,35,122,0.3));
   }
-
   .cover .subtitle {
     font-size: clamp(1em, 2vw, 1.4em);
-    font-weight: 300;
-    opacity: 0.85;
-    position: relative;
-    z-index: 2;
+    font-weight: 300; opacity: 0.85;
+    position: relative; z-index: 2;
     letter-spacing: 1px;
-    font-style: italic;
   }
   .cover .divider-line {
-    width: 120px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gramado), var(--gold), transparent);
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, transparent, #7c3aed, transparent);
     margin: 18px auto;
-    position: relative;
-    z-index: 2;
-    border-radius: 2px;
+    position: relative; z-index: 2;
   }
   .cover .dates {
     display: inline-block;
     background: rgba(255,255,255,0.06);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 12px 32px;
-    border-radius: 50px;
-    font-size: 1em;
-    margin-top: 8px;
+    padding: 12px 32px; border-radius: 50px;
+    font-size: 1em; margin-top: 8px;
     border: 1px solid rgba(255,255,255,0.08);
-    position: relative;
-    z-index: 2;
-    font-weight: 400;
-    letter-spacing: 0.5px;
+    position: relative; z-index: 2;
+    font-weight: 400; letter-spacing: 0.5px;
   }
   .cover .travelers {
-    margin-top: 12px;
-    font-size: 0.95em;
-    opacity: 0.6;
-    position: relative;
-    z-index: 2;
+    margin-top: 12px; font-size: 0.95em; opacity: 0.6;
+    position: relative; z-index: 2;
   }
   .cover .flags {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 28px;
-    font-size: 2.4em;
-    opacity: 0.3;
-    z-index: 2;
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 24px; font-size: 2em; opacity: 0.25; z-index: 2;
   }
-  .cover .flags span {
-    display: inline-block;
-    transition: transform 0.3s ease;
-    animation: flag-wave 3s ease-in-out infinite;
-  }
-  .cover .flags span:nth-child(2) { animation-delay: 0.5s; }
-  .cover .flags span:nth-child(3) { animation-delay: 1s; }
-  @keyframes flag-wave {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-4px) rotate(3deg); }
-    75% { transform: translateY(-2px) rotate(-2deg); }
-  }
-
-  /* Scroll indicator */
-  .cover .scroll-indicator {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    opacity: 0.4;
-    animation: float-down 2s ease-in-out infinite;
-  }
-  @keyframes float-down {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(8px); }
-  }
-  .cover .scroll-indicator span {
-    font-size: 0.7em;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-  }
-  .cover .scroll-indicator .arrow {
-    width: 20px;
-    height: 20px;
-    border-right: 2px solid rgba(255,255,255,0.3);
-    border-bottom: 2px solid rgba(255,255,255,0.3);
-    transform: rotate(45deg);
-  }
-
-  /* ============================================================
-     TIMELINE CONTAINER
-     ============================================================ */
-  .timeline-container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 50px 24px 80px;
-    position: relative;
-  }
-
+  .timeline-container { max-width: 960px; margin: 0 auto; padding: 50px 24px 80px; position: relative; }
   .timeline-container::before {
     content: '';
-    position: absolute;
-    left: 50%; top: 0; bottom: 0;
+    position: absolute; left: 50%; top: 0; bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, var(--gramado), var(--sp), var(--foz), var(--py));
-    opacity: 0.35;
-    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #7c3aed, #10b981, #f59e0b, #ef4444);
+    opacity: 0.3; transform: translateX(-50%);
   }
-
-  /* ============================================================
-     ROUTE MAP
-     ============================================================ */
-  .route-map-section {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .route-map-container {
-    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 24px;
-    padding: 30px;
-    position: relative;
-    overflow: hidden;
-  }
-  .route-map-container h3 {
-    text-align: center;
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.4em;
-    color: var(--text);
-    margin-bottom: 20px;
-  }
-  .route-map-container h3 small {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.5em;
-    color: var(--text-dim);
-    display: block;
-    font-weight: 400;
-    margin-top: 4px;
-  }
-  .route-svg {
-    width: 100%;
-    height: auto;
-  }
-
-  /* ============================================================
-     SECTION WATERMARKS
-     ============================================================ */
-  .sec-gramado, .sec-sp, .sec-foz, .sec-py { position: relative; }
-  .sec-gramado .wm, .sec-sp .wm, .sec-foz .wm, .sec-py .wm {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .sec-gramado .wm svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; opacity: 0.09; }
-  .sec-sp .wm svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; opacity: 0.08; }
-  .sec-foz .wm svg { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 85%; height: 65%; opacity: 0.08; }
-  .sec-py .wm svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; opacity: 0.09; }
-
-  /* ============================================================
-     SNOWFLAKES (Gramado section only)
-     ============================================================ */
-  .snow-container {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-  }
-  @keyframes snowfall {
-    0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.6; }
-    90% { opacity: 0.4; }
-    100% { transform: translateY(calc(100vh)) rotate(360deg); opacity: 0; }
-  }
-  .snowflake {
-    position: absolute;
-    top: -10px;
-    color: #fff;
-    font-size: 0.8em;
-    opacity: 0;
-    animation: snowfall linear infinite;
-  }
-  .snowflake:nth-child(1) { left: 5%; font-size: 0.6em; animation-duration: 12s; animation-delay: 0s; }
-  .snowflake:nth-child(2) { left: 15%; font-size: 0.9em; animation-duration: 15s; animation-delay: 2s; }
-  .snowflake:nth-child(3) { left: 25%; font-size: 0.5em; animation-duration: 10s; animation-delay: 4s; }
-  .snowflake:nth-child(4) { left: 35%; font-size: 1em; animation-duration: 18s; animation-delay: 1s; }
-  .snowflake:nth-child(5) { left: 45%; font-size: 0.7em; animation-duration: 13s; animation-delay: 3s; }
-  .snowflake:nth-child(6) { left: 55%; font-size: 0.85em; animation-duration: 16s; animation-delay: 5s; }
-  .snowflake:nth-child(7) { left: 65%; font-size: 0.55em; animation-duration: 11s; animation-delay: 2.5s; }
-  .snowflake:nth-child(8) { left: 75%; font-size: 0.95em; animation-duration: 14s; animation-delay: 0.5s; }
-  .snowflake:nth-child(9) { left: 85%; font-size: 0.65em; animation-duration: 17s; animation-delay: 3.5s; }
-  .snowflake:nth-child(10) { left: 92%; font-size: 0.75em; animation-duration: 12s; animation-delay: 1.5s; }
-  .snowflake:nth-child(11) { left: 10%; font-size: 1.1em; animation-duration: 20s; animation-delay: 6s; }
-  .snowflake:nth-child(12) { left: 50%; font-size: 0.5em; animation-duration: 9s; animation-delay: 4.5s; }
-  .snowflake:nth-child(13) { left: 70%; font-size: 0.8em; animation-duration: 14s; animation-delay: 7s; }
-  .snowflake:nth-child(14) { left: 30%; font-size: 0.6em; animation-duration: 11s; animation-delay: 5.5s; }
-  .snowflake:nth-child(15) { left: 80%; font-size: 0.9em; animation-duration: 16s; animation-delay: 2s; }
-
-  /* ============================================================
-     FIREWORKS (Réveillon)
-     ============================================================ */
-  @keyframes firework {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-200px) scale(0); opacity: 0; }
-  }
-  @keyframes firework-spark {
-    0% { transform: translate(0,0) scale(1); opacity: 1; }
-    100% { transform: translate(var(--fx), var(--fy)) scale(0); opacity: 0; }
-  }
-  .fireworks-container {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-  }
-  .firework-particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    animation: firework-spark 1.2s ease-out forwards;
-  }
-
-  /* ============================================================
-     PART DIVIDER
-     ============================================================ */
-  .part-divider {
-    text-align: center;
-    margin: 70px 0 45px;
-    position: relative;
-    z-index: 2;
-  }
+  .part-divider { text-align: center; margin: 70px 0 45px; position: relative; z-index: 2; }
   .part-divider::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 5%; right: 5%;
+    content: ''; position: absolute; top: 50%; left: 5%; right: 5%;
     height: 1px;
     background: linear-gradient(to right, transparent, rgba(124,58,237,0.2), transparent);
     z-index: -1;
   }
   .part-divider .badge {
     display: inline-block;
-    background: linear-gradient(135deg, #5b21b6, var(--gramado));
-    color: #fff;
-    font-size: 0.7em;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 6px 20px;
-    border-radius: 20px;
+    background: linear-gradient(135deg, #5b21b6, #7c3aed);
+    color: #fff; font-size: 0.7em; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    padding: 6px 20px; border-radius: 20px;
     margin-bottom: 10px;
     box-shadow: 0 4px 15px rgba(124,58,237,0.25);
   }
   .part-divider h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.8em, 3vw, 2.4em);
-    color: #f0edea;
-    font-weight: 400;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6em, 3vw, 2.2em);
+    color: #f0edea; font-weight: 700;
   }
-  .part-divider .part-dates {
-    font-size: 0.9em;
-    color: #a78bfa;
-    font-weight: 500;
-    margin-top: 4px;
+  .part-divider .part-dates { font-size: 0.9em; color: #a78bfa; font-weight: 500; margin-top: 4px; }
+  .sec-gramado, .sec-sp, .sec-foz, .sec-py { position: relative; }
+  .sec-gramado .wm, .sec-sp .wm, .sec-foz .wm, .sec-py .wm {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
   }
-
-  /* ============================================================
-     DAY CARD — PREMIUM GLASSMORPHISM
-     ============================================================ */
+  .sec-gramado .wm svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; opacity: 0.07; }
+  .sec-sp .wm svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; opacity: 0.06; }
+  .sec-foz .wm svg { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 80%; height: 60%; opacity: 0.06; }
+  .sec-py .wm svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; opacity: 0.07; }
   .day-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 24px;
-    padding: 36px 40px;
-    margin-bottom: 36px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
-    position: relative;
-    z-index: 2;
-    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.5s ease, border-color 0.5s ease;
-    overflow: hidden;
-  }
-  .day-card:hover {
-    transform: translateY(-8px) scale(1.008);
-    box-shadow: 0 20px 70px rgba(124,58,237,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
-    border-color: rgba(124,58,237,0.2);
-  }
-
-  /* Gradient border effect on hover */
-  .day-card::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 24px;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(124,58,237,0), rgba(124,58,237,0.15), rgba(245,158,11,0), rgba(124,58,237,0));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-  }
-  .day-card:hover::before { opacity: 1; }
-
-  .day-card .day-accent {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--gramado), #a78bfa);
-    border-radius: 4px 0 0 4px;
-    transition: box-shadow 0.5s ease;
-  }
-  .day-card:hover .day-accent { box-shadow: 0 0 20px var(--gramado-glow); }
-
-  .day-card .day-accent.acc-sp { background: linear-gradient(to bottom, var(--sp), #93c5fd); }
-  .day-card:hover .day-accent.acc-sp { box-shadow: 0 0 20px var(--sp-glow); }
-  .day-card .day-accent.acc-foz { background: linear-gradient(to bottom, var(--foz), #34d399); }
-  .day-card:hover .day-accent.acc-foz { box-shadow: 0 0 20px var(--foz-glow); }
-  .day-card .day-accent.acc-py { background: linear-gradient(to bottom, var(--py), #fbbf24); }
-  .day-card:hover .day-accent.acc-py { box-shadow: 0 0 20px var(--py-glow); }
-
-  /* Subtle corner glow */
-  .day-card::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 100% 0%, rgba(124,58,237,0.05), transparent 70%);
-    pointer-events: none;
-  }
-
-  .day-card:nth-child(odd) { margin-right: 60px; }
-  .day-card:nth-child(even) { margin-left: 60px; }
-
-  .day-card .day-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    margin-bottom: 14px;
-  }
-  .day-card .day-number {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.8em;
-    font-weight: 400;
-    color: #f0edea;
-    letter-spacing: -0.5px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .day-card .day-number .day-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(124,58,237,0.05));
-    border: 1px solid rgba(124,58,237,0.12);
-    font-size: 0.5em;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    color: #a78bfa;
-  }
-  .day-card .day-number .day-date {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.4em;
-    font-weight: 400;
-    color: #a78bfa;
-    letter-spacing: 0;
-  }
-  .day-card .day-icon { font-size: 1.6em; }
-
-  .day-card .day-dot {
-    position: absolute;
-    left: -44px;
-    top: 38px;
-    width: 16px;
-    height: 16px;
-    background: var(--gramado);
-    border: 3px solid var(--bg);
-    border-radius: 50%;
-    z-index: 3;
-    box-shadow: 0 0 0 4px rgba(124,58,237,0.2);
-    animation: pulse-dot 3s ease-in-out infinite;
-  }
-  @keyframes pulse-dot {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(124,58,237,0.2); }
-    50% { box-shadow: 0 0 0 8px rgba(124,58,237,0.08); }
-  }
-  .day-card:nth-child(even) .day-dot {
-    left: auto;
-    right: -44px;
-    background: var(--py);
-    box-shadow: 0 0 0 4px rgba(245,158,11,0.2);
-    animation-name: pulse-dot-gold;
-  }
-  @keyframes pulse-dot-gold {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(245,158,11,0.2); }
-    50% { box-shadow: 0 0 0 8px rgba(245,158,11,0.08); }
-  }
-
-  .day-card h3 {
-    font-size: 1.2em;
-    color: #c4b5d6;
-    margin-bottom: 12px;
-    font-weight: 600;
-  }
-
-  .day-card .flight-block {
-    background: linear-gradient(135deg, rgba(124,58,237,0.06), rgba(124,58,237,0.02));
-    border: 1px solid rgba(124,58,237,0.1);
-    border-radius: 16px;
-    padding: 20px 24px;
-    margin: 14px 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 14px;
-    position: relative;
-  }
-  .day-card .flight-block .flight-route {
-    font-weight: 700;
-    font-size: 1.2em;
-    color: #f0edea;
-    letter-spacing: 1px;
-  }
-  .day-card .flight-block .flight-meta {
-    font-size: 0.85em;
-    color: rgba(255,255,255,0.55);
-  }
-  .day-card .flight-block .flight-meta strong {
-    color: #e8e6e3;
-  }
-
-  .day-card .tag {
-    display: inline-block;
-    background: rgba(124,58,237,0.12);
-    color: #a78bfa;
-    padding: 3px 12px;
-    border-radius: 12px;
-    font-size: 0.78em;
-    font-weight: 500;
-    margin: 2px 3px;
-    border: 1px solid rgba(124,58,237,0.1);
-  }
-  .day-card .tag.gold { background: rgba(245,158,11,0.12); color: #fbbf24; border-color: rgba(245,158,11,0.1); }
-  .day-card .tag.green { background: rgba(16,185,129,0.12); color: #34d399; border-color: rgba(16,185,129,0.1); }
-  .day-card .tag.red { background: rgba(239,68,68,0.12); color: #f87171; border-color: rgba(239,68,68,0.1); }
-  .day-card .tag.blue { background: rgba(59,130,246,0.12); color: #93c5fd; border-color: rgba(59,130,246,0.1); }
-
-  .day-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 8px 0;
-  }
-  .day-card ul li {
-    padding: 5px 0 5px 24px;
-    position: relative;
-    color: rgba(255,255,255,0.78);
-    font-size: 0.95em;
-  }
-  .day-card ul li::before {
-    content: '✦';
-    position: absolute;
-    left: 0;
-    color: #a78bfa;
-    font-size: 0.65em;
-    top: 8px;
-  }
-
-  .day-card .highlight {
-    background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(124,58,237,0.03));
-    border: 1px solid rgba(124,58,237,0.08);
-    border-radius: 14px;
-    padding: 16px 20px;
-    margin: 12px 0;
-    font-size: 0.95em;
-    color: rgba(255,255,255,0.85);
-  }
-  .day-card .highlight strong { color: #c4b5d6; }
-  .day-card .highlight.gold {
-    background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.03));
-    border-color: rgba(245,158,11,0.1);
-  }
-  .day-card .highlight.green {
-    background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(16,185,129,0.03));
-    border-color: rgba(16,185,129,0.1);
-  }
-  .day-card .highlight .price-note {
-    font-size: 0.9em;
-    color: rgba(255,255,255,0.5);
-    font-style: italic;
-    margin-top: 4px;
-    display: block;
-  }
-
-  /* Natal glow */
-  .day-card .highlight.christmas-glow {
-    border-color: rgba(245,158,11,0.2);
-    box-shadow: 0 0 30px rgba(245,158,11,0.08), inset 0 0 30px rgba(245,158,11,0.03);
-    animation: christmas-pulse 4s ease-in-out infinite;
-  }
-  @keyframes christmas-pulse {
-    0%, 100% { box-shadow: 0 0 30px rgba(245,158,11,0.08), inset 0 0 30px rgba(245,158,11,0.03); }
-    50% { box-shadow: 0 0 50px rgba(245,158,11,0.15), inset 0 0 40px rgba(245,158,11,0.05); }
-  }
-
-  .hotel-box {
-    background: linear-gradient(135deg, rgba(124,58,237,0.06), rgba(124,58,237,0.02));
-    border: 1px dashed rgba(124,58,237,0.15);
-    border-radius: 14px;
-    padding: 16px 20px;
-    margin: 12px 0;
-    font-size: 0.92em;
-  }
-  .hotel-box .hotel-name { font-weight: 700; color: #c4b5d6; }
-  .hotel-box .hotel-detail { font-size: 0.88em; color: rgba(255,255,255,0.5); }
-
-  .activity-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin: 12px 0;
-  }
-  .activity-grid .act-card {
-    flex: 1;
-    min-width: 120px;
-    background: rgba(124,58,237,0.04);
-    border: 1px solid rgba(124,58,237,0.06);
-    padding: 16px 12px;
-    border-radius: 16px;
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-    cursor: default;
-    position: relative;
-    overflow: hidden;
-  }
-  .activity-grid .act-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(124,58,237,0.08), transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .activity-grid .act-card:hover {
-    background: rgba(124,58,237,0.1);
-    transform: translateY(-5px) scale(1.03);
-    border-color: rgba(124,58,237,0.25);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-  }
-  .activity-grid .act-card:hover::before { opacity: 1; }
-  .activity-grid .act-card .act-icon {
-    font-size: 2em;
-    margin-bottom: 6px;
-    position: relative;
-    z-index: 1;
-    transition: transform 0.3s ease;
-  }
-  .activity-grid .act-card:hover .act-icon { transform: scale(1.2); }
-  .activity-grid .act-card .act-name { font-weight: 600; font-size: 0.85em; color: #e8e6e3; position: relative; z-index: 1; }
-  .activity-grid .act-card .act-desc { font-size: 0.72em; color: rgba(255,255,255,0.45); position: relative; z-index: 1; }
-
-  .summary-box, .flight-summary, .reservation-box {
     background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 24px;
-    padding: 32px 36px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
-    z-index: 2;
+    padding: 36px 40px;
+    margin-bottom: 36px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+    position: relative; z-index: 2;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
+    overflow: hidden;
+  }
+  .day-card:hover { transform: translateY(-6px) scale(1.005); box-shadow: 0 16px 60px rgba(124,58,237,0.15), inset 0 1px 0 rgba(255,255,255,0.08); border-color: rgba(124,58,237,0.2); }
+  .day-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(to bottom, #7c3aed, #a78bfa);
+    border-radius: 4px 0 0 4px;
+  }
+  .day-card:nth-child(even)::before { left: auto; right: 0; border-radius: 0 4px 4px 0; background: linear-gradient(to bottom, #f59e0b, #fbbf24); }
+  .day-card::after {
+    content: ''; position: absolute; top: -50%; right: -50%;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at 100% 0%, rgba(124,58,237,0.04), transparent 70%);
+    pointer-events: none;
+  }
+  .day-card:nth-child(odd) { margin-right: 60px; }
+  .day-card:nth-child(even) { margin-left: 60px; }
+  .day-card .day-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 14px; }
+  .day-card .day-number { font-family: 'Playfair Display', serif; font-size: 1.6em; font-weight: 700; color: #f0edea; letter-spacing: -0.5px; }
+  .day-card .day-number .day-date { font-family: 'Inter', sans-serif; font-size: 0.45em; font-weight: 400; color: #a78bfa; margin-left: 10px; letter-spacing: 0; }
+  .day-card .day-icon { font-size: 1.6em; }
+  .day-card .day-dot {
+    position: absolute; left: -44px; top: 38px;
+    width: 16px; height: 16px; background: #7c3aed;
+    border: 3px solid #0a0a12; border-radius: 50%;
+    z-index: 3; box-shadow: 0 0 0 4px rgba(124,58,237,0.2);
+  }
+  .day-card:nth-child(even) .day-dot { left: auto; right: -44px; background: #f59e0b; box-shadow: 0 0 0 4px rgba(245,158,11,0.2); }
+  .day-card h3 { font-size: 1.2em; color: #c4b5d6; margin-bottom: 12px; font-weight: 600; }
+  .day-card .flight-block {
+    background: linear-gradient(135deg, rgba(124,58,237,0.06), rgba(124,58,237,0.02));
+    border: 1px solid rgba(124,58,237,0.1);
+    border-radius: 16px;
+    padding: 20px 24px; margin: 14px 0;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
     position: relative;
   }
-
-  .summary-box table {
-    width: 100%;
-    border-collapse: collapse;
+  .day-card .flight-block .flight-route { font-weight: 700; font-size: 1.2em; color: #f0edea; letter-spacing: 1px; }
+  .day-card .flight-block .flight-meta { font-size: 0.85em; color: rgba(255,255,255,0.55); }
+  .day-card .flight-block .flight-meta strong { color: #e8e6e3; }
+  .day-card .tag {
+    display: inline-block;
+    background: rgba(124,58,237,0.12); color: #a78bfa;
+    padding: 3px 12px; border-radius: 12px;
+    font-size: 0.78em; font-weight: 500; margin: 2px 3px;
+    border: 1px solid rgba(124,58,237,0.1);
+  }
+  .day-card .tag.gold { background: rgba(245,158,11,0.12); color: #fbbf24; border-color: rgba(245,158,11,0.1); }
+  .day-card .tag.green { background: rgba(16,185,129,0.12); color: #34d399; border-color: rgba(16,185,129,0.1); }
+  .day-card .tag.red { background: rgba(239,68,68,0.12); color: #f87171; border-color: rgba(239,68,68,0.1); }
+  .day-card ul { list-style: none; padding: 0; margin: 8px 0; }
+  .day-card ul li { padding: 5px 0 5px 24px; position: relative; color: rgba(255,255,255,0.78); font-size: 0.95em; }
+  .day-card ul li::before { content: '✦'; position: absolute; left: 0; color: #a78bfa; font-size: 0.65em; top: 8px; }
+  .day-card .highlight {
+    background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(124,58,237,0.03));
+    border: 1px solid rgba(124,58,237,0.08);
+    border-radius: 14px; padding: 16px 20px; margin: 12px 0;
+    font-size: 0.95em; color: rgba(255,255,255,0.85);
+  }
+  .day-card .highlight strong { color: #c4b5d6; }
+  .day-card .highlight.gold { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.03)); border-color: rgba(245,158,11,0.1); }
+  .day-card .highlight.green { background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(16,185,129,0.03)); border-color: rgba(16,185,129,0.1); }
+  .day-card .highlight .price-note { font-size: 0.9em; color: rgba(255,255,255,0.5); font-style: italic; margin-top: 4px; display: block; }
+  .hotel-box {
+    background: linear-gradient(135deg, rgba(124,58,237,0.06), rgba(124,58,237,0.02));
+    border: 1px dashed rgba(124,58,237,0.15);
+    border-radius: 14px; padding: 16px 20px; margin: 12px 0;
     font-size: 0.92em;
   }
-  .summary-box th {
-    text-align: left;
-    padding: 10px 6px;
-    color: #a78bfa;
-    border-bottom: 1px solid rgba(124,58,237,0.15);
-    font-weight: 600;
-    font-size: 0.82em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  .hotel-box .hotel-name { font-weight: 700; color: #c4b5d6; }
+  .hotel-box .hotel-detail { font-size: 0.88em; color: rgba(255,255,255,0.5); }
+  .activity-grid { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0; }
+  .activity-grid .act-card {
+    flex: 1; min-width: 120px;
+    background: rgba(124,58,237,0.04);
+    border: 1px solid rgba(124,58,237,0.06);
+    padding: 16px 12px; border-radius: 16px; text-align: center;
+    transition: all 0.3s ease; cursor: default;
   }
-  .summary-box td {
-    padding: 12px 6px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    color: rgba(255,255,255,0.7);
-  }
-  .summary-box tfoot td {
-    padding: 14px 6px;
-    border-top: 1px solid rgba(124,58,237,0.2);
-    color: #c4b5d6;
-  }
-
-  .price-val {
-    font-weight: 700;
-    color: #fbbf24;
-  }
-
-  /* ============================================================
-     TOOLTIP
-     ============================================================ */
-  [data-tip] {
-    position: relative;
-    cursor: help;
-  }
-  [data-tip]:hover::after {
-    content: attr(data-tip);
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(10,10,18,0.95);
-    color: var(--text);
-    font-size: 0.75em;
-    padding: 6px 12px;
-    border-radius: 8px;
-    white-space: nowrap;
+  .activity-grid .act-card:hover { background: rgba(124,58,237,0.1); transform: translateY(-3px); border-color: rgba(124,58,237,0.2); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+  .activity-grid .act-card .act-icon { font-size: 2em; margin-bottom: 6px; }
+  .activity-grid .act-card .act-name { font-weight: 600; font-size: 0.85em; color: #e8e6e3; }
+  .activity-grid .act-card .act-desc { font-size: 0.72em; color: rgba(255,255,255,0.45); }
+  .summary-box, .flight-summary, .reservation-box {
+    background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.06);
-    backdrop-filter: blur(8px);
-    z-index: 100;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border-radius: 24px; padding: 32px 36px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    z-index: 2; position: relative;
   }
+  .summary-box table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
+  .summary-box th { text-align: left; padding: 10px 6px; color: #a78bfa; border-bottom: 1px solid rgba(124,58,237,0.15); font-weight: 600; font-size: 0.82em; text-transform: uppercase; letter-spacing: 1px; }
+  .summary-box td { padding: 12px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.7); }
+  .summary-box tfoot td { padding: 14px 6px; border-top: 1px solid rgba(124,58,237,0.2); color: #c4b5d6; }
+  .price-val { font-weight: 700; color: #fbbf24; }
+  .confirmed {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(16,185,129,0.1); color: #34d399;
+    font-size: 0.78em; font-weight: 600;
+    padding: 4px 12px; border-radius: 8px;
+    border: 1px solid rgba(16,185,129,0.15);
+  }
+  .confirmed::before { content: '✓'; font-weight: 700; }
 
-  /* ============================================================
-     RESPONSIVE
-     ============================================================ */
   @media (max-width: 768px) {
-    .progress-bar { padding: 6px 12px; font-size: 0.7em; gap: 8px; }
-    .progress-bar .p-pct { display: none; }
-    .section-nav { right: 8px; gap: 8px; }
-    .section-nav a { width: 8px; height: 8px; }
-    .section-nav a .dot-label { display: none; }
-    .back-to-top { width: 38px; height: 38px; font-size: 1em; bottom: 16px; right: 14px; }
-
     .cover { padding: 50px 16px 40px; min-height: 80vh; }
-    .cover h1 { font-size: 2em; letter-spacing: 1px; }
+    .cover h1 { font-size: 2em; letter-spacing: 2px; }
     .cover .subtitle { font-size: 0.95em; }
     .cover .dates { font-size: 0.85em; padding: 10px 20px; }
-    .cover .flags { font-size: 1.6em; gap: 16px; bottom: 20px; }
+    .cover .flags { font-size: 1.4em; gap: 14px; }
     .cover .mountain-scene { height: 35%; }
-    .cover .scroll-indicator { bottom: 60px; }
-
-    .route-map-container { padding: 16px; border-radius: 16px; }
-    .route-map-container h3 { font-size: 1.1em; }
-
     .timeline-container { padding: 16px 10px 40px; }
     .timeline-container::before { left: 14px; }
-
     .part-divider { margin: 40px 0 28px; }
     .part-divider h2 { font-size: 1.4em; }
-    .part-divider .part-dates { font-size: 0.82em; }
-
-    .day-card {
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      padding: 20px 16px;
-      border-radius: 16px;
-    }
+    .day-card { margin-left: 0 !important; margin-right: 0 !important; padding: 20px 16px; border-radius: 16px; }
     .day-card .day-dot { display: none; }
-    .day-card .day-accent { width: 3px; border-radius: 3px 0 0 3px; }
-    .day-card .day-number { font-size: 1.3em; }
-    .day-card .day-number .day-badge { width: 32px; height: 32px; font-size: 0.45em; }
+    .day-card::before { width: 3px; border-radius: 3px 0 0 3px; }
+    .day-card:nth-child(even)::before { left: 0; right: auto; background: linear-gradient(to bottom, #7c3aed, #a78bfa); }
+    .day-card .day-number { font-size: 1.2em; }
     .day-card h3 { font-size: 1em; }
     .day-card ul li { font-size: 0.88em; padding: 4px 0 4px 20px; }
     .day-card .highlight { padding: 12px 14px; font-size: 0.88em; }
-    .day-card .highlight .price-note { font-size: 0.85em; }
     .day-card .flight-block { padding: 14px 16px; flex-direction: column; align-items: flex-start; }
-    .day-card .flight-block .flight-route { font-size: 1em; }
-    .day-card .flight-block .flight-meta { font-size: 0.8em; }
-
     .hotel-box { padding: 12px 14px; font-size: 0.85em; }
-
     .activity-grid { gap: 8px; }
     .activity-grid .act-card { min-width: 80px; padding: 12px 8px; border-radius: 12px; }
     .activity-grid .act-card .act-icon { font-size: 1.4em; }
     .activity-grid .act-card .act-name { font-size: 0.75em; }
-    .activity-grid .act-card .act-desc { font-size: 0.65em; }
-
-    .tag { font-size: 0.7em; padding: 2px 10px; }
-
-    .summary-box, .flight-summary, .reservation-box {
-      padding: 18px 14px;
-      border-radius: 16px;
-    }
+    .summary-box, .flight-summary, .reservation-box { padding: 18px 14px; border-radius: 16px; }
     .summary-box table { font-size: 0.8em; }
-    .summary-box th { font-size: 0.7em; padding: 6px 4px; }
-    .summary-box td { padding: 8px 4px; }
-    .summary-box tfoot td { padding: 10px 4px; font-size: 0.9em; }
-
     .reservation-box > div { flex-direction: column; gap: 14px; }
-    .reservation-box > div > div { min-width: auto; }
-
     .footer { padding: 30px 16px 24px; font-size: 0.75em; }
-    .footer .route-cities { font-size: 0.72em; }
-
-    .sec-gramado .wm svg,
-    .sec-sp .wm svg,
-    .sec-foz .wm svg,
-    .sec-py .wm svg { opacity: 0.04 !important; }
+    .sec-gramado .wm svg, .sec-sp .wm svg, .sec-foz .wm svg, .sec-py .wm svg { opacity: 0.04 !important; }
   }
-
   @media (max-width: 380px) {
     .cover h1 { font-size: 1.6em; }
-    .cover .subtitle { font-size: 0.85em; }
     .day-card { padding: 16px 12px; }
     .day-card .day-header { flex-direction: column; gap: 4px; }
     .activity-grid .act-card { min-width: 65px; padding: 8px 6px; }
-    .activity-grid .act-card .act-icon { font-size: 1.2em; }
-    .activity-grid .act-card .act-name { font-size: 0.65em; }
     .activity-grid .act-card .act-desc { display: none; }
   }
-
   @media (hover: none) {
-    .day-card:hover,
-    .activity-grid .act-card:hover {
-      transform: none;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
-    }
-    .day-card:active {
-      transform: scale(0.98);
-      transition: transform 0.1s;
-    }
-    .activity-grid .act-card:active { transform: scale(0.95); }
+    .day-card:hover, .activity-grid .act-card:hover { transform: none; box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
+    .day-card:active { transform: scale(0.98); transition: transform 0.1s; }
   }
-
-  .footer {
-    text-align: center;
-    padding: 50px 20px 40px;
-    color: rgba(255,255,255,0.25);
-    font-size: 0.85em;
-    max-width: 960px;
-    margin: 0 auto;
-    border-top: 1px solid rgba(255,255,255,0.04);
-  }
+  .footer { text-align: center; padding: 50px 20px 40px; color: rgba(255,255,255,0.25); font-size: 0.85em; max-width: 960px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.04); }
   .footer .hearts { color: #f43f5e; }
-  .footer .route-cities {
-    font-size: 0.8em;
-    opacity: 0.6;
-    margin-top: 6px;
-  }
-
-  .confirmed {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(16,185,129,0.1);
-    color: #34d399;
-    font-size: 0.78em;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(16,185,129,0.15);
-    margin-top: 2px;
-  }
-  .confirmed::before { content: '✓'; font-weight: 700; }
+  .footer .route-cities { font-size: 0.8em; opacity: 0.6; margin-top: 6px; }
 </style>
 </head>
 <body>
 
-<!-- === BACK LINK === -->
-<div class="back-link reveal">
-  <a href="index.html">← Dashboard</a>
-</div>
-
-<!-- === PROGRESS BAR === -->
-<div class="progress-bar" id="progressBar">
-  <span class="p-day" id="pDay">Dia 1</span>
-  <span class="p-loc" id="pLoc">Gramado</span>
-  <div class="p-track"><div class="p-fill" id="pFill"></div></div>
-  <span class="p-pct" id="pPct">0%</span>
-</div>
-
-<!-- ===== SECTION NAV ===== -->
-<nav class="section-nav" id="sectionNav">
-  <a href="#cover" class="active" data-section="cover"><span class="dot-label">Início</span></a>
-  <a href="#part-gramado" data-section="gramado"><span class="dot-label">Gramado</span></a>
-  <a href="#part-sp" data-section="sp"><span class="dot-label">São Paulo</span></a>
-  <a href="#part-foz" data-section="foz"><span class="dot-label">Foz</span></a>
-  <a href="#part-py" data-section="py"><span class="dot-label">Paraguai</span></a>
-</nav>
-
-<!-- ===== BACK TO TOP ===== -->
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">↑</button>
-
-<!-- ===== COVER ===== -->
-<section class="cover" id="cover">
+<div class="cover">
   <div class="bg-layer"></div>
-  <div class="bg-image"></div>
-  <div class="parallax-bg layer-1">
-    <div class="stars"></div>
-    <div class="star-twinkle"></div>
-    <div class="star-twinkle"></div>
-    <div class="star-twinkle"></div>
-    <div class="star-twinkle"></div>
-    <div class="star-twinkle"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-  </div>
-
-  <div class="parallax-bg layer-2">
-    <div class="mountain-scene">
-      <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice">
-        <defs>
-          <linearGradient id="mg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(255,255,255,0)" />
-            <stop offset="100%" stop-color="rgba(124,58,237,0.08)" />
-          </linearGradient>
-        </defs>
-        <path d="M0,600 L0,420 Q80,380 160,400 Q240,420 320,370 Q400,320 480,350 Q560,380 640,330 Q720,280 800,310 Q880,340 960,290 Q1040,240 1120,270 Q1200,300 1280,250 Q1360,200 1440,230 L1440,600 Z" fill="url(#mg)"/>
-        <path d="M0,600 L0,470 Q100,440 200,455 Q300,470 450,420 Q600,370 750,400 Q900,430 1050,380 Q1200,330 1350,360 Q1420,375 1440,360 L1440,600 Z" fill="url(#mg)" opacity="0.7"/>
-        <path d="M0,600 L0,520 Q120,495 240,510 Q360,525 500,490 Q640,455 780,475 Q920,495 1060,460 Q1200,425 1320,450 Q1400,462 1440,450 L1440,600 Z" fill="url(#mg)" opacity="0.5"/>
-        <path d="M0,600 L0,560 Q150,540 300,550 Q450,560 600,535 Q750,510 900,525 Q1050,540 1200,515 Q1350,490 1440,505 L1440,600 Z" fill="rgba(255,255,255,0.03)"/>
-        <g fill="rgba(255,255,255,0.03)" transform="translate(100,370)">
-          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
-        </g>
-        <g fill="rgba(255,255,255,0.03)" transform="translate(300,340)">
-          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
-        </g>
-        <g fill="rgba(255,255,255,0.03)" transform="translate(500,380)">
-          <polygon points="0,50 18,8 36,50"/><polygon points="18,60 0,60 36,60"/>
-        </g>
-        <g fill="rgba(255,255,255,0.03)" transform="translate(750,340)">
-          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
-        </g>
-        <g fill="rgba(255,255,255,0.03)" transform="translate(950,300)">
-          <polygon points="0,50 20,8 40,50"/><polygon points="20,60 0,60 40,60"/>
-        </g>
-        <g fill="rgba(255,255,255,0.03)" transform="translate(1150,260)">
-          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
-        </g>
-        <g fill="rgba(255,255,255,0.03)" transform="translate(1300,290)">
-          <polygon points="0,50 15,10 30,50"/><polygon points="15,60 0,60 30,60"/>
-        </g>
-      </svg>
-    </div>
-  </div>
-
-  <div class="flags">
-    <span data-tip="Brasil">🇧🇷</span>
-    <span data-tip="Argentina">🇦🇷</span>
-    <span data-tip="Paraguai">🇵🇾</span>
-  </div>
-
-  <h1 class="reveal visible">VIAGEM SUL / SP / PARAGUAI</h1>
-  <div class="subtitle reveal visible reveal-delay-1">✨ Uma aventura de mãe e filho pelo Brasil e suas fronteiras ✨</div>
-  <div class="divider-line reveal visible reveal-delay-2"></div>
-  <div class="dates reveal visible reveal-delay-2">✈ 18 de Dezembro de 2026 → 07 de Janeiro de 2027</div>
-  <div class="travelers reveal visible reveal-delay-3">👩‍👦 Rafael &amp; Mamãe · 21 dias · 3 países · 4 destinos</div>
-
-  <div class="scroll-indicator">
-    <span>Rolar</span>
-    <div class="arrow"></div>
-  </div>
-</section>
-
-<!-- ===== ROUTE MAP ===== -->
-<section class="route-map-section reveal" id="routeMap">
-  <div class="route-map-container">
-    <h3>🗺️ Mapa da Rota <small>Belém → Gramado → São Paulo → Foz do Iguaçu → Ciudad del Este → Belém</small></h3>
-    <svg class="route-svg" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="route-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#7c3aed"/>
-          <stop offset="33%" stop-color="#3b82f6"/>
-          <stop offset="66%" stop-color="#10b981"/>
-          <stop offset="100%" stop-color="#f59e0b"/>
-        </linearGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="3" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <!-- Background map outline (simplified Brazil) -->
-      <path d="M120,60 Q200,40 300,50 Q400,60 450,80 Q500,100 520,140 Q530,170 500,200 Q470,230 440,250 Q400,270 360,280 Q320,290 280,310 Q240,330 200,340 Q160,350 140,330 Q120,310 110,280 Q100,250 105,220 Q110,190 115,160 Q118,130 120,100 Z" fill="rgba(124,58,237,0.04)" stroke="rgba(124,58,237,0.08)" stroke-width="1"/>
-      <!-- Route lines -->
-      <path d="M140,290 L450,180 L530,220 L470,300 L440,320 L530,340" fill="none" stroke="url(#route-grad)" stroke-width="2.5" stroke-dasharray="8,6" opacity="0.7"/>
-      <!-- Return line -->
-      <path d="M530,340 L470,300 L530,220 L450,180 L140,290" fill="none" stroke="rgba(245,158,11,0.15)" stroke-width="1.5" stroke-dasharray="4,6"/>
-      <!-- City dots -->
-      <circle cx="140" cy="290" r="8" fill="#7c3aed" filter="url(#glow)"/>
-      <text x="140" y="278" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="600">Belém</text>
-      <circle cx="450" cy="180" r="8" fill="#7c3aed" filter="url(#glow)"/>
-      <text x="450" y="168" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="600">Gramado</text>
-      <circle cx="530" cy="220" r="8" fill="#3b82f6" filter="url(#glow)"/>
-      <text x="530" y="208" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">São Paulo</text>
-      <circle cx="470" cy="300" r="8" fill="#10b981" filter="url(#glow)"/>
-      <text x="470" y="288" text-anchor="middle" fill="#34d399" font-size="11" font-weight="600">Foz do Iguaçu</text>
-      <circle cx="440" cy="320" r="8" fill="#f59e0b" filter="url(#glow)"/>
-      <text x="440" y="310" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">Ciudad del Este</text>
-      <!-- Pulse animation on dots -->
-      <circle cx="140" cy="290" r="12" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.4">
-        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="450" cy="180" r="12" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.4">
-        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="0.5s"/>
-        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" begin="0.5s"/>
-      </circle>
-      <circle cx="530" cy="220" r="12" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.4">
-        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="1s"/>
-        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" begin="1s"/>
-      </circle>
-      <circle cx="470" cy="300" r="12" fill="none" stroke="#10b981" stroke-width="1" opacity="0.4">
-        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="1.5s"/>
-        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" begin="1.5s"/>
-      </circle>
-      <circle cx="440" cy="320" r="12" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.4">
-        <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="2s"/>
-        <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" begin="2s"/>
-      </circle>
-      <!-- Airplane icons -->
-      <text x="300" y="230" font-size="16" opacity="0.3">✈️</text>
-      <text x="500" y="200" font-size="14" opacity="0.25">✈️</text>
-      <text x="510" y="270" font-size="14" opacity="0.2">✈️</text>
-      <text x="300" y="320" font-size="14" opacity="0.15">✈️</text>
+  <div class="stars"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="mountain-scene">
+    <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice">
+      <defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0)"/><stop offset="100%" stop-color="rgba(124,58,237,0.08)"/></linearGradient></defs>
+      <path d="M0,600 L0,420 Q80,380 160,400 Q240,420 320,370 Q400,320 480,350 Q560,380 640,330 Q720,280 800,310 Q880,340 960,290 Q1040,240 1120,270 Q1200,300 1280,250 Q1360,200 1440,230 L1440,600 Z" fill="url(#mg)"/>
+      <path d="M0,600 L0,470 Q100,440 200,455 Q300,470 450,420 Q600,370 750,400 Q900,430 1050,380 Q1200,330 1350,360 Q1420,375 1440,360 L1440,600 Z" fill="url(#mg)" opacity="0.7"/>
+      <path d="M0,600 L0,520 Q120,495 240,510 Q360,525 500,490 Q640,455 780,475 Q920,495 1060,460 Q1200,425 1320,450 Q1400,462 1440,450 L1440,600 Z" fill="url(#mg)" opacity="0.5"/>
     </svg>
   </div>
-</section>
+  <div class="flags">🇧🇷&nbsp;&nbsp;&nbsp;🇦🇷&nbsp;&nbsp;&nbsp;🇵🇾</div>
+  <h1>VIAGEM SUL / SP / PARAGUAI</h1>
+  <div class="subtitle">✨ Natal &amp; Ano Novo — Mãe e Filho ✨</div>
+  <div class="divider-line"></div>
+  <div class="dates">✈ 18 de Dezembro de 2026 → 07 de Janeiro de 2027</div>
+  <div class="travelers">👩‍👦 Rafael &amp; Mamãe · 21 dias · 3 países · 4 destinos</div>
+</div>
 
-<!-- ===== TIMELINE ===== -->
 <div class="timeline-container">
 
   <!-- ================================================================ -->
-  <!-- PARTE 1 — GRAMADO                                                 -->
+  <!-- PARTE 1 — GRAMADO / SERRA                                        -->
   <!-- ================================================================ -->
-  <div class="sec-gramado" id="part-gramado">
+  <div class="sec-gramado">
   <div class="wm">
     <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-          <stop offset="100%" stop-color="rgba(124,58,237,0.06)"/>
-        </linearGradient>
-      </defs>
       <path d="M0,600 Q150,400 300,500 Q450,350 600,450 Q750,300 900,400 Q1050,250 1200,350 L1200,800 L0,800 Z" fill="rgba(124,58,237,0.03)"/>
-      <!-- Detailed pine trees -->
-      <g fill="rgba(124,58,237,0.03)" transform="translate(50,480)">
-        <polygon points="0,60 18,0 36,60"/><rect x="12" y="60" width="12" height="10"/>
-        <polygon points="9,35 18,15 27,35"/>
+      <g fill="rgba(124,58,237,0.025)">
+        <g transform="translate(50,480)"><polygon points="0,60 18,0 36,60"/><rect x="12" y="60" width="12" height="10"/></g>
+        <g transform="translate(180,500)"><polygon points="0,55 15,5 30,55"/><rect x="10" y="55" width="10" height="8"/></g>
+        <g transform="translate(300,470)"><polygon points="0,60 20,0 40,60"/><rect x="14" y="60" width="12" height="10"/></g>
+        <g transform="translate(450,490)"><polygon points="0,55 16,5 32,55"/><rect x="11" y="55" width="10" height="8"/></g>
+        <g transform="translate(600,460)"><polygon points="0,60 20,0 40,60"/><rect x="14" y="60" width="12" height="10"/></g>
+        <g transform="translate(750,490)"><polygon points="0,50 14,5 28,50"/><rect x="9" y="50" width="10" height="8"/></g>
+        <g transform="translate(880,475)"><polygon points="0,58 18,0 36,58"/><rect x="12" y="58" width="12" height="10"/></g>
+        <g transform="translate(1020,495)"><polygon points="0,50 14,5 28,50"/><rect x="9" y="50" width="10" height="8"/></g>
+        <g transform="translate(1140,465)"><polygon points="0,60 20,0 40,60"/><rect x="14" y="60" width="12" height="10"/></g>
       </g>
-      <g fill="rgba(124,58,237,0.03)" transform="translate(120,500)">
-        <polygon points="0,55 15,5 30,55"/><rect x="10" y="55" width="10" height="8"/>
-      </g>
-      <g fill="rgba(124,58,237,0.03)" transform="translate(220,470)">
-        <polygon points="0,60 20,0 40,60"/><rect x="14" y="60" width="12" height="10"/>
-        <polygon points="10,35 20,15 30,35"/>
-      </g>
-      <g fill="rgba(124,58,237,0.03)" transform="translate(350,490)">
-        <polygon points="0,55 16,5 32,55"/><rect x="11" y="55" width="10" height="8"/>
-      </g>
-      <g fill="rgba(124,58,237,0.03)" transform="translate(480,460)">
-        <polygon points="0,60 20,0 40,60"/><rect x="14" y="60" width="12" height="10"/>
-        <polygon points="10,35 20,15 30,35"/>
-      </g>
-      <g fill="rgba(124,58,237,0.03)" transform="translate(600,490)">
-        <polygon points="0,50 14,5 28,50"/><rect x="9" y="50" width="10" height="8"/>
-      </g>
-      <g fill="rgba(124,58,237,0.03)" transform="translate(720,475)">
-        <polygon points="0,58 18,0 36,58"/><rect x="12" y="58" width="12" height="10"/>
-        <polygon points="9,34 18,14 27,34"/>
-      </g>
-      <g fill="rgba(124,58,237,0.03)" transform="translate(850,495)">
-        <polygon points="0,50 14,5 28,50"/><rect x="9" y="50" width="10" height="8"/>
-      </g>
-      <g fill="rgba(124,58,237,0.03)" transform="translate(980,465)">
-        <polygon points="0,60 20,0 40,60"/><rect x="14" y="60" width="12" height="10"/>
-        <polygon points="10,35 20,15 30,35"/>
-      </g>
-      <g fill="rgba(124,58,237,0.03)" transform="translate(1100,485)">
-        <polygon points="0,55 16,5 32,55"/><rect x="11" y="55" width="10" height="8"/>
-      </g>
-      <!-- Christmas ornaments -->
-      <circle cx="200" cy="430" r="4" fill="rgba(245,158,11,0.05)"/>
-      <circle cx="450" cy="420" r="4" fill="rgba(245,158,11,0.05)"/>
-      <circle cx="700" cy="440" r="4" fill="rgba(245,158,11,0.05)"/>
-      <circle cx="950" cy="425" r="4" fill="rgba(245,158,11,0.05)"/>
-      <circle cx="350" cy="450" r="3" fill="rgba(239,68,68,0.04)"/>
-      <circle cx="580" cy="445" r="3" fill="rgba(239,68,68,0.04)"/>
-      <circle cx="820" cy="455" r="3" fill="rgba(239,68,68,0.04)"/>
-      <!-- Snowflake icons -->
-      <text x="150" y="380" font-size="20" fill="rgba(255,255,255,0.03)">❄</text>
-      <text x="400" y="370" font-size="16" fill="rgba(255,255,255,0.025)">❄</text>
-      <text x="650" y="390" font-size="18" fill="rgba(255,255,255,0.025)">❄</text>
-      <text x="900" y="375" font-size="14" fill="rgba(255,255,255,0.02)">❄</text>
-      <text x="1050" y="395" font-size="22" fill="rgba(255,255,255,0.02)">❄</text>
-      <!-- Star of Bethlehem -->
-      <text x="600" y="350" font-size="28" fill="rgba(245,158,11,0.035)">⭐</text>
+      <circle cx="200" cy="430" r="3" fill="rgba(245,158,11,0.04)"/>
+      <circle cx="500" cy="420" r="3" fill="rgba(245,158,11,0.04)"/>
+      <circle cx="800" cy="440" r="3" fill="rgba(245,158,11,0.04)"/>
+      <circle cx="1050" cy="425" r="3" fill="rgba(245,158,11,0.04)"/>
     </svg>
   </div>
-  <!-- Snowflakes -->
-  <div class="snow-container">
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-  </div>
 
-  <div class="part-divider reveal">
+  <div class="part-divider">
     <div class="badge">Parte 1</div>
     <h2>🏔️ Gramado &amp; Serra Gaúcha</h2>
-    <div class="part-dates">18 a 26 de Dezembro · 8 dias</div>
+    <div class="part-dates">18 a 26 de Dezembro · 9 dias</div>
   </div>
 
-  <!-- DAY 1 -->
-  <div class="day-card reveal reveal-delay-1">
-    <div class="day-accent"></div>
+  <!-- DIA 1 — 18/12 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">01</span> Dia 1 <span class="day-date">· 18/12 (Sex)</span></span>
-      <span class="day-icon" data-tip="Voo de ida">✈️</span>
+      <span class="day-number">Dia 1 <span class="day-date">· 18/12 (Sex)</span></span>
+      <span class="day-icon">✈️</span>
     </div>
     <h3>Belém ✈ Porto Alegre</h3>
     <div class="flight-block">
       <div style="flex:1;min-width:200px;">
         <div class="flight-route">BEL ✈ GRU ✈ POA</div>
-        <div class="flight-meta">
-          🛩️ <strong>LA3605</strong> · Airbus A321 · Latam<br>
-          13:25 Belém → 17:10 São Paulo · 3h45
-        </div>
+        <div class="flight-meta">🛩️ <strong>LA3605</strong> · A321 · 13:25 BEL → 17:10 GRU · 3h45</div>
       </div>
-      <div style="background:rgba(124,58,237,0.08);padding:4px 14px;border-radius:8px;font-size:0.82em;font-weight:500;color:#a78bfa;">
-        ⏱ Conexão GRU · 2h55
-      </div>
+      <div style="background:rgba(124,58,237,0.08);padding:4px 14px;border-radius:8px;font-size:0.82em;font-weight:500;color:#a78bfa;">⏱ Conexão GRU · 2h55</div>
       <div style="flex:1;min-width:200px;">
-        <div class="flight-meta">
-          🛩️ <strong>LA3424</strong> · Airbus A321 · Latam<br>
-          20:05 São Paulo → <strong>21:50</strong> Porto Alegre · 1h45
-        </div>
+        <div class="flight-meta">🛩️ <strong>LA3424</strong> · A321 · 20:05 GRU → <strong>21:50</strong> POA · 1h45</div>
       </div>
-    </div>
-    <div class="highlight">
-      <strong>🌙 Chegada noturna em POA</strong> — pernoite no Novotel Porto Alegre Airport. Preparativos para a serra!<br>
-      <span style="font-size:0.85em;color:var(--text-dim);">🏨 <strong>Novotel Porto Alegre Airport</strong> · R$ 581,30 · Check-in 18/dez → Check-out 19/dez · 2 camas · Confirmado</span>
-    </div>
-  </div>
-
-  <!-- DAY 2 -->
-  <div class="day-card reveal reveal-delay-2">
-    <div class="day-accent"></div>
-    <div class="day-dot"></div>
-    <div class="day-header">
-      <span class="day-number"><span class="day-badge">02</span> Dia 2 <span class="day-date">· 19/12 (Sáb)</span></span>
-      <span class="day-icon" data-tip="Transfer para a serra">🚗</span>
-    </div>
-    <h3>Porto Alegre → Gramado</h3>
-    <div class="highlight">
-      <strong>🛣️ Transfer para a serra</strong> — RS-020/RS-235, ≈ 2h de estrada serpenteando as montanhas. Chegada, instalação e primeiro contato com o centro de Gramado.
     </div>
     <div class="hotel-box">
+      <div class="hotel-name">🏨 Novotel Porto Alegre</div>
+      <div class="hotel-detail">📍 Porto Alegre · Pernoite após chegada noturna</div>
+    </div>
+    <div class="highlight"><strong>🌙 Chegada 21:50 em POA</strong> — pernoite no Novotel para seguir a Gramado no dia seguinte com calma.</div>
+  </div>
+
+  <!-- DIA 2 — 19/12 -->
+  <div class="day-card">
+    <div class="day-dot"></div>
+    <div class="day-header">
+      <span class="day-number">Dia 2 <span class="day-date">· 19/12 (Sáb)</span></span>
+      <span class="day-icon">🚗</span>
+    </div>
+    <h3>Porto Alegre → Gramado</h3>
+    <ul>
+      <li><strong>Transfer para Gramado</strong> (≈ 2h pela serra)</li>
+      <li><strong>✅ Check-in Hotel Fioreze Primo</strong> a partir das 14:00</li>
+      <li><strong>Tarde:</strong> Passeio pelo Centro Histórico — Av. Borges Medeiros, Igreja Matriz São Pedro, Fonte do Amor Eterno, <strong>Rua Torta</strong></li>
+      <li><strong>Noite:</strong> Jantar na <strong>Rua Coberta</strong></li>
+    </ul>
+    <div class="hotel-box">
       <div class="hotel-name">🏨 Hotel Fioreze Primo · <span class="confirmed">Confirmada</span></div>
-      <div class="hotel-detail">📍 Av. Borges de Medeiros, Centro · Gramado/RS · 800m da Rua Coberta</div>
-      <div class="hotel-detail">📅 20/dez → 26/dez · Cancelamento grátis · <span class="price-val">R$ 4.398,67</span></div>
+      <div class="hotel-detail">📍 Av. Borges de Medeiros, Centro · Gramado/RS · 📅 20/dez → 26/dez · <span class="price-val">R$ 4.398,67</span></div>
     </div>
   </div>
 
-  <!-- DAY 3 -->
-  <div class="day-card reveal reveal-delay-3">
-    <div class="day-accent"></div>
+  <!-- DIA 3 — 20/12 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">03</span> Dia 3 <span class="day-date">· 20/12 (Dom)</span></span>
-      <span class="day-icon" data-tip="Check-in">🏡</span>
+      <span class="day-number">Dia 3 <span class="day-date">· 20/12 (Dom)</span></span>
+      <span class="day-icon">🚂</span>
     </div>
-    <h3>🍷 Tour Uva e Vinho + Maria Fumaça</h3>
-    <ul>
-      <li><strong>Tour Uva e Vinho</strong> — visita a vinícolas com degustação</li>
-      <li><strong>Maria Fumaça + Epopeia Italiana</strong> — passeio de trem turístico</li>
-      <li><strong>Almoço incluso</strong> no tour</li>
-      <li>Check-in <strong>Hotel Fioreze Primo</strong> (a partir das 14h · saída 26/12 12h)</li>
-    </ul>
-    <div class="info-block" style="margin-top:8px;padding:10px 14px;background:rgba(124,58,237,0.06);border-radius:10px;border:1px solid rgba(124,58,237,0.1);">
-      <span style="font-size:0.78em;color:var(--text-dim);">🎫 <strong>Gramado Receptivo</strong> · Reserva #98187 · R$ 819,80 (2 pax) · <span style="color:#22c55e;">✅ Confirmado</span></span>
+    <h3>🌄 Vale dos Vinhedos — Passeio Completo</h3>
+    <div class="highlight gold">
+      <strong>🚂 Passeio de Trem Maria Fumaça + Vale dos Vinhedos</strong><br>
+      ⏰ <strong>07:00 às 19:50</strong> · Dia inteiro de turismo!
     </div>
-  </div>
-
-  <!-- DAY 4 -->
-  <div class="day-card reveal reveal-delay-4">
-    <div class="day-accent"></div>
-    <div class="day-dot"></div>
-    <div class="day-header">
-      <span class="day-number"><span class="day-badge">04</span> Dia 4 <span class="day-date">· 21/12 (Seg)</span></span>
-      <span class="day-icon" data-tip="Natal em Gramado">🎄</span>
-    </div>
-    <h3>Gramado — Os Clássicos</h3>
-    <ul>
-      <li><strong>Rua Torta</strong> — a famosa curva inclinada, fotos obrigatórias</li>
-      <li><strong>Rua Coberta</strong> — coração gastronômico</li>
-      <li><strong>Lago Negro</strong> — pedalinhos, cisnes, paisagem bucólica</li>
-      <li><strong>Praça das Etnias</strong> — homenagem aos imigrantes</li>
-      <li><strong>Parque do Caracol</strong> — natureza e vista panorâmica</li>
-    </ul>
-  </div>
-
-  <!-- DAY 5 -->
-  <div class="day-card reveal">
-    <div class="day-accent"></div>
-    <div class="day-dot"></div>
-    <div class="day-header">
-      <span class="day-number"><span class="day-badge">05</span> Dia 5 <span class="day-date">· 22/12 (Ter)</span></span>
-      <span class="day-icon" data-tip="Cidade irmã">🏞️</span>
-    </div>
-    <h3>🌲 Canela — A Cidade Irmã</h3>
     <div class="activity-grid">
-      <div class="act-card"><div class="act-icon">🚡</div><div class="act-name">Bondinhos</div><div class="act-desc">Teleférico panorâmico</div></div>
-      <div class="act-card"><div class="act-icon">⛪</div><div class="act-name">Catedral de Pedra</div><div class="act-desc">Arquitetura gótica</div></div>
+      <div class="act-card"><div class="act-icon">🚂</div><div class="act-name">Maria Fumaça</div><div class="act-desc">Trem turístico</div></div>
+      <div class="act-card"><div class="act-icon">🍷</div><div class="act-name">Vinícolas</div><div class="act-desc">Degustação de vinhos</div></div>
+      <div class="act-card"><div class="act-icon">🍝</div><div class="act-name">Almoço Italiano</div><div class="act-desc">Culinária colonial</div></div>
+      <div class="act-card"><div class="act-icon">🧀</div><div class="act-name">Queijaria</div><div class="act-desc">Produtos artesanais</div></div>
+    </div>
+    <ul>
+      <li><strong>Bento Gonçalves</strong> — trem Maria Fumaça + degustação de vinho</li>
+      <li><strong>Garibaldi</strong> — Parque Temático Epopeia Italiana</li>
+      <li>Vinícola + <strong>Almoço italiano</strong> típico</li>
+      <li>Queijaria, <strong>Tramontina</strong>, Trufas artesanais</li>
+    </ul>
+  </div>
+
+  <!-- DIA 4 — 21/12 -->
+  <div class="day-card">
+    <div class="day-dot"></div>
+    <div class="day-header">
+      <span class="day-number">Dia 4 <span class="day-date">· 21/12 (Seg)</span></span>
+      <span class="day-icon">🌲</span>
+    </div>
+    <h3>Parques &amp; Noite Suíça</h3>
+    <ul>
+      <li><strong>Manhã:</strong> Lago Negro, Praça das Etnias, <strong>Parque do Caracol</strong></li>
+      <li><strong>Tarde:</strong> <strong>Grande Park Gramado</strong> (funciona até 17:30)</li>
+      <li><strong>Noite:</strong> 🫕 <strong>Noite Suíça</strong> — Jantar Fondue</li>
+    </ul>
+  </div>
+
+  <!-- DIA 5 — 22/12 -->
+  <div class="day-card">
+    <div class="day-dot"></div>
+    <div class="day-header">
+      <span class="day-number">Dia 5 <span class="day-date">· 22/12 (Ter)</span></span>
+      <span class="day-icon">🏞️</span>
+    </div>
+    <h3>Canela — Bate &amp; Volta</h3>
+    <div class="activity-grid">
+      <div class="act-card"><div class="act-icon">⛪</div><div class="act-name">Catedral de Pedra</div><div class="act-desc">Cartão-postal</div></div>
+      <div class="act-card"><div class="act-icon">🚡</div><div class="act-name">Bondinhos</div><div class="act-desc">Vista panorâmica</div></div>
       <div class="act-card"><div class="act-icon">💦</div><div class="act-name">Cascata Caracol</div><div class="act-desc">Queda de 131m</div></div>
-      <div class="act-card"><div class="act-icon">🪟</div><div class="act-name">Skyglass</div><div class="act-desc"><span class="tag gold">Opcional</span></div></div>
+      <div class="act-card"><div class="act-icon">🌄</div><div class="act-name">Estação Campos</div><div class="act-desc">Paisagem serrana</div></div>
     </div>
-  </div>
-
-  <!-- DAY 6 -->
-  <div class="day-card reveal">
-    <div class="day-accent"></div>
-    <div class="day-dot"></div>
-    <div class="day-header">
-      <span class="day-number"><span class="day-badge">06</span> Dia 6 <span class="day-date">· 23/12 (Qua)</span></span>
-      <span class="day-icon" data-tip="Vale dos Vinhedos">🍷</span>
-    </div>
-    <h3>Bento Gonçalves &amp; 🌟 Nativitaten</h3>
     <ul>
-      <li><strong>Vale dos Vinhedos</strong> — rota turística mais charmosa do sul</li>
-      <li>Visita a <strong>vinícolas</strong> com degustação 🍇</li>
-      <li><strong>Almoço típico</strong> — culinária italiana colonial</li>
+      <li><strong>Manhã/Tarde:</strong> Catedral de Pedra, Estação Campos de Canela, Parque e Cascata do Caracol, Parque dos Bondinhos de Canela</li>
+      <li><strong>Noite:</strong> 🔥 <strong>Noite Gaúcha</strong> em Gramado — show de tradições e churrasco</li>
     </ul>
-    <span class="price-note">🍝 Cantina típica: ≈ R$ 80–150 por pessoa</span>
-    <div class="highlight gold christmas-glow" style="margin-top:12px;">
-      <strong>🌟 NATIVITATEN — Natal Luz · 20:00</strong><br>
-      <span style="font-size:0.85em;">Maior espetáculo sobre as águas do Natal Luz! Visão privilegiada do setor VIP 🎟️<br>
-      <span style="font-size:0.8em;color:var(--text-dim);">Ticket B050 · VIP Inteira · R$ 465,92 · Ticket B051 · VIP Idoso · R$ 291,20 · Total: <strong>R$ 757,12</strong> · 🎫 Confirmado</span></span>
-    </div>
   </div>
 
-  <!-- DAY 7 — CEIA DE NATAL -->
-  <div class="day-card reveal">
-    <div class="day-accent"></div>
+  <!-- DIA 6 — 23/12 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">07</span> Dia 7 <span class="day-date">· 24/12 (Qui)</span></span>
-      <span class="day-icon" data-tip="🎄 Véspera de Natal">🎅</span>
+      <span class="day-number">Dia 6 <span class="day-date">· 23/12 (Qua)</span></span>
+      <span class="day-icon">🎭</span>
     </div>
-    <h3>✨ Véspera de Natal — Ceia Especial</h3>
-    <div class="highlight gold christmas-glow">
+    <h3>Olivas &amp; Nativitaten</h3>
+    <ul>
+      <li><strong>Manhã:</strong> <strong>Olivas de Gramado</strong> — passeio entre olivais</li>
+      <li><strong>Tarde:</strong> Livre para compras e descanso</li>
+      <li><strong>Noite:</strong> 🌟 <strong>Nativitaten</strong> — espetáculo flutuante de Natal (um dos maiores do Brasil!)<br><span class="price-note">🎫 Ingressos: R$ 150 a R$ 400</span></li>
+    </ul>
+  </div>
+
+  <!-- DIA 7 — 24/12 -->
+  <div class="day-card">
+    <div class="day-dot"></div>
+    <div class="day-header">
+      <span class="day-number">Dia 7 <span class="day-date">· 24/12 (Qui) 🎄</span></span>
+      <span class="day-icon">🎅</span>
+    </div>
+    <h3>Chocolates &amp; Ceia de Natal</h3>
+    <ul>
+      <li><strong>Manhã:</strong> Rota dos Chocolates — <strong>Prawer, Lugano, Florbela, Chocolate Planalto</strong> 🍫</li>
+      <li><strong>Tarde:</strong> Livre</li>
+    </ul>
+    <div class="highlight gold">
       <strong>🎄 CEIA DE NATAL — Hotel Fioreze Primo</strong><br>
-      Reserva nº 34.521 · 2 adultos · Salão de eventos do hotel<br>
-      ⏰ <strong>20:00</strong><br>
-      <span class="price-note">💰 Valor total pago: <strong>R$ 850,00</strong></span>
+      Reserva nº 34.521 · 2 adultos · ⏰ <strong>20:00</strong><br>
+      <span class="price-note">💰 Valor pago: <strong>R$ 850,00</strong></span>
     </div>
   </div>
 
-  <!-- DAY 8 -->
-  <div class="day-card reveal">
-    <div class="day-accent"></div>
+  <!-- DIA 8 — 25/12 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">08</span> Dia 8 <span class="day-date">· 25/12 (Sex) 🎄</span></span>
-      <span class="day-icon" data-tip="Natal">☕</span>
+      <span class="day-number">Dia 8 <span class="day-date">· 25/12 (Sex) 🎄</span></span>
+      <span class="day-icon">☕</span>
     </div>
-    <h3>Natal — Dia Leve &amp; Chocolates</h3>
+    <h3>Natal — Mini Mundo &amp; Café Colonial</h3>
     <ul>
-      <li><strong>☕ Café da manhã especial de Natal</strong> no hotel</li>
-      <li>Visita às <strong>chocolaterias</strong> — Lugano, Caracol, Prawer 🍫</li>
-      <li><strong>Mini Mundo</strong> <span class="tag gold">Opcional</span> · <strong>Snowland</strong> <span class="tag gold">Opcional</span></li>
+      <li><strong>Manhã:</strong> <strong>Mini Mundo</strong> — réplicas em miniatura</li>
+      <li><strong>Tarde:</strong> <strong>Café Colonial Bela Vista</strong> — Av. Hortênsias, Vila Suíça, Gramado</li>
+      <li><strong>Noite:</strong> Arrumar malas</li>
     </ul>
   </div>
 
-  <!-- DAY 9 -->
-  <div class="day-card reveal">
-    <div class="day-accent"></div>
+  <!-- DIA 9 — 26/12 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">09</span> Dia 9 <span class="day-date">· 26/12 (Sáb)</span></span>
-      <span class="day-icon" data-tip="Voo para SP">✈️</span>
+      <span class="day-number">Dia 9 <span class="day-date">· 26/12 (Sáb)</span></span>
+      <span class="day-icon">✈️</span>
     </div>
     <h3>Gramado → São Paulo</h3>
     <div class="hotel-box">
@@ -1590,737 +551,470 @@
     </div>
     <div class="flight-block">
       <div class="flight-route">POA ✈ CGH</div>
-      <div class="flight-meta">
-        🛩️ <strong>LA3161</strong> · Airbus A320 · Latam · <strong>13:20</strong> POA → <strong>15:00</strong> CGH · 1h40<br>
-        ✈ <strong>Voo direto</strong>
-      </div>
+      <div class="flight-meta">🛩️ <strong>LA3161</strong> · A320 · <strong>13:20</strong> POA → <strong>15:00</strong> CGH · 1h40 · ✈ Direto</div>
     </div>
-    <div class="highlight">
-      <strong>🏙️ Congonhas (CGH)</strong> — aeroporto mais próximo da Paulista!
+    <div class="hotel-box">
+      <div class="hotel-name">🏨 Intercity São Paulo Paulista · <span class="confirmed">Confirmada</span></div>
+      <div class="hotel-detail">📍 Próximo à Av. Paulista · 📅 26/dez → 01/jan · <span class="price-val">R$ 3.767,74</span></div>
     </div>
   </div>
-  </div> <!-- /sec-gramado -->
+  </div>
 
   <!-- ================================================================ -->
-  <!-- PARTE 2 — SÃO PAULO                                              -->
+  <!-- PARTE 2 — SÃO PAULO                                               -->
   <!-- ================================================================ -->
-  <div class="sec-sp" id="part-sp">
+  <div class="sec-sp">
   <div class="wm">
     <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice">
-      <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-          <stop offset="100%" stop-color="rgba(59,130,246,0.04)"/>
-        </linearGradient>
-      </defs>
-      <!-- Skyline buildings with iconic shapes -->
-      <g fill="rgba(59,130,246,0.03)">
-        <!-- MASP-like (distinctive shape) -->
+      <g fill="rgba(59,130,246,0.025)">
         <rect x="50" y="200" width="40" height="300" rx="2"/>
         <rect x="110" y="150" width="35" height="350" rx="2"/>
         <rect x="165" y="180" width="30" height="320" rx="2"/>
-        <!-- Copan-like (wavy) -->
-        <path d="M210,120 Q225,115 240,120 L240,500 L210,500 Z"/>
-        <rect x="255" y="170" width="35" height="330" rx="2"/>
-        <!-- FIESP-like -->
-        <rect x="310" y="100" width="50" height="400" rx="2"/>
-        <rect x="330" y="120" width="10" height="380"/>
-        <rect x="380" y="140" width="40" height="360" rx="2"/>
-        <rect x="440" y="200" width="30" height="300" rx="2"/>
-        <rect x="490" y="160" width="45" height="340" rx="2"/>
-        <!-- Banespa-like (taller) -->
-        <rect x="555" y="90" width="45" height="410" rx="2"/>
-        <rect x="575" y="110" width="5" height="390"/>
-        <rect x="630" y="180" width="35" height="320" rx="2"/>
-        <rect x="685" y="130" width="40" height="370" rx="2"/>
-        <rect x="745" y="200" width="30" height="300" rx="2"/>
-        <rect x="795" y="150" width="50" height="350" rx="2"/>
-        <rect x="865" y="180" width="35" height="320" rx="2"/>
-        <rect x="920" y="120" width="40" height="380" rx="2"/>
-        <rect x="980" y="170" width="35" height="330" rx="2"/>
-        <rect x="1035" y="140" width="45" height="360" rx="2"/>
-        <rect x="1100" y="190" width="40" height="310" rx="2"/>
-      </g>
-      <!-- Lit windows -->
-      <g fill="rgba(255,200,50,0.03)">
-        <rect x="320" y="120" width="4" height="4" rx="1"/>
-        <rect x="320" y="140" width="4" height="4" rx="1"/>
-        <rect x="320" y="160" width="4" height="4" rx="1"/>
-        <rect x="340" y="130" width="4" height="4" rx="1"/>
-        <rect x="340" y="150" width="4" height="4" rx="1"/>
-        <rect x="565" y="110" width="4" height="4" rx="1"/>
-        <rect x="565" y="130" width="4" height="4" rx="1"/>
-        <rect x="585" y="120" width="4" height="4" rx="1"/>
-        <rect x="805" y="170" width="4" height="4" rx="1"/>
-        <rect x="820" y="190" width="4" height="4" rx="1"/>
-        <rect x="930" y="140" width="4" height="4" rx="1"/>
-        <rect x="930" y="160" width="4" height="4" rx="1"/>
-        <rect x="695" y="150" width="4" height="4" rx="1"/>
-        <rect x="695" y="170" width="4" height="4" rx="1"/>
+        <rect x="210" y="120" width="45" height="380" rx="2"/>
+        <rect x="275" y="170" width="35" height="330" rx="2"/>
+        <rect x="330" y="100" width="50" height="400" rx="2"/>
+        <rect x="400" y="140" width="40" height="360" rx="2"/>
+        <rect x="460" y="200" width="30" height="300" rx="2"/>
+        <rect x="510" y="160" width="45" height="340" rx="2"/>
+        <rect x="575" y="110" width="55" height="390" rx="2"/>
+        <rect x="650" y="180" width="35" height="320" rx="2"/>
+        <rect x="705" y="130" width="40" height="370" rx="2"/>
+        <rect x="765" y="200" width="30" height="300" rx="2"/>
+        <rect x="815" y="150" width="50" height="350" rx="2"/>
+        <rect x="885" y="180" width="35" height="320" rx="2"/>
+        <rect x="940" y="120" width="40" height="380" rx="2"/>
+        <rect x="1000" y="170" width="35" height="330" rx="2"/>
+        <rect x="1055" y="140" width="45" height="360" rx="2"/>
+        <rect x="1120" y="190" width="40" height="310" rx="2"/>
       </g>
     </svg>
   </div>
 
-  <div class="part-divider reveal">
+  <div class="part-divider">
     <div class="badge">Parte 2</div>
     <h2>🌆 São Paulo</h2>
     <div class="part-dates">26 de Dezembro a 01 de Janeiro · 6 dias</div>
   </div>
 
-  <!-- DAY 9b -->
-  <div class="day-card reveal reveal-delay-1">
-    <div class="day-accent acc-sp"></div>
+  <!-- DIA 10 — 27/12 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">09</span> Dia 9 <span class="day-date">· 26/12 (Sáb)</span></span>
-      <span class="day-icon" data-tip="Chegada em SP">🏨</span>
+      <span class="day-number">Dia 10 <span class="day-date">· 27/12 (Dom)</span></span>
+      <span class="day-icon">🏛️</span>
     </div>
-    <h3>Chegada a São Paulo</h3>
-    <div class="hotel-box">
-      <div class="hotel-name">🏨 Intercity São Paulo Paulista · <span class="confirmed">Confirmada</span></div>
-      <div class="hotel-detail">📍 Próximo à Avenida Paulista</div>
-      <div class="hotel-detail">📅 26/dez → 01/jan · Cancelamento grátis · <span class="price-val">R$ 3.767,74</span></div>
-    </div>
-  </div>
-
-  <!-- DAYS 10-13 -->
-  <div class="day-card reveal reveal-delay-2">
-    <div class="day-accent acc-sp"></div>
-    <div class="day-dot"></div>
-    <div class="day-header">
-      <span class="day-number"><span class="day-badge">10-13</span> Dias 10 a 13 <span class="day-date">· 27 a 30/12</span></span>
-      <span class="day-icon" data-tip="Explorando SP">🏛️</span>
-    </div>
-    <h3>Explorando São Paulo</h3>
-    <div class="activity-grid">
-      <div class="act-card"><div class="act-icon">🏛️</div><div class="act-name">MASP</div><div class="act-desc">Museu de Arte</div></div>
-      <div class="act-card"><div class="act-icon">🥟</div><div class="act-name">Mercadão</div><div class="act-desc">Sanduíche famoso</div></div>
-      <div class="act-card"><div class="act-icon">🏮</div><div class="act-name">Liberdade</div><div class="act-desc">Bairro japonês</div></div>
-      <div class="act-card"><div class="act-icon">🏙️</div><div class="act-name">Av. Paulista</div><div class="act-desc">Coração de SP</div></div>
-    </div>
+    <h3>Paulista, MASP &amp; Liberdade</h3>
     <ul>
-      <li><strong>Avenida Paulista</strong> — museus, arte de rua, MASP</li>
-      <li><strong>MASP</strong> — principal museu da América Latina</li>
-      <li><strong>Mercado Municipal</strong> — sanduíche de mortadela + pastel de bacalhau</li>
-      <li><strong>Liberdade</strong> — imersão na cultura japonesa</li>
+      <li><strong>Manhã:</strong> Avenida Paulista, <strong>MASP</strong>, Parque Trianon, <strong>Mercado Municipal</strong> (sanduíche de mortadela!)</li>
+      <li><strong>Tarde:</strong> Bairro da <strong>Liberdade</strong> — feirinha, cultura japonesa</li>
+      <li><strong>Noite:</strong> Livre</li>
     </ul>
   </div>
 
-  <!-- DAY 14 — RÉVEILLON -->
-  <div class="day-card reveal reveal-delay-3" id="reveillon-card">
-    <div class="day-accent acc-sp"></div>
+  <!-- DIA 11 — 28/12 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">14</span> Dia 14 <span class="day-date">· 31/12 (Qui)</span></span>
-      <span class="day-icon" data-tip="🎆 Réveillon!">🥂</span>
+      <span class="day-number">Dia 11 <span class="day-date">· 28/12 (Seg)</span></span>
+      <span class="day-icon">🏛️</span>
     </div>
-    <h3>🎆 Réveillon na Paulista</h3>
-    <div class="fireworks-container" id="fireworksContainer">
-      <!-- Fireworks generated by JS -->
-    </div>
+    <h3>Centro Histórico &amp; Ônibus Gastronômico</h3>
+    <ul>
+      <li><strong>Manhã:</strong> Centro Histórico — <strong>Catedral da Sé</strong>, Pátio do Colégio, <strong>Teatro Municipal</strong></li>
+      <li><strong>Tarde:</strong> Livre</li>
+    </ul>
     <div class="highlight gold">
-      <strong>🎆 ANO NOVO NA AVENIDA PAULISTA</strong><br>
-      Um dos réveillons mais emblemáticos do Brasil!
-    </div>
-    <div style="background:rgba(124,58,237,0.04);border-radius:14px;padding:14px 18px;margin:10px 0;border:1px solid rgba(124,58,237,0.06);">
-      <strong style="color:#fbbf24;">🍽️ Sugestão — Restaurante Jardan</strong><br>
-      <span style="color:rgba(255,255,255,0.55);">Vista privilegiada · Ceia de Réveillon<br>R$ 500 a R$ 1.200 por pessoa</span>
+      <strong>🚌 ÔNIBUS GASTRONÔMICO DE SÃO PAULO</strong><br>
+      Saída do Jazz Restaurante na Vila Mariana · <span class="price-note">🎫 R$ 282,00</span>
     </div>
   </div>
 
-  <!-- DAY 15 -->
-  <div class="day-card reveal reveal-delay-4">
-    <div class="day-accent acc-sp"></div>
+  <!-- DIA 12 — 29/12 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">15</span> Dia 15 <span class="day-date">· 01/01 (Sex) 🎉</span></span>
-      <span class="day-icon" data-tip="Voo para Foz">✈️</span>
+      <span class="day-number">Dia 12 <span class="day-date">· 29/12 (Ter)</span></span>
+      <span class="day-icon">🌳</span>
+    </div>
+    <h3>Ibirapuera, Pinacoteca &amp; Luz</h3>
+    <ul>
+      <li><strong>Manhã:</strong> <strong>Parque Ibirapuera</strong> — o parque mais famoso de SP</li>
+      <li><strong>Tarde:</strong> <strong>Pinacoteca</strong>, <strong>Museu da Língua Portuguesa</strong>, <strong>Estação da Luz</strong></li>
+      <li><strong>Noite:</strong> Livre</li>
+    </ul>
+  </div>
+
+  <!-- DIA 13 — 30/12 -->
+  <div class="day-card">
+    <div class="day-dot"></div>
+    <div class="day-header">
+      <span class="day-number">Dia 13 <span class="day-date">· 30/12 (Qua)</span></span>
+      <span class="day-icon">🛍️</span>
+    </div>
+    <h3>Dia de Outlet — Compras</h3>
+    <div class="activity-grid">
+      <div class="act-card"><div class="act-icon">🛍️</div><div class="act-name">Catarina Fashion</div><div class="act-desc">Outlet de grife</div></div>
+      <div class="act-card"><div class="act-icon">🏷️</div><div class="act-name">Outlet Premium SP</div><div class="act-desc">Descontos imperdíveis</div></div>
+    </div>
+    <ul>
+      <li><strong>Catarina Fashion Outlet</strong></li>
+      <li><strong>Outlet Premium São Paulo</strong></li>
+    </ul>
+  </div>
+
+  <!-- DIA 14 — 31/12 -->
+  <div class="day-card">
+    <div class="day-dot"></div>
+    <div class="day-header">
+      <span class="day-number">Dia 14 <span class="day-date">· 31/12 (Qui)</span></span>
+      <span class="day-icon">🥂</span>
+    </div>
+    <h3>🎆 Réveillon na Paulista</h3>
+    <div class="highlight gold">
+      <strong>🎆 ANO NOVO NA AVENIDA PAULISTA</strong><br>
+      Show de fogos, música ao vivo, milhões de pessoas celebrando!
+    </div>
+    <div style="background:rgba(124,58,237,0.04);border-radius:14px;padding:14px 18px;margin:10px 0;border:1px solid rgba(124,58,237,0.06);">
+      <strong style="color:#fbbf24;">🍽️ Restaurante Jardan</strong><br>
+      <span style="color:rgba(255,255,255,0.55);">Ceia especial de Réveillon com vista privilegiada<br>R$ 500 a R$ 1.200 por pessoa</span>
+    </div>
+  </div>
+
+  <!-- DIA 15 — 01/01 -->
+  <div class="day-card">
+    <div class="day-dot"></div>
+    <div class="day-header">
+      <span class="day-number">Dia 15 <span class="day-date">· 01/01 (Sex) 🎉</span></span>
+      <span class="day-icon">✈️</span>
     </div>
     <h3>São Paulo → Foz do Iguaçu</h3>
+    <ul>
+      <li><strong>Manhã:</strong> Arrumar malas · Check-out Intercity · Transfer para GRU (meio-dia)</li>
+    </ul>
     <div class="flight-block">
       <div class="flight-route">GRU ✈ IGU</div>
-      <div class="flight-meta">
-        🛩️ <strong>LA3204</strong> · Airbus A321 · Latam · <strong>15:30</strong> GRU → <strong>17:15</strong> IGU · 1h45<br>
-        ✈ <strong>Voo direto</strong>
-      </div>
+      <div class="flight-meta">🛩️ <strong>LA3204</strong> · A321 · <strong>15:30</strong> GRU → <strong>17:15</strong> IGU · 1h45 · ✈ Direto</div>
     </div>
     <div class="hotel-box">
       <div class="hotel-name">🏨 Ibis Budget Foz do Iguaçu · <span class="confirmed">Confirmada</span></div>
-      <div class="hotel-detail">📅 01/jan → 04/jan · Cancelamento grátis · <span class="price-val">R$ 1.156,05</span></div>
+      <div class="hotel-detail">📅 01/jan → 04/jan · <span class="price-val">R$ 1.156,05</span></div>
     </div>
+    <ul>
+      <li><strong>Noite:</strong> Cataratas JL Shopping / Liberty Duty Free</li>
+      <li><strong>Jantar:</strong> <strong>Rafain Churrascaria Show</strong> — buffet + show latino-americano (<span class="price-note">R$ 329,00 · sujeito a disponibilidade)</span></li>
+    </ul>
   </div>
-  </div> <!-- /sec-sp -->
+  </div>
 
   <!-- ================================================================ -->
   <!-- PARTE 3 — FOZ / ARGENTINA                                        -->
   <!-- ================================================================ -->
-  <div class="sec-foz" id="part-foz">
+  <div class="sec-foz">
   <div class="wm">
     <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
-      <defs>
-        <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-          <stop offset="100%" stop-color="rgba(16,185,129,0.05)"/>
-        </linearGradient>
-        <linearGradient id="rainbow" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="rgba(255,0,0,0.03)"/>
-          <stop offset="25%" stop-color="rgba(255,165,0,0.03)"/>
-          <stop offset="50%" stop-color="rgba(255,255,0,0.03)"/>
-          <stop offset="75%" stop-color="rgba(0,255,0,0.03)"/>
-          <stop offset="100%" stop-color="rgba(0,0,255,0.03)"/>
-        </linearGradient>
-      </defs>
-      <!-- Waterfall / cliffs -->
-      <path d="M150,50 Q220,80 280,100 Q340,120 300,220 Q260,320 380,400 Q500,480 450,560 Q400,600 500,600 L800,600 L800,0 Z" fill="rgba(16,185,129,0.03)"/>
-      <path d="M350,80 Q420,100 480,120 Q540,140 500,240 Q460,340 580,420 Q700,500 650,570 Q600,600 700,600 L0,600 L0,0 Z" fill="rgba(16,185,129,0.02)"/>
-      <!-- Rainbow arc -->
-      <path d="M100,450 Q400,200 700,450" fill="none" stroke="url(#rainbow)" stroke-width="8" opacity="0.4"/>
-      <path d="M120,460 Q400,230 680,460" fill="none" stroke="url(#rainbow)" stroke-width="4" opacity="0.2"/>
-      <!-- Water spray dots -->
-      <circle cx="340" cy="250" r="5" fill="rgba(255,255,255,0.04)"/>
-      <circle cx="360" cy="270" r="4" fill="rgba(255,255,255,0.03)"/>
-      <circle cx="380" cy="290" r="6" fill="rgba(255,255,255,0.03)"/>
-      <circle cx="320" cy="280" r="3" fill="rgba(255,255,255,0.04)"/>
-      <circle cx="400" cy="310" r="4" fill="rgba(255,255,255,0.03)"/>
-      <circle cx="350" cy="300" r="3" fill="rgba(255,255,255,0.025)"/>
-      <circle cx="370" cy="320" r="5" fill="rgba(255,255,255,0.02)"/>
-      <circle cx="310" cy="260" r="3" fill="rgba(255,255,255,0.03)"/>
-      <!-- Birds -->
-      <path d="M520,80 Q530,75 540,80 Q550,75 560,80" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
-      <path d="M570,60 Q580,55 590,60 Q600,55 610,60" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1.5"/>
-      <path d="M490,100 Q500,95 510,100 Q520,95 530,100" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1.5"/>
-      <!-- Tropical leaves -->
-      <text x="80" y="500" font-size="30" fill="rgba(16,185,129,0.025)">🌿</text>
-      <text x="700" y="480" font-size="25" fill="rgba(16,185,129,0.02)">🌴</text>
-      <text x="650" y="520" font-size="20" fill="rgba(16,185,129,0.02)">🌿</text>
+      <path d="M200,50 Q250,80 300,100 Q350,120 300,200 Q250,280 350,350 Q450,420 400,500 Q350,580 450,600 L800,600 L800,0 Z" fill="rgba(16,185,129,0.025)"/>
+      <path d="M350,80 Q400,100 450,120 Q500,140 450,220 Q400,300 500,370 Q600,440 550,520 Q500,600 600,600 L0,600 L0,0 Z" fill="rgba(16,185,129,0.015)"/>
+      <circle cx="340" cy="250" r="4" fill="rgba(255,255,255,0.03)"/>
+      <circle cx="380" cy="290" r="5" fill="rgba(255,255,255,0.02)"/>
+      <circle cx="400" cy="310" r="3" fill="rgba(255,255,255,0.02)"/>
+      <path d="M500,80 Q510,75 520,80 Q530,75 540,80" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1.5"/>
+      <path d="M550,60 Q560,55 570,60 Q580,55 590,60" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1.5"/>
     </svg>
   </div>
 
-  <div class="part-divider reveal">
+  <div class="part-divider">
     <div class="badge">Parte 3</div>
     <h2>🌊 Foz do Iguaçu &amp; Argentina</h2>
     <div class="part-dates">01 a 04 de Janeiro · 3 dias</div>
   </div>
 
-  <!-- DAY 16 -->
-  <div class="day-card reveal reveal-delay-1">
-    <div class="day-accent acc-foz"></div>
+  <!-- DIA 16 — 02/01 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">16</span> Dia 16 <span class="day-date">· 02/01 (Sáb)</span></span>
-      <span class="day-icon" data-tip="Cataratas!">🌊</span>
+      <span class="day-number">Dia 16 <span class="day-date">· 02/01 (Sáb)</span></span>
+      <span class="day-icon">🌊</span>
     </div>
-    <h3>Cataratas do Iguaçu — O Dia Mais Esperado</h3>
+    <h3>Parque das Aves &amp; Cataratas</h3>
     <div class="activity-grid">
-      <div class="act-card"><div class="act-icon">🦜</div><div class="act-name">Parque das Aves</div><div class="act-desc">Araras &amp; tucanos</div></div>
-      <div class="act-card"><div class="act-icon">💦</div><div class="act-name">Cataratas</div><div class="act-desc">Circuito 1,2km</div></div>
-      <div class="act-card"><div class="act-icon">🌎</div><div class="act-name">Marco 3 Fronteiras</div><div class="act-desc">BR/AR/PY</div></div>
-      <div class="act-card"><div class="act-icon">💃</div><div class="act-name">Danças Típicas</div><div class="act-desc">Pôr do sol</div></div>
+      <div class="act-card"><div class="act-icon">🦜</div><div class="act-name">Parque das Aves</div><div class="act-desc">Araras e tucanos</div></div>
+      <div class="act-card"><div class="act-icon">💦</div><div class="act-name">Cataratas</div><div class="act-desc">Garganta do Diabo</div></div>
+      <div class="act-card"><div class="act-icon">🍽️</div><div class="act-name">Porto Canoas</div><div class="act-desc">Almoço nas cataratas</div></div>
+      <div class="act-card"><div class="act-icon">🐂</div><div class="act-name">Cabeza de Vaca</div><div class="act-desc">Jantar show</div></div>
     </div>
     <ul>
-      <li><strong>Parque das Aves</strong> — tucanos, araras, borboletas gigantes</li>
-      <li><strong>Circuito Cataratas</strong> (Loumar Turismo) — almoço incluso</li>
-      <li><strong>Marco das Três Fronteiras</strong> + <strong>Show de Danças</strong> ao pôr do sol</li>
-      <li><strong>Dreamland Museu de Cera</strong></li>
+      <li><strong>Manhã:</strong> <strong>Parque das Aves</strong> — tucanos, araras, borboletas gigantes</li>
+      <li><strong>Cataratas do Iguaçu</strong> — almoço no <strong>Restaurante Porto Canoas</strong></li>
+      <li><strong>Noite:</strong> 🌎 <strong>Show da Tríplice Fronteira</strong> + Jantar no <strong>Cabeza de Vaca</strong> (Brasil)</li>
     </ul>
   </div>
 
-  <!-- DAY 17 -->
-  <div class="day-card reveal reveal-delay-2">
-    <div class="day-accent acc-foz"></div>
+  <!-- DIA 17 — 03/01 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">17</span> Dia 17 <span class="day-date">· 03/01 (Dom)</span></span>
-      <span class="day-icon" data-tip="Itaipu">🏗️</span>
-    </div>
-    <h3>Itaipu &amp; Roteiro Cultural</h3>
-    <ul>
-      <li><strong>Usina de Itaipu</strong> — 7 Maravilhas da Engenharia Moderna</li>
-      <li><strong>Sinagoga</strong> · <strong>Doceria Árabe Albany</strong> 🍯</li>
-      <li><strong>Templo Budista</strong> — paz e arquitetura oriental ☸️</li>
-    </ul>
-  </div>
-
-  <!-- DAY 18 -->
-  <div class="day-card reveal reveal-delay-3">
-    <div class="day-accent acc-foz"></div>
-    <div class="day-dot"></div>
-    <div class="day-header">
-      <span class="day-number"><span class="day-badge">18</span> Dia 18 <span class="day-date">· 04/01 (Seg)</span></span>
-      <span class="day-icon" data-tip="Argentina!">🇦🇷</span>
+      <span class="day-number">Dia 17 <span class="day-date">· 03/01 (Dom)</span></span>
+      <span class="day-icon">🇦🇷</span>
     </div>
     <h3>🇦🇷 Puerto Iguazú — Argentina</h3>
     <ul>
-      <li><strong>City Tour Argentina</strong> — cruze a fronteira</li>
-      <li><strong>Marco das 3 Fronteiras</strong> (lado argentino) · <strong>La Aripuca</strong></li>
-      <li><strong>Centro de Puerto Iguazú</strong> + <strong>Feirinha</strong> de artesanato</li>
+      <li><strong>Manhã/Tarde:</strong> Bate e volta em <strong>Puerto Iguazú</strong></li>
+      <li><strong>Duty Free Shop Puerto Iguazú</strong> (opcional, antes da aduaneira)</li>
+      <li><strong>Centro de Puerto Iguazú</strong> + Feirinha de Artesanato</li>
     </ul>
     <div class="highlight green">
-      <strong>🥩 Parrilla Argentina</strong> — La Rueda ou El Quincho del Tío Querido 🔥
+      <strong>🥩 Jantar: El Quincho del Tío Querido</strong><br>
+      A parrilla argentina mais autêntica! 🔥
+    </div>
+    <ul><li>🌙 Volta para Foz do Iguaçu</li></ul>
+  </div>
+
+  <!-- DIA 18 — 04/01 -->
+  <div class="day-card">
+    <div class="day-dot"></div>
+    <div class="day-header">
+      <span class="day-number">Dia 18 <span class="day-date">· 04/01 (Seg)</span></span>
+      <span class="day-icon">🕌</span>
+    </div>
+    <h3>Roteiro Cultural &amp; Check-out</h3>
+    <ul>
+      <li><strong>Manhã:</strong> <strong>Mesquita Omar Ibn Al-Khattab</strong>, <strong>Doceria Árabe Albayan</strong> 🍯</li>
+      <li><strong>Templo Budista Chen Tien</strong> (09:30 às 16:30) ☸️</li>
+      <li><strong>Tarde:</strong> ⏰ <strong>Check-out Ibis</strong> · Transfer para o Paraguai</li>
+    </ul>
+    <div class="hotel-box">
+      <div class="hotel-name">🏨 Rio Hotel By Bourbon Ciudad Del Este · <span class="confirmed">Confirmada</span></div>
+      <div class="hotel-detail">📍 Paraguai · 📅 04/jan → 07/jan · <span class="price-val">R$ 2.101</span></div>
     </div>
   </div>
-  </div> <!-- /sec-foz -->
+  </div>
 
   <!-- ================================================================ -->
   <!-- PARTE 4 — PARAGUAI                                               -->
   <!-- ================================================================ -->
-  <div class="sec-py" id="part-py">
+  <div class="sec-py">
   <div class="wm">
     <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice">
-      <defs>
-        <linearGradient id="pyg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-          <stop offset="100%" stop-color="rgba(245,158,11,0.04)"/>
-        </linearGradient>
-      </defs>
-      <!-- Modern CDE skyline -->
-      <g fill="rgba(245,158,11,0.03)">
-        <rect x="30" y="180" width="30" height="320" rx="2"/>
-        <rect x="75" y="140" width="25" height="360" rx="2"/>
-        <rect x="115" y="200" width="35" height="300" rx="2"/>
-        <rect x="165" y="120" width="40" height="380" rx="2"/>
-        <rect x="220" y="170" width="30" height="330" rx="2"/>
-        <rect x="265" y="100" width="45" height="400" rx="2"/>
-        <rect x="325" y="150" width="35" height="350" rx="2"/>
-        <rect x="375" y="190" width="30" height="310" rx="2"/>
-        <rect x="420" y="130" width="40" height="370" rx="2"/>
-        <rect x="475" y="160" width="35" height="340" rx="2"/>
-        <rect x="525" y="110" width="45" height="390" rx="2"/>
-        <rect x="585" y="180" width="30" height="320" rx="2"/>
-        <rect x="630" y="140" width="40" height="360" rx="2"/>
-        <rect x="685" y="200" width="25" height="300" rx="2"/>
-        <rect x="725" y="120" width="45" height="380" rx="2"/>
-        <rect x="785" y="170" width="35" height="330" rx="2"/>
-        <rect x="835" y="100" width="50" height="400" rx="2"/>
-        <rect x="900" y="160" width="30" height="340" rx="2"/>
-        <rect x="945" y="190" width="35" height="310" rx="2"/>
-        <rect x="995" y="130" width="40" height="370" rx="2"/>
-        <rect x="1050" y="180" width="30" height="320" rx="2"/>
-        <rect x="1095" y="150" width="35" height="350" rx="2"/>
-        <rect x="1145" y="170" width="35" height="330" rx="2"/>
-      </g>
-      <!-- Ponte da Amizade -->
-      <path d="M0,350 Q200,330 400,340 Q600,350 800,340 Q1000,330 1200,350" fill="none" stroke="rgba(245,158,11,0.04)" stroke-width="6"/>
-      <path d="M0,360 Q200,340 400,350 Q600,360 800,350 Q1000,340 1200,360" fill="none" stroke="rgba(245,158,11,0.025)" stroke-width="3"/>
-      <!-- Accent windows -->
-      <g fill="rgba(255,200,50,0.025)">
-        <rect x="275" y="120" width="4" height="4" rx="1"/>
-        <rect x="275" y="140" width="4" height="4" rx="1"/>
-        <rect x="845" y="120" width="4" height="4" rx="1"/>
-        <rect x="845" y="140" width="4" height="4" rx="1"/>
-        <rect x="845" y="160" width="4" height="4" rx="1"/>
-        <rect x="535" y="130" width="4" height="4" rx="1"/>
-        <rect x="535" y="150" width="4" height="4" rx="1"/>
+      <g fill="rgba(245,158,11,0.025)">
+        <rect x="30" y="180" width="30" height="320" rx="2"/><rect x="75" y="140" width="25" height="360" rx="2"/>
+        <rect x="115" y="200" width="35" height="300" rx="2"/><rect x="165" y="120" width="40" height="380" rx="2"/>
+        <rect x="220" y="170" width="30" height="330" rx="2"/><rect x="265" y="100" width="45" height="400" rx="2"/>
+        <rect x="325" y="150" width="35" height="350" rx="2"/><rect x="375" y="190" width="30" height="310" rx="2"/>
+        <rect x="420" y="130" width="40" height="370" rx="2"/><rect x="475" y="160" width="35" height="340" rx="2"/>
+        <rect x="525" y="110" width="45" height="390" rx="2"/><rect x="585" y="180" width="30" height="320" rx="2"/>
+        <rect x="630" y="140" width="40" height="360" rx="2"/><rect x="685" y="200" width="25" height="300" rx="2"/>
+        <rect x="725" y="120" width="45" height="380" rx="2"/><rect x="785" y="170" width="35" height="330" rx="2"/>
+        <rect x="835" y="100" width="50" height="400" rx="2"/><rect x="900" y="160" width="30" height="340" rx="2"/>
+        <rect x="945" y="190" width="35" height="310" rx="2"/><rect x="995" y="130" width="40" height="370" rx="2"/>
+        <rect x="1050" y="180" width="30" height="320" rx="2"/><rect x="1095" y="150" width="35" height="350" rx="2"/>
       </g>
     </svg>
   </div>
 
-  <div class="part-divider reveal">
+  <div class="part-divider">
     <div class="badge">Parte 4</div>
     <h2>🇵🇾 Paraguai</h2>
     <div class="part-dates">04 a 07 de Janeiro · 3 dias</div>
   </div>
 
-  <!-- DAY 19 -->
-  <div class="day-card reveal reveal-delay-1">
-    <div class="day-accent acc-py"></div>
+  <!-- DIA 19 — 05/01 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">19</span> Dia 19 <span class="day-date">· 05/01 (Ter)</span></span>
-      <span class="day-icon" data-tip="Compras no PY">🛍️</span>
+      <span class="day-number">Dia 19 <span class="day-date">· 05/01 (Ter)</span></span>
+      <span class="day-icon">🛍️</span>
     </div>
-    <h3>🇵🇾 Ciudad del Este — Compras</h3>
-    <div class="hotel-box">
-      <div class="hotel-name">🏨 Rio Hotel by Bourbon Ciudad Del Este · <span class="confirmed">Confirmada</span></div>
-      <div class="hotel-detail">📍 Ciudad del Este, Paraguai</div>
-      <div class="hotel-detail">📅 04/jan → 07/jan · Cancelamento grátis · <span class="price-val">R$ 2.101</span></div>
-    </div>
+    <h3>🇵🇾 Ciudad del Este — Dia de Compras</h3>
     <div class="activity-grid">
-      <div class="act-card"><div class="act-icon">🛍️</div><div class="act-name">Compras</div><div class="act-desc">Eletrônicos perfumes</div></div>
-      <div class="act-card"><div class="act-icon">🎸</div><div class="act-name">Hard Rock Café</div><div class="act-desc">Almoço</div></div>
-      <div class="act-card"><div class="act-icon">🎰</div><div class="act-name">Cassino Iguaçu</div><div class="act-desc"><span class="tag gold">Opc</span></div></div>
+      <div class="act-card"><div class="act-icon">📱</div><div class="act-name">Shopping Paris</div><div class="act-desc">Eletrônicos</div></div>
+      <div class="act-card"><div class="act-icon">💄</div><div class="act-name">Shopping Nissei</div><div class="act-desc">Perfumes</div></div>
+      <div class="act-card"><div class="act-icon">👟</div><div class="act-name">Del Este</div><div class="act-desc">Tênis e roupas</div></div>
+      <div class="act-card"><div class="act-icon">🍫</div><div class="act-name">Monalisa</div><div class="act-desc">Chocolates</div></div>
     </div>
-  </div>
-
-  <!-- DAY 20 -->
-  <div class="day-card reveal reveal-delay-2">
-    <div class="day-accent acc-py"></div>
-    <div class="day-dot"></div>
-    <div class="day-header">
-      <span class="day-number"><span class="day-badge">20</span> Dia 20 <span class="day-date">· 06/01 (Qua)</span></span>
-      <span class="day-icon" data-tip="Salto del Monday">🌿</span>
-    </div>
-    <h3>Presidente Franco — Salto del Monday</h3>
     <ul>
-      <li><strong>Tour por Presidente Franco</strong> — cidade paraguaia vizinha</li>
-      <li><strong>Salto del Monday</strong> — cachoeira de 40m na selva 🌿</li>
-      <li><strong>Cataratas do Monday</strong> — segredo bem guardado do Paraguai</li>
+      <li><strong>Shopping Paris e Nissei</strong> — eletrônicos, perfumes e cosméticos</li>
+      <li><strong>Shopping China</strong> · <strong>Shopping Del Este</strong></li>
+      <li><strong>Cellshop e Monalisa</strong> — perfumes, chocolates e bebidas</li>
+      <li><strong>Noite:</strong> Jantar em restaurante de carnes paraguaias ou comida libanesa</li>
     </ul>
   </div>
 
-  <!-- DAY 21 -->
-  <div class="day-card reveal reveal-delay-3">
-    <div class="day-accent acc-py"></div>
+  <!-- DIA 20 — 06/01 -->
+  <div class="day-card">
     <div class="day-dot"></div>
     <div class="day-header">
-      <span class="day-number"><span class="day-badge">21</span> Dia 21 <span class="day-date">· 07/01 (Qui)</span></span>
-      <span class="day-icon" data-tip="Retorno para casa">🏠</span>
+      <span class="day-number">Dia 20 <span class="day-date">· 06/01 (Qua)</span></span>
+      <span class="day-icon">🌿</span>
+    </div>
+    <h3>Presidente Franco — Salto del Monday</h3>
+    <ul>
+      <li><strong>Manhã:</strong> Natureza — <strong>Presidente Franco / Salto del Monday</strong></li>
+      <li><strong>Monday Falls</strong> — trilhas, mirantes e restaurante com vista para as quedas 🌿</li>
+      <li><strong>⏰ Check-out Rio Hotel</strong> às 14:00</li>
+      <li><strong>Transfer</strong> de volta para Foz do Iguaçu</li>
+    </ul>
+    <div class="hotel-box">
+      <div class="hotel-name">🏨 Ibis Budget Foz do Iguaçu (retorno)</div>
+      <div class="hotel-detail">📅 Última noite antes do voo</div>
+    </div>
+  </div>
+
+  <!-- DIA 21 — 07/01 -->
+  <div class="day-card">
+    <div class="day-dot"></div>
+    <div class="day-header">
+      <span class="day-number">Dia 21 <span class="day-date">· 07/01 (Qui)</span></span>
+      <span class="day-icon">🏠</span>
     </div>
     <h3>🇧🇷 Retorno — Foz do Iguaçu → Belém</h3>
     <div class="flight-block">
-      <div class="flight-route">IGU ✈ BEL</div>
-      <div class="flight-meta">
-        🛩️ <strong>LA3397</strong> · 4:15 IGU → 6:00 GRU · 1h45
-      </div>
-      <div style="background:rgba(124,58,237,0.08);padding:4px 14px;border-radius:8px;font-size:0.82em;color:#a78bfa;">
-        ⏱ Conexão GRU · 3h
-      </div>
-      <div class="flight-meta">
-        🛩️ <strong>LA3604</strong> · 9:00 GRU → 12:35 BEL · 3h35
-      </div>
+      <div class="flight-route">IGU ✈ GRU ✈ BEL</div>
+      <div class="flight-meta">🛩️ <strong>LA3397</strong> · 4:15 IGU → 6:00 GRU · 1h45</div>
+      <div style="background:rgba(124,58,237,0.08);padding:4px 14px;border-radius:8px;font-size:0.82em;color:#a78bfa;">⏱ Conexão GRU · 3h</div>
+      <div class="flight-meta">🛩️ <strong>LA3604</strong> · 9:00 GRU → <strong>12:35 BEL</strong> · 3h35</div>
     </div>
     <div class="highlight green">
-      <strong>🏡 Chegada em casa!</strong> — 21 dias de aventura inesquecível entre mãe e filho.
+      <strong>🏡 Chegada em Belém — 12:35</strong><br>
+      21 dias de aventura, memórias e momentos especiais entre mãe e filho! 🌟
     </div>
   </div>
-  </div> <!-- /sec-py -->
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- LISTA DE COMPRAS                                                 -->
+  <!-- ================================================================ -->
+  <div class="part-divider" style="margin-top:50px;">
+    <div class="badge">Lista de Compras</div>
+    <h2>🛍️ Paraguai — Checklist</h2>
+  </div>
+
+  <div class="summary-box">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;">
+      <div style="flex:1;min-width:150px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.08);border-radius:14px;padding:16px;text-align:center;">
+        <div style="font-size:2em;">📱</div>
+        <div style="font-weight:600;color:#e8e6e3;">Eletrônicos</div>
+        <div style="font-size:0.8em;color:rgba(255,255,255,0.45);">Shopping Paris e Nissei</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.08);border-radius:14px;padding:16px;text-align:center;">
+        <div style="font-size:2em;">💄</div>
+        <div style="font-weight:600;color:#e8e6e3;">Perfumes</div>
+        <div style="font-size:0.8em;color:rgba(255,255,255,0.45);">Shopping Nissei</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.08);border-radius:14px;padding:16px;text-align:center;">
+        <div style="font-size:2em;">👟</div>
+        <div style="font-weight:600;color:#e8e6e3;">Tênis &amp; Roupas</div>
+        <div style="font-size:0.8em;color:rgba(255,255,255,0.45);">Shopping Del Este</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.08);border-radius:14px;padding:16px;text-align:center;">
+        <div style="font-size:2em;">🍫</div>
+        <div style="font-weight:600;color:#e8e6e3;">Chocolates</div>
+        <div style="font-size:0.8em;color:rgba(255,255,255,0.45);">Monalisa &amp; Casa Rica</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.08);border-radius:14px;padding:16px;text-align:center;">
+        <div style="font-size:2em;">🧸</div>
+        <div style="font-weight:600;color:#e8e6e3;">Presentes</div>
+        <div style="font-size:0.8em;color:rgba(255,255,255,0.45);">Para sua neta</div>
+      </div>
+    </div>
+  </div>
 
   <!-- ================================================================ -->
   <!-- SUMMARY                                                          -->
   <!-- ================================================================ -->
-  <div class="part-divider reveal" style="margin-top:60px;">
+  <div class="part-divider" style="margin-top:50px;">
     <div class="badge">Resumo</div>
     <h2>📊 Panorama Geral</h2>
   </div>
 
-  <div class="summary-box reveal">
+  <div class="summary-box">
     <table>
       <thead><tr><th>Etapa</th><th>Datas</th><th>Base</th><th style="text-align:center;">Dias</th><th style="text-align:right;">Valor</th></tr></thead>
       <tbody>
-        <tr>
-          <td style="font-weight:600;">✈️ Porto Alegre</td>
-          <td>18 a 19/12</td>
-          <td>Novotel POA Airport</td>
-          <td style="text-align:center;">1</td>
-          <td style="text-align:right;"><span class="price-val">R$ 581,30</span></td>
-        </tr>
-        <tr>
-          <td style="font-weight:600;">🏔️ Gramado</td>
-          <td>19 a 26/12</td>
-          <td>Hotel Fioreze Primo</td>
-          <td style="text-align:center;">8</td>
-          <td style="text-align:right;"><span class="price-val">R$ 4.398,67</span></td>
-        </tr>
-        <tr>
-          <td style="font-weight:600;">🌆 São Paulo</td>
-          <td>26/12 a 01/01</td>
-          <td>Intercity São Paulo Paulista</td>
-          <td style="text-align:center;">6</td>
-          <td style="text-align:right;"><span class="price-val">R$ 3.767,74</span></td>
-        </tr>
-        <tr>
-          <td style="font-weight:600;">🌊 Foz / Argentina</td>
-          <td>01 a 04/01</td>
-          <td>Ibis Budget Foz</td>
-          <td style="text-align:center;">3</td>
-          <td style="text-align:right;"><span class="price-val">R$ 1.156,05</span></td>
-        </tr>
-        <tr>
-          <td style="font-weight:600;">🇵🇾 Paraguai</td>
-          <td>04 a 07/01</td>
-          <td>Rio Hotel by Bourbon CDE</td>
-          <td style="text-align:center;">3</td>
-          <td style="text-align:right;"><span class="price-val">R$ 2.101</span></td>
-        </tr>
+        <tr><td style="font-weight:600;">🏔️ Gramado/Serra</td><td>18 a 26/12</td><td>Hotel Fioreze Primo</td><td style="text-align:center;">9</td><td style="text-align:right;"><span class="price-val">R$ 4.398,67</span></td></tr>
+        <tr><td style="font-weight:600;">🌆 São Paulo</td><td>26/12 a 01/01</td><td>Intercity Paulista</td><td style="text-align:center;">6</td><td style="text-align:right;"><span class="price-val">R$ 3.767,74</span></td></tr>
+        <tr><td style="font-weight:600;">🌊 Foz/Argentina</td><td>01 a 04/01</td><td>Ibis Budget Foz</td><td style="text-align:center;">3</td><td style="text-align:right;"><span class="price-val">R$ 1.156,05</span></td></tr>
+        <tr><td style="font-weight:600;">🇵🇾 Paraguai</td><td>04 a 07/01</td><td>Rio Hotel CDE</td><td style="text-align:center;">3</td><td style="text-align:right;"><span class="price-val">R$ 2.101</span></td></tr>
       </tbody>
       <tfoot>
-        <tr>
-          <td style="font-size:1.1em;color:#fbbf24;font-weight:700;">🌟 Total</td>
-          <td style="font-weight:600;">18/12 → 07/01</td>
-          <td></td>
-          <td style="text-align:center;font-weight:700;">21</td>
-          <td style="text-align:right;font-weight:700;font-size:1.1em;color:#fbbf24;">R$ 11.423,46</td>
-        </tr>
+        <tr><td style="font-size:1.1em;color:#fbbf24;font-weight:700;">🌟 Total</td><td style="font-weight:600;">18/12 → 07/01</td><td></td><td style="text-align:center;font-weight:700;">21</td><td style="text-align:right;font-weight:700;font-size:1.1em;color:#fbbf24;">R$ 11.423,46</td></tr>
       </tfoot>
     </table>
     <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
       <span class="tag">✈️ 4 voos</span>
-      <span class="tag gold">🏨 4 hotéis</span>
+      <span class="tag gold">🏨 5 hotéis</span>
       <span class="tag green">🌍 3 países</span>
-      <span class="tag blue">🎄 Natal em Gramado</span>
-      <span class="tag red">🥂 Réveillon em SP</span>
+      <span class="tag blue">🎄 Natal Gramado</span>
+      <span class="tag red">🥂 Réveillon SP</span>
+      <span class="tag">🚂 Maria Fumaça</span>
     </div>
   </div>
 
-  <!-- FLIGHT CARD -->
-  <div class="part-divider reveal" style="margin-top:40px;">
+  <!-- FLIGHTS -->
+  <div class="part-divider" style="margin-top:40px;">
     <div class="badge">Voos</div>
     <h2>📋 Cartão de Embarque</h2>
   </div>
-
-  <div class="flight-summary reveal">
+  <div class="flight-summary">
     <div style="display:flex;flex-wrap:wrap;gap:16px;">
-      <div style="flex:1;min-width:170px;background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.08);border-radius:14px;padding:16px;">
-        <div style="font-size:0.75em;color:#a78bfa;font-weight:600;text-transform:uppercase;letter-spacing:1px;">18/12</div>
-        <div style="font-weight:700;font-size:1.1em;color:#f0edea;">BEL → POA</div>
-        <div style="color:rgba(255,255,255,0.5);font-size:0.85em;">13:25 → 21:50<br>1 conexão (GRU)</div>
+      <div style="flex:1;min-width:165px;background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.08);border-radius:14px;padding:16px;">
+        <div style="font-size:0.75em;color:#a78bfa;font-weight:600;text-transform:uppercase;letter-spacing:1px;">18/12 Sex</div>
+        <div style="font-weight:700;font-size:1.05em;color:#f0edea;">BEL → POA</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:0.82em;">13:25 → 21:50<br>1 conexão GRU</div>
       </div>
-      <div style="flex:1;min-width:170px;background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.08);border-radius:14px;padding:16px;">
-        <div style="font-size:0.75em;color:#a78bfa;font-weight:600;text-transform:uppercase;letter-spacing:1px;">26/12</div>
-        <div style="font-weight:700;font-size:1.1em;color:#f0edea;">POA → CGH</div>
-        <div style="color:rgba(255,255,255,0.5);font-size:0.85em;">13:20 → 15:00<br>✈ Direto</div>
+      <div style="flex:1;min-width:165px;background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.08);border-radius:14px;padding:16px;">
+        <div style="font-size:0.75em;color:#a78bfa;font-weight:600;text-transform:uppercase;letter-spacing:1px;">26/12 Sáb</div>
+        <div style="font-weight:700;font-size:1.05em;color:#f0edea;">POA → CGH</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:0.82em;">13:20 → 15:00<br>✈ Direto</div>
       </div>
-      <div style="flex:1;min-width:170px;background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.08);border-radius:14px;padding:16px;">
-        <div style="font-size:0.75em;color:#a78bfa;font-weight:600;text-transform:uppercase;letter-spacing:1px;">01/01</div>
-        <div style="font-weight:700;font-size:1.1em;color:#f0edea;">GRU → IGU</div>
-        <div style="color:rgba(255,255,255,0.5);font-size:0.85em;">15:30 → 17:15<br>✈ Direto</div>
+      <div style="flex:1;min-width:165px;background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.08);border-radius:14px;padding:16px;">
+        <div style="font-size:0.75em;color:#a78bfa;font-weight:600;text-transform:uppercase;letter-spacing:1px;">01/01 Sex</div>
+        <div style="font-weight:700;font-size:1.05em;color:#f0edea;">GRU → IGU</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:0.82em;">15:30 → 17:15<br>✈ Direto</div>
       </div>
-      <div style="flex:1;min-width:170px;background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.08);border-radius:14px;padding:16px;">
-        <div style="font-size:0.75em;color:#a78bfa;font-weight:600;text-transform:uppercase;letter-spacing:1px;">07/01</div>
-        <div style="font-weight:700;font-size:1.1em;color:#f0edea;">IGU → BEL</div>
-        <div style="color:rgba(255,255,255,0.5);font-size:0.85em;">4:15 → 12:35<br>1 conexão (GRU)</div>
+      <div style="flex:1;min-width:165px;background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.08);border-radius:14px;padding:16px;">
+        <div style="font-size:0.75em;color:#a78bfa;font-weight:600;text-transform:uppercase;letter-spacing:1px;">07/01 Qui</div>
+        <div style="font-weight:700;font-size:1.05em;color:#f0edea;">IGU → BEL</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:0.82em;">04:15 → 12:35<br>1 conexão GRU</div>
       </div>
     </div>
   </div>
 
   <!-- RESERVATIONS -->
-  <div class="part-divider reveal" style="margin-top:40px;">
+  <div class="part-divider" style="margin-top:40px;">
     <div class="badge">Reservas</div>
     <h2>📄 Confirmações</h2>
   </div>
-
-  <div class="reservation-box reveal">
-    <div style="display:flex;flex-wrap:wrap;gap:24px;">
-      <div style="flex:1;min-width:200px;">
+  <div class="reservation-box">
+    <div style="display:flex;flex-wrap:wrap;gap:20px;">
+      <div style="flex:1;min-width:180px;">
         <div style="font-weight:700;color:#c4b5d6;">🏨 Hotel Fioreze Primo</div>
-        <div style="color:rgba(255,255,255,0.5);font-size:0.86em;">
-          Gramado · 20/dez → 26/dez<br>
-          <span class="price-val">R$ 4.398,67</span> · <span class="confirmed"></span>
-        </div>
+        <div style="color:rgba(255,255,255,0.5);font-size:0.84em;">Gramado · 20→26/12<br><span class="price-val">R$ 4.398,67</span> <span class="confirmed"></span></div>
       </div>
-      <div style="flex:1;min-width:200px;">
-        <div style="font-weight:700;color:#c4b5d6;">🏨 Intercity São Paulo Paulista</div>
-        <div style="color:rgba(255,255,255,0.5);font-size:0.86em;">
-          São Paulo · 26/dez → 01/jan<br>
-          <span class="price-val">R$ 3.767,74</span> · <span class="confirmed"></span>
-        </div>
+      <div style="flex:1;min-width:180px;">
+        <div style="font-weight:700;color:#c4b5d6;">🏨 Intercity Paulista</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:0.84em;">SP · 26/12→01/01<br><span class="price-val">R$ 3.767,74</span> <span class="confirmed"></span></div>
       </div>
-      <div style="flex:1;min-width:200px;">
+      <div style="flex:1;min-width:180px;">
         <div style="font-weight:700;color:#c4b5d6;">🏨 Ibis Budget Foz</div>
-        <div style="color:rgba(255,255,255,0.5);font-size:0.86em;">
-          Foz do Iguaçu · 01/jan → 04/jan<br>
-          <span class="price-val">R$ 1.156,05</span> · <span class="confirmed"></span>
-        </div>
+        <div style="color:rgba(255,255,255,0.5);font-size:0.84em;">Foz · 01→04/01<br><span class="price-val">R$ 1.156,05</span> <span class="confirmed"></span></div>
       </div>
-      <div style="flex:1;min-width:200px;">
-        <div style="font-weight:700;color:#c4b5d6;">🏨 Rio Hotel by Bourbon CDE</div>
-        <div style="color:rgba(255,255,255,0.5);font-size:0.86em;">
-          Ciudad del Este · 04/jan → 07/jan<br>
-          <span class="price-val">R$ 2.101</span> · <span class="confirmed"></span>
-        </div>
+      <div style="flex:1;min-width:180px;">
+        <div style="font-weight:700;color:#c4b5d6;">🏨 Rio Hotel CDE</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:0.84em;">Paraguai · 04→07/01<br><span class="price-val">R$ 2.101</span> <span class="confirmed"></span></div>
       </div>
+    </div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.04);">
+      <div style="font-weight:600;color:#c4b5d6;font-size:0.9em;">🎄 Ceia de Natal</div>
+      <div style="color:rgba(255,255,255,0.5);font-size:0.84em;">Hotel Fioreze Primo · 24/12 20:00 · Res. nº 34.521 · Valor: <span class="price-val">R$ 850,00</span></div>
     </div>
   </div>
 
-</div> <!-- /timeline-container -->
-
-<!-- FOOTER -->
-<div class="footer reveal">
-  Feito com <span class="hearts">♥</span> por Rafael para sua mãe<br>
-  Boa viagem! 🌟<br>
-  <div class="route-cities">Gramado · Canela · Bento Gonçalves · São Paulo · Foz do Iguaçu · Puerto Iguazú · Ciudad del Este · Presidente Franco</div>
 </div>
 
-<script>
-(function() {
-  'use strict';
+<div class="footer">
+  Feito com <span class="hearts">♥</span> por Rafael para sua mãe
+  <div class="route-cities">Gramado · Canela · Bento Gonçalves · Garibaldi · São Paulo · Foz do Iguaçu · Puerto Iguazú · Ciudad del Este · Presidente Franco</div>
+</div>
 
-  // ============================================================
-  // SCROLL REVEAL — Intersection Observer
-  // ============================================================
-  const revealElements = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-  revealElements.forEach(el => revealObserver.observe(el));
-
-  // ============================================================
-  // PROGRESS BAR
-  // ============================================================
-  const progressBar = document.getElementById('progressBar');
-  const pDay = document.getElementById('pDay');
-  const pLoc = document.getElementById('pLoc');
-  const pFill = document.getElementById('pFill');
-  const pPct = document.getElementById('pPct');
-
-  // Day location mapping
-  const dayLocations = {
-    1: 'Belém ✈ POA', 2: 'Porto Alegre → Gramado', 3: 'Gramado',
-    4: 'Gramado', 5: 'Canela', 6: 'Bento Gonçalves',
-    7: 'Gramado 🎄', 8: 'Gramado 🎄', 9: 'Gramado → SP',
-    10: 'São Paulo', 11: 'São Paulo', 12: 'São Paulo',
-    13: 'São Paulo', 14: 'São Paulo 🥂', 15: 'SP → Foz',
-    16: 'Foz do Iguaçu', 17: 'Foz do Iguaçu', 18: 'Puerto Iguazú 🇦🇷',
-    19: 'Ciudad del Este 🇵🇾', 20: 'Presidente Franco', 21: 'Foz → Belém 🏠'
-  };
-
-  function updateProgress() {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
-
-    // Show progress bar after scrolling past cover
-    if (scrollTop > window.innerHeight * 0.6) {
-      progressBar.classList.add('visible');
-    } else {
-      progressBar.classList.remove('visible');
-    }
-
-    // Calculate current day based on scroll position
-    const totalDays = 21;
-    const currentDay = Math.max(1, Math.min(totalDays, Math.ceil((progress / 100) * totalDays)));
-    const location = dayLocations[currentDay] || 'Viagem';
-
-    pDay.textContent = 'Dia ' + currentDay;
-    pLoc.textContent = '· ' + location;
-    pFill.style.width = progress + '%';
-    pPct.textContent = Math.round(progress) + '%';
-  }
-
-  window.addEventListener('scroll', updateProgress, { passive: true });
-
-  // ============================================================
-  // BACK TO TOP
-  // ============================================================
-  const backToTop = document.getElementById('backToTop');
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > window.innerHeight) {
-      backToTop.classList.add('visible');
-    } else {
-      backToTop.classList.remove('visible');
-    }
-  }, { passive: true });
-
-  // ============================================================
-  // SECTION NAV — Active dot
-  // ============================================================
-  const navLinks = document.querySelectorAll('.section-nav a');
-  const sections = ['cover', 'part-gramado', 'part-sp', 'part-foz', 'part-py'];
-
-  function updateNav() {
-    const scrollY = window.scrollY + 120;
-    let activeIdx = 0;
-    sections.forEach((id, i) => {
-      const el = document.getElementById(id);
-      if (el && scrollY >= el.offsetTop) {
-        activeIdx = i;
-      }
-    });
-    navLinks.forEach((link, i) => {
-      link.classList.toggle('active', i === activeIdx);
-    });
-  }
-
-  window.addEventListener('scroll', updateNav, { passive: true });
-
-  // ============================================================
-  // FIREWORKS — Réveillon card
-  // ============================================================
-  function createFireworks() {
-    const container = document.getElementById('fireworksContainer');
-    if (!container) return;
-
-    const colors = ['#f43f5e', '#fbbf24', '#34d399', '#60a5fa', '#a78bfa', '#f97316', '#ec4899'];
-
-    function burst(cx, cy) {
-      const particleCount = 20 + Math.floor(Math.random() * 20);
-      for (let i = 0; i < particleCount; i++) {
-        const p = document.createElement('div');
-        p.className = 'firework-particle';
-        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.3;
-        const dist = 60 + Math.random() * 80;
-        const x = Math.cos(angle) * dist;
-        const y = Math.sin(angle) * dist;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        p.style.cssText = `
-          left: ${cx}px; top: ${cy}px;
-          background: ${color};
-          box-shadow: 0 0 6px ${color};
-          --fx: ${x}px; --fy: ${y}px;
-          width: ${2 + Math.random() * 4}px;
-          height: ${2 + Math.random() * 4}px;
-          animation-duration: ${0.8 + Math.random() * 0.6}s;
-        `;
-        container.appendChild(p);
-        setTimeout(() => p.remove(), 1500);
-      }
-    }
-
-    // Create bursts periodically
-    let fireworkInterval = setInterval(() => {
-      if (document.hidden) return;
-      const rect = container.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        const cx = 50 + Math.random() * (container.offsetWidth - 100);
-        const cy = 20 + Math.random() * (container.offsetHeight * 0.4);
-        burst(cx, cy);
-        // Sometimes double burst
-        if (Math.random() > 0.5) {
-          setTimeout(() => {
-            burst(50 + Math.random() * (container.offsetWidth - 100), 20 + Math.random() * (container.offsetHeight * 0.4));
-          }, 200);
-        }
-      }
-    }, 800);
-
-    // Cleanup if element leaves DOM
-    const observer = new MutationObserver(() => {
-      if (!document.body.contains(container)) {
-        clearInterval(fireworkInterval);
-        observer.disconnect();
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-  }
-
-  // Start fireworks when reveal section is visible
-  const revealCard = document.getElementById('reveillon-card');
-  if (revealCard) {
-    const fwObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          createFireworks();
-          fwObserver.disconnect();
-        }
-      });
-    }, { threshold: 0.3 });
-    fwObserver.observe(revealCard);
-  }
-
-  // ============================================================
-  // PARALLAX — Cover
-  // ============================================================
-  const parallaxLayers = document.querySelectorAll('.parallax-bg');
-  window.addEventListener('scroll', function() {
-    const scrollY = window.scrollY;
-    parallaxLayers.forEach((layer, i) => {
-      const speed = 0.15 + (i * 0.1);
-      layer.style.transform = 'translateY(' + (scrollY * speed) + 'px)';
-    });
-  }, { passive: true });
-
-  // ============================================================
-  // INITIAL CALL
-  // ============================================================
-  updateProgress();
-  updateNav();
-
-})();
-</script>
 </body>
 </html>
