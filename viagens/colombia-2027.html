@@ -6,10 +6,10 @@
 <title>🇨🇴 Colômbia 2027 — Rafael & Victoria</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root { --co: #f59e0b; --co-soft: #fbbf24; --co-glow: rgba(245,158,11,0.3); --bg: #0a0a12; --text: #e8e6e3; --text-dim: rgba(255,255,255,0.55); }
+  :root { --co: #f59e0b; --co-soft: #fbbf24; --co-glow: rgba(245,158,11,0.3); --bg: #0a0a12; --card: #12121c; --text: #e8e6e3; --text-dim: rgba(255,255,255,0.55); }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; overflow-x:hidden; }
-  body::before { content:''; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.035; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat:repeat; background-size:256px 256px; }
+  body::before { content:''; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat:repeat; background-size:256px 256px; }
   ::selection { background:var(--co); color:#fff; }
 
   .back-link { position:fixed; top:20px; left:20px; z-index:100; }
@@ -18,15 +18,16 @@
 
   .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:80px 24px; overflow:hidden; }
   .hero .hero-bg { position:absolute; inset:0; overflow:hidden; }
-  .hero .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 35%; filter:brightness(0.3) saturate(1.2); transform:scale(1.05); transition:transform .1s; }
+  .hero .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 35%; filter:brightness(0.28) saturate(1.25); transform:scale(1.05); transition:transform .1s; }
   @media(max-width:768px){ .hero .hero-bg img { object-fit:contain; background:#050508; } }
-  .hero .hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(10,10,18,0.85) 0%, rgba(10,10,18,0.1) 50%, rgba(10,10,18,0.3) 100%); }
+  .hero .hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(10,10,18,0.9) 0%, rgba(10,10,18,0.1) 40%, rgba(10,10,18,0.3) 100%); }
   .hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.8em,7vw,5em); font-weight:400; background:linear-gradient(135deg,#fff 20%,#f59e0b 40%,#e11d48 60%,#fff 80%); background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shift 8s ease infinite; margin-bottom:8px; position:relative; z-index:2; }
   @keyframes shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
   .hero .subtitle { font-size:clamp(0.85em,1.4vw,1.1em); font-weight:300; opacity:0.85; position:relative; z-index:2; letter-spacing:1px; font-style:italic; }
   .hero .divider { width:120px; height:2px; background:linear-gradient(90deg, transparent, var(--co), #e11d48, transparent); margin:12px auto; position:relative; z-index:2; border-radius:2px; }
   .hero .info-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:14px; position:relative; z-index:2; }
   .hero .info-chips .chip { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.06); backdrop-filter:blur(12px); padding:8px 18px; border-radius:50px; font-size:0.76em; border:1px solid rgba(255,255,255,0.06); }
+  .hero .info-chips .chip.highlight { border-color:var(--co); background:rgba(245,158,11,0.1); }
   .scroll-indicator { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:6px; opacity:0.3; animation:float 2.5s ease-in-out infinite; }
   @keyframes float { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
   .scroll-indicator span { font-size:0.6em; letter-spacing:3px; text-transform:uppercase; }
@@ -38,15 +39,58 @@
   .section-heading h3 { font-family:'DM Serif Display',serif; font-size:1.2em; color:#fff; display:flex; align-items:center; gap:10px; }
   .section-heading .sh-line { flex:1; height:1px; background:linear-gradient(90deg, rgba(245,158,11,0.2), transparent); }
 
-  .colombia-image { max-width:960px; margin:0 auto 28px; padding:0 24px; }
-  .colombia-image img { width:100%; height:auto; border-radius:20px; border:1px solid rgba(255,255,255,0.06); display:block; }
+  .timeline-key { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; justify-content:center; }
+  .timeline-key span { display:inline-flex; align-items:center; gap:3px; font-size:0.6em; background:rgba(255,255,255,0.04); padding:3px 10px; border-radius:30px; border:1px solid rgba(255,255,255,0.05); }
+
+  .day-card { background:linear-gradient(160deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.05); border-radius:16px; margin-bottom:14px; overflow:hidden; transition:all .3s; }
+  .day-card:hover { border-color:rgba(245,158,11,0.12); transform:translateY(-1px); }
+  .day-card .dc-header { display:flex; align-items:flex-start; padding:16px 20px 12px; cursor:pointer; gap:12px; }
+  .day-card .dc-num { font-family:'DM Serif Display',serif; font-size:1.6em; color:var(--co); min-width:44px; }
+  .day-card .dc-title { flex:1; }
+  .day-card .dc-title h4 { font-size:0.9em; color:#fff; font-weight:600; }
+  .day-card .dc-title .dc-sub { font-size:0.7em; color:var(--text-dim); margin-top:1px; }
+  .day-card .dc-header .dc-city-badge { display:inline-flex; align-items:center; gap:4px; font-size:0.65em; background:rgba(245,158,11,0.1); color:var(--co-soft); padding:4px 12px; border-radius:30px; white-space:nowrap; }
+  .day-card .dc-toggle { font-size:1.2em; color:rgba(255,255,255,0.3); align-self:center; transition:transform .3s; }
+  .day-card .dc-toggle.open { transform:rotate(180deg); }
+  .day-card .dc-body { padding:0 20px 16px; display:none; }
+  .day-card.open .dc-body { display:block; animation:fadeIn .3s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+
+  .act-list { list-style:none; }
+  .act-list li { position:relative; padding:6px 0 6px 18px; font-size:0.78em; color:rgba(255,255,255,0.85); border-bottom:1px solid rgba(255,255,255,0.03); }
+  .act-list li::before { content:'▸'; position:absolute; left:2px; color:var(--co); opacity:0.6; }
+  .act-list li:last-child { border-bottom:none; }
+  .act-list li .act-label { display:inline-block; font-size:0.72em; color:var(--co-soft); opacity:0.8; min-width:70px; }
+  .act-list li .act-highlight { color:#fbbf24; font-weight:500; }
+
+  .tag-food { display:inline-block; background:rgba(239,68,68,0.15); color:#fca5a5; font-size:0.65em; padding:1px 8px; border-radius:30px; vertical-align:middle; }
+  .tag-activity { display:inline-block; background:rgba(245,158,11,0.15); color:#fbbf24; font-size:0.65em; padding:1px 8px; border-radius:30px; vertical-align:middle; }
+  .tag-transport { display:inline-block; background:rgba(96,165,250,0.15); color:#93c5fd; font-size:0.65em; padding:1px 8px; border-radius:30px; vertical-align:middle; }
+  .tag-hotel { display:inline-block; background:rgba(52,211,153,0.15); color:#6ee7b7; font-size:0.65em; padding:1px 8px; border-radius:30px; vertical-align:middle; }
+
+  .hotel-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px; }
+  .hotel-card { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); border-radius:14px; padding:18px; transition:all .3s; }
+  .hotel-card:hover { border-color:rgba(245,158,11,0.1); transform:translateY(-2px); }
+  .hotel-card .hc-icon { font-size:1.6em; margin-bottom:6px; }
+  .hotel-card .hc-name { font-size:0.85em; font-weight:600; color:#fff; }
+  .hotel-card .hc-addr { font-size:0.65em; color:var(--text-dim); margin:2px 0 6px; }
+  .hotel-card .hc-desc { font-size:0.7em; color:var(--text-dim); margin-bottom:8px; }
+  .hotel-card .hc-link { display:inline-flex; align-items:center; gap:4px; font-size:0.68em; color:var(--co-soft); text-decoration:none; transition:gap .3s; }
+  .hotel-card .hc-link:hover { gap:8px; text-decoration:underline; }
 
   .city-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
   .city-card { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); border-radius:14px; padding:18px; transition:all .3s; }
   .city-card:hover { border-color:rgba(245,158,11,0.1); transform:translateY(-2px); }
   .city-card .cc-icon { font-size:2em; margin-bottom:6px; }
   .city-card .cc-name { font-size:0.9em; font-weight:600; color:#fff; }
-  .city-card .cc-desc { font-size:0.72em; color:var(--text-dim); margin-top:4px; }
+  .city-card .cc-desc { font-size:0.72em; color:var(--text-dim); margin-top:2px; }
+
+  .exp-highlights { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; }
+  .exp-card { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); border-radius:12px; padding:16px; transition:all .3s; }
+  .exp-card:hover { border-color:rgba(245,158,11,0.08); }
+  .exp-card .ec-city { font-size:0.6em; text-transform:uppercase; letter-spacing:1px; color:var(--co); margin-bottom:4px; }
+  .exp-card h5 { font-size:0.78em; color:#fff; font-weight:500; margin-bottom:4px; }
+  .exp-card p { font-size:0.68em; color:var(--text-dim); }
 
   .site-footer { text-align:center; padding:28px 24px; border-top:1px solid rgba(255,255,255,0.04); max-width:960px; margin:0 auto; }
   .site-footer p { font-size:0.7em; color:rgba(255,255,255,0.3); }
@@ -55,6 +99,9 @@
   .reveal.visible { opacity:1; transform:translateY(0); }
   .reveal-delay-1 { transition-delay:.1s; }
   .reveal-delay-2 { transition-delay:.2s; }
+  .reveal-delay-3 { transition-delay:.3s; }
+  .reveal-delay-4 { transition-delay:.4s; }
+  .reveal-delay-5 { transition-delay:.5s; }
 </style>
 </head>
 <body>
@@ -73,9 +120,17 @@
   <div class="divider"></div>
   <p class="subtitle">Rafael & Victoria — País do ritmo, cor e sabor</p>
   <div class="info-chips">
-    <span class="chip">📅 Em definição</span>
-    <span class="chip">✈️ A definir</span>
+    <span class="chip highlight">📅 14 Mar — 1 Abr 2027</span>
+    <span class="chip highlight">✈️ Avianca</span>
     <span class="chip">🗺️ Bogotá · Cartagena · San Andrés</span>
+    <span class="chip">🛫 BEL→MAO→BOG</span>
+    <span class="chip">🛬 BOG→MAO→BEL</span>
+  </div>
+  <div class="timeline-key">
+    <span>🏙️ 5 dias Bogotá</span>
+    <span>⚓ 6 dias Cartagena</span>
+    <span>🌴 5 dias San Andrés</span>
+    <span>🏙️ 1 dia Bogotá (retorno)</span>
   </div>
   <div class="scroll-indicator"><span>Roteiro</span><div class="arrow"></div></div>
 </section>
@@ -84,18 +139,519 @@
   <img src="colombia-cartagena.jpg" alt="Rua colonial em Cartagena, Colômbia">
 </div>
 
-<div class="section-heading reveal"><h3>🏙️ Destinos <span class="sh-line"></span></h3></div>
+<div class="section-heading reveal"><h3>📋 Roteiro Detalhado <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-1">
+
+  <!-- DIA 1 -->
+  <div class="day-card open">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">01</div>
+      <div class="dc-title">
+        <h4>14/03 (Dom) — Chegada em Bogotá <span class="dc-city-badge">🏙️ Bogotá</span></h4>
+        <div class="dc-sub">Check‑in, ambientação na Zona T e primeiro jantar</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">✈️ Manhã</span> Voo <strong>Belém (BEL) → Manaus (MAO) → Bogotá (BOG)</strong> operado pela <span class="act-highlight">Avianca</span></li>
+        <li><span class="act-label">🏨 Check‑in</span> <strong>Novotel Bogotá Parque 93</strong> ou <strong>Best Western Plus 93 Park Hotel</strong> — Zona 93, a 5 min da Zona T</li>
+        <li><span class="act-label">🚶 Tarde</span> Passeio de orientação pela <strong>Zona T</strong> (Calle 69 a 73, entre Carreras 11 y 15) — identifique cafés, lojas de design e boutiques</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>La Brasserie</strong> <span class="tag-food">Francesa‑Colombiana</span> (Calle 69 #11‑40) — cozinha francesa com toque colombiano. Peça mesa no terraço. Reserva recomendada.</li>
+        <li><span class="act-label">🌙 Noite</span> Descanso inicial — ajuste ao fuso (UTC‑5) e à altitude (2.640m). Beba muita água!</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 2 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">02</div>
+      <div class="dc-title">
+        <h4>15/03 (Seg) — Centro Histórico & Museus <span class="dc-city-badge">🏙️ Bogotá</span></h4>
+        <div class="dc-sub">La Candelaria, Museu do Ouro e Jusos Botero</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🚶 Manhã</span> Tour a pé pela <strong>La Candelaria</strong> — Plaza de Bolívar, Catedral Primária, Casa de Nariño e Iglesia de San Francisco. Pausa para <em>chocolate santafereño</em> com queijo.</li>
+        <li><span class="act-label">🍽️ Almoço</span> <strong>El Rey del Crepe</strong> <span class="tag-food">Casual</span> (Carrera 4 #12‑18) — crepes salgados e doces em casarão colonial</li>
+        <li><span class="act-label">🏛️ Tarde</span> <strong>Museu do Ouro</strong> — a maior coleção de ourivesaria pré‑colombiana do mundo</li>
+        <li><span class="act-label">🖼️ Tarde</span> <strong>Museu Botero</strong> <span class="tag-activity">⭐ Imperdível</span> — 123 obras de Fernando Botero + 85 peças do acervo pessoal (Picasso, Dalí, Miró, Monet)</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>Andrés Carne de Res</strong> <span class="tag-food">Experiência</span> (Chía, 30 min de Bogotá) — ícone da gastronomia colombiana: música, dança e comida. Reserva essencial!</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 3 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">03</div>
+      <div class="dc-title">
+        <h4>16/03 (Ter) — Monserrate & Catedral de Sal <span class="dc-city-badge">🏙️ Bogotá</span></h4>
+        <div class="dc-sub">Vista panorâmica dos Andes e maravilha subterrânea em Zipaquirá</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🚠 Manhã</span> <strong>Monserrate</strong> — teleférico ou trilha. No topo: santuário, mercado de artesanato e vista 360° de Bogotá. Almoço leve lá em cima.</li>
+        <li><span class="act-label">⛪ Tarde</span> <strong>Catedral de Sal de Zipaquirá</strong> <span class="tag-activity">⭐ Imperdível</span> — igreja subterrânea dentro de mina de sal ativa. Tour guiado pela Via‑Crúcis e cúpula principal. Saída 13h, retorno ~17h30.</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>Criterion</strong> <span class="tag-food">Contemporânea</span> (Calle 69 #11‑40) — cozinha de autor em ambiente intimista</li>
+        <li><span class="act-label">🎭 Opcional</span> Teatro Colón — verificar programação para a noite</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 4 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">04</div>
+      <div class="dc-title">
+        <h4>17/03 (Qua) — Passeio a Cavalo nas Montanhas <span class="dc-city-badge">🏙️ Bogotá</span></h4>
+        <div class="dc-sub">Aventura equestre pelos Andes e tarde cultural</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🐴 Manhã</span> <strong>Passeio a cavalo guiado</strong> <span class="tag-activity">⭐ Aventura</span> — saída 8h. Traslado para haras nas montanhas orientales (45 min) + 2h de trilha passando por fazendas, florestas de arrayán e miradores. Pausa para aguapanela com queijo.</li>
+        <li><span class="act-label">🍽️ Almoço</span> <strong>La Puerta Falsa</strong> <span class="tag-food">Tradicional</span> (Calle 11 #5‑41) — desde 1816, famoso por tamales e chocolate santafereiro</li>
+        <li><span class="act-label">🏛️ Tarde</span> Opção cultural: <strong>Museo Miguel Urrutia (MAMU)</strong> ou <strong>Jardín Botánico</strong></li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>Harry Sasson</strong> <span class="tag-food">Autor</span> (Calle 69 #11‑40) — cozinha de autor com ingredientes colombianos de alta qualidade</li>
+        <li><span class="act-label">📝 Preparação</span> Organizar detalhes para o workshop de esmeralda de amanhã</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 5 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">05</div>
+      <div class="dc-title">
+        <h4>18/03 (Qui) — Compras, Anel de Esmeralda & Jantar em Rooftop <span class="dc-city-badge">🏙️ Bogotá</span></h4>
+        <div class="dc-sub">Dia de glamour: Zona T de manhã, workshop à tarde, rooftop à noite</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🛍️ Manhã</span> <strong>Compras na Zona T</strong> <span class="tag-activity">⭐ Dedicado</span> — boutiques de design colombiano (Johanna Ortiz, Silvia Tcherassi), joalherias, mercados de arte. Foco em moda autoral, artesanato wayuu e filigrana.</li>
+        <li><span class="act-label">🍽️ Almoço</span> <strong>Criterión Bogotá</strong> ou <strong>Salto de la Abuela</strong> na Zona T — opção leve e sofisticada</li>
+        <li><span class="act-label">💍 Tarde</span> <strong>Workshop de anel de esmeralda colombiana</strong> <span class="tag-activity">⭐ Experiência única</span> (3h) — seleção da pedra bruta, lapidação guiada, design do anel em prata/ouro, polimento final e certificado de autenticidade</li>
+        <li><span class="act-label">🌇 Noite</span> <strong>Jantar em rooftop com vista panorâmica</strong> <span class="tag-food">⭐ Dedicado</span> — sugeridos: <strong>Azul Bistró Rooftop</strong>, <strong>Marea Rooftop</strong> (W Hotel) ou <strong>Andrés DC Rooftop</strong>. Reserva às 20h para o pôr do sol sobre os Andes. 🥂</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 6 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">06</div>
+      <div class="dc-title">
+        <h4>19/03 (Sex) — Bogotá → Cartagena <span class="dc-city-badge">⚓ Cartagena</span></h4>
+        <div class="dc-sub">Voo Avianca para a Cidade Amuralhada e primeiras impressões</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">✈️ Manhã</span> Voo <strong>Bogotá (BOG) → Cartagena (CTG)</strong> via <span class="act-highlight">Avianca</span> ~1h30</li>
+        <li><span class="act-label">🏨 Check‑in</span> <strong>Hotel Don Pedro de Heredia</strong> <span class="tag-hotel">⭐ Sugerido</span> — dentro da Cidade Amuralhada, próximo à Plaza Santo Domingo. Edifício colonial restaurado com piscina interna.</li>
+        <li><span class="act-label">🚶 Tarde</span> Passeio de orientação: Plaza Santo Domingo, Iglesia de Santo Domingo e ruas ao redor</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>Carmen Cartagena</strong> <span class="tag-food">Autor Caribenha</span> (Calle del Santo Domingo #36‑76) — cozinha de autor com ingredientes do Caribe colombiano</li>
+        <li><span class="act-label">🌙 Opcional</span> Caminhada noturna pelas muralhas iluminadas</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 7 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">07</div>
+      <div class="dc-title">
+        <h4>20/03 (Sáb) — Cidade Amuralhada & Getsemaní <span class="dc-city-badge">⚓ Cartagena</span></h4>
+        <div class="dc-sub">História colonial + arte de rua vibrante + pôr do sol no mar</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🚶 Manhã</span> Tour guiado pela <strong>Cidade Amuralhada</strong>: Porta del Relógio, Plaza de Bolívar, Catedral de Santa Catalina, Palacio de la Inquisición, Bóvedas e caminhada pelas muralhas</li>
+        <li><span class="act-label">🍽️ Almoço</span> <strong>La Mulata</strong> <span class="tag-food">Típica</span> (Calle del Santo Domingo #34‑90) — cozinha cartagenera autêntica</li>
+        <li><span class="act-label">🎨 Tarde</span> <strong>Getsemaní</strong> — Plaza de la Trinidad, Callejon del Sambú, Callejon de la Esperanza, murais de street art e ateliers de artistas locais</li>
+        <li><span class="act-label">🌇 Pôr do sol</span> <strong>Café del Mar</strong> <span class="tag-activity">⭐ Clássico</span> — coquetel nas muralhas com vista para o Caribe</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>Di Silvio Trattoria</strong> <span class="tag-food">Italiana</span> (Calle del Santo Domingo #36‑96) — frutos do mar com toque italiano</li>
+        <li><span class="act-label">🕺 Noite</span> Salsa club em Getsemaní: <strong>Donde Fidel</strong> ou <strong>Casa del Jaguar</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 8 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">08</div>
+      <div class="dc-title">
+        <h4>21/03 (Dom) — Castillo San Felipe & Ilhas do Rosário <span class="dc-city-badge">⚓ Cartagena</span></h4>
+        <div class="dc-sub">Maior fortaleza espanhola da América e snorkeling em recifes de coral</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🏰 Manhã</span> <strong>Castillo San Felipe de Barajas</strong> — tour pelos túneis subterrânicos, salas de cmando e vista panorâmica d cidade e do mar</li>
+        <li><span class="act-label">🍽️ Almoço</span> Pescado frito com patacones em restaurante ocal perto do castelo</li>
+        <li><span class="act-label">🚤 Tarde</span> <strong>Ilhas do Rosário</strong> <span class="tag-activity">⭐ Imperdível</span> — lancha do muelle de los Pegasos (45 min). Snorkeling em recifes de coral, caminhada ecológica, oceanário (opcional) e tempo livre na praia. Retorno ~16h.</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>La Cevichería</strong> <span class="tag-food">Frutos do Mar</span> (Calle del Santo Domingo #36‑88) — ceviches e tiraditos frescos</li>
+        <li><span class="act-label">🎶 Opcional</span> Show de música caribenha ou champeta em praça pública — verificar agenda local</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 9 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">09</div>
+      <div class="dc-title">
+        <h4>22/03 (Seg) — Playa Blanca & Vulcão de Lama <span class="dc-city-badge">⚓ Cartagena</span></h4>
+        <div class="dc-sub">Praia paradisíaca em Barú + experiência terapêutica de lama vulcânica</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🏖️ Manhã</span> <strong>Playa Blanca (Isla de Barú)</strong> <span class="tag-activity">⭐ Paraíso</span> — saída 7h, lancha 45 min. Banho de mar cristalino, caiaque, stand up paddle. Almoço típico na praia. Retorno ~16h.</li>
+        <li><span class="act-label">🌋 Alternativa</span> <strong>Volcán de Lodo Totumo</strong> <span class="tag-activity">Experiência única</span> — imersão em lama vulcânica terapêutica + banho de limpeza em lagoa. Saída 13h, retorno 17h30. (Opção caso não vá à Playa Blanca.)</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>La Pergola</strong> <span class="tag-food">Italiana Romântica</span> (Calle del Santo Domingo #36‑52) — ambiente na Plaza Santo Domingo</li>
+        <li><span class="act-label">🌙 Noite</span> Passeio tranquilo pelas calles iluminadas ou coquetel no terraço do hotel</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 10 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">10</div>
+      <div class="dc-title">
+        <h4>23/03 (Ter) — Parasail & Cultura Afro‑Colombiana <span class="dc-city-badge">⚓ Cartagena</span></h4>
+        <div class="dc-sub">Voo livre sobre o Caribe + raízes históricas da região</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🪂 Manhã</span> <strong>Parasail</strong> <span class="tag-activity">⭐ Aventura</span> — voo livre sobre o mar do Caribe (até 150m de altitude) com vistas de Cartagena, Islas del Rosário e Barú. Praia de Bocagrande ou Castillo Grande. ~1h de atividade.</li>
+        <li><span class="act-label">🍽️ Almoço</span> <strong>El Boliche Cebichería</strong> <span class="tag-food">Fusão</span> (Calle del Santo Domingo #30‑58) — cebiche peruano com toque cartagenero</li>
+        <li><span class="act-label">🌍 Tarde</span> <strong>Tour cultural Afro‑Colombiano</strong> — visita a <strong>La Boquilla</strong> (vila de pescadores): passeio de canoa pelos manguezais, técnicas de pesca tradicionais e gastronomia local. Ou: visita ao <strong>Monumento a la India Catalina</strong>.</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>Celele</strong> <span class="tag-food">⭐ Premiado</span> (Calle del Santo Domingo #36‑92) — alta cozinha do Pacífico e Caribe colombianos</li>
+        <li><span class="act-label">🌙 Noite</span> Último passeio pelas muralhas e coquetel de despedida de Cartagena</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 11 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">11</div>
+      <div class="dc-title">
+        <h4>24/03 (Qua) — Cartagena → San Andrés <span class="dc-city-badge">🌴 San Andrés</span></h4>
+        <div class="dc-sub">Voo para o arquipélago de 7 cores e primeiras águas cristalinas</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">✈️ Manhã</span> Voo <strong>Cartagena (CTG) → San Andrés (ADZ)</strong> ~1h de voo</li>
+        <li><span class="act-label">🏨 Check‑in</span> <strong>Hotel Aquamare</strong> <span class="tag-hotel">⭐ Sugerido</span> — frente ao mar, acesso direto à praia, piscina externa e restaurante à beira‑mar. 🔗 <a href="https://www.booking.com/hotel/co/aquamare.pt-br.html?aid=304142&label=gen173nr-10CAEoggI46AdIM1gEaCCIAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4Asn7_dMGwAIB0gIkYzAyNGI0ZGEtN2IwZS00YzIzLWEyYTgtZmYwMGY0MGU5ZDMz2AIB4AIB&sid=71fbf404952a7399c0671ec06a6394fa&all_sr_blocks=778370901_430183914_2_1_0_680028&checkin=2027-03-25&checkout=2027-03-29&dest_id=-597118&dest_type=city&dist=0&group_adults=1&group_children=0&hapos=1&highlighted_blocks=778370901_430183914_2_1_0_680028&hpos=1&matching_block_id=778370901_430183914_2_1_0_680028&no_rooms=1&req_adults=1&req_children=0&room1=A&sb_price_type=total&sr_order=popularity&sr_pri_blocks=778370901_430183914_2_1_0_680028_416250000&srepoch=1786740344&srpvid=65cd91edacc1051b&type=total&ucfs=1" style="color:var(--co-soft); text-decoration:underline;" target="_blank">Reservar</a></li>
+        <li><span class="act-label">🏖️ Tarde</span> Passeio pela orla do hotel + banho de mar para "queimar" a energia do voo</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>El Caribeño</strong> <span class="tag-food">Ilha</span> (no hotel ou próximo) — pescado del día, arroces e pratos típicos sanandresanos</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 12 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">12</div>
+      <div class="dc-title">
+        <h4>25/03 (Qui) — Spratt Bight & Johnny Cay <span class="dc-city-badge">🌴 San Andrés</span></h4>
+        <div class="dc-sub">Praia principal e ilhéu paradisíaco com snorkeling</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🏖️ Manhã</span> <strong>Playa Spratt Bight</strong> — caminhada pela orla (2km), banho de mar calmo, stand up paddle ou caiaque</li>
+        <li><span class="act-label">🍽️ Almoço</span> <strong>La Regina</strong> <span class="tag-food">Frutos do Mar</span> — frente ao mar, mariscos e cocina criolla</li>
+        <li><span class="act-label">🏝️ Tarde</span> <strong>Johnny Cay</strong> <span class="tag-activity">⭐ Paraíso</span> — lancha 15 min até ilhéu com coqueirais. Snorkeling em volta da ilha, descanso em hamacas. Retorno ~16h.</li>
+        <li><span class="act-label">🌅 Pôr do sol</span> <strong>West View</strong> — piscinas naturais em formação rochosa, vista espetacular do entardecer</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>La Punta</strong> <span class="tag-food">Descontraída</span> (zona norte) — pescado y mariscos em ambiente casual</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 13 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">13</div>
+      <div class="dc-title">
+        <h4>26/03 (Sex) — Parasail & El Cove <span class="dc-city-badge">🌴 San Andrés</span></h4>
+        <div class="dc-sub">Voo sobre o Mar de 7 Cores + paraíso do mergulho com tartarugas</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🪂 Manhã</span> <strong>Parasail sobre o Mar de 7 Cores</strong> <span class="tag-activity">⭐ Aventura</span> — voo sobre as águas multicolores de San Andrés. Região de Spratt Bight ou San Luis. ~1h de atividade.</li>
+        <li><span class="act-label">🍽️ Almoço</span> <strong>El Vecino</strong> <span class="tag-food">Caseira</span> — comidas caseras sanandresanas preparadas na hora</li>
+        <li><span class="act-label">🤿 Tarde</span> <strong>El Cove</strong> <span class="tag-activity">⭐ Mergulho</span> — zona noroeste da ilha, águas tranquilas e cristalinas. Snorkeling com tartarugas, raias e peixes‑angeião frequentes. Aluguel de equipamento no local.</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>La Gusita</strong> <span class="tag-food">Mariscos</span> — frente ao mar, ambiente agradável</li>
+        <li><span class="act-label">🌙 Noite</span> Coquetel em bar da praia ou relaxamento no hotel</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 14 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">14</div>
+      <div class="dc-title">
+        <h4>27/03 (Sáb) — La Piscina, La Loma & Cultura Raizal <span class="dc-city-badge">🌴 San Andrés</span></h4>
+        <div class="dc-sub">Piscina natural, vila tradicional e raízes da ilha</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🏊 Manhã</span> <strong>La Piscina</strong> — formação rochosa natural que cria uma piscina no mar. Águas calmas e rasas, ideal para flutuação e relaxamento.</li>
+        <li><span class="act-label">🍽️ Almoço</span> <strong>Casa Columbus</strong> — cozinha internacional com opções locais e vegetarianas</li>
+        <li><span class="act-label">🏘️ Tarde</span> <strong>La Loma</strong> <span class="tag-activity">⭐ Cultural</span> — pueblo tradicional sanandresano, corazón de la cultura raizal. Visita à Iglesia Bautista, casas de madeira coloridas, Museo de la Isla e lojas de artesanato (hamacas, sombreros, joyas de coco). Provar <strong>rondón</strong> (guiso de pescado com coco).</li>
+        <li><span class="act-label">🎵 Opcional</span> Ensaio de música tradicional raizal (mento, polka) — se houver disponibilidade</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>El Mojito</strong> <span class="tag-food">Cóteis</span> — especializado em mariscos e drinks caribenhos</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 15 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">15</div>
+      <div class="dc-title">
+        <h4>28/03 (Dom) — Tour Completo da Ilha & Mergulho <span class="dc-city-badge">🌴 San Andrés</span></h4>
+        <div class="dc-sub">Buggy/jeep por toda ilha + descobertas subaquáticad</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🚙 Manhã</span> <strong>Tour de buggy ou jeep pela ilha</strong> <span class="tag-activity">⭐ Completo</span> — saída 8h. Norte (Punta Norte, Boca de Rio), Este (costa oriental), Oeste (San Luis), Centro (fazenda de coco). Paradas para fotos em mirantes.</li>
+        <li><span class="act-label">🐢 Tarde</span> <strong>Mergulho (snorkeling ou scuba)</strong> — snorkeling em ponos recomendados (La Piscina, West Point, El Cove) ou mergulho autônomo com operadores locais (Dive San Andrés, Sea & Sea). ~2h30.</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>La Vista</strong> <span class="tag-food">Panorâmica</span> — restaurante com vista para o mar. Jantar de despedida da ilha.</li>
+        <li><span class="act-label">🌙 Noite</span> Último passeio pela orla, compras finais (ron, café, artesanato) e preparação das malas</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 16 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">16</div>
+      <div class="dc-title">
+        <h4>29/03 (Seg) — San Andrés → Bogotá <span class="dc-city-badge">🏙️ Bogotá</span></h4>
+        <div class="dc-sub">Retorno à capital para o último jantar especial</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">✈️ Manhã</span> Voo <strong>San Andrés (ADZ) → Bogotá (BOG)</strong> ~1h45</li>
+        <li><span class="act-label">🏨 Check‑in</span> <strong>Novotel Bogotá Parque 93</strong> ou <strong>Best Western Plus 93 Park Hotel</strong> (mesmo da estadia inicial)</li>
+        <li><span class="act-label">🚶 Tarde</span> Descanso ou passeio leve de orientação — nível de energia conforme o cansaço acumulado</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>El Cielo</strong> <span class="tag-food">⭐ Experiência Sensorial</span> (reserva essencial) — cozinha de autor com conceito sensorial multimídia. Alternativa: <strong>Leo Cocina y Cava</strong> (alta cozinha colombiana)</li>
+        <li><span class="act-label">🧳️ Noite</span> Prepração das malas para o retorno a Belém</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 17 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">17</div>
+      <div class="dc-title">
+        <h4>30/03 (Ter) — Bogotá: Despedida & Compras Finais <span class="dc-city-badge">🏙️ Bogotá</span></h4>
+        <div class="dc-sub">Último dia na Colômbia — compras, relaxamento e despedida</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">🛍️ Manhã</span> Últimas compras: <strong>Centro Comercial Andino</strong> ou artesanato no <strong>Parque 93</strong>. Opção cultural: <strong>Maloka</strong> (centro de ciência) ou <strong>Observatorio Astronómico</strong>.</li>
+        <li><span class="act-label">🍽️ Almoço</span> <strong>Amazónico</strong> <span class="tag-food">Cozinha Amazônica</span> — ingredientes exóticos da selva colombiana em pratos sofisticados</li>
+        <li><span class="act-label">🧘 Tarde</span> Relaxamento no spa do hotel (se disponível) ou passeio leve no <strong>Parque Simón Bolívar</strong>/<strong>Jardín Botánico</strong>. Verificação final de documentos e pertences.</li>
+        <li><span class="act-label">🍽️ Jantar</span> <strong>Andrés Carne de Res</strong> (Chía) — experiência completa de despedida. Alternativa: <strong>Club Colombia</strong> (pub gastronômico) ou <strong>El Prado</strong> (cozinha tradicional elegante).</li>
+        <li><span class="act-label">🌙 Noite</span> Último passeio pela Zona T ou retorno cedo ao hotel antes do voo</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DIA 18 -->
+  <div class="day-card">
+    <div class="dc-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="dc-num">18</div>
+      <div class="dc-title">
+        <h4>01/04 (Qua) — Retorno a Belém via Manaus <span class="dc-city-badge">✈️ Viagem</span></h4>
+        <div class="dc-sub">Conexão tranquila em Manaus e chegada em casa</div>
+      </div>
+      <div class="dc-toggle">▼</div>
+    </div>
+    <div class="dc-body">
+      <ul class="act-list">
+        <li><span class="act-label">✈️ Madrugada</span> Check‑out e traslado ao Aeroporto El Dorado (BOG)</li>
+        <li><span class="act-label">✈️ Manhã</span> Voo <strong>Bogotá → Manaus (MAO)</strong> via <span class="act-highlight">Avianca</span> ~3h00</li>
+        <li><span class="act-label">☕ Conexão</span> Tempo em Manaus — opcional: visita rápida ao <strong>Mercado Adolpho Lisboa</strong> ou passeio marginal pelo <strong>Rio Negro</strong> (se o tempo de conexão permitir)</li>
+        <li><span class="act-label">✈️ Tarde</span> Voo <strong>Manaus → Belém (BEL)</strong> — chegada no final da tarde. Fim da viagem! 🎉</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-heading reveal"><h3>🏨 Hotéis <span class="sh-line"></span></h3></div>
 <div class="content-card reveal reveal-delay-1">
   <div class="content-inner">
-    <div class="city-grid">
-      <div class="city-card"><div class="cc-icon">🏛️</div><div class="cc-name">Bogotá</div><div class="cc-desc">Capital cultural, Museu do Ouro, Monserrate, La Candelaria e gastronomia imperdível.</div></div>
-      <div class="city-card"><div class="cc-icon">🏛️</div><div class="cc-name">Cartagena</div><div class="cc-desc">Cidade colonial amuralhada, cores vibrantes, história caribenha e noites animadas.</div></div>
-      <div class="city-card"><div class="cc-icon">🏝️</div><div class="cc-name">San Andrés</div><div class="cc-desc">Praias paradisíacas, mar de 7 cores, mergulho e relaxamento total no Caribe.</div></div>
+    <div class="hotel-grid">
+
+      <div class="hotel-card">
+        <div class="hc-icon">🏝️</div>
+        <div class="hc-name">Hotel Aquamare — San Andrés</div>
+        <div class="hc-addr">⭐ Sugerido para 25–29/03</div>
+        <div class="hc-desc">Frente ao mar, acesso direto à praia, piscina externa, restaurante à beira‑mar e quartos com varanda vista oceano. Ideal para relaxamento total.</div>
+        <a class="hc-link" href="https://www.booking.com/hotel/co/aquamare.pt-br.html?aid=304142&label=gen173nr-10CAEoggI46AdIM1gEaCCIAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4Asn7_dMGwAIB0gIkYzAyNGI0ZGEtN2IwZS00YzIzLWEyYTgtZmYwMGY0MGU5ZDMz2AIB4AIB&sid=71fbf404952a7399c0671ec06a6394fa&all_sr_blocks=778370901_430183914_2_1_0_680028&checkin=2027-03-25&checkout=2027-03-29&dest_id=-597118&dest_type=city&dist=0&group_adults=1&group_children=0&hapos=1&highlighted_blocks=778370901_430183914_2_1_0_680028&hpos=1&matching_block_id=778370901_430183914_2_1_0_680028&no_rooms=1&req_adults=1&req_children=0&room1=A&sb_price_type=total&sr_order=popularity&sr_pri_blocks=778370901_430183914_2_1_0_680028_416250000&srepoch=1786740344&srpvid=65cd91edacc1051b&type=total&ucfs=1" target="_blank">🔗 Reservar →</a>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hc-icon">⚓</div>
+        <div class="hc-name">Hotel Don Pedro de Heredia — Cartagena</div>
+        <div class="hc-addr">⭐ Sugerido para 19–24/03</div>
+        <div class="hc-desc">Dentro da Cidade Amuralhada, próximo à Plaza Santo Domingo. Edifício colonial restaurado com piscina interna, restaurante à la carte e serviço de concierge.</div>
+        <a class="hc-link" href="https://www.booking.com/hotel/co/don-pedro-de-heredia.pt-br.html?label=gen173nr-10CAEoggI46AdIM1gEaCCIAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4Asn7_dMGwAIB0gIkYzAyNGI0ZGEtN2IwZS00YzIzLWEyYTgtZmYwMGY0MGU5ZDMz2AIB4AIB&aid=304142&ucfs=1&checkin=2027-03-19&checkout=2027-03-24&group_adults=1&no_rooms=1&group_children=0&srpvid=1eb99237888a0019&srepoch=1786740465&all_sr_blocks=26078107_342193292_1_1_0&highlighted_blocks=26078107_342193292_1_1_0&matching_block_id=26078107_342193292_1_1_0&atlas_src=hp_iw_title" target="_blank">🔗 Reservar →</a>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hc-icon">🏙️</div>
+        <div class="hc-name">Novotel Bogotá Parque 93</div>
+        <div class="hc-addr">14–18/03 &amp; 29–30/03 · Zona 93</div>
+        <div class="hc-desc">Avenida Chile con Calle 73 #9‑32. Piscina externa, academia, restaurante no local, Wi‑Fi. A 5 min da Zona T e Parque 93.</div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hc-icon">🏙️</div>
+        <div class="hc-name">Best Western Plus 93 Park Hotel</div>
+        <div class="hc-addr">Alternativa · Zona 93</div>
+        <div class="hc-desc">Calle 73 #9‑42. Café da manhã incluso, rooftop com vista, business center. Localização na esquina da Calle 73 com Carrera 9.</div>
+      </div>
+
     </div>
   </div>
 </div>
 
-<footer class="site-footer"><p>🇨🇴 Colômbia 2027 · Rafael & Victoria · ☕🌴💃</p></footer>
+<div class="section-heading reveal"><h3>🌟 Experiências Destacadas <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-2">
+  <div class="content-inner">
+    <div class="exp-highlights">
+
+      <div class="exp-card">
+        <div class="ec-city">🏙️ Bogotá</div>
+        <h5>🎨 Museu Botero (Jusos Botero)</h5>        <p>123 obras de Fernando Botero + 85 peças de Picasso, Dalí, Miró e Monet no acervo pessoal do artista.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="ec-city">🏙️ Bogotá</div>
+        <h5>🐴 Passeio a Cavalo nas Montanhas</h5>
+        <p>Trilhas andinas por fazendas tradicionais, florestas nativas e miradouros com paisagens espetaculares. Guiado por expertos locais.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="ec-city">🏙️ Bogotá</div>
+        <h5>💍 Workshop de Anel de Esmeralda</h5>
+        <p>Selecione, lápide e crie seu próprio anel de esmeralda colombiana com joalheiro mestre. Certificado de autenticidade incluso.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="ec-city">🏙️ Bogotá</div>
+        <h5>🌇 Jantar em Rooftop</h5>
+        <p>Vista panorâmica dos Andes ao pôr do sol. Sugestões: Azul Bistró, Marea Rooftop ou Andrés DC Rooftop. 🥂</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="ec-city">⚓ Cartagena</div>
+        <h5>🪂 Parasail sobre o Caribe</h5>
+        <p>Voo livre até 150m de altitude sobre as águas cristalinas do Caribe colombiano. Vistas de Cartagena, Islas del Rosário e Barú.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="ec-city">⚓ Cartagena</div>
+        <h5>🏰 Castillo San Felipe &amp; Ilhas do Rosário</h5>
+        <p>Maior fortaleza espanhola das Américas + snorkeling em recifes de coral protegidos no Parque Nacional Natural.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="ec-city">⚓ Cartagena</div>
+        <h5>🎨 Getsemaní &amp; Playa Blanca</h5>
+        <p>Street art vibrante e vida boêmia no bairro mais autêntico + praia paradisíaca em Isla de Barú.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="ec-city">🌴 San Andrés</div>
+        <h5>🪂 Parasail sobre o Mar de 7 Cores</h5>
+        <p>Voo livre sobre as águas multicolores que deram fama mundial à ilha. Perspectiva única e inesquecível.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="ec-city">🌴 San Andrés</div>
+        <h5>🏝️ Johnny Cay, La Piscina &amp; West View</h5>
+        <p>Ilhéu paradisíaco, piscina natural formada por rochas e pôr do sol com vistas espetaculares.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="ec-city">🌴 San Andrés</div>
+        <h5>🐢 Mergulho em El Cove &amp; Tour da Ilha</h5>
+        <p>Snorkeling com tartarugas e raias + tour completo de buggy: de Punta Norte às fazendas de coco no interior.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section-heading reveal"><h3>🏙️ Destinos <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-3">
+  <div class="content-inner">
+    <div class="city-grid">
+      <div class="city-card"><div class="cc-icon">🏛️</div><div class="cc-name">Bogotá</div><div class="cc-desc">Capital cultural onde tradição e modernidade se encontram. Museu do Ouro, Monserrate, La Candelaria, Zona T e cena gastronômica premiada. Altitude 2.640m, clima fresco o ano todo.</div></div>
+      <div class="city-card"><div class="cc-icon">⚓</div><div class="cc-name">Cartagena</div><div class="cc-desc">Jóia colonial do Caribe com energia contagiante. Muralhas históricas, praias cristalinas e vida noturna vibrante. Cidade Amuralhada, Getsemaní, Castillo San Felipe e Ilhas do Rosário.</div></div>
+      <div class="city-card"><div class="cc-icon">🏝️</div><div class="cc-name">San Andrés</div><div class="cc-desc">Paraíso de 7 cores no Caribe. Praias de areia branca, mar de tonalidades únicas, mergulho em recifes protegidos e cultura raizal acolhedora. O ritmo lento da ilha é o verdadeiro luxo.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-heading reveal"><h3>✈️ Logística de Voos <span class="sh-line"></span></h3></div>
+<div class="content-card reveal reveal-delay-4">
+  <div class="content-inner">
+    <ul class="act-list" style="font-size:0.85em;">
+      <li><span class="act-label">14/03</span> <strong>BEL → MAO → BOG</strong> <span class="tag-transport">Avianca</span> Voo de ida Belém via Manaus para Bogotá</li>
+      <li><span class="act-label">19/03</span> <strong>BOG → CTG</strong> <span class="tag-transport">Avianca</span> Bogotá → Cartagena ~1h30</li>
+      <li><span class="act-label">24/03</span> <strong>CTG → ADZ</strong> <span class="tag-transport">Avianca</span> Cartagena → San Andrés ~1h</li>
+      <li><span class="act-label">29/03</span> <strong>ADZ → BOG</strong> <span class="tag-transport">Avianca</span> San Andrés → Bogotá ~1h45</li>
+      <li><span class="act-label">01/04</span> <strong>BOG → MAO → BEL</strong> <span class="tag-transport">Avianca</span> Bogotá via Manaus para Belém ~3h + conexão</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>🇨🇴 Colômbia 2027 · Rafael & Victoria · ☕🌴💃</p>
+  <p style="margin-top:4px; font-size:0.6em;">14 Mar — 1 Abr 2027 · Bogotá · Cartagena · San Andrés · Avianca · BEL→MAO→BOG</p>
+</footer>
 
 <script>
   const obs = new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting)i.target.classList.add('visible')})},{threshold:.08});
