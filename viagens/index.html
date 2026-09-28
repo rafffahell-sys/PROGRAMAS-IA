@@ -255,6 +255,33 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   }
 
+  /* Viagens já realizadas: tratamento monocromático para diferenciá-las */
+  .trip-card.trip-completed .card-banner .banner-bg,
+  .trip-card.trip-completed .card-banner .flag-watermark {
+    filter: grayscale(1);
+  }
+  .trip-card.trip-completed .card-banner .banner-overlay {
+    background: linear-gradient(to top, rgba(10,10,18,0.94) 0%, rgba(10,10,18,0.28) 100%);
+  }
+  .trip-card.trip-completed .card-body,
+  .trip-card.trip-completed .card-footer { filter: grayscale(1); }
+  .trip-card.trip-completed::after {
+    content: "VIAGEM REALIZADA";
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 3;
+    padding: 7px 11px;
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 999px;
+    background: rgba(12,12,14,0.78);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+  }
+
   .trip-card .card-banner {
     height: 180px;
     position: relative;
@@ -605,7 +632,7 @@
     <div class="trips-grid">
 
       <!-- Argentina 2026 -->
-      <a href="argentina-2026-rafael-victoria.html" class="trip-card card-argentina reveal reveal-delay-1">
+      <a href="argentina-2026-rafael-victoria.html" class="trip-card card-argentina trip-completed reveal reveal-delay-1">
         <div class="card-banner">
           <div class="banner-bg"></div>
           <div class="flag-watermark flag-ar"></div>
