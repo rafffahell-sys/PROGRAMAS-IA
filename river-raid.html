@@ -64,8 +64,8 @@ function terrain(){
   ctx.fillStyle='#93d6cc';for(let i=0;i<22;i++){const sy=((i*37+scroll*1.7)%(H+8))-4,[l,r]=banks(sy);const span=r-l;if(span>45){const rx=l+18+((i*53+Math.floor(scroll))%Math.max(1,span-36));ctx.globalAlpha=.25+(i%3)*.12;ctx.fillRect(rx,sy,4+i%5,1)}}ctx.globalAlpha=1;
 }
 function drawPlayer(){
-  const x=player.x,y=player.y;ctx.save();ctx.translate(x,y);
-  // shadow, wings and tail first; nose points UP (forward), tail points down.
+  const x=player.x,y=player.y;ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI);
+  // Nose points DOWN, matching the aircraft's forward flight direction in this version.
   ctx.fillStyle='#06100b88';ctx.beginPath();ctx.ellipse(2,4,18,25,0,0,Math.PI*2);ctx.fill();
   ctx.fillStyle='#b6c7ae';ctx.beginPath();ctx.moveTo(0,-23);ctx.lineTo(5,-14);ctx.lineTo(21,-4);ctx.lineTo(22,2);ctx.lineTo(7,-1);ctx.lineTo(6,8);ctx.lineTo(13,14);ctx.lineTo(13,18);ctx.lineTo(3,15);ctx.lineTo(0,19);ctx.lineTo(-3,15);ctx.lineTo(-13,18);ctx.lineTo(-13,14);ctx.lineTo(-6,8);ctx.lineTo(-7,-1);ctx.lineTo(-22,2);ctx.lineTo(-21,-4);ctx.lineTo(-5,-14);ctx.closePath();ctx.fill();
   ctx.fillStyle='#e7ebc9';ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(4,-10);ctx.lineTo(3,12);ctx.lineTo(0,16);ctx.lineTo(-3,12);ctx.lineTo(-4,-10);ctx.closePath();ctx.fill();
