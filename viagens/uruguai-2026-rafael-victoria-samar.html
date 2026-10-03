@@ -832,8 +832,20 @@
     border: 1px solid rgba(255,255,255,0.04);
   }
 
+  /* Seguro viagem — resumo público, sem documentos ou identificadores pessoais */
+  .insurance-card { max-width: 1000px; margin: 0 auto 60px; padding: 28px; border: 1px solid rgba(6,182,212,0.23); border-radius: 18px; background: linear-gradient(135deg,rgba(6,182,212,0.09),rgba(255,255,255,0.025)); }
+  .insurance-intro { color: var(--text-dim); font-size: 0.88em; margin-bottom: 20px; }
+  .insurance-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr)); gap: 12px; }
+  .insurance-item { padding: 16px; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; background: rgba(10,10,18,0.45); }
+  .insurance-item strong { display: block; color: var(--cyan-soft); font-size: 0.85em; margin-bottom: 5px; }
+  .insurance-item span { display: block; font-size: 0.82em; color: var(--text-dim); }
+  .insurance-contact { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); color: var(--text-dim); font-size: 0.86em; }
+  .insurance-contact a { color: var(--cyan-soft); text-decoration: underline; text-underline-offset: 3px; }
+  .insurance-note { margin-top: 12px; color: var(--text-muted); font-size: 0.75em; }
+
   /* response */
   @media (max-width: 480px) {
+    .insurance-card { margin-left: 16px; margin-right: 16px; padding: 20px; }
     .summary-inner { grid-template-columns: repeat(2, 1fr); }
     .booking-grid { grid-template-columns: 1fr; }
     .flight-leg { flex-direction: column; align-items: flex-start; }
@@ -1106,6 +1118,22 @@
     </div>
   </div>
 </div>
+
+<!-- ==================== SEGURO VIAGEM ==================== -->
+<div class="section-heading reveal"><h3>🛡️ Seguros de Viagem <span class="sh-line"></span></h3></div>
+<section class="insurance-card reveal reveal-delay-1" aria-label="Seguros de viagem para o Uruguai">
+  <p class="insurance-intro"><strong>SulAmérica Viagem</strong> · Uruguai · Rafael, Victoria e Samar possuem apólices individuais. Coberturas de viagem válidas de <strong>01 a 08/11/2026</strong>, incluindo os dias previstos do roteiro (01 a 06/11).</p>
+  <div class="insurance-grid">
+    <div class="insurance-item"><strong>👥 Segurados</strong><span>Rafael · Victoria · Samar<br>3 seguros individuais contratados</span></div>
+    <div class="insurance-item"><strong>🏥 Assistência médica</strong><span>Despesas médicas, hospitalares e odontológicas no exterior, com extensão COVID-19: $ 15.000,00 por segurado.</span></div>
+    <div class="insurance-item"><strong>🧳 Bagagem e imprevistos</strong><span>Extravio de bagagem: $ 400,00; atraso de bagagem e atraso de voo: $ 50,00 cada, por segurado.</span></div>
+    <div class="insurance-item"><strong>🚑 Transporte e retorno</strong><span>Traslado médico, regresso sanitário e traslado de corpo: $ 15.000,00 cada, por segurado.</span></div>
+    <div class="insurance-item"><strong>✈️ Cancelamento e interrupção</strong><span>$ 200,00 cada, por segurado. Cancelamento: cobertura de 23/09 a 31/10/2026; interrupção: 01 a 08/11/2026.</span></div>
+    <div class="insurance-item"><strong>💳 Valor dos seguros</strong><span>Rafael: R$ 87,37 · Victoria: R$ 87,37 · Samar: R$ 166,95.<br>Total contratado: R$ 341,69.</span></div>
+  </div>
+  <div class="insurance-contact"><strong>🆘 Para acionar a SulAmérica em viagem internacional:</strong><br><a href="tel:+551135727543">+55 11 3572-7543</a> · WhatsApp <a href="https://wa.me/551132603999" target="_blank" rel="noopener noreferrer">+55 11 3260-3999</a>. Estes são os contatos da seguradora; os contatos dos passeios aparecem em Informações Importantes.</div>
+  <p class="insurance-note">Capitais indicados com o símbolo “$” exatamente como nas apólices; consulte os documentos originais para confirmar a moeda, as condições, exclusões e limites de cada cobertura. Por privacidade, os PDFs das apólices, documentos pessoais e números de apólice não são publicados neste site.</p>
+</section>
 
 <!-- ==================== TIMELINE ==================== -->
 <div class="section-heading reveal"><h3>📋 Roteiro Completo <span class="sh-line"></span></h3></div>
