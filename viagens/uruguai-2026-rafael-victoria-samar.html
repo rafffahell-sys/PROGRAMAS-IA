@@ -1,936 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>🇺🇾 Uruguai 2026 — Rafael, Victoria & Samar</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cyan: #06b6d4;
-    --cyan-soft: #22d3ee;
-    --cyan-glow: rgba(6,182,212,0.3);
-    --teal: #0e7490;
-    --gold: #fbbf24;
-    --bg: #0a0a12;
-    --bg-card: rgba(255,255,255,0.03);
-    --text: #e8e6e3;
-    --text-dim: rgba(255,255,255,0.55);
-    --text-muted: rgba(255,255,255,0.3);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0.035;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 256px 256px;
-  }
-
-  ::selection { background: var(--cyan); color: #fff; }
-
-  /* === PROGRESS BAR === */
-  .progress-bar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
-    background: rgba(10,10,18,0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    padding: 8px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 0.78em;
-    transform: translateY(-100%);
-    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  .progress-bar.visible { transform: translateY(0); }
-  .progress-bar .p-day { font-weight: 700; color: var(--gold); white-space: nowrap; }
-  .progress-bar .p-loc { color: var(--text-dim); white-space: nowrap; }
-  .progress-bar .p-track { flex: 1; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; min-width: 60px; }
-  .progress-bar .p-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--cyan), var(--teal)); transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); width: 0%; }
-  .progress-bar .p-pct { color: var(--text-dim); font-size: 0.85em; min-width: 36px; text-align: right; }
-
-  /* === NAV DOTS === */
-  .section-nav {
-    position: fixed;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .section-nav a {
-    display: block;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.12);
-    border: 1.5px solid rgba(255,255,255,0.08);
-    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-    position: relative;
-  }
-  .section-nav a:hover, .section-nav a.active {
-    background: var(--cyan);
-    border-color: var(--cyan);
-    box-shadow: 0 0 12px var(--cyan-glow);
-    transform: scale(1.4);
-  }
-  .section-nav a .dot-label {
-    position: absolute;
-    right: 20px; top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.65em;
-    color: rgba(255,255,255,0.5);
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    background: rgba(10,10,18,0.8);
-    padding: 2px 8px;
-    border-radius: 6px;
-  }
-  .section-nav a:hover .dot-label { opacity: 1; }
-
-  /* === SCROLL REVEAL === */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.35s; }
-  .reveal-delay-4 { transition-delay: 0.5s; }
-
-  /* === COVER / HERO === */
-  .cover {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 80px 40px;
-    background: #050508;
-    overflow: hidden;
-  }
-
-  .cover .bg-layer {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(6,182,212,0.15) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(14,116,144,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(251,191,36,0.05) 0%, transparent 60%);
-  }
-  .cover .bg-image {
-    position: absolute;
-    inset: 0;
-    background: url('uruguai-montevideo.jpg') center 30% / cover no-repeat;
-    filter: brightness(0.35) saturate(1.1);
-  }
-  @media (max-width: 768px) {
-    .cover .bg-image { background-size: contain; background-color: #050508; }
-  }
-
-  /* Waves at bottom */
-  .cover .wave-bg {
-    position: absolute;
-    bottom: 0; left: 0; width: 100%;
-    height: 30%;
-    opacity: 0.12;
-  }
-  .cover .wave-bg svg { width: 100%; height: 100%; }
-
-  .cover .stars {
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(1.5px 1.5px at 10% 15%, #fff, transparent),
-      radial-gradient(1px 1px at 22% 8%, #fff, transparent),
-      radial-gradient(2px 2px at 35% 22%, #fff, transparent),
-      radial-gradient(1px 1px at 48% 5%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 60% 18%, #fff, transparent),
-      radial-gradient(1px 1px at 73% 10%, #fff, transparent),
-      radial-gradient(2px 2px at 85% 25%, #fff, transparent),
-      radial-gradient(1px 1px at 92% 8%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 15% 40%, rgba(255,255,255,0.7), transparent),
-      radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(2px 2px at 55% 45%, rgba(255,255,255,0.8), transparent),
-      radial-gradient(1px 1px at 70% 38%, rgba(255,255,255,0.6), transparent),
-      radial-gradient(1.5px 1.5px at 25% 55%, rgba(255,255,255,0.4), transparent),
-      radial-gradient(1px 1px at 50% 60%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(2px 2px at 80% 50%, rgba(255,255,255,0.7), transparent),
-      radial-gradient(1px 1px at 90% 65%, rgba(255,255,255,0.3), transparent);
-    background-size: 100% 100%;
-    opacity: 0.85;
-  }
-
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-  .star-twinkle {
-    position: absolute;
-    width: 3px; height: 3px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
-    animation: twinkle 3s ease-in-out infinite;
-  }
-  .star-twinkle:nth-child(1) { top: 12%; left: 15%; animation-delay: 0s; }
-  .star-twinkle:nth-child(2) { top: 22%; left: 75%; animation-delay: 1s; width: 4px; height: 4px; }
-  .star-twinkle:nth-child(3) { top: 8%; left: 55%; animation-delay: 2s; }
-  .star-twinkle:nth-child(4) { top: 35%; left: 30%; animation-delay: 0.5s; width: 2px; height: 2px; }
-  .star-twinkle:nth-child(5) { top: 18%; left: 88%; animation-delay: 1.5s; }
-  .star-twinkle:nth-child(6) { top: 45%; left: 60%; animation-delay: 0.8s; }
-
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .cover h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.8em, 7vw, 5.5em);
-    font-weight: 400;
-    letter-spacing: 2px;
-    background: linear-gradient(135deg, #fff 20%, #22d3ee 40%, #fbbf24 60%, #22d3ee 80%, #fff 100%);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-shift 8s ease infinite;
-    margin-bottom: 10px;
-    position: relative;
-    z-index: 2;
-    filter: drop-shadow(0 4px 30px rgba(6,182,212,0.2));
-  }
-
-  .cover .subtitle {
-    font-size: clamp(0.8em, 1.5vw, 1.1em);
-    font-weight: 300;
-    opacity: 0.8;
-    position: relative;
-    z-index: 2;
-    letter-spacing: 1px;
-    font-style: italic;
-  }
-
-  .cover .subtitle .highlight-name {
-    color: var(--cyan-soft);
-  }
-
-  .cover .divider-line {
-    width: 140px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--cyan), var(--gold), transparent);
-    margin: 16px auto;
-    position: relative;
-    z-index: 2;
-    border-radius: 2px;
-  }
-
-  .cover .info-bar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 14px;
-    position: relative;
-    z-index: 2;
-  }
-  .cover .info-bar .info-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 8px 20px;
-    border-radius: 50px;
-    font-size: 0.82em;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .cover .flags {
-    position: absolute;
-    bottom: 36px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 28px;
-    font-size: 2.4em;
-    opacity: 0.25;
-    z-index: 2;
-  }
-  .cover .flags span {
-    display: inline-block;
-    animation: flag-wave 3s ease-in-out infinite;
-  }
-  .cover .flags span:nth-child(2) { animation-delay: 0.5s; }
-  .cover .flags span:nth-child(3) { animation-delay: 1s; }
-  @keyframes flag-wave {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-4px) rotate(3deg); }
-    75% { transform: translateY(-2px) rotate(-2deg); }
-  }
-
-  .scroll-indicator {
-    position: absolute;
-    bottom: 85px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    opacity: 0.35;
-    animation: float-down 2s ease-in-out infinite;
-  }
-  @keyframes float-down {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(8px); }
-  }
-  .scroll-indicator span {
-    font-size: 0.65em;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-  }
-  .scroll-indicator .arrow {
-    width: 18px; height: 18px;
-    border-right: 2px solid rgba(255,255,255,0.3);
-    border-bottom: 2px solid rgba(255,255,255,0.3);
-    transform: rotate(45deg);
-  }
-
-  /* === SUMMARY STATS === */
-  .summary-bar {
-    max-width: 960px;
-    margin: -40px auto 40px;
-    padding: 0 24px;
-    position: relative;
-    z-index: 5;
-  }
-  .summary-inner {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-    overflow: hidden;
-    backdrop-filter: blur(16px);
-    background-clip: padding-box;
-  }
-  .summary-item {
-    padding: 20px 16px;
-    text-align: center;
-    background: rgba(255,255,255,0.02);
-  }
-  .summary-item .s-value {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: var(--cyan-soft);
-  }
-  .summary-item .s-label {
-    font-size: 0.72em;
-    color: var(--text-dim);
-    margin-top: 2px;
-    letter-spacing: 0.5px;
-  }
-
-  /* === TIMELINE CONTAINER === */
-  .timeline-container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px 24px 60px;
-    position: relative;
-  }
-
-  .timeline-container::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--cyan), var(--teal), var(--gold));
-    opacity: 0.3;
-    transform: translateX(-50%);
-  }
-
-  /* === DAY CARD === */
-  .day-card {
-    position: relative;
-    margin-bottom: 40px;
-    width: 100%;
-  }
-
-  .day-card .day-marker {
-    position: absolute;
-    left: 50%;
-    top: 20px;
-    transform: translateX(-50%);
-    z-index: 2;
-  }
-  .day-card .day-marker .day-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--cyan);
-    border: 3px solid var(--bg);
-    box-shadow: 0 0 20px var(--cyan-glow);
-  }
-  .day-card:nth-child(6) .day-marker .day-dot { background: var(--gold); box-shadow: 0 0 20px rgba(251,191,36,0.3); }
-
-  .day-card .day-content {
-    width: calc(50% - 35px);
-    position: relative;
-  }
-
-  /* Left */
-  .day-card:nth-child(odd) .day-content {
-    margin-left: 0;
-    margin-right: auto;
-  }
-  /* Right */
-  .day-card:nth-child(even) .day-content {
-    margin-left: auto;
-    margin-right: 0;
-  }
-
-  .day-card .day-header {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  .day-card .day-header .day-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.6em;
-    font-weight: 400;
-    color: var(--cyan-soft);
-    line-height: 1;
-  }
-  .day-card .day-header .day-date {
-    font-size: 0.78em;
-    color: var(--text-dim);
-    background: rgba(255,255,255,0.04);
-    padding: 2px 12px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.04);
-  }
-
-  .day-card .day-body {
-    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-    padding: 24px;
-    backdrop-filter: blur(4px);
-    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  .day-card .day-body:hover {
-    border-color: rgba(6,182,212,0.15);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-  }
-
-  .day-card .day-body .day-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .day-card .day-body .day-section {
-    margin-bottom: 10px;
-  }
-  .day-card .day-body .day-section:last-child { margin-bottom: 0; }
-  .day-card .day-body .day-section .sec-label {
-    font-size: 0.7em;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--cyan);
-    margin-bottom: 2px;
-  }
-  .day-card .day-body .day-section .sec-value {
-    font-size: 0.88em;
-    color: var(--text-dim);
-    line-height: 1.5;
-  }
-  .day-card .day-body .day-section .sec-value.highlight {
-    color: var(--gold);
-    font-weight: 500;
-  }
-  .day-card .day-body .day-section .sec-value.danger {
-    color: #fb7185;
-  }
-
-  .day-card .day-body .day-section .sec-value .tag-link {
-    display: inline-block;
-    font-size: 0.85em;
-    color: var(--cyan-soft);
-    text-decoration: none;
-    border-bottom: 1px dashed rgba(6,182,212,0.2);
-    transition: all 0.2s;
-  }
-  .day-card .day-body .day-section .sec-value .tag-link:hover { color: #fff; border-color: var(--cyan); }
-
-  /* === MOBILE TIMELINE === */
-  @media (max-width: 768px) {
-    .timeline-container::before { left: 20px; }
-    .day-card .day-marker { left: 20px; }
-    .day-card .day-content {
-      width: calc(100% - 45px);
-      margin-left: auto !important;
-      margin-right: 0 !important;
-    }
-    .cover { padding: 60px 24px 80px; }
-    .cover h1 { font-size: 2.2em; }
-    .cover .info-bar .info-chip { font-size: 0.72em; padding: 6px 14px; }
-    .summary-bar { margin-top: -20px; }
-    .summary-inner { grid-template-columns: repeat(3, 1fr); }
-    .section-nav { display: none; }
-  }
-
-  /* === HOTEL INFO === */
-  .hotel-card {
-    max-width: 960px;
-    margin: 20px auto 40px;
-    padding: 0 24px;
-  }
-  .hotel-inner {
-    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-    padding: 28px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    align-items: center;
-  }
-  .hotel-inner .h-icon {
-    font-size: 2.5em;
-    opacity: 0.6;
-  }
-  .hotel-inner .h-info { flex: 1; min-width: 200px; }
-  .hotel-inner .h-info .h-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15em;
-    color: #fff;
-  }
-  .hotel-inner .h-info .h-detail {
-    font-size: 0.82em;
-    color: var(--text-dim);
-  }
-  .hotel-inner .h-info .h-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 6px;
-  }
-  .hotel-inner .h-info .h-tags .h-tag {
-    font-size: 0.65em;
-    padding: 2px 10px;
-    border-radius: 4px;
-    background: rgba(6,182,212,0.08);
-    border: 1px solid rgba(6,182,212,0.12);
-    color: var(--cyan-soft);
-  }
-
-  /* === BOOKING INFO === */
-  .booking-card {
-    max-width: 960px;
-    margin: 20px auto 40px;
-    padding: 0 24px;
-  }
-  .booking-inner {
-    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-    padding: 28px;
-  }
-  .booking-inner h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15em;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .booking-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-  }
-  .booking-item {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.04);
-    border-radius: 14px;
-    padding: 18px;
-    transition: all 0.3s ease;
-  }
-  .booking-item:hover {
-    border-color: rgba(6,182,212,0.1);
-    background: rgba(255,255,255,0.03);
-  }
-  .booking-item .b-icon { font-size: 1.5em; margin-bottom: 6px; }
-  .booking-item .b-title { font-size: 0.82em; font-weight: 600; color: #fff; }
-  .booking-item .b-desc { font-size: 0.75em; color: var(--text-dim); margin-top: 4px; }
-  .booking-item .b-price { font-size: 0.82em; font-weight: 700; color: var(--gold); margin-top: 6px; }
-  .booking-item .b-confirmed {
-    font-size: 0.65em;
-    color: #22c55e;
-    margin-top: 4px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  /* === VOUCHER SECTION === */
-  .voucher-section {
-    max-width: 960px;
-    margin: 20px auto 40px;
-    padding: 0 24px;
-  }
-  .voucher-section h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15em;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .voucher-grid {
-    display: grid;
-    gap: 12px;
-  }
-  .voucher-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.04);
-    border-radius: 12px;
-    padding: 14px 18px;
-    transition: all 0.3s;
-  }
-  .voucher-item:hover { border-color: rgba(6,182,212,0.1); }
-  .voucher-item .v-left { display: flex; align-items: center; gap: 12px; }
-  .voucher-item .v-left .v-icon { font-size: 1.3em; opacity: 0.6; }
-  .voucher-item .v-left .v-info .v-name { font-size: 0.82em; color: #fff; }
-  .voucher-item .v-left .v-info .v-detail { font-size: 0.7em; color: var(--text-dim); }
-  .voucher-item .v-right { text-align: right; }
-  .voucher-item .v-right .v-price { font-size: 0.85em; font-weight: 600; color: var(--gold); }
-  .voucher-item .v-right .v-paid { font-size: 0.65em; color: #22c55e; }
-
-  /* === FLIGHT INFO === */
-  .flight-card {
-    max-width: 960px;
-    margin: 20px auto 40px;
-    padding: 0 24px;
-  }
-  .flight-inner {
-    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-    padding: 28px;
-  }
-  .flight-inner h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15em;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .flight-legs {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .flight-leg {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.04);
-    border-radius: 14px;
-    padding: 16px;
-  }
-  .flight-leg .fl-airline {
-    font-size: 1em;
-    font-weight: 700;
-    color: var(--cyan-soft);
-    min-width: 40px;
-  }
-  .flight-leg .fl-route {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .flight-leg .fl-route .fl-from,
-  .flight-leg .fl-route .fl-to {
-    font-size: 0.85em;
-    font-weight: 600;
-    color: #fff;
-  }
-  .flight-leg .fl-route .fl-arrow {
-    color: var(--text-dim);
-    font-size: 0.7em;
-  }
-  .flight-leg .fl-route .fl-time {
-    font-size: 0.75em;
-    color: var(--text-dim);
-  }
-  .flight-leg .fl-dur {
-    font-size: 0.72em;
-    color: var(--text-muted);
-    background: rgba(255,255,255,0.03);
-    padding: 2px 10px;
-    border-radius: 6px;
-  }
-  .flight-leg .fl-code {
-    font-size: 0.65em;
-    color: var(--text-muted);
-    background: rgba(255,255,255,0.03);
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
-
-  /* === BACK TO TOP === */
-  .back-to-top {
-    position: fixed;
-    bottom: 24px;
-    right: 20px;
-    z-index: 999;
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(6,182,212,0.08));
-    border: 1px solid rgba(6,182,212,0.15);
-    color: var(--text);
-    font-size: 1.2em;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0;
-    transform: translateY(20px) scale(0.8);
-    transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  }
-  .back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); }
-  .back-to-top:hover {
-    background: linear-gradient(135deg, rgba(6,182,212,0.35), rgba(6,182,212,0.15));
-    border-color: rgba(6,182,212,0.3);
-    box-shadow: 0 4px 25px var(--cyan-glow);
-    transform: translateY(-3px) scale(1.05);
-  }
-
-  /* === BACK LINK === */
-  .back-link {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
-  }
-  .back-link a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-    font-size: 0.78em;
-    background: rgba(10,10,18,0.6);
-    backdrop-filter: blur(12px);
-    padding: 8px 16px;
-    border-radius: 50px;
-    border: 1px solid rgba(255,255,255,0.06);
-    transition: all 0.3s;
-  }
-  .back-link a:hover { color: #fff; border-color: rgba(255,255,255,0.15); gap: 10px; }
-
-  /* === FOOTER === */
-  .site-footer {
-    text-align: center;
-    padding: 30px 24px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    max-width: 960px;
-    margin: 0 auto;
-  }
-  .site-footer p {
-    font-size: 0.72em;
-    color: var(--text-muted);
-    letter-spacing: 0.5px;
-  }
-
-  /* === SECTION HEADINGS === */
-  .section-heading {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 24px 10px;
-  }
-  .section-heading h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.3em;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-heading .sh-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(6,182,212,0.2), transparent);
-  }
-
-  /* Passengers */
-  .passengers {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  .passengers .pax {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.8em;
-    background: rgba(255,255,255,0.05);
-    padding: 4px 14px 4px 10px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.04);
-  }
-
-  /* Seguro viagem — resumo público, sem documentos ou identificadores pessoais */
-  .insurance-card { max-width: 1000px; margin: 0 auto 60px; padding: 28px; border: 1px solid rgba(6,182,212,0.23); border-radius: 18px; background: linear-gradient(135deg,rgba(6,182,212,0.09),rgba(255,255,255,0.025)); }
-  .insurance-intro { color: var(--text-dim); font-size: 0.88em; margin-bottom: 20px; }
-  .insurance-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr)); gap: 12px; }
-  .insurance-item { padding: 16px; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; background: rgba(10,10,18,0.45); }
-  .insurance-item strong { display: block; color: var(--cyan-soft); font-size: 0.85em; margin-bottom: 5px; }
-  .insurance-item span { display: block; font-size: 0.82em; color: var(--text-dim); }
-  .insurance-contact { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); color: var(--text-dim); font-size: 0.86em; }
-  .insurance-contact a { color: var(--cyan-soft); text-decoration: underline; text-underline-offset: 3px; }
-  .insurance-note { margin-top: 12px; color: var(--text-muted); font-size: 0.75em; }
-
-  /* response */
-  @media (max-width: 480px) {
-    .insurance-card { margin-left: 16px; margin-right: 16px; padding: 20px; }
-    .summary-inner { grid-template-columns: repeat(2, 1fr); }
-    .booking-grid { grid-template-columns: 1fr; }
-    .flight-leg { flex-direction: column; align-items: flex-start; }
-  }
-</style>
-</head>
-<body>
-
-<!-- ==================== PROGRESS BAR ==================== -->
-<div class="progress-bar" id="progressBar">
-  <span class="p-day" id="pDay">Dia 1</span>
-  <span class="p-loc" id="pLoc">Montevidéu</span>
-  <div class="p-track"><div class="p-fill" id="pFill"></div></div>
-  <span class="p-pct" id="pPct">0%</span>
-</div>
-
-<!-- ==================== SECTION NAV ==================== -->
-<nav class="section-nav" id="sectionNav">
-  <a href="#day1" class="active"><span class="dot-label">Dia 1 · Chegada</span></a>
-  <a href="#day2"><span class="dot-label">Dia 2 · Punta del Este</span></a>
-  <a href="#day3"><span class="dot-label">Dia 3 · Colonia</span></a>
-  <a href="#day4"><span class="dot-label">Dia 4 · Montevidéu</span></a>
-  <a href="#day5"><span class="dot-label">Dia 5 · Pizzorno</span></a>
-  <a href="#day6"><span class="dot-label">Dia 6 · Montevidéu livre</span></a>
-  <a href="#day7"><span class="dot-label">Dia 7 · Voo de volta</span></a>
-  <a href="#day8"><span class="dot-label">Dia 8 · Chegada a Belém</span></a>
-</nav>
-
-<!-- ==================== HERO ==================== -->
-<section class="cover" id="top">
-  <div class="bg-layer"></div>
-  <div class="bg-image"></div>
-  <div class="stars"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-  <div class="star-twinkle"></div>
-
-  <!-- Wave SVG -->
-  <div class="wave-bg">
-    <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
-      <path d="M0,150 C300,300 600,0 900,150 C1050,225 1150,100 1200,150 L1200,300 L0,300 Z" fill="var(--cyan)" opacity="0.3"/>
-      <path d="M0,200 C200,100 400,250 600,200 C800,150 1000,250 1200,200 L1200,300 L0,300 Z" fill="var(--teal)" opacity="0.2"/>
-    </svg>
-  </div>
-
-  <h1>🇺🇾 Uruguai 2026</h1>
-  <div class="divider-line"></div>
-  <p class="subtitle" style="margin-bottom:4px;">44 anos de <span class="highlight-name">Little</span></p>
-  <p class="subtitle" style="font-size:clamp(0.72em,1.2vw,0.9em);opacity:0.6;">Rafael · Victoria · Samar</p>
-
-  <div class="info-bar">
-    <span class="info-chip">📅 01 a 08 de Novembro · 8 dias (7 no Uruguai)</span>
-    <span class="info-chip">🏨 Dazzler by Wyndham Montevideo</span>
-    <span class="info-chip">✈️ Gol Linhas Aéreas</span>
-    <span class="info-chip">💰 R$ 4.257,00 em passeios</span>
-  </div>
-
-  <div class="passengers">
-    <span class="pax">👤 Rafael</span>
-    <span class="pax">👤 Victoria</span>
-    <span class="pax">👤 Samar</span>
-  </div>
-
-  <div class="flags">
-    <span>🇧🇷</span>
-    <span>🇺🇾</span>
-    <span>🇧🇷</span>
-  </div>
-
-  <div class="scroll-indicator">
-    <span>Roteiro</span>
-    <div class="arrow"></div>
-  </div>
-</section>
-
-<!-- ==================== BACK LINK ==================== -->
-<div class="back-link">
-  <a href="index.html">← Dashboard</a>
-</div>
-
-<!-- ==================== SUMMARY BAR ==================== -->
-<div class="summary-bar reveal reveal-delay-1">
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Caderno de viagem de Rafael, Victoria e Samar: Uruguai, de 01 a 08 de novembro de 2026."><title>Uruguai 2026 — Nosso caderno de viagem</title><style>:root{--paper:#f5f1e9;--white:#fffdf8;--ink:#173641;--muted:#526770;--blue:#265c75;--gold:#947338;--line:#d8dfdc;--soft:#e6eeeb;--serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}a{color:var(--blue);text-underline-offset:4px}button,a{touch-action:manipulation}button{font:inherit;cursor:pointer}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:5px}h1,h2,h3,p{margin:0}h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.12}.wrap{max-width:1180px;margin:auto;padding-inline:40px}.skip{position:absolute;left:16px;top:-100px;background:var(--white);padding:10px;z-index:10}.skip:focus{top:10px}.masthead{border-bottom:1px solid var(--line);background:var(--paper)}.masthead .wrap{display:flex;gap:20px;justify-content:space-between;align-items:center;padding-block:20px}.brand{font-family:var(--serif);font-size:23px;text-decoration:none;letter-spacing:-.5px}.brand span{color:var(--gold)}.topnav{display:flex;gap:24px;flex-wrap:wrap;align-items:center;font-size:13px}.topnav a{text-decoration:none;color:var(--ink)}.topnav a:hover{color:var(--gold)}.edition{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}.hero{padding-block:65px 45px;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:30px}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:650}.hero h1{font-size:clamp(65px,8vw,110px);letter-spacing:-5px;margin-block:16px 20px}.hero h1 em{font-weight:400;color:var(--blue);font-size:.65em;letter-spacing:-2px}.intro{font-size:17px;color:var(--muted);max-width:460px}.travelers{display:flex;gap:0;align-items:center;margin-top:26px;flex-wrap:wrap}.travelers span{padding:0 18px;border-left:1px solid var(--line);font-size:14px}.travelers span:first-child{padding-left:0;border:0}.hero-actions{display:flex;gap:12px;margin-top:30px;align-items:center;flex-wrap:wrap}.action{display:inline-flex;justify-content:center;align-items:center;min-height:44px;padding:10px 19px;background:var(--ink);color:var(--white);text-decoration:none;border:1px solid var(--ink);border-radius:5px;font-size:13px}.action.secondary{background:transparent;color:var(--ink);border-color:var(--line)}.art{background:var(--blue);color:var(--white);aspect-ratio:1;max-width:365px;width:100%;justify-self:end;position:relative;overflow:hidden;border-radius:50% 50% 5px 5px;display:flex;align-items:center;justify-content:center}.art:before,.art:after{content:'';position:absolute;width:150%;height:150%;border:1px solid #ffffff26;border-radius:50%;left:7%;top:50%}.art:after{left:-40%;top:60%}.art-inner{position:relative;z-index:1;text-align:center;padding:25px}.art .sun{display:block;margin:0 auto 16px;width:44px;height:44px;border-radius:50%;background:#e4bf7d;box-shadow:0 0 0 8px #e4bf7d18}.art small{font-size:10px;letter-spacing:3px}.art strong{display:block;font-family:var(--serif);font-size:65px;line-height:1.1;font-weight:400;letter-spacing:-2px;margin:14px 0}.art .stamp{border-top:1px solid #ffffff40;padding-top:14px;font-size:11px;letter-spacing:1px}.art-caption{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-align:right;margin-top:12px}.hero-side{min-width:0}.trip-strip{border-block:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;padding-block:17px;font-size:12px;flex-wrap:wrap;color:var(--muted)}.trip-strip b{color:var(--ink);font-weight:600}.summary-inner{display:grid;grid-template-columns:repeat(5,1fr);gap:15px;padding-block:28px}.s-value{font-family:var(--serif);font-size:30px;letter-spacing:-1px}.s-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px}.birthday{background:var(--ink);color:var(--white);padding:30px 35px;display:grid;grid-template-columns:1fr auto;gap:25px;border-radius:6px;align-items:center;margin-block:10px 50px}.birthday .eyebrow{color:#e4bf7d}.birthday h2{font-size:34px;margin-block:8px 10px}.birthday p{color:#d5e0df;font-size:13px;max-width:600px}.birthday a{color:#f1d5a0;text-decoration:none;font-size:13px;white-space:nowrap}.section-top{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:24px}.section-top h2{font-size:42px;letter-spacing:-1px}.section-top p{font-size:12px;color:var(--muted);margin-top:10px}.section-counter{font-size:11px;color:var(--gold);letter-spacing:1px}.daynav{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:30px}.daynav a{padding:11px 4px;text-align:center;text-decoration:none;border:1px solid var(--line);border-radius:5px;color:var(--ink);font-size:11px;background:var(--white);min-height:50px;display:flex;flex-direction:column;justify-content:center}.daynav strong{font-size:17px;font-weight:500}.daynav a.special{background:#f0e3cc;border-color:#d7c297}.daynav a:hover,.daynav a[aria-current=true]{background:var(--ink);color:var(--white)}.travel-layout{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:35px;align-items:start}.timeline-container{min-width:0}.day-card{border-top:1px solid var(--line);padding-block:27px;scroll-margin-top:30px}.day-card:first-child{padding-top:0;border-top:0}.day-marker{display:none}.day-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}.day-num{font-family:var(--serif);font-size:35px;color:var(--gold);line-height:1}.day-date{font-size:12px;color:var(--muted)}.day-title{font-family:var(--serif);font-size:25px;line-height:1.25;margin-bottom:20px}.day-body{min-width:0}.day-section{padding-left:14px;border-left:2px solid var(--line);margin-block:15px}.sec-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--blue);font-weight:650;margin-bottom:6px}.sec-value{font-size:14px;color:var(--muted);line-height:1.7}.sec-value strong{color:var(--ink);font-weight:600}.sec-value.highlight{color:var(--ink);font-weight:500}.tag-link{font-size:13px}.day-card#day5{background:#efe5d4;margin-inline:-18px;padding-inline:18px;border-radius:6px;border-top:0}.rail{display:grid;gap:18px}.rail-card{background:var(--white);border:1px solid var(--line);padding:24px;border-radius:6px}.rail-card h3{font-size:24px;margin:7px 0 15px}.rail-card p{font-size:13px;color:var(--muted);line-height:1.65}.rail-card .rail-line{padding-block:12px;border-top:1px solid var(--line)}.rail-card a{font-size:13px;display:inline-block;margin-top:12px;overflow-wrap:anywhere}.rail-card .big-date{font-family:var(--serif);font-size:48px;line-height:1.2}.rail-card .tiny{font-size:11px}.section-block{margin-top:55px;scroll-margin-top:30px}.section-block>h2{font-size:34px;letter-spacing:-.6px;margin-bottom:24px}.section-heading{display:none}.flight-inner,.hotel-inner,.booking-inner{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:26px}.flight-legs{display:grid;grid-template-columns:1fr 1fr;gap:12px}.flight-leg{border-bottom:1px solid var(--line);padding:18px 0;display:flex;gap:14px;flex-wrap:wrap;align-items:center}.fl-airline{font-size:12px;font-weight:650;color:var(--gold);border:1px solid var(--line);padding:5px}.fl-route{flex:1;min-width:180px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.fl-from,.fl-to{font-size:15px;font-weight:600}.fl-time{font-size:11px;color:var(--muted);flex-basis:100%}.fl-dur,.fl-code{font-size:11px;color:var(--muted)}.flight-legs>div:not(.flight-leg){grid-column:1/-1}.h-icon{display:none}.h-name{font-family:var(--serif);font-size:27px;margin-bottom:12px}.h-detail{font-size:14px;color:var(--muted);margin-bottom:10px}.h-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}.h-tag{font-size:11px;background:var(--soft);padding:4px 10px;border-radius:3px}.booking-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}.booking-item{padding:5px 0;min-width:0}.b-icon{font-size:22px;margin-bottom:12px}.b-title{font-family:var(--serif);font-size:22px;line-height:1.2}.b-desc{font-size:13px;color:var(--muted);margin-top:10px}.b-price{font-size:17px;font-weight:600;margin-top:12px}.b-confirmed{font-size:11px;color:#366647;margin-top:6px}.voucher-grid{display:grid;gap:0}.voucher-item{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);padding:18px 0}.voucher-item:last-child{border:0}.v-left{display:flex;gap:12px;align-items:center;min-width:0}.v-icon{font-size:21px}.v-name{font-size:14px;font-weight:600}.v-detail{font-size:12px;color:var(--muted);margin-top:4px}.v-right{text-align:right;max-width:250px}.v-price{font-size:16px;font-weight:600;white-space:nowrap}.v-paid{font-size:11px;color:#366647}.insurance-card{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:26px}.insurance-intro{font-size:14px;color:var(--muted);margin-bottom:22px}.insurance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.insurance-item{font-size:13px;color:var(--muted)}.insurance-item strong{display:block;color:var(--ink);margin-bottom:7px;font-weight:600}.insurance-contact{margin-top:25px;padding-top:20px;border-top:1px solid var(--line);font-size:14px}.insurance-note{font-size:11px;color:var(--muted);margin-top:15px}.utility-notes .hotel-inner{display:block}.utility-notes .hotel-inner>div{display:grid;gap:20px;grid-template-columns:repeat(2,1fr)!important}.utility-notes strong{color:var(--ink)}.site-footer{margin-top:65px;border-top:1px solid var(--line);padding:27px 0;text-align:center}.site-footer p{font-size:12px;color:var(--muted)}.footer-note{font-size:10px;color:var(--muted);margin-top:10px}.print-button{background:none;border:0;padding:0;color:var(--ink);font-size:13px;min-height:44px}.no-js{font-size:12px;margin-top:15px}.page-end{display:flex;justify-content:center;padding:20px}.page-end a{font-size:12px}
+.hero{padding-block:48px 32px;grid-template-columns:1.3fr .7fr}.hero h1{font-size:clamp(62px,7vw,94px)}.flag-postcard{background:var(--white);padding:23px 25px 20px;box-shadow:0 15px 35px #17364112;border:1px solid #e4dfd5;transform:rotate(3deg);width:290px;max-width:100%;margin-left:auto}.postcard-edition{display:block;font-size:9px;letter-spacing:1.6px;color:var(--muted);margin-bottom:18px}.national-flag{width:100%;height:auto;display:block;aspect-ratio:4/3;border:1px solid #e6e9e8}.postcard-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:15px}.postcard-footer>span{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--blue)}.postcard-footer small{font-size:10px;color:var(--muted);max-width:90px;text-align:right}.destination-photo{margin:0 0 24px;position:relative;overflow:hidden;border-radius:6px;background:var(--ink)}.destination-photo>img{display:block;width:100%;height:360px;object-fit:cover;object-position:center 58%}.destination-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#081d2bd9,transparent 65%);pointer-events:none}.destination-photo figcaption{position:absolute;z-index:1;inset:auto 32px 25px;color:#fffdf8;display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:10px}.photo-kicker{flex-basis:100%;font-size:10px;letter-spacing:2px;color:#edddbd}.destination-photo strong{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.14;letter-spacing:-.5px;text-shadow:0 1px 10px #0008}.photo-date{font-size:10px;letter-spacing:2px;color:#e0e6e6}.brand:before{content:'';display:inline-block;width:4px;height:20px;background:var(--blue);margin-right:10px;vertical-align:-2px}.birthday{border-bottom:3px solid #cba86a}.site-footer:before{content:'☀';display:block;color:var(--gold);font-size:30px;margin-bottom:10px}
+@media(min-width:1000px){.rail{position:sticky;top:24px}}
+@media(max-width:800px){.wrap{padding-inline:24px}.hero{gap:20px;padding-top:38px}.hero h1{font-size:76px}.art strong{font-size:50px}.travel-layout{grid-template-columns:1fr}.rail{grid-template-columns:1fr 1fr}.rail-card:last-child{grid-column:1/-1}.daynav{grid-template-columns:repeat(4,1fr)}.birthday{padding:25px;grid-template-columns:1fr;gap:18px}.birthday a{white-space:normal}.summary-inner{grid-template-columns:repeat(3,1fr)}.topnav{gap:16px}.edition{display:none}.booking-grid{gap:18px}.insurance-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.wrap{padding-inline:20px}.masthead .wrap{flex-wrap:wrap;padding-block:15px;gap:8px}.brand{font-size:21px}.topnav{width:100%;justify-content:space-between;font-size:12px;gap:10px}.hero{grid-template-columns:1fr;padding-block:35px 28px;gap:25px}.hero h1{font-size:80px;letter-spacing:-4px;margin-bottom:16px}.intro{font-size:15px}.hero-side{display:none}.hero-actions{margin-top:22px}.travelers span{font-size:13px;padding:0 12px}.trip-strip{gap:8px;flex-direction:column;font-size:12px}.summary-inner{grid-template-columns:repeat(2,1fr);gap:18px;padding-block:22px}.s-value{font-size:27px}.summary-item:last-child{grid-column:1/-1}.birthday{margin-bottom:35px}.birthday h2{font-size:29px}.section-top h2{font-size:34px}.section-counter{display:none}.rail{grid-template-columns:1fr}.rail-card:last-child{grid-column:auto}.section-block{margin-top:38px}.section-block>h2{font-size:28px}.flight-legs,.booking-grid,.insurance-grid{grid-template-columns:1fr}.flight-inner,.hotel-inner,.booking-inner,.insurance-card{padding:20px}.booking-item+.booking-item{border-top:1px solid var(--line);padding-top:20px}.voucher-section .booking-inner{padding:20px!important}.voucher-item{flex-direction:column;gap:10px}.v-right{text-align:left;padding-left:34px;max-width:none}.utility-notes .hotel-inner>div{display:grid;gap:20px;grid-template-columns:1fr!important}.day-title{font-size:24px}.day-card#day5{margin-inline:0;padding-inline:16px}.h-name{font-size:25px}.fl-route{min-width:0;flex-basis:70%}.insurance-contact a{overflow-wrap:anywhere}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media(max-width:800px){.flag-postcard{width:240px;padding:18px}.hero h1{font-size:70px}.destination-photo>img{height:300px}}
+@media(max-width:540px){.hero{grid-template-columns:1fr auto;gap:14px;align-items:start;padding-block:30px 25px}.hero-side{display:block;width:95px;margin-top:3px}.hero h1{font-size:clamp(42px,11vw,56px);letter-spacing:-2.5px;line-height:1.08}.hero h1 em{font-size:clamp(21px,5vw,27px);letter-spacing:-.7px}.hero .eyebrow{font-size:8px;letter-spacing:1px}.hero .intro{font-size:14px}.hero .travelers{gap:5px}.hero .travelers span{padding:0 8px;font-size:12px}.hero .travelers span:first-child{padding-left:0}.hero-actions{grid-column:1/-1}.hero .action{font-size:12px;padding:9px 12px}.flag-postcard{transform:rotate(4deg);padding:8px;width:95px}.postcard-edition{font-size:7px;letter-spacing:.4px;margin-bottom:6px}.postcard-footer{margin-top:5px}.postcard-footer>span{font-size:13px}.postcard-footer small{display:none}.destination-photo>img{height:225px;object-position:50% 55%}.destination-photo figcaption{inset:auto 18px 18px}.destination-photo strong{font-size:25px}.photo-kicker{font-size:8px;letter-spacing:1.5px}.photo-date{font-size:8px;letter-spacing:1px}}
+@media print{.destination-photo{display:none}.flag-postcard{box-shadow:none;transform:none;width:130px}.hero-side{display:none}}
+@media print{body{background:white;color:#173641;font-size:11pt}.masthead,.hero-actions,.daynav,.rail,.page-end,.skip{display:none}.wrap{max-width:none;padding:0}.hero{padding:10px 0;display:block}.hero h1{font-size:48pt}.hero-side{display:none}.travel-layout{display:block}.birthday{background:white;color:#173641;border:1px solid #ccc;padding:15px;margin-bottom:20px}.birthday p,.birthday .eyebrow,.birthday a{color:#173641}.day-card{break-inside:avoid}.section-block{margin-top:20px}.flight-inner,.hotel-inner,.booking-inner,.insurance-card{padding:15px}.summary-inner{padding-block:15px}.rail-card{break-inside:avoid}a{color:inherit}.site-footer{margin-top:20px}}
+</style></head><body><a class="skip" href="#roteiro">Ir para o roteiro</a>
+<header class="masthead"><div class="wrap"><a class="brand" href="#top">Rafael<span>.</span> viagens</a><nav class="topnav" aria-label="Navegação principal"><a href="#roteiro">Roteiro</a><a href="#reservas">Reservas</a><a href="#apoio">Contatos</a><button class="print-button" id="print-page" type="button">Imprimir ↗</button></nav><span class="edition">Caderno de viagem · 2026</span></div></header>
+<main class="wrap" id="top">
+<section class="hero" aria-labelledby="hero-title"><div><div class="eyebrow">República Oriental do Uruguai</div><h1 id="hero-title">Uruguai.<br><em>Novembro, 2026</em></h1><p class="intro">Oito dias, boas companhias e um aniversário especial. Nosso caderno para viver cada momento.</p><div class="travelers"><span>Rafael</span><span>Victoria</span><span>Samar</span></div><div class="hero-actions"><a class="action" href="#roteiro">Explorar o roteiro ↓</a><a class="action secondary" href="#day5">05 de novembro · aniversário</a></div></div><div class="hero-side"><div class="flag-postcard"><span class="postcard-edition">NOSSO DESTINO · NOVEMBRO 2026</span><img class="national-flag" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy11eSIgdmlld0JveD0iMCAwIDY0MCA0ODAiPgogIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoNjQwdjQ4MEgweiIvPgogIDxwYXRoIGZpbGw9IiMwMDM4YTgiIGQ9Ik0yNjYgNTMuM2gzNzR2NTMuNEgyNjZ6bTAgMTA2LjdoMzc0djUzLjNIMjY2ek0wIDI2Ni43aDY0MFYzMjBIMHptMCAxMDYuNmg2NDB2NTMuNEgweiIvPgogIDxnIGZpbGw9IiNmY2QxMTYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjIwIiBzdHJva2Utd2lkdGg9Ii42IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMzMuMyAxMzMuMylzY2FsZSgyLjkzMzMzKSI+CiAgICA8ZyBpZD0idXktYyI+CiAgICAgIDxnIGlkPSJ1eS1iIj4KICAgICAgICA8ZyBpZD0idXktYSI+CiAgICAgICAgICA8cGF0aCBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBkPSJtLTIgOC45IDMgNC41Yy0xMi40IDktNC45IDE0LjItMTMuNiAxNyA1LjQtNS4yLS45LTUuNyAzLjctMTYuOCIvPgogICAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTS00LjIgMTAuMmMtNi44IDExLjItMi40IDE3LjQtOC40IDIwLjMiLz4KICAgICAgICAgIDxwYXRoIGQ9Ik0wIDBoNkwwIDMzLTYgMGg2djMzIi8+CiAgICAgICAgPC9nPgogICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3V5LWEiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0icm90YXRlKDQ1KSIvPgogICAgICA8L2c+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3V5LWIiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0icm90YXRlKDkwKSIvPgogICAgPC9nPgogICAgPHVzZSB4bGluazpocmVmPSIjdXktYyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJzY2FsZSgtMSkiLz4KICAgIDxjaXJjbGUgcj0iMTEiLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMzLjMgMTMzLjMpc2NhbGUoLjI5MzMzKSI+CiAgICA8ZyBpZD0idXktZCI+CiAgICAgIDxwYXRoIGQ9Ik04MS00NGMtNyA4LTExLTYtMzYtNlMxNi0zNSAxMi0zOHMyMS0yMSAyOS0yMiAzMSA3IDQwIDE2bS0yOSA5YzcgNiAxIDE5LTYgMTlTMjYtMjggMzItMzYiLz4KICAgICAgPHBhdGggZD0iTTE5LTI2YzEtMTIgMTEtMTQgMjctMTRzMjMgMTIgMjkgMTVjLTcgMC0xMy0xMC0yOS0xMHMtMTYgMC0yNyAxMG0zIDJjNC02IDkgNiAyMCA2czE3LTMgMjQtOC0xMCAxMi0yMSAxMi0yNi02LTIzLTEwIi8+CiAgICAgIDxwYXRoIGQ9Ik01Ni0xN2MxMy03IDUtMTcgMC0xOSAyIDIgMTAgMTIgMCAxOU0wIDQzYzYgMCA4LTIgMTYtMnMyNyAxMSAzOCA3Yy0yMyA5LTE0IDMtNTQgM2gtNW02MyA2Yy00LTctMy01LTExLTE2IDggNiAxMCA5IDExIDE2TTAgNjdjMjUgMCAyMS01IDU0LTE5LTI0IDMtMjkgMTEtNTQgMTFoLTVtNS0yOWM3IDAgOS01IDE3LTVzMTkgMyAyNCA3YzEgMS0zLTgtMTEtOVMyNSA5IDE2IDdjMCA0IDMgMyA0IDkgMCA1LTkgNS0xMSAwIDIgOC00IDgtOSA4Ii8+CiAgICA8L2c+CiAgICA8dXNlIHhsaW5rOmhyZWY9IiN1eS1kIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB0cmFuc2Zvcm09InNjYWxlKC0xIDEpIi8+CiAgICA8cGF0aCBkPSJNMCA3NmMtNSAwLTE4IDMgMCAzczUtMyAwLTMiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="Bandeira do Uruguai"><div class="postcard-footer"><span>Uruguay</span><small>Uma viagem para guardar.</small></div></div></div></section>
+<div class="trip-strip"><span><b>01 — 08 novembro</b> · 7 dias no Uruguai</span><span><b>Base:</b> Dazzler Montevideo</span><span><b>Voos:</b> Gol Linhas Aéreas</span></div>
+<figure class="destination-photo"><img src="data:image/jpeg;base64,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" alt="Letreiro de Montevideo à beira da Rambla, com a cidade e o céu ao pôr do sol" width="800" height="365" fetchpriority="high"><figcaption><span class="photo-kicker">ÀS MARGENS DO RIO DA PRATA</span><strong>Montevidéu.<br>Nosso ponto de partida.</strong><span class="photo-date">01 — 08 NOV / 2026</span></figcaption></figure>
+<div class="summary-bar  ">
   <div class="summary-inner">
     <div class="summary-item">
       <div class="s-value">8</div>
@@ -955,9 +41,224 @@
   </div>
 </div>
 
-<!-- ==================== FLIGHTS ==================== -->
-<div class="section-heading reveal"><h3>✈️ Voos <span class="sh-line"></span></h3></div>
-<div class="flight-card reveal reveal-delay-1">
+<section class="birthday" aria-labelledby="birthday-title"><div><div class="eyebrow">05 novembro · quinta-feira</div><h2 id="birthday-title">44 anos de Little.</h2><p>Um dia de vinhos na Bodega Pizzorno e um jantar especial no Primuseum. Rafael, Victoria e Samar, juntos para celebrar.</p></div><a href="#day5">Ver o dia especial →</a></section><section id="roteiro" aria-labelledby="route-title"><div class="section-top"><div><div class="eyebrow">Dia a dia</div><h2 id="route-title">Nosso roteiro.</h2><p>De Belém a Montevidéu, com tempo para descobrir e celebrar.</p></div><span class="section-counter">01 — 08 NOVEMBRO</span></div><nav class="daynav" aria-label="Escolher um dia do roteiro"><a href="#day1"><span>DOM</span><strong>01 NOV</strong></a><a href="#day2"><span>SEG</span><strong>02 NOV</strong></a><a href="#day3"><span>TER</span><strong>03 NOV</strong></a><a href="#day4"><span>QUA</span><strong>04 NOV</strong></a><a href="#day5" class="special"><span>QUI · 🎂</span><strong>05 NOV</strong></a><a href="#day6"><span>SEX</span><strong>06 NOV</strong></a><a href="#day7"><span>SÁB</span><strong>07 NOV</strong></a><a href="#day8"><span>DOM</span><strong>08 NOV</strong></a></nav><div class="travel-layout">
+<div class="section-heading "><h3>📋 Roteiro Completo <span class="sh-line"></span></h3></div>
+<div class="timeline-container">
+
+  <!-- DAY 1 -->
+  <div class="day-card" id="day1">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">01</span>
+        <span class="day-date">Dom · 01/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">✈️ Belém → Montevidéu</div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã</div>
+          <div class="sec-value">
+            <strong>Embarque em Belém</strong><br>
+            Gol 1519 · BEL 03:25 → GRU 07:05<br>
+            Conexão em Guarulhos (2h40)<br>
+            Gol 7630 · GRU 09:45 → MVD 12:25
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌤️ Tarde</div>
+          <div class="sec-value highlight">✅ Chegada em Montevidéu<br>Check-in no Dazzler by Wyndham Montevideo (14:00)<br>Primeiro passeio pela cidade</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre — Jantar por conta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" id="day2">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">02</span>
+        <span class="day-date">Seg · 02/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">🏖️ Punta del Este</div>
+        <div class="day-section">
+          <div class="sec-label">📍 Pickup</div>
+          <div class="sec-value">08:45 no Dazzler by Wyndham Montevideo (recepção)</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã + 🌤️ Tarde</div>
+          <div class="sec-value highlight">🚌 City Tour Punta del Este · Dia inteiro (08:45 ~ 18:00)</div>
+          <div class="sec-value">
+            <strong>Inclui:</strong> transfer ida/volta · guia bilíngue (português/espanhol) · parada em Piriápolis · península de Punta del Este · Casapueblo (foto externa)<br>
+            <strong>Não inclui:</strong> ingresso Casapueblo · almoço · bebidas
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Organizado por</div>
+          <div class="sec-value"><a class="tag-link" href="https://brasileirosnouruguai.com.br" target="_blank" rel="noopener noreferrer">Brasileiros no Uruguai</a></div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" id="day3">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">03</span>
+        <span class="day-date">Ter · 03/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">🏛️ Colonia del Sacramento</div>
+        <div class="day-section">
+          <div class="sec-label">📍 Pickup</div>
+          <div class="sec-value">08:15 no Dazzler by Wyndham Montevideo (recepção)</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã + 🌤️ Tarde</div>
+          <div class="sec-value highlight">🚌 City Tour Colonia del Sacramento · Dia inteiro (08:15 ~ 17:30)</div>
+          <div class="sec-value">
+            <strong>Inclui:</strong> transfer ida/volta · guia bilíngue · visita guiada ao Barrio Histórico · Calle de los Suspiros · Faro · Plaza Mayor · muralhas portuguesas · vista para Buenos Aires<br>
+            <strong>Não inclui:</strong> almoço · entrada no Faro (~US$ 1) · museus (~US$ 4)
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" id="day4">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">04</span>
+        <span class="day-date">Qua · 04/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">🏙️ Montevidéu + Mercado do Porto</div>
+        <div class="day-section">
+          <div class="sec-label">📍 Pickup</div>
+          <div class="sec-value">08:15 no Dazzler by Wyndham Montevideo (recepção)</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã</div>
+          <div class="sec-value highlight">🚐 City Tour Montevidéu (08:15 ~ 12:30)</div>
+          <div class="sec-value">
+            <strong>Inclui:</strong> transfer em van compartilhada · guia bilíngue · Ciudad Vieja · Plaza Independencia · Palácio Salvo · Rambla · Pocitos · Carrasco
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌤️ Tarde</div>
+          <div class="sec-value highlight">🍖 Almoço no Mercado do Porto — <em>"El Palanque"</em></div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value">Livre</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card" id="day5">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">05</span>
+        <span class="day-date">Qui · 05/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">🎂 44 Anos de Little!</div>
+        <div class="day-section">
+          <div class="sec-label">📍 Pickup</div>
+          <div class="sec-value">09:20 no Dazzler by Wyndham Montevideo (recepção)</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã + 🌤️ Tarde</div>
+          <div class="sec-value highlight">🍷 Bodega Pizzorno com Almoço Harmonizado (09:20 ~ 16:30)</div>
+          <div class="sec-value">
+            <strong>Inclui:</strong> transfer ida/volta · guia bilíngue · visita guiada (vinhedos, barricas, tanques) · degustação de vinhos selecionados · almoço harmonizado de 3 tempos · café e sobremesa<br>
+            <strong>Não inclui:</strong> compra de vinhos na loja · bebidas extras
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌙 Noite</div>
+          <div class="sec-value highlight">✅ Jantar no Restaurante Primuseum — mesa reservada para 3 pessoas às 20:30</div>
+          <div class="sec-value">
+            <a class="tag-link" href="https://www.primuseum.com" target="_blank" rel="noopener noreferrer">primuseum.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card" id="day6">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header">
+        <span class="day-num">06</span>
+        <span class="day-date">Sex · 06/11</span>
+      </div>
+      <div class="day-body">
+        <div class="day-title">🏙️ Dia livre em Montevidéu</div>
+        <div class="day-section">
+          <div class="sec-label">🌅 Manhã</div>
+          <div class="sec-value">Permanência no Dazzler: diária adicional de 06 a 07/11, com 2 quartos e café da manhã incluído.</div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">🌤️ Tarde</div>
+          <div class="sec-value highlight">Tempo livre para aproveitar Montevidéu. Pernoite no Dazzler.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day-card" id="day7">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header"><span class="day-num">07</span><span class="day-date">Sáb · 07/11</span></div>
+      <div class="day-body">
+        <div class="day-title">✈️ Montevidéu → Rio de Janeiro → Belém</div>
+        <div class="day-section"><div class="sec-label">🌅 Manhã</div><div class="sec-value">Check-out cedo no Dazzler (limite do hotel: 10:00). Para o voo das 12:25, planejar chegada ao aeroporto de Carrasco (MVD) por volta de 09:25.</div></div>
+        <div class="day-section"><div class="sec-label">🌤️ Tarde</div><div class="sec-value highlight">Gol 7587 · MVD 12:25 → GIG 14:55 · Conexão no Rio de Janeiro (7h10).</div></div>
+        <div class="day-section"><div class="sec-label">🌙 Noite</div><div class="sec-value">Gol 2008 · GIG 22:05 → BEL 01:35 do dia seguinte.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="day-card" id="day8">
+    <div class="day-marker"><div class="day-dot"></div></div>
+    <div class="day-content">
+      <div class="day-header"><span class="day-num">08</span><span class="day-date">Dom · 08/11</span></div>
+      <div class="day-body">
+        <div class="day-title">🏠 Chegada a Belém</div>
+        <div class="day-section"><div class="sec-label">🌙 Madrugada</div><div class="sec-value highlight">✅ Chegada prevista ao aeroporto de Belém às 01:35 — fim da viagem.</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<aside class="rail" aria-label="Consulta rápida"><section class="rail-card"><div class="eyebrow">Nossa base</div><h3>Dazzler<br>Montevideo</h3><p>21 de Setiembre 2752<br>Montevidéu, Uruguai</p><div class="rail-line"><p>01–07 novembro · 6 noites<br>2 quartos · café da manhã</p></div><p class="tiny">Apresentar as duas confirmações e confirmar a continuidade dos quartos em 06/11.</p><a href="#hotel">Ver detalhes da hospedagem →</a></section><section class="rail-card"><div class="eyebrow">O dia de celebrar</div><div class="big-date">05.11</div><h3>Primuseum</h3><p>Jantar às 20:30<br>Mesa reservada · 3 pessoas</p><a href="https://www.primuseum.com" target="_blank" rel="noopener noreferrer">Conhecer o restaurante ↗</a></section><section class="rail-card"><div class="eyebrow">Sempre à mão</div><h3>Apoio em viagem</h3><p>Contatos da seguradora e da agência, documentação e orientações dos passeios.</p><a href="#apoio">Consultar contatos →</a><br><a href="#seguros">Consultar o seguro →</a></section></aside></div></section><section class="section-block " id="voos" aria-labelledby="voos-title"><h2 id="voos-title">O caminho até lá.</h2>
+<div class="section-heading "><h3>✈️ Voos <span class="sh-line"></span></h3></div>
+<div class="flight-card  ">
   <div class="flight-inner">
     <div class="flight-legs">
 
@@ -985,7 +286,7 @@
         <span class="fl-code">G3 7630</span>
       </div>
 
-      <div style="text-align:center;font-size:0.72em;color:var(--text-muted);padding:8px 0;">⏱ Conexão em GRU · 2h40</div>
+      <div>⏱ Conexão em GRU · 2h40</div>
 
       <div class="flight-leg">
         <span class="fl-airline">G3</span>
@@ -1011,19 +312,19 @@
         <span class="fl-code">G3 2008</span>
       </div>
 
-      <div style="text-align:center;font-size:0.72em;color:var(--text-muted);padding:8px 0;">⏱ Conexão em GIG · 7h10 · Chegada a Belém em 08/11</div>
+      <div>⏱ Conexão em GIG · 7h10 · Chegada a Belém em 08/11</div>
 
     </div>
-    <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
-      <span style="font-size:0.65em;background:rgba(255,255,255,0.03);padding:3px 12px;border-radius:6px;color:var(--text-dim);">🎒 Mochila + Bagagem de mão + 1 mala 23kg por adulto</span>
-      <span style="font-size:0.65em;background:rgba(255,255,255,0.03);padding:3px 12px;border-radius:6px;color:var(--text-dim);">⏰ Comparecer ao aeroporto com 3 horas de antecedência</span>
+    <div>
+      <span>🎒 Mochila + Bagagem de mão + 1 mala 23kg por adulto</span>
+      <span>⏰ Comparecer ao aeroporto com 3 horas de antecedência</span>
     </div>
   </div>
 </div>
 
-<!-- ==================== HOTEL ==================== -->
-<div class="section-heading reveal"><h3>🏨 Hospedagem <span class="sh-line"></span></h3></div>
-<div class="hotel-card reveal reveal-delay-1">
+</section><section class="section-block " id="hotel" aria-labelledby="hotel-title"><h2 id="hotel-title">Um lugar para voltar.</h2>
+<div class="section-heading "><h3>🏨 Hospedagem <span class="sh-line"></span></h3></div>
+<div class="hotel-card  ">
   <div class="hotel-inner">
     <div class="h-icon">🏨</div>
     <div class="h-info">
@@ -1043,9 +344,9 @@
   </div>
 </div>
 
-<!-- ==================== BOOKINGS ==================== -->
-<div class="section-heading reveal"><h3>🎫 Passeios Contratados <span class="sh-line"></span></h3></div>
-<div class="booking-card reveal reveal-delay-1">
+</section><section class="section-block " id="reservas" aria-labelledby="reservas-title"><h2 id="reservas-title">Experiências & reservas.</h2>
+<div class="section-heading "><h3>🎫 Passeios Contratados <span class="sh-line"></span></h3></div>
+<div class="booking-card  ">
   <div class="booking-inner">
     <div class="booking-grid">
       <div class="booking-item">
@@ -1073,10 +374,10 @@
   </div>
 </div>
 
-<!-- ==================== VOUCHERS / PAGAMENTOS ==================== -->
-<div class="section-heading reveal"><h3>💰 Comprovantes <span class="sh-line"></span></h3></div>
-<div class="voucher-section reveal reveal-delay-1">
-  <div class="booking-inner" style="padding:20px 28px;">
+</section><section class="section-block " id="pagamentos" aria-labelledby="pagamentos-title"><h2 id="pagamentos-title">Pagamentos organizados.</h2>
+<div class="section-heading "><h3>💰 Comprovantes <span class="sh-line"></span></h3></div>
+<div class="voucher-section  ">
+  <div class="booking-inner">
     <div class="voucher-grid">
       <div class="voucher-item">
         <div class="v-left">
@@ -1134,9 +435,9 @@
   </div>
 </div>
 
-<!-- ==================== SEGURO VIAGEM ==================== -->
-<div class="section-heading reveal"><h3>🛡️ Seguros de Viagem <span class="sh-line"></span></h3></div>
-<section class="insurance-card reveal reveal-delay-1" aria-label="Seguros de viagem para o Uruguai">
+</section><section class="section-block " id="seguros" aria-labelledby="seguros-title"><h2 id="seguros-title">Viajar com tranquilidade.</h2>
+<div class="section-heading "><h3>🛡️ Seguros de Viagem <span class="sh-line"></span></h3></div>
+<section class="insurance-card  " aria-label="Seguros de viagem para o Uruguai">
   <p class="insurance-intro"><strong>SulAmérica Viagem</strong> · Uruguai · Rafael, Victoria e Samar possuem apólices individuais. Coberturas de viagem válidas de <strong>01 a 08/11/2026</strong>, incluindo a volta em 07/11 e a chegada a Belém em 08/11.</p>
   <div class="insurance-grid">
     <div class="insurance-item"><strong>👥 Segurados</strong><span>Rafael · Victoria · Samar<br>3 seguros individuais contratados</span></div>
@@ -1150,252 +451,37 @@
   <p class="insurance-note">Capitais indicados com o símbolo “$” exatamente como nas apólices; consulte os documentos originais para confirmar a moeda, as condições, exclusões e limites de cada cobertura. Por privacidade, os PDFs das apólices, documentos pessoais e números de apólice não são publicados neste site.</p>
 </section>
 
-<!-- ==================== TIMELINE ==================== -->
-<div class="section-heading reveal"><h3>📋 Roteiro Completo <span class="sh-line"></span></h3></div>
-<div class="timeline-container">
-
-  <!-- DAY 1 -->
-  <div class="day-card" id="day1">
-    <div class="day-marker"><div class="day-dot"></div></div>
-    <div class="day-content">
-      <div class="day-header">
-        <span class="day-num">01</span>
-        <span class="day-date">Dom · 01/11</span>
-      </div>
-      <div class="day-body">
-        <div class="day-title">✈️ Belém → Montevidéu</div>
-        <div class="day-section">
-          <div class="sec-label">🌅 Manhã</div>
-          <div class="sec-value">
-            <strong>Embarque em Belém</strong><br>
-            Gol 1519 · BEL 03:25 → GRU 07:05<br>
-            Conexão em Guarulhos (2h40)<br>
-            Gol 7630 · GRU 09:45 → MVD 12:25
-          </div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌤️ Tarde</div>
-          <div class="sec-value highlight">✅ Chegada em Montevidéu<br>Check-in no Dazzler by Wyndham Montevideo (14:00)<br>Primeiro passeio pela cidade</div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌙 Noite</div>
-          <div class="sec-value">Livre — Jantar por conta</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 2 -->
-  <div class="day-card" id="day2">
-    <div class="day-marker"><div class="day-dot"></div></div>
-    <div class="day-content">
-      <div class="day-header">
-        <span class="day-num">02</span>
-        <span class="day-date">Seg · 02/11</span>
-      </div>
-      <div class="day-body">
-        <div class="day-title">🏖️ Punta del Este</div>
-        <div class="day-section">
-          <div class="sec-label">📍 Pickup</div>
-          <div class="sec-value">08:45 no Dazzler by Wyndham Montevideo (recepção)</div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌅 Manhã + 🌤️ Tarde</div>
-          <div class="sec-value highlight">🚌 City Tour Punta del Este · Dia inteiro (08:45 ~ 18:00)</div>
-          <div class="sec-value" style="margin-top:4px;">
-            <strong>Inclui:</strong> transfer ida/volta · guia bilíngue (português/espanhol) · parada em Piriápolis · península de Punta del Este · Casapueblo (foto externa)<br>
-            <strong>Não inclui:</strong> ingresso Casapueblo · almoço · bebidas
-          </div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">Organizado por</div>
-          <div class="sec-value"><a class="tag-link" href="https://brasileirosnouruguai.com.br" target="_blank">Brasileiros no Uruguai</a></div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌙 Noite</div>
-          <div class="sec-value">Livre</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 3 -->
-  <div class="day-card" id="day3">
-    <div class="day-marker"><div class="day-dot"></div></div>
-    <div class="day-content">
-      <div class="day-header">
-        <span class="day-num">03</span>
-        <span class="day-date">Ter · 03/11</span>
-      </div>
-      <div class="day-body">
-        <div class="day-title">🏛️ Colonia del Sacramento</div>
-        <div class="day-section">
-          <div class="sec-label">📍 Pickup</div>
-          <div class="sec-value">08:15 no Dazzler by Wyndham Montevideo (recepção)</div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌅 Manhã + 🌤️ Tarde</div>
-          <div class="sec-value highlight">🚌 City Tour Colonia del Sacramento · Dia inteiro (08:15 ~ 17:30)</div>
-          <div class="sec-value" style="margin-top:4px;">
-            <strong>Inclui:</strong> transfer ida/volta · guia bilíngue · visita guiada ao Barrio Histórico · Calle de los Suspiros · Faro · Plaza Mayor · muralhas portuguesas · vista para Buenos Aires<br>
-            <strong>Não inclui:</strong> almoço · entrada no Faro (~US$ 1) · museus (~US$ 4)
-          </div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌙 Noite</div>
-          <div class="sec-value">Livre</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 4 -->
-  <div class="day-card" id="day4">
-    <div class="day-marker"><div class="day-dot"></div></div>
-    <div class="day-content">
-      <div class="day-header">
-        <span class="day-num">04</span>
-        <span class="day-date">Qua · 04/11</span>
-      </div>
-      <div class="day-body">
-        <div class="day-title">🏙️ Montevidéu + Mercado do Porto</div>
-        <div class="day-section">
-          <div class="sec-label">📍 Pickup</div>
-          <div class="sec-value">08:15 no Dazzler by Wyndham Montevideo (recepção)</div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌅 Manhã</div>
-          <div class="sec-value highlight">🚐 City Tour Montevidéu (08:15 ~ 12:30)</div>
-          <div class="sec-value" style="margin-top:4px;">
-            <strong>Inclui:</strong> transfer em van compartilhada · guia bilíngue · Ciudad Vieja · Plaza Independencia · Palácio Salvo · Rambla · Pocitos · Carrasco
-          </div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌤️ Tarde</div>
-          <div class="sec-value highlight">🍖 Almoço no Mercado do Porto — <em>"El Palanque"</em></div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌙 Noite</div>
-          <div class="sec-value">Livre</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 5 -->
-  <div class="day-card" id="day5">
-    <div class="day-marker"><div class="day-dot"></div></div>
-    <div class="day-content">
-      <div class="day-header">
-        <span class="day-num">05</span>
-        <span class="day-date">Qui · 05/11</span>
-      </div>
-      <div class="day-body">
-        <div class="day-title" style="color:var(--gold);">🎂 44 Anos de Little!</div>
-        <div class="day-section">
-          <div class="sec-label">📍 Pickup</div>
-          <div class="sec-value">09:20 no Dazzler by Wyndham Montevideo (recepção)</div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌅 Manhã + 🌤️ Tarde</div>
-          <div class="sec-value highlight">🍷 Bodega Pizzorno com Almoço Harmonizado (09:20 ~ 16:30)</div>
-          <div class="sec-value" style="margin-top:4px;">
-            <strong>Inclui:</strong> transfer ida/volta · guia bilíngue · visita guiada (vinhedos, barricas, tanques) · degustação de vinhos selecionados · almoço harmonizado de 3 tempos · café e sobremesa<br>
-            <strong>Não inclui:</strong> compra de vinhos na loja · bebidas extras
-          </div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌙 Noite</div>
-          <div class="sec-value highlight" style="font-weight:600;">✅ Jantar no Restaurante Primuseum — mesa reservada para 3 pessoas às 20:30</div>
-          <div class="sec-value" style="margin-top:4px;">
-            <a class="tag-link" href="https://www.primuseum.com" target="_blank">primuseum.com</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 6 -->
-  <div class="day-card" id="day6">
-    <div class="day-marker"><div class="day-dot" style="background:var(--gold);box-shadow:0 0 20px rgba(251,191,36,0.3);"></div></div>
-    <div class="day-content">
-      <div class="day-header">
-        <span class="day-num">06</span>
-        <span class="day-date">Sex · 06/11</span>
-      </div>
-      <div class="day-body">
-        <div class="day-title">🏙️ Dia livre em Montevidéu</div>
-        <div class="day-section">
-          <div class="sec-label">🌅 Manhã</div>
-          <div class="sec-value">Permanência no Dazzler: diária adicional de 06 a 07/11, com 2 quartos e café da manhã incluído.</div>
-        </div>
-        <div class="day-section">
-          <div class="sec-label">🌤️ Tarde</div>
-          <div class="sec-value highlight">Tempo livre para aproveitar Montevidéu. Pernoite no Dazzler.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 7 -->
-  <div class="day-card" id="day7">
-    <div class="day-marker"><div class="day-dot"></div></div>
-    <div class="day-content">
-      <div class="day-header"><span class="day-num">07</span><span class="day-date">Sáb · 07/11</span></div>
-      <div class="day-body">
-        <div class="day-title">✈️ Montevidéu → Rio de Janeiro → Belém</div>
-        <div class="day-section"><div class="sec-label">🌅 Manhã</div><div class="sec-value">Check-out cedo no Dazzler (limite do hotel: 10:00). Para o voo das 12:25, planejar chegada ao aeroporto de Carrasco (MVD) por volta de 09:25.</div></div>
-        <div class="day-section"><div class="sec-label">🌤️ Tarde</div><div class="sec-value highlight">Gol 7587 · MVD 12:25 → GIG 14:55 · Conexão no Rio de Janeiro (7h10).</div></div>
-        <div class="day-section"><div class="sec-label">🌙 Noite</div><div class="sec-value">Gol 2008 · GIG 22:05 → BEL 01:35 do dia seguinte.</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 8 -->
-  <div class="day-card" id="day8">
-    <div class="day-marker"><div class="day-dot" style="background:var(--gold);box-shadow:0 0 20px rgba(251,191,36,0.3);"></div></div>
-    <div class="day-content">
-      <div class="day-header"><span class="day-num">08</span><span class="day-date">Dom · 08/11</span></div>
-      <div class="day-body">
-        <div class="day-title">🏠 Chegada a Belém</div>
-        <div class="day-section"><div class="sec-label">🌙 Madrugada</div><div class="sec-value highlight">✅ Chegada prevista ao aeroporto de Belém às 01:35 — fim da viagem.</div></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- ==================== IMPORTANT NOTES ==================== -->
-<div class="section-heading reveal"><h3>📌 Informações Importantes <span class="sh-line"></span></h3></div>
-<div class="hotel-card reveal" style="margin-top:0;">
-  <div class="hotel-inner" style="flex-direction:column;align-items:flex-start;">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;width:100%;">
+</section><section class="section-block utility-notes" id="apoio" aria-labelledby="apoio-title"><h2 id="apoio-title">Informações sempre à mão.</h2>
+<div class="section-heading "><h3>📌 Informações Importantes <span class="sh-line"></span></h3></div>
+<div class="hotel-card ">
+  <div class="hotel-inner">
+    <div>
       <div>
-        <div style="font-size:0.7em;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;">🆘 Emergência</div>
-        <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">
+        <div>🆘 Emergência</div>
+        <div>
           Central 24h: <strong>+55 11 98953-6808</strong><br>
           Suporte: <strong>(11) 93047-0524</strong><br>
           Consultora: Adriana
         </div>
       </div>
       <div>
-        <div style="font-size:0.7em;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;">📄 Documentação</div>
-        <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">
+        <div>📄 Documentação</div>
+        <div>
           RG em bom estado ou Passaporte<br>
           Voucher impresso ou digital
         </div>
       </div>
       <div>
-        <div style="font-size:0.7em;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;">💧 Dicas</div>
-        <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">
+        <div>💧 Dicas</div>
+        <div>
           Passeios acontecem mesmo com chuva<br>
           Aguardar o guia na recepção (10 min antes)<br>
           Atraso máximo de 10 min na pickup
         </div>
       </div>
       <div>
-        <div style="font-size:0.7em;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;">🏦 Agência</div>
-        <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">
+        <div>🏦 Agência</div>
+        <div>
           Brasileiros Pelo Mundo<br>
           CNPJ: 15.343.169/0001-11<br>
           Cadastur: 26.075639.10.0001-4
@@ -1405,100 +491,20 @@
   </div>
 </div>
 
-<!-- ==================== FOOTER ==================== -->
+</section>
 <footer class="site-footer">
   <p>🇺🇾 Uruguai 2026 · 44 anos de Little · Rafael, Victoria & Samar · 💙</p>
 </footer>
 
-<!-- ==================== BACK TO TOP ==================== -->
-<button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">↑</button>
-
-<script>
-  // === SCROLL REVEAL ===
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  // === PROGRESS BAR ===
-  const dayMeta = [
-    { id: 'day1', label: 'Dia 1 · Chegada', loc: 'Montevidéu' },
-    { id: 'day2', label: 'Dia 2 · Punta del Este', loc: 'Punta del Este' },
-    { id: 'day3', label: 'Dia 3 · Colonia', loc: 'Colonia del Sacramento' },
-    { id: 'day4', label: 'Dia 4 · Montevidéu', loc: 'Montevidéu' },
-    { id: 'day5', label: 'Dia 5 · Pizzorno 🎂', loc: 'Bodega Pizzorno' },
-    { id: 'day6', label: 'Dia 6 · Montevidéu livre', loc: 'Montevidéu' },
-    { id: 'day7', label: 'Dia 7 · Voo de volta', loc: 'Montevidéu ✈ Rio ✈ Belém' },
-    { id: 'day8', label: 'Dia 8 · Chegada', loc: 'Belém' },
-  ];
-
-  const pBar = document.getElementById('progressBar');
-  const pDay = document.getElementById('pDay');
-  const pLoc = document.getElementById('pLoc');
-  const pFill = document.getElementById('pFill');
-  const pPct = document.getElementById('pPct');
-
-  let progressVisible = false;
-  let lastActiveIdx = -1;
-
-  function updateProgress() {
-    const scrollY = window.scrollY;
-    const winH = window.innerHeight;
-
-    // Show bar after hero
-    const heroH = document.querySelector('.cover').offsetHeight;
-    if (scrollY > heroH - 100 && !progressVisible) {
-      pBar.classList.add('visible');
-      progressVisible = true;
-    } else if (scrollY <= heroH - 100 && progressVisible) {
-      pBar.classList.remove('visible');
-      progressVisible = false;
-    }
-
-    // Find active day
-    let activeIdx = -1;
-    for (let i = dayMeta.length - 1; i >= 0; i--) {
-      const el = document.getElementById(dayMeta[i].id);
-      if (el && el.getBoundingClientRect().top < winH * 0.6) {
-        activeIdx = i;
-        break;
-      }
-    }
-
-    if (activeIdx >= 0 && activeIdx !== lastActiveIdx) {
-      lastActiveIdx = activeIdx;
-      pDay.textContent = dayMeta[activeIdx].label;
-      pLoc.textContent = dayMeta[activeIdx].loc;
-    }
-
-    // Progress %
-    const totalH = document.querySelector('.timeline-container').offsetHeight;
-    const timelineTop = document.querySelector('.timeline-container').getBoundingClientRect().top;
-    const scrolled = Math.max(0, Math.min(1, (winH - timelineTop) / (totalH - winH + 200)));
-    const pct = Math.round(scrolled * 100);
-    pFill.style.width = pct + '%';
-    pPct.textContent = pct + '%';
-
-    // Nav dots
-    document.querySelectorAll('.section-nav a').forEach((a, i) => {
-      a.classList.toggle('active', i === activeIdx);
-    });
+<div class="page-end"><a href="#top">Voltar ao início ↑</a></div></main><script>
+document.getElementById('print-page').addEventListener('click',()=>window.print());
+if ('IntersectionObserver' in window) {
+ const dayLinks = Array.from(document.querySelectorAll('.daynav a'));
+ const observer = new IntersectionObserver(entries=>{
+  for (const entry of entries) if (entry.isIntersecting) {
+   dayLinks.forEach(a=>{ if(a.hash==='#'+entry.target.id) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); });
   }
-
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress);
-
-  // === BACK TO TOP ===
-  window.addEventListener('scroll', () => {
-    const btn = document.querySelector('.back-to-top');
-    if (window.scrollY > 600) btn.classList.add('visible');
-    else btn.classList.remove('visible');
-  });
-</script>
-
-</body>
-</html>
+ }, {rootMargin:'-10% 0px -65% 0px',threshold:0});
+ document.querySelectorAll('.day-card').forEach(day=>observer.observe(day));
+}
+</script></body></html>
