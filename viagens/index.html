@@ -477,13 +477,18 @@
   .card-franca:hover { border-color: rgba(59,130,246,0.25); box-shadow: 0 20px 60px rgba(59,130,246,0.08); }
   .card-franca .banner-content .trip-year-badge { background: rgba(59,130,246,0.3); border-color: rgba(59,130,246,0.2); }
 
+  .trip-card.card-caminho .card-banner { height: 250px; }
   .card-caminho .banner-bg {
-    background: url('espanha-santiago-2028.webp') center / cover no-repeat;
+    background: url('espanha-santiago-2028-completa.webp') center / cover no-repeat;
+  }
+  .card-caminho .banner-overlay {
+    background: linear-gradient(to top, rgba(10,10,18,0.58), transparent 60%);
   }
   @media (max-width: 768px) {
+    .trip-card.card-caminho .card-banner { height: min(65vw, 280px); }
     .trip-card.card-caminho .card-banner .banner-bg {
-      background-image: url('espanha-santiago-2028-mobile.webp');
-      background-size: cover !important;
+      background-image: url('espanha-santiago-2028-completa-mobile.webp');
+      background-size: contain !important;
     }
   }
   .card-caminho:hover { border-color: rgba(215,167,45,0.3); box-shadow: 0 20px 60px rgba(215,167,45,0.1); }
