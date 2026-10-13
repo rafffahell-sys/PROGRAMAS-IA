@@ -478,7 +478,13 @@
   .card-franca .banner-content .trip-year-badge { background: rgba(59,130,246,0.3); border-color: rgba(59,130,246,0.2); }
 
   .card-caminho .banner-bg {
-    background: linear-gradient(135deg, #085b74 0%, #1b805e 55%, #d7a72d 100%);
+    background: url('espanha-santiago-2028.webp') center / cover no-repeat;
+  }
+  @media (max-width: 768px) {
+    .trip-card.card-caminho .card-banner .banner-bg {
+      background-image: url('espanha-santiago-2028-mobile.webp');
+      background-size: cover !important;
+    }
   }
   .card-caminho:hover { border-color: rgba(215,167,45,0.3); box-shadow: 0 20px 60px rgba(215,167,45,0.1); }
   .card-caminho .banner-content .trip-year-badge { background: rgba(215,167,45,0.3); border-color: rgba(215,167,45,0.25); }
@@ -835,7 +841,7 @@
     <div class="trips-grid">
 
       <!-- Espanha + Portugal 2028 -->
-      <a class="trip-card card-caminho reveal reveal-delay-1" style="cursor:default;opacity:0.7;">
+      <a class="trip-card card-caminho reveal reveal-delay-1" style="cursor:default;">
         <div class="card-banner">
           <div class="banner-bg"></div>
           <div class="banner-overlay"></div>
