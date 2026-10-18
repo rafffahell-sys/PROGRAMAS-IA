@@ -610,6 +610,8 @@
   .card-holanda::before { background: linear-gradient(135deg, rgba(193,18,31,0.2), transparent 60%); }
   .card-portugal::before { background: linear-gradient(135deg, rgba(0,102,0,0.2), transparent 60%); }
   .trip-card:hover::before { opacity: 1; }
+  .running-link { position:relative;z-index:3;display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:10px 17px;text-decoration:none;border:1px solid rgba(251,191,36,.58);border-radius:40px;background:rgba(10,10,18,.64);color:#fbbf24;font-size:.83em;letter-spacing:.03em;backdrop-filter:blur(10px);transition:background .2s,transform .2s; }
+  .running-link:hover { background:rgba(251,191,36,.18);transform:translateY(-2px); }
 </style>
 </head>
 <body>
@@ -633,6 +635,7 @@
     <span>🌍</span>
     <span>9 aventuras · 8 destinos · 4 continentes</span>
   </div>
+  <a class="running-link" href="../corridas/index.html">🏅 Corridas & medalhas — explorar coleção →</a>
 
   <div class="scroll-indicator">
     <span>Explorar</span>
