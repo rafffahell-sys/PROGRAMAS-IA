@@ -68,9 +68,9 @@
           <option value="dia">Dia</option>
         </select>
       </label>
-      <button id="btnEntrar" class="btn" type="button" hidden>Entrar com Google</button>
+      <button id="btnEntrar" class="btn entrar" type="button" hidden>Entrar com Google</button>
       <button id="btnSair" class="btn fantasma" type="button" hidden>Sair</button>
-      <button id="btnEvento" class="btn primario" type="button">Nova prova</button>
+      <button id="btnEvento" class="btn primario so-edicao" type="button" hidden>Nova prova</button>
     </div>
   </div>
   <svg class="perfil-hero" viewBox="0 0 1120 54" preserveAspectRatio="none" aria-hidden="true">
@@ -90,7 +90,7 @@
 
 <main class="miolo">
   <div class="backup">
-    <button id="btnSalvar" class="btn" type="button">Salvar agora</button>
+    <button id="btnSalvar" class="btn so-edicao" type="button" hidden>Salvar agora</button>
     <button id="btnExportar" class="btn fantasma" type="button">Exportar</button>
     <button id="btnImportar" class="btn fantasma" type="button">Importar</button>
     <input id="arquivo" type="file" accept="application/json,.json" hidden>
@@ -161,9 +161,9 @@
     <div class="canais">
       <article class="caixa">
         <h2 class="rotulo-caixa">Onde eu assisto</h2>
-        <p class="aviso">Toque para marcar os canais que você tem. O SBS fica na lista.</p>
+        <p class="aviso" id="avisoCanais">Toque para marcar os canais que você tem. O SBS fica na lista.</p>
         <div class="tags" id="listaCanais"></div>
-        <div class="linha-canal">
+        <div class="linha-canal so-edicao" hidden>
           <input id="novoCanal" class="campo" type="text" maxlength="40" placeholder="Adicionar canal" autocomplete="off">
           <button id="btnCanal" class="btn primario" type="button">Adicionar</button>
         </div>
