@@ -31,7 +31,7 @@ let loja;
 let memoria;
 let manifest;
 let calendarios = {};
-let anoAtivo = "2026";
+let anoAtivo = "2027";
 let eco = false;
 let visto = "";
 let emailVisto = "";
@@ -1072,7 +1072,7 @@ async function iniciar() {
     const resposta = await fetch("data/manifest.json");
     if (!resposta.ok) throw new Error("manifest");
     manifest = await resposta.json();
-    anoAtivo = String(memoria.anoAtivo || manifest.padrao || "2026");
+    anoAtivo = String(memoria.anoAtivo || manifest.padrao || "2027");
     if (!anosDisponiveis().includes(anoAtivo)) anoAtivo = String(manifest.padrao || anosDisponiveis()[0]);
     document.body.dataset.tema = memoria.tema || document.body.dataset.tema || "amarela";
     await carregarAno(anoAtivo);

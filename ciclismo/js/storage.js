@@ -109,7 +109,7 @@ function estadoVazio() {
     personalizados: {},
     canais: [...CANAIS_PADRAO],
     canaisSel: [],
-    anoAtivo: "2026",
+    anoAtivo: "",
     tema: "amarela"
   };
 }
@@ -122,7 +122,7 @@ function sanitizar(bruto) {
     personalizados: bruto.personalizados && typeof bruto.personalizados === "object" ? bruto.personalizados : {},
     canais: comSbs(bruto.canais),
     canaisSel: Array.isArray(bruto.canaisSel) ? bruto.canaisSel : [],
-    anoAtivo: String(bruto.anoAtivo || "2026"),
+    anoAtivo: bruto.anoAtivo ? String(bruto.anoAtivo) : "",
     tema: normalizarTema(bruto.tema || bruto.temaAtivo)
   };
 }
@@ -141,7 +141,7 @@ function lerLegado() {
     personalizados: personalizados || {},
     canais: canais || CANAIS_PADRAO,
     canaisSel: canaisSel || [],
-    anoAtivo: anoAtivo || "2026",
+    anoAtivo: anoAtivo || "",
     tema: temaAtivo || "amarela"
   });
 }
@@ -332,7 +332,7 @@ export function exportarBackup(estado) {
     personalizados: estado.personalizados || {},
     canais: comSbs(estado.canais),
     canaisSel: estado.canaisSel || [],
-    anoAtivo: estado.anoAtivo || "2026",
+    anoAtivo: estado.anoAtivo || "",
     tema: normalizarTema(estado.tema)
   };
 }

@@ -2,7 +2,7 @@
 
 Página para acompanhar as provas de ciclismo profissional que eu assisto na televisão: vencedor, canal, estrelas e o que ficou da transmissão. Fica em [rafffahell.com.br/ciclismo](https://rafffahell.com.br/ciclismo/).
 
-A temporada publicada está em `data/2026.json`, em ordem da data de início. O layout não guarda essa lista: o `manifest.json` diz quais anos existem.
+A temporada aberta por padrão é 2027 (`data/2027.json`), porque a de 2026 já terminou. 2026 continua no seletor, como histórico. A ordem de cada arquivo é a data de início. O layout não guarda essa lista: o `manifest.json` diz quais anos existem e qual abre primeiro. Quem já tinha um ano salvo neste navegador continua nele. O registro de cada prova leva o ano na chave (`2027_c1` não mistura com `2026_b1`).
 
 ## O que fica salvo
 
@@ -19,18 +19,13 @@ Se você já usava o esboço antigo, na primeira visita a página lê sozinha es
 
 Prova repetida do esboço acompanha o registro que ficou (por exemplo o segundo Tour Down Under vai para o id que permaneceu).
 
-## Adicionar 2027
+## Adicionar outro ano
 
-1. Crie `data/2027.json` no mesmo formato de `data/2026.json`. O campo `provas` precisa estar em ordem de `inicio`.
-2. Inclua o ano em `data/manifest.json`:
+1. Crie `data/2028.json` no mesmo formato de `data/2027.json`. O campo `provas` precisa estar em ordem de `inicio`. Prova sem data confirmada fica de fora.
+2. Inclua o ano em `data/manifest.json` e, se for o caso, troque `padrao`.
+3. Recarregue a página. O seletor passa a mostrar o ano novo. Os registros de cada ano continuam separados.
 
-```json
-{ "ano": 2027, "arquivo": "2027.json", "rotulo": "2027" }
-```
-
-3. Recarregue a página. O seletor de ano passa a mostrar 2027. Os registros de cada ano continuam separados.
-
-Não invente data: confira no calendário UCI (ou no site da prova) antes de acrescentar. O script `tools/build_calendario_2026.py` só regenera o arquivo de 2026.
+`tools/build_calendario_2026.py` regenera só 2026. `tools/build_calendario_2027.py` regenera só 2027. Não invente data: confira no calendário UCI (ou no site da prova) antes de acrescentar.
 
 ## Ligar o Firebase
 
