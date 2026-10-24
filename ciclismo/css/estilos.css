@@ -149,6 +149,16 @@ body[data-tema="dia"] .mini {
   border-color: transparent;
 }
 .btn.fantasma { background: transparent; }
+.btn.entrar {
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 8px;
+}
+.btn.entrar:hover { color: var(--ink); }
+.estrelas.fixas { color: #ffd35a; letter-spacing: 0.08em; font-size: 1.15rem; }
 .btn:hover { transform: translateY(-1px); }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 .btn.perigo { color: var(--danger); }

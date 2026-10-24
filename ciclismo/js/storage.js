@@ -253,6 +253,8 @@ async function criarFirebase(local) {
     if (!snap.exists()) return;
     aplicarNuvem(snap.data());
     avisar();
+  }, (erro) => {
+    console.warn("Não foi possível acompanhar a nuvem. A cópia deste navegador continua.", erro);
   });
 
   onAuthStateChanged(auth, async (user) => {

@@ -6,7 +6,7 @@ A temporada aberta por padrão é 2027 (`data/2027.json`), porque a de 2026 já 
 
 ## O que fica salvo
 
-Enquanto `js/firebase-config.js` estiver com a `apiKey` vazia, tudo fica neste navegador (localStorage). Os botões **Exportar** e **Importar** geram e leem um backup em JSON.
+A nuvem é o Firestore, documento `ciclismo/temporada`. Sem login a página só lê. O botão **Entrar com Google** grava apenas com `rafffahell@gmail.com`. **Exportar** e **Importar** continuam como backup JSON. Se o Firebase não responder, a página segue neste navegador e avisa.
 
 Se você já usava o esboço antigo, na primeira visita a página lê sozinha estas chaves:
 
@@ -27,9 +27,9 @@ Prova repetida do esboço acompanha o registro que ficou (por exemplo o segundo 
 
 `tools/build_calendario_2026.py` regenera só 2026. `tools/build_calendario_2027.py` regenera só 2027. Não invente data: confira no calendário UCI (ou no site da prova) antes de acrescentar.
 
-## Ligar o Firebase
+## Firebase
 
-A nuvem é o Firestore, com login do Google. Só o e-mail `rafffahell@gmail.com` grava. Qualquer visita consegue ler.
+A config pública do app web já está em `js/firebase-config.js`. A nuvem é o Firestore, com login do Google. Só o e-mail `rafffahell@gmail.com` grava. Qualquer visita consegue ler. O SDK é o modular, carregado do CDN `gstatic`, sem Analytics.
 
 1. Abra o [console do Firebase](https://console.firebase.google.com/) e crie um projeto, ou escolha um que já exista.
 2. Em **Build → Authentication → Sign-in method**, ative o provedor **Google**.
@@ -50,10 +50,6 @@ service cloud.firestore {
 }
 ```
 
-A leitura é pública. A escrita só passa com o login dessa conta. O documento usado pela página é `ciclismo/temporada`.
-
-6. Em **Project settings → Your apps**, adicione um app Web e copie a configuração.
-7. Cole os valores em `js/firebase-config.js`. O e-mail do dono já está no arquivo; não precisa mudar.
-8. Publique o site e recarregue `https://rafffahell.com.br/ciclismo/`. O botão **Entrar com Google** aparece. Entre com `rafffahell@gmail.com`.
+A leitura é pública. A escrita só passa com o login dessa conta. O documento usado pela página é `ciclismo/temporada`. As chaves do app web já estão em `js/firebase-config.js`. No site publicado, o botão **Entrar com Google** aparece para quem não está logado. Entre com `rafffahell@gmail.com` para gravar. Na primeira entrada, se `ciclismo/temporada` ainda não existir, o que está neste navegador sobe para a nuvem.
 
 O que sobe para a nuvem: registros, provas criadas por você, canais, o ano aberto e a camisa (amarela, rosa, vermelha ou dia). O backup JSON leva a mesma coisa. Se o Firebase não responder, a página continua neste navegador e avisa.

@@ -233,6 +233,7 @@ function assinatura(estado) {
 
 function textoConta() {
   if (!loja) return "";
+  if (loja.aviso && loja.modo !== "firebase") return loja.aviso;
   if (loja.modo === "firebase") {
     if (!loja.email) return "Entre com o Google para gravar na nuvem. Quem visita só lê.";
     if (loja.podeEscrever) return `Nuvem ligada · ${loja.email}`;
@@ -355,6 +356,19 @@ function htmlEstrelas(id, valor, travado) {
   return `<div class="estrelas" role="group" aria-label="Avaliação de ${esc(id)}">${botoes}</div>`;
 }
 
+function htmlResumoRegistro(r) {
+  const partes = [];
+  if (r.assistida === "SIM") partes.push("Assistida");
+  else if (r.assistida === "NAO") partes.push("Não assistida");
+  if (r.canal) partes.push(r.canal);
+  if (r.p1) partes.push(`1º ${r.p1}${r.e1 ? ` — ${r.e1}` : ""}`);
+  if (r.p2) partes.push(`2º ${r.p2}${r.e2 ? ` — ${r.e2}` : ""}`);
+  if (r.p3) partes.push(`3º ${r.p3}${r.e3 ? ` — ${r.e3}` : ""}`);
+  if (r.nota) partes.push(r.nota);
+  if (!partes.length) return "";
+  return `<p class="aviso resumo-registro">${partes.map((p) => esc(p)).join(" · ")}</p>`;
+}
+
 function campoTexto(id, campo, valor, placeholder, travado) {
   return `<input class="mini" data-id="${esc(id)}" data-campo="${campo}" value="${esc(valor)}" placeholder="${placeholder}" maxlength="80" autocomplete="off"${travado}>`;
 }
@@ -428,33 +442,16 @@ function renderLista() {
     const canais = [...(memoria.canais || [])];
     if (r.canal && !canais.includes(r.canal)) canais.unshift(r.canal);
     const aberto = r.p2 || r.e2 || r.p3 || r.e3 || r.nota ? " open" : "";
-    const apagar = prova.fixo || !podeEditar()
+    const edita = podeEditar();
+    const apagar = prova.fixo || !edita
       ? ""
       : `<button type="button" class="btn perigo apagar" data-apagar="${esc(prova.id)}">Remover</button>`;
-    html.push(`
-      <article class="${classes.join(" ")}" id="prova-${esc(prova.id)}">
-        <div class="lado">
-          <span class="indice">${String(posicao.get(prova.id)).padStart(3, "0")}</span>
-          <div class="quando">${esc(formatarIntervalo(prova.inicio, prova.fim, prova.semData))}</div>
-          ${perfilSvg(prova)}
-        </div>
-        <div>
-          <div class="cabeca">
-            <div>
-              <h3 class="nome">${esc(prova.nome)}</h3>
-              <div class="meta">
-                ${htmlPaises(prova)}
-                <span class="selo ${classeSelo(prova.cat)}">${esc(prova.cat)}</span>
-                ${status}
-                <span class="pill gen-${genCls}">${textoGen(prova.gen)}</span>
-                ${etapas ? `<span>${esc(etapas)}</span>` : ""}
-                ${classe}
-              </div>
-            </div>
-            ${htmlEstrelas(prova.id, r.estrelas, travado)}
-          </div>
-          ${htmlLargada(prova)}
-          ${prova.aviso ? `<p class="aviso">${esc(prova.aviso)}</p>` : ""}
+    const estrelas = edita
+      ? htmlEstrelas(prova.id, r.estrelas, travado)
+      : (r.estrelas
+        ? `<span class="estrelas fixas" aria-label="${r.estrelas} ${r.estrelas > 1 ? "estrelas" : "estrela"}">${"★".repeat(r.estrelas)}</span>`
+        : "");
+    const formulario = edita ? `
           <div class="registro">
             <label>Assistida
               <select class="mini" data-id="${esc(prova.id)}" data-campo="assistida"${travado}>
@@ -484,7 +481,32 @@ function renderLista() {
               </label>
             </div>
             ${apagar}
-          </details>
+          </details>` : htmlResumoRegistro(r);
+    html.push(`
+      <article class="${classes.join(" ")}" id="prova-${esc(prova.id)}">
+        <div class="lado">
+          <span class="indice">${String(posicao.get(prova.id)).padStart(3, "0")}</span>
+          <div class="quando">${esc(formatarIntervalo(prova.inicio, prova.fim, prova.semData))}</div>
+          ${perfilSvg(prova)}
+        </div>
+        <div>
+          <div class="cabeca">
+            <div>
+              <h3 class="nome">${esc(prova.nome)}</h3>
+              <div class="meta">
+                ${htmlPaises(prova)}
+                <span class="selo ${classeSelo(prova.cat)}">${esc(prova.cat)}</span>
+                ${status}
+                <span class="pill gen-${genCls}">${textoGen(prova.gen)}</span>
+                ${etapas ? `<span>${esc(etapas)}</span>` : ""}
+                ${classe}
+              </div>
+            </div>
+            ${estrelas}
+          </div>
+          ${htmlLargada(prova)}
+          ${prova.aviso ? `<p class="aviso">${esc(prova.aviso)}</p>` : ""}
+          ${formulario}
         </div>
       </article>`);
   });
@@ -581,11 +603,18 @@ function renderConta() {
   const entrar = document.getElementById("btnEntrar");
   const sair = document.getElementById("btnSair");
   const firebase = loja?.modo === "firebase";
+  const edita = podeEditar();
   entrar.hidden = !firebase || Boolean(loja.email);
   sair.hidden = !firebase || !loja.email;
-  document.getElementById("btnEvento").disabled = !podeEditar();
-  document.getElementById("btnCanal").disabled = !podeEditar();
-  document.getElementById("novoCanal").disabled = !podeEditar();
+  document.querySelectorAll(".so-edicao").forEach((el) => {
+    el.hidden = !edita;
+  });
+  const avisoCanais = document.getElementById("avisoCanais");
+  if (avisoCanais) {
+    avisoCanais.textContent = edita
+      ? "Toque para marcar os canais que você tem. O SBS fica na lista."
+      : "Canais desta temporada. O SBS fica na lista.";
+  }
   const extra = salvoAs ? ` Salvo às ${salvoAs}.` : "";
   document.getElementById("avisoSalvar").textContent = `${textoConta()}${extra}`;
 }
