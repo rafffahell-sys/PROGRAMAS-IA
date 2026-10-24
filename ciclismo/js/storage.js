@@ -176,6 +176,8 @@ function fatiaNuvem(estado) {
     personalizados: estado.personalizados,
     canais: estado.canais,
     canaisSel: estado.canaisSel,
+    anoAtivo: estado.anoAtivo,
+    tema: estado.tema,
     atualizadoEm: new Date().toISOString()
   };
 }
@@ -235,7 +237,9 @@ async function criarFirebase(local) {
       registros: dados.registros ?? estado.registros,
       personalizados: dados.personalizados ?? estado.personalizados,
       canais: dados.canais ?? estado.canais,
-      canaisSel: dados.canaisSel ?? estado.canaisSel
+      canaisSel: dados.canaisSel ?? estado.canaisSel,
+      anoAtivo: dados.anoAtivo ?? estado.anoAtivo,
+      tema: dados.tema ?? estado.tema
     });
     gravarLocal(estado);
   };
