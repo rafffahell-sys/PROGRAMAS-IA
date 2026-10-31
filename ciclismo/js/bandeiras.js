@@ -29,7 +29,10 @@ const ESPECIAIS = {
   MY: () => `<rect width="22" height="16" fill="#cc0001"/>${[1, 3, 5, 7, 9, 11, 13].map((i) => `<rect y="${i * (16 / 14)}" width="22" height="${16 / 14}" fill="#fff"/>`).join("")}<rect width="11" height="8.2" fill="#010066"/><circle cx="4.6" cy="4" r="1.6" fill="#fc0"/>`,
   CZ: () => `${faixas(["#fff", "#d7141a"])}<polygon points="0,0 11,8 0,16" fill="#11457e"/>`,
   AD: () => faixas(["#0018a8", "#fedf00", "#d0103a"], true) + `<rect x="9.4" y="5" width="3.2" height="5" fill="#c6a664"/>`,
-  MC: () => faixas(["#ce1126", "#fff"])
+  MC: () => faixas(["#ce1126", "#fff"]),
+  // Critériums 2026: Singapura (faixas + crescente + 5 estrelas) e Japão (círculo)
+  JP: () => `<rect width="22" height="16" fill="#fff"/><circle cx="11" cy="8" r="4.8" fill="#bc002d"/>`,
+  SG: () => `${faixas(["#ed2939", "#fff"])}<circle cx="5.2" cy="4" r="2.5" fill="#fff"/><circle cx="6.2" cy="4" r="2" fill="#ed2939"/><polygon points="9.4,2.3 9.6,2.9 10.2,2.9 9.75,3.25 9.9,3.85 9.4,3.5 8.9,3.85 9.05,3.25 8.6,2.9 9.2,2.9" fill="#fff"/><polygon points="11.1,3.5 11.3,4.1 11.9,4.1 11.45,4.45 11.6,5.05 11.1,4.7 10.6,5.05 10.75,4.45 10.3,4.1 10.9,4.1" fill="#fff"/><polygon points="10.6,5.6 10.8,6.2 11.4,6.2 10.95,6.55 11.1,7.15 10.6,6.8 10.1,7.15 10.25,6.55 9.8,6.2 10.4,6.2" fill="#fff"/><polygon points="8.2,5.6 8.4,6.2 9,6.2 8.55,6.55 8.7,7.15 8.2,6.8 7.7,7.15 7.85,6.55 7.4,6.2 8,6.2" fill="#fff"/><polygon points="7.7,3.5 7.9,4.1 8.5,4.1 8.05,4.45 8.2,5.05 7.7,4.7 7.2,5.05 7.35,4.45 6.9,4.1 7.5,4.1" fill="#fff"/>`
 };
 
 export function bandeiraSvg(codigo) {
