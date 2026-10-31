@@ -1,7 +1,7 @@
 {
   "ano": 2026,
   "titulo": "Temporada 2026",
-  "atualizado": "2026-10-23",
+  "atualizado": "2026-10-31",
   "nota": "Datas e países conferidos no calendário UCI 2026, nos sites oficiais das provas e nos resultados da temporada. A ordem é a data de início.",
   "provas": [
     {
@@ -122,19 +122,6 @@
       "classe": "1.1"
     },
     {
-      "id": "b120",
-      "nome": "Estrela de Bessèges",
-      "inicio": "2026-02-04",
-      "fim": "2026-02-08",
-      "pais": "França",
-      "codigo": "FR",
-      "cat": "Tour",
-      "gen": "M",
-      "etapas": 5,
-      "fixo": true,
-      "classe": "2.1"
-    },
-    {
       "id": "b119",
       "nome": "Volta à Comunidade Valenciana",
       "inicio": "2026-02-04",
@@ -146,6 +133,19 @@
       "etapas": 5,
       "fixo": true,
       "classe": "2.Pro"
+    },
+    {
+      "id": "b120",
+      "nome": "Estrela de Bessèges",
+      "inicio": "2026-02-04",
+      "fim": "2026-02-08",
+      "pais": "França",
+      "codigo": "FR",
+      "cat": "Tour",
+      "gen": "M",
+      "etapas": 5,
+      "fixo": true,
+      "classe": "2.1"
     },
     {
       "id": "b43",
@@ -252,12 +252,12 @@
       "classe": "2.UWT"
     },
     {
-      "id": "b125",
-      "nome": "Volta ao Algarve",
+      "id": "b124",
+      "nome": "Volta à Andaluzia",
       "inicio": "2026-02-18",
       "fim": "2026-02-22",
-      "pais": "Portugal",
-      "codigo": "PT",
+      "pais": "Espanha",
+      "codigo": "ES",
       "cat": "Tour",
       "gen": "M",
       "etapas": 5,
@@ -265,12 +265,12 @@
       "classe": "2.Pro"
     },
     {
-      "id": "b124",
-      "nome": "Volta à Andaluzia",
+      "id": "b125",
+      "nome": "Volta ao Algarve",
       "inicio": "2026-02-18",
       "fim": "2026-02-22",
-      "pais": "Espanha",
-      "codigo": "ES",
+      "pais": "Portugal",
+      "codigo": "PT",
       "cat": "Tour",
       "gen": "M",
       "etapas": 5,
@@ -343,12 +343,12 @@
       "classe": "1.WWT"
     },
     {
-      "id": "b57",
-      "nome": "Faun Drôme Classic",
+      "id": "b56",
+      "nome": "Kuurne-Bruxelas-Kuurne",
       "inicio": "2026-03-01",
       "fim": "2026-03-01",
-      "pais": "França",
-      "codigo": "FR",
+      "pais": "Bélgica",
+      "codigo": "BE",
       "cat": "Clássica",
       "gen": "M",
       "etapas": 1,
@@ -356,12 +356,12 @@
       "classe": "1.Pro"
     },
     {
-      "id": "b56",
-      "nome": "Kuurne-Bruxelas-Kuurne",
+      "id": "b57",
+      "nome": "Faun Drôme Classic",
       "inicio": "2026-03-01",
       "fim": "2026-03-01",
-      "pais": "Bélgica",
-      "codigo": "BE",
+      "pais": "França",
+      "codigo": "FR",
       "cat": "Clássica",
       "gen": "M",
       "etapas": 1,
@@ -473,12 +473,12 @@
       "classe": "1.WWT"
     },
     {
-      "id": "b62",
-      "nome": "Milão-Turim",
+      "id": "b61",
+      "nome": "Nokere Koerse",
       "inicio": "2026-03-18",
       "fim": "2026-03-18",
-      "pais": "Itália",
-      "codigo": "IT",
+      "pais": "Bélgica",
+      "codigo": "BE",
       "cat": "Clássica",
       "gen": "M",
       "etapas": 1,
@@ -486,12 +486,12 @@
       "classe": "1.Pro"
     },
     {
-      "id": "b61",
-      "nome": "Nokere Koerse",
+      "id": "b62",
+      "nome": "Milão-Turim",
       "inicio": "2026-03-18",
       "fim": "2026-03-18",
-      "pais": "Bélgica",
-      "codigo": "BE",
+      "pais": "Itália",
+      "codigo": "IT",
       "cat": "Clássica",
       "gen": "M",
       "etapas": 1,
@@ -525,19 +525,6 @@
       "classe": "1.Pro"
     },
     {
-      "id": "b65",
-      "nome": "Clássica Terres de l'Ebre",
-      "inicio": "2026-03-21",
-      "fim": "2026-03-21",
-      "pais": "Espanha",
-      "codigo": "ES",
-      "cat": "Clássica",
-      "gen": "M",
-      "etapas": 1,
-      "fixo": true,
-      "classe": "1.1"
-    },
-    {
       "id": "b16",
       "nome": "Milão-Sanremo",
       "inicio": "2026-03-21",
@@ -562,6 +549,19 @@
       "etapas": 1,
       "fixo": true,
       "classe": "1.WWT"
+    },
+    {
+      "id": "b65",
+      "nome": "Clássica Terres de l'Ebre",
+      "inicio": "2026-03-21",
+      "fim": "2026-03-21",
+      "pais": "Espanha",
+      "codigo": "ES",
+      "cat": "Clássica",
+      "gen": "M",
+      "etapas": 1,
+      "fixo": true,
+      "classe": "1.1"
     },
     {
       "id": "b5",
@@ -721,19 +721,6 @@
       "classe": "1.WWT"
     },
     {
-      "id": "b75",
-      "nome": "Cholet Agglo Tour",
-      "inicio": "2026-04-06",
-      "fim": "2026-04-06",
-      "pais": "França",
-      "codigo": "FR",
-      "cat": "Clássica",
-      "gen": "M",
-      "etapas": 1,
-      "fixo": true,
-      "classe": "1.1"
-    },
-    {
       "id": "b74",
       "nome": "Ronde de Mouscron",
       "inicio": "2026-04-06",
@@ -746,6 +733,19 @@
       "fixo": true,
       "classe": "1.1",
       "aviso": "Em 2026 a Ronde de Mouscron do calendário UCI foi a prova feminina."
+    },
+    {
+      "id": "b75",
+      "nome": "Cholet Agglo Tour",
+      "inicio": "2026-04-06",
+      "fim": "2026-04-06",
+      "pais": "França",
+      "codigo": "FR",
+      "cat": "Clássica",
+      "gen": "M",
+      "etapas": 1,
+      "fixo": true,
+      "classe": "1.1"
     },
     {
       "id": "b130",
@@ -828,19 +828,6 @@
       "aviso": "Hasselt–Tongeren. Não é a prova neerlandesa de Sittard-Geleen, cancelada em março."
     },
     {
-      "id": "b78",
-      "nome": "Classic Grand Besançon",
-      "inicio": "2026-04-17",
-      "fim": "2026-04-17",
-      "pais": "França",
-      "codigo": "FR",
-      "cat": "Clássica",
-      "gen": "M",
-      "etapas": 1,
-      "fixo": true,
-      "classe": "1.1"
-    },
-    {
       "id": "b77",
       "nome": "Flecha do Brabante",
       "inicio": "2026-04-17",
@@ -852,6 +839,19 @@
       "etapas": 1,
       "fixo": true,
       "classe": "1.Pro"
+    },
+    {
+      "id": "b78",
+      "nome": "Classic Grand Besançon",
+      "inicio": "2026-04-17",
+      "fim": "2026-04-17",
+      "pais": "França",
+      "codigo": "FR",
+      "cat": "Clássica",
+      "gen": "M",
+      "etapas": 1,
+      "fixo": true,
+      "classe": "1.1"
     },
     {
       "id": "b134",
@@ -1291,17 +1291,17 @@
       "classe": "2.2U"
     },
     {
-      "id": "b9",
-      "nome": "Tour de Suisse",
+      "id": "b148",
+      "nome": "Volta à Eslovênia",
       "inicio": "2026-06-17",
       "fim": "2026-06-21",
-      "pais": "Suíça",
-      "codigo": "CH",
+      "pais": "Eslovênia",
+      "codigo": "SI",
       "cat": "Tour",
       "gen": "M",
       "etapas": 5,
       "fixo": true,
-      "classe": "2.UWT"
+      "classe": "2.Pro"
     },
     {
       "id": "b149",
@@ -1317,17 +1317,17 @@
       "classe": "2.Pro"
     },
     {
-      "id": "b148",
-      "nome": "Volta à Eslovênia",
+      "id": "b9",
+      "nome": "Tour de Suisse",
       "inicio": "2026-06-17",
       "fim": "2026-06-21",
-      "pais": "Eslovênia",
-      "codigo": "SI",
+      "pais": "Suíça",
+      "codigo": "CH",
       "cat": "Tour",
       "gen": "M",
       "etapas": 5,
       "fixo": true,
-      "classe": "2.Pro"
+      "classe": "2.UWT"
     },
     {
       "id": "b150",
@@ -1528,12 +1528,12 @@
       "classe": "2.UWT"
     },
     {
-      "id": "b160",
-      "nome": "Arctic Race of Norway",
+      "id": "b159",
+      "nome": "Czech Tour",
       "inicio": "2026-08-13",
       "fim": "2026-08-16",
-      "pais": "Noruega",
-      "codigo": "NO",
+      "pais": "Tchéquia",
+      "codigo": "CZ",
       "cat": "Tour",
       "gen": "M",
       "etapas": 4,
@@ -1541,12 +1541,12 @@
       "classe": "2.Pro"
     },
     {
-      "id": "b159",
-      "nome": "Czech Tour",
+      "id": "b160",
+      "nome": "Arctic Race of Norway",
       "inicio": "2026-08-13",
       "fim": "2026-08-16",
-      "pais": "Tchéquia",
-      "codigo": "CZ",
+      "pais": "Noruega",
+      "codigo": "NO",
       "cat": "Tour",
       "gen": "M",
       "etapas": 4,
@@ -1593,6 +1593,19 @@
       "classe": "2.1"
     },
     {
+      "id": "b163",
+      "nome": "Volta à Alemanha",
+      "inicio": "2026-08-19",
+      "fim": "2026-08-23",
+      "pais": "Alemanha",
+      "codigo": "DE",
+      "cat": "Tour",
+      "gen": "M",
+      "etapas": 4,
+      "fixo": true,
+      "classe": "2.Pro"
+    },
+    {
       "id": "b164",
       "nome": "Renewi Tour",
       "inicio": "2026-08-19",
@@ -1609,19 +1622,6 @@
         "NL"
       ],
       "aviso": "Ex-Tour do Benelux. Cruza a Bélgica e os Países Baixos."
-    },
-    {
-      "id": "b163",
-      "nome": "Volta à Alemanha",
-      "inicio": "2026-08-19",
-      "fim": "2026-08-23",
-      "pais": "Alemanha",
-      "codigo": "DE",
-      "cat": "Tour",
-      "gen": "M",
-      "etapas": 4,
-      "fixo": true,
-      "classe": "2.Pro"
     },
     {
       "id": "b165",
@@ -1776,19 +1776,6 @@
       "classe": "1.UWT"
     },
     {
-      "id": "b93",
-      "nome": "GP de Fourmies",
-      "inicio": "2026-09-13",
-      "fim": "2026-09-13",
-      "pais": "França",
-      "codigo": "FR",
-      "cat": "Clássica",
-      "gen": "M",
-      "etapas": 1,
-      "fixo": true,
-      "classe": "1.Pro"
-    },
-    {
       "id": "b36",
       "nome": "GP de Montreal",
       "inicio": "2026-09-13",
@@ -1800,6 +1787,19 @@
       "etapas": 1,
       "fixo": true,
       "classe": "1.UWT"
+    },
+    {
+      "id": "b93",
+      "nome": "GP de Fourmies",
+      "inicio": "2026-09-13",
+      "fim": "2026-09-13",
+      "pais": "França",
+      "codigo": "FR",
+      "cat": "Clássica",
+      "gen": "M",
+      "etapas": 1,
+      "fixo": true,
+      "classe": "1.Pro"
     },
     {
       "id": "b167",
@@ -1815,19 +1815,6 @@
       "classe": "2.1"
     },
     {
-      "id": "b169",
-      "nome": "Volta a Luxemburgo",
-      "inicio": "2026-09-16",
-      "fim": "2026-09-20",
-      "pais": "Luxemburgo",
-      "codigo": "LU",
-      "cat": "Tour",
-      "gen": "M",
-      "etapas": 5,
-      "fixo": true,
-      "classe": "2.Pro"
-    },
-    {
       "id": "b168",
       "nome": "Volta à Eslováquia",
       "inicio": "2026-09-16",
@@ -1839,6 +1826,19 @@
       "etapas": 5,
       "fixo": true,
       "classe": "2.1"
+    },
+    {
+      "id": "b169",
+      "nome": "Volta a Luxemburgo",
+      "inicio": "2026-09-16",
+      "fim": "2026-09-20",
+      "pais": "Luxemburgo",
+      "codigo": "LU",
+      "cat": "Tour",
+      "gen": "M",
+      "etapas": 5,
+      "fixo": true,
+      "classe": "2.Pro"
     },
     {
       "id": "b94",
@@ -1947,19 +1947,6 @@
       "classe": "1.1"
     },
     {
-      "id": "b101",
-      "nome": "Binche-Chimay-Binche",
-      "inicio": "2026-10-06",
-      "fim": "2026-10-06",
-      "pais": "Bélgica",
-      "codigo": "BE",
-      "cat": "Clássica",
-      "gen": "M",
-      "etapas": 1,
-      "fixo": true,
-      "classe": "1.1"
-    },
-    {
       "id": "b100",
       "nome": "Tre Valli Varesine",
       "inicio": "2026-10-06",
@@ -1971,6 +1958,19 @@
       "etapas": 1,
       "fixo": true,
       "classe": "1.Pro"
+    },
+    {
+      "id": "b101",
+      "nome": "Binche-Chimay-Binche",
+      "inicio": "2026-10-06",
+      "fim": "2026-10-06",
+      "pais": "Bélgica",
+      "codigo": "BE",
+      "cat": "Clássica",
+      "gen": "M",
+      "etapas": 1,
+      "fixo": true,
+      "classe": "1.1"
     },
     {
       "id": "b102",
@@ -2013,19 +2013,6 @@
       "aviso": "Nannup, Austrália Ocidental. Elite feminina no dia 10 e masculina no dia 11."
     },
     {
-      "id": "b38",
-      "nome": "Paris-Tours",
-      "inicio": "2026-10-11",
-      "fim": "2026-10-11",
-      "pais": "França",
-      "codigo": "FR",
-      "cat": "Clássica",
-      "gen": "M",
-      "etapas": 1,
-      "fixo": true,
-      "classe": "1.Pro"
-    },
-    {
       "id": "b111",
       "nome": "Trofeo Tessile & Moda",
       "inicio": "2026-10-11",
@@ -2041,6 +2028,19 @@
       "aviso": "O Cyclingflash registrou cancelamento. A Lega ainda listava a prova e não há vencedor publicado."
     },
     {
+      "id": "b38",
+      "nome": "Paris-Tours",
+      "inicio": "2026-10-11",
+      "fim": "2026-10-11",
+      "pais": "França",
+      "codigo": "FR",
+      "cat": "Clássica",
+      "gen": "M",
+      "etapas": 1,
+      "fixo": true,
+      "classe": "1.Pro"
+    },
+    {
       "id": "b49",
       "nome": "Tour de Chongming feminino",
       "inicio": "2026-10-13",
@@ -2052,19 +2052,6 @@
       "etapas": 3,
       "fixo": true,
       "classe": "2.WWT"
-    },
-    {
-      "id": "b47",
-      "nome": "Tour de Guangxi",
-      "inicio": "2026-10-13",
-      "fim": "2026-10-18",
-      "pais": "China",
-      "codigo": "CN",
-      "cat": "Tour",
-      "gen": "M",
-      "etapas": 6,
-      "fixo": true,
-      "classe": "2.UWT"
     },
     {
       "id": "b172",
@@ -2081,10 +2068,36 @@
       "aviso": "NIBC Tour of Holland. O site do organizador anuncia 13–18 de outubro; o Sofascore listou 13–17."
     },
     {
+      "id": "b47",
+      "nome": "Tour de Guangxi",
+      "inicio": "2026-10-13",
+      "fim": "2026-10-18",
+      "pais": "China",
+      "codigo": "CN",
+      "cat": "Tour",
+      "gen": "M",
+      "etapas": 6,
+      "fixo": true,
+      "classe": "2.UWT"
+    },
+    {
       "id": "b103",
       "nome": "Giro del Veneto",
       "inicio": "2026-10-14",
       "fim": "2026-10-14",
+      "pais": "Itália",
+      "codigo": "IT",
+      "cat": "Clássica",
+      "gen": "M",
+      "etapas": 1,
+      "fixo": true,
+      "classe": "1.Pro"
+    },
+    {
+      "id": "b104",
+      "nome": "Veneto Classic",
+      "inicio": "2026-10-18",
+      "fim": "2026-10-18",
       "pais": "Itália",
       "codigo": "IT",
       "cat": "Clássica",
@@ -2107,17 +2120,32 @@
       "classe": "1.WWT"
     },
     {
-      "id": "b104",
-      "nome": "Veneto Classic",
-      "inicio": "2026-10-18",
-      "fim": "2026-10-18",
-      "pais": "Itália",
-      "codigo": "IT",
+      "id": "b173",
+      "nome": "Tour de France Singapore Criterium",
+      "inicio": "2026-11-08",
+      "fim": "2026-11-08",
+      "pais": "Singapura",
+      "codigo": "SG",
       "cat": "Clássica",
       "gen": "M",
       "etapas": 1,
       "fixo": true,
-      "classe": "1.Pro"
+      "classe": "1.1",
+      "aviso": "Critério de exibição (Tour de France). Transmissão: SBS."
+    },
+    {
+      "id": "b174",
+      "nome": "Tour de France Saitama Critérium",
+      "inicio": "2026-11-15",
+      "fim": "2026-11-15",
+      "pais": "Japão",
+      "codigo": "JP",
+      "cat": "Clássica",
+      "gen": "M",
+      "etapas": 1,
+      "fixo": true,
+      "classe": "1.1",
+      "aviso": "Critério de exibição (Tour de France). Canal ainda indefinido."
     }
   ]
 }
