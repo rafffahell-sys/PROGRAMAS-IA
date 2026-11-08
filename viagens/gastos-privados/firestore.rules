@@ -1,0 +1,37 @@
+rules_version = '2';
+// PROPOSTA PARA REVISÃO. Este arquivo não está publicado no projeto programas-ia.
+// Não importe gastos reais antes de comparar com as regras do console e publicar.
+// As regras do Firestore são unidas por OU: não existe deny. Um match amplo
+// sem a exclusão abaixo autorizaria viagensPrivadas mesmo com a regra do proprietário.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function ehProprietario() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email is string
+        && request.auth.token.email.lower() == "rafffahell@gmail.com";
+    }
+
+    // Caminho exclusivo dos gastos. Só o proprietário já autorizado no ciclismo.
+    // O documento pai viagensPrivadas/{viagem} não tem allow: não há índice público.
+    match /viagensPrivadas/{viagem}/lancamentos/{lancamento} {
+      allow read, write: if ehProprietario();
+    }
+
+    // Ciclismo, como em ciclismo/README.md: leitura pública, escrita do proprietário.
+    // Fora do match amplo para a escrita não voltar a ser de qualquer pessoa.
+    match /ciclismo/{documento} {
+      allow read: if true;
+      allow write: if ehProprietario();
+    }
+
+    // Preserva o acesso histórico das outras coleções. Fora do ciclismo, o projeto
+    // não tem regras implantadas neste repositório e a memória é de regras abertas.
+    // A comparação é o nome exato, sem distinção de maiúsculas: ViagensPrivadas
+    // e viagensprivadas também ficam de fora e, sem allow próprio, negam todos.
+    match /{colecao}/{caminho=**} {
+      allow read, write: if colecao.lower() != "viagensprivadas"
+        && colecao.lower() != "ciclismo";
+    }
+  }
+}
