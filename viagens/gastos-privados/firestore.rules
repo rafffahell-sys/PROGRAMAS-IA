@@ -1,8 +1,12 @@
 rules_version = '2';
-// PROPOSTA PARA REVISÃO. Este arquivo não está publicado no projeto programas-ia.
-// Não importe gastos reais antes de comparar com as regras do console e publicar.
-// As regras do Firestore são unidas por OU: não existe deny. Um match amplo
-// sem a exclusão abaixo autorizaria viagensPrivadas mesmo com a regra do proprietário.
+// EXEMPLO do legado aberto, para revisão. Não é o padrão a publicar.
+// Publique este arquivo só se as regras do console forem conferidas e forem
+// idênticas a este legado. Se forem diferentes, adapte as regras efetivas:
+// todo match que alcance viagensPrivadas tem de excluir ou restringir esse
+// caminho. Um allow específico não fecha um allow amplo, porque as regras
+// são OU. allow read: if request.auth != null num curinga ainda entrega os
+// gastos a qualquer conta autenticada.
+// Este arquivo não está publicado. Não importe gastos reais antes da auditoria.
 service cloud.firestore {
   match /databases/{database}/documents {
     function ehProprietario() {
@@ -12,23 +16,29 @@ service cloud.firestore {
         && request.auth.token.email.lower() == "rafffahell@gmail.com";
     }
 
-    // Caminho exclusivo dos gastos. Só o proprietário já autorizado no ciclismo.
+    function ehProprietarioGoogle() {
+      return ehProprietario()
+        && request.auth.token.firebase.sign_in_provider == "google.com";
+    }
+
+    // Caminho exclusivo dos gastos. E-mail verificado e provedor Google.
     // O documento pai viagensPrivadas/{viagem} não tem allow: não há índice público.
     match /viagensPrivadas/{viagem}/lancamentos/{lancamento} {
-      allow read, write: if ehProprietario();
+      allow read, write: if ehProprietarioGoogle();
     }
 
     // Ciclismo, como em ciclismo/README.md: leitura pública, escrita do proprietário.
+    // Sem exigência de provedor, para não mudar o contrato já documentado do ciclismo.
     // Fora do match amplo para a escrita não voltar a ser de qualquer pessoa.
     match /ciclismo/{documento} {
       allow read: if true;
       allow write: if ehProprietario();
     }
 
-    // Preserva o acesso histórico das outras coleções. Fora do ciclismo, o projeto
-    // não tem regras implantadas neste repositório e a memória é de regras abertas.
-    // A comparação é o nome exato, sem distinção de maiúsculas: ViagensPrivadas
-    // e viagensprivadas também ficam de fora e, sem allow próprio, negam todos.
+    // Só neste exemplo de legado aberto. Não é um trecho para colar sobre
+    // regras mais fechadas: isso ampliaria o acesso delas.
+    // A comparação não distingue maiúsculas: ViagensPrivadas e viagensprivadas
+    // também ficam de fora e, sem allow próprio, negam todos.
     match /{colecao}/{caminho=**} {
       allow read, write: if colecao.lower() != "viagensprivadas"
         && colecao.lower() != "ciclismo";

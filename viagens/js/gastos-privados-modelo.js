@@ -6,6 +6,7 @@ export const COLECAO_GASTOS = "viagensPrivadas";
 export const SUBCOLECAO_LANCAMENTOS = "lancamentos";
 export const VIAGEM_ID = "uruguai-2026-rafael-victoria-samar";
 export const PROJETO_FIREBASE = "programas-ia";
+export const PROVEDOR_GOOGLE = "google.com";
 
 // Mesmo e-mail de ciclismo/js/firebase-config.js. A página usa o global
 // FIREBASE_OWNER_EMAIL; este constante existe para o teste não divergir.
@@ -24,6 +25,21 @@ export function ehProprietario(email, esperado) {
   const conta = String(email || "").trim().toLowerCase();
   const dono = String(esperado || "").trim().toLowerCase();
   return dono.length > 0 && conta === dono;
+}
+
+export function sessaoEhGoogle(signInProvider) {
+  return signInProvider === PROVEDOR_GOOGLE;
+}
+
+export function leituraVeioDoServidor(metadata) {
+  return Boolean(metadata) && metadata.fromCache === false;
+}
+
+export function falhaDeRede(codigo) {
+  return codigo === "unavailable"
+    || codigo === "deadline-exceeded"
+    || codigo === "offline-cache"
+    || codigo === "auth/network-request-failed";
 }
 
 export function dataIsoValida(iso) {

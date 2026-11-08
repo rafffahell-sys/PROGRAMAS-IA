@@ -3,10 +3,13 @@ import test from "node:test";
 import {
   EMAIL_PROPRIETARIO,
   ehProprietario,
+  falhaDeRede,
   formatarCentavos,
   formatarDataIso,
   interpretarLancamento,
   interpretarLista,
+  leituraVeioDoServidor,
+  sessaoEhGoogle,
   somarBrlCentavos
 } from "../../js/gastos-privados-modelo.js";
 
@@ -79,6 +82,20 @@ test("ordena por data e soma so inteiros exatos", () => {
     { valorBrlCentavos: Number.MAX_SAFE_INTEGER },
     { valorBrlCentavos: Number.MAX_SAFE_INTEGER }
   ]), RangeError);
+});
+
+test("so mostra leitura vinda do servidor e sessao Google", () => {
+  assert.equal(leituraVeioDoServidor({ fromCache: false }), true);
+  assert.equal(leituraVeioDoServidor({ fromCache: true }), false);
+  assert.equal(leituraVeioDoServidor(undefined), false);
+  assert.equal(leituraVeioDoServidor(null), false);
+  assert.equal(sessaoEhGoogle("google.com"), true);
+  assert.equal(sessaoEhGoogle("password"), false);
+  assert.equal(sessaoEhGoogle("custom"), false);
+  assert.equal(sessaoEhGoogle(""), false);
+  assert.equal(falhaDeRede("unavailable"), true);
+  assert.equal(falhaDeRede("offline-cache"), true);
+  assert.equal(falhaDeRede("permission-denied"), false);
 });
 
 test("formata centavos em pt-BR sem depender de ponto flutuante", () => {

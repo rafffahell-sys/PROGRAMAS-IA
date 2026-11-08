@@ -30,15 +30,27 @@ test("a pagina conserva o roteiro e ganha um acesso discreto", () => {
 test("o cliente nao guarda gastos e nao trata interface como seguranca", () => {
   assert.match(cliente, /memoryLocalCache/);
   assert.match(cliente, /terminate/);
+  assert.match(cliente, /getDocsFromServer\s*\(/);
+  assert.doesNotMatch(cliente, /\bgetDocs\s*\(/);
+  assert.match(cliente, /signInProvider/);
+  assert.match(cliente, /sessaoEhGoogle/);
+  assert.match(cliente, /leituraVeioDoServidor/);
+  assert.match(cliente, /A tabela foi apagada/);
+  assert.match(cliente, /não mostra cópia guardada no navegador/);
   assert.doesNotMatch(cliente, /localStorage|sessionStorage|indexedDB|persistentLocalCache|innerHTML/);
   assert.match(cliente, /ehProprietario/);
   assert.match(cliente, /Esconder a tabela não bloqueia o banco/);
+  const captura = cliente.slice(cliente.indexOf("} catch (erro)"), cliente.indexOf("} finally"));
+  assert.match(captura, /limparDom\(\)[\s\S]*mostrarStatus/);
 });
 
 test("as regras citam o mesmo proprietario do ciclismo e excluem o caminho privado", () => {
   assert.match(config, new RegExp(EMAIL_PROPRIETARIO.replace(".", "\\.")));
   assert.match(regras, new RegExp(EMAIL_PROPRIETARIO.replace(".", "\\.")));
   assert.match(regras, new RegExp(`match /${COLECAO_GASTOS}/\\{viagem\\}/${SUBCOLECAO_LANCAMENTOS}/`));
+  assert.match(regras, /sign_in_provider == "google\.com"/);
+  assert.match(regras, /ehProprietarioGoogle\(\)/);
+  assert.match(regras, /allow write: if ehProprietario\(\);/);
   assert.match(regras, /colecao\.lower\(\) != "viagensprivadas"/);
   assert.match(regras, /colecao\.lower\(\) != "ciclismo"/);
   assert.equal(regras.includes(VIAGEM_ID), false);

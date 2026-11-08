@@ -1,10 +1,13 @@
 import {
   PROJETO_FIREBASE,
   ehProprietario,
+  falhaDeRede,
   formatarCentavos,
   formatarDataIso,
   interpretarLista,
+  leituraVeioDoServidor,
   segmentosLancamentos,
+  sessaoEhGoogle,
   somarBrlCentavos
 } from "./gastos-privados-modelo.js";
 
@@ -24,7 +27,9 @@ const ignoradosEl = document.getElementById("gastos-ignorados");
 
 const TEXTO_DESCONECTADO = "Nenhuma conta conectada. Os gastos não ficam salvos nesta página. Entre com a conta Google do proprietário para consultar.";
 const TEXTO_CONTA_ERRADA = "Erro: esta conta Google não pode ver os gastos. Saia e entre com a conta do proprietário. Esconder a tabela não bloqueia o banco.";
-const TEXTO_AVISO_LEITURA = "A leitura foi aceita nesta sessão. Esta página não confirma qual arquivo de regras está publicado.";
+const TEXTO_PROVEDOR = "Erro: esta sessão não entrou com o Google. A leitura dos gastos não foi feita e a tabela foi apagada.";
+const TEXTO_OFFLINE = "Erro: não foi possível ler os gastos no servidor. A tabela foi apagada. Esta página não mostra cópia guardada no navegador.";
+const TEXTO_AVISO_LEITURA = "A leitura veio do servidor nesta sessão. Esta página não confirma qual arquivo de regras está publicado.";
 
 let app = null;
 let auth = null;
@@ -128,9 +133,7 @@ function mensagemErro(erro) {
   if (codigo === "permission-denied") {
     return "Erro: o Firestore recusou a leitura. Se esta é a conta do proprietário, o caminho privado ainda não está autorizado no banco. Esta página não verifica as regras publicadas.";
   }
-  if (codigo === "unavailable" || codigo === "deadline-exceeded") {
-    return "Erro: não foi possível falar com o Firestore agora. Nada foi gravado neste navegador.";
-  }
+  if (falhaDeRede(codigo)) return TEXTO_OFFLINE;
   if (codigo === "auth/popup-closed-by-user" || codigo === "auth/cancelled-popup-request") {
     return "Erro: o login foi cancelado. Nenhum gasto foi consultado.";
   }
@@ -167,6 +170,7 @@ async function garantirFirebase() {
     }
   }
   if (db) return db;
+  // memoryLocalCache não impede getDocs de devolver memória. A leitura usa getDocsFromServer.
   const { initializeFirestore, memoryLocalCache } = await import(`${SDK}/firebase-firestore.js`);
   const novo = initializeFirestore(app, { localCache: memoryLocalCache() });
   if (geracao !== cacheGeracao) {
@@ -187,14 +191,27 @@ async function carregar() {
     mostrarStatus(usuario ? TEXTO_CONTA_ERRADA : TEXTO_DESCONECTADO, usuario ? "erro" : "info");
     return;
   }
-  mostrarStatus("Carregando gastos…");
+  mostrarStatus("Carregando gastos no servidor…");
   dialog.setAttribute("aria-busy", "true");
   try {
+    const token = await usuario.getIdTokenResult();
+    if (meu !== ticket) return;
+    if (!sessaoEhGoogle(token?.signInProvider)) {
+      lancamentos = [];
+      limparDom();
+      mostrarStatus(TEXTO_PROVEDOR, "erro");
+      return;
+    }
     const banco = await garantirFirebase();
     if (!banco || meu !== ticket) return;
-    const { collection, getDocs } = await import(`${SDK}/firebase-firestore.js`);
-    const snap = await getDocs(collection(banco, ...segmentosLancamentos()));
+    const { collection, getDocsFromServer } = await import(`${SDK}/firebase-firestore.js`);
+    const snap = await getDocsFromServer(collection(banco, ...segmentosLancamentos()));
     if (meu !== ticket) return;
+    if (!leituraVeioDoServidor(snap.metadata)) {
+      const erro = new Error("cache");
+      erro.code = "offline-cache";
+      throw erro;
+    }
     const { aceitos, ignorados } = interpretarLista(snap.docs.map((item) => [item.id, item.data()]));
     if (meu !== ticket) return;
     lancamentos = aceitos;
