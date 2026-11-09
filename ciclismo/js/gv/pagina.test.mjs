@@ -19,6 +19,7 @@ globalThis.document = dom.window.document;
 globalThis.location = dom.window.location;
 
 const { iniciarPagina, htmlEtapa, htmlHub } = await import("./pagina.js");
+const { htmlCena } = await import("./cena.js");
 
 function fetchLocal(pedidos) {
   return async (url) => {
@@ -101,6 +102,23 @@ test("tour sem distância não inventa perfil", async () => {
   assert.match(raizDom.innerHTML, /distância a publicar/);
   assert.match(raizDom.innerHTML, /Perfil altimétrico a publicar/);
   assert.match(raizDom.innerHTML, /data-resultados="ocultos"/);
+});
+
+test("cena do giro é italiana e a do tour não", () => {
+  const giro = htmlCena("giro");
+  const tour = htmlCena("tour");
+  const vuelta = htmlCena("vuelta");
+  assert.match(giro, /aria-hidden="true"/);
+  assert.match(giro, /#008C45/);
+  assert.match(giro, /#f4a4c4/);
+  assert.equal(tour.includes("#008C45"), false);
+  assert.match(tour, /#0055A4/);
+  assert.match(vuelta, /#C60B1E/);
+  assert.equal(giro.includes("Atleta"), false);
+  assert.equal(giro.includes("ciclista"), false);
+  const css = fs.readFileSync(path.join(raiz, "css/grande-volta.css"), "utf8");
+  assert.match(css, /prefers-reduced-motion:\s*reduce/);
+  assert.match(css, /\.gv-roda \{\s*animation:\s*none/);
 });
 
 test("filtro de perfil vazio e comparação não contígua sintética", () => {

@@ -1,4 +1,40 @@
 .gv-topo { padding-bottom: 12px; }
+.gv-marca-bike {
+  width: 78px;
+  height: 44px;
+  flex: none;
+  color: var(--jersey);
+}
+body[data-prova="giro"] {
+  --gv-f1: #008C45;
+  --gv-f2: #f4f1e6;
+  --gv-f3: #CD212A;
+  --gv-num: #f4a4c4;
+}
+body[data-prova="tour"] {
+  --gv-f1: #0055A4;
+  --gv-f2: #f4f1e6;
+  --gv-f3: #EF4135;
+  --gv-num: #ffe14a;
+}
+body[data-prova="vuelta"] {
+  --gv-f1: #C60B1E;
+  --gv-f2: #F7C948;
+  --gv-f3: #C60B1E;
+  --gv-num: #ff8d86;
+}
+body[data-prova="giro"] .gv-marca-bike { color: var(--gv-num); }
+body[data-prova="tour"] .gv-marca-bike { color: var(--gv-num); }
+body[data-prova="vuelta"] .gv-marca-bike { color: var(--gv-num); }
+body[data-prova="giro"] .faixa-maillots span:nth-child(1) { background: var(--gv-f1); }
+body[data-prova="giro"] .faixa-maillots span:nth-child(2) { background: var(--gv-f2); }
+body[data-prova="giro"] .faixa-maillots span:nth-child(3) { background: var(--gv-f3); }
+body[data-prova="tour"] .faixa-maillots span:nth-child(1) { background: var(--gv-f1); }
+body[data-prova="tour"] .faixa-maillots span:nth-child(2) { background: var(--gv-f2); }
+body[data-prova="tour"] .faixa-maillots span:nth-child(3) { background: var(--gv-f3); }
+body[data-prova="vuelta"] .faixa-maillots span:nth-child(1) { background: var(--gv-f1); }
+body[data-prova="vuelta"] .faixa-maillots span:nth-child(2) { background: var(--gv-f2); }
+body[data-prova="vuelta"] .faixa-maillots span:nth-child(3) { background: var(--gv-f3); }
 .gv-marca {
   margin: 0;
   font-family: var(--display);
@@ -14,7 +50,28 @@
 }
 .gv-cabeca h1 {
   font-size: clamp(2.2rem, 7vw, 4rem);
+  text-wrap: balance;
 }
+.gv-cena {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 280px);
+  gap: 8px 22px;
+  align-items: end;
+}
+.gv-cena-texto { min-width: 0; }
+.gv-cena-arte {
+  pointer-events: none;
+  min-width: 0;
+}
+.gv-cena-svg { display: block; width: 100%; height: auto; }
+.gv-serra { fill: currentColor; opacity: 0.2; }
+.gv-serra-frente { opacity: 0.34; }
+body[data-prova="giro"] .gv-serra { color: #f4a4c4; }
+body[data-prova="tour"] .gv-serra { color: #ffe14a; }
+body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
+.gv-cipreste { fill: #1f6b3a; }
+.gv-asfalto { stroke: currentColor; stroke-width: 2; opacity: 0.4; }
+.gv-num { color: var(--gv-num, inherit); }
 .gv-progresso {
   font-family: var(--display);
   font-size: 1.8rem;
@@ -43,14 +100,26 @@
   flex-direction: column;
   gap: 6px;
   min-height: 132px;
-  padding: 12px;
+  padding: 16px 12px 12px;
   border-radius: 16px;
   border: 1px solid var(--line);
   background: var(--card);
   color: inherit;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
 }
-.gv-card:hover, .gv-card:focus-visible { outline: 2px solid var(--jersey); }
+.gv-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gv-f1, var(--jersey)) 0 33.34%, var(--gv-f2, transparent) 33.34% 66.66%, var(--gv-f3, var(--jersey)) 66.66%);
+}
+.gv-card:hover, .gv-card:focus-visible { outline: 3px solid var(--gv-num, var(--jersey)); outline-offset: 2px; }
+.gv-card strong { font-size: 1rem; line-height: 1.25; }
 .gv-num {
   font-family: var(--display);
   font-size: 2rem;
@@ -118,11 +187,18 @@
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
-@media (max-width: 640px) {
+@media (max-width: 720px) {
+  .gv-cena { grid-template-columns: 1fr; }
+  .gv-cena-arte { max-width: 320px; }
   .gv-grade { grid-template-columns: 1fr; }
   .gv-card { min-height: 0; }
   .gv-progresso { font-size: 1.4rem; }
+  .gv-marca-bike { width: 64px; }
 }
+@media (prefers-reduced-motion: no-preference) {
+  .gv-roda { animation: gv-roda 24s linear infinite; transform-box: fill-box; transform-origin: center; }
+}
+@keyframes gv-roda { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) {
-  .revelar { animation: none; }
+  .revelar, .gv-roda { animation: none; }
 }

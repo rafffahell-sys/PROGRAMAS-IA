@@ -15,6 +15,7 @@ import {
   compararTops
 } from "./modelo.js";
 import { pontosValidos, svgPerfil } from "./perfil.js";
+import { htmlCena } from "./cena.js";
 import { carregarSnapshot } from "./snapshots.js";
 
 const ROTULO_CHIP = {
@@ -196,12 +197,15 @@ export function htmlHub(prova, liberacao, filtro = {}) {
   const tipos = [`<option value="">Todos os tipos</option>`]
     .concat(TIPOS.map((tipo) => `<option value="${tipo}"${filtro.tipo === tipo ? " selected" : ""}>${esc(ROTULO_TIPO[tipo])}</option>`))
     .join("");
-  return `<header class="gv-cabeca">
-      <p class="kicker">Grande Volta · ${esc(prova.ano)}</p>
-      <h1>${esc(prova.nome)}</h1>
-      <p>Calendário do site: ${esc(fmtData(prova.calendario?.inicio))} – ${esc(fmtData(prova.calendario?.fim))}. Isso não é o seu progresso.</p>
-      <p class="gv-progresso" data-progresso="etapas"><strong>${liberadas.length}</strong> de ${esc(prova.totalEtapas)} etapas confirmadas</p>
-      <p>${esc(kmTexto)}</p>
+  return `<header class="gv-cabeca gv-cena">
+      <div class="gv-cena-texto">
+        <p class="kicker">Grande Volta · ${esc(prova.ano)}</p>
+        <h1>${esc(prova.nome)}</h1>
+        <p>Calendário do site: ${esc(fmtData(prova.calendario?.inicio))} – ${esc(fmtData(prova.calendario?.fim))}. Isso não é o seu progresso.</p>
+        <p class="gv-progresso" data-progresso="etapas"><strong>${liberadas.length}</strong> de ${esc(prova.totalEtapas)} etapas confirmadas</p>
+        <p>${esc(kmTexto)}</p>
+      </div>
+      ${htmlCena(prova.slug)}
     </header>
     <p class="gv-aviso">Resultados só depois que você confirmar cada etapa. Nenhuma confirmação libera a vizinha nem a prova inteira.</p>
     <section>
@@ -230,14 +234,17 @@ export function htmlEtapa(prova, etapa, liberacao, snap, snapAnterior, opcoes = 
   const detalhe = etapa.detalhe ? `<p>${esc(etapa.detalhe)}</p>` : "";
   const avisos = (etapa.avisos || []).map((texto) => `<li>${esc(texto)}</li>`).join("");
   return `<p class="gv-voltar"><a href="${esc(hrefHub(prova.slug, prova.ano))}">Todas as etapas</a></p>
-    <header class="gv-cabeca">
-      <p class="kicker">${esc(prova.nome)} · ${esc(prova.ano)}</p>
-      <h1>Etapa ${esc(etapa.n)}</h1>
-      <p class="gv-chip ${esc(chip)}">${esc(ROTULO_CHIP[chip])}</p>
-      <p class="gv-lugar">${esc(lugar(etapa))}</p>
-      <p>${esc(fmtData(etapa.data))} · ${esc(fmtKm(etapa.km))}${etapa.desnivelM == null ? "" : ` · D+ ${esc(etapa.desnivelM)} m`}</p>
-      <p>${esc(ROTULO_TIPO[etapa.tipo] || "")}${etapa.tipoOficial ? ` · ${esc(etapa.tipoOficial)}` : ""}</p>
-      ${detalhe}
+    <header class="gv-cabeca gv-cena">
+      <div class="gv-cena-texto">
+        <p class="kicker">${esc(prova.nome)} · ${esc(prova.ano)}</p>
+        <h1>Etapa ${esc(etapa.n)}</h1>
+        <p class="gv-chip ${esc(chip)}">${esc(ROTULO_CHIP[chip])}</p>
+        <p class="gv-lugar">${esc(lugar(etapa))}</p>
+        <p>${esc(fmtData(etapa.data))} · ${esc(fmtKm(etapa.km))}${etapa.desnivelM == null ? "" : ` · D+ ${esc(etapa.desnivelM)} m`}</p>
+        <p>${esc(ROTULO_TIPO[etapa.tipo] || "")}${etapa.tipoOficial ? ` · ${esc(etapa.tipoOficial)}` : ""}</p>
+        ${detalhe}
+      </div>
+      ${htmlCena(prova.slug)}
     </header>
     ${htmlPerfil(etapa)}
     <div class="gv-marcas-grade">
@@ -255,9 +262,16 @@ function acharProva(catalogo, slug, ano) {
   ) || null;
 }
 
+function marcarProva(slug) {
+  if (typeof document === "undefined" || !document.body) return;
+  if (slug) document.body.dataset.prova = slug;
+  else delete document.body.dataset.prova;
+}
+
 export async function desenhar(estado) {
   const rota = lerRota(globalThis.location.hash);
   const raiz = estado.raiz;
+  marcarProva(rota.ok ? rota.slug : "");
   if (!rota.ok) {
     const links = (estado.catalogo?.provas || []).map((item) => (
       `<li><a href="${esc(hrefHub(item.slug, item.ano))}">${esc(item.nome)} ${esc(item.ano)}</a></li>`
