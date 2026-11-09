@@ -295,3 +295,75 @@ export function validarAnalisePre(analise, config) {
   if (mencionaEtapaFutura(analise.texto, n - 1)) erros.push("analise:etapa_propria_ou_futura");
   return erros;
 }
+
+/** Um decimal, no mesmo passo da distância que a televisão mostra. */
+export function arredondarKm(valor) {
+  return Math.round((valor + Number.EPSILON) * 10) / 10;
+}
+
+/** Aceita 128,7 ou 128.7. Recusa vazio, texto e sinal. */
+export function parseKm(texto) {
+  if (typeof texto === "number") return Number.isFinite(texto) ? texto : null;
+  const bruto = String(texto ?? "").trim().replace(/\s/g, "").replace(",", ".");
+  if (!/^\d+(\.\d+)?$/.test(bruto)) return null;
+  const numero = Number(bruto);
+  return Number.isFinite(numero) ? numero : null;
+}
+
+/** Totais publicados, sem misturar card, eixo do desenho e ficha quando divergem. */
+export function referenciasDistancia(etapa) {
+  if (!etapa || typeof etapa.km !== "number" || !Number.isFinite(etapa.km) || etapa.km < 0) return [];
+  const refs = [{ id: "card", rotulo: "distância do card", km: arredondarKm(etapa.km) }];
+  const imagem = etapa.perfil?.imagem || {};
+  const extras = [
+    ["eixo", "eixo do desenho", imagem.kmNoEixo],
+    ["ficha", "ficha técnica", imagem.kmNaFicha]
+  ];
+  const vistos = new Set([refs[0].km]);
+  for (const [id, rotulo, km] of extras) {
+    if (typeof km !== "number" || !Number.isFinite(km) || km < 0) continue;
+    const valor = arredondarKm(km);
+    if (vistos.has(valor)) continue;
+    vistos.add(valor);
+    refs.push({ id, rotulo, km: valor });
+  }
+  return refs;
+}
+
+export function situarRestante(total, entrada) {
+  if (typeof total !== "number" || !Number.isFinite(total) || total < 0) {
+    return { ok: false, motivo: "sem_distancia" };
+  }
+  const lido = typeof entrada === "number" ? entrada : parseKm(entrada);
+  if (lido == null || lido < 0) return { ok: false, motivo: "invalido" };
+  const restante = arredondarKm(lido);
+  const distancia = arredondarKm(total);
+  if (restante > distancia) return { ok: false, motivo: "fora" };
+  return {
+    ok: true,
+    restante,
+    percorrido: arredondarKm(distancia - restante),
+    total: distancia,
+    chegada: restante === 0
+  };
+}
+
+/** xKm é a distância desde a largada. Só converte com um total da mesma versão. */
+export function situarPonto(xKm, total) {
+  if (xKm == null || typeof total !== "number" || !Number.isFinite(total)) {
+    return { ok: false, motivo: "ausente" };
+  }
+  const percorrido = typeof xKm === "number" ? xKm : parseKm(xKm);
+  if (percorrido == null) return { ok: false, motivo: "ausente" };
+  const distancia = arredondarKm(total);
+  const andado = arredondarKm(percorrido);
+  if (andado < 0 || andado > distancia) return { ok: false, motivo: "fora" };
+  return situarRestante(distancia, arredondarKm(distancia - andado));
+}
+
+export function totalDoPonto(etapa, item) {
+  if (item?.xKm == null) return null;
+  const refs = referenciasDistancia(etapa);
+  if (item.referencia) return refs.find((ref) => ref.id === item.referencia) || null;
+  return refs.length === 1 ? refs[0] : null;
+}

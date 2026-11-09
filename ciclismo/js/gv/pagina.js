@@ -14,7 +14,11 @@ import {
   numerosLiberados,
   podeLerSnapshot,
   somaKm,
-  compararTops
+  compararTops,
+  referenciasDistancia,
+  situarPonto,
+  situarRestante,
+  totalDoPonto
 } from "./modelo.js";
 import { pontosValidos, svgPerfil } from "./perfil.js";
 import { htmlCena } from "./cena.js";
@@ -90,16 +94,52 @@ function htmlCamisas(prova) {
   }).join("");
 }
 
-function htmlMarcadores(titulo, itens) {
+function htmlMarcadores(titulo, itens, etapa) {
   if (!itens?.length) return "";
   const lis = itens.map((item) => {
     const cat = item.categoria ? ` · cat. ${esc(item.categoria)}` : "";
-    const km = item.xKm != null && Number.isFinite(Number(item.xKm))
-      ? ` · km ${esc(item.xKm)}`
-      : " · km não informado";
+    const ref = totalDoPonto(etapa, item);
+    const conta = ref ? situarPonto(item.xKm, ref.km) : null;
+    const km = conta?.ok
+      ? ` · <span class="gv-km-restante">a ${esc(fmtKm(conta.restante))} da chegada</span><span class="gv-km-percorrido" hidden>${esc(fmtKm(conta.percorrido))} desde a largada</span> <span class="gv-km-fonte">(${esc(ref.rotulo)})</span>`
+      : " · distância até a chegada não informada";
     return `<li>${esc(item.nome)}${cat}${km}</li>`;
   }).join("");
   return `<div class="gv-marcas"><h3>${esc(titulo)}</h3><ul>${lis}</ul></div>`;
+}
+
+function htmlAcompanhar(etapa) {
+  const refs = referenciasDistancia(etapa);
+  const notaEixo = refs.length > 1
+    ? `<p>Há mais de uma distância publicada. Cada conta usa só o total da própria fonte.</p>`
+    : "";
+  const totais = refs.map((ref) => (
+    `<li data-ref="${esc(ref.id)}" data-km="${esc(ref.km)}" data-rotulo="${esc(ref.rotulo)}">${esc(ref.rotulo)}: ${esc(fmtKm(ref.km))} até a chegada</li>`
+  )).join("");
+  const form = refs.length
+    ? `<form id="gv-tv-form">
+        <label for="gv-tv-restante">Quilómetros restantes na TV</label>
+        <input id="gv-tv-restante" name="restante" inputmode="decimal" autocomplete="off" placeholder="128,7">
+        <button type="submit">Situar no percurso</button>
+      </form>
+      <div id="gv-tv-resultado" aria-live="polite"></div>`
+    : `<p>Esta etapa não tem distância publicada. O número da TV não pode ser situado.</p>`;
+  return `<section class="gv-tv" aria-labelledby="gv-tv-titulo">
+    <h2 id="gv-tv-titulo">Quilómetros que faltam</h2>
+    <p>A televisão mostra a distância que ainda falta até a chegada. Esta página não acompanha a corrida ao vivo.</p>
+    <p>O desenho do perfil segue da largada para a chegada e não foi invertido.</p>
+    ${notaEixo}
+    ${totais ? `<ul class="gv-tv-totais">${totais}</ul>` : ""}
+    ${form}
+  </section>`;
+}
+
+function htmlModoKm() {
+  return `<fieldset class="gv-modo-km">
+    <legend>Referência dos pontos conhecidos</legend>
+    <label><input type="radio" name="modo-km" value="restante" checked> Até a chegada</label>
+    <label><input type="radio" name="modo-km" value="percorrido"> Desde a largada</label>
+  </fieldset>`;
 }
 
 function htmlPerfil(etapa) {
@@ -124,7 +164,7 @@ function htmlPerfil(etapa) {
     return `<figure class="gv-perfil gv-perfil-imagem">
       <img src="${esc(imagem.arquivo)}" alt="${esc(alt)}" width="1280" height="852">
       <button type="button" class="gv-botao-ampliar" data-perfil-ampliar>Ampliar</button>
-      <figcaption>Perfil altimétrico do percurso, sem resultado. A imagem não foi convertida em pontos.</figcaption>
+      <figcaption>Perfil altimétrico do percurso, da largada para a chegada. A imagem não foi invertida nem convertida em pontos.</figcaption>
       ${links ? `<p class="gv-fonte">Fonte do perfil: ${links}</p>` : ""}
       <dialog class="gv-perfil-dialog">
         <form method="dialog"><button value="fechar">Fechar</button></form>
@@ -136,6 +176,36 @@ function htmlPerfil(etapa) {
     <figcaption>Perfil altimétrico a publicar</figcaption>
     <p>A fonte de percurso consultada não trouxe a série de altitude. Nenhum desenho foi inventado.</p>
   </figure>`;
+}
+
+function ligarAcompanhar(raiz) {
+  const form = raiz.querySelector("#gv-tv-form");
+  const saida = raiz.querySelector("#gv-tv-resultado");
+  if (form && saida) {
+    form.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      const valor = form.querySelector("[name=restante]").value;
+      const itens = [...raiz.querySelectorAll(".gv-tv-totais li")];
+      const partes = itens.map((li) => {
+        const conta = situarRestante(Number(li.dataset.km), valor);
+        const rotulo = li.dataset.rotulo;
+        if (!conta.ok && conta.motivo === "invalido") {
+          return "Digite um número a partir de zero. Use vírgula nos decimais, como 128,7.";
+        }
+        if (!conta.ok) return `O valor fica fora da ${rotulo} (${fmtKm(Number(li.dataset.km))}).`;
+        if (conta.chegada) return `Chegada, na ${rotulo} (${fmtKm(conta.total)}).`;
+        return `Na ${rotulo} (${fmtKm(conta.total)}): faltam ${fmtKm(conta.restante)} e já foram ${fmtKm(conta.percorrido)}.`;
+      });
+      saida.innerHTML = `<ul>${[...new Set(partes)].map((texto) => `<li>${esc(texto)}</li>`).join("")}</ul>`;
+    });
+  }
+  raiz.querySelectorAll('input[name="modo-km"]').forEach((input) => {
+    input.addEventListener("change", () => {
+      const restante = input.value !== "percorrido";
+      raiz.querySelectorAll(".gv-km-restante").forEach((el) => { el.hidden = !restante; });
+      raiz.querySelectorAll(".gv-km-percorrido").forEach((el) => { el.hidden = restante; });
+    });
+  });
 }
 
 function ligarPerfil(raiz) {
@@ -273,7 +343,7 @@ export function htmlHub(prova, liberacao, filtro = {}, favoritos = null) {
       <span class="gv-num">${esc(etapa.n)}</span>
       <span class="gv-chip ${esc(chip)}">${esc(ROTULO_CHIP[chip])}</span>
       <strong>${esc(lugar(etapa))}</strong>
-      <span>${esc(fmtKm(etapa.km))} · ${esc(ROTULO_TIPO[etapa.tipo] || etapa.tipo)}</span>
+      <span>${esc(fmtKm(etapa.km))}${typeof etapa.km === "number" ? " até a chegada" : ""} · ${esc(ROTULO_TIPO[etapa.tipo] || etapa.tipo)}</span>
       ${temPerfil(etapa) ? `<span class="gv-tem-perfil">com perfil</span>` : ""}
     </a>`;
   }).join("");
@@ -324,17 +394,19 @@ export function htmlEtapa(prova, etapa, liberacao, snap, snapAnterior, opcoes = 
         <h1>Etapa ${esc(etapa.n)}</h1>
         <p class="gv-chip ${esc(chip)}">${esc(ROTULO_CHIP[chip])}</p>
         <p class="gv-lugar">${esc(lugar(etapa))}</p>
-        <p>${esc(fmtData(etapa.data))} · ${esc(fmtKm(etapa.km))}${etapa.desnivelM == null ? "" : ` · D+ ${esc(etapa.desnivelM)} m`}</p>
+        <p>${esc(fmtData(etapa.data))} · ${esc(fmtKm(etapa.km))}${typeof etapa.km === "number" ? " até a chegada" : ""}${etapa.desnivelM == null ? "" : ` · D+ ${esc(etapa.desnivelM)} m`}</p>
         <p>${esc(ROTULO_TIPO[etapa.tipo] || "")}${etapa.tipoOficial ? ` · ${esc(etapa.tipoOficial)}` : ""}</p>
         ${detalhe}
       </div>
       ${htmlCena(prova.slug)}
     </header>
     ${htmlPerfil(etapa)}
+    ${htmlAcompanhar(etapa)}
     ${htmlAnalisePre(etapa.n, liberacao, opcoes.analise || null, opcoes.acesso || { regrasComprovadas: false })}
+    ${htmlModoKm()}
     <div class="gv-marcas-grade">
-      ${htmlMarcadores("Sprints do percurso", etapa.perfil?.sprints)}
-      ${htmlMarcadores("Subidas do percurso", etapa.perfil?.montanhas)}
+      ${htmlMarcadores("Sprints do percurso", etapa.perfil?.sprints, etapa)}
+      ${htmlMarcadores("Subidas do percurso", etapa.perfil?.montanhas, etapa)}
     </div>
     ${avisos ? `<ul class="gv-avisos">${avisos}</ul>` : ""}
     <p class="gv-fonte">Fonte do percurso: ${(prova.fontes || []).map((f) => esc(f.nome)).join(" · ")}</p>
@@ -433,6 +505,7 @@ export async function desenhar(estado) {
     analise
   });
   ligarPerfil(raiz);
+  ligarAcompanhar(raiz);
   document.title = `Etapa ${etapa.n} · ${prova.nome} ${prova.ano}`;
 }
 

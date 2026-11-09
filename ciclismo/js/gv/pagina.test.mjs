@@ -140,9 +140,13 @@ test("giro real filtra imagem de perfil e mantém o km do regulamento", () => {
   assert.match(hub, /com perfil/);
   const etapa = prova.etapas.find((item) => item.n === 7);
   const html = htmlEtapa(prova, etapa, { etapas: {}, provaCompleta: false }, null, null);
-  assert.match(html, /244 km/);
-  assert.match(html, /245 km/);
+  assert.match(html, /244 km até a chegada/);
+  assert.match(html, /245 km até a chegada/);
+  assert.match(html, /eixo do desenho/);
+  assert.match(html, /não foi invertido/);
+  assert.equal(html.includes("scaleX"), false);
   assert.match(html, /etapa-07\.jpg/);
+  assert.match(html, /distância até a chegada não informada/);
   assert.match(html, /data-resultados="ocultos"/);
   assert.equal(html.includes("<polyline"), false);
   assert.equal(html.includes("firestore"), false);

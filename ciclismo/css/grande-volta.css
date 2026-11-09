@@ -222,6 +222,46 @@ body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
   text-transform: uppercase;
   color: var(--muted);
 }
+.gv-tv, .gv-modo-km {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+.gv-tv form, .gv-modo-km {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: end;
+}
+.gv-tv label, .gv-modo-km label { display: grid; gap: 4px; }
+.gv-tv input[type="radio"], .gv-modo-km input { margin-right: 6px; }
+.gv-tv input[name="restante"] {
+  width: 8rem;
+  max-width: 100%;
+  font: inherit;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+}
+.gv-tv button {
+  font: inherit;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.gv-tv-totais { padding-left: 1.1rem; }
+.gv-km-fonte { color: var(--muted); }
+@media (max-width: 720px) {
+  .gv-tv form, .gv-modo-km { align-items: stretch; }
+  .gv-tv input[name="restante"], .gv-tv button { width: 100%; }
+}
 .gv-marcas { flex: 1; min-width: 220px; }
 .gv-avisos { color: var(--muted); }
 .gv-lista { margin: 0; padding-left: 0; list-style: none; }
