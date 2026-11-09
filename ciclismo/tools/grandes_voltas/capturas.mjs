@@ -149,11 +149,15 @@ await folha.goto(`${base}/grande-volta.html#/tour/2026`, { waitUntil: "domconten
 await folha.waitForFunction(() => document.body.innerText.toLowerCase().includes("carcassonne"));
 await folha.waitForSelector("#favoritos-prelargada");
 const tour = (await folha.$eval("#gv-app", (el) => el.innerText)).toLowerCase();
+const tourHtml = await folha.$eval("#gv-app", (el) => el.innerHTML);
 exigir(tour.includes("amarela"), "Tour sem camisa amarela");
 exigir(tour.includes("carcassonne"), "Tour sem a etapa 4");
 exigir(tour.includes("favoritos pré-largada"), "Tour sem favoritos pré-largada");
 exigir(!/vitória|pódio|venceu/.test(tour), "Tour com resultado no hub");
-exigir(tour.includes("ainda não há foto isolada"), "Tour mostrou troféu sem fonte");
+exigir(tour.includes("troféus de cristal 2026"), "Tour sem o troféu de cristal");
+exigir(tourHtml.includes("img/trofeus/tour-2026-cristal.jpg"), "Tour sem o arquivo do troféu");
+exigir(tour.includes("škoda"), "Tour sem o crédito da foto");
+exigir(!tour.includes("imagem ainda não disponível"), "Tour ficou sem a foto já publicada");
 await (await folha.$(".gv-trofeu")).screenshot({ path: `${out}/gv-tour-trofeu-desktop.png` });
 await folha.screenshot({ path: `${out}/gv-tour-hub-desktop.png`, fullPage: true });
 const favTour = await folha.$("#favoritos-prelargada");
@@ -183,7 +187,8 @@ const vueltaHub = (await folhaVuelta.$eval("#gv-app", (el) => el.innerText)).toL
 exigir(vueltaHub.includes("vermelha"), "Vuelta sem camisa vermelha");
 exigir(vueltaHub.includes("favoritos pré-largada"), "Vuelta sem favoritos");
 exigir(!/vitória|pódio|venceu/.test(vueltaHub), "Vuelta com resultado no hub");
-exigir(vueltaHub.includes("ainda não há foto isolada"), "Vuelta mostrou troféu sem fonte");
+exigir(vueltaHub.includes("imagem ainda não disponível nesta página"), "Vuelta sem o aviso de imagem");
+exigir(!vueltaHub.includes("foto isolada"), "Vuelta ainda explica o processo da foto");
 await (await folhaVuelta.$(".gv-trofeu")).screenshot({ path: `${out}/gv-vuelta-trofeu-desktop.png` });
 await folhaVuelta.screenshot({ path: `${out}/gv-vuelta-hub-desktop.png`, fullPage: true });
 const favVuelta = await folhaVuelta.$("#favoritos-prelargada");

@@ -210,11 +210,15 @@ test("favoritos pré-largada ficam no hub do giro e fora da etapa", async () => 
   assert.match(raizDom.innerHTML, /data-analise="bloqueada"/);
   location.hash = "#/tour/2026";
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
-  assert.match(raizDom.innerHTML, /Ainda não há foto isolada deste troféu/);
-  assert.equal(raizDom.innerHTML.includes("img/trofeus/"), false);
+  assert.match(raizDom.innerHTML, /Troféus de cristal 2026/);
+  assert.match(raizDom.innerHTML, /img\/trofeus\/tour-2026-cristal.jpg/);
+  assert.match(raizDom.innerHTML, /Škoda Storyboard/);
+  assert.equal(raizDom.innerHTML.includes("giro-trofeo-senza-fine"), false);
+  assert.equal(raizDom.innerHTML.includes("Imagem ainda não disponível"), false);
   location.hash = "#/vuelta/2026";
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
-  assert.match(raizDom.innerHTML, /Ainda não há foto isolada deste troféu/);
+  assert.match(raizDom.innerHTML, /Imagem ainda não disponível nesta página/);
+  assert.equal(raizDom.innerHTML.includes("img/trofeus/"), false);
   assert.equal(pedidos.some((url) => /snapshot|firestore|ciclismo_gv_analises/i.test(url)), false);
   assert.notEqual(globalThis.__GV_ANALISE_CARREGADA__, true);
 });

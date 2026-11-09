@@ -280,7 +280,7 @@ function htmlTrofeu(trofeu) {
   }
   return `<section class="gv-trofeu" aria-labelledby="gv-trofeu-titulo">
     <h2 id="gv-trofeu-titulo">Troféu</h2>
-    <p>Ainda não há foto isolada deste troféu com licença verificada e sem vencedor na imagem. Nenhuma figura foi desenhada no lugar.</p>
+    <p>Imagem ainda não disponível nesta página.</p>
   </section>`;
 }
 

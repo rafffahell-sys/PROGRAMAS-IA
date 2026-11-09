@@ -10,6 +10,15 @@
     "fonteUrl": "https://commons.wikimedia.org/wiki/File:2012_Giro_di_italia_cup.jpg",
     "ajuste": "Cópia local em JPEG, sem metadados."
   },
-  "tour": null,
+  "tour": {
+    "arquivo": "img/trofeus/tour-2026-cristal.jpg",
+    "alt": "Troféus de cristal do Tour de France 2026: uma taça verde e uma taça transparente, com o logotipo da prova na base, sem pessoa ao lado.",
+    "nome": "Troféus de cristal 2026",
+    "credito": "Foto de imprensa da Škoda Auto, 2 de julho de 2026.",
+    "licenca": "Uso editorial em imprensa e internet",
+    "fonteNome": "Škoda Storyboard",
+    "fonteUrl": "https://www.skoda-storyboard.com/en/press-releases/skoda-auto-marks-23-years-as-tour-de-france-main-partner-new-skoda-peaq-to-serve-as-red-car/",
+    "ajuste": "Cópia local em JPEG, sem metadados."
+  },
   "vuelta": null
 }
