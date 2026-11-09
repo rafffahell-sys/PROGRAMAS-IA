@@ -53,3 +53,21 @@ service cloud.firestore {
 A leitura é pública. A escrita só passa com o login dessa conta. O documento usado pela página é `ciclismo/temporada`. As chaves do app web já estão em `js/firebase-config.js`. No site publicado, o botão **Entrar com Google** aparece para quem não está logado. Entre com `rafffahell@gmail.com` para gravar. Na primeira entrada, se `ciclismo/temporada` ainda não existir, o que está neste navegador sobe para a nuvem.
 
 O que sobe para a nuvem: registros, provas criadas por você, canais, o ano aberto e a camisa (amarela, rosa, vermelha ou dia). O backup JSON leva a mesma coisa. Se o Firebase não responder, a página continua neste navegador e avisa.
+
+## Grandes Voltas
+
+Giro, Tour e Vuelta masculinos de 2026 abrem em `grande-volta.html#/giro/2026` (troque o slug por `tour` ou `vuelta`). Cada etapa tem endereço próprio, por exemplo `grande-volta.html#/giro/2026/etapa/1`. O card no calendário continua com canal, estrelas e o registro de assistida; o pódio da prova inteira fica oculto até a prova ser marcada completa.
+
+Nenhuma etapa começa liberada. O percurso está em `data/grandes-voltas/`. Não há resultado nesse JSON. A leitura de um snapshot futuro depende de `data/grandes-voltas/acesso.json` (`regrasComprovadas`) e das regras propostas em `firestore.rules`, que ainda não foram publicadas. O passo a passo, a auditoria das regras e o que falta implantar estão em `docs/grandes-voltas-implantacao.md`.
+
+Para regenerar só o percurso, sem mexer nas liberações:
+
+```bash
+python3 tools/grandes_voltas/percursos_2026.py
+```
+
+O pipeline de uma etapa autorizada é dry-run por omissão e não usa credencial:
+
+```bash
+python3 tools/grandes_voltas/pipeline.py --payload pedido.json
+```

@@ -1,0 +1,100 @@
+{
+  "provaId": "b10",
+  "slug": "tour",
+  "ano": 2026,
+  "tipo": "favoritos_prelargada",
+  "ordem": "alfabetica",
+  "aviso": "Seleção editorial baseada em análises anteriores à largada. Não é a lista completa de inscritos nem uma classificação oficial.",
+  "atualizadoEm": "2026-11-09",
+  "fontes": [
+    {
+      "id": "lista-inscritos",
+      "nome": "Lista de partants do Tour de France 2026, reproduzida por Cyclisme Romand",
+      "data": "2026-07",
+      "url": "https://www.cyclismeromand.ch/resultats/res26/TDF_Partants.pdf",
+      "nota": "Nomes, dorsais e equipes desta edição. Não é o domínio do organizador. Conferida com a lista publicada pelo Le Parisien em 3 de julho de 2026, véspera da largada."
+    }
+  ],
+  "itens": [
+    {
+      "nome": "Juan Ayuso",
+      "inscricao": "AYUSO Juan",
+      "pais": "Espanha",
+      "equipe": "Lidl-Trek",
+      "dorsal": 31,
+      "caracteristicas": "Escalador jovem. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Richard Carapaz",
+      "inscricao": "CARAPAZ Richard",
+      "pais": "Equador",
+      "equipe": "EF Education-EasyPost",
+      "dorsal": 41,
+      "caracteristicas": "Escalador de altitude. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Remco Evenepoel",
+      "inscricao": "EVENEPOEL Remco",
+      "pais": "Bélgica",
+      "equipe": "Red Bull-BORA-hansgrohe",
+      "dorsal": 21,
+      "caracteristicas": "Contrarrelojista e escalador. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Matteo Jorgenson",
+      "inscricao": "JORGENSON Matteo",
+      "pais": "Estados Unidos",
+      "equipe": "Team Visma | Lease a Bike",
+      "dorsal": 16,
+      "caracteristicas": "Corredor completo. Também anda bem no contrarrelógio."
+    },
+    {
+      "nome": "Florian Lipowitz",
+      "inscricao": "LIPOWITZ Florian",
+      "pais": "Alemanha",
+      "equipe": "Red Bull-BORA-hansgrohe",
+      "dorsal": 25,
+      "caracteristicas": "Escalador. Na inscrição, divide a equipe com o líder."
+    },
+    {
+      "nome": "Lenny Martinez",
+      "inscricao": "MARTINEZ Lenny",
+      "pais": "França",
+      "equipe": "Bahrain Victorious",
+      "dorsal": 71,
+      "caracteristicas": "Escalador jovem. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Tadej Pogacar",
+      "inscricao": "POGACAR Tadej",
+      "pais": "Eslovênia",
+      "equipe": "UAE Team Emirates XRG",
+      "dorsal": 1,
+      "caracteristicas": "Escalador e corredor completo. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Paul Seixas",
+      "inscricao": "SEIXAS Paul",
+      "pais": "França",
+      "equipe": "Decathlon CMA CGM Team",
+      "dorsal": 51,
+      "caracteristicas": "Escalador jovem. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Mattias Skjelmose",
+      "inscricao": "SKJELMOSE Mattias",
+      "pais": "Dinamarca",
+      "equipe": "Lidl-Trek",
+      "dorsal": 35,
+      "caracteristicas": "Escalador. Também anda bem no contrarrelógio."
+    },
+    {
+      "nome": "Jonas Vingegaard",
+      "inscricao": "VINGEGAARD Jonas",
+      "pais": "Dinamarca",
+      "equipe": "Team Visma | Lease a Bike",
+      "dorsal": 11,
+      "caracteristicas": "Escalador. Líder da equipe na lista de inscritos."
+    }
+  ]
+}

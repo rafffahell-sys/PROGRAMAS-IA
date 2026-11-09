@@ -1,0 +1,8 @@
+node_modules/
+__pycache__/
+*.pyc
+tools/grandes_voltas/saida/
+.firebase/
+firestore-debug.log
+ui-debug.log
+*-debug.log

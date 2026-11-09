@@ -1,0 +1,1181 @@
+{
+  "provaId": "b7",
+  "slug": "giro",
+  "ano": 2026,
+  "nome": "Giro d'Italia",
+  "genero": "M",
+  "totalEtapas": 21,
+  "calendario": {
+    "id": "b7",
+    "inicio": "2026-05-08",
+    "fim": "2026-05-31",
+    "confirmadoNoSite": true
+  },
+  "fontes": [
+    {
+      "nome": "Regulamento do 109º Giro d'Italia (4 de maio de 2026)",
+      "url": "https://www.giroditalia.it/wp-content/uploads/2026/05/ZVzAI74R7A7gM9wuyqTu_040526-014251.pdf",
+      "consultadoEm": "2026-11-09",
+      "observacao": "Tabela de etapas, categorias de dificuldade, sprints e subidas categorizadas. A brochura de percurso de fevereiro de 2026 confirma Feltre–Alleghe na etapa 19. Não foram usadas páginas de classificação."
+    },
+    {
+      "nome": "Brochura de percurso e hospitalidade do Giro d'Italia 2026 (fevereiro de 2026)",
+      "url": "https://www.giroditalia.it/wp-content/uploads/2026/02/t14YXHcwwDHMg5HfLDg9_260226-053022.pdf",
+      "consultadoEm": "2026-11-09"
+    }
+  ],
+  "camisas": [
+    {
+      "id": "gc",
+      "nomeClasse": "geral",
+      "unidade": "tempo",
+      "cor": "#f4a4c4",
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "prioridade": 1,
+      "nota": "Líder da classificação geral por tempo. Prioridade máxima se o mesmo corredor liderar outra camisa."
+    },
+    {
+      "id": "pontos",
+      "nomeClasse": "pontos",
+      "unidade": "pontos",
+      "cor": "#c71585",
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "prioridade": 2,
+      "nota": "Classificação por pontos. Escala no regulamento, distinta para categorias a/b, c e d/e."
+    },
+    {
+      "id": "montanha",
+      "nomeClasse": "montanha",
+      "unidade": "pontos",
+      "cor": "#1e90ff",
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "prioridade": 3,
+      "nota": "Melhor escalador. Cima Coppi no Passo Giau, etapa 19."
+    },
+    {
+      "id": "jovem",
+      "nomeClasse": "jovem",
+      "unidade": "tempo",
+      "cor": "#f4f1e6",
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "prioridade": 4,
+      "nota": "Melhor colocado na geral entre nascidos a partir de 1º de janeiro de 2001."
+    }
+  ],
+  "regulamento": {
+    "oficialConfirmado": true,
+    "fonte": "https://www.giroditalia.it/wp-content/uploads/2026/05/ZVzAI74R7A7gM9wuyqTu_040526-014251.pdf",
+    "prioridadeVestimenta": [
+      "gc",
+      "pontos",
+      "montanha",
+      "jovem"
+    ],
+    "prioridadeConfirmada": true,
+    "notaPrioridade": "Se um corredor lidera mais de uma classificação, veste a camisa de maior prioridade. A camisa restante passa, em título honorífico, ao seguinte dessa classificação que não lidere outra.",
+    "jovem": {
+      "nascidoAPartirDe": "2001-01-01",
+      "confirmado": true
+    },
+    "tabelaPontosChegada": {
+      "a_b": [
+        50,
+        35,
+        25,
+        18,
+        14,
+        12,
+        10,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "c": [
+        25,
+        18,
+        12,
+        8,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "d_e": [
+        15,
+        12,
+        9,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    "sprintIntermediarioPontos": [
+      12,
+      8,
+      5,
+      3,
+      1
+    ],
+    "montanhaPontos": {
+      "cima_coppi": [
+        50,
+        30,
+        20,
+        14,
+        10,
+        6,
+        4,
+        2,
+        1
+      ],
+      "1_chegada": [
+        50,
+        24,
+        16,
+        9,
+        6,
+        4,
+        2,
+        1
+      ],
+      "1_passagem": [
+        40,
+        18,
+        12,
+        9,
+        6,
+        4,
+        2,
+        1
+      ],
+      "2": [
+        18,
+        8,
+        6,
+        4,
+        2,
+        1
+      ],
+      "3": [
+        9,
+        4,
+        2,
+        1
+      ],
+      "4": [
+        3,
+        2,
+        1
+      ]
+    }
+  },
+  "classificacaoEquipes": {
+    "habilitada": false,
+    "previstaNoRegulamento": true,
+    "oficialConfirmado": true,
+    "nota": "O regulamento soma os três melhores tempos de cada equipe. O painel fica desligado até um snapshot autorizado trazer esses dados."
+  },
+  "observacoes": [
+    "Nenhuma etapa está liberada.",
+    "Perfis altimétricos: 21 de 21, como imagem oficial na aba de altimetria de cada página de etapa, consultada em 9 de novembro de 2026. Não há série numérica e o desenho não foi convertido em pontos. O desnível de cada etapa é o valor Altitude Gain dessa ficha. A distância do card continua a do regulamento de 4 de maio de 2026. Nas etapas 6, 7 e 8 a ficha ou o eixo do desenho não coincidem com esse regulamento; a divergência fica no aviso da etapa.",
+    "A página Roadbook do site oficial, consultada em 9 de novembro de 2026, já mostra a edição seguinte e não foi usada.",
+    "As brochuras de hospitalidade de fevereiro e março de 2026 trazem a planimetria geral (3.459,2 km e 49.150 m no total), não o perfil de cada etapa. Esses totais não substituem os 3.468 km do regulamento de maio e não foram distribuídos entre as etapas."
+  ],
+  "etapas": [
+    {
+      "n": 1,
+      "data": "2026-05-08",
+      "km": 147,
+      "desnivelM": 500,
+      "tipo": "plana",
+      "tipoOficial": "categoria a do art. 17",
+      "origem": "Nessebar",
+      "destino": "Burgas",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Sozopol",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Cape Agalina",
+            "xKm": null,
+            "categoria": "4"
+          },
+          {
+            "nome": "Cape Agalina (2ª passagem)",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-01.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-1-of-the-giro-ditalia-2026-nessebar-burgas/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/TZ47AewuV8Gv3n5iveJ4_140426-121837.jpg?v=20260414121837",
+          "alt": "Perfil altimétrico da etapa 1 do Giro d'Italia 2026, Nessebar–Burgas.",
+          "kmNaFicha": 147,
+          "desnivelMNaFicha": 500
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 2,
+      "data": "2026-05-09",
+      "km": 221,
+      "desnivelM": 2600,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Burgas",
+      "destino": "Veliko Tarnovo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Sliven",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Byala Pass",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Vratnik Pass",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Lyaskovets Monastery Pass",
+            "xKm": null,
+            "categoria": "3"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-02.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-2-of-the-giro-ditalia-2026-burgas-veliko-tarnovo/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/ieWEakDDQVJWr3WEcdrP_140426-011845.jpg?v=20260414131845",
+          "alt": "Perfil altimétrico da etapa 2 do Giro d'Italia 2026, Burgas–Veliko Tarnovo.",
+          "kmNaFicha": 221,
+          "desnivelMNaFicha": 2600
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos.",
+        "A célula de dia da tabela de quilometragem veio inconsistente com a etapa 3. A data segue a tabela de sprints do mesmo regulamento (9 de maio) e a sequência sexta–domingo."
+      ]
+    },
+    {
+      "n": 3,
+      "data": "2026-05-10",
+      "km": 175,
+      "desnivelM": 1600,
+      "tipo": "ondulada",
+      "tipoOficial": "categoria b do art. 17",
+      "origem": "Plovdiv",
+      "destino": "Sofia",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Dolna Banja",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Borovets Pass",
+            "xKm": null,
+            "categoria": "2"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-03.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-3-of-the-giro-ditalia-2026-plovdiv-sofia/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/bUGri5dr1hGsYTmK8PXd_140426-014008.jpg?v=20260414134008",
+          "alt": "Perfil altimétrico da etapa 3 do Giro d'Italia 2026, Plovdiv–Sofia.",
+          "kmNaFicha": 175,
+          "desnivelMNaFicha": 1600
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 4,
+      "data": "2026-05-12",
+      "km": 138,
+      "desnivelM": 1800,
+      "tipo": "ondulada",
+      "tipoOficial": "categoria b do art. 17",
+      "origem": "Catanzaro",
+      "destino": "Cosenza",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "San Lucido",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Cozzo Tunno",
+            "xKm": null,
+            "categoria": "2"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-04.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-4-of-the-giro-ditalia-2026-catanzaro-cosenza/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/93pI3K7uLnpXeRTVpXwY_140426-021637.jpg?v=20260414141637",
+          "alt": "Perfil altimétrico da etapa 4 do Giro d'Italia 2026, Catanzaro–Cosenza.",
+          "kmNaFicha": 138,
+          "desnivelMNaFicha": 1800
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 5,
+      "data": "2026-05-13",
+      "km": 203,
+      "desnivelM": 4100,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Praia a Mare",
+      "destino": "Potenza",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Francavilla in Sinni",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Montagna Grande di Viggiano",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Prestieri",
+            "xKm": null,
+            "categoria": "3"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-05.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-5-of-the-giro-ditalia-2026-praia-a-mare-potenza/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/oaDDENNdyzZ3IsbXQ7jL_140426-025248.jpg?v=20260414145248",
+          "alt": "Perfil altimétrico da etapa 5 do Giro d'Italia 2026, Praia a Mare–Potenza.",
+          "kmNaFicha": 203,
+          "desnivelMNaFicha": 4100
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 6,
+      "data": "2026-05-14",
+      "km": 141,
+      "desnivelM": 500,
+      "tipo": "plana",
+      "tipoOficial": "categoria a do art. 17",
+      "origem": "Paestum",
+      "destino": "Napoli",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Brusciano",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Cava de' Tirreni",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-06.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-6-of-the-giro-ditalia-2026-paestum-napoli/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/Fy9VjSwDjcSNZxc6SuqE_270426-101912.jpg?v=20260427101912",
+          "alt": "Perfil altimétrico da etapa 6 do Giro d'Italia 2026, Paestum–Napoli.",
+          "kmNaFicha": 142,
+          "desnivelMNaFicha": 500,
+          "kmNoEixo": 141
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos.",
+        "A ficha técnica da página oficial da etapa indica 142 km e 500 m de desnível. O eixo do desenho marca 141,0 km. O regulamento de 4 de maio de 2026 lista 141 km. A distância do card permanece 141 km; o desnível mostrado é o da ficha, não uma leitura do gráfico."
+      ]
+    },
+    {
+      "n": 7,
+      "data": "2026-05-15",
+      "km": 244,
+      "desnivelM": 4600,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Formia",
+      "destino": "Blockhaus",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Venafro",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Roccaraso",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Blockhaus",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-07.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-7-of-the-giro-ditalia-2026-formia-blockhaus/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/dCrHWpqrypEFLMeVU62A_140526-050709.png?v=20260514170709",
+          "alt": "Perfil altimétrico da etapa 7 do Giro d'Italia 2026, Formia–Blockhaus.",
+          "kmNaFicha": 245,
+          "desnivelMNaFicha": 4600,
+          "kmNoEixo": 245
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos.",
+        "A ficha técnica da página oficial da etapa indica 245 km e 4.600 m de desnível. O eixo do desenho marca 245,0 km. O arquivo estático do perfil traz 14 de maio de 2026 no nome. O regulamento de 4 de maio de 2026 lista 244 km. A distância do card permanece 244 km; o desnível mostrado é o da ficha, não uma leitura do gráfico."
+      ]
+    },
+    {
+      "n": 8,
+      "data": "2026-05-16",
+      "km": 156,
+      "desnivelM": 1900,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Chieti",
+      "destino": "Fermo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Cupra Marittima",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Montefiore d'Aso",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Monterubbiano",
+            "xKm": null,
+            "categoria": "4"
+          },
+          {
+            "nome": "Capodarco",
+            "xKm": null,
+            "categoria": "4"
+          },
+          {
+            "nome": "Fermo",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-08.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-8-of-the-giro-ditalia-2026-chieti-fermo/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/izdJ2M6qS6RkNkylx7g8_140426-034526.jpg?v=20260414154526",
+          "alt": "Perfil altimétrico da etapa 8 do Giro d'Italia 2026, Chieti–Fermo.",
+          "kmNaFicha": 156,
+          "desnivelMNaFicha": 1900,
+          "kmNoEixo": 157
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos.",
+        "A ficha técnica da página oficial da etapa indica 156 km e 1.900 m de desnível, a mesma distância do regulamento de 4 de maio de 2026. O eixo do desenho marca 157,0 km. A distância do card permanece 156 km; o desnível mostrado é o da ficha, não uma leitura do gráfico."
+      ]
+    },
+    {
+      "n": 9,
+      "data": "2026-05-17",
+      "km": 184,
+      "desnivelM": 2400,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Cervia",
+      "destino": "Corno alle Scale",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Marzabotto",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Querciola",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Corno alle Scale",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-09.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-9-of-the-giro-ditalia-2026-cervia-corno-alle-scale/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/fKQrLIRo8DZlbqop814R_150426-080440.jpg?v=20260415080440",
+          "alt": "Perfil altimétrico da etapa 9 do Giro d'Italia 2026, Cervia–Corno alle Scale.",
+          "kmNaFicha": 184,
+          "desnivelMNaFicha": 2400
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 10,
+      "data": "2026-05-19",
+      "km": 42,
+      "desnivelM": 50,
+      "tipo": "crono",
+      "tipoOficial": "categoria e do art. 17",
+      "origem": "Viareggio",
+      "destino": "Massa",
+      "detalhe": "Contra-relógio individual.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-10.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-10-of-the-giro-ditalia-2026-viareggio-massa-tudor-itt/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/lQXPEqVwJuJ914DHez2w_150426-083005.jpg?v=20260415083005",
+          "alt": "Perfil altimétrico da etapa 10 do Giro d'Italia 2026, Viareggio–Massa.",
+          "kmNaFicha": 42,
+          "desnivelMNaFicha": 50
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos.",
+        "Apresentações anteriores citaram 40,2 km. O regulamento de 4 de maio de 2026 lista 42 km, e a soma das 21 etapas fecha nos 3.468,0 km publicados nesse documento."
+      ]
+    },
+    {
+      "n": 11,
+      "data": "2026-05-20",
+      "km": 195,
+      "desnivelM": 2850,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Porcari (Paper District)",
+      "destino": "Chiavari",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Luni",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Passo del Termine",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Colla dei Scioli",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Colle di Guaitarola",
+            "xKm": null,
+            "categoria": "2"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-11.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-11-of-the-giro-ditalia-2026-porcari-paper-district-chiavari/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/QvAY8szrOplqgV2vODAY_150426-085619.jpg?v=20260415085619",
+          "alt": "Perfil altimétrico da etapa 11 do Giro d'Italia 2026, Porcari (Paper District)–Chiavari.",
+          "kmNaFicha": 195,
+          "desnivelMNaFicha": 2850
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 12,
+      "data": "2026-05-21",
+      "km": 175,
+      "desnivelM": 2250,
+      "tipo": "ondulada",
+      "tipoOficial": "categoria b do art. 17",
+      "origem": "Imperia",
+      "destino": "Novi Ligure",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Stella",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Colle Giovo",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Bric Berton",
+            "xKm": null,
+            "categoria": "3"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-12.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-12-of-the-giro-ditalia-2026-imperia-novi-ligure/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/ak7ArX3X5Up1GwnlTadR_150426-094758.jpg?v=20260415094758",
+          "alt": "Perfil altimétrico da etapa 12 do Giro d'Italia 2026, Imperia–Novi Ligure.",
+          "kmNaFicha": 175,
+          "desnivelMNaFicha": 2250
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 13,
+      "data": "2026-05-22",
+      "km": 189,
+      "desnivelM": 1400,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Alessandria",
+      "destino": "Verbania",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Stresa",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Ungiasca",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Bieno",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-13.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-13-of-the-giro-ditalia-2026-alessandria-verbania/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/ztmmsbRfLTIzCYJeQyU4_150426-101430.jpg?v=20260415101430",
+          "alt": "Perfil altimétrico da etapa 13 do Giro d'Italia 2026, Alessandria–Verbania.",
+          "kmNaFicha": 189,
+          "desnivelMNaFicha": 1400
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 14,
+      "data": "2026-05-23",
+      "km": 133,
+      "desnivelM": 4350,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Aosta",
+      "destino": "Pila (Gressan)",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Roisan",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Doues",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Verrogne",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Saint-Barthélémy",
+            "xKm": null,
+            "categoria": "1"
+          },
+          {
+            "nome": "Lin Noir",
+            "xKm": null,
+            "categoria": "1"
+          },
+          {
+            "nome": "Pila",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-14.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-14-of-the-giro-ditalia-2026-aosta-pila/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/YURkaSH6Hyd21zF0BLrY_150426-104353.jpg?v=20260415104353",
+          "alt": "Perfil altimétrico da etapa 14 do Giro d'Italia 2026, Aosta–Pila (Gressan).",
+          "kmNaFicha": 133,
+          "desnivelMNaFicha": 4350
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 15,
+      "data": "2026-05-24",
+      "km": 157,
+      "desnivelM": 200,
+      "tipo": "plana",
+      "tipoOficial": "categoria a do art. 17",
+      "origem": "Voghera",
+      "destino": "Milano",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Pavia",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-15.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-15-of-the-giro-ditalia-2026-voghera-milano/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/5ip8pnNAeAbTPWvny27I_150426-023237.jpg?v=20260415143237",
+          "alt": "Perfil altimétrico da etapa 15 do Giro d'Italia 2026, Voghera–Milano.",
+          "kmNaFicha": 157,
+          "desnivelMNaFicha": 200
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 16,
+      "data": "2026-05-26",
+      "km": 113,
+      "desnivelM": 3000,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Bellinzona",
+      "destino": "Carì",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Ludiano",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Torre",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Torre (2ª passagem)",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Leontica",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Leontica (2ª passagem)",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Carì",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-16.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-16-of-the-giro-ditalia-2026-bellinzona-cari/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/PtTqq9KeZ9zFqTPG3ybs_150426-024759.jpg?v=20260415144759",
+          "alt": "Perfil altimétrico da etapa 16 do Giro d'Italia 2026, Bellinzona–Carì.",
+          "kmNaFicha": 113,
+          "desnivelMNaFicha": 3000
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 17,
+      "data": "2026-05-27",
+      "km": 202,
+      "desnivelM": 3300,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Cassano d'Adda",
+      "destino": "Andalo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Roncone",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Passo dei Tre Termini",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Cocca di Lodrino",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Andalo-Lever",
+            "xKm": null,
+            "categoria": "3"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-17.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-17-of-the-giro-ditalia-2026-cassano-dadda-andalo/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/n5I2olqrYw1bCMjSPfKp_150426-030536.jpg?v=20260415150536",
+          "alt": "Perfil altimétrico da etapa 17 do Giro d'Italia 2026, Cassano d'Adda–Andalo.",
+          "kmNaFicha": 202,
+          "desnivelMNaFicha": 3300
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 18,
+      "data": "2026-05-28",
+      "km": 171,
+      "desnivelM": 2050,
+      "tipo": "ondulada",
+      "tipoOficial": "categoria b do art. 17",
+      "origem": "Fai della Paganella",
+      "destino": "Pieve di Soligo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Guia",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Fastro",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Muro di Ca' del Poggio",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-18.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-18-of-the-giro-ditalia-2026-fai-della-paganella-pieve-di-soligo/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/OEcEZnHLvjsWtVpFKDbE_280426-010447.jpg?v=20260428130447",
+          "alt": "Perfil altimétrico da etapa 18 do Giro d'Italia 2026, Fai della Paganella–Pieve di Soligo.",
+          "kmNaFicha": 171,
+          "desnivelMNaFicha": 2050
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 19,
+      "data": "2026-05-29",
+      "km": 151,
+      "desnivelM": 5000,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Feltre",
+      "destino": "Alleghe (Piani di Pezzè)",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Palafavera",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Passo Duran",
+            "xKm": null,
+            "categoria": "1"
+          },
+          {
+            "nome": "Coi",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Forcella Staulanza",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Passo Falzarego",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Passo Giau",
+            "xKm": null,
+            "categoria": "cima_coppi"
+          },
+          {
+            "nome": "Piani di Pezzè",
+            "xKm": null,
+            "categoria": "2"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-19.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-19-of-the-giro-ditalia-2026-feltre-alleghe-piani-di-pezze/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/Kcobp7DQfK1u2J76rr4g_150426-033547.jpg?v=20260415153547",
+          "alt": "Perfil altimétrico da etapa 19 do Giro d'Italia 2026, Feltre–Alleghe (Piani di Pezzè).",
+          "kmNaFicha": 151,
+          "desnivelMNaFicha": 5000
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos.",
+        "Na extração da tabela de quilometragem as colunas de origem e destino vieram invertidas. A brochura de percurso de fevereiro de 2026 traz Feltre–Alleghe (Piani di Pezzè)."
+      ]
+    },
+    {
+      "n": 20,
+      "data": "2026-05-30",
+      "km": 200,
+      "desnivelM": 3750,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Gemona del Friuli",
+      "destino": "Piancavallo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Forgaria nel Friuli",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Clauzetto",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Piancavallo",
+            "xKm": null,
+            "categoria": "1"
+          },
+          {
+            "nome": "Piancavallo (chegada)",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-20.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-20-of-the-giro-ditalia-2026-gemona-del-friuli-1976-2026-piancavallo/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/ilYaK3jnrBqWjLwlVZma_150426-035245.jpg?v=20260415155245",
+          "alt": "Perfil altimétrico da etapa 20 do Giro d'Italia 2026, Gemona del Friuli–Piancavallo.",
+          "kmNaFicha": 200,
+          "desnivelMNaFicha": 3750
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    },
+    {
+      "n": 21,
+      "data": "2026-05-31",
+      "km": 131,
+      "desnivelM": 500,
+      "tipo": "plana",
+      "tipoOficial": "categoria a do art. 17",
+      "origem": "Roma",
+      "destino": "Roma",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Fontana dello Zodiaco",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/giro-2026/etapa-21.jpg",
+          "fontePagina": "https://www.giroditalia.it/en/tappe/stage-21-of-the-giro-ditalia-2026-roma-roma/",
+          "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/JltckuXzPEqYHToPc76G_150426-040937.jpg?v=20260415160937",
+          "alt": "Perfil altimétrico da etapa 21 do Giro d'Italia 2026, Roma–Roma.",
+          "kmNaFicha": 131,
+          "desnivelMNaFicha": 500
+        }
+      },
+      "perfilPublicado": true,
+      "avisos": [
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
+      ]
+    }
+  ]
+}

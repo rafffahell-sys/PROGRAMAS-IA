@@ -1,0 +1,9 @@
+{
+  "versao": 1,
+  "nota": "Nenhuma etapa foi liberada. Este arquivo não contém resultados.",
+  "provas": {
+    "2026_b7": { "etapas": {}, "provaCompleta": false },
+    "2026_b10": { "etapas": {}, "provaCompleta": false },
+    "2026_b12": { "etapas": {}, "provaCompleta": false }
+  }
+}

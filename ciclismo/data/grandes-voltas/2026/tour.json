@@ -1,0 +1,595 @@
+{
+  "provaId": "b10",
+  "slug": "tour",
+  "ano": 2026,
+  "nome": "Tour de France",
+  "genero": "M",
+  "totalEtapas": 21,
+  "calendario": {
+    "id": "b10",
+    "inicio": "2026-07-04",
+    "fim": "2026-07-26",
+    "confirmadoNoSite": true
+  },
+  "fontes": [
+    {
+      "nome": "Grand Départ Barcelona 2026",
+      "url": "https://www.letour.fr/en/the-race/grands-departs/grand-depart-2026",
+      "consultadoEm": "2026-11-09"
+    },
+    {
+      "nome": "2026 Route (parcours)",
+      "url": "https://www.letour.fr/en/parcours-webview",
+      "consultadoEm": "2026-11-09",
+      "observacao": "O índice stage-0N do site oficial, consultado na mesma data, já descrevia a edição seguinte. Essas fichas não foram usadas. Onde o resumo de 2026 não traz cidade, km ou tipo, o campo fica vazio."
+    },
+    {
+      "nome": "Dossiê de imprensa do percurso do Tour de France 2026",
+      "url": "https://storage-aso.lequipe.fr/ASO/cycling_tdf/tdf2026-dossier-de-presse.pdf",
+      "consultadoEm": "2026-11-09",
+      "observacao": "Quadro de etapas de 22 de outubro de 2025, marcado como total antes da homologação, e descrição das camisas."
+    },
+    {
+      "nome": "Cifras-chave do Tour de France 2026",
+      "url": "https://storage-aso.lequipe.fr/ASO/cycling_tdf/tdf26-chiffres-cles-fr.pdf",
+      "consultadoEm": "2026-11-09",
+      "observacao": "Folheto de 24 de junho de 2026, antes da largada. Traz o total de 3.320,7 km e 53.950 m, sem a distância de cada etapa."
+    }
+  ],
+  "camisas": [
+    {
+      "id": "gc",
+      "nomeClasse": "geral",
+      "unidade": "tempo",
+      "cor": "#ffe14a",
+      "rotulo": "Amarela",
+      "oficialConfirmado": true,
+      "prioridade": null,
+      "nota": "Maillot jaune, classificação geral individual ao tempo. Dossiê de imprensa de 22 de outubro de 2025, patrocínio LCL."
+    },
+    {
+      "id": "pontos",
+      "nomeClasse": "pontos",
+      "unidade": "pontos",
+      "cor": "#1f8f4e",
+      "rotulo": "Verde",
+      "oficialConfirmado": true,
+      "prioridade": null,
+      "nota": "Maillot vert. Pontos na chegada e num sprint intermédio das etapas em linha. A tabela numérica não está nesse dossiê."
+    },
+    {
+      "id": "montanha",
+      "nomeClasse": "montanha",
+      "unidade": "pontos",
+      "cor": "#e10600",
+      "rotulo": "Bolinhas vermelhas",
+      "oficialConfirmado": true,
+      "prioridade": null,
+      "nota": "Maillot blanc à pois rouges. Pontos no topo de cada subida e nas chegadas em altitude. A tabela numérica não está nesse dossiê."
+    },
+    {
+      "id": "jovem",
+      "nomeClasse": "jovem",
+      "unidade": "tempo",
+      "cor": "#f4f1e6",
+      "rotulo": "Branca",
+      "oficialConfirmado": true,
+      "prioridade": null,
+      "nota": "Maillot blanc. Corredores com 25 anos no máximo durante o ano de 2026."
+    }
+  ],
+  "regulamento": {
+    "oficialConfirmado": false,
+    "fonte": "https://storage-aso.lequipe.fr/ASO/cycling_tdf/tdf2026-dossier-de-presse.pdf",
+    "prioridadeVestimenta": null,
+    "prioridadeConfirmada": false,
+    "notaPrioridade": "O dossiê de 2026 nomeia as quatro camisas e não fixa a prioridade de quem lidera duas ao mesmo tempo. Não foi encontrado o regulamento particular com o barema numérico.",
+    "jovem": {
+      "nascidoAPartirDe": "2001-01-01",
+      "confirmado": true,
+      "nota": "O dossiê diz «25 ans au plus dans l'année en cours» para 2026, o que corresponde a nascidos a partir de 1º de janeiro de 2001."
+    },
+    "tabelaPontosChegada": null
+  },
+  "classificacaoEquipes": {
+    "habilitada": false,
+    "previstaNoRegulamento": true,
+    "oficialConfirmado": false,
+    "nota": "O dossiê de 2026 prevê um prémio de classificação por equipes, patrocinado pela Basic-Fit, sem publicar a fórmula. O painel fica desligado."
+  },
+  "observacoes": [
+    "Nenhuma etapa está liberada.",
+    "Perfis altimétricos: 0 de 21. O mapa oficial de 6 de outubro de 2025 é a planimetria geral, não o perfil de cada etapa. O dossiê de 22 de outubro de 2025 não traz uma imagem de altimetria por etapa. Em 9 de novembro de 2026 a ficha stage-15 do site já era a edição seguinte (Rodez–Albi) e não foi usada.",
+    "O resumo oficial conta 7 planas, 4 onduladas, 8 de montanha, 1 contra-relógio por equipes e 1 individual. Só foram marcadas as etapas que o dossiê ou o resumo identificam: as cinco chegadas no alto, a etapa de montanha de Le Lioran, a etapa 2 descrita como muito ondulada e os dois contra-relógios.",
+    "O dossiê de outubro de 2025 atribui 54.450 m de desnível ao Tour 2026. O folheto de cifras de 24 de junho de 2026, ainda antes da largada, publica 53.950 m e 3.320,7 km no total. Nenhum dos dois reparte o desnível por todas as etapas. Onde o dossiê dá o número de uma etapa, ele fica no card.",
+    "A soma das distâncias do card mistura a página do Grand Départ, nas três primeiras, com o quadro anterior à homologação do dossiê, nas restantes. Não foi ajustada ao total de 3.320,7 km do folheto de junho."
+  ],
+  "etapas": [
+    {
+      "n": 1,
+      "data": "2026-07-04",
+      "km": 19.6,
+      "desnivelM": null,
+      "tipo": "crono",
+      "tipoOficial": "team time-trial",
+      "origem": "Barcelona",
+      "destino": "Barcelona",
+      "detalhe": "Contra-relógio por equipes.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância adotada: 19,6 km, no título da etapa na página Grand Départ Barcelona 2026. O parágrafo inicial dessa página cita 19,7 km, o resumo do percurso cita 19 km e o dossiê de 22 de outubro de 2025 também arredonda para 19 km."
+      ]
+    },
+    {
+      "n": 2,
+      "data": "2026-07-05",
+      "km": 168.5,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": null,
+      "origem": "Tarragona",
+      "destino": "Barcelona",
+      "detalhe": "A página do Grand Départ descreve o final como muito ondulado, com chegada em subida em Montjuïc.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": [
+          {
+            "nome": "Côte de Begues",
+            "xKm": null
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância adotada: 168,5 km na página Grand Départ Barcelona 2026. O parágrafo inicial dessa mesma página ainda cita 178 km. O dossiê de 22 de outubro de 2025 lista 182 km, antes da homologação."
+      ]
+    },
+    {
+      "n": 3,
+      "data": "2026-07-06",
+      "km": 195.9,
+      "desnivelM": 3950,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Granollers",
+      "destino": "Les Angles",
+      "detalhe": "O dossiê de imprensa atribui 3.950 m de desnível a esta etapa. O tipo formal não veio nomeado.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância adotada: 195,9 km na página Grand Départ Barcelona 2026. O dossiê de 22 de outubro de 2025 arredonda para 196 km."
+      ]
+    },
+    {
+      "n": 4,
+      "data": "2026-07-07",
+      "km": 182,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Carcassonne",
+      "destino": "Foix",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 5,
+      "data": "2026-07-08",
+      "km": 158,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Lannemezan",
+      "destino": "Pau",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 6,
+      "data": "2026-07-09",
+      "km": 186,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "summit finish",
+      "origem": "Pau",
+      "destino": "Gavarnie-Gèdre",
+      "detalhe": "Chegada no alto nomeada no resumo oficial entre as cinco da edição.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": [
+          {
+            "nome": "Montée de Gavarnie-Gèdre",
+            "xKm": null
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 7,
+      "data": "2026-07-10",
+      "km": 175,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Hagetmau",
+      "destino": "Bordeaux",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 8,
+      "data": "2026-07-11",
+      "km": 182,
+      "desnivelM": 1150,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Périgueux",
+      "destino": "Bergerac",
+      "detalhe": "O dossiê de imprensa limita o desnível desta etapa a 1.150 m.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 9,
+      "data": "2026-07-12",
+      "km": 185,
+      "desnivelM": 3300,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Malemort",
+      "destino": "Ussel",
+      "detalhe": "O dossiê de imprensa atribui 3.300 m de desnível a esta etapa. O tipo formal não veio nomeado.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 10,
+      "data": "2026-07-14",
+      "km": 167,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "étape de montagne",
+      "origem": "Aurillac",
+      "destino": "Le Lioran",
+      "detalhe": "O dossiê chama esta chegada de etapa de montanha. Não está na lista das cinco chegadas no alto.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": [
+          {
+            "nome": "Col de la Griffoul",
+            "xKm": null
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 11,
+      "data": "2026-07-15",
+      "km": 161,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Vichy",
+      "destino": "Nevers",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 12,
+      "data": "2026-07-16",
+      "km": 181,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Circuit Nevers Magny-Cours",
+      "destino": "Chalon-sur-Saône",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 13,
+      "data": "2026-07-17",
+      "km": 205,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Dole",
+      "destino": "Belfort",
+      "detalhe": "Única etapa acima de 200 km no quadro do dossiê. O tipo formal não veio nomeado.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 14,
+      "data": "2026-07-18",
+      "km": 155,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Mulhouse",
+      "destino": "Le Markstein Fellering",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": [
+          {
+            "nome": "Col du Page",
+            "xKm": null
+          },
+          {
+            "nome": "Col du Haag",
+            "xKm": null
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 15,
+      "data": "2026-07-19",
+      "km": 184,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "summit finish",
+      "origem": "Champagnole",
+      "destino": "Plateau de Solaison",
+      "detalhe": "Chegada no alto nomeada no resumo oficial.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": [
+          {
+            "nome": "Plateau de Solaison",
+            "xKm": null
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 16,
+      "data": "2026-07-21",
+      "km": 26,
+      "desnivelM": null,
+      "tipo": "crono",
+      "tipoOficial": "individual time trial",
+      "origem": "Évian-les-Bains",
+      "destino": "Thonon-les-Bains",
+      "detalhe": "Contra-relógio individual. O dossiê e o resumo do percurso concordam em 26 km.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 17,
+      "data": "2026-07-22",
+      "km": 175,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Chambéry",
+      "destino": "Voiron",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 18,
+      "data": "2026-07-23",
+      "km": 185,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "summit finish",
+      "origem": "Voiron",
+      "destino": "Orcières-Merlette",
+      "detalhe": "Chegada no alto nomeada no resumo oficial.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 19,
+      "data": "2026-07-24",
+      "km": 128,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "summit finish",
+      "origem": "Gap",
+      "destino": "Alpe d'Huez",
+      "detalhe": "Chegada no alto nomeada no resumo oficial.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 20,
+      "data": "2026-07-25",
+      "km": 171,
+      "desnivelM": 5600,
+      "tipo": "montanha",
+      "tipoOficial": "summit finish",
+      "origem": "Le Bourg d'Oisans",
+      "destino": "Alpe d'Huez",
+      "detalhe": "O dossiê atribui 5.600 m de desnível a esta etapa e cita os cols de la Croix de Fer, du Télégraphe, du Galibier e de Sarenne.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": [
+          {
+            "nome": "Col de la Croix de Fer",
+            "xKm": null
+          },
+          {
+            "nome": "Col du Télégraphe",
+            "xKm": null
+          },
+          {
+            "nome": "Col du Galibier",
+            "xKm": null
+          },
+          {
+            "nome": "Col de Sarenne",
+            "xKm": null
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    },
+    {
+      "n": 21,
+      "data": "2026-07-26",
+      "km": 130,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Thoiry",
+      "destino": "Paris",
+      "detalhe": "Chegada nos Champs-Élysées, segundo o dossiê. O tipo formal não veio nomeado.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
+      ]
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 import { abrirArmazenamento, CANAIS_PADRAO, exportarBackup, importarBackup } from "./storage.js";
 import { bandeiraSvg } from "./bandeiras.js";
+import {
+  hrefHub,
+  liberacaoDaProva,
+  numerosLiberados,
+  podioRevelado,
+  PROVAS_ETAPAS_CONFIRMADAS
+} from "./gv/modelo.js";
 
 const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
 const MESES_LONGO = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
@@ -29,6 +36,7 @@ const CLASSE_NOME = {
 
 let loja;
 let memoria;
+let gvLiberacoes = { provas: {} };
 let manifest;
 let calendarios = {};
 let anoAtivo = "2027";
@@ -201,6 +209,33 @@ function provasDoAno(ano) {
   const base = (calendarios[ano]?.provas || []).map((p) => normalizarProva(p, ano));
   const extras = (memoria.personalizados?.[ano] || []).map((p) => normalizarProva({ ...p, fixo: false }, ano));
   return [...base, ...extras].sort(compararProvas);
+}
+
+function metaGrandeVolta(ano, id) {
+  return PROVAS_ETAPAS_CONFIRMADAS.find(
+    (prova) => String(prova.ano) === String(ano) && prova.provaId === id
+  ) || null;
+}
+
+function escondePodioGlobal(ano, id) {
+  const meta = metaGrandeVolta(ano, id);
+  if (!meta) return false;
+  return !podioRevelado(liberacaoDaProva(gvLiberacoes, ano, id), meta.totalEtapas);
+}
+
+function htmlProgressoGv(meta) {
+  const n = numerosLiberados(liberacaoDaProva(gvLiberacoes, meta.ano, meta.provaId)).length;
+  return `<p class="aviso">Etapas confirmadas: ${n} de ${meta.totalEtapas}. <a class="link-gv" href="${esc(hrefHub(meta.slug, meta.ano))}">Abrir etapas</a>. O pódio da prova inteira fica oculto até ela ser marcada completa.</p>`;
+}
+
+function htmlResumoSemPodio(r) {
+  const partes = [];
+  if (r.assistida === "SIM") partes.push("Assistida");
+  else if (r.assistida === "NAO") partes.push("Não assistida");
+  if (r.canal) partes.push(r.canal);
+  if (r.nota) partes.push(r.nota);
+  if (!partes.length) return "";
+  return `<p class="aviso resumo-registro">${partes.map((p) => esc(p)).join(" · ")}</p>`;
 }
 
 function registroDe(ano, id) {
@@ -388,7 +423,9 @@ function renderLista() {
   const filtradas = todas.filter((prova) => {
     const r = registroDe(anoAtivo, prova.id);
     if (busca) {
-      const bloco = norm([prova.nome, prova.pais, prova.classe, r.p1, r.e1, r.p2, r.p3, r.canal].join(" "));
+      const campos = [prova.nome, prova.pais, prova.classe, r.canal];
+      if (!escondePodioGlobal(anoAtivo, prova.id)) campos.push(r.p1, r.e1, r.p2, r.e2, r.p3, r.e3);
+      const bloco = norm(campos.join(" "));
       if (!bloco.includes(busca)) return false;
     }
     if (filtroAss === "SIM" && r.assistida !== "SIM") return false;
@@ -441,7 +478,9 @@ function renderLista() {
     const genCls = prova.gen === "F" ? "f" : prova.gen === "A" ? "a" : "m";
     const canais = [...(memoria.canais || [])];
     if (r.canal && !canais.includes(r.canal)) canais.unshift(r.canal);
-    const aberto = r.p2 || r.e2 || r.p3 || r.e3 || r.nota ? " open" : "";
+    const gv = metaGrandeVolta(anoAtivo, prova.id);
+    const semPodio = escondePodioGlobal(anoAtivo, prova.id);
+    const aberto = semPodio ? (r.nota ? " open" : "") : (r.p2 || r.e2 || r.p3 || r.e3 || r.nota ? " open" : "");
     const edita = podeEditar();
     const apagar = prova.fixo || !edita
       ? ""
@@ -451,7 +490,33 @@ function renderLista() {
       : (r.estrelas
         ? `<span class="estrelas fixas" aria-label="${r.estrelas} ${r.estrelas > 1 ? "estrelas" : "estrela"}">${"★".repeat(r.estrelas)}</span>`
         : "");
-    const formulario = edita ? `
+    const formularioGv = !gv ? "" : edita ? `
+          ${htmlProgressoGv(gv)}
+          <div class="registro">
+            <label>Assistida
+              <select class="mini" data-id="${esc(prova.id)}" data-campo="assistida"${travado}>
+                <option value=""${!r.assistida ? " selected" : ""}>—</option>
+                <option value="SIM"${r.assistida === "SIM" ? " selected" : ""}>Assistida</option>
+                <option value="NAO"${r.assistida === "NAO" ? " selected" : ""}>Não assistida</option>
+              </select>
+            </label>
+            <label>Canal
+              <select class="mini" data-id="${esc(prova.id)}" data-campo="canal"${travado}>
+                <option value="">Canal</option>
+                ${canais.map((c) => `<option value="${esc(c)}"${r.canal === c ? " selected" : ""}>${esc(c)}</option>`).join("")}
+              </select>
+            </label>
+          </div>
+          <details class="mais"${aberto}>
+            <summary>Notas da prova</summary>
+            <div class="grade-mais">
+              <label class="nota">Notas
+                <textarea class="mini" data-id="${esc(prova.id)}" data-campo="nota" maxlength="400" placeholder="O que ficou da transmissão"${travado}>${esc(r.nota)}</textarea>
+              </label>
+            </div>
+            ${apagar}
+          </details>` : `${htmlProgressoGv(gv)}${htmlResumoSemPodio(r)}`;
+    const formularioClassica = edita ? `
           <div class="registro">
             <label>Assistida
               <select class="mini" data-id="${esc(prova.id)}" data-campo="assistida"${travado}>
@@ -482,17 +547,18 @@ function renderLista() {
             </div>
             ${apagar}
           </details>` : htmlResumoRegistro(r);
+    const formulario = semPodio ? formularioGv : formularioClassica;
     html.push(`
       <article class="${classes.join(" ")}" id="prova-${esc(prova.id)}">
         <div class="lado">
           <span class="indice">${String(posicao.get(prova.id)).padStart(3, "0")}</span>
           <div class="quando">${esc(formatarIntervalo(prova.inicio, prova.fim, prova.semData))}</div>
-          ${perfilSvg(prova)}
+          ${gv ? `<a class="link-gv" href="${esc(hrefHub(gv.slug, gv.ano))}">Etapas</a>` : perfilSvg(prova)}
         </div>
         <div>
           <div class="cabeca">
             <div>
-              <h3 class="nome">${esc(prova.nome)}</h3>
+              <h3 class="nome">${gv ? `<a class="link-gv" href="${esc(hrefHub(gv.slug, gv.ano))}">${esc(prova.nome)}</a>` : esc(prova.nome)}</h3>
               <div class="meta">
                 ${htmlPaises(prova)}
                 <span class="selo ${classeSelo(prova.cat)}">${esc(prova.cat)}</span>
@@ -663,12 +729,12 @@ function renderFavoritas() {
     if (!lista.length) return "";
     const cards = lista.map((prova) => {
       const r = registroDe(anoAtivo, prova.id);
+      const gv = metaGrandeVolta(anoAtivo, prova.id);
+      const semPodio = escondePodioGlobal(anoAtivo, prova.id);
       return `<article class="card-fav">
-        <h3 class="nome">${esc(prova.nome)}</h3>
+        <h3 class="nome">${gv ? `<a class="link-gv" href="${esc(hrefHub(gv.slug, gv.ano))}">${esc(prova.nome)}</a>` : esc(prova.nome)}</h3>
         <p class="aviso">${esc(formatarIntervalo(prova.inicio, prova.fim, prova.semData))} · ${htmlPaises(prova)}</p>
-        ${linhaPodio("1º", r.p1, r.e1)}
-        ${linhaPodio("2º", r.p2, r.e2)}
-        ${linhaPodio("3º", r.p3, r.e3)}
+        ${semPodio ? htmlProgressoGv(gv) : `${linhaPodio("1º", r.p1, r.e1)}${linhaPodio("2º", r.p2, r.e2)}${linhaPodio("3º", r.p3, r.e3)}`}
         ${r.nota ? `<p class="aviso">“${esc(r.nota)}”</p>` : ""}
         ${r.canal ? `<p class="aviso">${esc(r.canal)}${r.assistida === "SIM" ? " · assistida" : ""}</p>` : ""}
       </article>`;
@@ -748,8 +814,9 @@ function renderEstatisticas() {
   const estrelas = { 1: 0, 2: 0, 3: 0 };
   provas.forEach((prova) => {
     const r = registroDe(anoAtivo, prova.id);
-    if (r.p1) vencedores[r.p1] = (vencedores[r.p1] || 0) + 1;
-    if (r.e1) equipes[r.e1] = (equipes[r.e1] || 0) + 1;
+    const semPodio = escondePodioGlobal(anoAtivo, prova.id);
+    if (!semPodio && r.p1) vencedores[r.p1] = (vencedores[r.p1] || 0) + 1;
+    if (!semPodio && r.e1) equipes[r.e1] = (equipes[r.e1] || 0) + 1;
     if (r.canal && r.assistida === "SIM") canais[r.canal] = (canais[r.canal] || 0) + 1;
     if (!cats[prova.cat]) cats[prova.cat] = { t: 0, a: 0 };
     cats[prova.cat].t += 1;
@@ -1101,6 +1168,12 @@ async function iniciar() {
     const resposta = await fetch("data/manifest.json");
     if (!resposta.ok) throw new Error("manifest");
     manifest = await resposta.json();
+    try {
+      const liberacoes = await fetch("data/grandes-voltas/liberacoes.json");
+      if (liberacoes.ok) gvLiberacoes = await liberacoes.json();
+    } catch (erro) {
+      gvLiberacoes = { provas: {} };
+    }
     anoAtivo = String(memoria.anoAtivo || manifest.padrao || "2027");
     if (!anosDisponiveis().includes(anoAtivo)) anoAtivo = String(manifest.padrao || anosDisponiveis()[0]);
     document.body.dataset.tema = memoria.tema || document.body.dataset.tema || "amarela";

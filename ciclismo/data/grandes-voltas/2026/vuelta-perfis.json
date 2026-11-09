@@ -1,0 +1,224 @@
+{
+  "versao": 1,
+  "consultadoEm": "2026-11-09",
+  "metodo": "Recorte do gráfico de altimetria nas páginas de perfil do roadbook interativo oficial de 16 de dezembro de 2025. O comentário editorial da mesma página não entra na imagem.",
+  "observacao": "Perfis altimétricos: 21 de 21, recortados do roadbook interativo oficial de 16 de dezembro de 2025. Não há série numérica e o desenho não foi convertido em pontos. O eixo do desenho usa a distância arredondada desse roadbook, anterior à homologação. A distância do card continua a da tabela do site consultada em 9 de novembro de 2026. O regulamento particular traz um terceiro conjunto, marcado como aproximado. As maiores divergências ficam no aviso das etapas 3, 15 e 21.",
+  "etapas": {
+    "1": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-01.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 1 da Vuelta a España 2026, Monaco–Monaco.",
+      "kmNaFicha": 9,
+      "kmNoEixo": 9,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "2": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-02.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 2 da Vuelta a España 2026, Monaco–Manosque.",
+      "kmNaFicha": 215,
+      "kmNoEixo": 215,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "3": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-03.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 3 da Vuelta a España 2026, Gruissan - Aude–Font Romeu.",
+      "kmNaFicha": 166,
+      "kmNoEixo": 166,
+      "desnivelM": null,
+      "avisos": [
+        "O desenho do roadbook de 16 de dezembro de 2025 marca 166 km. A tabela do site, em 9 de novembro de 2026, lista 174 km, e o regulamento particular também lista 174 km. A distância do card permanece 174 km."
+      ]
+    },
+    "4": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-04.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 4 da Vuelta a España 2026, Andorra la Vella–Andorra la Vella.",
+      "kmNaFicha": 104,
+      "kmNoEixo": 104,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "5": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-05.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 5 da Vuelta a España 2026, Falset . Costa Daurada–Roquetes. Terres de l'Ebre.",
+      "kmNaFicha": 171,
+      "kmNoEixo": 171,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "6": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-06.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 6 da Vuelta a España 2026, Alcossebre–Castelló.",
+      "kmNaFicha": 176,
+      "kmNoEixo": 176,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "7": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-07.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 7 da Vuelta a España 2026, vall d'Alba–Aramón Valdelinares.",
+      "kmNaFicha": 149,
+      "kmNoEixo": 149,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "8": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-08.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 8 da Vuelta a España 2026, Puçol–Xeraco.",
+      "kmNaFicha": 168,
+      "kmNoEixo": 168,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "9": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-09.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 9 da Vuelta a España 2026, La Vila Joiosa/ Villajoyosa–Alto de Aitana.Costa Blanca.",
+      "kmNaFicha": 187,
+      "kmNoEixo": 187,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "10": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-10.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 10 da Vuelta a España 2026, Alcaraz–Elche de la Sierra.",
+      "kmNaFicha": 184,
+      "kmNoEixo": 184,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "11": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-11.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 11 da Vuelta a España 2026, Cartagena–Lorca.",
+      "kmNaFicha": 156,
+      "kmNoEixo": 156,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "12": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-12.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 12 da Vuelta a España 2026, Vera–Calar Alto.",
+      "kmNaFicha": 166,
+      "kmNoEixo": 166,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "13": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-13.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 13 da Vuelta a España 2026, Almuñécar–Loja.",
+      "kmNaFicha": 193,
+      "kmNoEixo": 193,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "14": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-14.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 14 da Vuelta a España 2026, Jaén–Sierra de La Pandera.",
+      "kmNaFicha": 152,
+      "kmNoEixo": 152,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "15": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-15.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 15 da Vuelta a España 2026, Palma del Río–Córdoba.",
+      "kmNaFicha": 181,
+      "kmNoEixo": 181,
+      "desnivelM": null,
+      "avisos": [
+        "A tabela do site, em 9 de novembro de 2026, lista 110,2 km. O desenho do roadbook marca 181 km. O regulamento particular lista 189,7 km e marca o total como aproximado. A distância do card permanece 110,2 km, a da tabela viva; as outras duas fontes ficam neste aviso."
+      ]
+    },
+    "16": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-16.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 16 da Vuelta a España 2026, Cortegana–La Rábida. Palos de la Frontera.",
+      "kmNaFicha": 186,
+      "kmNoEixo": 186,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "17": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-17.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 17 da Vuelta a España 2026, Dos Hermanas–Sevilla.",
+      "kmNaFicha": 189,
+      "kmNoEixo": 189,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "18": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-18.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 18 da Vuelta a España 2026, El Puerto de Santa María–Jerez de la Frontera.",
+      "kmNaFicha": 32,
+      "kmNoEixo": 32,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "19": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-19.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 19 da Vuelta a España 2026, Vélez-Málaga–Peñas Blancas. Estepona.",
+      "kmNaFicha": 205,
+      "kmNoEixo": 205,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "20": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-20.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 20 da Vuelta a España 2026, La Calahorra–Collado del Alguacil.",
+      "kmNaFicha": 187,
+      "kmNoEixo": 187,
+      "desnivelM": null,
+      "avisos": []
+    },
+    "21": {
+      "arquivo": "img/perfis/vuelta-2026/etapa-21.jpg",
+      "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+      "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "alt": "Perfil altimétrico da etapa 21 da Vuelta a España 2026, Carrefour Granada–Granada.",
+      "kmNaFicha": 99,
+      "kmNoEixo": 99,
+      "desnivelM": null,
+      "avisos": [
+        "O desenho do roadbook marca 99 km. A tabela do site e o regulamento particular listam 112 km. A distância do card permanece 112 km."
+      ]
+    }
+  }
+}

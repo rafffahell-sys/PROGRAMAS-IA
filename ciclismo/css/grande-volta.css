@@ -1,0 +1,250 @@
+.gv-topo { padding-bottom: 12px; }
+.gv-marca-bike {
+  width: 78px;
+  height: 44px;
+  flex: none;
+  color: var(--jersey);
+}
+body[data-prova="giro"] {
+  --gv-f1: #008C45;
+  --gv-f2: #f4f1e6;
+  --gv-f3: #CD212A;
+  --gv-num: #f4a4c4;
+}
+body[data-prova="tour"] {
+  --gv-f1: #0055A4;
+  --gv-f2: #f4f1e6;
+  --gv-f3: #EF4135;
+  --gv-num: #ffe14a;
+}
+body[data-prova="vuelta"] {
+  --gv-f1: #C60B1E;
+  --gv-f2: #F7C948;
+  --gv-f3: #C60B1E;
+  --gv-num: #ff8d86;
+}
+body[data-prova="giro"] .gv-marca-bike { color: var(--gv-num); }
+body[data-prova="tour"] .gv-marca-bike { color: var(--gv-num); }
+body[data-prova="vuelta"] .gv-marca-bike { color: var(--gv-num); }
+body[data-prova="giro"] .faixa-maillots span:nth-child(1) { background: var(--gv-f1); }
+body[data-prova="giro"] .faixa-maillots span:nth-child(2) { background: var(--gv-f2); }
+body[data-prova="giro"] .faixa-maillots span:nth-child(3) { background: var(--gv-f3); }
+body[data-prova="tour"] .faixa-maillots span:nth-child(1) { background: var(--gv-f1); }
+body[data-prova="tour"] .faixa-maillots span:nth-child(2) { background: var(--gv-f2); }
+body[data-prova="tour"] .faixa-maillots span:nth-child(3) { background: var(--gv-f3); }
+body[data-prova="vuelta"] .faixa-maillots span:nth-child(1) { background: var(--gv-f1); }
+body[data-prova="vuelta"] .faixa-maillots span:nth-child(2) { background: var(--gv-f2); }
+body[data-prova="vuelta"] .faixa-maillots span:nth-child(3) { background: var(--gv-f3); }
+.gv-marca {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.gv-irmas { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.gv-irmas a, .link-gv, .gv-voltar a {
+  color: var(--ink);
+  font-weight: 700;
+}
+.gv-cabeca h1 {
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  text-wrap: balance;
+}
+.gv-cena {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 280px);
+  gap: 8px 22px;
+  align-items: end;
+}
+.gv-cena-texto { min-width: 0; }
+.gv-cena-arte {
+  pointer-events: none;
+  min-width: 0;
+}
+.gv-cena-svg { display: block; width: 100%; height: auto; }
+.gv-serra { fill: currentColor; opacity: 0.2; }
+.gv-serra-frente { opacity: 0.34; }
+body[data-prova="giro"] .gv-serra { color: #f4a4c4; }
+body[data-prova="tour"] .gv-serra { color: #ffe14a; }
+body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
+.gv-cipreste { fill: #1f6b3a; }
+.gv-platano { fill: #1d4e89; }
+.gv-oliveira { fill: #8a6232; }
+.gv-asfalto { stroke: currentColor; stroke-width: 2; opacity: 0.4; }
+.gv-num { color: var(--gv-num, inherit); }
+.gv-progresso {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.gv-aviso, .gv-nota, .gv-fonte, .gv-compara {
+  color: var(--muted);
+}
+.gv-analise, .gv-favoritos {
+  margin-top: 18px;
+}
+.gv-favoritos-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+.gv-favorito {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+.gv-favorito h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.gv-favorito-equipe { margin: 0; font-weight: 700; }
+.gv-favorito p { margin: 6px 0 0; }
+.gv-aviso {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--jersey) 10%, transparent);
+}
+.gv-filtros, .gv-grade, .gv-marcas-grade {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.gv-filtros { margin: 14px 0; align-items: center; }
+.gv-filtros label { display: flex; gap: 6px; align-items: center; }
+.gv-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.gv-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 132px;
+  padding: 16px 12px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.gv-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gv-f1, var(--jersey)) 0 33.34%, var(--gv-f2, transparent) 33.34% 66.66%, var(--gv-f3, var(--jersey)) 66.66%);
+}
+.gv-card:hover, .gv-card:focus-visible { outline: 3px solid var(--gv-num, var(--jersey)); outline-offset: 2px; }
+.gv-card strong { font-size: 1rem; line-height: 1.25; }
+.gv-num {
+  font-family: var(--display);
+  font-size: 2rem;
+  line-height: 0.8;
+}
+.gv-chip {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+}
+.gv-chip.percurso_ok { background: color-mix(in srgb, var(--jersey) 24%, transparent); }
+.gv-chip.assistida { background: var(--good); color: #142006; }
+.gv-chip.bloqueada { color: var(--muted); }
+.gv-camisas { list-style: none; padding: 0; display: flex; gap: 10px; flex-wrap: wrap; }
+.gv-camisa { display: flex; gap: 8px; align-items: center; }
+.gv-cor {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  flex: none;
+}
+.gv-badge {
+  margin-left: 6px;
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+}
+.gv-badge.ok { background: color-mix(in srgb, var(--good) 30%, transparent); }
+.gv-lugar { font-size: 1.15rem; font-weight: 800; }
+.gv-perfil, .gv-bloqueio, .gv-resultados, .gv-bloco {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+.gv-perfil-vazio {
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background:
+    linear-gradient(180deg, transparent, color-mix(in srgb, var(--jersey) 16%, transparent)),
+    repeating-linear-gradient(90deg, transparent 0 18px, color-mix(in srgb, var(--line) 80%, transparent) 18px 19px);
+}
+.gv-perfil-svg { width: 100%; height: auto; color: var(--jersey); }
+.gv-perfil-imagem img { width: 100%; height: auto; display: block; background: #fff; }
+.gv-botao-ampliar {
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font: inherit;
+  cursor: zoom-in;
+}
+.gv-perfil-dialog {
+  width: min(1100px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  border: 0;
+  border-radius: 16px;
+  padding: 12px;
+}
+.gv-perfil-dialog img { width: 100%; height: auto; }
+.gv-perfil-dialog::backdrop { background: rgba(20, 8, 16, 0.72); }
+.gv-tem-perfil {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.gv-marcas { flex: 1; min-width: 220px; }
+.gv-avisos { color: var(--muted); }
+.gv-lista { margin: 0; padding-left: 0; list-style: none; }
+.gv-lista li { padding: 6px 0; border-bottom: 1px solid var(--line); }
+.gv-pos { font-family: var(--display); font-size: 1.3rem; margin-right: 6px; }
+.gv-eq, .gv-tempo { color: var(--muted); }
+.revelar { animation: gv-revelar 0.45s ease; }
+@keyframes gv-revelar {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 720px) {
+  .gv-cena { grid-template-columns: 1fr; }
+  .gv-cena-arte { max-width: 320px; }
+  .gv-grade { grid-template-columns: 1fr; }
+  .gv-card { min-height: 0; }
+  .gv-progresso { font-size: 1.4rem; }
+  .gv-marca-bike { width: 64px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gv-roda { animation: gv-roda 24s linear infinite; transform-box: fill-box; transform-origin: center; }
+}
+@keyframes gv-roda { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .revelar, .gv-roda { animation: none; }
+}

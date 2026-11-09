@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12160f">
+  <title>Grandes Voltas — percursos</title>
+  <meta name="description" content="Etapas do Giro, do Tour e da Vuelta: distância, tipo e percurso. Resultados só depois da confirmação de cada etapa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2312160f'/%3E%3Ccircle cx='16' cy='44' r='9' fill='none' stroke='%23ffe14a' stroke-width='4'/%3E%3Ccircle cx='48' cy='44' r='9' fill='none' stroke='%23ffe14a' stroke-width='4'/%3E%3Cpath d='M16 44h14l10-16h8M30 44 40 28 24 28M40 28 48 44' fill='none' stroke='%23ffe14a' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/grande-volta.css">
+</head>
+<body>
+<script>
+(function () {
+  try {
+    var bruto = localStorage.getItem("ciclismo_v2");
+    var salvo = bruto ? JSON.parse(bruto) : null;
+    var tema = (salvo && (salvo.tema || salvo.temaAtivo)) || localStorage.getItem("ciclismo_temaAtivo");
+    var mapa = { "red-dark": "roja", "blue-light": "dia", "green-dark": "amarela", amarela: "amarela", rosa: "rosa", roja: "roja", dia: "dia" };
+    document.body.dataset.tema = mapa[tema] || "amarela";
+  } catch (e) {
+    document.body.dataset.tema = "amarela";
+  }
+})();
+</script>
+<div class="faixa-maillots" aria-hidden="true"><span></span><span></span><span></span></div>
+<header class="topo gv-topo">
+  <div class="topo-miolo">
+    <div class="marca">
+      <svg class="gv-marca-bike" viewBox="0 0 86 48" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="32" r="12"/>
+          <circle cx="66" cy="32" r="12"/>
+          <path d="M18 32h22l14-16h10M40 16h12M54 16l12 8v8"/>
+        </g>
+      </svg>
+      <div>
+        <p class="kicker">O que eu assisto</p>
+        <p class="gv-marca">Ciclismo</p>
+      </div>
+    </div>
+    <nav class="gv-irmas" aria-label="Grandes Voltas">
+      <a href="index.html">Calendário</a>
+      <a href="grande-volta.html#/giro/2026">Giro</a>
+      <a href="grande-volta.html#/tour/2026">Tour</a>
+      <a href="grande-volta.html#/vuelta/2026">Vuelta</a>
+    </nav>
+  </div>
+</header>
+<main class="miolo" id="gv-app">
+  <p>Carregando o percurso…</p>
+</main>
+<footer class="rodape">
+  <p>Percurso público. Resultado de etapa não entra nesta página sem confirmação daquela etapa.</p>
+  <p><a href="index.html">Voltar ao calendário</a></p>
+</footer>
+<script type="module" src="js/gv/pagina.js"></script>
+</body>
+</html>
