@@ -302,6 +302,7 @@ body[data-tema="dia"] .mini {
   line-height: 1.2;
   font-weight: 800;
 }
+.link-gv { color: inherit; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; align-items: center; color: var(--muted); font-size: 0.86rem; }
 .paises { display: inline-flex; gap: 4px; align-items: center; }
 .bandeira { width: 22px; height: 16px; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0,0,0,.25); display: block; }

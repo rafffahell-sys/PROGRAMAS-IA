@@ -1,0 +1,57 @@
+rules_version = '2';
+// PROPOSTA. Não implantada.
+// A regra de /ciclismo/{documento} repete a já documentada no README, sem alargá-la.
+// Não há match recursivo. Snapshot só é lido se a mesma etapa estiver na lista pública de booleanos.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function dono() {
+      return request.auth != null
+        && request.auth.token.email == "rafffahell@gmail.com";
+    }
+
+    match /ciclismo/{documento} {
+      allow read: if true;
+      allow write: if dono();
+    }
+
+    function liberacaoValida() {
+      return request.resource.data.keys().hasOnly(["etapas", "provaCompleta", "atualizadoEm"])
+        && request.resource.data.provaCompleta is bool
+        && request.resource.data.etapas is map
+        && request.resource.data.etapas.size() <= 30
+        && request.resource.data.etapas.values().hasOnly([true])
+        && (
+          request.resource.data.provaCompleta == false
+          || request.resource.data.etapas.keys().hasAny(["21"])
+        );
+    }
+
+    match /ciclismo_gv/{provaAno} {
+      allow get, list: if true;
+      allow create, update: if dono() && liberacaoValida();
+      allow delete: if false;
+    }
+
+    function etapaLiberada(provaAno, etapa) {
+      let caminho = /databases/$(database)/documents/ciclismo_gv/$(provaAno);
+      return exists(caminho)
+        && get(caminho).data.etapas.keys().hasAny([etapa])
+        && get(caminho).data.etapas[etapa] == true;
+    }
+
+    match /ciclismo_gv_snapshots/{provaAno}/apos/{etapa} {
+      allow get: if etapaLiberada(provaAno, etapa);
+      allow list: if false;
+      allow create: if dono()
+        && request.resource.data.imutavel == true
+        && request.resource.data.aposEtapa == int(etapa)
+        && request.resource.data.provaId is string
+        && request.resource.data.ano is int;
+      allow update, delete: if false;
+    }
+
+    match /ciclismo_gv_auditoria/{id} {
+      allow read, write: if dono();
+    }
+  }
+}

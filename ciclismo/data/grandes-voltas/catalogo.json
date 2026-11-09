@@ -1,0 +1,32 @@
+{
+  "versao": 1,
+  "provas": [
+    {
+      "provaId": "b7",
+      "slug": "giro",
+      "ano": 2026,
+      "nome": "Giro d'Italia",
+      "genero": "M",
+      "totalEtapas": 21,
+      "arquivo": "2026/giro.json"
+    },
+    {
+      "provaId": "b10",
+      "slug": "tour",
+      "ano": 2026,
+      "nome": "Tour de France",
+      "genero": "M",
+      "totalEtapas": 21,
+      "arquivo": "2026/tour.json"
+    },
+    {
+      "provaId": "b12",
+      "slug": "vuelta",
+      "ano": 2026,
+      "nome": "Volta à Espanha",
+      "genero": "M",
+      "totalEtapas": 21,
+      "arquivo": "2026/vuelta.json"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+node_modules/
+tools/grandes_voltas/saida/
+.firebase/
+firestore-debug.log
+ui-debug.log
+*-debug.log

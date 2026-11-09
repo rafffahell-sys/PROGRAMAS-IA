@@ -1,0 +1,548 @@
+{
+  "provaId": "b10",
+  "slug": "tour",
+  "ano": 2026,
+  "nome": "Tour de France",
+  "genero": "M",
+  "totalEtapas": 21,
+  "calendario": {
+    "id": "b10",
+    "inicio": "2026-07-04",
+    "fim": "2026-07-26",
+    "confirmadoNoSite": true
+  },
+  "fontes": [
+    {
+      "nome": "Grand Départ Barcelona 2026",
+      "url": "https://www.letour.fr/en/the-race/grands-departs/grand-depart-2026",
+      "consultadoEm": "2026-11-09"
+    },
+    {
+      "nome": "2026 Route (parcours)",
+      "url": "https://www.letour.fr/en/parcours-webview",
+      "consultadoEm": "2026-11-09",
+      "observacao": "O índice stage-0N do site oficial, consultado na mesma data, já descrevia a edição seguinte. Essas fichas não foram usadas. Onde o resumo de 2026 não traz cidade, km ou tipo, o campo fica vazio."
+    }
+  ],
+  "camisas": [
+    {
+      "id": "gc",
+      "nomeClasse": "geral",
+      "unidade": "tempo",
+      "cor": "#ffe14a",
+      "rotulo": "Amarela",
+      "oficialConfirmado": false,
+      "prioridade": null,
+      "nota": "Rótulo clássico, a confirmar no regulamento desta edição. A página de regras do site não identificava o ano 2026 na consulta."
+    },
+    {
+      "id": "pontos",
+      "nomeClasse": "pontos",
+      "unidade": "pontos",
+      "cor": "#1f8f4e",
+      "rotulo": "Verde",
+      "oficialConfirmado": false,
+      "prioridade": null,
+      "nota": "Rótulo clássico, a confirmar. Tabela de pontos não copiada."
+    },
+    {
+      "id": "montanha",
+      "nomeClasse": "montanha",
+      "unidade": "pontos",
+      "cor": "#e10600",
+      "rotulo": "Bolinhas",
+      "oficialConfirmado": false,
+      "prioridade": null,
+      "nota": "Rótulo clássico, a confirmar. Tabela de pontos não copiada."
+    },
+    {
+      "id": "jovem",
+      "nomeClasse": "jovem",
+      "unidade": "tempo",
+      "cor": "#f4f1e6",
+      "rotulo": "Branca",
+      "oficialConfirmado": false,
+      "prioridade": null,
+      "nota": "Rótulo clássico, a confirmar. Idade-limite desta edição não foi fechada numa página de regulamento de 2026."
+    }
+  ],
+  "regulamento": {
+    "oficialConfirmado": false,
+    "fonte": null,
+    "prioridadeVestimenta": null,
+    "prioridadeConfirmada": false,
+    "notaPrioridade": "Prioridade entre camisas não confirmada para 2026.",
+    "jovem": {
+      "nascidoAPartirDe": null,
+      "confirmado": false
+    },
+    "tabelaPontosChegada": null
+  },
+  "classificacaoEquipes": {
+    "habilitada": false,
+    "previstaNoRegulamento": false,
+    "oficialConfirmado": false,
+    "nota": "Não confirmada para esta edição. O painel permanece desligado."
+  },
+  "observacoes": [
+    "Nenhuma etapa está liberada.",
+    "O resumo oficial de 2026 fala em 7 etapas planas, 4 onduladas, 8 de montanha, 1 contra-relógio por equipes e 1 individual, com dois dias de descanso. Essa conta não foi desdobrada etapa a etapa onde a página não numera o tipo.",
+    "O mesmo resumo cita 54.450 m de desnível associados ao ano de 2025. Esse número não foi usado para 2026.",
+    "Chegadas no alto nomeadas sem número de etapa no resumo: Orcières-Merlette e Alpe d'Huez (duas vezes). Não foram atribuídas a uma etapa."
+  ],
+  "etapas": [
+    {
+      "n": 1,
+      "data": "2026-07-04",
+      "km": 19.6,
+      "desnivelM": null,
+      "tipo": "crono",
+      "tipoOficial": "team time-trial",
+      "origem": "Barcelona",
+      "destino": "Barcelona",
+      "detalhe": "Contra-relógio por equipes. O resumo do percurso arredonda para 19 km; o mesmo texto de apresentação também cita 19,7 km.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância adotada: 19,6 km, no título da etapa na página Grand Départ Barcelona 2026. O parágrafo inicial dessa página cita 19,7 km e o resumo do percurso cita 19 km."
+      ]
+    },
+    {
+      "n": 2,
+      "data": "2026-07-05",
+      "km": 168.5,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": null,
+      "origem": "Tarragona",
+      "destino": "Barcelona",
+      "detalhe": "A página de percurso descreve o final como muito ondulado, com chegada em subida em Montjuïc. Não há um rótulo formal flat/hilly nessa ficha.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância adotada: 168,5 km na página Grand Départ Barcelona 2026. O parágrafo inicial dessa mesma página ainda cita 178 km, de uma versão anterior."
+      ]
+    },
+    {
+      "n": 3,
+      "data": "2026-07-06",
+      "km": 195.9,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Granollers",
+      "destino": "Les Angles",
+      "detalhe": "A página confirma origem, destino e distância, sem classificar o tipo.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 4,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 5,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 6,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "summit finish",
+      "origem": null,
+      "destino": "Gavarnie-Gèdre",
+      "detalhe": "Chegada no alto citada no resumo do percurso 2026. Origem e distância não vieram nessa página.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Origem e distância ausentes na página de percurso de 2026 consultada."
+      ]
+    },
+    {
+      "n": 7,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Hagetmau",
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Destino, distância e tipo ausentes na página de percurso de 2026 consultada."
+      ]
+    },
+    {
+      "n": 8,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 9,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Malemort",
+      "destino": "Ussel",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância e tipo ausentes na página de percurso de 2026 consultada."
+      ]
+    },
+    {
+      "n": 10,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 11,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 12,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Circuit Nevers Magny-Cours",
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Destino, distância e tipo ausentes na página de percurso de 2026 consultada."
+      ]
+    },
+    {
+      "n": 13,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 14,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": "O resumo do percurso cita Col du Page e Col du Haag nesta etapa, sem origem, destino, distância ou tipo formal.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": [
+          {
+            "nome": "Col du Page",
+            "xKm": null
+          },
+          {
+            "nome": "Col du Haag",
+            "xKm": null
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 15,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "summit finish",
+      "origem": null,
+      "destino": "Plateau de Solaison",
+      "detalhe": "Chegada no alto citada no resumo do percurso 2026.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Origem e distância ausentes na página de percurso de 2026 consultada."
+      ]
+    },
+    {
+      "n": 16,
+      "data": null,
+      "km": 26,
+      "desnivelM": null,
+      "tipo": "crono",
+      "tipoOficial": "individual time trial",
+      "origem": "Évian-les-Bains",
+      "destino": "Thonon-les-Bains",
+      "detalhe": "Contra-relógio individual de 26 km, segundo o resumo do percurso 2026. A data do dia não veio nessa página.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 17,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 18,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 19,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 20,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": null,
+      "destino": null,
+      "detalhe": "O resumo do percurso cita o Col de Sarenne pelo flanco sudeste nesta etapa. Alpe d'Huez aparece como chegada no alto em dois dias, sem número de etapa nesse resumo — por isso não foi atribuído aqui.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": [
+          {
+            "nome": "Col de Sarenne",
+            "xKm": null
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
+      ]
+    },
+    {
+      "n": 21,
+      "data": null,
+      "km": null,
+      "desnivelM": null,
+      "tipo": "desconhecido",
+      "tipoOficial": null,
+      "origem": "Thoiry",
+      "destino": "Paris",
+      "detalhe": "O resumo do percurso indica Thoiry na largada da última etapa e Paris na chegada final, sem distância nem tipo.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Distância e tipo ausentes na página de percurso de 2026 consultada."
+      ]
+    }
+  ]
+}

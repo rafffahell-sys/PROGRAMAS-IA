@@ -1,0 +1,1005 @@
+{
+  "provaId": "b7",
+  "slug": "giro",
+  "ano": 2026,
+  "nome": "Giro d'Italia",
+  "genero": "M",
+  "totalEtapas": 21,
+  "calendario": {
+    "id": "b7",
+    "inicio": "2026-05-08",
+    "fim": "2026-05-31",
+    "confirmadoNoSite": true
+  },
+  "fontes": [
+    {
+      "nome": "Regulamento do 109º Giro d'Italia (4 de maio de 2026)",
+      "url": "https://www.giroditalia.it/wp-content/uploads/2026/05/ZVzAI74R7A7gM9wuyqTu_040526-014251.pdf",
+      "consultadoEm": "2026-11-09",
+      "observacao": "Tabela de etapas, categorias de dificuldade, sprints e subidas categorizadas. A brochura de percurso de fevereiro de 2026 confirma Feltre–Alleghe na etapa 19. Não foram usadas páginas de classificação."
+    },
+    {
+      "nome": "Brochura de percurso e hospitalidade do Giro d'Italia 2026 (fevereiro de 2026)",
+      "url": "https://www.giroditalia.it/wp-content/uploads/2026/02/t14YXHcwwDHMg5HfLDg9_260226-053022.pdf",
+      "consultadoEm": "2026-11-09"
+    }
+  ],
+  "camisas": [
+    {
+      "id": "gc",
+      "nomeClasse": "geral",
+      "unidade": "tempo",
+      "cor": "#f4a4c4",
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "prioridade": 1,
+      "nota": "Líder da classificação geral por tempo. Prioridade máxima se o mesmo corredor liderar outra camisa."
+    },
+    {
+      "id": "pontos",
+      "nomeClasse": "pontos",
+      "unidade": "pontos",
+      "cor": "#c71585",
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "prioridade": 2,
+      "nota": "Classificação por pontos. Escala no regulamento, distinta para categorias a/b, c e d/e."
+    },
+    {
+      "id": "montanha",
+      "nomeClasse": "montanha",
+      "unidade": "pontos",
+      "cor": "#1e90ff",
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "prioridade": 3,
+      "nota": "Melhor escalador. Cima Coppi no Passo Giau, etapa 19."
+    },
+    {
+      "id": "jovem",
+      "nomeClasse": "jovem",
+      "unidade": "tempo",
+      "cor": "#f4f1e6",
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "prioridade": 4,
+      "nota": "Melhor colocado na geral entre nascidos a partir de 1º de janeiro de 2001."
+    }
+  ],
+  "regulamento": {
+    "oficialConfirmado": true,
+    "fonte": "https://www.giroditalia.it/wp-content/uploads/2026/05/ZVzAI74R7A7gM9wuyqTu_040526-014251.pdf",
+    "prioridadeVestimenta": [
+      "gc",
+      "pontos",
+      "montanha",
+      "jovem"
+    ],
+    "prioridadeConfirmada": true,
+    "notaPrioridade": "Se um corredor lidera mais de uma classificação, veste a camisa de maior prioridade. A camisa restante passa, em título honorífico, ao seguinte dessa classificação que não lidere outra.",
+    "jovem": {
+      "nascidoAPartirDe": "2001-01-01",
+      "confirmado": true
+    },
+    "tabelaPontosChegada": {
+      "a_b": [
+        50,
+        35,
+        25,
+        18,
+        14,
+        12,
+        10,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "c": [
+        25,
+        18,
+        12,
+        8,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "d_e": [
+        15,
+        12,
+        9,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    "sprintIntermediarioPontos": [
+      12,
+      8,
+      5,
+      3,
+      1
+    ],
+    "montanhaPontos": {
+      "cima_coppi": [
+        50,
+        30,
+        20,
+        14,
+        10,
+        6,
+        4,
+        2,
+        1
+      ],
+      "1_chegada": [
+        50,
+        24,
+        16,
+        9,
+        6,
+        4,
+        2,
+        1
+      ],
+      "1_passagem": [
+        40,
+        18,
+        12,
+        9,
+        6,
+        4,
+        2,
+        1
+      ],
+      "2": [
+        18,
+        8,
+        6,
+        4,
+        2,
+        1
+      ],
+      "3": [
+        9,
+        4,
+        2,
+        1
+      ],
+      "4": [
+        3,
+        2,
+        1
+      ]
+    }
+  },
+  "classificacaoEquipes": {
+    "habilitada": false,
+    "previstaNoRegulamento": true,
+    "oficialConfirmado": true,
+    "nota": "O regulamento soma os três melhores tempos de cada equipe. O painel fica desligado até um snapshot autorizado trazer esses dados."
+  },
+  "observacoes": [
+    "Nenhuma etapa está liberada.",
+    "Não há série altimétrica: o gráfico fica ausente de propósito."
+  ],
+  "etapas": [
+    {
+      "n": 1,
+      "data": "2026-05-08",
+      "km": 147,
+      "desnivelM": null,
+      "tipo": "plana",
+      "tipoOficial": "categoria a do art. 17",
+      "origem": "Nessebar",
+      "destino": "Burgas",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Sozopol",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Cape Agalina",
+            "xKm": null,
+            "categoria": "4"
+          },
+          {
+            "nome": "Cape Agalina (2ª passagem)",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 2,
+      "data": "2026-05-09",
+      "km": 221,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Burgas",
+      "destino": "Veliko Tarnovo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Sliven",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Byala Pass",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Vratnik Pass",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Lyaskovets Monastery Pass",
+            "xKm": null,
+            "categoria": "3"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "A célula de dia da tabela de quilometragem veio inconsistente com a etapa 3. A data segue a tabela de sprints do mesmo regulamento (9 de maio) e a sequência sexta–domingo."
+      ]
+    },
+    {
+      "n": 3,
+      "data": "2026-05-10",
+      "km": 175,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": "categoria b do art. 17",
+      "origem": "Plovdiv",
+      "destino": "Sofia",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Dolna Banja",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Borovets Pass",
+            "xKm": null,
+            "categoria": "2"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 4,
+      "data": "2026-05-12",
+      "km": 138,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": "categoria b do art. 17",
+      "origem": "Catanzaro",
+      "destino": "Cosenza",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "San Lucido",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Cozzo Tunno",
+            "xKm": null,
+            "categoria": "2"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 5,
+      "data": "2026-05-13",
+      "km": 203,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Praia a Mare",
+      "destino": "Potenza",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Francavilla in Sinni",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Montagna Grande di Viggiano",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Prestieri",
+            "xKm": null,
+            "categoria": "3"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 6,
+      "data": "2026-05-14",
+      "km": 141,
+      "desnivelM": null,
+      "tipo": "plana",
+      "tipoOficial": "categoria a do art. 17",
+      "origem": "Paestum",
+      "destino": "Napoli",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Brusciano",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Cava de' Tirreni",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 7,
+      "data": "2026-05-15",
+      "km": 244,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Formia",
+      "destino": "Blockhaus",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Venafro",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Roccaraso",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Blockhaus",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 8,
+      "data": "2026-05-16",
+      "km": 156,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Chieti",
+      "destino": "Fermo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Cupra Marittima",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Montefiore d'Aso",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Monterubbiano",
+            "xKm": null,
+            "categoria": "4"
+          },
+          {
+            "nome": "Capodarco",
+            "xKm": null,
+            "categoria": "4"
+          },
+          {
+            "nome": "Fermo",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 9,
+      "data": "2026-05-17",
+      "km": 184,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Cervia",
+      "destino": "Corno alle Scale",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Marzabotto",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Querciola",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Corno alle Scale",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 10,
+      "data": "2026-05-19",
+      "km": 42,
+      "desnivelM": null,
+      "tipo": "crono",
+      "tipoOficial": "categoria e do art. 17",
+      "origem": "Viareggio",
+      "destino": "Massa",
+      "detalhe": "Contra-relógio individual.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Apresentações anteriores citaram 40,2 km. O regulamento de 4 de maio de 2026 lista 42 km, e a soma das 21 etapas fecha nos 3.468,0 km publicados nesse documento."
+      ]
+    },
+    {
+      "n": 11,
+      "data": "2026-05-20",
+      "km": 195,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Porcari (Paper District)",
+      "destino": "Chiavari",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Luni",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Passo del Termine",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Colla dei Scioli",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Colle di Guaitarola",
+            "xKm": null,
+            "categoria": "2"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 12,
+      "data": "2026-05-21",
+      "km": 175,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": "categoria b do art. 17",
+      "origem": "Imperia",
+      "destino": "Novi Ligure",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Stella",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Colle Giovo",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Bric Berton",
+            "xKm": null,
+            "categoria": "3"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 13,
+      "data": "2026-05-22",
+      "km": 189,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Alessandria",
+      "destino": "Verbania",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Stresa",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Ungiasca",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Bieno",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 14,
+      "data": "2026-05-23",
+      "km": 133,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Aosta",
+      "destino": "Pila (Gressan)",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Roisan",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Doues",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Verrogne",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Saint-Barthélémy",
+            "xKm": null,
+            "categoria": "1"
+          },
+          {
+            "nome": "Lin Noir",
+            "xKm": null,
+            "categoria": "1"
+          },
+          {
+            "nome": "Pila",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 15,
+      "data": "2026-05-24",
+      "km": 157,
+      "desnivelM": null,
+      "tipo": "plana",
+      "tipoOficial": "categoria a do art. 17",
+      "origem": "Voghera",
+      "destino": "Milano",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Pavia",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 16,
+      "data": "2026-05-26",
+      "km": 113,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Bellinzona",
+      "destino": "Carì",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Ludiano",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Torre",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Torre (2ª passagem)",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Leontica",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Leontica (2ª passagem)",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Carì",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 17,
+      "data": "2026-05-27",
+      "km": 202,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "categoria c do art. 17",
+      "origem": "Cassano d'Adda",
+      "destino": "Andalo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Roncone",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Passo dei Tre Termini",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Cocca di Lodrino",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Andalo-Lever",
+            "xKm": null,
+            "categoria": "3"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 18,
+      "data": "2026-05-28",
+      "km": 171,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": "categoria b do art. 17",
+      "origem": "Fai della Paganella",
+      "destino": "Pieve di Soligo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Guia",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Fastro",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Muro di Ca' del Poggio",
+            "xKm": null,
+            "categoria": "4"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 19,
+      "data": "2026-05-29",
+      "km": 151,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Feltre",
+      "destino": "Alleghe (Piani di Pezzè)",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Palafavera",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Passo Duran",
+            "xKm": null,
+            "categoria": "1"
+          },
+          {
+            "nome": "Coi",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Forcella Staulanza",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Passo Falzarego",
+            "xKm": null,
+            "categoria": "2"
+          },
+          {
+            "nome": "Passo Giau",
+            "xKm": null,
+            "categoria": "cima_coppi"
+          },
+          {
+            "nome": "Piani di Pezzè",
+            "xKm": null,
+            "categoria": "2"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada.",
+        "Na extração da tabela de quilometragem as colunas de origem e destino vieram invertidas. A brochura de percurso de fevereiro de 2026 traz Feltre–Alleghe (Piani di Pezzè)."
+      ]
+    },
+    {
+      "n": 20,
+      "data": "2026-05-30",
+      "km": 200,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "categoria d do art. 17",
+      "origem": "Gemona del Friuli",
+      "destino": "Piancavallo",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Forgaria nel Friuli",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": [
+          {
+            "nome": "Clauzetto",
+            "xKm": null,
+            "categoria": "3"
+          },
+          {
+            "nome": "Piancavallo",
+            "xKm": null,
+            "categoria": "1"
+          },
+          {
+            "nome": "Piancavallo (chegada)",
+            "xKm": null,
+            "categoria": "1"
+          }
+        ]
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 21,
+      "data": "2026-05-31",
+      "km": 131,
+      "desnivelM": null,
+      "tipo": "plana",
+      "tipoOficial": "categoria a do art. 17",
+      "origem": "Roma",
+      "destino": "Roma",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [
+          {
+            "nome": "Fontana dello Zodiaco",
+            "xKm": null,
+            "categoria": "intermediario"
+          }
+        ],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    }
+  ]
+}

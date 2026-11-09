@@ -1,0 +1,24 @@
+{
+  "versao": 1,
+  "descricao": "Formato de um snapshot imutável após a etapa N. Não há snapshot real neste repositório.",
+  "publicadoSomenteSe": [
+    "a etapa N está em liberacoes com valor true",
+    "acesso.regrasComprovadas é true",
+    "as regras do Firestore permitem a leitura só nesse caso"
+  ],
+  "campos": {
+    "sintetico": "boolean. true só em teste. O site recusa desenhar snapshot sintético.",
+    "provaId": "string",
+    "ano": "number",
+    "aposEtapa": "number",
+    "imutavel": "true",
+    "fonte": { "nome": "string", "url": "string ou null", "coletadoEm": "string" },
+    "validacao": { "ok": "boolean", "checagens": "string[]", "avisos": "string[]" },
+    "etapa": { "top10": "lista de até 10: pos, ciclista, equipe, tempo, gap" },
+    "gc": { "top10": "lista de até 10: pos, ciclista, equipe, tempo, gap" },
+    "camisas": "mapa id da config -> { top5, lider, quemVeste, fonteNaoDistingue }",
+    "equipes": "null ou { top5 } — opcional e desligado até vir no snapshot"
+  },
+  "comparacao": "Somente com a maior etapa liberada estritamente anterior. Não assume N-1.",
+  "quemVeste": "Se a fonte não separa líder de quem veste, quemVeste fica null e fonteNaoDistingue true."
+}

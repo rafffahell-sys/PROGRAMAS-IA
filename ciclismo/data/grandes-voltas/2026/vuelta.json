@@ -1,0 +1,509 @@
+{
+  "provaId": "b12",
+  "slug": "vuelta",
+  "ano": 2026,
+  "nome": "Volta à Espanha",
+  "genero": "M",
+  "totalEtapas": 21,
+  "calendario": {
+    "id": "b12",
+    "inicio": "2026-08-22",
+    "fim": "2026-09-13",
+    "confirmadoNoSite": true
+  },
+  "fontes": [
+    {
+      "nome": "Official route of La Vuelta 2026",
+      "url": "https://www.lavuelta.es/en/overall-route",
+      "consultadoEm": "2026-11-09",
+      "observacao": "Tabela de etapas, tipo, data, origem, destino e distância. Sem perfil numérico nessa página."
+    }
+  ],
+  "camisas": [
+    {
+      "id": "gc",
+      "nomeClasse": "geral",
+      "unidade": "tempo",
+      "cor": "#e10600",
+      "rotulo": "Vermelha",
+      "oficialConfirmado": false,
+      "prioridade": null,
+      "nota": "Rótulo clássico, a confirmar no regulamento. A página de regras em inglês não nomeia a cor."
+    },
+    {
+      "id": "pontos",
+      "nomeClasse": "pontos",
+      "unidade": "pontos",
+      "cor": "#1f8f4e",
+      "rotulo": "Verde",
+      "oficialConfirmado": false,
+      "prioridade": null,
+      "nota": "Rótulo clássico, a confirmar. Tabela de pontos não copiada."
+    },
+    {
+      "id": "montanha",
+      "nomeClasse": "montanha",
+      "unidade": "pontos",
+      "cor": "#1e4fbf",
+      "rotulo": "Bolinhas azuis",
+      "oficialConfirmado": false,
+      "prioridade": null,
+      "nota": "Rótulo a confirmar. A página de regras não nomeia a cor das bolinhas desta edição."
+    },
+    {
+      "id": "jovem",
+      "nomeClasse": "jovem",
+      "unidade": "tempo",
+      "cor": "#f4f1e6",
+      "rotulo": "Branca",
+      "oficialConfirmado": false,
+      "prioridade": null,
+      "nota": "Rótulo clássico, a confirmar. A página de regras consultada não declara o ano da edição na idade-limite."
+    }
+  ],
+  "regulamento": {
+    "oficialConfirmado": false,
+    "fonte": "https://www.lavuelta.es/en/the-race/sporting-stakes",
+    "prioridadeVestimenta": null,
+    "prioridadeConfirmada": false,
+    "notaPrioridade": "A página de regras descreve geral, pontos, montanha, jovem e equipes, mas o texto extraído não fixa o ano 2026 nem a prioridade de quem veste duas camisas. Pontuação não foi inventada.",
+    "jovem": {
+      "nascidoAPartirDe": null,
+      "confirmado": false
+    },
+    "tabelaPontosChegada": null
+  },
+  "classificacaoEquipes": {
+    "habilitada": false,
+    "previstaNoRegulamento": false,
+    "oficialConfirmado": false,
+    "nota": "A página de regras fala em soma dos três melhores tempos, sem cravar a edição 2026 no trecho lido. O painel fica desligado até um snapshot autorizado."
+  },
+  "observacoes": [
+    "Nenhuma etapa está liberada.",
+    "A página de percurso anuncia 3.275 km no total. A soma da coluna de distância das 21 etapas, com os números publicados na mesma tabela, dá 3.231,9 km. A diferença não foi ajustada.",
+    "A mesma página conta 4 onduladas, 1 ondulada com chegada em subida, 4 planas, 4 de média montanha, 6 de montanha, 2 contra-relógios e 2 dias de descanso."
+  ],
+  "etapas": [
+    {
+      "n": 1,
+      "data": "2026-08-22",
+      "km": 9.4,
+      "desnivelM": null,
+      "tipo": "crono",
+      "tipoOficial": "Individual time-trial",
+      "origem": "Monaco",
+      "destino": "Monaco",
+      "detalhe": "Contra-relógio individual.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 2,
+      "data": "2026-08-23",
+      "km": 214.3,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": "Hilly",
+      "origem": "Monaco",
+      "destino": "Manosque",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 3,
+      "data": "2026-08-24",
+      "km": 174,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "Medium Mountains",
+      "origem": "Gruissan - Aude",
+      "destino": "Font Romeu",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 4,
+      "data": "2026-08-25",
+      "km": 104.8,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "Mountain",
+      "origem": "Andorra la Vella",
+      "destino": "Andorra la Vella",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 5,
+      "data": "2026-08-26",
+      "km": 173.3,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": "Hilly",
+      "origem": "Falset . Costa Daurada",
+      "destino": "Roquetes. Terres de l'Ebre",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 6,
+      "data": "2026-08-27",
+      "km": 177.5,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "Medium Mountains",
+      "origem": "Alcossebre",
+      "destino": "Castelló",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 7,
+      "data": "2026-08-28",
+      "km": 149.8,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "Mountain",
+      "origem": "vall d'Alba",
+      "destino": "Aramón Valdelinares",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 8,
+      "data": "2026-08-29",
+      "km": 171,
+      "desnivelM": null,
+      "tipo": "plana",
+      "tipoOficial": "Flat",
+      "origem": "Puçol",
+      "destino": "Xeraco",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 9,
+      "data": "2026-08-30",
+      "km": 187.4,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "Mountain",
+      "origem": "La Vila Joiosa/ Villajoyosa",
+      "destino": "Alto de Aitana.Costa Blanca",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 10,
+      "data": "2026-09-01",
+      "km": 184.7,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": "Hilly",
+      "origem": "Alcaraz",
+      "destino": "Elche de la Sierra",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 11,
+      "data": "2026-09-02",
+      "km": 153.8,
+      "desnivelM": null,
+      "tipo": "plana",
+      "tipoOficial": "Flat",
+      "origem": "Cartagena",
+      "destino": "Lorca",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 12,
+      "data": "2026-09-03",
+      "km": 166.6,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "Mountain",
+      "origem": "Vera",
+      "destino": "Calar Alto",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 13,
+      "data": "2026-09-04",
+      "km": 192.8,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "Medium Mountains",
+      "origem": "Almuñécar",
+      "destino": "Loja",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 14,
+      "data": "2026-09-05",
+      "km": 154.5,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "Mountain",
+      "origem": "Jaén",
+      "destino": "Sierra de La Pandera",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 15,
+      "data": "2026-09-06",
+      "km": 110.2,
+      "desnivelM": null,
+      "tipo": "mista",
+      "tipoOficial": "Medium Mountains",
+      "origem": "Palma del Río",
+      "destino": "Córdoba",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 16,
+      "data": "2026-09-08",
+      "km": 181.1,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": "Hilly",
+      "origem": "Cortegana",
+      "destino": "La Rábida. Palos de la Frontera",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 17,
+      "data": "2026-09-09",
+      "km": 185,
+      "desnivelM": null,
+      "tipo": "plana",
+      "tipoOficial": "Flat",
+      "origem": "Dos Hermanas",
+      "destino": "Sevilla",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 18,
+      "data": "2026-09-10",
+      "km": 32.1,
+      "desnivelM": null,
+      "tipo": "crono",
+      "tipoOficial": "Individual time-trial",
+      "origem": "El Puerto de Santa María",
+      "destino": "Jerez de la Frontera",
+      "detalhe": "Contra-relógio individual.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 19,
+      "data": "2026-09-11",
+      "km": 210.8,
+      "desnivelM": null,
+      "tipo": "ondulada",
+      "tipoOficial": "Hilly. Uphill arrival",
+      "origem": "Vélez-Málaga",
+      "destino": "Peñas Blancas. Estepona",
+      "detalhe": "Chegada em subida, segundo o rótulo oficial.",
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 20,
+      "data": "2026-09-12",
+      "km": 186.8,
+      "desnivelM": null,
+      "tipo": "montanha",
+      "tipoOficial": "Mountain",
+      "origem": "La Calahorra",
+      "destino": "Collado del Alguacil",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    },
+    {
+      "n": 21,
+      "data": "2026-09-13",
+      "km": 112,
+      "desnivelM": null,
+      "tipo": "plana",
+      "tipoOficial": "Flat",
+      "origem": "Carrefour Granada",
+      "destino": "Granada",
+      "detalhe": null,
+      "perfil": {
+        "pontos": [],
+        "sprints": [],
+        "montanhas": []
+      },
+      "perfilPublicado": false,
+      "avisos": [
+        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+      ]
+    }
+  ]
+}
