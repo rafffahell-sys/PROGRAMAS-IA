@@ -84,6 +84,8 @@ const etapaHtml = await desktop.$eval("#gv-app", (el) => el.innerHTML);
 exigir(etapaHtml.includes('aria-hidden="true"'), "etapa sem decoração acessível");
 exigir(!etapaHtml.includes("<polyline"), "a etapa desenhou um perfil que não existe");
 exigir(etapa.includes("Bloqueados"), "aviso de bloqueio ausente");
+exigir(!etapa.includes("Resumo da etapa"), "etapa bloqueada mostrou resumo");
+exigir(!etapa.includes("Relato sintético"), "etapa bloqueada mostrou relato");
 exigir(!etapa.includes("Atleta"), "etapa mostrou nome de teste");
 await desktop.screenshot({ path: `${out}/gv-giro-etapa-desktop.png`, fullPage: true });
 

@@ -13,6 +13,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -74,6 +75,72 @@ def _lista(lista, limite: int, nome: str, erros: list[str]) -> None:
         erros.append(f"{nome}:incompleta")
 
 
+def _texto_limpo(valor, limite: int, minimo: int = 1) -> bool:
+    if not isinstance(valor, str):
+        return False
+    texto = valor.strip()
+    if len(texto) < minimo or len(texto) > limite:
+        return False
+    return "<" not in texto and ">" not in texto
+
+
+def _menciona_etapa_futura(texto: str, etapa: int) -> bool:
+    for achado in re.finditer(r"\betapas?\s+(\d{1,2})\b", texto or "", flags=re.I):
+        if int(achado.group(1)) > etapa:
+            return True
+    return False
+
+
+def validar_resumo(resumo: dict, snap: dict) -> list[str]:
+    erros = []
+    n = snap.get("aposEtapa")
+    if not isinstance(resumo, dict):
+        return ["resumo"]
+    if resumo.get("provaId") != snap.get("provaId"):
+        erros.append("resumo:provaId")
+    if int(resumo.get("ano") or 0) != int(snap.get("ano") or 0):
+        erros.append("resumo:ano")
+    if resumo.get("ateEtapa") != n:
+        erros.append("resumo:ateEtapa")
+    if resumo.get("ausente") is True:
+        if resumo.get("texto") is not None or resumo.get("momentos") or resumo.get("contextoClassificatorio"):
+            erros.append("resumo:ausente_com_texto")
+        return erros
+    if resumo.get("ausente") is not False:
+        erros.append("resumo:ausente")
+    if not _texto_limpo(resumo.get("texto"), 1200, 40):
+        erros.append("resumo:texto")
+    momentos = resumo.get("momentos")
+    if not isinstance(momentos, list) or len(momentos) > 5 or any(not _texto_limpo(item, 200, 8) for item in momentos):
+        erros.append("resumo:momentos")
+    contexto = resumo.get("contextoClassificatorio")
+    if contexto is not None and not _texto_limpo(contexto, 500, 8):
+        erros.append("resumo:contexto")
+    fonte = resumo.get("fonte")
+    if not isinstance(fonte, dict) or not _texto_limpo(fonte.get("nome"), 120, 3):
+        erros.append("resumo:fonte")
+    bloco = " ".join(
+        [resumo.get("texto") or "", contexto or ""] + [item for item in (momentos or []) if isinstance(item, str)]
+    )
+    if isinstance(n, int) and _menciona_etapa_futura(bloco, n):
+        erros.append("resumo:etapa_futura")
+    return erros
+
+
+def validar_pontuacao(pontuacao: dict, prova: dict) -> list[str]:
+    confirmada = (prova.get("regulamento") or {}).get("oficialConfirmado") is True
+    if not isinstance(pontuacao, dict):
+        return ["pontuacao"]
+    erros = []
+    if pontuacao.get("modo") != "copia_oficial":
+        erros.append("pontuacao:modo")
+    if pontuacao.get("recalculada") is not False:
+        erros.append("pontuacao:recalculada")
+    if pontuacao.get("regrasDaEdicaoConfirmadas") is not confirmada:
+        erros.append("pontuacao:regras")
+    return erros
+
+
 def validar_snapshot(snap: dict, prova: dict) -> list[str]:
     erros = []
     if not isinstance(snap, dict):
@@ -104,6 +171,8 @@ def validar_snapshot(snap: dict, prova: dict) -> list[str]:
             erros.append(f"camisa:{camisa['id']}:quemVeste")
     if snap.get("equipes") is not None and not isinstance(snap.get("equipes"), dict):
         erros.append("equipes")
+    erros.extend(validar_resumo(snap.get("resumo"), snap))
+    erros.extend(validar_pontuacao(snap.get("pontuacao"), prova))
     if (snap.get("validacao") or {}).get("ok") is not True:
         erros.append("validacao")
     return erros

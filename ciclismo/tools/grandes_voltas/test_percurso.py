@@ -16,7 +16,7 @@ DADOS = RAIZ / "data" / "grandes-voltas"
 CALENDARIO = RAIZ / "data" / "2026.json"
 PROIBIDOS = {
     "ciclista", "lider", "quemVeste", "top10", "top5", "gap", "vencedor",
-    "snapshot", "autorizacaoTexto", "classificacao",
+    "snapshot", "autorizacaoTexto", "classificacao", "resumo",
 }
 
 

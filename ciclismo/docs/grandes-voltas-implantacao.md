@@ -65,7 +65,11 @@ python3 tools/grandes_voltas/pipeline.py --payload pedido.json
 
 `--aplicar` exige `--destino`, um JSON de confirmação direta da mesma etapa (`confirmacaoDireta: true`, mesma `idempotencyKey`) e não grava no Firebase. A mesma chave, com o mesmo conteúdo, vira no-op. Conteúdo diferente não sobrescreve. O pedido não pode listar várias etapas. Prova completa é outro passo (`--prova-completa` mais `provaCompleta: true` na confirmação) e só na etapa 21; não marca as outras. Se `autorizacaoTexto` vier no pedido, é descartado e não entra no arquivo nem na auditoria. Se alguma variável de credencial estiver definida, o script para.
 
-Não há agendamento. Quem for preencher uma etapa autorizada manda um snapshot já pesquisado; este script só confere o formato. A gravação no banco continua manual, depois da confirmação, e fora deste repositório enquanto `regrasComprovadas` for false.
+Não há agendamento. O fluxo, quando Rafael confirmar uma etapa, é este: o ESPORTE pode entregar o snapshot e o resumo já pesquisados e conferidos na fonte oficial daquela etapa. O SITE só valida o formato e grava essa etapa. Não recalcula tempo, ponto nem posição. Copia a classificação oficial. As tabelas do Giro estão no config porque o regulamento de 4 de maio de 2026 as confirma; servem de referência da edição, não de conta automática. Tour e Vuelta seguem com `oficialConfirmado: false`. Um snapshot dessas provas que marque as regras como confirmadas é recusado.
+
+O resumo mora dentro do snapshot: prova, ano, número da etapa, texto em português, momentos e o contexto da classificação só até o fim dessa etapa. Se a coleta não trouxe resumo, o campo fica `ausente: true` e a tela da etapa liberada diz que nada foi escrito no lugar. Etapa bloqueada não recebe esse texto. A mesma chave com outro resumo não sobrescreve.
+
+A gravação no banco continua manual, depois da confirmação, e fora deste repositório enquanto `regrasComprovadas` for false. Com o flag falso, ter o contrato pronto não significa que o preenchimento real já funcione.
 
 ## Limites conhecidos do percurso
 

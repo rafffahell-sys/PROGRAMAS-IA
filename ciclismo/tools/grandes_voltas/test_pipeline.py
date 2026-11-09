@@ -64,6 +64,17 @@ def snapshot(etapa=5):
             "jovem": camisa(top5, True),
         },
         "equipes": None,
+        "pontuacao": {"modo": "copia_oficial", "recalculada": False, "regrasDaEdicaoConfirmadas": True},
+        "resumo": {
+            "provaId": "b7",
+            "ano": 2026,
+            "ateEtapa": etapa,
+            "ausente": False,
+            "texto": "Relato sintético desta etapa de teste, sem ligação com uma corrida disputada.",
+            "momentos": ["Um lance sintético no fim da etapa."],
+            "contextoClassificatorio": "Contexto sintético só até esta etapa.",
+            "fonte": {"nome": "fixture sintetica", "url": None, "coletadoEm": "2026-11-09"},
+        },
     }
 
 
@@ -126,6 +137,32 @@ class Pipeline(unittest.TestCase):
                 pipeline.executar(outro, confirmacao(), True, destino, True, False)
             gravado = json.loads((destino / "2026_b7_etapa_5" / "snapshot.json").read_text())
             self.assertEqual(gravado["fonte"]["nome"], "fixture sintetica")
+
+    def test_resumo_diferente_nao_sobrescreve(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            destino = Path(tmp)
+            pipeline.executar(pedido(), confirmacao(), True, destino, True, False)
+            outro = pedido()
+            outro["snapshot"]["resumo"]["texto"] = (
+                "Outro relato sintético da mesma etapa, ainda sem ligação com corrida real."
+            )
+            with self.assertRaises(pipeline.Recusa):
+                pipeline.executar(outro, confirmacao(), True, destino, True, False)
+            gravado = json.loads((destino / "2026_b7_etapa_5" / "snapshot.json").read_text())
+            self.assertIn("sem ligação com uma corrida disputada", gravado["resumo"]["texto"])
+
+    def test_recusa_resumo_com_html_ou_regra_inventada(self):
+        html = pedido()
+        html["snapshot"]["resumo"]["texto"] = "Relato sintético com <b>marca</b> que não pode entrar no snapshot."
+        with self.assertRaises(pipeline.Recusa):
+            pipeline.executar(html, confirmacao(), False, None, True, False)
+        tour = pipeline.carregar_prova("b10", 2026)
+        corpo = pedido()["snapshot"]
+        corpo["provaId"] = "b10"
+        corpo["resumo"]["provaId"] = "b10"
+        corpo["pontuacao"]["regrasDaEdicaoConfirmadas"] = True
+        erros = pipeline.validar_snapshot(corpo, tour)
+        self.assertIn("pontuacao:regras", erros)
 
     def test_remove_texto_de_autorizacao(self):
         corpo = pedido()

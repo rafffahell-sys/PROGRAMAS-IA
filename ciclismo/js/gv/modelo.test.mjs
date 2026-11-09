@@ -55,6 +55,17 @@ function snapshot(etapa) {
     gc: { top10 },
     camisas: { gc: camisa(top5, true), pontos: camisa(top5.map((item) => linha(item.pos, true)), false) },
     equipes: null,
+    pontuacao: { modo: "copia_oficial", recalculada: false, regrasDaEdicaoConfirmadas: false },
+    resumo: {
+      provaId: "b7",
+      ano: 2026,
+      ateEtapa: etapa,
+      ausente: false,
+      texto: "Relato sintético desta etapa de teste, sem ligação com uma corrida disputada.",
+      momentos: ["Um lance sintético no fim da etapa."],
+      contextoClassificatorio: "Contexto sintético só até esta etapa.",
+      fonte: { nome: "fixture sintetica", url: null, coletadoEm: "2026-11-09" }
+    },
     validacao: { ok: true, checagens: [], avisos: [] }
   };
 }
@@ -118,6 +129,21 @@ test("snapshot sintético inválido e leitura fechada", async () => {
   ruim.camisas.pontos.fonteNaoDistingue = false;
   assert.equal(validarSnapshot(ruim, config).ok, false);
   assert.equal(validarSnapshot(snapshot(3), config).ok, true);
+  const futuro = snapshot(3);
+  futuro.resumo.texto = "Relato sintético que cita a etapa 4, fora do limite desta coleta de teste.";
+  assert.equal(validarSnapshot(futuro, config).ok, false);
+  const html = snapshot(3);
+  html.resumo.texto = "Relato sintético com marca <b>indevida</b> que o validador deve recusar agora.";
+  assert.equal(validarSnapshot(html, config).ok, false);
+  const vazio = snapshot(3);
+  vazio.resumo = { provaId: "b7", ano: 2026, ateEtapa: 3, ausente: true, texto: null, momentos: [], contextoClassificatorio: null, fonte: null };
+  assert.equal(validarSnapshot(vazio, config).ok, true);
+  const tour = { ...config, provaId: "b10", regulamento: { oficialConfirmado: false } };
+  const inventado = snapshot(3);
+  inventado.provaId = "b10";
+  inventado.resumo.provaId = "b10";
+  inventado.pontuacao = { modo: "copia_oficial", recalculada: false, regrasDaEdicaoConfirmadas: true };
+  assert.equal(validarSnapshot(inventado, tour).ok, false);
   let chamadas = 0;
   const leitor = async () => {
     chamadas += 1;

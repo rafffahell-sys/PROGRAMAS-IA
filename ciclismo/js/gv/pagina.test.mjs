@@ -158,4 +158,27 @@ test("filtro de perfil vazio e comparação não contígua sintética", () => {
   const bloqueado = htmlEtapa(prova, etapa, { etapas: {}, provaCompleta: false }, snap, null, { permitirSintetico: true });
   assert.match(bloqueado, /data-resultados="ocultos"/);
   assert.equal(bloqueado.includes("Atleta"), false);
+  assert.equal(bloqueado.includes("data-resumo"), false);
+});
+
+test("resumo sintético só na etapa liberada e sem html livre", () => {
+  const prova = {
+    slug: "giro", ano: 2026, nome: "Giro d'Italia", provaId: "b7", totalEtapas: 21,
+    calendario: { inicio: "2026-05-08", fim: "2026-05-31" }, fontes: [], camisas: [],
+    regulamento: { notaPrioridade: "" }, observacoes: [], etapas: []
+  };
+  const etapa = { n: 5, km: 10, tipo: "plana", data: "2026-05-13", origem: "C", destino: "D", perfil: { pontos: [], sprints: [], montanhas: [] }, avisos: [], detalhe: null, tipoOficial: null, desnivelM: null };
+  const frase = "Relato sintético com <b>marca</b> que precisa aparecer só como texto.";
+  const snap = {
+    sintetico: true,
+    resumo: { ausente: false, texto: frase, momentos: ["Lance sintético."], contextoClassificatorio: null, fonte: { nome: "fixture sintetica" } },
+    etapa: { top10: [] }, gc: { top10: [] }, camisas: {}
+  };
+  const bloqueado = htmlEtapa(prova, etapa, { etapas: {}, provaCompleta: false }, snap, null, { permitirSintetico: true });
+  assert.equal(bloqueado.includes("Relato sintético"), false);
+  assert.equal(bloqueado.includes("data-resumo"), false);
+  const liberado = htmlEtapa(prova, etapa, { etapas: { 5: true }, provaCompleta: false }, snap, null, { permitirSintetico: true });
+  assert.match(liberado, /data-resumo="presente"/);
+  assert.match(liberado, /&lt;b&gt;marca&lt;\/b&gt;/);
+  assert.equal(liberado.includes("<b>marca</b>"), false);
 });

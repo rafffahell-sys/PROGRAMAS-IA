@@ -131,6 +131,18 @@ function htmlClassificacao(titulo, lista, unidade) {
   return `<section class="gv-bloco"><h3>${esc(titulo)}</h3><ol class="gv-lista">${lista.map((item) => htmlLinha(item, unidade)).join("")}</ol></section>`;
 }
 
+function htmlResumo(resumo) {
+  if (!resumo || resumo.ausente === true || typeof resumo.texto !== "string" || !resumo.texto.trim()) {
+    return `<section class="gv-bloco" data-resumo="ausente"><h3>Resumo da etapa</h3><p>A coleta desta etapa não trouxe resumo. Nenhum texto foi escrito no lugar.</p></section>`;
+  }
+  const momentos = (resumo.momentos || []).map((item) => `<li>${esc(item)}</li>`).join("");
+  const contexto = resumo.contextoClassificatorio
+    ? `<p>${esc(resumo.contextoClassificatorio)}</p>`
+    : "";
+  const fonte = resumo.fonte?.nome ? `<p class="gv-fonte">Fonte do resumo: ${esc(resumo.fonte.nome)}</p>` : "";
+  return `<section class="gv-bloco" data-resumo="presente"><h3>Resumo da etapa</h3><p>${esc(resumo.texto)}</p>${momentos ? `<ul class="gv-lista">${momentos}</ul>` : ""}${contexto}${fonte}</section>`;
+}
+
 function htmlResultados(prova, etapa, liberacao, snap, snapAnterior, anteriorN) {
   if (!etapaLiberada(liberacao, etapa.n) || !snap) {
     return `<section class="gv-bloqueio" data-resultados="ocultos">
@@ -168,6 +180,7 @@ function htmlResultados(prova, etapa, liberacao, snap, snapAnterior, anteriorN) 
   return `<section class="gv-resultados revelar" data-resultados="visiveis">
     <h2>Depois da etapa ${esc(etapa.n)}</h2>
     ${comparacao}
+    ${htmlResumo(snap.resumo)}
     ${htmlClassificacao("Etapa", etapaAtual, "tempo")}
     ${htmlClassificacao("Geral", gcAtual, "tempo")}
     ${camisas}

@@ -119,6 +119,63 @@ export function hrefEtapa(slug, ano, n) {
   return `grande-volta.html#/${slug}/${ano}/etapa/${n}`;
 }
 
+const LIMITE_RESUMO = { texto: 1200, momento: 200, momentos: 5, contexto: 500 };
+
+function textoLimpo(valor, max) {
+  if (typeof valor !== "string") return false;
+  const texto = valor.trim();
+  if (!texto || texto.length > max) return false;
+  return !/[<>]/.test(texto);
+}
+
+function mencionaEtapaFutura(texto, etapa) {
+  const achados = String(texto || "").matchAll(/\betapas?\s+(\d{1,2})\b/gi);
+  for (const item of achados) {
+    if (Number(item[1]) > etapa) return true;
+  }
+  return false;
+}
+
+/** Resumo factual só da etapa N. Não completa lacuna com texto inventado. */
+export function validarResumo(resumo, snap) {
+  const erros = [];
+  const n = Number(snap?.aposEtapa);
+  if (!resumo || typeof resumo !== "object" || Array.isArray(resumo)) {
+    return ["resumo"];
+  }
+  if (resumo.provaId !== snap.provaId) erros.push("resumo:provaId");
+  if (Number(resumo.ano) !== Number(snap.ano)) erros.push("resumo:ano");
+  if (Number(resumo.ateEtapa) !== n) erros.push("resumo:ateEtapa");
+  if (resumo.ausente === true) {
+    if (resumo.texto != null || (resumo.momentos || []).length || resumo.contextoClassificatorio) {
+      erros.push("resumo:ausente_com_texto");
+    }
+    return erros;
+  }
+  if (resumo.ausente !== false) erros.push("resumo:ausente");
+  if (!textoLimpo(resumo.texto, LIMITE_RESUMO.texto) || resumo.texto.trim().length < 40) erros.push("resumo:texto");
+  if (!Array.isArray(resumo.momentos) || resumo.momentos.length > LIMITE_RESUMO.momentos) erros.push("resumo:momentos");
+  else if (resumo.momentos.some((item) => !textoLimpo(item, LIMITE_RESUMO.momento))) erros.push("resumo:momentos");
+  if (resumo.contextoClassificatorio != null && !textoLimpo(resumo.contextoClassificatorio, LIMITE_RESUMO.contexto)) {
+    erros.push("resumo:contexto");
+  }
+  const fonte = resumo.fonte;
+  if (!fonte || typeof fonte !== "object" || !textoLimpo(fonte.nome, 120)) erros.push("resumo:fonte");
+  const bloco = [resumo.texto, ...(resumo.momentos || []), resumo.contextoClassificatorio].filter(Boolean).join(" ");
+  if (mencionaEtapaFutura(bloco, n)) erros.push("resumo:etapa_futura");
+  return erros;
+}
+
+export function validarPontuacao(pontuacao, config) {
+  const confirmada = config?.regulamento?.oficialConfirmado === true;
+  if (!pontuacao || typeof pontuacao !== "object" || Array.isArray(pontuacao)) return ["pontuacao"];
+  const erros = [];
+  if (pontuacao.modo !== "copia_oficial") erros.push("pontuacao:modo");
+  if (pontuacao.recalculada !== false) erros.push("pontuacao:recalculada");
+  if (pontuacao.regrasDaEdicaoConfirmadas !== confirmada) erros.push("pontuacao:regras");
+  return erros;
+}
+
 function listaPosicoes(lista, limite) {
   if (!Array.isArray(lista)) return { ok: false, erro: "lista ausente" };
   if (lista.length < 1 || lista.length > limite) return { ok: false, erro: "tamanho" };
@@ -175,6 +232,8 @@ export function validarSnapshot(snap, config) {
     }
   });
   if (snap.equipes != null && typeof snap.equipes !== "object") erros.push("equipes");
+  erros.push(...validarResumo(snap.resumo, snap));
+  erros.push(...validarPontuacao(snap.pontuacao, config));
   if (snap.validacao?.ok !== true) erros.push("validacao");
   return { ok: erros.length === 0, erros, avisos };
 }
