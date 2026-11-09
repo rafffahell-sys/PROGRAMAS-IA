@@ -138,11 +138,36 @@ function htmlPerfil(etapa) {
   </figure>`;
 }
 
+function htmlMapa(etapa) {
+  const imagem = etapa.mapa;
+  if (!imagem || typeof imagem.arquivo !== "string" || !imagem.arquivo) return "";
+  const alt = imagem.alt || `Mapa do percurso da etapa ${etapa.n}.`;
+  const links = [
+    imagem.fontePagina
+      ? `<a href="${esc(imagem.fontePagina)}" rel="noopener noreferrer">página oficial da etapa</a>`
+      : "",
+    imagem.fonteAsset
+      ? `<a href="${esc(imagem.fonteAsset)}" rel="noopener noreferrer">arquivo original do mapa</a>`
+      : ""
+  ].filter(Boolean).join(" · ");
+  return `<figure class="gv-mapa gv-perfil-imagem">
+    <img src="${esc(imagem.arquivo)}" alt="${esc(alt)}" width="960" height="679">
+    <button type="button" class="gv-botao-ampliar" data-perfil-ampliar>Ampliar mapa</button>
+    <figcaption>Mapa do percurso, sem resultado. A imagem não foi convertida em rota.</figcaption>
+    ${links ? `<p class="gv-fonte">Fonte do mapa: ${links}</p>` : ""}
+    <dialog class="gv-perfil-dialog">
+      <form method="dialog"><button value="fechar">Fechar</button></form>
+      <img src="${esc(imagem.arquivo)}" alt="${esc(alt)}">
+    </dialog>
+  </figure>`;
+}
+
 function ligarPerfil(raiz) {
-  const botao = raiz.querySelector("[data-perfil-ampliar]");
-  const dialog = raiz.querySelector("dialog.gv-perfil-dialog");
-  if (!botao || !dialog || typeof dialog.showModal !== "function") return;
-  botao.addEventListener("click", () => dialog.showModal());
+  raiz.querySelectorAll("[data-perfil-ampliar]").forEach((botao) => {
+    const dialog = botao.parentElement?.querySelector("dialog.gv-perfil-dialog");
+    if (!dialog || typeof dialog.showModal !== "function") return;
+    botao.addEventListener("click", () => dialog.showModal());
+  });
 }
 
 function htmlLinha(item, unidade) {
@@ -358,6 +383,7 @@ export function htmlEtapa(prova, etapa, liberacao, snap, snapAnterior, opcoes = 
       ${htmlCena(prova.slug)}
     </header>
     ${htmlPerfil(etapa)}
+    ${htmlMapa(etapa)}
     ${htmlAnalisePre(etapa.n, liberacao, opcoes.analise || null, opcoes.acesso || { regrasComprovadas: false })}
     <div class="gv-marcas-grade">
       ${htmlMarcadores("Sprints do percurso", etapa.perfil?.sprints)}

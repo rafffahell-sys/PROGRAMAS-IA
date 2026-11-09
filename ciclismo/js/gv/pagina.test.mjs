@@ -106,7 +106,10 @@ test("tour com percurso não inventa perfil e não pede snapshot", async () => {
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
   assert.match(raizDom.innerHTML, /182 km/);
   assert.match(raizDom.innerHTML, /Carcassonne/);
-  assert.match(raizDom.innerHTML, /Perfil altimétrico a publicar/);
+  assert.match(raizDom.innerHTML, /img\/perfis\/tour-2026\/etapa-04.jpg/);
+  assert.match(raizDom.innerHTML, /img\/mapas\/tour-2026\/etapa-04.jpg/);
+  assert.match(raizDom.innerHTML, /Ampliar mapa/);
+  assert.equal(raizDom.innerHTML.includes("Perfil altimétrico a publicar"), false);
   assert.equal(raizDom.innerHTML.includes("img/trofeus/"), false);
   assert.equal(raizDom.innerHTML.includes("<polyline"), false);
   assert.match(raizDom.innerHTML, /data-resultados="ocultos"/);
