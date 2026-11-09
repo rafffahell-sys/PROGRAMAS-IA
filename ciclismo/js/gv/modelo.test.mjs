@@ -259,9 +259,17 @@ test("ponto sem km de fonte não ganha distância e divergência não se mistura
   assert.equal(situarPonto(18.3, 147).restante, 128.7);
   assert.equal(totalDoPonto(unica, { xKm: 18.3 }).id, "card");
 
-  const divergente = { km: 244, perfil: { imagem: { kmNoEixo: 245, kmNaFicha: 245 } } };
+  const divergente = { km: 244, perfil: { imagem: { kmNoEixo: 245, kmNaFicha: 245, kmNaPagina: 245 } } };
   assert.deepEqual(referenciasDistancia(divergente).map((ref) => ref.km), [244, 245]);
   assert.equal(totalDoPonto(divergente, { xKm: 10 }), null);
   assert.equal(totalDoPonto(divergente, { xKm: 10, referencia: "eixo" }).km, 245);
   assert.equal(situarPonto(10, 245).restante, 235);
+
+  const tour8 = { km: 182, perfil: { imagem: { kmNaPagina: 182, kmNoEixo: 180.4 } } };
+  assert.deepEqual(referenciasDistancia(tour8).map((ref) => [ref.id, ref.km]), [["card", 182], ["eixo", 180.4]]);
+  const noEixo = situarRestante(180.4, "10");
+  assert.equal(noEixo.ok, true);
+  assert.equal(noEixo.percorrido, 170.4);
+  assert.equal(situarRestante(180.4, "181").motivo, "fora");
+  assert.equal(situarRestante(182, "181").ok, true);
 });

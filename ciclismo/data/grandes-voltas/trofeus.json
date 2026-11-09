@@ -1,0 +1,28 @@
+{
+  "giro": {
+    "arquivo": "img/trofeus/giro-trofeo-senza-fine.jpg",
+    "alt": "Trofeo Senza Fine, troféu do Giro d'Italia: espiral dourada sobre uma base, sem pessoa ao lado.",
+    "nome": "Trofeo Senza Fine",
+    "credito": "Foto de Fabio (Fabio Photography), 10 de maio de 2012.",
+    "licenca": "CC BY 2.0",
+    "licencaUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "fonteNome": "Wikimedia Commons",
+    "fonteUrl": "https://commons.wikimedia.org/wiki/File:2012_Giro_di_italia_cup.jpg",
+    "ajuste": "Cópia local em JPEG, sem metadados."
+  },
+  "tour": {
+    "arquivo": "img/trofeus/tour-2026-cristal.jpg",
+    "alt": "Troféus de cristal do Tour de France 2026: uma taça verde e uma taça transparente, com o logotipo da prova na base, sem pessoa ao lado.",
+    "nome": "Troféus de cristal 2026",
+    "credito": "Foto de imprensa da Škoda Auto, 2 de julho de 2026.",
+    "licenca": "Uso editorial em imprensa e internet",
+    "fonteNome": "Škoda Storyboard",
+    "fonteUrl": "https://www.skoda-storyboard.com/en/press-releases/skoda-auto-marks-23-years-as-tour-de-france-main-partner-new-skoda-peaq-to-serve-as-red-car/",
+    "ajuste": "Cópia local em JPEG, sem metadados."
+  },
+  "vuelta": {
+    "arquivo": "img/trofeus/vuelta-ilustracao.jpg",
+    "alt": "Ilustração inspirada no troféu da Vuelta (não é foto oficial): peça em V preta com faixas vermelhas e bordas douradas sobre base preta, fundo vermelho e amarelo com oliveiras.",
+    "credito": "Ilustração inspirada no troféu da Vuelta (não é foto oficial)."
+  }
+}

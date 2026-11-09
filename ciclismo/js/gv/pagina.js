@@ -208,11 +208,36 @@ function ligarAcompanhar(raiz) {
   });
 }
 
+function htmlMapa(etapa) {
+  const imagem = etapa.mapa;
+  if (!imagem || typeof imagem.arquivo !== "string" || !imagem.arquivo) return "";
+  const alt = imagem.alt || `Mapa do percurso da etapa ${etapa.n}.`;
+  const links = [
+    imagem.fontePagina
+      ? `<a href="${esc(imagem.fontePagina)}" rel="noopener noreferrer">página oficial da etapa</a>`
+      : "",
+    imagem.fonteAsset
+      ? `<a href="${esc(imagem.fonteAsset)}" rel="noopener noreferrer">arquivo original do mapa</a>`
+      : ""
+  ].filter(Boolean).join(" · ");
+  return `<figure class="gv-mapa gv-perfil-imagem">
+    <img src="${esc(imagem.arquivo)}" alt="${esc(alt)}" width="960" height="679">
+    <button type="button" class="gv-botao-ampliar" data-perfil-ampliar>Ampliar mapa</button>
+    <figcaption>Mapa do percurso, sem resultado. A imagem não foi convertida em rota.</figcaption>
+    ${links ? `<p class="gv-fonte">Fonte do mapa: ${links}</p>` : ""}
+    <dialog class="gv-perfil-dialog">
+      <form method="dialog"><button value="fechar">Fechar</button></form>
+      <img src="${esc(imagem.arquivo)}" alt="${esc(alt)}">
+    </dialog>
+  </figure>`;
+}
+
 function ligarPerfil(raiz) {
-  const botao = raiz.querySelector("[data-perfil-ampliar]");
-  const dialog = raiz.querySelector("dialog.gv-perfil-dialog");
-  if (!botao || !dialog || typeof dialog.showModal !== "function") return;
-  botao.addEventListener("click", () => dialog.showModal());
+  raiz.querySelectorAll("[data-perfil-ampliar]").forEach((botao) => {
+    const dialog = botao.parentElement?.querySelector("dialog.gv-perfil-dialog");
+    if (!dialog || typeof dialog.showModal !== "function") return;
+    botao.addEventListener("click", () => dialog.showModal());
+  });
 }
 
 function htmlLinha(item, unidade) {
@@ -328,7 +353,33 @@ function htmlResultados(prova, etapa, liberacao, snap, snapAnterior, anteriorN) 
   </section>`;
 }
 
-export function htmlHub(prova, liberacao, filtro = {}, favoritos = null) {
+function htmlTrofeu(trofeu) {
+  if (trofeu?.arquivo) {
+    const credito = [
+      trofeu.credito || "",
+      trofeu.licenca && trofeu.licencaUrl
+        ? `<a href="${esc(trofeu.licencaUrl)}" rel="license noopener noreferrer">${esc(trofeu.licenca)}</a>`
+        : esc(trofeu.licenca || ""),
+      trofeu.fonteUrl
+        ? `<a href="${esc(trofeu.fonteUrl)}" rel="noopener noreferrer">${esc(trofeu.fonteNome || "Fonte")}</a>`
+        : "",
+      trofeu.ajuste || ""
+    ].filter(Boolean).join(" · ");
+    return `<section class="gv-trofeu" aria-labelledby="gv-trofeu-titulo">
+      <h2 id="gv-trofeu-titulo">Troféu</h2>
+      <figure>
+        <img src="${esc(trofeu.arquivo)}" alt="${esc(trofeu.alt || trofeu.nome || "Troféu da prova")}" width="683" height="1024">
+        <figcaption>${trofeu.nome ? `<strong>${esc(trofeu.nome)}</strong>. ` : ""}${credito}</figcaption>
+      </figure>
+    </section>`;
+  }
+  return `<section class="gv-trofeu" aria-labelledby="gv-trofeu-titulo">
+    <h2 id="gv-trofeu-titulo">Troféu</h2>
+    <p>Imagem ainda não disponível nesta página.</p>
+  </section>`;
+}
+
+export function htmlHub(prova, liberacao, filtro = {}, favoritos = null, trofeu = null) {
   const liberadas = numerosLiberados(liberacao);
   const etapas = filtrarEtapas(prova.etapas, liberacao, filtro);
   const km = somaKm(prova.etapas);
@@ -361,6 +412,7 @@ export function htmlHub(prova, liberacao, filtro = {}, favoritos = null) {
       ${htmlCena(prova.slug)}
     </header>
     <p class="gv-aviso">Resultados só depois que você confirmar cada etapa. Nenhuma confirmação libera a vizinha nem a prova inteira.</p>
+    ${htmlTrofeu(trofeu)}
     <section>
       <h2>Camisas</h2>
       <ul class="gv-camisas">${htmlCamisas(prova)}</ul>
@@ -401,6 +453,7 @@ export function htmlEtapa(prova, etapa, liberacao, snap, snapAnterior, opcoes = 
       ${htmlCena(prova.slug)}
     </header>
     ${htmlPerfil(etapa)}
+    ${htmlMapa(etapa)}
     ${htmlAcompanhar(etapa)}
     ${htmlAnalisePre(etapa.n, liberacao, opcoes.analise || null, opcoes.acesso || { regrasComprovadas: false })}
     ${htmlModoKm()}
@@ -461,7 +514,11 @@ export async function desenhar(estado) {
       }
       favoritos = estado.favoritosPorProva[prova.slug];
     }
-    raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro || {}, favoritos);
+    if (!estado.trofeus) {
+      estado.trofeus = await lerOuFechado(estado.fetchFn, "data/grandes-voltas/trofeus.json", {});
+    }
+    const trofeu = estado.trofeus?.[prova.slug] || null;
+    raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro || {}, favoritos, trofeu);
     document.title = `${prova.nome} ${prova.ano} — etapas`;
     ligarFiltros(estado, prova, liberacao);
     return;
@@ -520,7 +577,8 @@ function ligarFiltros(estado, prova, liberacao) {
       somenteComPerfil: form.querySelector('[name="perfil"]').checked
     };
     const favoritos = estado.favoritosPorProva ? estado.favoritosPorProva[prova.slug] : null;
-    estado.raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro, favoritos);
+    const trofeu = estado.trofeus?.[prova.slug] || null;
+    estado.raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro, favoritos, trofeu);
     ligarFiltros(estado, prova, liberacao);
   });
 }

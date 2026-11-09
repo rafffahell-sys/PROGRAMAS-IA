@@ -317,7 +317,8 @@ export function referenciasDistancia(etapa) {
   const imagem = etapa.perfil?.imagem || {};
   const extras = [
     ["eixo", "eixo do desenho", imagem.kmNoEixo],
-    ["ficha", "ficha técnica", imagem.kmNaFicha]
+    ["ficha", "ficha técnica", imagem.kmNaFicha],
+    ["pagina", "cabeçalho da página", imagem.kmNaPagina]
   ];
   const vistos = new Set([refs[0].km]);
   for (const [id, rotulo, km] of extras) {
