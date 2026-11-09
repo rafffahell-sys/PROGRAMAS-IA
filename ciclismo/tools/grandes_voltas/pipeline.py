@@ -314,6 +314,100 @@ def _ler_json(caminho: str | None) -> dict | None:
     return json.loads(Path(caminho).read_text(encoding="utf-8"))
 
 
+def validar_analise_pre(analise: dict, prova: dict) -> list[str]:
+    erros = []
+    if not isinstance(analise, dict):
+        return ["analise"]
+    n = analise.get("etapa")
+    if not isinstance(n, int) or n < 2 or n > int(prova["totalEtapas"]):
+        erros.append("analise:etapa")
+    if analise.get("provaId") != prova["provaId"]:
+        erros.append("analise:provaId")
+    if int(analise.get("ano") or 0) != int(prova["ano"]):
+        erros.append("analise:ano")
+    if analise.get("contextoAteEtapa") != (n - 1 if isinstance(n, int) else None):
+        erros.append("analise:contexto")
+    for chave in ("top10", "top5", "ciclista", "gap", "lider", "quemVeste", "gc", "camisas"):
+        if chave in analise:
+            erros.append(f"analise:{chave}")
+    if analise.get("ausente") is True:
+        if analise.get("texto") is not None:
+            erros.append("analise:ausente_com_texto")
+        return erros
+    if analise.get("ausente") is not False:
+        erros.append("analise:ausente")
+    if not _texto_limpo(analise.get("texto"), 1200, 40):
+        erros.append("analise:texto")
+    fonte = analise.get("fonte")
+    if not isinstance(fonte, dict) or not _texto_limpo(fonte.get("nome"), 120, 3):
+        erros.append("analise:fonte")
+    if isinstance(n, int) and _menciona_etapa_futura(analise.get("texto") or "", n - 1):
+        erros.append("analise:etapa_propria_ou_futura")
+    return erros
+
+
+def executar_analise(payload: dict, confirmacao: dict | None, aplicar: bool, destino: Path | None,
+                     permitir_sintetico: bool) -> dict:
+    if credencial_presente():
+        raise Recusa("credencial presente; o pipeline não corre com ela")
+    if payload.get("tipo") != "grande_volta_analise_pre":
+        raise Recusa("tipo precisa ser grande_volta_analise_pre")
+    prova = carregar_prova(payload.get("provaId"), int(payload.get("ano") or 0))
+    etapa = payload.get("etapa")
+    if etapa == 1:
+        raise Recusa("a etapa 1 não guarda análise; a página só mostra a introdução neutra")
+    if not isinstance(etapa, int):
+        raise Recusa("etapa inválida")
+    chave = f"{prova['ano']}_{prova['provaId']}_analise_pre_{etapa}"
+    if payload.get("idempotencyKey") != chave:
+        raise Recusa("idempotencyKey não corresponde à análise pré-etapa")
+    analise = payload.get("analise")
+    erros = validar_analise_pre(analise, prova)
+    if erros:
+        raise Recusa("análise inválida: " + ", ".join(erros))
+    if analise.get("sintetico") is True and not permitir_sintetico:
+        raise Recusa("análise sintética recusada")
+    if not confirmacao:
+        raise Recusa("falta a confirmação da etapa imediatamente anterior")
+    if confirmacao.get("confirmacaoDireta") is not True:
+        raise Recusa("confirmação direta ausente")
+    if confirmacao.get("provaId") != prova["provaId"] or int(confirmacao.get("ano") or 0) != int(prova["ano"]):
+        raise Recusa("confirmação de outra prova ou outro ano")
+    if confirmacao.get("etapa") != etapa - 1:
+        raise Recusa("a confirmação não é da etapa imediatamente anterior")
+    plano = {
+        "quando": _agora(),
+        "modo": "aplicar" if aplicar else "dry-run",
+        "chave": chave,
+        "etapa": etapa,
+        "contextoAteEtapa": etapa - 1,
+        "provaCompleta": False,
+        "etapasLiberadasNestePedido": [],
+        "avisos": ["análise pré-etapa não libera a etapa nem as vizinhas"],
+        "hash": _hash(analise),
+    }
+    if not aplicar:
+        plano["resultado"] = "plano"
+        return plano
+    if destino is None:
+        raise Recusa("aplicar exige --destino")
+    pasta = destino / chave
+    pasta.mkdir(parents=True, exist_ok=True)
+    arquivo = pasta / "analise.json"
+    if arquivo.exists():
+        if _hash(json.loads(arquivo.read_text(encoding="utf-8"))) == plano["hash"]:
+            plano["resultado"] = "noop"
+            _auditar(destino, plano)
+            return plano
+        plano["resultado"] = "conflito"
+        _auditar(destino, plano)
+        raise Recusa("já existe análise diferente para esta chave; não foi sobrescrita")
+    arquivo.write_text(json.dumps(analise, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    plano["resultado"] = "gravado"
+    _auditar(destino, plano)
+    return plano
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Valida um snapshot de uma etapa. Dry-run por omissão.")
     parser.add_argument("--payload", required=True)
@@ -324,14 +418,24 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--prova-completa", action="store_true")
     args = parser.parse_args(argv)
     try:
-        plano = executar(
-            _ler_json(args.payload),
-            _ler_json(args.confirmacao),
-            args.aplicar,
-            Path(args.destino) if args.destino else None,
-            args.permitir_sintetico,
-            args.prova_completa,
-        )
+        payload = _ler_json(args.payload)
+        if isinstance(payload, dict) and payload.get("tipo") == "grande_volta_analise_pre":
+            plano = executar_analise(
+                payload,
+                _ler_json(args.confirmacao),
+                args.aplicar,
+                Path(args.destino) if args.destino else None,
+                args.permitir_sintetico,
+            )
+        else:
+            plano = executar(
+                payload,
+                _ler_json(args.confirmacao),
+                args.aplicar,
+                Path(args.destino) if args.destino else None,
+                args.permitir_sintetico,
+                args.prova_completa,
+            )
     except Recusa as erro:
         print(json.dumps({"ok": False, "erro": str(erro)}, ensure_ascii=False))
         return 2

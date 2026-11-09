@@ -14,6 +14,8 @@ import {
   validarSnapshot
 } from "./modelo.js";
 import { carregarSnapshot } from "./snapshots.js";
+import { carregarAnalisePre } from "./analises.js";
+import { podeLerAnalisePre, validarAnalisePre } from "./modelo.js";
 import { pontosValidos, svgPerfil } from "./perfil.js";
 
 const config = {
@@ -163,6 +165,41 @@ test("snapshot sintético inválido e leitura fechada", async () => {
     etapa: 1,
     acesso: { regrasComprovadas: true }
   }), { ok: false, motivo: "bloqueada" });
+});
+
+test("análise pré-etapa exige a etapa imediatamente anterior da mesma prova", async () => {
+  const liberadas = liberacaoDaProva({
+    provas: { "2026_b7": { etapas: { 1: true, 5: true }, provaCompleta: false } }
+  }, 2026, "b7");
+  const aberto = { regrasComprovadas: true };
+  const fechado = { regrasComprovadas: false };
+  assert.equal(podeLerAnalisePre({ liberacao: liberadas, etapa: 1, acesso: aberto }).motivo, "introducao_neutra");
+  assert.equal(podeLerAnalisePre({ liberacao: liberadas, etapa: 2, acesso: aberto }).ok, true);
+  assert.equal(podeLerAnalisePre({ liberacao: liberadas, etapa: 2, acesso: fechado }).motivo, "regras_nao_comprovadas");
+  assert.equal(podeLerAnalisePre({ liberacao: liberadas, etapa: 3, acesso: aberto }).motivo, "anterior_imediata_bloqueada");
+  assert.equal(podeLerAnalisePre({ liberacao: liberadas, etapa: 5, acesso: aberto }).motivo, "anterior_imediata_bloqueada");
+  assert.equal(podeLerAnalisePre({ liberacao: liberadas, etapa: 6, acesso: aberto }).ok, true);
+  const outroAno = liberacaoDaProva({
+    provas: { "2026_b7": { etapas: { 1: true }, provaCompleta: false } }
+  }, 2027, "b7");
+  assert.equal(podeLerAnalisePre({ liberacao: outroAno, etapa: 2, acesso: aberto }).ok, false);
+  let chamadas = 0;
+  const leitor = async () => { chamadas += 1; return null; };
+  const bloqueada = await carregarAnalisePre({
+    prova: config, etapa: 5, liberacao: liberadas, acesso: aberto, leitor
+  });
+  assert.equal(bloqueada.motivo, "anterior_imediata_bloqueada");
+  assert.equal(chamadas, 0);
+  const texto = "Relato sintético só com o que já foi confirmado até a etapa anterior, sem a etapa nova.";
+  assert.equal(validarAnalisePre({
+    provaId: "b7", ano: 2026, etapa: 5, contextoAteEtapa: 4, ausente: false,
+    texto, fonte: { nome: "fixture sintetica" }
+  }, config).length, 0);
+  assert.ok(validarAnalisePre({
+    provaId: "b7", ano: 2026, etapa: 5, contextoAteEtapa: 4, ausente: false,
+    texto: "Relato sintético que antecipa a etapa 5 e portanto não pode ser análise prévia.",
+    fonte: { nome: "fixture sintetica" }
+  }, config).includes("analise:etapa_propria_ou_futura"));
 });
 
 test("perfil sem pontos não desenha linha", () => {

@@ -153,12 +153,32 @@ test("filtro de perfil vazio e comparação não contígua sintética", () => {
   };
   const html = htmlEtapa({ ...prova, etapas: [etapa] }, etapa, liberacao, snap, anterior, { permitirSintetico: true });
   assert.match(html, /Comparação com a etapa 1/);
-  assert.equal(html.includes("etapa 4"), false);
+  assert.equal(html.includes("Comparação com a etapa 4"), false);
+  assert.match(html, /data-analise="bloqueada"/);
   assert.match(html, /data-resultados="visiveis"/);
   const bloqueado = htmlEtapa(prova, etapa, { etapas: {}, provaCompleta: false }, snap, null, { permitirSintetico: true });
   assert.match(bloqueado, /data-resultados="ocultos"/);
   assert.equal(bloqueado.includes("Atleta"), false);
   assert.equal(bloqueado.includes("data-resumo"), false);
+});
+
+test("favoritos pré-largada ficam no hub do giro e fora da etapa", async () => {
+  const pedidos = [];
+  location.hash = "#/giro/2026";
+  const raizDom = document.getElementById("gv-app");
+  await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
+  assert.match(raizDom.innerHTML, /Favoritos pré-largada/);
+  assert.match(raizDom.innerHTML, /Seleção editorial baseada em análises anteriores à largada/);
+  assert.equal(raizDom.innerHTML.includes("vitória"), false);
+  assert.equal(raizDom.innerHTML.includes("pódio"), false);
+  assert.equal((raizDom.querySelectorAll("#favoritos-prelargada .gv-pos")).length, 0);
+  location.hash = "#/giro/2026/etapa/3";
+  await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
+  assert.equal(raizDom.innerHTML.includes("Favoritos pré-largada"), false);
+  assert.equal(raizDom.innerHTML.includes("Jonas Vingegaard"), false);
+  assert.match(raizDom.innerHTML, /data-analise="bloqueada"/);
+  assert.equal(pedidos.some((url) => /snapshot|firestore|ciclismo_gv_analises/i.test(url)), false);
+  assert.notEqual(globalThis.__GV_ANALISE_CARREGADA__, true);
 });
 
 test("resumo sintético só na etapa liberada e sem html livre", () => {

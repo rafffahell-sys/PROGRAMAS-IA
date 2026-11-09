@@ -138,6 +138,55 @@ class Pipeline(unittest.TestCase):
             gravado = json.loads((destino / "2026_b7_etapa_5" / "snapshot.json").read_text())
             self.assertEqual(gravado["fonte"]["nome"], "fixture sintetica")
 
+    def test_analise_pre_so_com_a_etapa_imediatamente_anterior(self):
+        texto = "Relato sintético apenas com o contexto já encerrado na etapa anterior, sem antecipar a seguinte."
+        def corpo(etapa, prova="b7", ano=2026):
+            return {
+                "tipo": "grande_volta_analise_pre",
+                "ano": ano,
+                "provaId": prova,
+                "etapa": etapa,
+                "idempotencyKey": f"{ano}_{prova}_analise_pre_{etapa}",
+                "analise": {
+                    "provaId": prova,
+                    "ano": ano,
+                    "etapa": etapa,
+                    "contextoAteEtapa": etapa - 1,
+                    "ausente": False,
+                    "sintetico": True,
+                    "rotulo": "DADO SINTETICO — NAO E ANALISE REAL",
+                    "texto": texto,
+                    "fonte": {"nome": "fixture sintetica"},
+                },
+            }
+        def ok_anterior(etapa, prova="b7", ano=2026):
+            return {
+                "provaId": prova,
+                "ano": ano,
+                "etapa": etapa - 1,
+                "confirmacaoDireta": True,
+            }
+        with self.assertRaises(pipeline.Recusa):
+            pipeline.executar_analise(corpo(1), ok_anterior(1), False, None, True)
+        with self.assertRaises(pipeline.Recusa):
+            pipeline.executar_analise(corpo(5), ok_anterior(2), False, None, True)
+        with self.assertRaises(pipeline.Recusa):
+            pipeline.executar_analise(corpo(5), ok_anterior(5, "b10"), False, None, True)
+        with self.assertRaises(pipeline.Recusa):
+            pipeline.executar_analise(corpo(5), ok_anterior(5, ano=2027), False, None, True)
+        ruim = corpo(5)
+        ruim["analise"]["texto"] = "Relato sintético que fala da etapa 5 antes de ela ser confirmada pelo espectador."
+        with self.assertRaises(pipeline.Recusa):
+            pipeline.executar_analise(ruim, ok_anterior(5), False, None, True)
+        with tempfile.TemporaryDirectory() as tmp:
+            destino = Path(tmp)
+            plano = pipeline.executar_analise(corpo(5), ok_anterior(5), True, destino, True)
+            self.assertEqual(plano["resultado"], "gravado")
+            self.assertEqual(plano["etapasLiberadasNestePedido"], [])
+            self.assertEqual(plano["contextoAteEtapa"], 4)
+            de_novo = pipeline.executar_analise(corpo(5), ok_anterior(5), True, destino, True)
+            self.assertEqual(de_novo["resultado"], "noop")
+
     def test_resumo_diferente_nao_sobrescreve(self):
         with tempfile.TemporaryDirectory() as tmp:
             destino = Path(tmp)

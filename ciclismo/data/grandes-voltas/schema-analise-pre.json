@@ -1,0 +1,18 @@
+{
+  "versao": 1,
+  "descricao": "Contrato da análise pré-etapa. Não há análise real neste repositório.",
+  "separacao": "Não faz parte do percurso neutro nem do resumo pós-etapa.",
+  "gate": "Para a etapa N maior que 1, a leitura só existe se a etapa N-1 da mesma prova e do mesmo ano estiver confirmada e acesso.regrasComprovadas for true. A última etapa liberada não contígua não substitui N-1. A data do calendário não libera.",
+  "etapa1": "Não há documento. A página mostra só uma introdução neutra, sem resultado.",
+  "contexto": "O texto não pode citar a própria etapa N nem etapas seguintes. O contexto vai só até o fim de N-1.",
+  "campos": {
+    "provaId": "string",
+    "ano": "number",
+    "etapa": "number, a etapa que ainda vai ser vista",
+    "contextoAteEtapa": "number, obrigatoriamente N-1",
+    "ausente": "true sem texto, ou false com texto e fonte",
+    "texto": "português, sem HTML",
+    "fonte": { "nome": "string" },
+    "sintetico": "true só em teste; o site recusa desenhar"
+  }
+}

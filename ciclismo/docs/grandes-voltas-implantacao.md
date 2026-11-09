@@ -71,6 +71,10 @@ O resumo mora dentro do snapshot: prova, ano, número da etapa, texto em portugu
 
 A gravação no banco continua manual, depois da confirmação, e fora deste repositório enquanto `regrasComprovadas` for false. Com o flag falso, ter o contrato pronto não significa que o preenchimento real já funcione.
 
+A análise pré-etapa é outro documento, `ciclismo_gv_analises/{ano}_{provaId}/pre/{n}`. Para N maior que 1, a leitura no emulador só passa se a etapa N−1 da mesma prova e do mesmo ano estiver em `true`. Liberar 1 e 5 não abre a análise da 3 nem da 5. A comparação de classificação continua usando a última etapa liberada, que pode não ser a imediatamente anterior. A etapa 1 não tem documento: a página mostra só uma introdução sem resultado. Não há análise real gravada.
+
+Os favoritos pré-largada do Giro são uma lista estática pedida à parte, em `data/grandes-voltas/2026/giro-favoritos-prelargada.json`. Não são snapshot, não autorizam etapa e não valem para Tour nem Vuelta.
+
 ## Limites conhecidos do percurso
 
 - Giro: distâncias, tipos, cidades, sprints e subidas categorizadas saem do regulamento de 4 de maio de 2026. Não há série de altitude. A etapa 10 fica em 42 km porque a soma do regulamento fecha em 3.468,0; uma apresentação anterior dizia 40,2. A etapa 19 usa Feltre–Alleghe, como a brochura de fevereiro; a tabela de quilometragem veio com as colunas trocadas.

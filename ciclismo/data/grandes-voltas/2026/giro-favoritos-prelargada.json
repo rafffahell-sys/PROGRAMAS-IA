@@ -1,0 +1,125 @@
+{
+  "provaId": "b7",
+  "slug": "giro",
+  "ano": 2026,
+  "tipo": "favoritos_prelargada",
+  "ordem": "alfabetica",
+  "aviso": "Seleção editorial baseada em análises anteriores à largada. Não é a lista completa de inscritos nem uma classificação oficial.",
+  "atualizadoEm": "2026-11-09",
+  "fontes": [
+    {
+      "id": "lista-inscritos",
+      "nome": "Lista de inscritos do Giro 2026 (8 a 31 de maio), reproduzida por Italciclismo",
+      "data": "2026-05",
+      "url": "https://www.italciclismo.it/wp-content/uploads/2026/05/AAA-Giro-dItalia-2026-Entry-List.pdf",
+      "nota": "Nomes, dorsais e equipes desta edição. Não é o domínio do organizador."
+    },
+    {
+      "id": "cyclingstage",
+      "nome": "Cyclingstage — prévia de favoritos à geral",
+      "data": "2026-04-28",
+      "url": "https://www.cyclingstage.com/giro-2026-favourites/contenders-italy-2026/",
+      "nota": "Conferida em 7 de maio de 2026, ainda antes da largada."
+    },
+    {
+      "id": "tour-magazin",
+      "nome": "TOUR Magazin — prévia pré-largada",
+      "data": "2026-05-06",
+      "url": "https://www.tour-magazin.de/en/professional-cycling/giro-d-italia/giro-d-italia-2026-who-can-beat-vingegaard/"
+    },
+    {
+      "id": "cyclist",
+      "nome": "Cyclist — prévia do Giro",
+      "data": "2026-05-05",
+      "url": "https://www.cyclist.co.uk/in-depth/giro-ditalia-watch-live-stages-route-riders-teams-start-list"
+    },
+    {
+      "id": "cyclingnews",
+      "nome": "Cyclingnews — análise dos favoritos antes da largada",
+      "data": "2026-05",
+      "url": "https://www.cyclingnews.com/pro-cycling/racing/jonas-vingegaard-the-clear-frontrunner-but-who-will-emerge-as-his-biggest-challenger-analysing-the-favourites-for-the-giro-d-italia/"
+    }
+  ],
+  "itens": [
+    {
+      "nome": "Thymen Arensman",
+      "inscricao": "ARENSMAN Thymen",
+      "pais": "Países Baixos",
+      "equipe": "Netcompany Ineos",
+      "dorsal": 92,
+      "caracteristicas": "Escalador. Também anda bem no contrarrelógio. Na inscrição, divide a liderança da equipe."
+    },
+    {
+      "nome": "Egan Bernal",
+      "inscricao": "BERNAL GÓMEZ Egan Arley",
+      "pais": "Colômbia",
+      "equipe": "Netcompany Ineos",
+      "dorsal": 91,
+      "caracteristicas": "Escalador de altitude, com experiência em Grandes Voltas. Na inscrição, divide a liderança da equipe."
+    },
+    {
+      "nome": "Santiago Buitrago",
+      "inscricao": "BUITRAGO SÁNCHEZ Santiago",
+      "pais": "Colômbia",
+      "equipe": "Bahrain Victorious",
+      "dorsal": 11,
+      "caracteristicas": "Escalador. Líder da equipe na lista de inscritos. Os previews anteriores à largada não sustentam um perfil técnico mais longo."
+    },
+    {
+      "nome": "Felix Gall",
+      "inscricao": "GALL Felix",
+      "pais": "Áustria",
+      "equipe": "Decathlon CMA CGM Team",
+      "dorsal": 31,
+      "caracteristicas": "Escalador. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Derek Gee",
+      "inscricao": "GEE Derek",
+      "pais": "Canadá",
+      "equipe": "Lidl-Trek",
+      "dorsal": 63,
+      "caracteristicas": "Perfil de classificação geral, com estilo de ataque. Os previews consultados não sustentam mais atributos sem citar outras provas."
+    },
+    {
+      "nome": "Jai Hindley",
+      "inscricao": "HINDLEY Jai",
+      "pais": "Austrália",
+      "equipe": "Red Bull – Bora – Hansgrohe",
+      "dorsal": 121,
+      "caracteristicas": "Experiência e regularidade em Grandes Voltas. Na inscrição, divide a liderança da equipe. O perfil citado antes da largada é mais de escalada e consistência do que de especialista de contrarrelógio."
+    },
+    {
+      "nome": "Enric Mas",
+      "inscricao": "MAS NICOLAU Enric",
+      "pais": "Espanha",
+      "equipe": "Movistar Team",
+      "dorsal": 81,
+      "caracteristicas": "Escalador de classificação geral. Os previews anteriores à largada indicam estreia nesta prova."
+    },
+    {
+      "nome": "Giulio Pellizzari",
+      "inscricao": "PELLIZZARI Giulio",
+      "pais": "Itália",
+      "equipe": "Red Bull – Bora – Hansgrohe",
+      "dorsal": 125,
+      "caracteristicas": "Escalador italiano, com o contrarrelógio ainda em evolução. Jovem referência de subida na inscrição da equipe."
+    },
+    {
+      "nome": "Jonas Vingegaard",
+      "inscricao": "VINGEGAARD HANSEN Jonas",
+      "pais": "Dinamarca",
+      "equipe": "Team Visma | Lease a Bike",
+      "dorsal": 171,
+      "caracteristicas": "Escalador de elite, também forte no contrarrelógio, com consistência em Grandes Voltas. Os previews anteriores à largada indicam estreia nesta prova."
+    },
+    {
+      "nome": "Adam Yates",
+      "inscricao": "YATES Adam Richard",
+      "pais": "Reino Unido",
+      "equipe": "UAE Team Emirates XRG",
+      "dorsal": 191,
+      "caracteristicas": "Experiência em provas por etapas. Líder da equipe na lista de inscritos."
+    }
+  ]
+}

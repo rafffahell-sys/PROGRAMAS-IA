@@ -255,3 +255,37 @@ export function podeLerSnapshot({ liberacao, etapa, acesso }) {
   if (acesso?.regrasComprovadas !== true) return { ok: false, motivo: "regras_nao_comprovadas" };
   return { ok: true, motivo: "liberada" };
 }
+
+/** Pré-etapa de N só com a etapa N-1 da mesma prova e do mesmo ano confirmada. */
+export function podeLerAnalisePre({ liberacao, etapa, acesso }) {
+  const n = Number(etapa);
+  if (!Number.isInteger(n) || n < 1) return { ok: false, motivo: "etapa_invalida" };
+  if (n === 1) return { ok: false, motivo: "introducao_neutra" };
+  if (!etapaLiberada(liberacao, n - 1)) return { ok: false, motivo: "anterior_imediata_bloqueada" };
+  if (acesso?.regrasComprovadas !== true) return { ok: false, motivo: "regras_nao_comprovadas" };
+  return { ok: true, motivo: "liberada" };
+}
+
+const CHAVES_PROIBIDAS_ANALISE = ["top10", "top5", "ciclista", "gap", "lider", "quemVeste", "gc", "camisas", "classificacao"];
+
+export function validarAnalisePre(analise, config) {
+  const erros = [];
+  if (!analise || typeof analise !== "object" || Array.isArray(analise)) return ["analise"];
+  const n = Number(analise.etapa);
+  if (!Number.isInteger(n) || n < 2 || n > Number(config?.totalEtapas || 0)) erros.push("analise:etapa");
+  if (analise.provaId !== config?.provaId) erros.push("analise:provaId");
+  if (Number(analise.ano) !== Number(config?.ano)) erros.push("analise:ano");
+  if (Number(analise.contextoAteEtapa) !== n - 1) erros.push("analise:contexto");
+  for (const chave of CHAVES_PROIBIDAS_ANALISE) {
+    if (Object.prototype.hasOwnProperty.call(analise, chave)) erros.push(`analise:${chave}`);
+  }
+  if (analise.ausente === true) {
+    if (analise.texto != null) erros.push("analise:ausente_com_texto");
+    return erros;
+  }
+  if (analise.ausente !== false) erros.push("analise:ausente");
+  if (!textoLimpo(analise.texto, 1200) || analise.texto.trim().length < 40) erros.push("analise:texto");
+  if (!analise.fonte || !textoLimpo(analise.fonte.nome, 120)) erros.push("analise:fonte");
+  if (mencionaEtapaFutura(analise.texto, n - 1)) erros.push("analise:etapa_propria_ou_futura");
+  return erros;
+}

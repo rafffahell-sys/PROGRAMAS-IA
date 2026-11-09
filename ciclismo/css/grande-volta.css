@@ -81,6 +81,23 @@ body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
 .gv-aviso, .gv-nota, .gv-fonte, .gv-compara {
   color: var(--muted);
 }
+.gv-analise, .gv-favoritos {
+  margin-top: 18px;
+}
+.gv-favoritos-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+.gv-favorito {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+.gv-favorito h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.gv-favorito-equipe { margin: 0; font-weight: 700; }
+.gv-favorito p { margin: 6px 0 0; }
 .gv-aviso {
   border: 1px solid var(--line);
   border-radius: 16px;

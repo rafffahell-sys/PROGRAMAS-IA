@@ -16,7 +16,7 @@ DADOS = RAIZ / "data" / "grandes-voltas"
 CALENDARIO = RAIZ / "data" / "2026.json"
 PROIBIDOS = {
     "ciclista", "lider", "quemVeste", "top10", "top5", "gap", "vencedor",
-    "snapshot", "autorizacaoTexto", "classificacao", "resumo",
+    "snapshot", "autorizacaoTexto", "classificacao", "resumo", "analisePre",
 }
 
 
@@ -112,6 +112,19 @@ class Percurso(unittest.TestCase):
             self.assertEqual(liberacoes["provas"][chave]["etapas"], {})
             self.assertFalse(liberacoes["provas"][chave]["provaCompleta"])
         self.assertFalse(acesso["regrasComprovadas"])
+
+    def test_favoritos_prelargada_sem_resultado(self):
+        bruto = (DADOS / "2026" / "giro-favoritos-prelargada.json").read_text(encoding="utf-8")
+        dados = json.loads(bruto)
+        self.assertEqual(dados["ordem"], "alfabetica")
+        self.assertEqual(len(dados["itens"]), 10)
+        nomes = [item["nome"] for item in dados["itens"]]
+        self.assertEqual(nomes, sorted(nomes, key=lambda nome: nome.split()[-1]))
+        self.assertNotIn("vitória", bruto.lower())
+        self.assertNotIn("pódio", bruto.lower())
+        self.assertNotIn("odds", bruto.lower())
+        for item in dados["itens"]:
+            self.assertNotIn("ordem", item)
 
     def test_fontes_do_script_batem_com_o_json(self):
         gerado = fontes._giro()

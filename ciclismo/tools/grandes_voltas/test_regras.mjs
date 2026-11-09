@@ -13,6 +13,7 @@ test("auditoria de todos os allow: sem curinga e sem alargar /ciclismo", () => {
     "/ciclismo/{documento}",
     "/ciclismo_gv/{provaAno}",
     "/ciclismo_gv_snapshots/{provaAno}/apos/{etapa}",
+    "/ciclismo_gv_analises/{provaAno}/pre/{etapa}",
     "/ciclismo_gv_auditoria/{id}"
   ]);
   const allows = [...regras.matchAll(/^\s*allow\s+([^:]+):/gm)].map((m) => m[1].trim());
@@ -22,6 +23,10 @@ test("auditoria de todos os allow: sem curinga e sem alargar /ciclismo", () => {
     "get, list",
     "create, update",
     "delete",
+    "get",
+    "list",
+    "create",
+    "update, delete",
     "get",
     "list",
     "create",
@@ -69,6 +74,15 @@ test("emulador: snapshot só da etapa liberada, mesmo com a leitura ampla de /ci
       });
       await setDoc(doc(db, "ciclismo_gv_snapshots", "2026_b7"), { solto: 1 });
       await setDoc(doc(db, "ciclismo_gv_auditoria", "nota"), { texto: "sem resultado" });
+      const analise = (etapa, provaId, ano) => ({
+        etapa, contextoAteEtapa: etapa - 1, provaId, ano, texto: "sintetico"
+      });
+      for (const n of [2, 3, 5, 6]) {
+        await setDoc(doc(db, "ciclismo_gv_analises", "2026_b7", "pre", String(n)), analise(n, "b7", 2026));
+      }
+      await setDoc(doc(db, "ciclismo_gv_analises", "2026_b7", "pre", "1"), analise(1, "b7", 2026));
+      await setDoc(doc(db, "ciclismo_gv_analises", "2027_b7", "pre", "2"), analise(2, "b7", 2027));
+      await setDoc(doc(db, "ciclismo_gv_analises", "2026_b10", "pre", "2"), analise(2, "b10", 2026));
     });
 
     const anon = ambiente.unauthenticatedContext().firestore();
@@ -82,6 +96,14 @@ test("emulador: snapshot só da etapa liberada, mesmo com a leitura ampla de /ci
     await assertFails(getDoc(doc(anon, "ciclismo_gv_snapshots", "ruim", "apos", "4")));
     await assertFails(getDoc(doc(anon, "ciclismo_gv_snapshots", "2026_b7")));
     await assertFails(getDoc(doc(anon, "ciclismo_gv_auditoria", "nota")));
+    await assertSucceeds(getDoc(doc(anon, "ciclismo_gv_analises", "2026_b7", "pre", "2")));
+    await assertSucceeds(getDoc(doc(anon, "ciclismo_gv_analises", "2026_b7", "pre", "6")));
+    await assertFails(getDoc(doc(anon, "ciclismo_gv_analises", "2026_b7", "pre", "3")));
+    await assertFails(getDoc(doc(anon, "ciclismo_gv_analises", "2026_b7", "pre", "5")));
+    await assertFails(getDoc(doc(anon, "ciclismo_gv_analises", "2026_b7", "pre", "1")));
+    await assertFails(getDoc(doc(anon, "ciclismo_gv_analises", "2027_b7", "pre", "2")));
+    await assertFails(getDoc(doc(anon, "ciclismo_gv_analises", "2026_b10", "pre", "2")));
+    await assertFails(getDocs(collection(anon, "ciclismo_gv_analises", "2026_b7", "pre")));
 
     const dono = ambiente.authenticatedContext("dono", { email: "rafffahell@gmail.com" }).firestore();
     await assertFails(setDoc(doc(dono, "ciclismo_gv_snapshots", "2026_b7", "apos", "5"), {

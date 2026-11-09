@@ -58,6 +58,23 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    function antecessoraImediataLiberada(provaAno, etapa) {
+      let n = int(etapa);
+      return n > 1 && etapaLiberada(provaAno, string(n - 1));
+    }
+
+    match /ciclismo_gv_analises/{provaAno}/pre/{etapa} {
+      allow get: if antecessoraImediataLiberada(provaAno, etapa);
+      allow list: if false;
+      allow create: if dono()
+        && int(etapa) > 1
+        && request.resource.data.etapa == int(etapa)
+        && request.resource.data.contextoAteEtapa == int(etapa) - 1
+        && request.resource.data.provaId is string
+        && request.resource.data.ano is int;
+      allow update, delete: if false;
+    }
+
     match /ciclismo_gv_auditoria/{id} {
       allow read, write: if dono();
     }

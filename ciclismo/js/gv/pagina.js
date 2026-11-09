@@ -1,6 +1,7 @@
 import {
   TIPOS,
   etapaAnteriorLiberada,
+  podeLerAnalisePre,
   etapaLiberada,
   estadoChip,
   filtrarEtapas,
@@ -17,6 +18,7 @@ import {
 import { pontosValidos, svgPerfil } from "./perfil.js";
 import { htmlCena } from "./cena.js";
 import { carregarSnapshot } from "./snapshots.js";
+import { carregarAnalisePre } from "./analises.js";
 
 const ROTULO_CHIP = {
   bloqueada: "bloqueada",
@@ -131,6 +133,43 @@ function htmlClassificacao(titulo, lista, unidade) {
   return `<section class="gv-bloco"><h3>${esc(titulo)}</h3><ol class="gv-lista">${lista.map((item) => htmlLinha(item, unidade)).join("")}</ol></section>`;
 }
 
+function htmlAnalisePre(etapaN, liberacao, analise, acesso) {
+  const n = Number(etapaN);
+  if (n === 1) {
+    return `<section class="gv-analise" data-analise="neutra"><h2>Antes da largada</h2><p>Nesta primeira etapa só fica o percurso. Não há análise com resultado.</p></section>`;
+  }
+  const gate = podeLerAnalisePre({ liberacao, etapa: n, acesso });
+  if (!gate.ok) {
+    return `<section class="gv-analise" data-analise="bloqueada"><h2>Análise pré-etapa</h2><p>Bloqueada até você confirmar a etapa ${n - 1} desta mesma prova e deste mesmo ano.</p></section>`;
+  }
+  if (!analise || analise.ausente === true || typeof analise.texto !== "string" || !analise.texto.trim()) {
+    return `<section class="gv-analise" data-analise="ausente"><h2>Análise pré-etapa</h2><p>A etapa ${n - 1} está confirmada, mas esta coleta não trouxe análise. Nenhum texto foi escrito no lugar.</p></section>`;
+  }
+  const fonte = analise.fonte?.nome ? `<p class="gv-fonte">Fonte da análise: ${esc(analise.fonte.nome)}</p>` : "";
+  return `<section class="gv-analise" data-analise="presente"><h2>Análise pré-etapa</h2><p>${esc(analise.texto)}</p>${fonte}</section>`;
+}
+
+function htmlFavoritos(lista) {
+  if (!lista || lista.tipo !== "favoritos_prelargada" || !Array.isArray(lista.itens)) return "";
+  const cards = lista.itens.map((item) => `<article class="gv-favorito">
+      <h3>${esc(item.nome)}</h3>
+      <p class="gv-favorito-equipe">${esc(item.equipe)}</p>
+      <p>Inscrição: ${esc(item.inscricao)} · dorsal ${esc(item.dorsal)} · ${esc(item.pais)}</p>
+      <p>${esc(item.caracteristicas)}</p>
+    </article>`).join("");
+  const fontes = (lista.fontes || []).map((fonte) => (
+    `<li><a href="${esc(fonte.url)}" rel="noopener noreferrer">${esc(fonte.nome)}</a>${fonte.data ? ` · ${esc(fonte.data)}` : ""}${fonte.nota ? ` · ${esc(fonte.nota)}` : ""}</li>`
+  )).join("");
+  return `<section id="favoritos-prelargada" class="gv-favoritos">
+    <h2>Favoritos pré-largada</h2>
+    <p class="gv-aviso">${esc(lista.aviso)}</p>
+    <p class="gv-nota">Ordem alfabética. Não é posição de favoritismo nem classificação.</p>
+    <div class="gv-favoritos-grade">${cards}</div>
+    <h3>Fontes da seleção</h3>
+    <ul>${fontes}</ul>
+  </section>`;
+}
+
 function htmlResumo(resumo) {
   if (!resumo || resumo.ausente === true || typeof resumo.texto !== "string" || !resumo.texto.trim()) {
     return `<section class="gv-bloco" data-resumo="ausente"><h3>Resumo da etapa</h3><p>A coleta desta etapa não trouxe resumo. Nenhum texto foi escrito no lugar.</p></section>`;
@@ -189,7 +228,7 @@ function htmlResultados(prova, etapa, liberacao, snap, snapAnterior, anteriorN) 
   </section>`;
 }
 
-export function htmlHub(prova, liberacao, filtro = {}) {
+export function htmlHub(prova, liberacao, filtro = {}, favoritos = null) {
   const liberadas = numerosLiberados(liberacao);
   const etapas = filtrarEtapas(prova.etapas, liberacao, filtro);
   const km = somaKm(prova.etapas);
@@ -232,6 +271,7 @@ export function htmlHub(prova, liberacao, filtro = {}) {
       <label><input type="checkbox" name="perfil"${filtro.somenteComPerfil ? " checked" : ""}> Só com perfil</label>
     </form>
     <div class="gv-grade">${cards || `<p class="gv-vazio">Nenhuma etapa com esse filtro.</p>`}</div>
+    ${prova.slug === "giro" ? htmlFavoritos(favoritos) : ""}
     <section>
       <h2>Fontes do percurso</h2>
       <ul>${htmlFontes(prova)}</ul>
@@ -260,6 +300,7 @@ export function htmlEtapa(prova, etapa, liberacao, snap, snapAnterior, opcoes = 
       ${htmlCena(prova.slug)}
     </header>
     ${htmlPerfil(etapa)}
+    ${htmlAnalisePre(etapa.n, liberacao, opcoes.analise || null, opcoes.acesso || { regrasComprovadas: false })}
     <div class="gv-marcas-grade">
       ${htmlMarcadores("Sprints do percurso", etapa.perfil?.sprints)}
       ${htmlMarcadores("Subidas do percurso", etapa.perfil?.montanhas)}
@@ -304,7 +345,18 @@ export async function desenhar(estado) {
   const prova = estado.provas[resumo.arquivo];
   const liberacao = liberacaoDaProva(estado.liberacoes, prova.ano, prova.provaId);
   if (!rota.etapa) {
-    raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro || {});
+    let favoritos = null;
+    if (prova.slug === "giro") {
+      if (!estado.favoritos) {
+        estado.favoritos = await lerOuFechado(
+          estado.fetchFn,
+          "data/grandes-voltas/2026/giro-favoritos-prelargada.json",
+          null
+        );
+      }
+      favoritos = estado.favoritos;
+    }
+    raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro || {}, favoritos);
     document.title = `${prova.nome} ${prova.ano} — etapas`;
     ligarFiltros(estado, prova, liberacao);
     return;
@@ -315,8 +367,10 @@ export async function desenhar(estado) {
     return;
   }
   const gate = podeLerSnapshot({ liberacao, etapa: etapa.n, acesso: estado.acesso });
+  const gateAnalise = podeLerAnalisePre({ liberacao, etapa: etapa.n, acesso: estado.acesso });
   let snap = null;
   let snapAnterior = null;
+  let analise = null;
   if (gate.ok) {
     const { criarLeitorFirestore } = await import("./firestore-leitor.js");
     const leitor = estado.leitor || criarLeitorFirestore();
@@ -332,8 +386,18 @@ export async function desenhar(estado) {
       snapAnterior = anterior.snapshot;
     }
   }
+  if (gateAnalise.ok) {
+    const { criarLeitorAnaliseFirestore } = await import("./firestore-leitor-analise.js");
+    const leitorAnalise = estado.leitorAnalise || criarLeitorAnaliseFirestore();
+    const lida = await carregarAnalisePre({
+      prova, etapa: etapa.n, liberacao, acesso: estado.acesso, leitor: leitorAnalise
+    });
+    analise = lida.analise;
+  }
   raiz.innerHTML = htmlEtapa(prova, etapa, liberacao, snap, snapAnterior, {
-    permitirSintetico: false
+    permitirSintetico: false,
+    acesso: estado.acesso,
+    analise
   });
   document.title = `Etapa ${etapa.n} · ${prova.nome} ${prova.ano}`;
 }
@@ -348,7 +412,7 @@ function ligarFiltros(estado, prova, liberacao) {
       somenteAssistidas: form.querySelector('[name="assistidas"]').checked,
       somenteComPerfil: form.querySelector('[name="perfil"]').checked
     };
-    estado.raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro);
+    estado.raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro, prova.slug === "giro" ? estado.favoritos : null);
     ligarFiltros(estado, prova, liberacao);
   });
 }
