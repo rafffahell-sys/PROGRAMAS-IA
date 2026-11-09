@@ -107,6 +107,7 @@ test("tour com percurso não inventa perfil e não pede snapshot", async () => {
   assert.match(raizDom.innerHTML, /182 km/);
   assert.match(raizDom.innerHTML, /Carcassonne/);
   assert.match(raizDom.innerHTML, /Perfil altimétrico a publicar/);
+  assert.equal(raizDom.innerHTML.includes("img/trofeus/"), false);
   assert.equal(raizDom.innerHTML.includes("<polyline"), false);
   assert.match(raizDom.innerHTML, /data-resultados="ocultos"/);
   assert.equal(pedidos.some((url) => /snapshot|firestore|analise/i.test(url)), false);
@@ -194,6 +195,9 @@ test("favoritos pré-largada ficam no hub do giro e fora da etapa", async () => 
   location.hash = "#/giro/2026";
   const raizDom = document.getElementById("gv-app");
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
+  assert.match(raizDom.innerHTML, /Trofeo Senza Fine/);
+  assert.match(raizDom.innerHTML, /CC BY 2.0/);
+  assert.match(raizDom.innerHTML, /img\/trofeus\/giro-trofeo-senza-fine.jpg/);
   assert.match(raizDom.innerHTML, /Favoritos pré-largada/);
   assert.match(raizDom.innerHTML, /Seleção editorial baseada em análises anteriores à largada/);
   assert.equal(raizDom.innerHTML.includes("vitória"), false);
@@ -204,6 +208,13 @@ test("favoritos pré-largada ficam no hub do giro e fora da etapa", async () => 
   assert.equal(raizDom.innerHTML.includes("Favoritos pré-largada"), false);
   assert.equal(raizDom.innerHTML.includes("Jonas Vingegaard"), false);
   assert.match(raizDom.innerHTML, /data-analise="bloqueada"/);
+  location.hash = "#/tour/2026";
+  await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
+  assert.match(raizDom.innerHTML, /Ainda não há foto isolada deste troféu/);
+  assert.equal(raizDom.innerHTML.includes("img/trofeus/"), false);
+  location.hash = "#/vuelta/2026";
+  await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
+  assert.match(raizDom.innerHTML, /Ainda não há foto isolada deste troféu/);
   assert.equal(pedidos.some((url) => /snapshot|firestore|ciclismo_gv_analises/i.test(url)), false);
   assert.notEqual(globalThis.__GV_ANALISE_CARREGADA__, true);
 });

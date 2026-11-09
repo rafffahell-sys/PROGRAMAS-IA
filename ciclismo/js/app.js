@@ -223,6 +223,27 @@ function escondePodioGlobal(ano, id) {
   return !podioRevelado(liberacaoDaProva(gvLiberacoes, ano, id), meta.totalEtapas);
 }
 
+function renderAtalhoGv() {
+  const nav = document.getElementById("atalho-gv");
+  if (!nav) return;
+  const publicados = PROVAS_ETAPAS_CONFIRMADAS.filter((prova) => prova.ano && prova.slug);
+  if (!publicados.length) {
+    nav.hidden = true;
+    nav.innerHTML = "";
+    return;
+  }
+  const doAno = publicados.filter((prova) => String(prova.ano) === String(anoAtivo));
+  const outras = publicados.filter((prova) => String(prova.ano) !== String(anoAtivo));
+  const botoes = (lista) => lista.map((prova) => (
+    `<a class="atalho-gv-btn" href="${esc(hrefHub(prova.slug, prova.ano))}">${esc(prova.nome)} ${esc(prova.ano)}</a>`
+  )).join("");
+  const blocos = [];
+  if (doAno.length) blocos.push(`<p class="atalho-gv-rotulo">Percursos de ${esc(anoAtivo)}</p>${botoes(doAno)}`);
+  if (outras.length) blocos.push(`<p class="atalho-gv-rotulo">Percursos já publicados</p>${botoes(outras)}`);
+  nav.hidden = false;
+  nav.innerHTML = blocos.join("");
+}
+
 function htmlProgressoGv(meta) {
   const n = numerosLiberados(liberacaoDaProva(gvLiberacoes, meta.ano, meta.provaId)).length;
   return `<p class="aviso">Etapas confirmadas: ${n} de ${meta.totalEtapas}. <a class="link-gv" href="${esc(hrefHub(meta.slug, meta.ano))}">Abrir etapas</a>. O pódio da prova inteira fica oculto até ela ser marcada completa.</p>`;
@@ -553,7 +574,7 @@ function renderLista() {
         <div class="lado">
           <span class="indice">${String(posicao.get(prova.id)).padStart(3, "0")}</span>
           <div class="quando">${esc(formatarIntervalo(prova.inicio, prova.fim, prova.semData))}</div>
-          ${gv ? `<a class="link-gv" href="${esc(hrefHub(gv.slug, gv.ano))}">Etapas</a>` : perfilSvg(prova)}
+          ${gv ? `<a class="atalho-gv-btn" href="${esc(hrefHub(gv.slug, gv.ano))}">Abrir etapas</a>` : perfilSvg(prova)}
         </div>
         <div>
           <div class="cabeca">
@@ -701,6 +722,7 @@ function abrirAba(nome) {
 
 function renderTudo() {
   renderAnoTema();
+  renderAtalhoGv();
   renderFiltroCat();
   renderLista();
   pintarNumeros();
