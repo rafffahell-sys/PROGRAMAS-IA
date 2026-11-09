@@ -15,7 +15,15 @@ import {
 } from "./modelo.js";
 import { carregarSnapshot } from "./snapshots.js";
 import { carregarAnalisePre } from "./analises.js";
-import { podeLerAnalisePre, validarAnalisePre } from "./modelo.js";
+import {
+  podeLerAnalisePre,
+  validarAnalisePre,
+  parseKm,
+  referenciasDistancia,
+  situarPonto,
+  situarRestante,
+  totalDoPonto
+} from "./modelo.js";
 import { pontosValidos, svgPerfil } from "./perfil.js";
 
 const config = {
@@ -210,4 +218,58 @@ test("perfil sem pontos não desenha linha", () => {
   const svg = svgPerfil([{ xKm: 0, elevM: 10 }, { xKm: 5, elevM: 40 }], [{ xKm: null }, { xKm: 2 }]);
   assert.match(svg, /polyline/);
   assert.equal(svg.split("<line").length - 1, 1);
+});
+
+test("quilómetro restante da TV converte só dentro do total da mesma fonte", () => {
+  assert.equal(parseKm("128,7"), 128.7);
+  assert.equal(parseKm("128.7"), 128.7);
+  assert.equal(parseKm(""), null);
+  assert.equal(parseKm("128,7 km"), null);
+  assert.equal(parseKm("-1"), null);
+
+  const giro = situarRestante(147, "128,7");
+  assert.equal(giro.ok, true);
+  assert.equal(giro.restante, 128.7);
+  assert.equal(giro.percorrido, 18.3);
+  assert.equal(giro.chegada, false);
+
+  const chegada = situarRestante(147, "0");
+  assert.equal(chegada.chegada, true);
+  assert.equal(chegada.percorrido, 147);
+
+  const largada = situarRestante(19.6, "19,6");
+  assert.equal(largada.percorrido, 0);
+  assert.equal(situarRestante(9.4, "0,1").percorrido, 9.3);
+
+  assert.equal(situarRestante(147, "").motivo, "invalido");
+  assert.equal(situarRestante(147, "200").motivo, "fora");
+  assert.equal(situarRestante(null, "10").motivo, "sem_distancia");
+
+  const card = situarRestante(244, "100");
+  const eixo = situarRestante(245, "100");
+  assert.equal(card.percorrido, 144);
+  assert.equal(eixo.percorrido, 145);
+  assert.notEqual(card.percorrido, eixo.percorrido);
+});
+
+test("ponto sem km de fonte não ganha distância e divergência não se mistura", () => {
+  const unica = { km: 147, perfil: { imagem: { kmNaFicha: 147 } } };
+  assert.equal(referenciasDistancia(unica).length, 1);
+  assert.equal(situarPonto(null, 147).motivo, "ausente");
+  assert.equal(situarPonto(18.3, 147).restante, 128.7);
+  assert.equal(totalDoPonto(unica, { xKm: 18.3 }).id, "card");
+
+  const divergente = { km: 244, perfil: { imagem: { kmNoEixo: 245, kmNaFicha: 245, kmNaPagina: 245 } } };
+  assert.deepEqual(referenciasDistancia(divergente).map((ref) => ref.km), [244, 245]);
+  assert.equal(totalDoPonto(divergente, { xKm: 10 }), null);
+  assert.equal(totalDoPonto(divergente, { xKm: 10, referencia: "eixo" }).km, 245);
+  assert.equal(situarPonto(10, 245).restante, 235);
+
+  const tour8 = { km: 182, perfil: { imagem: { kmNaPagina: 182, kmNoEixo: 180.4 } } };
+  assert.deepEqual(referenciasDistancia(tour8).map((ref) => [ref.id, ref.km]), [["card", 182], ["eixo", 180.4]]);
+  const noEixo = situarRestante(180.4, "10");
+  assert.equal(noEixo.ok, true);
+  assert.equal(noEixo.percorrido, 170.4);
+  assert.equal(situarRestante(180.4, "181").motivo, "fora");
+  assert.equal(situarRestante(182, "181").ok, true);
 });
