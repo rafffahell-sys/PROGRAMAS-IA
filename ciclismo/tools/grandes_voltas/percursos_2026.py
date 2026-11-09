@@ -338,7 +338,9 @@ def _giro():
         },
         "observacoes": [
             "Nenhuma etapa está liberada.",
-            "Não há série altimétrica: o gráfico fica ausente de propósito.",
+            "Perfis altimétricos: 0 de 21. O regulamento de 4 de maio de 2026 remete os desenhos à Guida Tecnica, mas o PDF público obtido é o regulamento, sem perfil de etapa.",
+            "A página Roadbook do site oficial, consultada em 9 de novembro de 2026, já mostra a edição seguinte e não foi usada.",
+            "As brochuras de hospitalidade de fevereiro e março de 2026 trazem a planimetria geral (3.459,2 km e 49.150 m no total), não o perfil de cada etapa. Esses totais não substituem os 3.468 km do regulamento de maio e não foram distribuídos entre as etapas.",
         ],
         "etapas": _giro_etapas(),
     }
@@ -552,6 +554,7 @@ def _tour():
         },
         "observacoes": [
             "Nenhuma etapa está liberada.",
+            "Perfis altimétricos: 0 de 21. O resumo de percurso de 2026 não traz série nem imagem de perfil por etapa. As fichas de etapa atuais do site não foram usadas.",
             "O resumo oficial de 2026 fala em 7 etapas planas, 4 onduladas, 8 de montanha, 1 contra-relógio por equipes e 1 individual, com dois dias de descanso. Essa conta não foi desdobrada etapa a etapa onde a página não numera o tipo.",
             "O mesmo resumo cita 54.450 m de desnível associados ao ano de 2025. Esse número não foi usado para 2026.",
             "Chegadas no alto nomeadas sem número de etapa no resumo: Orcières-Merlette e Alpe d'Huez (duas vezes). Não foram atribuídas a uma etapa.",
@@ -677,6 +680,7 @@ def _vuelta():
         },
         "observacoes": [
             "Nenhuma etapa está liberada.",
+            "Perfis altimétricos: 0 de 21. A tabela oficial de percurso não traz série nem imagem de perfil por etapa.",
             "A página de percurso anuncia 3.275 km no total. A soma da coluna de distância das 21 etapas, com os números publicados na mesma tabela, dá 3.231,9 km. A diferença não foi ajustada.",
             "A mesma página conta 4 onduladas, 1 ondulada com chegada em subida, 4 planas, 4 de média montanha, 6 de montanha, 2 contra-relógios e 2 dias de descanso.",
         ],

@@ -64,6 +64,12 @@ class Percurso(unittest.TestCase):
                 self.assertFalse(etapa["perfilPublicado"])
                 self.assertIsNone(etapa["desnivelM"])
 
+    def test_nenhum_perfil_publicado(self):
+        for slug, prova in self.provas.items():
+            publicados = [e for e in prova["etapas"] if e["perfilPublicado"] or e["perfil"]["pontos"]]
+            self.assertEqual(publicados, [], slug)
+            self.assertTrue(any(obs.startswith("Perfis altimétricos: 0 de 21") for obs in prova["observacoes"]))
+
     def test_giro_fecha_3468(self):
         giro = self.provas["giro"]
         self.assertEqual(sum(e["km"] for e in giro["etapas"]), 3468)

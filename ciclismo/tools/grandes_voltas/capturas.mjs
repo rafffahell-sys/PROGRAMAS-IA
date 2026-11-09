@@ -128,7 +128,7 @@ exigir(montanha.includes("Bloqueados"), "mobile mostrou resultado");
 await mobile.screenshot({ path: `${out}/gv-giro-etapa-mobile.png`, fullPage: true });
 
 const todos = [...pedidosDesktop, ...pedidosMobile];
-const vazou = todos.filter((url) => /firestore\.googleapis|ciclismo_gv_snapshots|firebaseio/.test(url));
+const vazou = todos.filter((url) => /firestore\.googleapis|ciclismo_gv_snapshots|ciclismo_gv_analises|firebaseio/.test(url));
 exigir(vazou.length === 0, `pedido de snapshot: ${vazou.join(" ")}`);
 
 await browser.close();

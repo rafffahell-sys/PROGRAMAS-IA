@@ -192,7 +192,9 @@
   },
   "observacoes": [
     "Nenhuma etapa está liberada.",
-    "Não há série altimétrica: o gráfico fica ausente de propósito."
+    "Perfis altimétricos: 0 de 21. O regulamento de 4 de maio de 2026 remete os desenhos à Guida Tecnica, mas o PDF público obtido é o regulamento, sem perfil de etapa.",
+    "A página Roadbook do site oficial, consultada em 9 de novembro de 2026, já mostra a edição seguinte e não foi usada.",
+    "As brochuras de hospitalidade de fevereiro e março de 2026 trazem a planimetria geral (3.459,2 km e 49.150 m no total), não o perfil de cada etapa. Esses totais não substituem os 3.468 km do regulamento de maio e não foram distribuídos entre as etapas."
   ],
   "etapas": [
     {
