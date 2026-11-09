@@ -58,6 +58,41 @@ test("página real não pede snapshot nem desenha resultado", async () => {
   assert.equal(pedidos.some((url) => /snapshot|firestore|googleapis/i.test(url)), false);
 });
 
+test("acesso falso e liberação malformada não pedem snapshot", async () => {
+  const pedidos = [];
+  globalThis.__GV_LEITOR_CARREGADO__ = false;
+  location.hash = "#/giro/2026/etapa/1";
+  const raizDom = document.getElementById("gv-app");
+  const fetchFn = async (url) => {
+    const alvo = String(url);
+    pedidos.push(alvo);
+    if (/snapshot|firestore|googleapis|firebase/i.test(alvo)) {
+      throw new Error(`pedido bloqueado: ${alvo}`);
+    }
+    if (alvo.endsWith("acesso.json")) {
+      return { ok: false, async json() { throw new Error("ausente"); } };
+    }
+    if (alvo.endsWith("liberacoes.json")) {
+      return {
+        ok: true,
+        async json() {
+          return { provas: { "2026_b7": { etapas: [true, true], provaCompleta: true } } };
+        }
+      };
+    }
+    const arquivo = path.join(raiz, alvo.replace(/^\//, ""));
+    const texto = fs.readFileSync(arquivo, "utf8");
+    return { ok: true, async json() { return JSON.parse(texto); } };
+  };
+  await iniciarPagina(raizDom, { fetchFn });
+  assert.match(raizDom.innerHTML, /data-resultados="ocultos"/);
+  assert.match(raizDom.innerHTML, /Perfil altimétrico a publicar/);
+  assert.equal(raizDom.innerHTML.includes("Atleta"), false);
+  assert.equal(pedidos.some((url) => /snapshot|firestore|googleapis|firebase/i.test(url)), false);
+  assert.equal(globalThis.__GV_LEITOR_CARREGADO__, false);
+  assert.match(raizDom.textContent, /0/);
+});
+
 test("tour sem distância não inventa perfil", async () => {
   const pedidos = [];
   location.hash = "#/tour/2026/etapa/4";

@@ -6,7 +6,10 @@ import {
   estadoChip,
   filtrarEtapas,
   lerRota,
+  liberacaoDaProva,
+  normalizarAcesso,
   numerosLiberados,
+  podioRevelado,
   podeLerSnapshot,
   validarSnapshot
 } from "./modelo.js";
@@ -86,6 +89,27 @@ test("rota estável e chip de percurso", () => {
   ];
   assert.equal(filtrarEtapas(etapas, { etapas: {} }, { somenteComPerfil: true }).length, 1);
   assert.equal(filtrarEtapas(etapas, { etapas: { 2: true } }, { somenteAssistidas: true })[0].n, 2);
+});
+
+test("liberação ausente ou malformada não abre etapa nem pódio", () => {
+  assert.deepEqual(liberacaoDaProva(null, 2026, "b7"), { etapas: {}, provaCompleta: false });
+  assert.deepEqual(liberacaoDaProva({ provas: [] }, 2026, "b7").etapas, {});
+  const lista = liberacaoDaProva({
+    provas: { "2026_b7": { etapas: [true, true], provaCompleta: true } }
+  }, 2026, "b7");
+  assert.deepEqual(lista, { etapas: {}, provaCompleta: false });
+  const texto = liberacaoDaProva({
+    provas: { "2026_b7": { etapas: { 1: "true", 5: 1, 9: true }, provaCompleta: true } }
+  }, 2026, "b7");
+  assert.deepEqual(numerosLiberados(texto), [9]);
+  assert.equal(podioRevelado(texto, 21), false);
+  const completa = liberacaoDaProva({
+    provas: { "2026_b7": { etapas: { 21: true }, provaCompleta: true } }
+  }, 2026, "b7");
+  assert.equal(podioRevelado(completa, 21), true);
+  assert.equal(normalizarAcesso(null).regrasComprovadas, false);
+  assert.equal(normalizarAcesso({ regrasComprovadas: "true" }).regrasComprovadas, false);
+  assert.equal(normalizarAcesso({ regrasComprovadas: false }).regrasComprovadas, false);
 });
 
 test("snapshot sintético inválido e leitura fechada", async () => {

@@ -220,7 +220,7 @@ function metaGrandeVolta(ano, id) {
 function escondePodioGlobal(ano, id) {
   const meta = metaGrandeVolta(ano, id);
   if (!meta) return false;
-  return !podioRevelado(liberacaoDaProva(gvLiberacoes, ano, id));
+  return !podioRevelado(liberacaoDaProva(gvLiberacoes, ano, id), meta.totalEtapas);
 }
 
 function htmlProgressoGv(meta) {

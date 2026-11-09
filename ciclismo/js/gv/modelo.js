@@ -19,18 +19,27 @@ export function provaConfirmada(ano, provaId) {
   ) || null;
 }
 
+function mapaPlano(valor) {
+  return Boolean(valor) && typeof valor === "object" && !Array.isArray(valor);
+}
+
+/** Só booleanos true. Lista, texto ou campo ausente não liberam nada. */
 export function liberacaoDaProva(liberacoes, ano, provaId) {
-  const bruto = liberacoes?.provas?.[chaveProva(ano, provaId)];
+  const fechada = { etapas: {}, provaCompleta: false };
+  if (!mapaPlano(liberacoes) || !mapaPlano(liberacoes.provas)) return fechada;
+  const bruto = liberacoes.provas[chaveProva(ano, provaId)];
+  if (!mapaPlano(bruto) || !mapaPlano(bruto.etapas)) return fechada;
   const etapas = {};
-  if (bruto && bruto.etapas && typeof bruto.etapas === "object") {
-    Object.entries(bruto.etapas).forEach(([k, v]) => {
-      if (v === true) etapas[String(k)] = true;
-    });
+  for (const [chave, valor] of Object.entries(bruto.etapas)) {
+    if (valor === true && /^[1-9][0-9]?$/.test(chave)) etapas[chave] = true;
   }
-  return {
-    etapas,
-    provaCompleta: bruto?.provaCompleta === true
-  };
+  const completa = bruto.provaCompleta === true;
+  return { etapas, provaCompleta: completa };
+}
+
+export function normalizarAcesso(bruto) {
+  if (!mapaPlano(bruto)) return { regrasComprovadas: false };
+  return { regrasComprovadas: bruto.regrasComprovadas === true };
 }
 
 export function etapaLiberada(liberacao, n) {
@@ -65,8 +74,9 @@ export function estadoChip(etapa, liberada) {
   return "bloqueada";
 }
 
-export function podioRevelado(liberacao) {
-  return liberacao?.provaCompleta === true;
+/** Pódio global só com a última etapa em true e a prova marcada completa. */
+export function podioRevelado(liberacao, totalEtapas = 21) {
+  return liberacao?.provaCompleta === true && etapaLiberada(liberacao, totalEtapas);
 }
 
 export function filtrarEtapas(etapas, liberacao, filtro = {}) {

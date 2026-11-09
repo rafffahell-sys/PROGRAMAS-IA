@@ -49,7 +49,9 @@ Matches da proposta:
 
 Não há `match /{document=**}`. Não foi acrescentada leitura pública em cima de `ciclismo/temporada`.
 
-O que não deu para auditar: qualquer outra regra que já exista no projeto e não esteja no README. Um `allow read: if true` recursivo, se existir lá, anula o `get` restrito, porque no Firestore basta um match permitir. Também há outras coleções no mesmo projeto (o painel patrimonial grava `patrimonio/rafael`). Substituir o arquivo inteiro do console por `firestore.rules` apagaria essas regras. Na hora de publicar, o caminho é acrescentar os matches novos ao texto que já está no console, sem remover os que não estão neste arquivo.
+No repositório, os `allow` que existem são só os deste arquivo: a leitura pública de `ciclismo/{documento}` (a do README) e os quatro matches novos. O emulador carrega o arquivo inteiro, não um recorte. Um documento de liberação com campo a mais, ou com valor que não é `true`, não é lido. O snapshot da etapa correspondente também não. Não há `match /{document=**}` neste arquivo.
+
+O que não está no repositório continua fora do teste: o texto que já está publicado no console. O painel patrimonial grava `patrimonio/rafael`, mas a regra dessa coleção não aparece no código. Um `allow read: if true` recursivo, se existir só no console, anula o `get` restrito, porque no Firestore basta um match permitir. Por isso `acesso.json` segue com `regrasComprovadas: false` e a página não pede snapshot. Substituir o arquivo inteiro do console por `firestore.rules` apagaria regras que não estão aqui. Na hora de publicar, o caminho é acrescentar os matches novos ao texto do console, sem remover os outros, e só então mudar o flag.
 
 Até essa conferência, o cliente não pede snapshot. Não há botão na página para liberar etapa.
 

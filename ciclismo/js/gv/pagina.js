@@ -8,6 +8,7 @@ import {
   hrefHub,
   lerRota,
   liberacaoDaProva,
+  normalizarAcesso,
   numerosLiberados,
   podeLerSnapshot,
   somaKm,
@@ -325,13 +326,27 @@ function ligarFiltros(estado, prova, liberacao) {
   });
 }
 
+async function lerOuFechado(fetchFn, url, fallback) {
+  try {
+    return await lerJson(fetchFn, url);
+  } catch {
+    return fallback;
+  }
+}
+
 export async function iniciarPagina(raiz, deps = {}) {
   const fetchFn = deps.fetchFn || globalThis.fetch.bind(globalThis);
-  const [acesso, catalogo, liberacoes] = await Promise.all([
-    lerJson(fetchFn, "data/grandes-voltas/acesso.json"),
-    lerJson(fetchFn, "data/grandes-voltas/catalogo.json"),
-    lerJson(fetchFn, "data/grandes-voltas/liberacoes.json")
-  ]);
+  const catalogo = await lerJson(fetchFn, "data/grandes-voltas/catalogo.json");
+  const acesso = normalizarAcesso(await lerOuFechado(
+    fetchFn,
+    "data/grandes-voltas/acesso.json",
+    { regrasComprovadas: false }
+  ));
+  const liberacoes = await lerOuFechado(
+    fetchFn,
+    "data/grandes-voltas/liberacoes.json",
+    { provas: {} }
+  );
   const estado = {
     raiz,
     fetchFn,

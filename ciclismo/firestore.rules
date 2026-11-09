@@ -26,8 +26,16 @@ service cloud.firestore {
         );
     }
 
+    function liberacaoLegivel() {
+      return resource.data.keys().hasOnly(["etapas", "provaCompleta", "atualizadoEm"])
+        && resource.data.provaCompleta is bool
+        && resource.data.etapas is map
+        && resource.data.etapas.size() <= 30
+        && resource.data.etapas.values().hasOnly([true]);
+    }
+
     match /ciclismo_gv/{provaAno} {
-      allow get, list: if true;
+      allow get, list: if liberacaoLegivel();
       allow create, update: if dono() && liberacaoValida();
       allow delete: if false;
     }
