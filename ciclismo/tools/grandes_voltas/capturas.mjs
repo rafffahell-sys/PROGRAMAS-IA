@@ -187,8 +187,10 @@ const vueltaHub = (await folhaVuelta.$eval("#gv-app", (el) => el.innerText)).toL
 exigir(vueltaHub.includes("vermelha"), "Vuelta sem camisa vermelha");
 exigir(vueltaHub.includes("favoritos pré-largada"), "Vuelta sem favoritos");
 exigir(!/vitória|pódio|venceu/.test(vueltaHub), "Vuelta com resultado no hub");
-exigir(vueltaHub.includes("imagem ainda não disponível nesta página"), "Vuelta sem o aviso de imagem");
-exigir(!vueltaHub.includes("foto isolada"), "Vuelta ainda explica o processo da foto");
+exigir(vueltaHub.includes("ilustração inspirada no troféu da vuelta (não é foto oficial)"), "Vuelta sem a legenda da ilustração");
+exigir(!vueltaHub.includes("imagem ainda não disponível"), "Vuelta ainda mostra o aviso de imagem ausente");
+const vueltaHubHtml = await folhaVuelta.$eval("#gv-app", (el) => el.innerHTML);
+exigir(vueltaHubHtml.includes("img/trofeus/vuelta-ilustracao.jpg"), "Vuelta sem o arquivo da ilustração");
 await (await folhaVuelta.$(".gv-trofeu")).screenshot({ path: `${out}/gv-vuelta-trofeu-desktop.png` });
 await folhaVuelta.screenshot({ path: `${out}/gv-vuelta-hub-desktop.png`, fullPage: true });
 const favVuelta = await folhaVuelta.$("#favoritos-prelargada");
@@ -272,6 +274,10 @@ await mobile.screenshot({ path: `${out}/gv-tour-etapa-mobile.png`, fullPage: tru
 
 await mobile.goto(`${base}/grande-volta.html#/vuelta/2026`, { waitUntil: "domcontentloaded" });
 await mobile.waitForSelector("#favoritos-prelargada");
+await mobile.waitForSelector(".gv-trofeu img");
+const vueltaHubMovel = (await mobile.$eval("#gv-app", (el) => el.innerText)).toLowerCase();
+exigir(vueltaHubMovel.includes("ilustração inspirada no troféu da vuelta (não é foto oficial)"), "Vuelta móvel sem a legenda da ilustração");
+await mobile.screenshot({ path: `${out}/gv-vuelta-hub-mobile.png`, fullPage: true });
 await mobile.click('input[name="perfil"]');
 await mobile.waitForSelector(".gv-grade a");
 await mobile.screenshot({ path: `${out}/gv-vuelta-filtro-perfil-mobile.png`, fullPage: true });

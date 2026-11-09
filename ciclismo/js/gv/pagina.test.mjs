@@ -217,8 +217,11 @@ test("favoritos pré-largada ficam no hub do giro e fora da etapa", async () => 
   assert.equal(raizDom.innerHTML.includes("Imagem ainda não disponível"), false);
   location.hash = "#/vuelta/2026";
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
-  assert.match(raizDom.innerHTML, /Imagem ainda não disponível nesta página/);
-  assert.equal(raizDom.innerHTML.includes("img/trofeus/"), false);
+  assert.match(raizDom.innerHTML, /Ilustração inspirada no troféu da Vuelta \(não é foto oficial\)/);
+  assert.match(raizDom.innerHTML, /img\/trofeus\/vuelta-ilustracao.jpg/);
+  assert.equal(raizDom.innerHTML.includes("Imagem ainda não disponível"), false);
+  assert.equal(raizDom.innerHTML.includes("giro-trofeo-senza-fine"), false);
+  assert.equal(raizDom.innerHTML.includes("tour-2026-cristal"), false);
   assert.equal(pedidos.some((url) => /snapshot|firestore|ciclismo_gv_analises/i.test(url)), false);
   assert.notEqual(globalThis.__GV_ANALISE_CARREGADA__, true);
 });

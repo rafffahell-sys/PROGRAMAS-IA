@@ -20,5 +20,9 @@
     "fonteUrl": "https://www.skoda-storyboard.com/en/press-releases/skoda-auto-marks-23-years-as-tour-de-france-main-partner-new-skoda-peaq-to-serve-as-red-car/",
     "ajuste": "Cópia local em JPEG, sem metadados."
   },
-  "vuelta": null
+  "vuelta": {
+    "arquivo": "img/trofeus/vuelta-ilustracao.jpg",
+    "alt": "Ilustração inspirada no troféu da Vuelta (não é foto oficial): peça em V preta com faixas vermelhas e bordas douradas sobre base preta, fundo vermelho e amarelo com oliveiras.",
+    "credito": "Ilustração inspirada no troféu da Vuelta (não é foto oficial)."
+  }
 }
