@@ -44,10 +44,28 @@ function ciprestes() {
   return `<path class="gv-cipreste" d="M46 164 L54 86 L62 164 Z M392 166 L400 98 L408 166 Z"></path>`;
 }
 
+function platanos() {
+  return `<g class="gv-platano">
+    <rect x="54" y="128" width="5" height="40"></rect>
+    <circle cx="56" cy="118" r="16"></circle>
+    <rect x="384" y="132" width="5" height="36"></rect>
+    <circle cx="386" cy="122" r="14"></circle>
+  </g>`;
+}
+
+function oliveiras() {
+  return `<g class="gv-oliveira">
+    <rect x="48" y="150" width="4" height="18"></rect>
+    <ellipse cx="50" cy="148" rx="18" ry="8"></ellipse>
+    <rect x="390" y="152" width="4" height="16"></rect>
+    <ellipse cx="392" cy="150" rx="16" ry="7"></ellipse>
+  </g>`;
+}
+
 export function htmlCena(slug) {
   const faixa = FAIXAS[slug] || FAIXAS.giro;
   const quadro = QUADROS[slug] || QUADROS.giro;
-  const extra = slug === "giro" ? ciprestes() : "";
+  const extra = slug === "giro" ? ciprestes() : slug === "tour" ? platanos() : slug === "vuelta" ? oliveiras() : "";
   const barras = faixa.map((cor, i) => (
     `<rect x="${i * 146.7}" y="206" width="146.7" height="8" fill="${cor}"></rect>`
   )).join("");

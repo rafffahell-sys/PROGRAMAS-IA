@@ -70,6 +70,8 @@ body[data-prova="giro"] .gv-serra { color: #f4a4c4; }
 body[data-prova="tour"] .gv-serra { color: #ffe14a; }
 body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
 .gv-cipreste { fill: #1f6b3a; }
+.gv-platano { fill: #1d4e89; }
+.gv-oliveira { fill: #8a6232; }
 .gv-asfalto { stroke: currentColor; stroke-width: 2; opacity: 0.4; }
 .gv-num { color: var(--gv-num, inherit); }
 .gv-progresso {

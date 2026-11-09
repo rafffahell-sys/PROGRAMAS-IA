@@ -17,6 +17,18 @@
       "url": "https://www.lavuelta.es/en/overall-route",
       "consultadoEm": "2026-11-09",
       "observacao": "Tabela de etapas, tipo, data, origem, destino e distância. Sem perfil numérico nessa página."
+    },
+    {
+      "nome": "Regulamento particular da 81.ª Vuelta a España",
+      "url": "https://storage-aso.lequipe.fr/ASO/cycling_vue/reglamento-espanol.pdf",
+      "consultadoEm": "2026-11-09",
+      "observacao": "Camisas, pontos, jovem e equipes da edição de 22 de agosto a 13 de setembro de 2026. O total de quilómetros vem marcado como aproximado."
+    },
+    {
+      "nome": "Roadbook interativo da Vuelta 2026",
+      "url": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+      "consultadoEm": "2026-11-09",
+      "observacao": "Documento de 16 de dezembro de 2025. Perfis de altimetria por etapa e distâncias arredondadas, antes da homologação."
     }
   ],
   "camisas": [
@@ -26,9 +38,9 @@
       "unidade": "tempo",
       "cor": "#e10600",
       "rotulo": "Vermelha",
-      "oficialConfirmado": false,
-      "prioridade": null,
-      "nota": "Rótulo clássico, a confirmar no regulamento. A página de regras em inglês não nomeia a cor."
+      "oficialConfirmado": true,
+      "prioridade": 1,
+      "nota": "Líder da geral por tempos. Regulamento particular da 81.ª edição."
     },
     {
       "id": "pontos",
@@ -36,9 +48,9 @@
       "unidade": "pontos",
       "cor": "#1f8f4e",
       "rotulo": "Verde",
-      "oficialConfirmado": false,
-      "prioridade": null,
-      "nota": "Rótulo clássico, a confirmar. Tabela de pontos não copiada."
+      "oficialConfirmado": true,
+      "prioridade": 2,
+      "nota": "Líder da classificação por pontos. Regulamento particular da 81.ª edição."
     },
     {
       "id": "montanha",
@@ -46,9 +58,9 @@
       "unidade": "pontos",
       "cor": "#1e4fbf",
       "rotulo": "Bolinhas azuis",
-      "oficialConfirmado": false,
-      "prioridade": null,
-      "nota": "Rótulo a confirmar. A página de regras não nomeia a cor das bolinhas desta edição."
+      "oficialConfirmado": true,
+      "prioridade": 3,
+      "nota": "Camisola branca com bolinhas azuis, prémio da montanha. Regulamento particular da 81.ª edição."
     },
     {
       "id": "jovem",
@@ -56,33 +68,133 @@
       "unidade": "tempo",
       "cor": "#f4f1e6",
       "rotulo": "Branca",
-      "oficialConfirmado": false,
-      "prioridade": null,
-      "nota": "Rótulo clássico, a confirmar. A página de regras consultada não declara o ano da edição na idade-limite."
+      "oficialConfirmado": true,
+      "prioridade": 4,
+      "nota": "Melhor jovem na geral. Nascidos a partir de 1º de janeiro de 2001."
     }
   ],
   "regulamento": {
-    "oficialConfirmado": false,
-    "fonte": "https://www.lavuelta.es/en/the-race/sporting-stakes",
-    "prioridadeVestimenta": null,
-    "prioridadeConfirmada": false,
-    "notaPrioridade": "A página de regras descreve geral, pontos, montanha, jovem e equipes, mas o texto extraído não fixa o ano 2026 nem a prioridade de quem veste duas camisas. Pontuação não foi inventada.",
+    "oficialConfirmado": true,
+    "fonte": "https://storage-aso.lequipe.fr/ASO/cycling_vue/reglamento-espanol.pdf",
+    "prioridadeVestimenta": [
+      "gc",
+      "pontos",
+      "montanha",
+      "jovem"
+    ],
+    "prioridadeConfirmada": true,
+    "notaPrioridade": "O regulamento numera as camisolas nessa ordem. Quem lidera duas usa a de maior prioridade e a outra passa ao seguinte dessa classificação que não lidere outra. O mesmo artigo remete também aos artigos 1.3.071 e 2.6.018 da UCI.",
     "jovem": {
-      "nascidoAPartirDe": null,
-      "confirmado": false
+      "nascidoAPartirDe": "2001-01-01",
+      "confirmado": true
     },
-    "tabelaPontosChegada": null
+    "tabelaPontosChegada": {
+      "grupo1_etapas_11_17": [
+        50,
+        30,
+        20,
+        18,
+        16,
+        14,
+        12,
+        10,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "grupo2_3_etapas_2_3_5_8_10_13_15_16_21": [
+        30,
+        25,
+        22,
+        19,
+        17,
+        15,
+        13,
+        11,
+        9,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "grupo4_5_e_cronos": [
+        20,
+        17,
+        15,
+        13,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    "sprintIntermediarioPontos": [
+      20,
+      17,
+      15,
+      13,
+      10
+    ],
+    "montanhaPontos": {
+      "cima_alberto_fernandez": [
+        20,
+        15,
+        10,
+        6,
+        4,
+        2
+      ],
+      "especial": [
+        15,
+        10,
+        6,
+        4,
+        2,
+        1
+      ],
+      "1": [
+        10,
+        6,
+        4,
+        2,
+        1
+      ],
+      "2": [
+        5,
+        3,
+        1
+      ],
+      "3": [
+        3,
+        2,
+        1
+      ]
+    }
   },
   "classificacaoEquipes": {
     "habilitada": false,
-    "previstaNoRegulamento": false,
-    "oficialConfirmado": false,
-    "nota": "A página de regras fala em soma dos três melhores tempos, sem cravar a edição 2026 no trecho lido. O painel fica desligado até um snapshot autorizado."
+    "previstaNoRegulamento": true,
+    "oficialConfirmado": true,
+    "nota": "O regulamento soma os três melhores tempos de cada equipe na etapa e na geral. O painel fica desligado até um snapshot autorizado."
   },
   "observacoes": [
     "Nenhuma etapa está liberada.",
-    "Perfis altimétricos: 0 de 21. A tabela oficial de percurso não traz série nem imagem de perfil por etapa.",
-    "A página de percurso anuncia 3.275 km no total. A soma da coluna de distância das 21 etapas, com os números publicados na mesma tabela, dá 3.231,9 km. A diferença não foi ajustada.",
+    "Perfis altimétricos: 21 de 21, recortados do roadbook interativo oficial de 16 de dezembro de 2025. Não há série numérica e o desenho não foi convertido em pontos. O eixo do desenho usa a distância arredondada desse roadbook, anterior à homologação. A distância do card continua a da tabela do site consultada em 9 de novembro de 2026. O regulamento particular traz um terceiro conjunto, marcado como aproximado. As maiores divergências ficam no aviso das etapas 3, 15 e 21.",
+    "A página de percurso anuncia 3.275 km no total. A soma da coluna de distância das 21 etapas, com os números publicados na mesma tabela em 9 de novembro de 2026, dá 3.231,9 km. A diferença não foi ajustada.",
+    "O regulamento particular marca o total como aproximado, cerca de 3.308 km, e diverge da tabela do site em várias etapas. O roadbook de dezembro de 2025 usa distâncias arredondadas e soma 3.275 km antes da homologação. O card mantém a tabela do site.",
     "A mesma página conta 4 onduladas, 1 ondulada com chegada em subida, 4 planas, 4 de média montanha, 6 de montanha, 2 contra-relógios e 2 dias de descanso."
   ],
   "etapas": [
@@ -99,11 +211,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-01.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 1 da Vuelta a España 2026, Monaco–Monaco.",
+          "kmNaFicha": 9,
+          "kmNoEixo": 9
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -119,11 +239,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-02.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 2 da Vuelta a España 2026, Monaco–Manosque.",
+          "kmNaFicha": 215,
+          "kmNoEixo": 215
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -139,11 +267,20 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-03.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 3 da Vuelta a España 2026, Gruissan - Aude–Font Romeu.",
+          "kmNaFicha": 166,
+          "kmNoEixo": 166
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos.",
+        "O desenho do roadbook de 16 de dezembro de 2025 marca 166 km. A tabela do site, em 9 de novembro de 2026, lista 174 km, e o regulamento particular também lista 174 km. A distância do card permanece 174 km."
       ]
     },
     {
@@ -159,11 +296,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-04.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 4 da Vuelta a España 2026, Andorra la Vella–Andorra la Vella.",
+          "kmNaFicha": 104,
+          "kmNoEixo": 104
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -179,11 +324,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-05.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 5 da Vuelta a España 2026, Falset . Costa Daurada–Roquetes. Terres de l'Ebre.",
+          "kmNaFicha": 171,
+          "kmNoEixo": 171
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -199,11 +352,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-06.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 6 da Vuelta a España 2026, Alcossebre–Castelló.",
+          "kmNaFicha": 176,
+          "kmNoEixo": 176
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -219,11 +380,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-07.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 7 da Vuelta a España 2026, vall d'Alba–Aramón Valdelinares.",
+          "kmNaFicha": 149,
+          "kmNoEixo": 149
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -239,11 +408,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-08.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 8 da Vuelta a España 2026, Puçol–Xeraco.",
+          "kmNaFicha": 168,
+          "kmNoEixo": 168
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -259,11 +436,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-09.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 9 da Vuelta a España 2026, La Vila Joiosa/ Villajoyosa–Alto de Aitana.Costa Blanca.",
+          "kmNaFicha": 187,
+          "kmNoEixo": 187
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -279,11 +464,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-10.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 10 da Vuelta a España 2026, Alcaraz–Elche de la Sierra.",
+          "kmNaFicha": 184,
+          "kmNoEixo": 184
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -299,11 +492,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-11.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 11 da Vuelta a España 2026, Cartagena–Lorca.",
+          "kmNaFicha": 156,
+          "kmNoEixo": 156
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -319,11 +520,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-12.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 12 da Vuelta a España 2026, Vera–Calar Alto.",
+          "kmNaFicha": 166,
+          "kmNoEixo": 166
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -339,11 +548,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-13.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 13 da Vuelta a España 2026, Almuñécar–Loja.",
+          "kmNaFicha": 193,
+          "kmNoEixo": 193
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -359,11 +576,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-14.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 14 da Vuelta a España 2026, Jaén–Sierra de La Pandera.",
+          "kmNaFicha": 152,
+          "kmNoEixo": 152
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -379,11 +604,20 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-15.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 15 da Vuelta a España 2026, Palma del Río–Córdoba.",
+          "kmNaFicha": 181,
+          "kmNoEixo": 181
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos.",
+        "A tabela do site, em 9 de novembro de 2026, lista 110,2 km. O desenho do roadbook marca 181 km. O regulamento particular lista 189,7 km e marca o total como aproximado. A distância do card permanece 110,2 km, a da tabela viva; as outras duas fontes ficam neste aviso."
       ]
     },
     {
@@ -399,11 +633,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-16.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 16 da Vuelta a España 2026, Cortegana–La Rábida. Palos de la Frontera.",
+          "kmNaFicha": 186,
+          "kmNoEixo": 186
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -419,11 +661,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-17.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 17 da Vuelta a España 2026, Dos Hermanas–Sevilla.",
+          "kmNaFicha": 189,
+          "kmNoEixo": 189
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -439,11 +689,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-18.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 18 da Vuelta a España 2026, El Puerto de Santa María–Jerez de la Frontera.",
+          "kmNaFicha": 32,
+          "kmNoEixo": 32
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -459,11 +717,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-19.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 19 da Vuelta a España 2026, Vélez-Málaga–Peñas Blancas. Estepona.",
+          "kmNaFicha": 205,
+          "kmNoEixo": 205
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -479,11 +745,19 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-20.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 20 da Vuelta a España 2026, La Calahorra–Collado del Alguacil.",
+          "kmNaFicha": 187,
+          "kmNoEixo": 187
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos."
       ]
     },
     {
@@ -499,11 +773,20 @@
       "perfil": {
         "pontos": [],
         "sprints": [],
-        "montanhas": []
+        "montanhas": [],
+        "imagem": {
+          "arquivo": "img/perfis/vuelta-2026/etapa-21.jpg",
+          "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
+          "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+          "alt": "Perfil altimétrico da etapa 21 da Vuelta a España 2026, Carrefour Granada–Granada.",
+          "kmNaFicha": 99,
+          "kmNoEixo": 99
+        }
       },
-      "perfilPublicado": false,
+      "perfilPublicado": true,
       "avisos": [
-        "Série altimétrica numérica não publicada na fonte de percurso consultada."
+        "O perfil publicado é a imagem oficial de altimetria. Não há série numérica; o desenho não foi convertido em pontos.",
+        "O desenho do roadbook marca 99 km. A tabela do site e o regulamento particular listam 112 km. A distância do card permanece 112 km."
       ]
     }
   ]

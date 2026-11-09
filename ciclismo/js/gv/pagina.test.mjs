@@ -99,14 +99,17 @@ test("acesso falso e liberação malformada não pedem snapshot", async () => {
   assert.match(raizDom.textContent, /0/);
 });
 
-test("tour sem distância não inventa perfil", async () => {
+test("tour com percurso não inventa perfil e não pede snapshot", async () => {
   const pedidos = [];
   location.hash = "#/tour/2026/etapa/4";
   const raizDom = document.getElementById("gv-app");
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
-  assert.match(raizDom.innerHTML, /distância a publicar/);
+  assert.match(raizDom.innerHTML, /182 km/);
+  assert.match(raizDom.innerHTML, /Carcassonne/);
   assert.match(raizDom.innerHTML, /Perfil altimétrico a publicar/);
+  assert.equal(raizDom.innerHTML.includes("<polyline"), false);
   assert.match(raizDom.innerHTML, /data-resultados="ocultos"/);
+  assert.equal(pedidos.some((url) => /snapshot|firestore|analise/i.test(url)), false);
 });
 
 test("cena do giro é italiana e a do tour não", () => {
@@ -118,7 +121,11 @@ test("cena do giro é italiana e a do tour não", () => {
   assert.match(giro, /#f4a4c4/);
   assert.equal(tour.includes("#008C45"), false);
   assert.match(tour, /#0055A4/);
+  assert.match(tour, /gv-platano/);
+  assert.equal(tour.includes("gv-cipreste"), false);
   assert.match(vuelta, /#C60B1E/);
+  assert.match(vuelta, /gv-oliveira/);
+  assert.equal(vuelta.includes("gv-cipreste"), false);
   assert.equal(giro.includes("Atleta"), false);
   assert.equal(giro.includes("ciclista"), false);
   const css = fs.readFileSync(path.join(raiz, "css/grande-volta.css"), "utf8");

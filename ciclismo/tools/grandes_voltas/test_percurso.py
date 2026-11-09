@@ -64,9 +64,12 @@ class Percurso(unittest.TestCase):
                 if slug == "giro":
                     self.assertTrue(etapa["perfilPublicado"])
                     self.assertIsInstance(etapa["desnivelM"], int)
+                elif slug == "vuelta":
+                    self.assertTrue(etapa["perfilPublicado"])
+                    self.assertIsNone(etapa["desnivelM"])
+                    self.assertIn("imagem", etapa["perfil"])
                 else:
                     self.assertFalse(etapa["perfilPublicado"])
-                    self.assertIsNone(etapa["desnivelM"])
                     self.assertNotIn("imagem", etapa["perfil"])
 
     def test_giro_tem_imagem_de_perfil_e_as_outras_nao(self):
@@ -100,11 +103,9 @@ class Percurso(unittest.TestCase):
         self.assertEqual(etapa8["km"], 156)
         self.assertEqual(etapa8["perfil"]["imagem"]["kmNaFicha"], 156)
         self.assertEqual(etapa8["perfil"]["imagem"]["kmNoEixo"], 157)
-        for slug in ("tour", "vuelta"):
-            prova = self.provas[slug]
-            publicados = [e for e in prova["etapas"] if e["perfilPublicado"] or e["perfil"]["pontos"]]
-            self.assertEqual(publicados, [])
-            self.assertTrue(any(obs.startswith("Perfis altimétricos: 0 de 21") for obs in prova["observacoes"]))
+        tour = self.provas["tour"]
+        self.assertEqual([e for e in tour["etapas"] if e["perfilPublicado"] or e["perfil"]["pontos"]], [])
+        self.assertTrue(any(obs.startswith("Perfis altimétricos: 0 de 21") for obs in tour["observacoes"]))
 
     def test_giro_fecha_3468(self):
         giro = self.provas["giro"]
@@ -116,12 +117,28 @@ class Percurso(unittest.TestCase):
         )
         self.assertFalse(giro["classificacaoEquipes"]["habilitada"])
 
-    def test_tour_e_vuelta_nao_confirmam_camisa(self):
-        for slug in ("tour", "vuelta"):
-            for camisa in self.provas[slug]["camisas"]:
-                self.assertFalse(camisa["oficialConfirmado"], f"{slug}:{camisa['id']}")
-            self.assertFalse(self.provas[slug]["regulamento"]["oficialConfirmado"])
-            self.assertIsNone(self.provas[slug]["regulamento"]["tabelaPontosChegada"])
+    def test_tour_confirma_camisa_sem_barema(self):
+        tour = self.provas["tour"]
+        self.assertTrue(all(c["oficialConfirmado"] for c in tour["camisas"]))
+        self.assertEqual(tour["camisas"][2]["rotulo"], "Bolinhas vermelhas")
+        self.assertFalse(tour["regulamento"]["oficialConfirmado"])
+        self.assertFalse(tour["regulamento"]["prioridadeConfirmada"])
+        self.assertIsNone(tour["regulamento"]["tabelaPontosChegada"])
+        self.assertEqual(tour["regulamento"]["jovem"]["nascidoAPartirDe"], "2001-01-01")
+        self.assertTrue(tour["regulamento"]["jovem"]["confirmado"])
+
+    def test_vuelta_confirma_regulamento(self):
+        vuelta = self.provas["vuelta"]
+        self.assertTrue(vuelta["regulamento"]["oficialConfirmado"])
+        self.assertEqual(
+            vuelta["regulamento"]["prioridadeVestimenta"],
+            ["gc", "pontos", "montanha", "jovem"],
+        )
+        self.assertEqual(vuelta["regulamento"]["jovem"]["nascidoAPartirDe"], "2001-01-01")
+        self.assertEqual(vuelta["regulamento"]["tabelaPontosChegada"]["grupo1_etapas_11_17"][0], 50)
+        self.assertEqual(vuelta["regulamento"]["montanhaPontos"]["cima_alberto_fernandez"][0], 20)
+        self.assertTrue(vuelta["classificacaoEquipes"]["oficialConfirmado"])
+        self.assertFalse(vuelta["classificacaoEquipes"]["habilitada"])
 
     def test_vuelta_soma_oficial(self):
         vuelta = self.provas["vuelta"]
@@ -130,14 +147,28 @@ class Percurso(unittest.TestCase):
         self.assertTrue(any("3.275" in texto and "3.231,9" in texto for texto in vuelta["observacoes"]))
         self.assertEqual(vuelta["etapas"][0]["origem"], "Monaco")
         self.assertEqual(vuelta["etapas"][-1]["destino"], "Granada")
+        self.assertEqual(vuelta["etapas"][14]["km"], 110.2)
+        self.assertEqual(vuelta["etapas"][14]["perfil"]["imagem"]["kmNoEixo"], 181)
+        imagens = [e for e in vuelta["etapas"] if e["perfil"].get("imagem")]
+        self.assertEqual(len(imagens), 21)
+        for etapa in vuelta["etapas"]:
+            arquivo = RAIZ / etapa["perfil"]["imagem"]["arquivo"]
+            self.assertTrue(arquivo.is_file(), etapa["n"])
+            self.assertEqual(etapa["perfil"]["pontos"], [])
 
-    def test_tour_nao_completa_lacunas(self):
+    def test_tour_fecha_o_percurso_sem_perfil_inventado(self):
         tour = self.provas["tour"]
         self.assertEqual(tour["etapas"][0]["km"], 19.6)
-        self.assertEqual(tour["etapas"][15]["km"], 26)
-        self.assertIsNone(tour["etapas"][3]["km"])
+        self.assertEqual(tour["etapas"][3]["origem"], "Carcassonne")
+        self.assertEqual(tour["etapas"][3]["destino"], "Foix")
+        self.assertEqual(tour["etapas"][3]["km"], 182)
         self.assertEqual(tour["etapas"][3]["tipo"], "desconhecido")
-        self.assertIn("2025", " ".join(tour["observacoes"]))
+        self.assertEqual(tour["etapas"][15]["km"], 26)
+        self.assertEqual(tour["etapas"][19]["desnivelM"], 5600)
+        self.assertEqual(sum(e["km"] for e in tour["etapas"]), 3320)
+        self.assertFalse(any(e["perfilPublicado"] for e in tour["etapas"]))
+        self.assertIn("0 de 21", " ".join(tour["observacoes"]))
+        self.assertIn("53.950", " ".join(tour["observacoes"]))
 
     def test_sem_chaves_de_resultado(self):
         achados = []
@@ -167,6 +198,26 @@ class Percurso(unittest.TestCase):
         self.assertNotIn("odds", bruto.lower())
         for item in dados["itens"]:
             self.assertNotIn("ordem", item)
+
+    def test_favoritos_tour_e_vuelta_sem_resultado(self):
+        for nome in ("tour-favoritos-prelargada.json", "vuelta-favoritos-prelargada.json"):
+            bruto = (DADOS / "2026" / nome).read_text(encoding="utf-8")
+            dados = json.loads(bruto)
+            self.assertEqual(len(dados["itens"]), 10)
+            def chave(nome):
+                partes = nome.split()
+                if len(partes) >= 2 and partes[-2].lower() == "van":
+                    return " ".join(partes[-2:]).lower()
+                return partes[-1].lower()
+
+            nomes = [item["nome"] for item in dados["itens"]]
+            self.assertEqual(nomes, sorted(nomes, key=chave))
+            baixo = bruto.lower()
+            for termo in ("vitória", "pódio", "odds", "venceu", "abandon"):
+                self.assertNotIn(termo, baixo, nome)
+            for item in dados["itens"]:
+                self.assertIsInstance(item["dorsal"], int)
+                self.assertTrue(item["equipe"])
 
     def test_fontes_do_script_batem_com_o_json(self):
         gerado = fontes._giro()

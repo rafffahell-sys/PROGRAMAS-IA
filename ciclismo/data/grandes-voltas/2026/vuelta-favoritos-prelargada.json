@@ -1,0 +1,100 @@
+{
+  "provaId": "b12",
+  "slug": "vuelta",
+  "ano": 2026,
+  "tipo": "favoritos_prelargada",
+  "ordem": "alfabetica",
+  "aviso": "Seleção editorial baseada em análises anteriores à largada. Não é a lista completa de inscritos nem uma classificação oficial.",
+  "atualizadoEm": "2026-11-09",
+  "fontes": [
+    {
+      "id": "lista-inscritos",
+      "nome": "Lista de corredores de La Vuelta 2026",
+      "data": "2026-08",
+      "url": "https://www.lavuelta.es/es/corredores",
+      "nota": "Nomes, dorsais e equipes no site do organizador. Consultada em 9 de novembro de 2026. A página identifica a edição 2026."
+    }
+  ],
+  "itens": [
+    {
+      "nome": "João Almeida",
+      "inscricao": "ALMEIDA João",
+      "pais": "Portugal",
+      "equipe": "UAE Team Emirates XRG",
+      "dorsal": 12,
+      "caracteristicas": "Escalador. Também anda bem no contrarrelógio."
+    },
+    {
+      "nome": "Felix Gall",
+      "inscricao": "GALL Felix",
+      "pais": "Áustria",
+      "equipe": "Decathlon CMA CGM Team",
+      "dorsal": 41,
+      "caracteristicas": "Escalador. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Enric Mas",
+      "inscricao": "MAS Enric",
+      "pais": "Espanha",
+      "equipe": "Movistar Team",
+      "dorsal": 21,
+      "caracteristicas": "Escalador. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Oscar Onley",
+      "inscricao": "ONLEY Oscar",
+      "pais": "Reino Unido",
+      "equipe": "Netcompany Ineos",
+      "dorsal": 61,
+      "caracteristicas": "Escalador. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Tadej Pogacar",
+      "inscricao": "POGACAR Tadej",
+      "pais": "Eslovênia",
+      "equipe": "UAE Team Emirates XRG",
+      "dorsal": 11,
+      "caracteristicas": "Escalador e corredor completo."
+    },
+    {
+      "nome": "Carlos Rodríguez",
+      "inscricao": "RODRIGUEZ Carlos",
+      "pais": "Espanha",
+      "equipe": "Netcompany Ineos",
+      "dorsal": 65,
+      "caracteristicas": "Escalador."
+    },
+    {
+      "nome": "Primož Roglič",
+      "inscricao": "ROGLIC Primoz",
+      "pais": "Eslovênia",
+      "equipe": "Red Bull-BORA-hansgrohe",
+      "dorsal": 1,
+      "caracteristicas": "Escalador e contrarrelojista. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Mattias Skjelmose",
+      "inscricao": "SKJELMOSE Mattias",
+      "pais": "Dinamarca",
+      "equipe": "Lidl-Trek",
+      "dorsal": 81,
+      "caracteristicas": "Escalador. Também anda bem no contrarrelógio. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Wout van Aert",
+      "inscricao": "VAN AERT Wout",
+      "pais": "Bélgica",
+      "equipe": "Team Visma | Lease a Bike",
+      "dorsal": 31,
+      "caracteristicas": "Corredor completo. Líder da equipe na lista de inscritos."
+    },
+    {
+      "nome": "Jay Vine",
+      "inscricao": "VINE Jay",
+      "pais": "Austrália",
+      "equipe": "UAE Team Emirates XRG",
+      "dorsal": 18,
+      "caracteristicas": "Escalador."
+    }
+  ]
+}

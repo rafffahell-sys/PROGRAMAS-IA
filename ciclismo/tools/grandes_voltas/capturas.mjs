@@ -28,6 +28,15 @@ function exigir(condicao, mensagem) {
   if (!condicao) throw new Error(mensagem);
 }
 
+async function ir(page, hash, texto) {
+  await page.evaluate(async (alvo) => {
+    location.hash = "#/reload";
+    await new Promise((resolver) => setTimeout(resolver, 30));
+    location.hash = alvo;
+  }, hash);
+  await page.waitForFunction((esperado) => document.body.innerText.toLowerCase().includes(esperado), {}, texto);
+}
+
 const desktop = await browser.newPage();
 await desktop.setViewport({ width: 1280, height: 900 });
 const pedidosDesktop = await preparar(desktop);
@@ -104,19 +113,67 @@ exigir(!etapa.includes("Relato sintético"), "etapa bloqueada mostrou relato");
 exigir(!etapa.includes("Atleta"), "etapa mostrou nome de teste");
 await desktop.screenshot({ path: `${out}/gv-giro-etapa-desktop.png`, fullPage: true });
 
-await desktop.goto(`${base}/grande-volta.html#/tour/2026`, { waitUntil: "domcontentloaded" });
-await desktop.waitForSelector(".gv-grade");
-const tour = (await desktop.$eval("#gv-app", (el) => el.innerText)).toLowerCase();
-exigir(tour.includes("a confirmar"), "Tour deveria marcar camisa a confirmar");
-exigir(tour.includes("distância a publicar") || tour.includes("sem distância"), "Tour preencheu lacuna");
-await desktop.screenshot({ path: `${out}/gv-tour-hub-desktop.png`, fullPage: true });
+const folha = await browser.newPage();
+await folha.setViewport({ width: 1280, height: 900 });
+const pedidosFolha = await preparar(folha);
+await folha.goto(`${base}/grande-volta.html#/tour/2026`, { waitUntil: "domcontentloaded" });
+await folha.waitForFunction(() => document.body.innerText.toLowerCase().includes("carcassonne"));
+await folha.waitForSelector("#favoritos-prelargada");
+const tour = (await folha.$eval("#gv-app", (el) => el.innerText)).toLowerCase();
+exigir(tour.includes("amarela"), "Tour sem camisa amarela");
+exigir(tour.includes("carcassonne"), "Tour sem a etapa 4");
+exigir(tour.includes("favoritos pré-largada"), "Tour sem favoritos pré-largada");
+exigir(!/vitória|pódio|venceu/.test(tour), "Tour com resultado no hub");
+await folha.screenshot({ path: `${out}/gv-tour-hub-desktop.png`, fullPage: true });
+const favTour = await folha.$("#favoritos-prelargada");
+await favTour.evaluate((el) => el.scrollIntoView({ block: "start" }));
+await favTour.screenshot({ path: `${out}/gv-tour-favoritos-desktop.png` });
+await folha.click('input[name="perfil"]');
+await folha.waitForSelector(".gv-vazio");
+await folha.screenshot({ path: `${out}/gv-tour-filtro-perfil-desktop.png` });
+await folha.goto(`${base}/grande-volta.html#/tour/2026/etapa/6`, { waitUntil: "domcontentloaded" });
+await folha.waitForFunction(() => document.body.innerText.includes("Gavarnie"));
+const tourEtapa = await folha.$eval("#gv-app", (el) => el.innerText);
+const tourEtapaHtml = await folha.$eval("#gv-app", (el) => el.innerHTML);
+exigir(tourEtapa.includes("Gavarnie"), "etapa 6 do Tour sem destino");
+exigir(tourEtapa.includes("186 km"), "etapa 6 do Tour sem distância");
+exigir(tourEtapa.includes("Perfil altimétrico a publicar"), "Tour ganhou perfil que não foi verificado");
+exigir(!tourEtapaHtml.includes("<polyline"), "Tour desenhou perfil");
+exigir(tourEtapa.includes("Bloqueados"), "etapa do Tour mostrou resultado");
+await folha.screenshot({ path: `${out}/gv-tour-etapa-desktop.png`, fullPage: true });
 
-await desktop.goto(`${base}/grande-volta.html#/vuelta/2026/etapa/1`, { waitUntil: "domcontentloaded" });
-await desktop.waitForSelector("[data-resultados=\"ocultos\"]");
-const vuelta = await desktop.$eval("#gv-app", (el) => el.innerText);
+const folhaVuelta = await browser.newPage();
+await folhaVuelta.setViewport({ width: 1280, height: 900 });
+const pedidosVuelta = await preparar(folhaVuelta);
+await folhaVuelta.goto(`${base}/grande-volta.html#/vuelta/2026`, { waitUntil: "domcontentloaded" });
+await folhaVuelta.waitForFunction(() => document.body.innerText.toLowerCase().includes("monaco"));
+await folhaVuelta.waitForSelector("#favoritos-prelargada");
+const vueltaHub = (await folhaVuelta.$eval("#gv-app", (el) => el.innerText)).toLowerCase();
+exigir(vueltaHub.includes("vermelha"), "Vuelta sem camisa vermelha");
+exigir(vueltaHub.includes("favoritos pré-largada"), "Vuelta sem favoritos");
+exigir(!/vitória|pódio|venceu/.test(vueltaHub), "Vuelta com resultado no hub");
+await folhaVuelta.screenshot({ path: `${out}/gv-vuelta-hub-desktop.png`, fullPage: true });
+const favVuelta = await folhaVuelta.$("#favoritos-prelargada");
+await favVuelta.evaluate((el) => el.scrollIntoView({ block: "start" }));
+await favVuelta.screenshot({ path: `${out}/gv-vuelta-favoritos-desktop.png` });
+await folhaVuelta.click('input[name="perfil"]');
+await folhaVuelta.waitForSelector(".gv-grade a");
+const filtroVuelta = await folhaVuelta.$$eval(".gv-grade a", (cards) => cards.length);
+exigir(filtroVuelta === 21, `filtro da Vuelta mostrou ${filtroVuelta}`);
+await folhaVuelta.screenshot({ path: `${out}/gv-vuelta-filtro-perfil-desktop.png`, fullPage: true });
+
+await folhaVuelta.goto(`${base}/grande-volta.html#/vuelta/2026/etapa/1`, { waitUntil: "domcontentloaded" });
+await folhaVuelta.waitForFunction(() => document.body.innerText.includes("9,4 km"));
+await folhaVuelta.waitForSelector(".gv-perfil-imagem img");
+const vuelta = await folhaVuelta.$eval("#gv-app", (el) => el.innerText);
+const vueltaHtml = await folhaVuelta.$eval("#gv-app", (el) => el.innerHTML);
 exigir(vuelta.includes("9,4 km"), "Vuelta etapa 1 sem 9,4 km");
 exigir(vuelta.includes("Monaco"), "Vuelta etapa 1 sem origem");
-await desktop.screenshot({ path: `${out}/gv-vuelta-etapa-desktop.png`, fullPage: true });
+exigir(vuelta.includes("Ampliar"), "Vuelta etapa 1 sem ampliar");
+exigir(vueltaHtml.includes("img/perfis/vuelta-2026/etapa-01.jpg"), "Vuelta etapa 1 sem arquivo");
+exigir(!vueltaHtml.includes("<polyline"), "Vuelta converteu o perfil em pontos");
+exigir(vuelta.includes("Bloqueados"), "Vuelta etapa 1 mostrou resultado");
+await folhaVuelta.screenshot({ path: `${out}/gv-vuelta-etapa-desktop.png`, fullPage: true });
 
 const mobile = await browser.newPage();
 await mobile.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
@@ -152,7 +209,33 @@ exigir(montanhaHtml.includes("etapa-07.jpg"), "etapa 7 sem a imagem do perfil");
 exigir(!montanhaHtml.includes("<polyline"), "etapa 7 converteu o perfil em pontos");
 await mobile.screenshot({ path: `${out}/gv-giro-etapa-mobile.png`, fullPage: true });
 
-const todos = [...pedidosDesktop, ...pedidosMobile];
+await mobile.goto(`${base}/grande-volta.html#/tour/2026`, { waitUntil: "domcontentloaded" });
+await mobile.waitForSelector("#favoritos-prelargada");
+await mobile.screenshot({ path: `${out}/gv-tour-hub-mobile.png`, fullPage: true });
+const favTourMovel = await mobile.$("#favoritos-prelargada");
+await favTourMovel.evaluate((el) => el.scrollIntoView({ block: "start" }));
+await favTourMovel.screenshot({ path: `${out}/gv-tour-favoritos-mobile.png` });
+await mobile.goto(`${base}/grande-volta.html#/tour/2026/etapa/1`, { waitUntil: "domcontentloaded" });
+await mobile.waitForSelector("[data-resultados=\"ocultos\"]");
+await mobile.screenshot({ path: `${out}/gv-tour-etapa-mobile.png`, fullPage: true });
+
+await mobile.goto(`${base}/grande-volta.html#/vuelta/2026`, { waitUntil: "domcontentloaded" });
+await mobile.waitForSelector("#favoritos-prelargada");
+await mobile.click('input[name="perfil"]');
+await mobile.waitForSelector(".gv-grade a");
+await mobile.screenshot({ path: `${out}/gv-vuelta-filtro-perfil-mobile.png`, fullPage: true });
+const favVueltaMovel = await mobile.$("#favoritos-prelargada");
+await favVueltaMovel.evaluate((el) => el.scrollIntoView({ block: "start" }));
+await favVueltaMovel.screenshot({ path: `${out}/gv-vuelta-favoritos-mobile.png` });
+await mobile.goto(`${base}/grande-volta.html#/vuelta/2026/etapa/1`, { waitUntil: "domcontentloaded" });
+await mobile.waitForSelector(".gv-perfil-imagem img");
+const vueltaMovel = await mobile.$eval("#gv-app", (el) => el.innerText);
+exigir(vueltaMovel.includes("9,4 km"), "Vuelta móvel sem distância");
+exigir(vueltaMovel.includes("Ampliar"), "Vuelta móvel sem ampliar");
+exigir(vueltaMovel.includes("Bloqueados"), "Vuelta móvel mostrou resultado");
+await mobile.screenshot({ path: `${out}/gv-vuelta-etapa-mobile.png`, fullPage: true });
+
+const todos = [...pedidosDesktop, ...pedidosFolha, ...pedidosVuelta, ...pedidosMobile];
 const vazou = todos.filter((url) => /firestore\.googleapis|ciclismo_gv_snapshots|ciclismo_gv_analises|firebaseio/.test(url));
 exigir(vazou.length === 0, `pedido de snapshot: ${vazou.join(" ")}`);
 

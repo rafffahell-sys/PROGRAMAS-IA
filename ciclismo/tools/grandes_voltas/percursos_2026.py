@@ -43,6 +43,30 @@ FONTE_TOUR_RESUMO = {
         "Essas fichas não foram usadas. Onde o resumo de 2026 não traz cidade, km ou tipo, o campo fica vazio."
     ),
 }
+FONTE_TOUR_DOSSIER = {
+    "nome": "Dossiê de imprensa do percurso do Tour de France 2026",
+    "url": "https://storage-aso.lequipe.fr/ASO/cycling_tdf/tdf2026-dossier-de-presse.pdf",
+    "consultadoEm": CONSULTADO,
+    "observacao": "Quadro de etapas de 22 de outubro de 2025, marcado como total antes da homologação, e descrição das camisas.",
+}
+FONTE_TOUR_CHIFFRES = {
+    "nome": "Cifras-chave do Tour de France 2026",
+    "url": "https://storage-aso.lequipe.fr/ASO/cycling_tdf/tdf26-chiffres-cles-fr.pdf",
+    "consultadoEm": CONSULTADO,
+    "observacao": "Folheto de 24 de junho de 2026, antes da largada. Traz o total de 3.320,7 km e 53.950 m, sem a distância de cada etapa.",
+}
+FONTE_VUELTA_REGULAMENTO = {
+    "nome": "Regulamento particular da 81.ª Vuelta a España",
+    "url": "https://storage-aso.lequipe.fr/ASO/cycling_vue/reglamento-espanol.pdf",
+    "consultadoEm": CONSULTADO,
+    "observacao": "Camisas, pontos, jovem e equipes da edição de 22 de agosto a 13 de setembro de 2026. O total de quilómetros vem marcado como aproximado.",
+}
+FONTE_VUELTA_ROADBOOK = {
+    "nome": "Roadbook interativo da Vuelta 2026",
+    "url": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
+    "consultadoEm": CONSULTADO,
+    "observacao": "Documento de 16 de dezembro de 2025. Perfis de altimetria por etapa e distâncias arredondadas, antes da homologação.",
+}
 FONTE_VUELTA = {
     "nome": "Official route of La Vuelta 2026",
     "url": "https://www.lavuelta.es/en/overall-route",
@@ -291,10 +315,8 @@ def _camisas_giro():
 
 
 def _aplicar_perfis_imagem(prova):
-    """Junta imagens oficiais de altimetria sem inventar pontos nem trocar o km do regulamento."""
-    if prova.get("slug") != "giro":
-        return prova
-    caminho = DESTINO / "2026" / "giro-perfis.json"
+    """Junta imagens oficiais de altimetria sem inventar pontos nem trocar o km do card."""
+    caminho = DESTINO / "2026" / f"{prova.get('slug')}-perfis.json"
     if not caminho.exists():
         return prova
     catalogo = json.loads(caminho.read_text(encoding="utf-8"))
@@ -309,14 +331,16 @@ def _aplicar_perfis_imagem(prova):
             "fonteAsset": item["fonteAsset"],
             "alt": item["alt"],
             "kmNaFicha": item["kmNaFicha"],
-            "desnivelMNaFicha": item["desnivelM"],
         }
+        if item.get("desnivelM") is not None:
+            imagem["desnivelMNaFicha"] = item["desnivelM"]
         if item.get("kmNoEixo") is not None:
             imagem["kmNoEixo"] = item["kmNoEixo"]
         etapa["perfil"]["imagem"] = imagem
         etapa["perfil"]["pontos"] = []
         etapa["perfilPublicado"] = True
-        etapa["desnivelM"] = item["desnivelM"]
+        if item.get("desnivelM") is not None:
+            etapa["desnivelM"] = item["desnivelM"]
         avisos = [texto for texto in etapa.get("avisos") or [] if texto != AVISO_PERFIL]
         if AVISO_PERFIL_IMAGEM not in avisos:
             avisos.insert(0, AVISO_PERFIL_IMAGEM)
@@ -394,124 +418,84 @@ def _giro():
 
 
 def _tour_etapas():
-    lacuna = [AVISO_PERFIL, AVISO_TOUR_LACUNA]
+    aviso_dossier = (
+        "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, "
+        "no quadro marcado como total antes da homologação."
+    )
+    aviso_perfil = AVISO_PERFIL
+    # km, tipo, tipoOficial, origem, destino, desnivel, detalhe, montanhas, avisos
+    linhas = [
+        (1, "2026-07-04", 19.6, "crono", "team time-trial", "Barcelona", "Barcelona", None,
+         "Contra-relógio por equipes.", [],
+         [aviso_perfil,
+          "Distância adotada: 19,6 km, no título da etapa na página Grand Départ Barcelona 2026. "
+          "O parágrafo inicial dessa página cita 19,7 km, o resumo do percurso cita 19 km "
+          "e o dossiê de 22 de outubro de 2025 também arredonda para 19 km."]),
+        (2, "2026-07-05", 168.5, "ondulada", None, "Tarragona", "Barcelona", None,
+         "A página do Grand Départ descreve o final como muito ondulado, com chegada em subida em Montjuïc.",
+         ["Côte de Begues"],
+         [aviso_perfil,
+          "Distância adotada: 168,5 km na página Grand Départ Barcelona 2026. "
+          "O parágrafo inicial dessa mesma página ainda cita 178 km. "
+          "O dossiê de 22 de outubro de 2025 lista 182 km, antes da homologação."]),
+        (3, "2026-07-06", 195.9, "desconhecido", None, "Granollers", "Les Angles", 3950,
+         "O dossiê de imprensa atribui 3.950 m de desnível a esta etapa. O tipo formal não veio nomeado.",
+         [],
+         [aviso_perfil,
+          "Distância adotada: 195,9 km na página Grand Départ Barcelona 2026. "
+          "O dossiê de 22 de outubro de 2025 arredonda para 196 km."]),
+        (4, "2026-07-07", 182, "desconhecido", None, "Carcassonne", "Foix", None, None, [], [aviso_perfil, aviso_dossier]),
+        (5, "2026-07-08", 158, "desconhecido", None, "Lannemezan", "Pau", None, None, [], [aviso_perfil, aviso_dossier]),
+        (6, "2026-07-09", 186, "montanha", "summit finish", "Pau", "Gavarnie-Gèdre", None,
+         "Chegada no alto nomeada no resumo oficial entre as cinco da edição.",
+         ["Montée de Gavarnie-Gèdre"], [aviso_perfil, aviso_dossier]),
+        (7, "2026-07-10", 175, "desconhecido", None, "Hagetmau", "Bordeaux", None, None, [], [aviso_perfil, aviso_dossier]),
+        (8, "2026-07-11", 182, "desconhecido", None, "Périgueux", "Bergerac", 1150,
+         "O dossiê de imprensa limita o desnível desta etapa a 1.150 m.",
+         [], [aviso_perfil, aviso_dossier]),
+        (9, "2026-07-12", 185, "desconhecido", None, "Malemort", "Ussel", 3300,
+         "O dossiê de imprensa atribui 3.300 m de desnível a esta etapa. O tipo formal não veio nomeado.",
+         [], [aviso_perfil, aviso_dossier]),
+        (10, "2026-07-14", 167, "montanha", "étape de montagne", "Aurillac", "Le Lioran", None,
+         "O dossiê chama esta chegada de etapa de montanha. Não está na lista das cinco chegadas no alto.",
+         ["Col de la Griffoul"], [aviso_perfil, aviso_dossier]),
+        (11, "2026-07-15", 161, "desconhecido", None, "Vichy", "Nevers", None, None, [], [aviso_perfil, aviso_dossier]),
+        (12, "2026-07-16", 181, "desconhecido", None, "Circuit Nevers Magny-Cours", "Chalon-sur-Saône", None,
+         None, [], [aviso_perfil, aviso_dossier]),
+        (13, "2026-07-17", 205, "desconhecido", None, "Dole", "Belfort", None,
+         "Única etapa acima de 200 km no quadro do dossiê. O tipo formal não veio nomeado.",
+         [], [aviso_perfil, aviso_dossier]),
+        (14, "2026-07-18", 155, "desconhecido", None, "Mulhouse", "Le Markstein Fellering", None,
+         None, ["Col du Page", "Col du Haag"], [aviso_perfil, aviso_dossier]),
+        (15, "2026-07-19", 184, "montanha", "summit finish", "Champagnole", "Plateau de Solaison", None,
+         "Chegada no alto nomeada no resumo oficial.",
+         ["Plateau de Solaison"], [aviso_perfil, aviso_dossier]),
+        (16, "2026-07-21", 26, "crono", "individual time trial", "Évian-les-Bains", "Thonon-les-Bains", None,
+         "Contra-relógio individual. O dossiê e o resumo do percurso concordam em 26 km.",
+         [], [aviso_perfil]),
+        (17, "2026-07-22", 175, "desconhecido", None, "Chambéry", "Voiron", None, None, [], [aviso_perfil, aviso_dossier]),
+        (18, "2026-07-23", 185, "montanha", "summit finish", "Voiron", "Orcières-Merlette", None,
+         "Chegada no alto nomeada no resumo oficial.",
+         [], [aviso_perfil, aviso_dossier]),
+        (19, "2026-07-24", 128, "montanha", "summit finish", "Gap", "Alpe d'Huez", None,
+         "Chegada no alto nomeada no resumo oficial.",
+         [], [aviso_perfil, aviso_dossier]),
+        (20, "2026-07-25", 171, "montanha", "summit finish", "Le Bourg d'Oisans", "Alpe d'Huez", 5600,
+         "O dossiê atribui 5.600 m de desnível a esta etapa e cita os cols de la Croix de Fer, du Télégraphe, du Galibier e de Sarenne.",
+         ["Col de la Croix de Fer", "Col du Télégraphe", "Col du Galibier", "Col de Sarenne"],
+         [aviso_perfil, aviso_dossier]),
+        (21, "2026-07-26", 130, "desconhecido", None, "Thoiry", "Paris", None,
+         "Chegada nos Champs-Élysées, segundo o dossiê. O tipo formal não veio nomeado.",
+         [], [aviso_perfil, aviso_dossier]),
+    ]
     etapas = []
-    for n in range(1, 22):
-        etapas.append(_etapa(n=n, avisos=list(lacuna)))
-    etapas[0].update(
-        {
-            "data": "2026-07-04",
-            "km": 19.6,
-            "tipo": "crono",
-            "tipoOficial": "team time-trial",
-            "origem": "Barcelona",
-            "destino": "Barcelona",
-            "detalhe": "Contra-relógio por equipes. O resumo do percurso arredonda para 19 km; o mesmo texto de apresentação também cita 19,7 km.",
-            "avisos": [
-                AVISO_PERFIL,
-                "Distância adotada: 19,6 km, no título da etapa na página Grand Départ Barcelona 2026. "
-                "O parágrafo inicial dessa página cita 19,7 km e o resumo do percurso cita 19 km.",
-            ],
-        }
-    )
-    etapas[1].update(
-        {
-            "data": "2026-07-05",
-            "km": 168.5,
-            "tipo": "ondulada",
-            "tipoOficial": None,
-            "origem": "Tarragona",
-            "destino": "Barcelona",
-            "detalhe": "A página de percurso descreve o final como muito ondulado, com chegada em subida em Montjuïc. Não há um rótulo formal flat/hilly nessa ficha.",
-            "avisos": [
-                AVISO_PERFIL,
-                "Distância adotada: 168,5 km na página Grand Départ Barcelona 2026. "
-                "O parágrafo inicial dessa mesma página ainda cita 178 km, de uma versão anterior.",
-            ],
-        }
-    )
-    etapas[2].update(
-        {
-            "data": "2026-07-06",
-            "km": 195.9,
-            "tipo": "desconhecido",
-            "origem": "Granollers",
-            "destino": "Les Angles",
-            "detalhe": "A página confirma origem, destino e distância, sem classificar o tipo.",
-            "avisos": [AVISO_PERFIL],
-        }
-    )
-    # Menções explícitas no resumo do percurso 2026, sem quilometragem.
-    etapas[5].update(
-        {
-            "destino": "Gavarnie-Gèdre",
-            "tipo": "montanha",
-            "tipoOficial": "summit finish",
-            "detalhe": "Chegada no alto citada no resumo do percurso 2026. Origem e distância não vieram nessa página.",
-            "avisos": [AVISO_PERFIL, "Origem e distância ausentes na página de percurso de 2026 consultada."],
-        }
-    )
-    etapas[6].update(
-        {
-            "origem": "Hagetmau",
-            "avisos": [AVISO_PERFIL, "Destino, distância e tipo ausentes na página de percurso de 2026 consultada."],
-        }
-    )
-    etapas[8].update(
-        {
-            "origem": "Malemort",
-            "destino": "Ussel",
-            "avisos": [AVISO_PERFIL, "Distância e tipo ausentes na página de percurso de 2026 consultada."],
-        }
-    )
-    etapas[11].update(
-        {
-            "origem": "Circuit Nevers Magny-Cours",
-            "avisos": [AVISO_PERFIL, "Destino, distância e tipo ausentes na página de percurso de 2026 consultada."],
-        }
-    )
-    etapas[13].update(
-        {
-            "detalhe": "O resumo do percurso cita Col du Page e Col du Haag nesta etapa, sem origem, destino, distância ou tipo formal.",
-            "perfil": _perfil(
-                montanhas=[_marcador("Col du Page"), _marcador("Col du Haag")]
-            ),
-        }
-    )
-    etapas[14].update(
-        {
-            "destino": "Plateau de Solaison",
-            "tipo": "montanha",
-            "tipoOficial": "summit finish",
-            "detalhe": "Chegada no alto citada no resumo do percurso 2026.",
-            "avisos": [AVISO_PERFIL, "Origem e distância ausentes na página de percurso de 2026 consultada."],
-        }
-    )
-    etapas[15].update(
-        {
-            "km": 26,
-            "tipo": "crono",
-            "tipoOficial": "individual time trial",
-            "origem": "Évian-les-Bains",
-            "destino": "Thonon-les-Bains",
-            "detalhe": "Contra-relógio individual de 26 km, segundo o resumo do percurso 2026. A data do dia não veio nessa página.",
-            "avisos": [AVISO_PERFIL],
-        }
-    )
-    etapas[19].update(
-        {
-            "detalhe": "O resumo do percurso cita o Col de Sarenne pelo flanco sudeste nesta etapa. Alpe d'Huez aparece como chegada no alto em dois dias, sem número de etapa nesse resumo — por isso não foi atribuído aqui.",
-            "perfil": _perfil(montanhas=[_marcador("Col de Sarenne")]),
-        }
-    )
-    etapas[20].update(
-        {
-            "origem": "Thoiry",
-            "destino": "Paris",
-            "detalhe": "O resumo do percurso indica Thoiry na largada da última etapa e Paris na chegada final, sem distância nem tipo.",
-            "avisos": [AVISO_PERFIL, "Distância e tipo ausentes na página de percurso de 2026 consultada."],
-        }
-    )
+    for n, data, km, tipo, oficial, origem, destino, desnivel, detalhe, montanhas, avisos in linhas:
+        etapas.append(_etapa(
+            n=n, data=data, km=km, desnivelM=desnivel, tipo=tipo, tipoOficial=oficial,
+            origem=origem, destino=destino, detalhe=detalhe,
+            perfil=_perfil(montanhas=[_marcador(nome) for nome in montanhas]),
+            avisos=avisos,
+        ))
     return etapas
 
 
@@ -534,7 +518,7 @@ def _camisas_classicas(itens):
 
 
 def _tour():
-    return {
+    return _aplicar_perfis_imagem({
         "provaId": "b10",
         "slug": "tour",
         "ano": 2026,
@@ -547,67 +531,74 @@ def _tour():
             "fim": "2026-07-26",
             "confirmadoNoSite": True,
         },
-        "fontes": [FONTE_TOUR_LARGADA, FONTE_TOUR_RESUMO],
-        "camisas": _camisas_classicas(
-            [
-                {
-                    "id": "gc",
-                    "nomeClasse": "geral",
-                    "unidade": "tempo",
-                    "cor": "#ffe14a",
-                    "rotulo": "Amarela",
-                    "nota": "Rótulo clássico, a confirmar no regulamento desta edição. A página de regras do site não identificava o ano 2026 na consulta.",
-                },
-                {
-                    "id": "pontos",
-                    "nomeClasse": "pontos",
-                    "unidade": "pontos",
-                    "cor": "#1f8f4e",
-                    "rotulo": "Verde",
-                    "nota": "Rótulo clássico, a confirmar. Tabela de pontos não copiada.",
-                },
-                {
-                    "id": "montanha",
-                    "nomeClasse": "montanha",
-                    "unidade": "pontos",
-                    "cor": "#e10600",
-                    "rotulo": "Bolinhas",
-                    "nota": "Rótulo clássico, a confirmar. Tabela de pontos não copiada.",
-                },
-                {
-                    "id": "jovem",
-                    "nomeClasse": "jovem",
-                    "unidade": "tempo",
-                    "cor": "#f4f1e6",
-                    "rotulo": "Branca",
-                    "nota": "Rótulo clássico, a confirmar. Idade-limite desta edição não foi fechada numa página de regulamento de 2026.",
-                },
-            ]
-        ),
+        "fontes": [FONTE_TOUR_LARGADA, FONTE_TOUR_RESUMO, FONTE_TOUR_DOSSIER, FONTE_TOUR_CHIFFRES],
+        "camisas": [
+            {
+                "id": "gc",
+                "nomeClasse": "geral",
+                "unidade": "tempo",
+                "cor": "#ffe14a",
+                "rotulo": "Amarela",
+                "oficialConfirmado": True,
+                "prioridade": None,
+                "nota": "Maillot jaune, classificação geral individual ao tempo. Dossiê de imprensa de 22 de outubro de 2025, patrocínio LCL.",
+            },
+            {
+                "id": "pontos",
+                "nomeClasse": "pontos",
+                "unidade": "pontos",
+                "cor": "#1f8f4e",
+                "rotulo": "Verde",
+                "oficialConfirmado": True,
+                "prioridade": None,
+                "nota": "Maillot vert. Pontos na chegada e num sprint intermédio das etapas em linha. A tabela numérica não está nesse dossiê.",
+            },
+            {
+                "id": "montanha",
+                "nomeClasse": "montanha",
+                "unidade": "pontos",
+                "cor": "#e10600",
+                "rotulo": "Bolinhas vermelhas",
+                "oficialConfirmado": True,
+                "prioridade": None,
+                "nota": "Maillot blanc à pois rouges. Pontos no topo de cada subida e nas chegadas em altitude. A tabela numérica não está nesse dossiê.",
+            },
+            {
+                "id": "jovem",
+                "nomeClasse": "jovem",
+                "unidade": "tempo",
+                "cor": "#f4f1e6",
+                "rotulo": "Branca",
+                "oficialConfirmado": True,
+                "prioridade": None,
+                "nota": "Maillot blanc. Corredores com 25 anos no máximo durante o ano de 2026.",
+            },
+        ],
         "regulamento": {
             "oficialConfirmado": False,
-            "fonte": None,
+            "fonte": FONTE_TOUR_DOSSIER["url"],
             "prioridadeVestimenta": None,
             "prioridadeConfirmada": False,
-            "notaPrioridade": "Prioridade entre camisas não confirmada para 2026.",
-            "jovem": {"nascidoAPartirDe": None, "confirmado": False},
+            "notaPrioridade": "O dossiê de 2026 nomeia as quatro camisas e não fixa a prioridade de quem lidera duas ao mesmo tempo. Não foi encontrado o regulamento particular com o barema numérico.",
+            "jovem": {"nascidoAPartirDe": "2001-01-01", "confirmado": True,
+                      "nota": "O dossiê diz «25 ans au plus dans l'année en cours» para 2026, o que corresponde a nascidos a partir de 1º de janeiro de 2001."},
             "tabelaPontosChegada": None,
         },
         "classificacaoEquipes": {
             "habilitada": False,
-            "previstaNoRegulamento": False,
+            "previstaNoRegulamento": True,
             "oficialConfirmado": False,
-            "nota": "Não confirmada para esta edição. O painel permanece desligado.",
+            "nota": "O dossiê de 2026 prevê um prémio de classificação por equipes, patrocinado pela Basic-Fit, sem publicar a fórmula. O painel fica desligado.",
         },
         "observacoes": [
             "Nenhuma etapa está liberada.",
-            "Perfis altimétricos: 0 de 21. O resumo de percurso de 2026 não traz série nem imagem de perfil por etapa. As fichas de etapa atuais do site não foram usadas.",
-            "O resumo oficial de 2026 fala em 7 etapas planas, 4 onduladas, 8 de montanha, 1 contra-relógio por equipes e 1 individual, com dois dias de descanso. Essa conta não foi desdobrada etapa a etapa onde a página não numera o tipo.",
-            "O mesmo resumo cita 54.450 m de desnível associados ao ano de 2025. Esse número não foi usado para 2026.",
-            "Chegadas no alto nomeadas sem número de etapa no resumo: Orcières-Merlette e Alpe d'Huez (duas vezes). Não foram atribuídas a uma etapa.",
+            "Perfis altimétricos: 0 de 21. O mapa oficial de 6 de outubro de 2025 é a planimetria geral, não o perfil de cada etapa. O dossiê de 22 de outubro de 2025 não traz uma imagem de altimetria por etapa. Em 9 de novembro de 2026 a ficha stage-15 do site já era a edição seguinte (Rodez–Albi) e não foi usada.",
+            "O resumo oficial conta 7 planas, 4 onduladas, 8 de montanha, 1 contra-relógio por equipes e 1 individual. Só foram marcadas as etapas que o dossiê ou o resumo identificam: as cinco chegadas no alto, a etapa de montanha de Le Lioran, a etapa 2 descrita como muito ondulada e os dois contra-relógios.",
+            "O dossiê de outubro de 2025 atribui 54.450 m de desnível ao Tour 2026. O folheto de cifras de 24 de junho de 2026, ainda antes da largada, publica 53.950 m e 3.320,7 km no total. Nenhum dos dois reparte o desnível por todas as etapas. Onde o dossiê dá o número de uma etapa, ele fica no card.",
+            "A soma das distâncias do card mistura a página do Grand Départ, nas três primeiras, com o quadro anterior à homologação do dossiê, nas restantes. Não foi ajustada ao total de 3.320,7 km do folheto de junho.",
         ],
         "etapas": _tour_etapas(),
-    }
+    })
 
 
 def _vuelta_etapas():
@@ -653,7 +644,7 @@ def _vuelta_etapas():
 
 
 def _vuelta():
-    return {
+    return _aplicar_perfis_imagem({
         "provaId": "b12",
         "slug": "vuelta",
         "ano": 2026,
@@ -666,73 +657,92 @@ def _vuelta():
             "fim": "2026-09-13",
             "confirmadoNoSite": True,
         },
-        "fontes": [FONTE_VUELTA],
-        "camisas": _camisas_classicas(
-            [
-                {
-                    "id": "gc",
-                    "nomeClasse": "geral",
-                    "unidade": "tempo",
-                    "cor": "#e10600",
-                    "rotulo": "Vermelha",
-                    "nota": "Rótulo clássico, a confirmar no regulamento. A página de regras em inglês não nomeia a cor.",
-                },
-                {
-                    "id": "pontos",
-                    "nomeClasse": "pontos",
-                    "unidade": "pontos",
-                    "cor": "#1f8f4e",
-                    "rotulo": "Verde",
-                    "nota": "Rótulo clássico, a confirmar. Tabela de pontos não copiada.",
-                },
-                {
-                    "id": "montanha",
-                    "nomeClasse": "montanha",
-                    "unidade": "pontos",
-                    "cor": "#1e4fbf",
-                    "rotulo": "Bolinhas azuis",
-                    "nota": "Rótulo a confirmar. A página de regras não nomeia a cor das bolinhas desta edição.",
-                },
-                {
-                    "id": "jovem",
-                    "nomeClasse": "jovem",
-                    "unidade": "tempo",
-                    "cor": "#f4f1e6",
-                    "rotulo": "Branca",
-                    "nota": "Rótulo clássico, a confirmar. A página de regras consultada não declara o ano da edição na idade-limite.",
-                },
-            ]
-        ),
+        "fontes": [FONTE_VUELTA, FONTE_VUELTA_REGULAMENTO, FONTE_VUELTA_ROADBOOK],
+        "camisas": [
+            {
+                "id": "gc",
+                "nomeClasse": "geral",
+                "unidade": "tempo",
+                "cor": "#e10600",
+                "rotulo": "Vermelha",
+                "oficialConfirmado": True,
+                "prioridade": 1,
+                "nota": "Líder da geral por tempos. Regulamento particular da 81.ª edição.",
+            },
+            {
+                "id": "pontos",
+                "nomeClasse": "pontos",
+                "unidade": "pontos",
+                "cor": "#1f8f4e",
+                "rotulo": "Verde",
+                "oficialConfirmado": True,
+                "prioridade": 2,
+                "nota": "Líder da classificação por pontos. Regulamento particular da 81.ª edição.",
+            },
+            {
+                "id": "montanha",
+                "nomeClasse": "montanha",
+                "unidade": "pontos",
+                "cor": "#1e4fbf",
+                "rotulo": "Bolinhas azuis",
+                "oficialConfirmado": True,
+                "prioridade": 3,
+                "nota": "Camisola branca com bolinhas azuis, prémio da montanha. Regulamento particular da 81.ª edição.",
+            },
+            {
+                "id": "jovem",
+                "nomeClasse": "jovem",
+                "unidade": "tempo",
+                "cor": "#f4f1e6",
+                "rotulo": "Branca",
+                "oficialConfirmado": True,
+                "prioridade": 4,
+                "nota": "Melhor jovem na geral. Nascidos a partir de 1º de janeiro de 2001.",
+            },
+        ],
         "regulamento": {
-            "oficialConfirmado": False,
-            "fonte": "https://www.lavuelta.es/en/the-race/sporting-stakes",
-            "prioridadeVestimenta": None,
-            "prioridadeConfirmada": False,
+            "oficialConfirmado": True,
+            "fonte": FONTE_VUELTA_REGULAMENTO["url"],
+            "prioridadeVestimenta": ["gc", "pontos", "montanha", "jovem"],
+            "prioridadeConfirmada": True,
             "notaPrioridade": (
-                "A página de regras descreve geral, pontos, montanha, jovem e equipes, "
-                "mas o texto extraído não fixa o ano 2026 nem a prioridade de quem veste duas camisas. "
-                "Pontuação não foi inventada."
+                "O regulamento numera as camisolas nessa ordem. Quem lidera duas usa a de maior prioridade "
+                "e a outra passa ao seguinte dessa classificação que não lidere outra. "
+                "O mesmo artigo remete também aos artigos 1.3.071 e 2.6.018 da UCI."
             ),
-            "jovem": {"nascidoAPartirDe": None, "confirmado": False},
-            "tabelaPontosChegada": None,
+            "jovem": {"nascidoAPartirDe": "2001-01-01", "confirmado": True},
+            "tabelaPontosChegada": {
+                "grupo1_etapas_11_17": [50, 30, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2],
+                "grupo2_3_etapas_2_3_5_8_10_13_15_16_21": [30, 25, 22, 19, 17, 15, 13, 11, 9, 7, 6, 5, 4, 3, 2],
+                "grupo4_5_e_cronos": [20, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+            },
+            "sprintIntermediarioPontos": [20, 17, 15, 13, 10],
+            "montanhaPontos": {
+                "cima_alberto_fernandez": [20, 15, 10, 6, 4, 2],
+                "especial": [15, 10, 6, 4, 2, 1],
+                "1": [10, 6, 4, 2, 1],
+                "2": [5, 3, 1],
+                "3": [3, 2, 1],
+            },
         },
         "classificacaoEquipes": {
             "habilitada": False,
-            "previstaNoRegulamento": False,
-            "oficialConfirmado": False,
+            "previstaNoRegulamento": True,
+            "oficialConfirmado": True,
             "nota": (
-                "A página de regras fala em soma dos três melhores tempos, sem cravar a edição 2026 no trecho lido. "
+                "O regulamento soma os três melhores tempos de cada equipe na etapa e na geral. "
                 "O painel fica desligado até um snapshot autorizado."
             ),
         },
         "observacoes": [
             "Nenhuma etapa está liberada.",
             "Perfis altimétricos: 0 de 21. A tabela oficial de percurso não traz série nem imagem de perfil por etapa.",
-            "A página de percurso anuncia 3.275 km no total. A soma da coluna de distância das 21 etapas, com os números publicados na mesma tabela, dá 3.231,9 km. A diferença não foi ajustada.",
+            "A página de percurso anuncia 3.275 km no total. A soma da coluna de distância das 21 etapas, com os números publicados na mesma tabela em 9 de novembro de 2026, dá 3.231,9 km. A diferença não foi ajustada.",
+            "O regulamento particular marca o total como aproximado, cerca de 3.308 km, e diverge da tabela do site em várias etapas. O roadbook de dezembro de 2025 usa distâncias arredondadas e soma 3.275 km antes da homologação. O card mantém a tabela do site.",
             "A mesma página conta 4 onduladas, 1 ondulada com chegada em subida, 4 planas, 4 de média montanha, 6 de montanha, 2 contra-relógios e 2 dias de descanso.",
         ],
         "etapas": _vuelta_etapas(),
-    }
+    })
 
 
 def materializar(destino: Path = DESTINO) -> None:

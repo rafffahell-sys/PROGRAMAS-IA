@@ -302,7 +302,7 @@ export function htmlHub(prova, liberacao, filtro = {}, favoritos = null) {
       <label><input type="checkbox" name="perfil"${filtro.somenteComPerfil ? " checked" : ""}> Só com perfil</label>
     </form>
     <div class="gv-grade">${cards || `<p class="gv-vazio">Nenhuma etapa com esse filtro.</p>`}</div>
-    ${prova.slug === "giro" ? htmlFavoritos(favoritos) : ""}
+    ${htmlFavoritos(favoritos)}
     <section>
       <h2>Fontes do percurso</h2>
       <ul>${htmlFontes(prova)}</ul>
@@ -377,15 +377,17 @@ export async function desenhar(estado) {
   const liberacao = liberacaoDaProva(estado.liberacoes, prova.ano, prova.provaId);
   if (!rota.etapa) {
     let favoritos = null;
-    if (prova.slug === "giro") {
-      if (!estado.favoritos) {
-        estado.favoritos = await lerOuFechado(
-          estado.fetchFn,
-          "data/grandes-voltas/2026/giro-favoritos-prelargada.json",
-          null
-        );
+    const urlFavoritos = {
+      giro: "data/grandes-voltas/2026/giro-favoritos-prelargada.json",
+      tour: "data/grandes-voltas/2026/tour-favoritos-prelargada.json",
+      vuelta: "data/grandes-voltas/2026/vuelta-favoritos-prelargada.json"
+    }[prova.slug];
+    if (urlFavoritos) {
+      if (!estado.favoritosPorProva) estado.favoritosPorProva = {};
+      if (!(prova.slug in estado.favoritosPorProva)) {
+        estado.favoritosPorProva[prova.slug] = await lerOuFechado(estado.fetchFn, urlFavoritos, null);
       }
-      favoritos = estado.favoritos;
+      favoritos = estado.favoritosPorProva[prova.slug];
     }
     raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro || {}, favoritos);
     document.title = `${prova.nome} ${prova.ano} — etapas`;
@@ -444,7 +446,8 @@ function ligarFiltros(estado, prova, liberacao) {
       somenteAssistidas: form.querySelector('[name="assistidas"]').checked,
       somenteComPerfil: form.querySelector('[name="perfil"]').checked
     };
-    estado.raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro, prova.slug === "giro" ? estado.favoritos : null);
+    const favoritos = estado.favoritosPorProva ? estado.favoritosPorProva[prova.slug] : null;
+    estado.raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro, favoritos);
     ligarFiltros(estado, prova, liberacao);
   });
 }
