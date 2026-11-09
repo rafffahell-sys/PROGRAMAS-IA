@@ -69,8 +69,9 @@ class Percurso(unittest.TestCase):
                     self.assertIsNone(etapa["desnivelM"])
                     self.assertIn("imagem", etapa["perfil"])
                 else:
-                    self.assertFalse(etapa["perfilPublicado"])
-                    self.assertNotIn("imagem", etapa["perfil"])
+                    self.assertTrue(etapa["perfilPublicado"])
+                    self.assertIn("imagem", etapa["perfil"])
+                    self.assertIn("arquivo", etapa["mapa"])
 
     def test_giro_tem_imagem_de_perfil_e_as_outras_nao(self):
         giro = self.provas["giro"]
@@ -104,8 +105,8 @@ class Percurso(unittest.TestCase):
         self.assertEqual(etapa8["perfil"]["imagem"]["kmNaFicha"], 156)
         self.assertEqual(etapa8["perfil"]["imagem"]["kmNoEixo"], 157)
         tour = self.provas["tour"]
-        self.assertEqual([e for e in tour["etapas"] if e["perfilPublicado"] or e["perfil"]["pontos"]], [])
-        self.assertTrue(any(obs.startswith("Perfis altimétricos: 0 de 21") for obs in tour["observacoes"]))
+        self.assertEqual(len([e for e in tour["etapas"] if e["perfil"].get("imagem") and e["mapa"].get("arquivo")]), 21)
+        self.assertTrue(any(obs.startswith("Perfis altimétricos: 21 de 21") for obs in tour["observacoes"]))
 
     def test_giro_fecha_3468(self):
         giro = self.provas["giro"]
@@ -166,9 +167,19 @@ class Percurso(unittest.TestCase):
         self.assertEqual(tour["etapas"][15]["km"], 26)
         self.assertEqual(tour["etapas"][19]["desnivelM"], 5600)
         self.assertEqual(sum(e["km"] for e in tour["etapas"]), 3320)
-        self.assertFalse(any(e["perfilPublicado"] for e in tour["etapas"]))
-        self.assertIn("0 de 21", " ".join(tour["observacoes"]))
+        self.assertTrue(all(e["perfilPublicado"] for e in tour["etapas"]))
+        self.assertEqual(tour["etapas"][7]["km"], 182)
+        self.assertEqual(tour["etapas"][7]["perfil"]["imagem"]["kmNaPagina"], 182)
+        self.assertEqual(tour["etapas"][7]["perfil"]["imagem"]["kmNoEixo"], 180.4)
+        self.assertIn("21 de 21", " ".join(tour["observacoes"]))
         self.assertIn("53.950", " ".join(tour["observacoes"]))
+        for etapa in tour["etapas"]:
+            perfil = RAIZ / etapa["perfil"]["imagem"]["arquivo"]
+            mapa = RAIZ / etapa["mapa"]["arquivo"]
+            self.assertTrue(perfil.is_file(), etapa["n"])
+            self.assertTrue(mapa.is_file(), etapa["n"])
+            self.assertEqual(etapa["perfil"]["pontos"], [])
+            self.assertNotIn("urgencia", etapa["mapa"]["fonteAsset"])
 
     def test_sem_chaves_de_resultado(self):
         achados = []

@@ -178,7 +178,7 @@ body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
 }
 .gv-badge.ok { background: color-mix(in srgb, var(--good) 30%, transparent); }
 .gv-lugar { font-size: 1.15rem; font-weight: 800; }
-.gv-perfil, .gv-bloqueio, .gv-resultados, .gv-bloco {
+.gv-perfil, .gv-mapa, .gv-bloqueio, .gv-resultados, .gv-bloco {
   margin-top: 16px;
   padding: 14px;
   border-radius: 16px;
