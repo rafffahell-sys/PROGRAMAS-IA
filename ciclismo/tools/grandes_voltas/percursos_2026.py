@@ -51,6 +51,10 @@ FONTE_VUELTA = {
 }
 
 AVISO_PERFIL = "Série altimétrica numérica não publicada na fonte de percurso consultada."
+AVISO_PERFIL_IMAGEM = (
+    "O perfil publicado é a imagem oficial de altimetria. "
+    "Não há série numérica; o desenho não foi convertido em pontos."
+)
 AVISO_TOUR_LACUNA = (
     "Cidade, distância ou tipo não constam das páginas de percurso de 2026 ainda identificadas como esta edição. "
     "As fichas stage-0N atuais do site oficial já mostram outra edição e foram ignoradas."
@@ -286,8 +290,51 @@ def _camisas_giro():
     ]
 
 
+def _aplicar_perfis_imagem(prova):
+    """Junta imagens oficiais de altimetria sem inventar pontos nem trocar o km do regulamento."""
+    if prova.get("slug") != "giro":
+        return prova
+    caminho = DESTINO / "2026" / "giro-perfis.json"
+    if not caminho.exists():
+        return prova
+    catalogo = json.loads(caminho.read_text(encoding="utf-8"))
+    por_n = {int(chave): item for chave, item in catalogo["etapas"].items()}
+    for etapa in prova["etapas"]:
+        item = por_n.get(etapa["n"])
+        if not item:
+            continue
+        imagem = {
+            "arquivo": item["arquivo"],
+            "fontePagina": item["fontePagina"],
+            "fonteAsset": item["fonteAsset"],
+            "alt": item["alt"],
+            "kmNaFicha": item["kmNaFicha"],
+            "desnivelMNaFicha": item["desnivelM"],
+        }
+        if item.get("kmNoEixo") is not None:
+            imagem["kmNoEixo"] = item["kmNoEixo"]
+        etapa["perfil"]["imagem"] = imagem
+        etapa["perfil"]["pontos"] = []
+        etapa["perfilPublicado"] = True
+        etapa["desnivelM"] = item["desnivelM"]
+        avisos = [texto for texto in etapa.get("avisos") or [] if texto != AVISO_PERFIL]
+        if AVISO_PERFIL_IMAGEM not in avisos:
+            avisos.insert(0, AVISO_PERFIL_IMAGEM)
+        for extra in item.get("avisos") or []:
+            if extra not in avisos:
+                avisos.append(extra)
+        etapa["avisos"] = avisos
+    texto = catalogo.get("observacao")
+    if texto:
+        prova["observacoes"] = [
+            texto if linha.startswith("Perfis altimétricos:") else linha
+            for linha in prova["observacoes"]
+        ]
+    return prova
+
+
 def _giro():
-    return {
+    return _aplicar_perfis_imagem({
         "provaId": "b7",
         "slug": "giro",
         "ano": 2026,
@@ -343,7 +390,7 @@ def _giro():
             "As brochuras de hospitalidade de fevereiro e março de 2026 trazem a planimetria geral (3.459,2 km e 49.150 m no total), não o perfil de cada etapa. Esses totais não substituem os 3.468 km do regulamento de maio e não foram distribuídos entre as etapas.",
         ],
         "etapas": _giro_etapas(),
-    }
+    })
 
 
 def _tour_etapas():

@@ -79,11 +79,17 @@ export function podioRevelado(liberacao, totalEtapas = 21) {
   return liberacao?.provaCompleta === true && etapaLiberada(liberacao, totalEtapas);
 }
 
+export function temPerfil(etapa) {
+  if ((etapa?.perfil?.pontos || []).length >= 2) return true;
+  const arquivo = etapa?.perfil?.imagem?.arquivo;
+  return typeof arquivo === "string" && arquivo.length > 0;
+}
+
 export function filtrarEtapas(etapas, liberacao, filtro = {}) {
   return (etapas || []).filter((etapa) => {
     const liberada = etapaLiberada(liberacao, etapa.n);
     if (filtro.somenteAssistidas && !liberada) return false;
-    if (filtro.somenteComPerfil && (etapa.perfil?.pontos || []).length < 2) return false;
+    if (filtro.somenteComPerfil && !temPerfil(etapa)) return false;
     if (filtro.tipo && etapa.tipo !== filtro.tipo) return false;
     return true;
   });

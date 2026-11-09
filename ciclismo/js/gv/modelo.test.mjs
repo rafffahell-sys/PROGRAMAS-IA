@@ -98,9 +98,11 @@ test("rota estável e chip de percurso", () => {
   assert.equal(estadoChip({ km: null, perfil: { pontos: [] } }, true), "assistida");
   const etapas = [
     { n: 1, tipo: "plana", perfil: { pontos: [] } },
-    { n: 2, tipo: "montanha", perfil: { pontos: [{ xKm: 0, elevM: 1 }, { xKm: 1, elevM: 2 }] } }
+    { n: 2, tipo: "montanha", perfil: { pontos: [{ xKm: 0, elevM: 1 }, { xKm: 1, elevM: 2 }] } },
+    { n: 3, tipo: "plana", perfil: { pontos: [], imagem: { arquivo: "img/perfis/giro-2026/etapa-03.jpg" } } }
   ];
-  assert.equal(filtrarEtapas(etapas, { etapas: {} }, { somenteComPerfil: true }).length, 1);
+  const comPerfil = filtrarEtapas(etapas, { etapas: {} }, { somenteComPerfil: true });
+  assert.deepEqual(comPerfil.map((etapa) => etapa.n), [2, 3]);
   assert.equal(filtrarEtapas(etapas, { etapas: { 2: true } }, { somenteAssistidas: true })[0].n, 2);
 });
 

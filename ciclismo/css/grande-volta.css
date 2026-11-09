@@ -193,6 +193,33 @@ body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
     repeating-linear-gradient(90deg, transparent 0 18px, color-mix(in srgb, var(--line) 80%, transparent) 18px 19px);
 }
 .gv-perfil-svg { width: 100%; height: auto; color: var(--jersey); }
+.gv-perfil-imagem img { width: 100%; height: auto; display: block; background: #fff; }
+.gv-botao-ampliar {
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font: inherit;
+  cursor: zoom-in;
+}
+.gv-perfil-dialog {
+  width: min(1100px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  border: 0;
+  border-radius: 16px;
+  padding: 12px;
+}
+.gv-perfil-dialog img { width: 100%; height: auto; }
+.gv-perfil-dialog::backdrop { background: rgba(20, 8, 16, 0.72); }
+.gv-tem-perfil {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 .gv-marcas { flex: 1; min-width: 220px; }
 .gv-avisos { color: var(--muted); }
 .gv-lista { margin: 0; padding-left: 0; list-style: none; }

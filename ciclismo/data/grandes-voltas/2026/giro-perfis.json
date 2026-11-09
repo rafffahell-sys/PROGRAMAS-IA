@@ -1,0 +1,206 @@
+{
+  "versao": 1,
+  "consultadoEm": "2026-11-09",
+  "metodo": "Primeira imagem dentro de .js-tab-info-altrimetria, antes de .js-tab-planimetria, na página oficial de cada etapa.",
+  "observacao": "Perfis altimétricos: 21 de 21, como imagem oficial na aba de altimetria de cada página de etapa, consultada em 9 de novembro de 2026. Não há série numérica e o desenho não foi convertido em pontos. O desnível de cada etapa é o valor Altitude Gain dessa ficha. A distância do card continua a do regulamento de 4 de maio de 2026. Nas etapas 6, 7 e 8 a ficha ou o eixo do desenho não coincidem com esse regulamento; a divergência fica no aviso da etapa.",
+  "etapas": {
+    "1": {
+      "arquivo": "img/perfis/giro-2026/etapa-01.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-1-of-the-giro-ditalia-2026-nessebar-burgas/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/TZ47AewuV8Gv3n5iveJ4_140426-121837.jpg?v=20260414121837",
+      "alt": "Perfil altimétrico da etapa 1 do Giro d'Italia 2026, Nessebar–Burgas.",
+      "kmNaFicha": 147,
+      "desnivelM": 500,
+      "avisos": []
+    },
+    "2": {
+      "arquivo": "img/perfis/giro-2026/etapa-02.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-2-of-the-giro-ditalia-2026-burgas-veliko-tarnovo/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/ieWEakDDQVJWr3WEcdrP_140426-011845.jpg?v=20260414131845",
+      "alt": "Perfil altimétrico da etapa 2 do Giro d'Italia 2026, Burgas–Veliko Tarnovo.",
+      "kmNaFicha": 221,
+      "desnivelM": 2600,
+      "avisos": []
+    },
+    "3": {
+      "arquivo": "img/perfis/giro-2026/etapa-03.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-3-of-the-giro-ditalia-2026-plovdiv-sofia/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/bUGri5dr1hGsYTmK8PXd_140426-014008.jpg?v=20260414134008",
+      "alt": "Perfil altimétrico da etapa 3 do Giro d'Italia 2026, Plovdiv–Sofia.",
+      "kmNaFicha": 175,
+      "desnivelM": 1600,
+      "avisos": []
+    },
+    "4": {
+      "arquivo": "img/perfis/giro-2026/etapa-04.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-4-of-the-giro-ditalia-2026-catanzaro-cosenza/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/93pI3K7uLnpXeRTVpXwY_140426-021637.jpg?v=20260414141637",
+      "alt": "Perfil altimétrico da etapa 4 do Giro d'Italia 2026, Catanzaro–Cosenza.",
+      "kmNaFicha": 138,
+      "desnivelM": 1800,
+      "avisos": []
+    },
+    "5": {
+      "arquivo": "img/perfis/giro-2026/etapa-05.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-5-of-the-giro-ditalia-2026-praia-a-mare-potenza/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/oaDDENNdyzZ3IsbXQ7jL_140426-025248.jpg?v=20260414145248",
+      "alt": "Perfil altimétrico da etapa 5 do Giro d'Italia 2026, Praia a Mare–Potenza.",
+      "kmNaFicha": 203,
+      "desnivelM": 4100,
+      "avisos": []
+    },
+    "6": {
+      "arquivo": "img/perfis/giro-2026/etapa-06.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-6-of-the-giro-ditalia-2026-paestum-napoli/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/Fy9VjSwDjcSNZxc6SuqE_270426-101912.jpg?v=20260427101912",
+      "alt": "Perfil altimétrico da etapa 6 do Giro d'Italia 2026, Paestum–Napoli.",
+      "kmNaFicha": 142,
+      "desnivelM": 500,
+      "avisos": [
+        "A ficha técnica da página oficial da etapa indica 142 km e 500 m de desnível. O eixo do desenho marca 141,0 km. O regulamento de 4 de maio de 2026 lista 141 km. A distância do card permanece 141 km; o desnível mostrado é o da ficha, não uma leitura do gráfico."
+      ],
+      "kmNoEixo": 141
+    },
+    "7": {
+      "arquivo": "img/perfis/giro-2026/etapa-07.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-7-of-the-giro-ditalia-2026-formia-blockhaus/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/dCrHWpqrypEFLMeVU62A_140526-050709.png?v=20260514170709",
+      "alt": "Perfil altimétrico da etapa 7 do Giro d'Italia 2026, Formia–Blockhaus.",
+      "kmNaFicha": 245,
+      "desnivelM": 4600,
+      "avisos": [
+        "A ficha técnica da página oficial da etapa indica 245 km e 4.600 m de desnível. O eixo do desenho marca 245,0 km. O arquivo estático do perfil traz 14 de maio de 2026 no nome. O regulamento de 4 de maio de 2026 lista 244 km. A distância do card permanece 244 km; o desnível mostrado é o da ficha, não uma leitura do gráfico."
+      ],
+      "kmNoEixo": 245
+    },
+    "8": {
+      "arquivo": "img/perfis/giro-2026/etapa-08.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-8-of-the-giro-ditalia-2026-chieti-fermo/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/izdJ2M6qS6RkNkylx7g8_140426-034526.jpg?v=20260414154526",
+      "alt": "Perfil altimétrico da etapa 8 do Giro d'Italia 2026, Chieti–Fermo.",
+      "kmNaFicha": 156,
+      "desnivelM": 1900,
+      "avisos": [
+        "A ficha técnica da página oficial da etapa indica 156 km e 1.900 m de desnível, a mesma distância do regulamento de 4 de maio de 2026. O eixo do desenho marca 157,0 km. A distância do card permanece 156 km; o desnível mostrado é o da ficha, não uma leitura do gráfico."
+      ],
+      "kmNoEixo": 157
+    },
+    "9": {
+      "arquivo": "img/perfis/giro-2026/etapa-09.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-9-of-the-giro-ditalia-2026-cervia-corno-alle-scale/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/fKQrLIRo8DZlbqop814R_150426-080440.jpg?v=20260415080440",
+      "alt": "Perfil altimétrico da etapa 9 do Giro d'Italia 2026, Cervia–Corno alle Scale.",
+      "kmNaFicha": 184,
+      "desnivelM": 2400,
+      "avisos": []
+    },
+    "10": {
+      "arquivo": "img/perfis/giro-2026/etapa-10.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-10-of-the-giro-ditalia-2026-viareggio-massa-tudor-itt/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/lQXPEqVwJuJ914DHez2w_150426-083005.jpg?v=20260415083005",
+      "alt": "Perfil altimétrico da etapa 10 do Giro d'Italia 2026, Viareggio–Massa.",
+      "kmNaFicha": 42,
+      "desnivelM": 50,
+      "avisos": []
+    },
+    "11": {
+      "arquivo": "img/perfis/giro-2026/etapa-11.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-11-of-the-giro-ditalia-2026-porcari-paper-district-chiavari/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/QvAY8szrOplqgV2vODAY_150426-085619.jpg?v=20260415085619",
+      "alt": "Perfil altimétrico da etapa 11 do Giro d'Italia 2026, Porcari (Paper District)–Chiavari.",
+      "kmNaFicha": 195,
+      "desnivelM": 2850,
+      "avisos": []
+    },
+    "12": {
+      "arquivo": "img/perfis/giro-2026/etapa-12.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-12-of-the-giro-ditalia-2026-imperia-novi-ligure/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/ak7ArX3X5Up1GwnlTadR_150426-094758.jpg?v=20260415094758",
+      "alt": "Perfil altimétrico da etapa 12 do Giro d'Italia 2026, Imperia–Novi Ligure.",
+      "kmNaFicha": 175,
+      "desnivelM": 2250,
+      "avisos": []
+    },
+    "13": {
+      "arquivo": "img/perfis/giro-2026/etapa-13.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-13-of-the-giro-ditalia-2026-alessandria-verbania/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/ztmmsbRfLTIzCYJeQyU4_150426-101430.jpg?v=20260415101430",
+      "alt": "Perfil altimétrico da etapa 13 do Giro d'Italia 2026, Alessandria–Verbania.",
+      "kmNaFicha": 189,
+      "desnivelM": 1400,
+      "avisos": []
+    },
+    "14": {
+      "arquivo": "img/perfis/giro-2026/etapa-14.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-14-of-the-giro-ditalia-2026-aosta-pila/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/YURkaSH6Hyd21zF0BLrY_150426-104353.jpg?v=20260415104353",
+      "alt": "Perfil altimétrico da etapa 14 do Giro d'Italia 2026, Aosta–Pila (Gressan).",
+      "kmNaFicha": 133,
+      "desnivelM": 4350,
+      "avisos": []
+    },
+    "15": {
+      "arquivo": "img/perfis/giro-2026/etapa-15.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-15-of-the-giro-ditalia-2026-voghera-milano/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/5ip8pnNAeAbTPWvny27I_150426-023237.jpg?v=20260415143237",
+      "alt": "Perfil altimétrico da etapa 15 do Giro d'Italia 2026, Voghera–Milano.",
+      "kmNaFicha": 157,
+      "desnivelM": 200,
+      "avisos": []
+    },
+    "16": {
+      "arquivo": "img/perfis/giro-2026/etapa-16.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-16-of-the-giro-ditalia-2026-bellinzona-cari/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/PtTqq9KeZ9zFqTPG3ybs_150426-024759.jpg?v=20260415144759",
+      "alt": "Perfil altimétrico da etapa 16 do Giro d'Italia 2026, Bellinzona–Carì.",
+      "kmNaFicha": 113,
+      "desnivelM": 3000,
+      "avisos": []
+    },
+    "17": {
+      "arquivo": "img/perfis/giro-2026/etapa-17.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-17-of-the-giro-ditalia-2026-cassano-dadda-andalo/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/n5I2olqrYw1bCMjSPfKp_150426-030536.jpg?v=20260415150536",
+      "alt": "Perfil altimétrico da etapa 17 do Giro d'Italia 2026, Cassano d'Adda–Andalo.",
+      "kmNaFicha": 202,
+      "desnivelM": 3300,
+      "avisos": []
+    },
+    "18": {
+      "arquivo": "img/perfis/giro-2026/etapa-18.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-18-of-the-giro-ditalia-2026-fai-della-paganella-pieve-di-soligo/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/OEcEZnHLvjsWtVpFKDbE_280426-010447.jpg?v=20260428130447",
+      "alt": "Perfil altimétrico da etapa 18 do Giro d'Italia 2026, Fai della Paganella–Pieve di Soligo.",
+      "kmNaFicha": 171,
+      "desnivelM": 2050,
+      "avisos": []
+    },
+    "19": {
+      "arquivo": "img/perfis/giro-2026/etapa-19.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-19-of-the-giro-ditalia-2026-feltre-alleghe-piani-di-pezze/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/Kcobp7DQfK1u2J76rr4g_150426-033547.jpg?v=20260415153547",
+      "alt": "Perfil altimétrico da etapa 19 do Giro d'Italia 2026, Feltre–Alleghe (Piani di Pezzè).",
+      "kmNaFicha": 151,
+      "desnivelM": 5000,
+      "avisos": []
+    },
+    "20": {
+      "arquivo": "img/perfis/giro-2026/etapa-20.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-20-of-the-giro-ditalia-2026-gemona-del-friuli-1976-2026-piancavallo/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/ilYaK3jnrBqWjLwlVZma_150426-035245.jpg?v=20260415155245",
+      "alt": "Perfil altimétrico da etapa 20 do Giro d'Italia 2026, Gemona del Friuli–Piancavallo.",
+      "kmNaFicha": 200,
+      "desnivelM": 3750,
+      "avisos": []
+    },
+    "21": {
+      "arquivo": "img/perfis/giro-2026/etapa-21.jpg",
+      "fontePagina": "https://www.giroditalia.it/en/tappe/stage-21-of-the-giro-ditalia-2026-roma-roma/",
+      "fonteAsset": "https://static2.giroditalia.it/wp-content/uploads/2026/04/JltckuXzPEqYHToPc76G_150426-040937.jpg?v=20260415160937",
+      "alt": "Perfil altimétrico da etapa 21 do Giro d'Italia 2026, Roma–Roma.",
+      "kmNaFicha": 131,
+      "desnivelM": 500,
+      "avisos": []
+    }
+  }
+}

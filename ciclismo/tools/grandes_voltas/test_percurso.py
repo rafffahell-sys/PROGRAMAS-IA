@@ -61,13 +61,49 @@ class Percurso(unittest.TestCase):
             self.assertEqual(len(prova["etapas"]), 21, slug)
             for etapa in prova["etapas"]:
                 self.assertEqual(etapa["perfil"]["pontos"], [])
-                self.assertFalse(etapa["perfilPublicado"])
-                self.assertIsNone(etapa["desnivelM"])
+                if slug == "giro":
+                    self.assertTrue(etapa["perfilPublicado"])
+                    self.assertIsInstance(etapa["desnivelM"], int)
+                else:
+                    self.assertFalse(etapa["perfilPublicado"])
+                    self.assertIsNone(etapa["desnivelM"])
+                    self.assertNotIn("imagem", etapa["perfil"])
 
-    def test_nenhum_perfil_publicado(self):
-        for slug, prova in self.provas.items():
+    def test_giro_tem_imagem_de_perfil_e_as_outras_nao(self):
+        giro = self.provas["giro"]
+        total = 0
+        for etapa in giro["etapas"]:
+            imagem = etapa["perfil"]["imagem"]
+            arquivo = RAIZ / imagem["arquivo"]
+            self.assertTrue(arquivo.is_file(), imagem["arquivo"])
+            self.assertGreater(arquivo.stat().st_size, 20_000)
+            total += arquivo.stat().st_size
+            self.assertTrue(imagem["arquivo"].endswith(f"etapa-{etapa['n']:02d}.jpg"))
+            self.assertIn(f"etapa {etapa['n']} ", imagem["alt"])
+            self.assertIn(etapa["origem"], imagem["alt"])
+            self.assertTrue(imagem["fontePagina"].startswith("https://www.giroditalia.it/en/tappe/stage-"))
+            self.assertIn("/wp-content/uploads/2026/04/", imagem["fonteAsset"])
+            self.assertNotIn("ciclista", imagem["alt"].lower())
+        self.assertLess(total, 4_000_000)
+        self.assertTrue(any(obs.startswith("Perfis altimétricos: 21 de 21") for obs in giro["observacoes"]))
+        etapa6 = giro["etapas"][5]
+        etapa7 = giro["etapas"][6]
+        etapa8 = giro["etapas"][7]
+        self.assertEqual(etapa6["km"], 141)
+        self.assertEqual(etapa6["perfil"]["imagem"]["kmNaFicha"], 142)
+        self.assertEqual(etapa6["perfil"]["imagem"]["kmNoEixo"], 141)
+        self.assertEqual(etapa7["km"], 244)
+        self.assertEqual(etapa7["perfil"]["imagem"]["kmNaFicha"], 245)
+        self.assertEqual(etapa7["perfil"]["imagem"]["kmNoEixo"], 245)
+        self.assertIn("140526", etapa7["perfil"]["imagem"]["fonteAsset"])
+        self.assertTrue(etapa7["perfil"]["imagem"]["fonteAsset"].split("?")[0].endswith(".png"))
+        self.assertEqual(etapa8["km"], 156)
+        self.assertEqual(etapa8["perfil"]["imagem"]["kmNaFicha"], 156)
+        self.assertEqual(etapa8["perfil"]["imagem"]["kmNoEixo"], 157)
+        for slug in ("tour", "vuelta"):
+            prova = self.provas[slug]
             publicados = [e for e in prova["etapas"] if e["perfilPublicado"] or e["perfil"]["pontos"]]
-            self.assertEqual(publicados, [], slug)
+            self.assertEqual(publicados, [])
             self.assertTrue(any(obs.startswith("Perfis altimétricos: 0 de 21") for obs in prova["observacoes"]))
 
     def test_giro_fecha_3468(self):
@@ -136,6 +172,9 @@ class Percurso(unittest.TestCase):
         gerado = fontes._giro()
         self.assertEqual(gerado["etapas"][18]["origem"], "Feltre")
         self.assertEqual(self.provas["giro"]["etapas"][9]["km"], 42)
+        self.assertEqual(gerado["etapas"][0]["perfil"]["imagem"]["arquivo"], "img/perfis/giro-2026/etapa-01.jpg")
+        self.assertEqual(gerado["etapas"][0]["perfil"]["pontos"], [])
+        self.assertEqual(gerado["etapas"][6]["km"], 244)
 
 
 if __name__ == "__main__":

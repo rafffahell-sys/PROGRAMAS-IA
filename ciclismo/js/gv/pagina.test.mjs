@@ -53,7 +53,11 @@ test("página real não pede snapshot nem desenha resultado", async () => {
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
   assert.match(raizDom.innerHTML, /Etapa 1/);
   assert.match(raizDom.innerHTML, /147 km/);
-  assert.match(raizDom.innerHTML, /Perfil altimétrico a publicar/);
+  assert.match(raizDom.innerHTML, /img\/perfis\/giro-2026\/etapa-01\.jpg/);
+  assert.match(raizDom.innerHTML, /Nessebar–Burgas/);
+  assert.match(raizDom.innerHTML, /Ampliar/);
+  assert.equal(raizDom.innerHTML.includes("<polyline"), false);
+  assert.equal(raizDom.innerHTML.includes("Perfil altimétrico a publicar"), false);
   assert.match(raizDom.innerHTML, /data-resultados="ocultos"/);
   assert.equal(raizDom.innerHTML.includes("Atleta"), false);
   assert.equal(pedidos.some((url) => /snapshot|firestore|googleapis/i.test(url)), false);
@@ -87,7 +91,8 @@ test("acesso falso e liberação malformada não pedem snapshot", async () => {
   };
   await iniciarPagina(raizDom, { fetchFn });
   assert.match(raizDom.innerHTML, /data-resultados="ocultos"/);
-  assert.match(raizDom.innerHTML, /Perfil altimétrico a publicar/);
+  assert.match(raizDom.innerHTML, /img\/perfis\/giro-2026\/etapa-01\.jpg/);
+  assert.equal(raizDom.innerHTML.includes("<polyline"), false);
   assert.equal(raizDom.innerHTML.includes("Atleta"), false);
   assert.equal(pedidos.some((url) => /snapshot|firestore|googleapis|firebase/i.test(url)), false);
   assert.equal(globalThis.__GV_LEITOR_CARREGADO__, false);
@@ -119,6 +124,21 @@ test("cena do giro é italiana e a do tour não", () => {
   const css = fs.readFileSync(path.join(raiz, "css/grande-volta.css"), "utf8");
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(css, /\.gv-roda \{\s*animation:\s*none/);
+});
+
+test("giro real filtra imagem de perfil e mantém o km do regulamento", () => {
+  const prova = JSON.parse(fs.readFileSync(path.join(raiz, "data/grandes-voltas/2026/giro.json"), "utf8"));
+  const hub = htmlHub(prova, { etapas: {}, provaCompleta: false }, { somenteComPerfil: true });
+  assert.equal((hub.match(/class="gv-card"/g) || []).length, 21);
+  assert.match(hub, /com perfil/);
+  const etapa = prova.etapas.find((item) => item.n === 7);
+  const html = htmlEtapa(prova, etapa, { etapas: {}, provaCompleta: false }, null, null);
+  assert.match(html, /244 km/);
+  assert.match(html, /245 km/);
+  assert.match(html, /etapa-07\.jpg/);
+  assert.match(html, /data-resultados="ocultos"/);
+  assert.equal(html.includes("<polyline"), false);
+  assert.equal(html.includes("firestore"), false);
 });
 
 test("filtro de perfil vazio e comparação não contígua sintética", () => {

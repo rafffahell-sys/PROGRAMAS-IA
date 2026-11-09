@@ -5,6 +5,7 @@ import {
   etapaLiberada,
   estadoChip,
   filtrarEtapas,
+  temPerfil,
   hrefEtapa,
   hrefHub,
   lerRota,
@@ -103,16 +104,45 @@ function htmlMarcadores(titulo, itens) {
 
 function htmlPerfil(etapa) {
   const pontos = etapa.perfil?.pontos || [];
-  if (!pontosValidos(pontos)) {
-    return `<figure class="gv-perfil gv-perfil-vazio">
-      <figcaption>Perfil altimétrico a publicar</figcaption>
-      <p>A fonte de percurso consultada não trouxe a série de altitude. Nenhum desenho foi inventado.</p>
+  if (pontosValidos(pontos)) {
+    const marcas = [...(etapa.perfil?.sprints || []), ...(etapa.perfil?.montanhas || [])];
+    return `<figure class="gv-perfil">${svgPerfil(pontos, marcas)}
+      <figcaption>Perfil do percurso, sem resultado.</figcaption>
     </figure>`;
   }
-  const marcas = [...(etapa.perfil?.sprints || []), ...(etapa.perfil?.montanhas || [])];
-  return `<figure class="gv-perfil">${svgPerfil(pontos, marcas)}
-    <figcaption>Perfil do percurso, sem resultado.</figcaption>
+  const imagem = etapa.perfil?.imagem;
+  if (imagem && typeof imagem.arquivo === "string" && imagem.arquivo) {
+    const alt = imagem.alt || `Perfil altimétrico da etapa ${etapa.n}.`;
+    const links = [
+      imagem.fontePagina
+        ? `<a href="${esc(imagem.fontePagina)}" rel="noopener noreferrer">página oficial da etapa</a>`
+        : "",
+      imagem.fonteAsset
+        ? `<a href="${esc(imagem.fonteAsset)}" rel="noopener noreferrer">arquivo original do perfil</a>`
+        : ""
+    ].filter(Boolean).join(" · ");
+    return `<figure class="gv-perfil gv-perfil-imagem">
+      <img src="${esc(imagem.arquivo)}" alt="${esc(alt)}" width="1280" height="852">
+      <button type="button" class="gv-botao-ampliar" data-perfil-ampliar>Ampliar</button>
+      <figcaption>Perfil altimétrico do percurso, sem resultado. A imagem não foi convertida em pontos.</figcaption>
+      ${links ? `<p class="gv-fonte">Fonte do perfil: ${links}</p>` : ""}
+      <dialog class="gv-perfil-dialog">
+        <form method="dialog"><button value="fechar">Fechar</button></form>
+        <img src="${esc(imagem.arquivo)}" alt="${esc(alt)}">
+      </dialog>
+    </figure>`;
+  }
+  return `<figure class="gv-perfil gv-perfil-vazio">
+    <figcaption>Perfil altimétrico a publicar</figcaption>
+    <p>A fonte de percurso consultada não trouxe a série de altitude. Nenhum desenho foi inventado.</p>
   </figure>`;
+}
+
+function ligarPerfil(raiz) {
+  const botao = raiz.querySelector("[data-perfil-ampliar]");
+  const dialog = raiz.querySelector("dialog.gv-perfil-dialog");
+  if (!botao || !dialog || typeof dialog.showModal !== "function") return;
+  botao.addEventListener("click", () => dialog.showModal());
 }
 
 function htmlLinha(item, unidade) {
@@ -244,6 +274,7 @@ export function htmlHub(prova, liberacao, filtro = {}, favoritos = null) {
       <span class="gv-chip ${esc(chip)}">${esc(ROTULO_CHIP[chip])}</span>
       <strong>${esc(lugar(etapa))}</strong>
       <span>${esc(fmtKm(etapa.km))} · ${esc(ROTULO_TIPO[etapa.tipo] || etapa.tipo)}</span>
+      ${temPerfil(etapa) ? `<span class="gv-tem-perfil">com perfil</span>` : ""}
     </a>`;
   }).join("");
   const tipos = [`<option value="">Todos os tipos</option>`]
@@ -399,6 +430,7 @@ export async function desenhar(estado) {
     acesso: estado.acesso,
     analise
   });
+  ligarPerfil(raiz);
   document.title = `Etapa ${etapa.n} · ${prova.nome} ${prova.ano}`;
 }
 
