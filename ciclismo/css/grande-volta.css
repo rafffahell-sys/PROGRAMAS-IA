@@ -216,6 +216,15 @@ body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
 }
 .gv-perfil-dialog img { width: 100%; height: auto; }
 .gv-perfil-dialog::backdrop { background: rgba(20, 8, 16, 0.72); }
+.gv-trofeu { margin-top: 16px; }
+.gv-trofeu img {
+  width: min(280px, 100%);
+  height: auto;
+  display: block;
+  background: #fff;
+  border-radius: 16px;
+}
+.gv-trofeu figcaption { margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
 .gv-tem-perfil {
   font-size: 0.72rem;
   letter-spacing: 0.04em;

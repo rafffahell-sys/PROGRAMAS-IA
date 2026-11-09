@@ -258,7 +258,33 @@ function htmlResultados(prova, etapa, liberacao, snap, snapAnterior, anteriorN) 
   </section>`;
 }
 
-export function htmlHub(prova, liberacao, filtro = {}, favoritos = null) {
+function htmlTrofeu(trofeu) {
+  if (trofeu?.arquivo) {
+    const credito = [
+      trofeu.credito || "",
+      trofeu.licenca && trofeu.licencaUrl
+        ? `<a href="${esc(trofeu.licencaUrl)}" rel="license noopener noreferrer">${esc(trofeu.licenca)}</a>`
+        : esc(trofeu.licenca || ""),
+      trofeu.fonteUrl
+        ? `<a href="${esc(trofeu.fonteUrl)}" rel="noopener noreferrer">${esc(trofeu.fonteNome || "Fonte")}</a>`
+        : "",
+      trofeu.ajuste || ""
+    ].filter(Boolean).join(" · ");
+    return `<section class="gv-trofeu" aria-labelledby="gv-trofeu-titulo">
+      <h2 id="gv-trofeu-titulo">Troféu</h2>
+      <figure>
+        <img src="${esc(trofeu.arquivo)}" alt="${esc(trofeu.alt || trofeu.nome || "Troféu da prova")}" width="683" height="1024">
+        <figcaption>${trofeu.nome ? `<strong>${esc(trofeu.nome)}</strong>. ` : ""}${credito}</figcaption>
+      </figure>
+    </section>`;
+  }
+  return `<section class="gv-trofeu" aria-labelledby="gv-trofeu-titulo">
+    <h2 id="gv-trofeu-titulo">Troféu</h2>
+    <p>Imagem ainda não disponível nesta página.</p>
+  </section>`;
+}
+
+export function htmlHub(prova, liberacao, filtro = {}, favoritos = null, trofeu = null) {
   const liberadas = numerosLiberados(liberacao);
   const etapas = filtrarEtapas(prova.etapas, liberacao, filtro);
   const km = somaKm(prova.etapas);
@@ -291,6 +317,7 @@ export function htmlHub(prova, liberacao, filtro = {}, favoritos = null) {
       ${htmlCena(prova.slug)}
     </header>
     <p class="gv-aviso">Resultados só depois que você confirmar cada etapa. Nenhuma confirmação libera a vizinha nem a prova inteira.</p>
+    ${htmlTrofeu(trofeu)}
     <section>
       <h2>Camisas</h2>
       <ul class="gv-camisas">${htmlCamisas(prova)}</ul>
@@ -389,7 +416,11 @@ export async function desenhar(estado) {
       }
       favoritos = estado.favoritosPorProva[prova.slug];
     }
-    raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro || {}, favoritos);
+    if (!estado.trofeus) {
+      estado.trofeus = await lerOuFechado(estado.fetchFn, "data/grandes-voltas/trofeus.json", {});
+    }
+    const trofeu = estado.trofeus?.[prova.slug] || null;
+    raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro || {}, favoritos, trofeu);
     document.title = `${prova.nome} ${prova.ano} — etapas`;
     ligarFiltros(estado, prova, liberacao);
     return;
@@ -447,7 +478,8 @@ function ligarFiltros(estado, prova, liberacao) {
       somenteComPerfil: form.querySelector('[name="perfil"]').checked
     };
     const favoritos = estado.favoritosPorProva ? estado.favoritosPorProva[prova.slug] : null;
-    estado.raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro, favoritos);
+    const trofeu = estado.trofeus?.[prova.slug] || null;
+    estado.raiz.innerHTML = htmlHub(prova, liberacao, estado.filtro, favoritos, trofeu);
     ligarFiltros(estado, prova, liberacao);
   });
 }
