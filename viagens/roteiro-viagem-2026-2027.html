@@ -324,6 +324,79 @@
   .footer { text-align: center; padding: 50px 20px 40px; color: rgba(255,255,255,0.25); font-size: 0.85em; max-width: 960px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.04); }
   .footer .hearts { color: #f43f5e; }
   .footer .route-cities { font-size: 0.8em; opacity: 0.6; margin-top: 6px; }
+  /* Edição luxo — preserva o roteiro e seus dados */
+  :root {
+    --lux-ink:#172536; --lux-muted:#596779; --lux-gold:#b58a45;
+    --lux-gold-soft:#ead9b7; --lux-paper:#fffdf8; --lux-line:#e8e1d4;
+  }
+  body { background:#f4f1e9; color:var(--lux-ink); font-family:'Inter',sans-serif; line-height:1.72; }
+  ::selection { background:var(--lux-gold); color:#fff; }
+  .cover {
+    min-height:82vh; padding:100px 28px 90px;
+    background:linear-gradient(115deg,rgba(12,24,39,.88),rgba(19,35,51,.55)),url('sul-ponte.jpg') center 42%/cover no-repeat;
+    color:#fff; border-bottom:4px solid var(--lux-gold);
+  }
+  .cover .bg-layer { background:linear-gradient(180deg,rgba(6,15,26,.18),rgba(6,15,26,.18)),radial-gradient(ellipse at 50% 100%,rgba(181,138,69,.18),transparent 58%); }
+  .cover .stars,.cover .shooting-star,.cover .mountain-scene { display:none; }
+  .cover h1 {
+    max-width:1120px; color:#fff; font-family:'Playfair Display',serif;
+    font-size:clamp(2.3rem,6vw,5.2rem); font-weight:700; letter-spacing:.015em;
+    background:linear-gradient(110deg,#fff 15%,#f0dfbd 75%,#d6b36e 100%);
+    -webkit-background-clip:text; background-clip:text; filter:none;
+    text-shadow:0 3px 28px rgba(0,0,0,.22);
+  }
+  .cover .subtitle { color:#f7f2e8; font-weight:400; letter-spacing:.08em; }
+  .cover .divider-line { background:linear-gradient(90deg,transparent,var(--lux-gold),#f2dfb9,transparent); }
+  .cover .dates { background:rgba(12,24,39,.58); border:1px solid rgba(234,217,183,.55); color:#fff; box-shadow:0 10px 30px rgba(0,0,0,.15); }
+  .cover .travelers { color:#f3ecdf; opacity:.9; }
+  .cover .flags { opacity:.75; filter:drop-shadow(0 2px 8px rgba(0,0,0,.5)); }
+  .timeline-container { max-width:1080px; padding:48px 24px 78px; }
+  .timeline-container::before { background:linear-gradient(to bottom,#c49a56,#e4d5b8,#c49a56); opacity:.65; }
+  .part-divider { margin:64px 0 38px; }
+  .part-divider::before { background:linear-gradient(to right,transparent,rgba(181,138,69,.42),transparent); }
+  .part-divider h2 { color:var(--lux-ink); font-family:'Playfair Display',serif; font-weight:700; }
+  .badge { background:#172536; color:#f2dfba; border:1px solid #b58a45; box-shadow:0 6px 18px rgba(23,37,54,.18); }
+  .day-card,.summary-box,.flight-summary,.reservation-box {
+    color:var(--lux-ink); background:var(--lux-paper); border:1px solid var(--lux-line);
+    border-radius:20px; box-shadow:0 12px 34px rgba(34,43,54,.09);
+  }
+  .day-card { padding:30px 34px; margin-bottom:28px; }
+  .day-card:nth-of-type(odd) { border-left:4px solid var(--lux-gold); }
+  .day-card:nth-of-type(even) { border-right:4px solid #74889a; }
+  .day-card :not(.day-icon):not(.confirmed),.summary-box :not(.tag),.flight-summary :not(.tag),.reservation-box :not(.confirmed) { color:#465366 !important; }
+  .day-card .day-number,.day-card h3,.part-divider h2 { color:var(--lux-ink) !important; }
+  .day-card .day-date,.part-subtitle { color:#96733d !important; }
+  .day-card .price-val,.summary-box .price-val { color:#946d2d !important; }
+  .day-card .confirmed { color:#28775b !important; }
+  .flight-locator { display:inline-flex; align-items:center; gap:8px; margin-top:12px; padding:7px 12px; border:1px solid #d9c79f; border-radius:999px; background:#f8f3e8; color:#6e552c !important; font-size:.82rem; letter-spacing:.02em; }
+  .flight-locator strong { color:#172536 !important; font-family:ui-monospace,monospace; letter-spacing:.12em; }
+  .flight-block,.hotel-box,.highlight,.summary-box [style*="background:rgba"],.flight-summary [style*="background:rgba"] {
+    background:#f4f0e7 !important; border-color:#e5dcc9 !important; color:#35445a !important;
+  }
+  .highlight.green { background:#edf4ef !important; border-color:#d4e4d7 !important; }
+  .highlight.gold { background:#f8f1e3 !important; border-color:#ead8b2 !important; }
+  .highlight.blue { background:#edf2f5 !important; border-color:#d8e0e7 !important; }
+  .highlight.red { background:#f7eeeb !important; border-color:#ebd8d1 !important; }
+  .tag { background:#efe7d8; color:#765c32; }
+  .tag.green { background:#e7f0e9; color:#28775b; }
+  .tag.blue { background:#e8eef2; color:#45677f; }
+  .tag.gold { background:#f6eddb; color:#87652e; }
+  .tag.red { background:#f5e9e5; color:#925a49; }
+  table th { color:#896c3b; }
+  table td { color:#465366; border-color:#e8e1d4; }
+  .footer { color:#657183; border-color:#e4ddcf; }
+  .route-cities { color:#7c8794; }
+  @media (max-width:700px) {
+    .cover { min-height:70vh; padding:78px 20px 75px; background-position:54% center; }
+    .cover h1 { letter-spacing:0; }
+    .cover .flags { font-size:1.65em; bottom:20px; }
+    .timeline-container { padding:25px 14px 48px; }
+    .timeline-container::before { left:13px; }
+    .day-card { padding:22px 18px; border-radius:18px; margin-left:7px; }
+    .part-divider { margin:44px 0 26px; }
+    .summary-box,.flight-summary,.reservation-box { padding:18px !important; }
+    table { display:block; overflow-x:auto; white-space:nowrap; }
+  }
 </style>
 </head>
 <body>
@@ -400,6 +473,7 @@
         <div class="flight-meta">🛩️ <strong>LA3424</strong> · A321 · 20:05 GRU → <strong>21:50</strong> POA · 1h45</div>
       </div>
     </div>
+    <div class="flight-locator">🔒 Localizador LATAM <strong>YUQQFM</strong></div>
     <div class="hotel-box">
       <div class="hotel-name">🏨 Novotel Porto Alegre Airport · <span class="confirmed">Confirmado</span></div>
       <div class="hotel-detail">📍 Porto Alegre · 📅 18/dez → 19/dez · 1 noite · <span class="price-val">R$ 581,30</span></div>
@@ -565,6 +639,7 @@
       <div class="flight-route">POA ✈ CGH</div>
       <div class="flight-meta">🛩️ <strong>LA3161</strong> · A320 · <strong>13:20</strong> POA → <strong>15:00</strong> CGH · 1h40 · ✈ Direto</div>
     </div>
+    <div class="flight-locator">🔒 Localizador LATAM <strong>YCHEGT</strong></div>
     <div class="hotel-box">
       <div class="hotel-name">🏨 Intercity São Paulo Paulista · <span class="confirmed">Confirmada</span></div>
       <div class="hotel-detail">📍 Próximo à Av. Paulista · Check-in a partir das 14h · 📅 26/dez → 01/jan · 6 diárias · <span class="price-val">R$ 3.767,74</span></div>
@@ -719,6 +794,7 @@
       <div class="flight-route">GRU ✈ IGU</div>
       <div class="flight-meta">🛩️ <strong>LA3204</strong> · A321 · <strong>15:30</strong> GRU → <strong>17:15</strong> IGU · 1h45 · ✈ Direto</div>
     </div>
+    <div class="flight-locator">🔒 Localizador LATAM <strong>EYEKII</strong></div>
     <div class="hotel-box">
       <div class="hotel-name">🏨 Ibis Budget Foz do Iguaçu · <span class="confirmed">Confirmada</span></div>
       <div class="hotel-detail">📅 01/jan → 04/jan · <span class="price-val">R$ 1.156,05</span></div>
@@ -903,6 +979,7 @@
       <div style="background:rgba(124,58,237,0.08);padding:4px 14px;border-radius:8px;font-size:0.82em;color:#a78bfa;">⏱ Conexão GRU · 2h35</div>
       <div class="flight-meta">🛩️ <strong>LA3604</strong> · 08:35 GRU → <strong>12:10 BEL</strong> · 3h35</div>
     </div>
+    <div class="flight-locator">🔒 Localizador LATAM <strong>CKYDUP</strong></div>
     <div class="highlight green">
       <strong>🏡 Chegada em Belém — 12:10</strong><br>
       21 dias de aventura, memórias e momentos especiais entre mãe e filho! 🌟
