@@ -13,8 +13,28 @@
 @media(max-width:540px){.dashboard-back{left:12px;bottom:12px;padding:9px 13px;font-size:12px}}
 @media print{.dashboard-back{display:none}}
 @media print{body{background:white;color:#173641;font-size:11pt}.masthead,.hero-actions,.daynav,.rail,.page-end,.skip{display:none}.wrap{max-width:none;padding:0}.hero{padding:10px 0;display:block}.hero h1{font-size:48pt}.hero-side{display:none}.travel-layout{display:block}.birthday{background:white;color:#173641;border:1px solid #ccc;padding:15px;margin-bottom:20px}.birthday p,.birthday .eyebrow,.birthday a{color:#173641}.day-card{break-inside:avoid}.section-block{margin-top:20px}.flight-inner,.hotel-inner,.booking-inner,.insurance-card{padding:15px}.summary-inner{padding-block:15px}.rail-card{break-inside:avoid}a{color:inherit}.site-footer{margin-top:20px}}
+</style>
+<style>
+.gastos-acesso{background:none;border:0;padding:0;color:var(--ink);font-size:13px;min-height:44px}
+.gastos-noscript{max-width:1180px;margin:0 auto 24px;padding-inline:40px;font-size:13px;color:var(--muted)}
+#gastos-dialog{width:min(920px,calc(100vw - 24px));max-height:min(720px,calc(100vh - 24px));overflow:auto;border:1px solid var(--line);border-radius:8px;padding:22px;background:var(--white);color:var(--ink)}
+#gastos-dialog::backdrop{background:#17364180}
+#gastos-dialog h2{font-size:32px;letter-spacing:-.5px}
+#gastos-dialog [hidden]{display:none !important}
+.gastos-aviso,.gastos-status,.gastos-ignorados{font-size:14px;color:var(--muted);margin-top:12px}
+.gastos-status[data-tipo="erro"],.gastos-ignorados{color:#6d2b2b}
+.gastos-acoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.gastos-tabela-scroll{overflow-x:auto;margin-top:18px}
+#gastos-tabela{width:100%;border-collapse:collapse;font-size:14px}
+#gastos-tabela caption{text-align:left;font-size:13px;color:var(--muted);margin-bottom:8px}
+#gastos-tabela th,#gastos-tabela td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+#gastos-tabela th{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:650}
+#gastos-tabela .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.gastos-total{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-size:16px}
+@media(max-width:540px){.gastos-noscript{padding-inline:20px}#gastos-dialog{padding:16px}#gastos-dialog h2{font-size:28px}}
+@media print{.gastos-acesso,#gastos-dialog,.gastos-noscript{display:none !important}}
 </style></head><body><a class="skip" href="#roteiro">Ir para o roteiro</a><a class="dashboard-back" href="index.html" aria-label="Voltar ao dashboard de viagens">← Dashboard</a>
-<header class="masthead"><div class="wrap"><a class="brand" href="#top">Rafael<span>.</span> viagens</a><nav class="topnav" aria-label="Navegação principal"><a href="#roteiro">Roteiro</a><a href="#reservas">Reservas</a><a href="#apoio">Contatos</a><button class="print-button" id="print-page" type="button">Imprimir ↗</button></nav><span class="edition">Caderno de viagem · 2026</span></div></header>
+<header class="masthead"><div class="wrap"><a class="brand" href="#top">Rafael<span>.</span> viagens</a><nav class="topnav" aria-label="Navegação principal"><a href="#roteiro">Roteiro</a><a href="#reservas">Reservas</a><a href="#apoio">Contatos</a><button class="gastos-acesso" id="abrir-gastos" type="button" aria-haspopup="dialog" aria-controls="gastos-dialog">Conferir gastos</button><button class="print-button" id="print-page" type="button">Imprimir ↗</button></nav><span class="edition">Caderno de viagem · 2026</span></div></header>
 <main class="wrap" id="top">
 <section class="hero" aria-labelledby="hero-title"><div><div class="eyebrow">República Oriental do Uruguai</div><h1 id="hero-title">Uruguai.<br><em>Novembro, 2026</em></h1><p class="intro">Oito dias, boas companhias e um aniversário especial. Nosso caderno para viver cada momento.</p><div class="travelers"><span>Rafael</span><span>Victoria</span><span>Samar</span></div><div class="hero-actions"><a class="action" href="#roteiro">Explorar o roteiro ↓</a><a class="action secondary" href="#day5">05 de novembro · aniversário</a></div></div><div class="hero-side"><div class="flag-postcard"><span class="postcard-edition">NOSSO DESTINO · NOVEMBRO 2026</span><img class="national-flag" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy11eSIgdmlld0JveD0iMCAwIDY0MCA0ODAiPgogIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoNjQwdjQ4MEgweiIvPgogIDxwYXRoIGZpbGw9IiMwMDM4YTgiIGQ9Ik0yNjYgNTMuM2gzNzR2NTMuNEgyNjZ6bTAgMTA2LjdoMzc0djUzLjNIMjY2ek0wIDI2Ni43aDY0MFYzMjBIMHptMCAxMDYuNmg2NDB2NTMuNEgweiIvPgogIDxnIGZpbGw9IiNmY2QxMTYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjIwIiBzdHJva2Utd2lkdGg9Ii42IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMzMuMyAxMzMuMylzY2FsZSgyLjkzMzMzKSI+CiAgICA8ZyBpZD0idXktYyI+CiAgICAgIDxnIGlkPSJ1eS1iIj4KICAgICAgICA8ZyBpZD0idXktYSI+CiAgICAgICAgICA8cGF0aCBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBkPSJtLTIgOC45IDMgNC41Yy0xMi40IDktNC45IDE0LjItMTMuNiAxNyA1LjQtNS4yLS45LTUuNyAzLjctMTYuOCIvPgogICAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTS00LjIgMTAuMmMtNi44IDExLjItMi40IDE3LjQtOC40IDIwLjMiLz4KICAgICAgICAgIDxwYXRoIGQ9Ik0wIDBoNkwwIDMzLTYgMGg2djMzIi8+CiAgICAgICAgPC9nPgogICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3V5LWEiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0icm90YXRlKDQ1KSIvPgogICAgICA8L2c+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3V5LWIiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0icm90YXRlKDkwKSIvPgogICAgPC9nPgogICAgPHVzZSB4bGluazpocmVmPSIjdXktYyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJzY2FsZSgtMSkiLz4KICAgIDxjaXJjbGUgcj0iMTEiLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMzLjMgMTMzLjMpc2NhbGUoLjI5MzMzKSI+CiAgICA8ZyBpZD0idXktZCI+CiAgICAgIDxwYXRoIGQ9Ik04MS00NGMtNyA4LTExLTYtMzYtNlMxNi0zNSAxMi0zOHMyMS0yMSAyOS0yMiAzMSA3IDQwIDE2bS0yOSA5YzcgNiAxIDE5LTYgMTlTMjYtMjggMzItMzYiLz4KICAgICAgPHBhdGggZD0iTTE5LTI2YzEtMTIgMTEtMTQgMjctMTRzMjMgMTIgMjkgMTVjLTcgMC0xMy0xMC0yOS0xMHMtMTYgMC0yNyAxMG0zIDJjNC02IDkgNiAyMCA2czE3LTMgMjQtOC0xMCAxMi0yMSAxMi0yNi02LTIzLTEwIi8+CiAgICAgIDxwYXRoIGQ9Ik01Ni0xN2MxMy03IDUtMTcgMC0xOSAyIDIgMTAgMTIgMCAxOU0wIDQzYzYgMCA4LTIgMTYtMnMyNyAxMSAzOCA3Yy0yMyA5LTE0IDMtNTQgM2gtNW02MyA2Yy00LTctMy01LTExLTE2IDggNiAxMCA5IDExIDE2TTAgNjdjMjUgMCAyMS01IDU0LTE5LTI0IDMtMjkgMTEtNTQgMTFoLTVtNS0yOWM3IDAgOS01IDE3LTVzMTkgMyAyNCA3YzEgMS0zLTgtMTEtOVMyNSA5IDE2IDdjMCA0IDMgMyA0IDkgMCA1LTkgNS0xMSAwIDIgOC00IDgtOSA4Ii8+CiAgICA8L2c+CiAgICA8dXNlIHhsaW5rOmhyZWY9IiN1eS1kIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB0cmFuc2Zvcm09InNjYWxlKC0xIDEpIi8+CiAgICA8cGF0aCBkPSJNMCA3NmMtNSAwLTE4IDMgMCAzczUtMyAwLTMiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="Bandeira do Uruguai"><div class="postcard-footer"><span>Uruguay</span><small>Uma viagem para guardar.</small></div></div></div></section>
 <div class="trip-strip"><span><b>01 — 08 novembro</b> · 7 dias no Uruguai</span><span><b>Base:</b> Dazzler Montevideo</span><span><b>Voos:</b> Gol Linhas Aéreas</span></div>
@@ -499,7 +519,36 @@
   <p>🇺🇾 Uruguai 2026 · 44 anos de Little · Rafael, Victoria & Samar · 💙</p>
 </footer>
 
-<div class="page-end"><a href="#top">Voltar ao início ↑</a></div></main><script>
+<div class="page-end"><a href="#top">Voltar ao início ↑</a></div></main>
+<dialog id="gastos-dialog" aria-labelledby="gastos-titulo" aria-describedby="gastos-aviso">
+  <h2 id="gastos-titulo">Gastos da viagem</h2>
+  <p class="gastos-aviso" id="gastos-aviso">Esta página não lê as regras publicadas no Firebase. O login só decide se ela pede os gastos; não prova que outra pessoa esteja bloqueada no banco. Não carregue gastos reais antes de publicar e conferir as regras propostas.</p>
+  <p class="gastos-status" id="gastos-status" role="status">Nenhuma consulta começa antes do login do proprietário. Os gastos não ficam salvos nesta página.</p>
+  <div class="gastos-acoes">
+    <button class="action" id="gastos-entrar" type="button">Entrar com Google</button>
+    <button class="action secondary" id="gastos-sair" type="button" hidden>Sair</button>
+    <button class="action secondary" id="gastos-fechar" type="button">Fechar</button>
+  </div>
+  <div class="gastos-tabela-scroll" id="gastos-scroll" tabindex="0" hidden>
+    <table id="gastos-tabela">
+      <caption>Lançamentos da viagem. O total em reais soma só as linhas aceitas.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Data</th>
+          <th scope="col">Local</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Moeda original</th>
+          <th scope="col" class="num">Valor original</th>
+          <th scope="col" class="num">Valor em BRL</th>
+        </tr>
+      </thead>
+      <tbody id="gastos-corpo"></tbody>
+    </table>
+  </div>
+  <p class="gastos-total" id="gastos-total-linha" hidden><span>Total em reais</span> <strong id="gastos-total"></strong></p>
+  <p class="gastos-ignorados" id="gastos-ignorados" hidden></p>
+</dialog>
+<script>
 document.getElementById('print-page').addEventListener('click',()=>window.print());
 if ('IntersectionObserver' in window) {
  const dayLinks = Array.from(document.querySelectorAll('.daynav a'));
@@ -510,4 +559,8 @@ if ('IntersectionObserver' in window) {
  }, {rootMargin:'-10% 0px -65% 0px',threshold:0});
  document.querySelectorAll('.day-card').forEach(day=>observer.observe(day));
 }
-</script></body></html>
+</script>
+<script src="../ciclismo/js/firebase-config.js"></script>
+<script type="module" src="js/gastos-privados.js"></script>
+<noscript><p class="gastos-noscript">Conferir gastos precisa de JavaScript. O roteiro continua nesta página.</p></noscript>
+</body></html>

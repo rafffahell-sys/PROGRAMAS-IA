@@ -1,0 +1,47 @@
+rules_version = '2';
+// EXEMPLO do legado aberto, para revisão. Não é o padrão a publicar.
+// Publique este arquivo só se as regras do console forem conferidas e forem
+// idênticas a este legado. Se forem diferentes, adapte as regras efetivas:
+// todo match que alcance viagensPrivadas tem de excluir ou restringir esse
+// caminho. Um allow específico não fecha um allow amplo, porque as regras
+// são OU. allow read: if request.auth != null num curinga ainda entrega os
+// gastos a qualquer conta autenticada.
+// Este arquivo não está publicado. Não importe gastos reais antes da auditoria.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function ehProprietario() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email is string
+        && request.auth.token.email.lower() == "rafffahell@gmail.com";
+    }
+
+    function ehProprietarioGoogle() {
+      return ehProprietario()
+        && request.auth.token.firebase.sign_in_provider == "google.com";
+    }
+
+    // Caminho exclusivo dos gastos. E-mail verificado e provedor Google.
+    // O documento pai viagensPrivadas/{viagem} não tem allow: não há índice público.
+    match /viagensPrivadas/{viagem}/lancamentos/{lancamento} {
+      allow read, write: if ehProprietarioGoogle();
+    }
+
+    // Ciclismo, como em ciclismo/README.md: leitura pública, escrita do proprietário.
+    // Sem exigência de provedor, para não mudar o contrato já documentado do ciclismo.
+    // Fora do match amplo para a escrita não voltar a ser de qualquer pessoa.
+    match /ciclismo/{documento} {
+      allow read: if true;
+      allow write: if ehProprietario();
+    }
+
+    // Só neste exemplo de legado aberto. Não é um trecho para colar sobre
+    // regras mais fechadas: isso ampliaria o acesso delas.
+    // A comparação não distingue maiúsculas: ViagensPrivadas e viagensprivadas
+    // também ficam de fora e, sem allow próprio, negam todos.
+    match /{colecao}/{caminho=**} {
+      allow read, write: if colecao.lower() != "viagensprivadas"
+        && colecao.lower() != "ciclismo";
+    }
+  }
+}
