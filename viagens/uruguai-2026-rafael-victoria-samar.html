@@ -13,6 +13,62 @@
 @media(max-width:540px){.dashboard-back{left:12px;bottom:12px;padding:9px 13px;font-size:12px}}
 @media print{.dashboard-back{display:none}}
 @media print{body{background:white;color:#173641;font-size:11pt}.masthead,.hero-actions,.daynav,.rail,.page-end,.skip{display:none}.wrap{max-width:none;padding:0}.hero{padding:10px 0;display:block}.hero h1{font-size:48pt}.hero-side{display:none}.travel-layout{display:block}.birthday{background:white;color:#173641;border:1px solid #ccc;padding:15px;margin-bottom:20px}.birthday p,.birthday .eyebrow,.birthday a{color:#173641}.day-card{break-inside:avoid}.section-block{margin-top:20px}.flight-inner,.hotel-inner,.booking-inner,.insurance-card{padding:15px}.summary-inner{padding-block:15px}.rail-card{break-inside:avoid}a{color:inherit}.site-footer{margin-top:20px}}
+
+@font-face{font-family:Caveat;font-style:normal;font-weight:400 700;font-display:swap;src:url("fonts/caveat-latin.woff2") format("woff2")}
+.souvenir{--hand:Caveat,"Segoe Script","Bradley Hand",cursive;margin:18px auto 48px;max-width:820px;padding:20px 8px 8px}
+.postcard{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(200px,.9fr);grid-template-areas:"photo frank" "photo note";gap:4px 22px;align-items:start;padding:26px 26px 22px;background-color:#efe6d4;background-image:repeating-linear-gradient(0deg,transparent 0 3px,rgba(23,54,65,.018) 3px 4px),repeating-linear-gradient(90deg,transparent 0 3px,rgba(148,115,56,.022) 3px 4px),radial-gradient(ellipse at 16% 0,rgba(255,253,248,.7),transparent 52%),radial-gradient(ellipse at 100% 100%,rgba(148,115,56,.12),transparent 46%),linear-gradient(180deg,#f4ecde,#e8dcc6);border:1px solid #d9cbb0;box-shadow:0 18px 40px #17364118,inset 0 0 0 1px #fff9,inset 0 0 70px #94733814}
+.postcard:before{content:"";position:absolute;inset:8px;border:1px dashed #94733833;pointer-events:none}
+.polaroid-wrap{grid-area:photo;position:relative;padding:28px 24px 18px;width:100%;max-width:400px;justify-self:center}
+.postcard-frank{grid-area:frank;display:flex;justify-content:flex-end;align-items:flex-start;position:relative;z-index:3;padding:2px 2px 0 0;min-height:96px}
+.stamp{width:68px;height:84px;flex:0 0 auto;transform:rotate(6deg);filter:drop-shadow(0 2px 3px #17364122)}
+.stamp svg,.postmark svg{display:block;width:100%;height:100%}
+.postmark{width:118px;height:118px;margin:-16px 4px 0 -30px;transform:rotate(-18deg);opacity:.78;pointer-events:none}
+.postcard-note{grid-area:note;font-family:var(--hand);font-weight:400;font-size:clamp(22px,2.4vw,28px);line-height:1.35;color:var(--blue);margin:12px 0 8px;padding-left:22px;border-left:1px solid #94733847;transform:rotate(1.2deg);align-self:center}
+.washi{position:absolute;z-index:4;height:24px;border-radius:1px;box-shadow:0 1px 2px #17364122;mix-blend-mode:multiply;pointer-events:none}
+.washi-tl{top:14px;left:10px;width:86px;background:repeating-linear-gradient(-18deg,rgba(38,92,117,.48) 0 7px,rgba(148,115,56,.36) 7px 14px,rgba(245,241,233,.55) 14px 18px);transform:rotate(-8deg)}
+.washi-tr{top:16px;right:16px;width:74px;background:repeating-linear-gradient(16deg,rgba(148,115,56,.52) 0 6px,rgba(38,92,117,.28) 6px 12px,rgba(255,253,248,.5) 12px 16px);transform:rotate(11deg)}
+.polaroid{background:var(--white);padding:10px 10px 0;box-shadow:0 10px 24px #17364124,0 1px 0 #fff inset;transform:rotate(-3deg);transform-origin:center center;transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s;position:relative;z-index:2}
+.polaroid img{display:block;width:100%;height:auto;aspect-ratio:1312/1199;object-fit:cover;background:var(--soft)}
+.souvenir-caption{font-family:var(--hand);font-weight:600;font-size:clamp(24px,2.6vw,30px);line-height:1.15;color:var(--ink);text-align:center;padding:12px 8px 16px;margin:0}
+.hearts{position:absolute;left:18%;right:18%;top:18px;height:0;z-index:5;pointer-events:none}
+.hearts span{position:absolute;top:0;color:var(--gold);font-size:15px;line-height:1;opacity:0;text-shadow:0 1px 0 #fff8}
+.hearts span:nth-child(1){left:8%}
+.hearts span:nth-child(2){left:48%;font-size:13px;color:var(--blue)}
+.hearts span:nth-child(3){left:82%}
+@keyframes souvenir-heart{0%{opacity:0;transform:translateY(10px) scale(.6)}18%{opacity:.9}100%{opacity:0;transform:translateY(-78px) scale(1.15)}}
+@media(hover:hover) and (pointer:fine){
+.souvenir:hover .polaroid,.souvenir:focus-within .polaroid{transform:rotate(0deg) translateY(-8px);box-shadow:0 22px 40px #1736412e}
+.souvenir:hover .hearts span,.souvenir:focus-within .hearts span{animation:souvenir-heart 2s ease-out infinite}
+.souvenir:hover .hearts span:nth-child(2),.souvenir:focus-within .hearts span:nth-child(2){animation-delay:.35s}
+.souvenir:hover .hearts span:nth-child(3),.souvenir:focus-within .hearts span:nth-child(3){animation-delay:.7s}
+}
+@media(max-width:800px){
+.souvenir{max-width:560px}
+.postcard{grid-template-columns:1fr;grid-template-areas:"frank" "photo" "note";gap:0;padding:20px 16px 16px}
+.postcard-frank{justify-content:center;min-height:88px;padding:0}
+.polaroid-wrap{padding:22px 20px 10px;max-width:420px}
+.postcard-note{border-left:0;padding:4px 12px 8px;margin:0;text-align:center;transform:none;justify-self:center}
+}
+@media(max-width:540px){
+.souvenir{margin:10px auto 36px;padding:12px 0 4px}
+.postcard{padding:16px 12px 14px}
+.polaroid-wrap{padding:22px 14px 8px;max-width:100%}
+.polaroid{transform:rotate(-2deg)}
+.souvenir-caption{font-size:24px;padding:10px 6px 14px}
+.postcard-note{font-size:22px}
+.stamp{width:56px;height:70px}
+.postmark{width:96px;height:96px;margin:-12px 0 0 -22px}
+.washi-tl{width:70px;height:20px;left:4px;top:12px}
+.washi-tr{width:62px;height:20px;right:8px;top:14px}
+}
+@media(prefers-reduced-motion:reduce){
+.polaroid,.postcard-note{transition:none}
+.polaroid{transform:none}
+.souvenir:hover .polaroid,.souvenir:focus-within .polaroid{transform:none;box-shadow:0 10px 24px #17364124}
+.hearts{display:none}
+}
+@media print{.souvenir{display:none}}
+
 </style></head><body><a class="skip" href="#roteiro">Ir para o roteiro</a><a class="dashboard-back" href="index.html" aria-label="Voltar ao dashboard de viagens">← Dashboard</a>
 <header class="masthead"><div class="wrap"><a class="brand" href="#top">Rafael<span>.</span> viagens</a><nav class="topnav" aria-label="Navegação principal"><a href="#roteiro">Roteiro</a><a href="#reservas">Reservas</a><a href="#apoio">Contatos</a><button class="print-button" id="print-page" type="button">Imprimir ↗</button></nav><span class="edition">Caderno de viagem · 2026</span></div></header>
 <main class="wrap" id="top">
@@ -43,6 +99,26 @@
     </div>
   </div>
 </div>
+
+<figure class="souvenir">
+<div class="postcard">
+<div class="postcard-frank" aria-hidden="true">
+<div class="stamp"><svg viewBox="0 0 68 84" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="1.2" y="1.2" width="65.6" height="81.6" rx="1.5" fill="#fffdf8" stroke="#947338" stroke-width="1.35" stroke-dasharray="2.1 1.7"/><rect x="5" y="5" width="58" height="61.5" fill="#fffdf8"/><rect x="5" y="11.83" width="58" height="6.83" fill="#265c75"/><rect x="5" y="25.5" width="58" height="6.83" fill="#265c75"/><rect x="5" y="39.17" width="58" height="6.83" fill="#265c75"/><rect x="5" y="52.83" width="58" height="6.83" fill="#265c75"/><rect x="5" y="5" width="32.2" height="34.2" fill="#fffdf8"/><g transform="translate(21.1 22.1)" fill="#947338"><g id="souvenir-sun-rays"><polygon points="0,-16.2 1.7,-8  -1.7,-8"/><polygon points="0,-11.8 1.15,-7.4 -1.15,-7.4" transform="rotate(22.5)"/></g><use href="#souvenir-sun-rays" transform="rotate(45)"/><use href="#souvenir-sun-rays" transform="rotate(90)"/><use href="#souvenir-sun-rays" transform="rotate(135)"/><use href="#souvenir-sun-rays" transform="rotate(180)"/><use href="#souvenir-sun-rays" transform="rotate(225)"/><use href="#souvenir-sun-rays" transform="rotate(270)"/><use href="#souvenir-sun-rays" transform="rotate(315)"/><circle r="6.3"/><circle cx="-2" cy="-1.15" r=".7" fill="#fffdf8"/><circle cx="2" cy="-1.15" r=".7" fill="#fffdf8"/><path d="M-2.3 1.9 Q0 3.8 2.3 1.9" fill="none" stroke="#fffdf8" stroke-width=".85" stroke-linecap="round"/></g><text x="34" y="77.5" text-anchor="middle" fill="#947338" font-family="Georgia,'Times New Roman',serif" font-size="6.2" letter-spacing="1.3">URUGUAY</text></svg></div>
+<div class="postmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#265c75" stroke-width="1.2"><circle cx="60" cy="60" r="55"/><circle cx="60" cy="60" r="49.5"/><circle cx="60" cy="60" r="31"/></g><defs><path id="souvenir-pm-path" d="M60 60 m-40.5 0 a40.5 40.5 0 1 1 81 0 a40.5 40.5 0 1 1 -81 0"/></defs><text fill="#265c75" font-size="8.4" font-family="Georgia,'Times New Roman',serif" letter-spacing="1.15"><textPath href="#souvenir-pm-path">MONTEVIDÉU · NOV 2026 · MONTEVIDÉU · NOV 2026 ·</textPath></text><text x="60" y="57" text-anchor="middle" fill="#265c75" font-family="Georgia,'Times New Roman',serif" font-size="8.2" letter-spacing=".6">NOV</text><text x="60" y="69" text-anchor="middle" fill="#265c75" font-family="Georgia,'Times New Roman',serif" font-size="9" letter-spacing=".8">2026</text></svg></div>
+</div>
+<div class="polaroid-wrap">
+<span class="washi washi-tl" aria-hidden="true"></span>
+<span class="washi washi-tr" aria-hidden="true"></span>
+<div class="polaroid">
+<img src="img/bubu-e-dudu-montevideo.webp" alt="Ilustração de Bubu e Dudu em um café em Montevidéu, com o Palácio Salvo, a estátua de Artigas, a bandeira do Uruguai e um bolo de aniversário ao pôr do sol" width="1312" height="1199" loading="lazy">
+<figcaption class="souvenir-caption">Bubu e Dudu em Montevidéu ♥</figcaption>
+</div>
+<span class="hearts" aria-hidden="true"><span>♥</span><span>♥</span><span>♥</span></span>
+</div>
+<p class="postcard-note">Feliz 44, Little!<br>— com amor, Bubu e Dudu</p>
+</div>
+</figure>
+
 
 <section class="birthday" aria-labelledby="birthday-title"><div><div class="eyebrow">05 novembro · quinta-feira</div><h2 id="birthday-title">44 anos de Little.</h2><p>Um dia de vinhos na Bodega Pizzorno e um jantar especial no Primuseum. Rafael, Victoria e Samar, juntos para celebrar.</p></div><a href="#day5">Ver o dia especial →</a></section><section id="roteiro" aria-labelledby="route-title"><div class="section-top"><div><div class="eyebrow">Dia a dia</div><h2 id="route-title">Nosso roteiro.</h2><p>De Belém a Montevidéu, com tempo para descobrir e celebrar.</p></div><span class="section-counter">01 — 08 NOVEMBRO</span></div><nav class="daynav" aria-label="Escolher um dia do roteiro"><a href="#day1"><span>DOM</span><strong>01 NOV</strong></a><a href="#day2"><span>SEG</span><strong>02 NOV</strong></a><a href="#day3"><span>TER</span><strong>03 NOV</strong></a><a href="#day4"><span>QUA</span><strong>04 NOV</strong></a><a href="#day5" class="special"><span>QUI · 🎂</span><strong>05 NOV</strong></a><a href="#day6"><span>SEX</span><strong>06 NOV</strong></a><a href="#day7"><span>SÁB</span><strong>07 NOV</strong></a><a href="#day8"><span>DOM</span><strong>08 NOV</strong></a></nav><div class="travel-layout">
 <div class="section-heading "><h3>📋 Roteiro Completo <span class="sh-line"></span></h3></div>
