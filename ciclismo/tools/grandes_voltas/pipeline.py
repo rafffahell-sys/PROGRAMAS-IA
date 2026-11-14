@@ -161,7 +161,13 @@ def validar_snapshot(snap: dict, prova: dict) -> list[str]:
         if not isinstance(bloco, dict):
             erros.append(f"camisa:{camisa['id']}")
             continue
-        _lista(bloco.get("top5"), 5, f"camisa:{camisa['id']}", erros)
+        top5 = bloco.get("top5")
+        total = bloco.get("totalClassificados")
+        curta = (
+            isinstance(total, int) and not isinstance(total, bool) and isinstance(top5, list)
+            and total == len(top5) and total < 5
+        )
+        _lista(top5, len(top5) if curta else 5, f"camisa:{camisa['id']}", erros)
         if bloco.get("lider") is not None and not isinstance(bloco.get("lider"), str):
             erros.append(f"camisa:{camisa['id']}:lider")
         if bloco.get("quemVeste") is None:

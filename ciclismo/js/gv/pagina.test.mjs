@@ -40,21 +40,19 @@ test("página real não pede snapshot nem desenha resultado", async () => {
   const raizDom = document.getElementById("gv-app");
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
   const html = raizDom.innerHTML;
-  assert.match(html, /0/);
-  assert.match(html, /de 21 etapas confirmadas/);
+  assert.match(html, /<strong>1<\/strong> de 21 etapas confirmadas/);
   assert.match(html, /147 km|147/);
   assert.equal(html.includes("firestore"), false);
   assert.equal(html.includes("Atleta"), false);
   assert.equal(pedidos.some((url) => /snapshot|firestore|googleapis/i.test(url)), false);
   assert.equal(globalThis.__GV_LEITOR_CARREGADO__, false);
 
-  location.hash = "#/giro/2026/etapa/1";
+  location.hash = "#/giro/2026/etapa/2";
   raizDom.innerHTML = "";
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
-  assert.match(raizDom.innerHTML, /Etapa 1/);
-  assert.match(raizDom.innerHTML, /147 km/);
-  assert.match(raizDom.innerHTML, /img\/perfis\/giro-2026\/etapa-01\.jpg/);
-  assert.match(raizDom.innerHTML, /Nessebar–Burgas/);
+  assert.match(raizDom.innerHTML, /Etapa 2/);
+  assert.match(raizDom.innerHTML, /221 km/);
+  assert.match(raizDom.innerHTML, /img\/perfis\/giro-2026\/etapa-02\.jpg/);
   assert.match(raizDom.innerHTML, /Ampliar/);
   assert.equal(raizDom.innerHTML.includes("<polyline"), false);
   assert.equal(raizDom.innerHTML.includes("Perfil altimétrico a publicar"), false);
@@ -256,4 +254,43 @@ test("resumo sintético só na etapa liberada e sem html livre", () => {
   assert.match(liberado, /data-resumo="presente"/);
   assert.match(liberado, /&lt;b&gt;marca&lt;\/b&gt;/);
   assert.equal(liberado.includes("<b>marca</b>"), false);
+});
+
+test("giro real: só a etapa 1 liberada pede o próprio snapshot estático", async () => {
+  const raizDom = document.getElementById("gv-app");
+  const pedidos = [];
+  location.hash = "#/giro/2026/etapa/1";
+  await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
+  const snapshots = pedidos.filter((url) => /snapshots\//.test(url));
+  assert.deepEqual(snapshots, ["data/grandes-voltas/snapshots/2026_b7/apos-1.json"]);
+  assert.match(raizDom.innerHTML, /data-resultados="visiveis"/);
+  assert.match(raizDom.innerHTML, /Depois da etapa 1/);
+  assert.match(raizDom.innerHTML, /Maglia Azzurra/);
+  assert.match(raizDom.innerHTML, /data-analise="neutra"/);
+  assert.equal(raizDom.querySelectorAll(".gv-resultados .gv-bloco").length >= 6, true);
+  assert.equal(pedidos.some((url) => /firestore|googleapis|firebase/i.test(url)), false);
+  assert.equal(globalThis.__GV_LEITOR_CARREGADO__, false);
+  for (let n = 2; n <= 21; n += 1) {
+    const antes = pedidos.length;
+    location.hash = `#/giro/2026/etapa/${n}`;
+    await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
+    const novos = pedidos.slice(antes);
+    assert.equal(novos.some((url) => /snapshot|firestore|googleapis|analise/i.test(url)), false, `etapa ${n}`);
+    assert.match(raizDom.innerHTML, /data-resultados="ocultos"/, `etapa ${n}`);
+  }
+});
+
+test("só existe arquivo de snapshot para etapa liberada", () => {
+  const liberacoes = JSON.parse(fs.readFileSync(path.join(raiz, "data/grandes-voltas/liberacoes.json"), "utf8"));
+  const pasta = path.join(raiz, "data/grandes-voltas/snapshots");
+  const achados = [];
+  for (const prova of fs.readdirSync(pasta)) {
+    for (const arquivo of fs.readdirSync(path.join(pasta, prova))) {
+      const m = arquivo.match(/^apos-(\d{1,2})\.json$/);
+      assert.ok(m, arquivo);
+      assert.equal(liberacoes.provas[prova]?.etapas?.[m[1]], true, `${prova}/${arquivo}`);
+      achados.push(`${prova}/${m[1]}`);
+    }
+  }
+  assert.deepEqual(achados, ["2026_b7/1"]);
 });

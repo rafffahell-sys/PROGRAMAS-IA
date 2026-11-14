@@ -273,3 +273,21 @@ test("ponto sem km de fonte não ganha distância e divergência não se mistura
   assert.equal(situarRestante(180.4, "181").motivo, "fora");
   assert.equal(situarRestante(182, "181").ok, true);
 });
+
+test("camisa com menos de 5 classificados só passa se a fonte declarar o total", async () => {
+  const { urlSnapshotEstatico } = await import("./modelo.js");
+  const curta = snapshot(1);
+  curta.camisas.pontos.top5 = curta.camisas.pontos.top5.slice(0, 4);
+  assert.equal(validarSnapshot(curta, config).ok, false);
+  curta.camisas.pontos.totalClassificados = 4;
+  assert.equal(validarSnapshot(curta, config).ok, true);
+  curta.camisas.pontos.totalClassificados = 5;
+  assert.equal(validarSnapshot(curta, config).ok, false);
+  assert.equal(urlSnapshotEstatico(2026, "b7", 1), "data/grandes-voltas/snapshots/2026_b7/apos-1.json");
+  assert.equal(urlSnapshotEstatico(2026, "../x", 1), null);
+  assert.equal(normalizarAcesso({ snapshotsEstaticos: "true" }).snapshotsEstaticos, false);
+  const estatico = { regrasComprovadas: false, snapshotsEstaticos: true };
+  assert.equal(podeLerSnapshot({ liberacao: { etapas: { 1: true } }, etapa: 1, acesso: estatico }).ok, true);
+  assert.equal(podeLerSnapshot({ liberacao: { etapas: { 1: true } }, etapa: 2, acesso: estatico }).motivo, "bloqueada");
+  assert.equal(podeLerAnalisePre({ liberacao: { etapas: { 1: true } }, etapa: 2, acesso: estatico }).motivo, "regras_nao_comprovadas");
+});

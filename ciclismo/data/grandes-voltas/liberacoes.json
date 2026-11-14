@@ -1,9 +1,20 @@
 {
   "versao": 1,
-  "nota": "Nenhuma etapa foi liberada. Este arquivo não contém resultados.",
+  "nota": "Só booleanos. Etapa em true tem snapshot próprio em data/grandes-voltas/snapshots; etapa ausente não tem arquivo.",
   "provas": {
-    "2026_b7": { "etapas": {}, "provaCompleta": false },
-    "2026_b10": { "etapas": {}, "provaCompleta": false },
-    "2026_b12": { "etapas": {}, "provaCompleta": false }
+    "2026_b7": {
+      "etapas": {
+        "1": true
+      },
+      "provaCompleta": false
+    },
+    "2026_b10": {
+      "etapas": {},
+      "provaCompleta": false
+    },
+    "2026_b12": {
+      "etapas": {},
+      "provaCompleta": false
+    }
   }
 }

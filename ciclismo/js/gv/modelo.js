@@ -38,8 +38,22 @@ export function liberacaoDaProva(liberacoes, ano, provaId) {
 }
 
 export function normalizarAcesso(bruto) {
-  if (!mapaPlano(bruto)) return { regrasComprovadas: false };
-  return { regrasComprovadas: bruto.regrasComprovadas === true };
+  if (!mapaPlano(bruto)) return { regrasComprovadas: false, snapshotsEstaticos: false };
+  return {
+    regrasComprovadas: bruto.regrasComprovadas === true,
+    snapshotsEstaticos: bruto.snapshotsEstaticos === true
+  };
+}
+
+/**
+ * Snapshot estático: um arquivo por etapa liberada, criado só depois da confirmação.
+ * Etapa bloqueada não tem arquivo, e o cliente nem monta a URL dela.
+ */
+export function urlSnapshotEstatico(ano, provaId, etapa) {
+  const n = Number(etapa);
+  if (!Number.isInteger(n) || n < 1 || n > 99) return null;
+  if (!/^[a-z0-9]+$/.test(String(provaId)) || !/^\d{4}$/.test(String(ano))) return null;
+  return `data/grandes-voltas/snapshots/${ano}_${provaId}/apos-${n}.json`;
 }
 
 export function etapaLiberada(liberacao, n) {
@@ -196,6 +210,12 @@ function listaPosicoes(lista, limite) {
   return { ok: true, incompleta: lista.length !== limite };
 }
 
+/** A fonte oficial só classificou menos de 5 nomes (ex.: montanha na etapa 1). */
+function listaCurtaDeclarada(bloco) {
+  const total = bloco?.totalClassificados;
+  return Number.isInteger(total) && Array.isArray(bloco.top5) && total === bloco.top5.length && total < 5;
+}
+
 /**
  * Valida o formato. Não completa campos em falta.
  * Publicar exige listas cheias (10 e 5) e validacao.ok.
@@ -228,7 +248,7 @@ export function validarSnapshot(snap, config) {
     }
     const top = listaPosicoes(bloco.top5, 5);
     if (!top.ok) erros.push(`camisa:${camisa.id}:top5`);
-    else if (top.incompleta) erros.push(`camisa:${camisa.id}:incompleta`);
+    else if (top.incompleta && !listaCurtaDeclarada(bloco)) erros.push(`camisa:${camisa.id}:incompleta`);
     const lider = bloco.lider;
     if (lider != null && typeof lider !== "string") erros.push(`camisa:${camisa.id}:lider`);
     if (bloco.quemVeste == null) {
@@ -258,7 +278,9 @@ export function compararTops(atual, anterior) {
 
 export function podeLerSnapshot({ liberacao, etapa, acesso }) {
   if (!etapaLiberada(liberacao, etapa)) return { ok: false, motivo: "bloqueada" };
-  if (acesso?.regrasComprovadas !== true) return { ok: false, motivo: "regras_nao_comprovadas" };
+  if (acesso?.regrasComprovadas !== true && acesso?.snapshotsEstaticos !== true) {
+    return { ok: false, motivo: "regras_nao_comprovadas" };
+  }
   return { ok: true, motivo: "liberada" };
 }
 
