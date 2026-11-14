@@ -275,5 +275,29 @@ class Pipeline(unittest.TestCase):
             self.assertEqual(list(Path(tmp).iterdir()), [payload])
 
 
+    def test_resumo_string_e_fontes_opcionais(self):
+        giro = pipeline.carregar_prova("b7", 2026)
+        corpo = pedido()["snapshot"]
+        del corpo["resumo"]
+        self.assertEqual(pipeline.validar_snapshot(corpo, giro), [])
+        corpo["resumo"] = (
+            "Relato sintético desta etapa de teste, escrito em frases curtas só para o validador."
+        )
+        corpo["resumoFontes"] = [
+            "https://example.com/etapa",
+            "http://exemplo.org/fonte",
+        ]
+        self.assertEqual(pipeline.validar_snapshot(corpo, giro), [])
+        corpo["resumo"] = "Relato sintético com <b>marca</b> que o validador deve recusar."
+        self.assertIn("resumo:texto", pipeline.validar_snapshot(corpo, giro))
+        corpo["resumo"] = (
+            "Relato sintético desta etapa de teste, escrito em frases curtas só para o validador."
+        )
+        corpo["resumoFontes"] = ["https://ok.example", "javascript:alert(1)"]
+        self.assertIn("resumoFontes", pipeline.validar_snapshot(corpo, giro))
+        corpo["resumoFontes"] = ["/fonte-local"]
+        self.assertIn("resumoFontes", pipeline.validar_snapshot(corpo, giro))
+
+
 if __name__ == "__main__":
     unittest.main()

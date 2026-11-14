@@ -156,12 +156,40 @@ function mencionaEtapaFutura(texto, etapa) {
   return false;
 }
 
-/** Resumo factual só da etapa N. Não completa lacuna com texto inventado. */
+const LIMITE_RESUMO_TEXTO = 2000;
+
+export function urlHttp(valor) {
+  if (typeof valor !== "string") return false;
+  const texto = valor.trim();
+  if (!texto || /[<>\s]/.test(texto)) return false;
+  try {
+    const parsed = new URL(texto);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+function validarResumoFontes(snap) {
+  const fontes = snap?.resumoFontes;
+  if (fontes == null) return [];
+  if (!Array.isArray(fontes) || fontes.some((item) => !urlHttp(item))) return ["resumoFontes"];
+  return [];
+}
+
+/** Resumo factual só da etapa N. Aceita o objeto legado ou o texto opcional + resumoFontes. */
 export function validarResumo(resumo, snap) {
-  const erros = [];
+  const erros = validarResumoFontes(snap);
   const n = Number(snap?.aposEtapa);
-  if (!resumo || typeof resumo !== "object" || Array.isArray(resumo)) {
-    return ["resumo"];
+  if (resumo == null || resumo === "") return erros;
+  if (typeof resumo === "string") {
+    if (!textoLimpo(resumo, LIMITE_RESUMO_TEXTO) || resumo.trim().length < 40) erros.push("resumo:texto");
+    if (mencionaEtapaFutura(resumo, n)) erros.push("resumo:etapa_futura");
+    return erros;
+  }
+  if (typeof resumo !== "object" || Array.isArray(resumo)) {
+    erros.push("resumo");
+    return erros;
   }
   if (resumo.provaId !== snap.provaId) erros.push("resumo:provaId");
   if (Number(resumo.ano) !== Number(snap.ano)) erros.push("resumo:ano");

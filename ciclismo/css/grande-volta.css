@@ -297,3 +297,29 @@ body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
 @media (prefers-reduced-motion: reduce) {
   .revelar, .gv-roda { animation: none; }
 }
+
+.gv-titulo-camisa {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+.gv-icone-camisa {
+  width: 1.45em;
+  height: 1.45em;
+  flex: none;
+  display: block;
+  overflow: visible;
+  color: var(--ink);
+}
+.gv-camisa .gv-icone-camisa { width: 1.7em; height: 1.7em; }
+.gv-fontes-resumo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+.gv-fontes-resumo a { color: var(--ink); font-weight: 700; }
+.gv-resumo-ausente { color: var(--muted); margin: 0; }

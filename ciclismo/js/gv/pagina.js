@@ -22,6 +22,7 @@ import {
 } from "./modelo.js";
 import { pontosValidos, svgPerfil } from "./perfil.js";
 import { htmlCena } from "./cena.js";
+import { svgIconeCamisa } from "./camisa.js";
 import { carregarSnapshot } from "./snapshots.js";
 import { carregarAnalisePre } from "./analises.js";
 
@@ -88,7 +89,7 @@ function htmlCamisas(prova) {
       ? `<span class="gv-badge ok">regulamento</span>`
       : `<span class="gv-badge">a confirmar</span>`;
     return `<li class="gv-camisa">
-      <span class="gv-cor" style="background:${esc(camisa.cor)}"></span>
+      ${svgIconeCamisa(prova.slug, camisa)}
       <span><strong>${esc(camisa.rotulo)}</strong> ${badge}</span>
     </li>`;
   }).join("");
@@ -298,16 +299,48 @@ function htmlFavoritos(lista) {
   </section>`;
 }
 
-function htmlResumo(resumo) {
-  if (!resumo || resumo.ausente === true || typeof resumo.texto !== "string" || !resumo.texto.trim()) {
-    return `<section class="gv-bloco" data-resumo="ausente"><h3>Resumo da etapa</h3><p>A coleta desta etapa não trouxe resumo. Nenhum texto foi escrito no lugar.</p></section>`;
+function textoDoResumo(resumo) {
+  if (typeof resumo === "string") return resumo.trim();
+  if (resumo && typeof resumo === "object" && resumo.ausente !== true && typeof resumo.texto === "string") {
+    return resumo.texto.trim();
   }
-  const momentos = (resumo.momentos || []).map((item) => `<li>${esc(item)}</li>`).join("");
-  const contexto = resumo.contextoClassificatorio
-    ? `<p>${esc(resumo.contextoClassificatorio)}</p>`
+  return "";
+}
+
+function htmlFontesResumo(fontes) {
+  if (!Array.isArray(fontes)) return "";
+  const itens = [];
+  fontes.forEach((url, i) => {
+    if (typeof url !== "string") return;
+    let href;
+    let rotulo;
+    try {
+      const parsed = new URL(url.trim());
+      if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return;
+      href = parsed.href;
+      rotulo = parsed.hostname.replace(/^www\./, "") || `Fonte ${i + 1}`;
+    } catch {
+      return;
+    }
+    itens.push(`<li><a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(rotulo)}</a></li>`);
+  });
+  return itens.length ? `<ul class="gv-fontes-resumo">${itens.join("")}</ul>` : "";
+}
+
+function htmlResumo(snap) {
+  const resumo = snap?.resumo;
+  const texto = textoDoResumo(resumo);
+  if (!texto) {
+    return `<section class="gv-bloco" data-resumo="ausente"><h3>Resumo da etapa</h3><p class="gv-resumo-ausente">O resumo ainda não foi adicionado.</p></section>`;
+  }
+  const objeto = resumo && typeof resumo === "object" && !Array.isArray(resumo) ? resumo : null;
+  const momentos = (objeto?.momentos || []).map((item) => `<li>${esc(item)}</li>`).join("");
+  const contexto = objeto?.contextoClassificatorio
+    ? `<p>${esc(objeto.contextoClassificatorio)}</p>`
     : "";
-  const fonte = resumo.fonte?.nome ? `<p class="gv-fonte">Fonte do resumo: ${esc(resumo.fonte.nome)}</p>` : "";
-  return `<section class="gv-bloco" data-resumo="presente"><h3>Resumo da etapa</h3><p>${esc(resumo.texto)}</p>${momentos ? `<ul class="gv-lista">${momentos}</ul>` : ""}${contexto}${fonte}</section>`;
+  const fonteNome = objeto?.fonte?.nome ? `<p class="gv-fonte">Fonte do resumo: ${esc(objeto.fonte.nome)}</p>` : "";
+  const fontes = htmlFontesResumo(snap?.resumoFontes);
+  return `<section class="gv-bloco" data-resumo="presente"><h3>Resumo da etapa</h3><p>${esc(texto)}</p>${momentos ? `<ul class="gv-lista">${momentos}</ul>` : ""}${contexto}${fonteNome}${fontes}</section>`;
 }
 
 function htmlResultados(prova, etapa, liberacao, snap, snapAnterior, anteriorN) {
@@ -332,8 +365,8 @@ function htmlResultados(prova, etapa, liberacao, snap, snapAnterior, anteriorN) 
     const veste = bloco.fonteNaoDistingue
       ? "A fonte não separa o líder de quem veste a camisa."
       : `Quem veste: ${bloco.quemVeste || "—"}.`;
-    return `<section class="gv-bloco">
-      <h3>${esc(camisa.rotulo)}</h3>
+    return `<section class="gv-bloco" data-camisa="${esc(camisa.id)}">
+      <h3 class="gv-titulo-camisa">${svgIconeCamisa(prova.slug, camisa)}<span>${esc(camisa.rotulo)}</span></h3>
       <p>Líder da classificação: ${esc(bloco.lider || "—")}. ${esc(veste)}</p>
       <ol class="gv-lista">${top.map((item) => htmlLinha(item, camisa.unidade)).join("")}</ol>
     </section>`;
@@ -347,7 +380,7 @@ function htmlResultados(prova, etapa, liberacao, snap, snapAnterior, anteriorN) 
   return `<section class="gv-resultados revelar" data-resultados="visiveis">
     <h2>Depois da etapa ${esc(etapa.n)}</h2>
     ${comparacao}
-    ${htmlResumo(snap.resumo)}
+    ${htmlResumo(snap)}
     ${htmlClassificacao("Etapa", etapaAtual, "tempo")}
     ${htmlClassificacao("Geral", gcAtual, "tempo")}
     ${camisas}

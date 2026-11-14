@@ -1,5 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   compararTops,
   etapaAnteriorLiberada,
@@ -290,4 +293,34 @@ test("camisa com menos de 5 classificados só passa se a fonte declarar o total"
   assert.equal(podeLerSnapshot({ liberacao: { etapas: { 1: true } }, etapa: 1, acesso: estatico }).ok, true);
   assert.equal(podeLerSnapshot({ liberacao: { etapas: { 1: true } }, etapa: 2, acesso: estatico }).motivo, "bloqueada");
   assert.equal(podeLerAnalisePre({ liberacao: { etapas: { 1: true } }, etapa: 2, acesso: estatico }).motivo, "regras_nao_comprovadas");
+});
+
+const raizModelo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+
+test("snapshot estático da etapa 1 aceita resumo em string e fontes http", () => {
+  const prova = JSON.parse(fs.readFileSync(path.join(raizModelo, "data/grandes-voltas/2026/giro.json"), "utf8"));
+  const snap = JSON.parse(fs.readFileSync(path.join(raizModelo, "data/grandes-voltas/snapshots/2026_b7/apos-1.json"), "utf8"));
+  const saida = validarSnapshot(snap, prova);
+  assert.equal(saida.ok, true, saida.erros.join(","));
+  assert.equal(typeof snap.resumo, "string");
+  assert.ok(snap.resumo.trim().length >= 40);
+  assert.ok(Array.isArray(snap.resumoFontes));
+  assert.equal(snap.resumoFontes.length, 3);
+  assert.ok(snap.resumoFontes.every((url) => url.startsWith("https://")));
+});
+
+
+test("resumo em string e resumoFontes são opcionais e validados", () => {
+  const base = snapshot(3);
+  delete base.resumo;
+  assert.equal(validarSnapshot(base, config).ok, true);
+  base.resumo = "Relato sintético desta etapa de teste, escrito em frases curtas só para o validador.";
+  base.resumoFontes = ["https://example.com/etapa", "http://exemplo.org/fonte"];
+  assert.equal(validarSnapshot(base, config).ok, true);
+  const html = { ...base, resumo: "Relato sintético com marca <b>indevida</b> que o validador deve recusar agora." };
+  assert.equal(validarSnapshot(html, config).ok, false);
+  const ruim = { ...base, resumoFontes: ["https://ok.example", "javascript:alert(1)"] };
+  assert.deepEqual(validarSnapshot(ruim, config).erros.filter((e) => e === "resumoFontes"), ["resumoFontes"]);
+  const relativo = { ...base, resumoFontes: ["/fonte-local"] };
+  assert.ok(validarSnapshot(relativo, config).erros.includes("resumoFontes"));
 });
