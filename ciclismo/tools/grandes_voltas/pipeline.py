@@ -17,6 +17,7 @@ import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
 
 RAIZ = Path(__file__).resolve().parents[2]
 DADOS = RAIZ / "data" / "grandes-voltas"
@@ -91,11 +92,42 @@ def _menciona_etapa_futura(texto: str, etapa: int) -> bool:
     return False
 
 
-def validar_resumo(resumo: dict, snap: dict) -> list[str]:
-    erros = []
-    n = snap.get("aposEtapa")
+def _url_http(valor) -> bool:
+    if not isinstance(valor, str):
+        return False
+    texto = valor.strip()
+    if not texto or any(ch.isspace() or ch in "<>" for ch in texto):
+        return False
+    try:
+        parsed = urlparse(texto)
+    except ValueError:
+        return False
+    return parsed.scheme in ("http", "https") and bool(parsed.netloc)
+
+
+def _validar_resumo_fontes(snap: dict) -> list[str]:
+    fontes = snap.get("resumoFontes") if isinstance(snap, dict) else None
+    if fontes is None:
+        return []
+    if not isinstance(fontes, list) or any(not _url_http(item) for item in fontes):
+        return ["resumoFontes"]
+    return []
+
+
+def validar_resumo(resumo, snap: dict) -> list[str]:
+    erros = _validar_resumo_fontes(snap)
+    n = snap.get("aposEtapa") if isinstance(snap, dict) else None
+    if resumo is None or resumo == "":
+        return erros
+    if isinstance(resumo, str):
+        if not _texto_limpo(resumo, 2000, 40):
+            erros.append("resumo:texto")
+        if isinstance(n, int) and _menciona_etapa_futura(resumo, n):
+            erros.append("resumo:etapa_futura")
+        return erros
     if not isinstance(resumo, dict):
-        return ["resumo"]
+        erros.append("resumo")
+        return erros
     if resumo.get("provaId") != snap.get("provaId"):
         erros.append("resumo:provaId")
     if int(resumo.get("ano") or 0) != int(snap.get("ano") or 0):

@@ -381,16 +381,12 @@
     }
   },
   "equipes": null,
-  "resumo": {
-    "provaId": "b7",
-    "ano": 2026,
-    "ateEtapa": 1,
-    "ausente": true,
-    "texto": null,
-    "momentos": [],
-    "contextoClassificatorio": null,
-    "fonte": null
-  },
+  "resumo": "Na etapa 1, plana de 147 km entre Nessebar e Burgas, Manuele Tarozzi (Bardiani CSF 7 Saber) e Diego Pablo Sevilla (Team Polti VisitMalta) escaparam logo após o quilômetro zero. Sevilla levou as duas subidas de quarta categoria do Cape Agalina, e Tarozzi ficou com o sprint intermediário de Sozopol e o Red Bull KM; o pelotão absorveu a fuga a 22 km da chegada. No último quilômetro, uma queda pesada de Erlend Blikra (Uno-X Mobility) derrubou, entre outros, Dylan Groenewegen, Kaden Groves e Matteo Moschetti, e só um grupo reduzido disputou a sprint. Paul Magnier (Soudal Quick-Step) venceu em 3h21min08s, à frente de Tobias Lund Andresen (Decathlon CMA CGM Team) e Ethan Vernon (NSN Cycling Team); Jonathan Milan chegou em quarto. Magnier assumiu as maglias Rosa, Ciclamino e Bianca, e Sevilla ficou com a Azzurra.",
+  "resumoFontes": [
+    "https://www.giroditalia.it/en/news/paul-magnier-wins-stage-1-of-giro-ditalia-2026/",
+    "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-1",
+    "https://www.cyclingnews.com/pro-cycling/racing/giro-d-italia-paul-magnier-speeds-to-victory-as-massive-crash-blocks-peloton-in-stage-1-sprint/"
+  ],
   "pontuacao": {
     "modo": "copia_oficial",
     "recalculada": false,

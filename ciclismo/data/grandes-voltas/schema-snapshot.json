@@ -18,10 +18,11 @@
     "gc": { "top10": "lista de até 10: pos, ciclista, equipe, tempo, gap" },
     "camisas": "mapa id da config -> { top5, lider, quemVeste, fonteNaoDistingue }",
     "equipes": "null ou { top5 } — opcional e desligado até vir no snapshot",
-    "resumo": "objeto da etapa N: texto factual em português, momentos, contexto até o fim de N, fonte. ausente true sem texto quando a coleta não trouxe resumo. Nunca fica no percurso.",
+    "resumo": "opcional. string com 3 a 5 frases factuais da etapa N, ou o objeto legado (texto, momentos, contexto, fonte, ausente). Sem HTML. Nunca fica no percurso.",
+    "resumoFontes": "opcional. lista de URLs http/https das fontes do resumo.",
     "pontuacao": "modo copia_oficial, recalculada false. regrasDaEdicaoConfirmadas só true se o regulamento daquela edição estiver confirmado no config."
   },
-  "resumo": "Guardado só dentro do snapshot. A página bloqueada não recebe o texto, nem em título, tooltip ou JSON de percurso."
+  "resumo": "Guardado só dentro do snapshot. A página bloqueada não recebe o texto, nem em título, tooltip ou JSON de percurso.",
   "comparacao": "Somente com a maior etapa liberada estritamente anterior. Não assume N-1.",
   "quemVeste": "Se a fonte não separa líder de quem veste, quemVeste fica null e fonteNaoDistingue true."
 }

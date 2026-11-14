@@ -294,3 +294,76 @@ test("só existe arquivo de snapshot para etapa liberada", () => {
   }
   assert.deepEqual(achados, ["2026_b7/1"]);
 });
+
+
+test("ícone de camisa aparece no hub e no título da classificação", () => {
+  const prova = {
+    slug: "tour",
+    ano: 2026,
+    nome: "Tour de France",
+    provaId: "b10",
+    totalEtapas: 21,
+    calendario: { inicio: "2026-07-04", fim: "2026-07-26" },
+    fontes: [],
+    camisas: [
+      { id: "gc", rotulo: "Amarela", unidade: "tempo", oficialConfirmado: true, cor: "#ffe14a" },
+      { id: "montanha", rotulo: "Bolinhas vermelhas", unidade: "pontos", oficialConfirmado: true, cor: "#e10600" }
+    ],
+    regulamento: { notaPrioridade: "" },
+    observacoes: [],
+    etapas: []
+  };
+  const hub = htmlHub(prova, { etapas: {}, provaCompleta: false });
+  assert.match(hub, /class="gv-icone-camisa"/);
+  assert.match(hub, /aria-label="Amarela"/);
+  assert.match(hub, /aria-label="Bolinhas vermelhas"/);
+  assert.match(hub, /<pattern /);
+  const etapa = { n: 1, km: 10, tipo: "plana", data: "2026-07-04", origem: "A", destino: "B", perfil: { pontos: [], sprints: [], montanhas: [] }, avisos: [], detalhe: null, tipoOficial: null, desnivelM: null };
+  const snap = {
+    sintetico: true,
+    resumo: "Relato sintético desta etapa de teste. Nada disto é resultado de uma prova real.",
+    resumoFontes: ["https://www.example.com/cronica", "https://stats.exemplo.org/etapa-1"],
+    etapa: { top10: [] },
+    gc: { top10: [] },
+    camisas: {
+      gc: { top5: [atleta(1)], lider: "Atleta 01", quemVeste: "Atleta 01", fonteNaoDistingue: false },
+      montanha: { top5: [atleta(1)], lider: "Atleta 01", quemVeste: "Atleta 01", fonteNaoDistingue: false }
+    }
+  };
+  const html = htmlEtapa({ ...prova, etapas: [etapa] }, etapa, { etapas: { 1: true }, provaCompleta: false }, snap, null, { permitirSintetico: true });
+  assert.match(html, /class="gv-titulo-camisa"/);
+  assert.equal((html.match(/class="gv-icone-camisa"/g) || []).length >= 2, true);
+  assert.match(html, /data-camisa="gc"/);
+  assert.match(html, /data-resumo="presente"/);
+  assert.match(html, /Relato sintético desta etapa de teste/);
+  assert.match(html, /href="https:\/\/www\.example\.com\/cronica"/);
+  assert.match(html, /target="_blank"/);
+  assert.match(html, /rel="noopener noreferrer"/);
+  assert.match(html, />example\.com</);
+  assert.match(html, />stats\.exemplo\.org</);
+  const vazio = htmlEtapa({ ...prova, etapas: [etapa] }, etapa, { etapas: { 1: true }, provaCompleta: false }, { sintetico: true, etapa: { top10: [] }, gc: { top10: [] }, camisas: {} }, null, { permitirSintetico: true });
+  assert.match(vazio, /data-resumo="ausente"/);
+  assert.match(vazio, /O resumo ainda não foi adicionado/);
+});
+
+test("resumo em string escapa html e ignora fonte que não é http", () => {
+  const prova = {
+    slug: "giro", ano: 2026, nome: "Giro d'Italia", provaId: "b7", totalEtapas: 21,
+    calendario: { inicio: "2026-05-08", fim: "2026-05-31" }, fontes: [], camisas: [],
+    regulamento: { notaPrioridade: "" }, observacoes: [], etapas: []
+  };
+  const etapa = { n: 5, km: 10, tipo: "plana", data: "2026-05-13", origem: "C", destino: "D", perfil: { pontos: [], sprints: [], montanhas: [] }, avisos: [], detalhe: null, tipoOficial: null, desnivelM: null };
+  const snap = {
+    sintetico: true,
+    resumo: "Relato sintético com <b>marca</b> que precisa aparecer só como texto.",
+    resumoFontes: ["https://fonte.example/ok", "javascript:alert(1)", "ftp://nao.vale"],
+    etapa: { top10: [] }, gc: { top10: [] }, camisas: {}
+  };
+  const html = htmlEtapa(prova, etapa, { etapas: { 5: true }, provaCompleta: false }, snap, null, { permitirSintetico: true });
+  assert.match(html, /data-resumo="presente"/);
+  assert.match(html, /&lt;b&gt;marca&lt;\/b&gt;/);
+  assert.equal(html.includes("<b>marca</b>"), false);
+  assert.match(html, /href="https:\/\/fonte\.example\/ok"/);
+  assert.equal(html.includes("javascript:"), false);
+  assert.equal(html.includes("ftp://"), false);
+});
