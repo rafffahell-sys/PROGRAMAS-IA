@@ -1,0 +1,401 @@
+{
+  "provaId": "b7",
+  "ano": 2026,
+  "aposEtapa": 1,
+  "imutavel": true,
+  "fonte": {
+    "nome": "Giro d'Italia oficial (RCS) + ProCyclingStats",
+    "url": "https://www.giroditalia.it/en/classifiche/di-tappa/1/",
+    "urls": [
+      "https://www.giroditalia.it/en/tappe/stage-1-of-the-giro-ditalia-2026-nessebar-burgas/",
+      "https://www.giroditalia.it/en/classifiche/di-tappa/1/",
+      "https://www.giroditalia.it/en/news/paul-magnier-wins-stage-1-of-giro-ditalia-2026/",
+      "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-1",
+      "https://procyclinguk.com/gc-and-jerseys-after-giro-ditalia-2026-stage-1/"
+    ],
+    "coletadoEm": "2026-11-13T23:20:16-03:00"
+  },
+  "validacao": {
+    "ok": true,
+    "checagens": [
+      "top10_etapa",
+      "gc10",
+      "camisas_top5"
+    ],
+    "avisos": [
+      "FirstCycling (https://firstcycling.com/race.php?r=13&y=2026&e=1) devolveu 403 nesta coleta; o top 10 da GC após a etapa 1 foi cruzado com ProCyclingUK, que declara resultados alimentados pelo FirstCycling, e bate com o PCS e com o recálculo a partir dos abbuoni oficiais.",
+      "O site oficial não publica nesta página a classificação geral completa após a etapa 1 (só o top 3 no comunicado e os abbuoni na ordem de chegada). O top 10 da GC foi montado com PCS + ProCyclingUK e conferido: tempo de etapa oficial 3:21:08 menos abbuono oficial.",
+      "A classifica oficial de pontos da etapa 1 (que, nesta abertura, coincide com a acumulada) empata Lonardi e Tarozzi com 12 pontos e coloca Lonardi em 6º e Tarozzi em 7º. Uma tabela do PCS inverte essa ordem do empate; isso não afeta o top 5.",
+      "A azzurra após a etapa 1 tem apenas 4 ciclistas com pontos. O top 5 fica com 4 nomes.",
+      "O site oficial lista apenas os líderes das maglias, sem distinguir quem veste. Comunicado oficial: MAGNIER lidera Rosa, Ciclamino e Bianca; SEVILLA lidera Azzurra. Bike World News acrescenta quem veste Ciclamino (ANDRESEN) e Bianca (MORGADO); ProCyclingUK trata esses dois como expectativa para a etapa 2, não como fato oficial. Por isso quemVeste de pontos e jovem ficou null, com fonteNaoDistingue.",
+      "Desnível oficial: 500 m. PCS indica 872 m de vertical meters; Pelotonscope indica 864 m. Foi gravado o valor oficial de 500 m.",
+      "Não há série oficial {xKm, elevM} do perfil; o campo pontos ficou vazio. Há imagem oficial de altimetria.",
+      "Velocidade média: comunicado oficial 43,851 km/h; PCS 43,852 km/h (arredondamento).",
+      "WALSCHEID: oficial Maximilian; PCS usa Max. Foi gravado o nome oficial.",
+      "MORGADO: grafia oficial Antonio (sem acento).",
+      "A página oficial /en/classifiche/ e as URLs com ?tappa=1/?stage=1 parecem servir a classifica geral corrente (pós-prova), não o snapshot após a etapa 1. Não foram usadas.",
+      "Não foram usados resultados de etapas posteriores nem a classificação final da prova."
+    ]
+  },
+  "etapa": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "MAGNIER Paul",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": "0:10"
+      },
+      {
+        "pos": 2,
+        "ciclista": "ANDRESEN Tobias Lund",
+        "equipe": "Decathlon CMA CGM Team",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": "0:06"
+      },
+      {
+        "pos": 3,
+        "ciclista": "VERNON Ethan",
+        "equipe": "NSN Cycling Team",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": "0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "MILAN Jonathan",
+        "equipe": "Lidl-Trek",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 5,
+        "ciclista": "MIHKELS Madis",
+        "equipe": "EF Education - EasyPost",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 6,
+        "ciclista": "LONARDI Giovanni",
+        "equipe": "Team Polti VisitMalta",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 7,
+        "ciclista": "ACKERMANN Pascal",
+        "equipe": "Team Jayco Alula",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 8,
+        "ciclista": "GUDMESTAD Tord",
+        "equipe": "Decathlon CMA CGM Team",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 9,
+        "ciclista": "WALSCHEID Maximilian",
+        "equipe": "Lidl-Trek",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 10,
+        "ciclista": "VAN GESTEL Dries",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "3:21:08",
+        "gap": "0:00",
+        "abbuono": null
+      }
+    ],
+    "vencedor": {
+      "ciclista": "MAGNIER Paul",
+      "equipe": "Soudal Quick-Step",
+      "tempo": "3:21:08"
+    },
+    "mediaKmH": 43.851,
+    "abandonos": 0,
+    "partentes": 184
+  },
+  "gc": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "MAGNIER Paul",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "3:20:58",
+        "gap": "+0:00"
+      },
+      {
+        "pos": 2,
+        "ciclista": "ANDRESEN Tobias Lund",
+        "equipe": "Decathlon CMA CGM Team",
+        "tempo": "3:21:02",
+        "gap": "+0:04"
+      },
+      {
+        "pos": 3,
+        "ciclista": "TAROZZI Manuele",
+        "equipe": "Bardiani CSF 7 Saber",
+        "tempo": "3:21:02",
+        "gap": "+0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "VERNON Ethan",
+        "equipe": "NSN Cycling Team",
+        "tempo": "3:21:04",
+        "gap": "+0:06"
+      },
+      {
+        "pos": 5,
+        "ciclista": "SEVILLA Diego Pablo",
+        "equipe": "Team Polti VisitMalta",
+        "tempo": "3:21:04",
+        "gap": "+0:06"
+      },
+      {
+        "pos": 6,
+        "ciclista": "MORGADO Antonio",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "3:21:06",
+        "gap": "+0:08"
+      },
+      {
+        "pos": 7,
+        "ciclista": "MILAN Jonathan",
+        "equipe": "Lidl-Trek",
+        "tempo": "3:21:08",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 8,
+        "ciclista": "MIHKELS Madis",
+        "equipe": "EF Education - EasyPost",
+        "tempo": "3:21:08",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 9,
+        "ciclista": "LONARDI Giovanni",
+        "equipe": "Team Polti VisitMalta",
+        "tempo": "3:21:08",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 10,
+        "ciclista": "ACKERMANN Pascal",
+        "equipe": "Team Jayco Alula",
+        "tempo": "3:21:08",
+        "gap": "+0:10"
+      }
+    ]
+  },
+  "camisas": {
+    "gc": {
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "tempo": "3:20:58",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "ANDRESEN Tobias Lund",
+          "equipe": "Decathlon CMA CGM Team",
+          "tempo": "3:21:02",
+          "gap": "+0:04"
+        },
+        {
+          "pos": 3,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "tempo": "3:21:02",
+          "gap": "+0:04"
+        },
+        {
+          "pos": 4,
+          "ciclista": "VERNON Ethan",
+          "equipe": "NSN Cycling Team",
+          "tempo": "3:21:04",
+          "gap": "+0:06"
+        },
+        {
+          "pos": 5,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "tempo": "3:21:04",
+          "gap": "+0:06"
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": "MAGNIER Paul",
+      "fonteNaoDistingue": false
+    },
+    "pontos": {
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 50,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "ANDRESEN Tobias Lund",
+          "equipe": "Decathlon CMA CGM Team",
+          "pontos": 35,
+          "diff": 15
+        },
+        {
+          "pos": 3,
+          "ciclista": "VERNON Ethan",
+          "equipe": "NSN Cycling Team",
+          "pontos": 25,
+          "diff": 25
+        },
+        {
+          "pos": 4,
+          "ciclista": "MILAN Jonathan",
+          "equipe": "Lidl-Trek",
+          "pontos": 23,
+          "diff": 27
+        },
+        {
+          "pos": 5,
+          "ciclista": "MIHKELS Madis",
+          "equipe": "EF Education - EasyPost",
+          "pontos": 14,
+          "diff": 36
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": null,
+      "fonteNaoDistingue": true
+    },
+    "montanha": {
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 6,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 4,
+          "diff": 2
+        },
+        {
+          "pos": 3,
+          "ciclista": "BASTIAENS Ayco",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 1,
+          "diff": 5
+        },
+        {
+          "pos": 4,
+          "ciclista": "DE VRIES Hartthijs",
+          "equipe": "Unibet Rose Rockets",
+          "pontos": 1,
+          "diff": 5
+        }
+      ],
+      "lider": "SEVILLA Diego Pablo",
+      "quemVeste": "SEVILLA Diego Pablo",
+      "fonteNaoDistingue": false,
+      "totalClassificados": 4
+    },
+    "jovem": {
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "regraOficialIdade": "nascidos depois de 1º de janeiro de 2001 (comunicado oficial)",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "tempo": "3:20:58",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "ANDRESEN Tobias Lund",
+          "equipe": "Decathlon CMA CGM Team",
+          "tempo": "3:21:02",
+          "gap": "+0:04"
+        },
+        {
+          "pos": 3,
+          "ciclista": "MORGADO Antonio",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "3:21:06",
+          "gap": "+0:08"
+        },
+        {
+          "pos": 4,
+          "ciclista": "MIHKELS Madis",
+          "equipe": "EF Education - EasyPost",
+          "tempo": "3:21:08",
+          "gap": "+0:10"
+        },
+        {
+          "pos": 5,
+          "ciclista": "GUDMESTAD Tord",
+          "equipe": "Decathlon CMA CGM Team",
+          "tempo": "3:21:08",
+          "gap": "+0:10"
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": null,
+      "fonteNaoDistingue": true
+    }
+  },
+  "equipes": null,
+  "resumo": {
+    "provaId": "b7",
+    "ano": 2026,
+    "ateEtapa": 1,
+    "ausente": true,
+    "texto": null,
+    "momentos": [],
+    "contextoClassificatorio": null,
+    "fonte": null
+  },
+  "pontuacao": {
+    "modo": "copia_oficial",
+    "recalculada": false,
+    "regrasDaEdicaoConfirmadas": true
+  },
+  "idempotencyKey": "2026_b7_etapa_1",
+  "sintetico": false
+}

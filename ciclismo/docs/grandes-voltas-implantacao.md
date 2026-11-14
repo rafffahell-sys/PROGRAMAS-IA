@@ -1,5 +1,13 @@
 # Grandes Voltas — o que falta para publicar
 
+## Etapas liberadas (atualizado em 13/11/2026)
+
+- Giro d'Italia 2026, etapa 1: liberada pelo Rafael em 13/11/2026 (chave `2026_b7_etapa_1`). As etapas 2 a 21 seguem bloqueadas e a prova não está completa.
+- Mecanismo em uso: snapshot estático por etapa em `data/grandes-voltas/snapshots/{ano}_{provaId}/apos-{n}.json`, com `acesso.snapshotsEstaticos: true`. O arquivo só é criado depois da confirmação daquela etapa, e a página só monta a URL de etapa que esteja `true` em `liberacoes.json`. Um teste falha se existir arquivo de etapa não liberada.
+- O Firestore continua fora: `regrasComprovadas` segue `false`, porque as regras propostas não estão no ar e o catch-all de produção deixaria as coleções `ciclismo_gv*` abertas para leitura e escrita.
+- Camisa com menos de cinco nomes pontuados: o snapshot declara `totalClassificados`, igual ao tamanho da lista. Sem esse campo, a lista curta é recusada.
+- Na etapa 1 a análise pré-etapa não existe. Da etapa 2 em diante, a análise depende do Firestore e fica indisponível enquanto `regrasComprovadas` for `false`.
+
 Nada disto foi implantado. O Firebase real não foi autenticado, as regras não foram publicadas e não há snapshot no banco. O site abre só o percurso. `data/grandes-voltas/acesso.json` fica com `regrasComprovadas: false` até alguém com acesso ao console conferir as regras de produção e repetir o teste do emulador contra esse texto completo.
 
 ## Calendário confirmado

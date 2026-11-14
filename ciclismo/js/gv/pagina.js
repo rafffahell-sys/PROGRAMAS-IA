@@ -264,6 +264,9 @@ function htmlAnalisePre(etapaN, liberacao, analise, acesso) {
     return `<section class="gv-analise" data-analise="neutra"><h2>Antes da largada</h2><p>Nesta primeira etapa só fica o percurso. Não há análise com resultado.</p></section>`;
   }
   const gate = podeLerAnalisePre({ liberacao, etapa: n, acesso });
+  if (!gate.ok && gate.motivo === "regras_nao_comprovadas") {
+    return `<section class="gv-analise" data-analise="indisponivel"><h2>Análise pré-etapa</h2><p>A etapa ${n - 1} está confirmada, mas a análise pré-etapa ainda não é publicada neste site.</p></section>`;
+  }
   if (!gate.ok) {
     return `<section class="gv-analise" data-analise="bloqueada"><h2>Análise pré-etapa</h2><p>Bloqueada até você confirmar a etapa ${n - 1} desta mesma prova e deste mesmo ano.</p></section>`;
   }
@@ -534,8 +537,14 @@ export async function desenhar(estado) {
   let snapAnterior = null;
   let analise = null;
   if (gate.ok) {
-    const { criarLeitorFirestore } = await import("./firestore-leitor.js");
-    const leitor = estado.leitor || criarLeitorFirestore();
+    let leitor = estado.leitor;
+    if (!leitor && estado.acesso.snapshotsEstaticos === true) {
+      const { criarLeitorEstatico } = await import("./leitor-estatico.js");
+      leitor = criarLeitorEstatico(estado.fetchFn);
+    } else if (!leitor) {
+      const { criarLeitorFirestore } = await import("./firestore-leitor.js");
+      leitor = criarLeitorFirestore();
+    }
     const atual = await carregarSnapshot({
       prova, etapa: etapa.n, liberacao, acesso: estado.acesso, leitor
     });

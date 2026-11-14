@@ -1,4 +1,5 @@
 {
   "regrasComprovadas": false,
-  "motivo": "As regras propostas não foram implantadas no Firebase real e o projeto de produção não foi lido nesta entrega. Sem essa comprovação o cliente não pede snapshot."
+  "snapshotsEstaticos": true,
+  "motivo": "As regras propostas do Firestore não foram implantadas, então o cliente não lê snapshot no Firebase. Cada etapa confirmada pelo Rafael ganha um arquivo estático próprio em data/grandes-voltas/snapshots/{ano}_{provaId}/apos-{n}.json, criado só depois da confirmação. Etapa sem confirmação não tem arquivo e a página não monta a URL dela."
 }
