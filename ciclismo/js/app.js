@@ -1191,7 +1191,7 @@ async function iniciar() {
     if (!resposta.ok) throw new Error("manifest");
     manifest = await resposta.json();
     try {
-      const liberacoes = await fetch("data/grandes-voltas/liberacoes.json");
+      const liberacoes = await fetch("data/grandes-voltas/liberacoes.json", { cache: "no-store" });
       if (liberacoes.ok) gvLiberacoes = await liberacoes.json();
     } catch (erro) {
       gvLiberacoes = { provas: {} };

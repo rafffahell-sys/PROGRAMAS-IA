@@ -8,7 +8,7 @@ export function criarLeitorEstatico(fetchFn = globalThis.fetch.bind(globalThis))
   return async function lerSnapshot({ provaId, ano, etapa }) {
     const url = urlSnapshotEstatico(ano, provaId, etapa);
     if (!url) return null;
-    const resposta = await fetchFn(url, { cache: "no-cache" });
+    const resposta = await fetchFn(url, { cache: "no-store" });
     if (!resposta.ok) return null;
     return resposta.json();
   };
