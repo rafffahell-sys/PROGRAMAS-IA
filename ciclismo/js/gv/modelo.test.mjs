@@ -14,6 +14,7 @@ import {
   numerosLiberados,
   podioRevelado,
   podeLerSnapshot,
+  urlSnapshotEstatico,
   validarSnapshot
 } from "./modelo.js";
 import { carregarSnapshot } from "./snapshots.js";
@@ -307,6 +308,22 @@ test("snapshot estático da etapa 1 aceita resumo em string e fontes http", () =
   assert.ok(Array.isArray(snap.resumoFontes));
   assert.equal(snap.resumoFontes.length, 3);
   assert.ok(snap.resumoFontes.every((url) => url.startsWith("https://")));
+});
+
+test("snapshot estático da etapa 2 aceita resumo, fontes http e quemVeste nulo", () => {
+  const prova = JSON.parse(fs.readFileSync(path.join(raizModelo, "data/grandes-voltas/2026/giro.json"), "utf8"));
+  const snap = JSON.parse(fs.readFileSync(path.join(raizModelo, "data/grandes-voltas/snapshots/2026_b7/apos-2.json"), "utf8"));
+  const saida = validarSnapshot(snap, prova);
+  assert.equal(saida.ok, true, saida.erros.join(","));
+  assert.equal(snap.aposEtapa, 2);
+  assert.equal(typeof snap.resumo, "string");
+  assert.ok(snap.resumo.trim().length >= 40);
+  assert.ok(Array.isArray(snap.resumoFontes));
+  assert.equal(snap.resumoFontes.length, 3);
+  assert.ok(snap.resumoFontes.every((url) => url.startsWith("https://")));
+  assert.equal(snap.camisas.jovem.quemVeste, null);
+  assert.equal(snap.camisas.jovem.fonteNaoDistingue, true);
+  assert.equal(urlSnapshotEstatico(2026, "b7", 2), "data/grandes-voltas/snapshots/2026_b7/apos-2.json");
 });
 
 

@@ -1,0 +1,439 @@
+{
+  "provaId": "b7",
+  "ano": 2026,
+  "aposEtapa": 2,
+  "imutavel": true,
+  "fonte": {
+    "nome": "Giro d'Italia oficial (RCS) + ProCyclingStats",
+    "url": "https://www.giroditalia.it/en/classifiche/di-tappa/2/",
+    "urls": [
+      "https://www.giroditalia.it/en/tappe/stage-2-of-the-giro-ditalia-2026-burgas-veliko-tarnovo/",
+      "https://www.giroditalia.it/en/classifiche/di-tappa/2/",
+      "https://www.giroditalia.it/en/news/guillermo-silva-wins-stage-2-of-giro-ditalia-2026/",
+      "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-2",
+      "https://procyclinguk.com/gc-and-jerseys-after-giro-ditalia-2026-stage-2/"
+    ],
+    "coletadoEm": "2026-11-14T23:21:19-03:00"
+  },
+  "validacao": {
+    "ok": true,
+    "checagens": [
+      "top10_etapa",
+      "gc10",
+      "camisas_top5"
+    ],
+    "avisos": [
+      "O site oficial não publica nesta página a classificação geral completa após a etapa 2 (só o top 3 no comunicado, com tempos omitidos além dos abbuoni na ordem de chegada). O top 10 da GC foi montado com PCS + ProCyclingUK e conferido: tempo de etapa oficial 5:39:25 somado ao 3:21:08 do pelotão da etapa 1, menos os abbuoni oficiais (chegada e Red Bull KM).",
+      "ProCyclingUK declara resultados alimentados pelo FirstCycling e bate com o PCS no top 10 da GC, nos pontos (Magnier 55, Andresen 35, Milan 26, Silva 25, Vernon 25) e na Azzurra (Sevilla 24, Vingegaard 9, Maestri 8).",
+      "No empate da Ciclamino com 25 pontos, o PCS coloca SILVA em 4º (pontos do dia) e VERNON em 5º. O site oficial não publicou nesta coleta a classifica acumulada de pontos após a etapa 2.",
+      "No empate da Azzurra com 4 pontos, o PCS coloca PELLIZZARI em 4º (pontos do dia) e TAROZZI em 5º (pontos da etapa 1).",
+      "O comunicado oficial lista apenas os líderes das maglias, sem distinguir quem veste. SILVA lidera Rosa e Bianca e veste a Rosa (comunicado: 'Thomas Silva wears the Maglia Rosa'). MAGNIER lidera a Ciclamino e já não veste a Rosa; SEVILLA lidera a Azzurra. ProCyclingUK trata CHRISTEN como expectativa para vestir a Bianca na etapa seguinte, não como fato oficial. Por isso quemVeste de jovem ficou null, com fonteNaoDistingue.",
+      "Desnível oficial: 2.600 m. PCS indica 2.348 m de vertical meters. Foi gravado o valor oficial de 2.600 m.",
+      "Não há série oficial {xKm, elevM} do perfil; o campo pontos ficou vazio. Há imagem oficial de altimetria, conferida com a cópia local.",
+      "Velocidade média: comunicado oficial e PCS 39,067 km/h.",
+      "SILVA: array oficial SILVA Guillermo; comunicado, legendas oficiais e PCS usam Guillermo Thomas Silva (SILVA COUSSAN Guillermo Thomas). Foi gravado SILVA Guillermo Thomas.",
+      "TJOTTA: grafia oficial Martin TJOTTA (sem ø). PCS usa TJØTTA.",
+      "Abandonos oficiais: 5 (MOSCHETTI Matteo, PINARELLO-Q36.5 Pro Cycling Team; BUITRAGO Santiago, Bahrain Victorious; SOLER Marc, UAE Team Emirates XRG; VINE Jay, UAE Team Emirates XRG; HOLTER Ådne, Uno-X Mobility). O PCS classifica MOSCHETTI como DNS e os outros quatro como DNF. O campo abandonos segue o oficial (5). Com 179 chegadas, 179+5=184; partentes foi gravado 184, alinhado ao campo da etapa 1 e ao total oficial de baixas, com a ressalva do DNS no PCS.",
+      "A classifica oficial de equipes da etapa (Super Team) e a acumulada do PCS após a etapa 2 empatam XDS Astana Team, Tudor Pro Cycling Team, Uno-X Mobility, Movistar Team e Red Bull - BORA - hansgrohe em 16:58:15 no dia e 27:01:39 na geral. O texto do ProCyclingUK cita XDS à frente de Uno-X e Tudor, sem registrar o empate de tempos.",
+      "Pontuação dos três GPM (oficial/PCS) foi 9-4-2-1, escala atípica para 3ª categoria clássica (em geral 3-2-1). A categoria 3 segue a prévia oficial (Byala e Vratnik) e o rótulo do PCS (incluindo Lyaskovets).",
+      "A página oficial /en/classifiche/ e as URLs com ?tappa=/?stage= parecem servir a classifica geral corrente (pós-prova), não o snapshot após a etapa 2. Não foram usadas.",
+      "Não foram usados resultados de etapas posteriores nem a classificação final da prova."
+    ]
+  },
+  "etapa": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "SILVA Guillermo Thomas",
+        "equipe": "XDS Astana Team",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": "0:10"
+      },
+      {
+        "pos": 2,
+        "ciclista": "STORK Florian",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": "0:06"
+      },
+      {
+        "pos": 3,
+        "ciclista": "CICCONE Giulio",
+        "equipe": "Lidl-Trek",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": "0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "SCARONI Christian",
+        "equipe": "XDS Astana Team",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 5,
+        "ciclista": "PELLIZZARI Giulio",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 6,
+        "ciclista": "SOBRERO Matteo",
+        "equipe": "Lidl-Trek",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 7,
+        "ciclista": "LEKNESSUND Andreas",
+        "equipe": "Uno-X Mobility",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 8,
+        "ciclista": "CHRISTEN Jan",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 9,
+        "ciclista": "TJOTTA Martin",
+        "equipe": "Uno-X Mobility",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 10,
+        "ciclista": "RONDEL Mathys",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "5:39:25",
+        "gap": "0:00",
+        "abbuono": null
+      }
+    ],
+    "vencedor": {
+      "ciclista": "SILVA Guillermo Thomas",
+      "equipe": "XDS Astana Team",
+      "tempo": "5:39:25"
+    },
+    "mediaKmH": 39.067,
+    "abandonos": 5,
+    "partentes": 184
+  },
+  "gc": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "SILVA Guillermo Thomas",
+        "equipe": "XDS Astana Team",
+        "tempo": "9:00:23",
+        "gap": "+0:00"
+      },
+      {
+        "pos": 2,
+        "ciclista": "STORK Florian",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "9:00:27",
+        "gap": "+0:04"
+      },
+      {
+        "pos": 3,
+        "ciclista": "BERNAL Egan",
+        "equipe": "Netcompany INEOS",
+        "tempo": "9:00:27",
+        "gap": "+0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "9:00:29",
+        "gap": "+0:06"
+      },
+      {
+        "pos": 5,
+        "ciclista": "CICCONE Giulio",
+        "equipe": "Lidl-Trek",
+        "tempo": "9:00:29",
+        "gap": "+0:06"
+      },
+      {
+        "pos": 6,
+        "ciclista": "CHRISTEN Jan",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "9:00:33",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 7,
+        "ciclista": "KULSET Johannes",
+        "equipe": "Uno-X Mobility",
+        "tempo": "9:00:33",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 8,
+        "ciclista": "TJOTTA Martin",
+        "equipe": "Uno-X Mobility",
+        "tempo": "9:00:33",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 9,
+        "ciclista": "VAN EETVELT Lennert",
+        "equipe": "Lotto Intermarché",
+        "tempo": "9:00:33",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 10,
+        "ciclista": "RAFFERTY Darren",
+        "equipe": "EF Education - EasyPost",
+        "tempo": "9:00:33",
+        "gap": "+0:10"
+      }
+    ]
+  },
+  "camisas": {
+    "gc": {
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "SILVA Guillermo Thomas",
+          "equipe": "XDS Astana Team",
+          "tempo": "9:00:23",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "STORK Florian",
+          "equipe": "Tudor Pro Cycling Team",
+          "tempo": "9:00:27",
+          "gap": "+0:04"
+        },
+        {
+          "pos": 3,
+          "ciclista": "BERNAL Egan",
+          "equipe": "Netcompany INEOS",
+          "tempo": "9:00:27",
+          "gap": "+0:04"
+        },
+        {
+          "pos": 4,
+          "ciclista": "ARENSMAN Thymen",
+          "equipe": "Netcompany INEOS",
+          "tempo": "9:00:29",
+          "gap": "+0:06"
+        },
+        {
+          "pos": 5,
+          "ciclista": "CICCONE Giulio",
+          "equipe": "Lidl-Trek",
+          "tempo": "9:00:29",
+          "gap": "+0:06"
+        }
+      ],
+      "lider": "SILVA Guillermo Thomas",
+      "quemVeste": "SILVA Guillermo Thomas",
+      "fonteNaoDistingue": false
+    },
+    "pontos": {
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 55,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "ANDRESEN Tobias Lund",
+          "equipe": "Decathlon CMA CGM Team",
+          "pontos": 35,
+          "diff": 20
+        },
+        {
+          "pos": 3,
+          "ciclista": "MILAN Jonathan",
+          "equipe": "Lidl-Trek",
+          "pontos": 26,
+          "diff": 29
+        },
+        {
+          "pos": 4,
+          "ciclista": "SILVA Guillermo Thomas",
+          "equipe": "XDS Astana Team",
+          "pontos": 25,
+          "diff": 30
+        },
+        {
+          "pos": 5,
+          "ciclista": "VERNON Ethan",
+          "equipe": "NSN Cycling Team",
+          "pontos": 25,
+          "diff": 30
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": "MAGNIER Paul",
+      "fonteNaoDistingue": false
+    },
+    "montanha": {
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 24,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "pontos": 9,
+          "diff": 15
+        },
+        {
+          "pos": 3,
+          "ciclista": "MAESTRI Mirco",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 8,
+          "diff": 16
+        },
+        {
+          "pos": 4,
+          "ciclista": "PELLIZZARI Giulio",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "pontos": 4,
+          "diff": 20
+        },
+        {
+          "pos": 5,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 4,
+          "diff": 20
+        }
+      ],
+      "lider": "SEVILLA Diego Pablo",
+      "quemVeste": "SEVILLA Diego Pablo",
+      "fonteNaoDistingue": false
+    },
+    "jovem": {
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "regraOficialIdade": "nascidos depois de 1º de janeiro de 2001 (comunicado oficial)",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "SILVA Guillermo Thomas",
+          "equipe": "XDS Astana Team",
+          "tempo": "9:00:23",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "CHRISTEN Jan",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "9:00:33",
+          "gap": "+0:10"
+        },
+        {
+          "pos": 3,
+          "ciclista": "KULSET Johannes",
+          "equipe": "Uno-X Mobility",
+          "tempo": "9:00:33",
+          "gap": "+0:10"
+        },
+        {
+          "pos": 4,
+          "ciclista": "TJOTTA Martin",
+          "equipe": "Uno-X Mobility",
+          "tempo": "9:00:33",
+          "gap": "+0:10"
+        },
+        {
+          "pos": 5,
+          "ciclista": "VAN EETVELT Lennert",
+          "equipe": "Lotto Intermarché",
+          "tempo": "9:00:33",
+          "gap": "+0:10"
+        }
+      ],
+      "lider": "SILVA Guillermo Thomas",
+      "quemVeste": null,
+      "fonteNaoDistingue": true
+    }
+  },
+  "equipes": {
+    "top5": [
+      {
+        "pos": 1,
+        "equipe": "XDS Astana Team",
+        "tempo": "27:01:39",
+        "gap": "0:00"
+      },
+      {
+        "pos": 2,
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "27:01:39",
+        "gap": "0:00"
+      },
+      {
+        "pos": 3,
+        "equipe": "Uno-X Mobility",
+        "tempo": "27:01:39",
+        "gap": "0:00"
+      },
+      {
+        "pos": 4,
+        "equipe": "Movistar Team",
+        "tempo": "27:01:39",
+        "gap": "0:00"
+      },
+      {
+        "pos": 5,
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "27:01:39",
+        "gap": "0:00"
+      }
+    ]
+  },
+  "resumo": "Na etapa 2, ondulada de 221 km entre Burgas e Veliko Tarnovo, Mirco Maestri e Diego Pablo Sevilla (Team Polti VisitMalta) escaparam quase o dia inteiro; Sevilla levou os GPM do Byala Pass e do Vratnik Pass e reforçou a Maglia Azzurra, e a dupla também ficou com o sprint intermediário de Sliven. A cerca de 20 km da chegada, uma queda coletiva no asfalto molhado, com a UAE Team Emirates XRG no centro do acidente, derrubou mais de 20 ciclistas, forçou a neutralização da prova e tirou de prova, entre outros, Jay Vine, Marc Soler e Santiago Buitrago; Adam Yates chegou com quase 14 minutos de atraso. Relançada a corrida, Egan Bernal e Thymen Arensman (Netcompany INEOS) levaram 6 s e 4 s de abbuono no Red Bull KM. Na subida do Mosteiro de Lyaskovets, Jonas Vingegaard atacou com Giulio Pellizzari e Lennert Van Eetvelt, abriram cerca de 20 s, mas foram alcançados a 500 m da linha. Guillermo Thomas Silva (XDS Astana Team), lançado por Christian Scaroni, venceu o sprint do grupo reduzido em 5h39min25s, à frente de Florian Stork e Giulio Ciccone, e assumiu as maglias Rosa e Bianca; Paul Magnier manteve a Ciclamino e Sevilla ficou com a Azzurra.",
+  "resumoFontes": [
+    "https://www.giroditalia.it/en/news/guillermo-silva-wins-stage-2-of-giro-ditalia-2026/",
+    "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-2",
+    "https://www.cyclingnews.com/pro-cycling/racing/giro-d-italia-thomas-silva-secures-race-lead-with-stage-2-sprint-victory-after-jonas-vingegaard-led-attack-is-caught-in-final-kilometre/"
+  ],
+  "pontuacao": {
+    "modo": "copia_oficial",
+    "recalculada": false,
+    "regrasDaEdicaoConfirmadas": true
+  },
+  "idempotencyKey": "2026_b7_etapa_2",
+  "sintetico": false
+}

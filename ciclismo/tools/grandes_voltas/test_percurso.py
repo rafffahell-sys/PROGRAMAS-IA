@@ -192,7 +192,7 @@ class Percurso(unittest.TestCase):
     def test_liberacoes_vazias_e_regras_fechadas(self):
         liberacoes = json.loads((DADOS / "liberacoes.json").read_text(encoding="utf-8"))
         acesso = json.loads((DADOS / "acesso.json").read_text(encoding="utf-8"))
-        esperado = {"2026_b7": {"1": True}, "2026_b10": {}, "2026_b12": {}}
+        esperado = {"2026_b7": {"1": True, "2": True}, "2026_b10": {}, "2026_b12": {}}
         for chave, etapas in esperado.items():
             self.assertEqual(liberacoes["provas"][chave]["etapas"], etapas)
             self.assertFalse(liberacoes["provas"][chave]["provaCompleta"])
