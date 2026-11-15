@@ -22,7 +22,7 @@ const { iniciarPagina, htmlEtapa, htmlHub, formatarPontosClassificacao, lerPonto
 const { htmlCena } = await import("./cena.js");
 
 function fetchLocal(pedidos) {
-  return async (url) => {
+  return async (url, _opcoes) => {
     const alvo = String(url);
     pedidos.push(alvo);
     const arquivo = path.join(raiz, alvo.replace(/^\//, ""));
@@ -66,7 +66,7 @@ test("acesso falso e liberação malformada não pedem snapshot", async () => {
   globalThis.__GV_LEITOR_CARREGADO__ = false;
   location.hash = "#/giro/2026/etapa/1";
   const raizDom = document.getElementById("gv-app");
-  const fetchFn = async (url) => {
+  const fetchFn = async (url, _opcoes) => {
     const alvo = String(url);
     pedidos.push(alvo);
     if (/snapshot|firestore|googleapis|firebase/i.test(alvo)) {
@@ -292,6 +292,32 @@ test("giro real: etapas 1 e 2 liberadas pedem o próprio snapshot estático", as
     assert.equal(novos.some((url) => /snapshot|firestore|googleapis|analise/i.test(url)), false, `etapa ${n}`);
     assert.match(raizDom.innerHTML, /data-resultados="ocultos"/, `etapa ${n}`);
   }
+});
+
+test("liberacoes.json, acesso.json e snapshots liberados são pedidos com cache no-store", async () => {
+  const pedidos = [];
+  location.hash = "#/giro/2026/etapa/1";
+  const raizDom = document.getElementById("gv-app");
+  const fetchFn = async (url, opcoes) => {
+    const alvo = String(url);
+    pedidos.push({ url: alvo, opcoes: opcoes || {} });
+    const arquivo = path.join(raiz, alvo.replace(/^\//, ""));
+    const texto = fs.readFileSync(arquivo, "utf8");
+    return { ok: true, async json() { return JSON.parse(texto); } };
+  };
+  await iniciarPagina(raizDom, { fetchFn });
+  const liberacoes = pedidos.find((item) => item.url.endsWith("liberacoes.json"));
+  assert.ok(liberacoes);
+  assert.equal(liberacoes.opcoes.cache, "no-store");
+  const acesso = pedidos.find((item) => item.url.endsWith("acesso.json"));
+  assert.ok(acesso);
+  assert.equal(acesso.opcoes.cache, "no-store");
+  const snapshots = pedidos.filter((item) => /snapshots\//.test(item.url));
+  assert.deepEqual(snapshots.map((item) => item.url), [
+    "data/grandes-voltas/snapshots/2026_b7/apos-1.json"
+  ]);
+  assert.equal(snapshots.every((item) => item.opcoes.cache === "no-store"), true);
+  assert.equal(pedidos.some((item) => /apos-3\.json|firestore|googleapis/i.test(item.url)), false);
 });
 
 test("só existe arquivo de snapshot para etapa liberada", () => {

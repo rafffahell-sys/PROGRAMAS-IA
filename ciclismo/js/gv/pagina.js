@@ -46,8 +46,8 @@ function esc(valor) {
   }[c]));
 }
 
-async function lerJson(fetchFn, url) {
-  const resposta = await fetchFn(url);
+async function lerJson(fetchFn, url, opcoes) {
+  const resposta = await fetchFn(url, opcoes);
   if (!resposta.ok) throw new Error(url);
   return resposta.json();
 }
@@ -661,9 +661,9 @@ function ligarFiltros(estado, prova, liberacao) {
   });
 }
 
-async function lerOuFechado(fetchFn, url, fallback) {
+async function lerOuFechado(fetchFn, url, fallback, opcoes) {
   try {
-    return await lerJson(fetchFn, url);
+    return await lerJson(fetchFn, url, opcoes);
   } catch {
     return fallback;
   }
@@ -672,15 +672,18 @@ async function lerOuFechado(fetchFn, url, fallback) {
 export async function iniciarPagina(raiz, deps = {}) {
   const fetchFn = deps.fetchFn || globalThis.fetch.bind(globalThis);
   const catalogo = await lerJson(fetchFn, "data/grandes-voltas/catalogo.json");
+  const semCache = { cache: "no-store" };
   const acesso = normalizarAcesso(await lerOuFechado(
     fetchFn,
     "data/grandes-voltas/acesso.json",
-    { regrasComprovadas: false }
+    { regrasComprovadas: false },
+    semCache
   ));
   const liberacoes = await lerOuFechado(
     fetchFn,
     "data/grandes-voltas/liberacoes.json",
-    { provas: {} }
+    { provas: {} },
+    semCache
   );
   const estado = {
     raiz,
