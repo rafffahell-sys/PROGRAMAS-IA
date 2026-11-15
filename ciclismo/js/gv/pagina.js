@@ -241,9 +241,44 @@ function ligarPerfil(raiz) {
   });
 }
 
+const MENOS_TIPOGRAFICO = "\u2212";
+
+function numeroOuNulo(bruto) {
+  if (typeof bruto === "number" && Number.isFinite(bruto)) return bruto;
+  if (typeof bruto === "string" && bruto.trim() !== "") {
+    const texto = bruto.trim().replace("−", "-").replace("–", "-").replace("+", "");
+    const n = Number(texto.replace(",", "."));
+    return Number.isFinite(n) ? n : null;
+  }
+  return null;
+}
+
+/** Lê camisas.*.top5[].pontos (aceita pts se o campo vier com outro nome). */
+export function lerPontos(item) {
+  if (!item || typeof item !== "object") return null;
+  return numeroOuNulo(item.pontos ?? item.pts);
+}
+
+export function formatarPontosClassificacao(item) {
+  const pts = lerPontos(item);
+  if (pts == null) return "";
+  const rotulo = `${pts} pts`;
+  const diff = numeroOuNulo(item?.diff ?? item?.diferenca);
+  if (diff == null || diff === 0) return rotulo;
+  return `${rotulo} ${MENOS_TIPOGRAFICO}${Math.abs(diff)}`;
+}
+
+function unidadeDaLinha(item, unidade) {
+  if (unidade === "pontos" || unidade === "tempo") return unidade;
+  if (item && lerPontos(item) != null && item.tempo == null) return "pontos";
+  return unidade || "tempo";
+}
+
 function htmlLinha(item, unidade) {
-  const valor = unidade === "pontos" ? item.pontos : item.tempo;
-  const diff = item.gap ?? item.diff ?? "";
+  const tipo = unidadeDaLinha(item, unidade);
+  const textoValor = tipo === "pontos"
+    ? formatarPontosClassificacao(item)
+    : `${item?.tempo ?? ""} ${item?.gap ?? item?.diff ?? ""}`;
   const delta = item.delta == null
     ? ""
     : item.delta === 0
@@ -251,7 +286,8 @@ function htmlLinha(item, unidade) {
       : item.delta > 0
         ? ` · subiu ${item.delta}`
         : ` · caiu ${Math.abs(item.delta)}`;
-  return `<li><span class="gv-pos">${esc(item.pos)}</span> ${esc(item.ciclista)} <span class="gv-eq">${esc(item.equipe || "")}</span> <span class="gv-tempo">${esc(valor ?? "")} ${esc(diff ?? "")}</span>${esc(delta)}</li>`;
+  const classe = tipo === "pontos" ? "gv-tempo gv-pts" : "gv-tempo";
+  return `<li><span class="gv-pos">${esc(item.pos)}</span> ${esc(item.ciclista)} <span class="gv-eq">${esc(item.equipe || "")}</span> <span class="${classe}">${esc(textoValor)}</span>${esc(delta)}</li>`;
 }
 
 function htmlClassificacao(titulo, lista, unidade) {
@@ -368,7 +404,7 @@ function htmlResultados(prova, etapa, liberacao, snap, snapAnterior, anteriorN) 
     return `<section class="gv-bloco" data-camisa="${esc(camisa.id)}">
       <h3 class="gv-titulo-camisa">${svgIconeCamisa(prova.slug, camisa)}<span>${esc(camisa.rotulo)}</span></h3>
       <p>Líder da classificação: ${esc(bloco.lider || "—")}. ${esc(veste)}</p>
-      <ol class="gv-lista">${top.map((item) => htmlLinha(item, camisa.unidade)).join("")}</ol>
+      <ol class="gv-lista">${top.map((item) => htmlLinha(item, camisa.unidade || bloco.unidade)).join("")}</ol>
     </section>`;
   }).join("");
   const equipes = prova.classificacaoEquipes?.habilitada && snap.equipes?.top5

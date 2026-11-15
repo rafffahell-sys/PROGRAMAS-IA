@@ -18,7 +18,7 @@ globalThis.window = dom.window;
 globalThis.document = dom.window.document;
 globalThis.location = dom.window.location;
 
-const { iniciarPagina, htmlEtapa, htmlHub } = await import("./pagina.js");
+const { iniciarPagina, htmlEtapa, htmlHub, formatarPontosClassificacao, lerPontos } = await import("./pagina.js");
 const { htmlCena } = await import("./cena.js");
 
 function fetchLocal(pedidos) {
@@ -366,4 +366,87 @@ test("resumo em string escapa html e ignora fonte que não é http", () => {
   assert.match(html, /href="https:\/\/fonte\.example\/ok"/);
   assert.equal(html.includes("javascript:"), false);
   assert.equal(html.includes("ftp://"), false);
+});
+
+
+test("classificação por pontos mostra pts e menos tipográfico; o tempo não muda", () => {
+  assert.equal(formatarPontosClassificacao({ pontos: 50, diff: 0 }), "50 pts");
+  assert.equal(formatarPontosClassificacao({ pontos: 35, diff: 15 }), "35 pts \u221215");
+  assert.equal(formatarPontosClassificacao({ pontos: 6, diff: 0 }), "6 pts");
+  assert.equal(formatarPontosClassificacao({ pontos: 4, diff: 2 }), "4 pts \u22122");
+  assert.equal(formatarPontosClassificacao({ pontos: 1, diff: 5 }), "1 pts \u22125");
+  assert.equal(formatarPontosClassificacao({ pts: "23", diferenca: "27" }), "23 pts \u221227");
+  assert.equal(formatarPontosClassificacao({ pontos: 50, diff: "0" }), "50 pts");
+  assert.equal(formatarPontosClassificacao({}), "");
+  assert.equal(lerPontos({ pontos: 6 }), 6);
+
+  const prova = {
+    slug: "giro", ano: 2026, nome: "Giro d'Italia", provaId: "b7", totalEtapas: 21,
+    calendario: { inicio: "2026-05-08", fim: "2026-05-31" }, fontes: [],
+    camisas: [
+      { id: "gc", rotulo: "Maglia Rosa", unidade: "tempo", oficialConfirmado: true, cor: "#f4a4c4" },
+      { id: "pontos", rotulo: "Maglia Ciclamino", unidade: "pontos", oficialConfirmado: true, cor: "#a0307a" },
+      { id: "montanha", rotulo: "Maglia Azzurra", unidade: "pontos", oficialConfirmado: true, cor: "#5bb8e8" },
+      { id: "jovem", rotulo: "Maglia Bianca", unidade: "tempo", oficialConfirmado: true, cor: "#fff" }
+    ],
+    regulamento: { notaPrioridade: "" }, observacoes: [], etapas: []
+  };
+  const etapa = { n: 1, km: 10, tipo: "plana", data: "2026-05-08", origem: "A", destino: "B", perfil: { pontos: [], sprints: [], montanhas: [] }, avisos: [], detalhe: null, tipoOficial: null, desnivelM: null };
+  const linhaTempo = (pos, tempo, gap) => ({ pos, ciclista: `Atleta ${String(pos).padStart(2, "0")}`, equipe: `Equipe ${pos}`, tempo, gap });
+  const linhaPts = (pos, pontos, diff) => ({ pos, ciclista: `Atleta ${String(pos).padStart(2, "0")}`, equipe: `Equipe ${pos}`, pontos, diff });
+  const snap = {
+    sintetico: true,
+    etapa: { top10: [linhaTempo(1, "3:21:08", "+0:00")] },
+    gc: { top10: [linhaTempo(1, "3:20:58", "+0:00"), linhaTempo(2, "3:21:02", "+0:04")] },
+    camisas: {
+      gc: { top5: [linhaTempo(1, "3:20:58", "+0:00")], lider: "Atleta 01", quemVeste: "Atleta 01", fonteNaoDistingue: false, unidade: "tempo" },
+      pontos: { top5: [linhaPts(1, 50, 0), linhaPts(2, 35, 15), linhaPts(3, 25, 25)], lider: "Atleta 01", quemVeste: null, fonteNaoDistingue: true, unidade: "pontos" },
+      montanha: { top5: [linhaPts(1, 6, 0), linhaPts(2, 4, 2), linhaPts(3, 1, 5), linhaPts(4, 1, 5)], lider: "Atleta 04", quemVeste: "Atleta 04", fonteNaoDistingue: false, unidade: "pontos", totalClassificados: 4 },
+      jovem: { top5: [linhaTempo(1, "3:20:58", "+0:00")], lider: "Atleta 01", quemVeste: null, fonteNaoDistingue: true, unidade: "tempo" }
+    }
+  };
+  const html = htmlEtapa({ ...prova, etapas: [etapa] }, etapa, { etapas: { 1: true }, provaCompleta: false }, snap, null, { permitirSintetico: true });
+  const ciclamino = html.match(/data-camisa="pontos"[\s\S]*?<\/section>/)[0];
+  const azzurra = html.match(/data-camisa="montanha"[\s\S]*?<\/section>/)[0];
+  const rosa = html.match(/data-camisa="gc"[\s\S]*?<\/section>/)[0];
+  const bianca = html.match(/data-camisa="jovem"[\s\S]*?<\/section>/)[0];
+  assert.match(ciclamino, /class="gv-tempo gv-pts">50 pts</);
+  assert.match(ciclamino, /35 pts \u221215/);
+  assert.match(ciclamino, /25 pts \u221225/);
+  assert.equal(ciclamino.includes("50 0"), false);
+  assert.equal(ciclamino.includes("50 pts 0"), false);
+  assert.equal(ciclamino.includes(">0<") || /gv-pts">0/.test(ciclamino), false);
+  assert.match(azzurra, /class="gv-tempo gv-pts">6 pts</);
+  assert.match(azzurra, /4 pts \u22122/);
+  assert.match(azzurra, /1 pts \u22125/);
+  assert.equal(azzurra.includes("6 0"), false);
+  assert.match(rosa, /class="gv-tempo">3:20:58 \+0:00</);
+  assert.equal(rosa.includes("pts"), false);
+  assert.match(bianca, /3:20:58 \+0:00/);
+  assert.equal(bianca.includes("pts"), false);
+  assert.match(html, /3:21:08 \+0:00/);
+});
+
+test("Azzurra lê pontos mesmo se a unidade vier só do snapshot", () => {
+  const prova = {
+    slug: "giro", ano: 2026, nome: "Giro d'Italia", provaId: "b7", totalEtapas: 21,
+    calendario: { inicio: "2026-05-08", fim: "2026-05-31" }, fontes: [],
+    camisas: [{ id: "montanha", rotulo: "Maglia Azzurra", oficialConfirmado: true, cor: "#5bb8e8" }],
+    regulamento: { notaPrioridade: "" }, observacoes: [], etapas: []
+  };
+  const etapa = { n: 1, km: 10, tipo: "plana", data: "2026-05-08", origem: "A", destino: "B", perfil: { pontos: [], sprints: [], montanhas: [] }, avisos: [], detalhe: null, tipoOficial: null, desnivelM: null };
+  const snap = {
+    sintetico: true,
+    etapa: { top10: [] }, gc: { top10: [] },
+    camisas: {
+      montanha: {
+        top5: [{ pos: 1, ciclista: "Atleta 04", equipe: "Equipe 4", pontos: 6, diff: 0 }],
+        lider: "Atleta 04", quemVeste: "Atleta 04", fonteNaoDistingue: false, unidade: "pontos"
+      }
+    }
+  };
+  const html = htmlEtapa({ ...prova, etapas: [etapa] }, etapa, { etapas: { 1: true }, provaCompleta: false }, snap, null, { permitirSintetico: true });
+  assert.match(html, /data-camisa="montanha"/);
+  assert.match(html, /6 pts/);
+  assert.equal(html.includes("6 0"), false);
 });

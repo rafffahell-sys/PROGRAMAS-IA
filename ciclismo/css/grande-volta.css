@@ -277,6 +277,7 @@ body[data-prova="vuelta"] .gv-serra { color: #ff8d86; }
 .gv-lista li { padding: 6px 0; border-bottom: 1px solid var(--line); }
 .gv-pos { font-family: var(--display); font-size: 1.3rem; margin-right: 6px; }
 .gv-eq, .gv-tempo { color: var(--muted); }
+.gv-pts { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .revelar { animation: gv-revelar 0.45s ease; }
 @keyframes gv-revelar {
   from { opacity: 0; transform: translateY(8px); }
