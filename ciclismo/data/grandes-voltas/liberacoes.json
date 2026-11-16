@@ -5,7 +5,8 @@
     "2026_b7": {
       "etapas": {
         "1": true,
-        "2": true
+        "2": true,
+        "3": true
       },
       "provaCompleta": false
     },
