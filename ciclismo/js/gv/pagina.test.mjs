@@ -40,19 +40,19 @@ test("página real no hub não pede snapshot e etapa não liberada permanece ocu
   const raizDom = document.getElementById("gv-app");
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
   const html = raizDom.innerHTML;
-  assert.match(html, /<strong>3<\/strong> de 21 etapas confirmadas/);
+  assert.match(html, /<strong>4<\/strong> de 21 etapas confirmadas/);
   assert.match(html, /147 km|147/);
   assert.equal(html.includes("firestore"), false);
   assert.equal(html.includes("Atleta"), false);
   assert.equal(pedidos.some((url) => /snapshot|firestore|googleapis/i.test(url)), false);
   assert.equal(globalThis.__GV_LEITOR_CARREGADO__, false);
 
-  location.hash = "#/giro/2026/etapa/4";
+  location.hash = "#/giro/2026/etapa/5";
   raizDom.innerHTML = "";
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
-  assert.match(raizDom.innerHTML, /Etapa 4/);
-  assert.match(raizDom.innerHTML, /138 km/);
-  assert.match(raizDom.innerHTML, /img\/perfis\/giro-2026\/etapa-04\.jpg/);
+  assert.match(raizDom.innerHTML, /Etapa 5/);
+  assert.match(raizDom.innerHTML, /203 km/);
+  assert.match(raizDom.innerHTML, /img\/perfis\/giro-2026\/etapa-05\.jpg/);
   assert.match(raizDom.innerHTML, /Ampliar/);
   assert.equal(raizDom.innerHTML.includes("<polyline"), false);
   assert.equal(raizDom.innerHTML.includes("Perfil altimétrico a publicar"), false);
@@ -211,7 +211,7 @@ test("favoritos pré-largada ficam no hub do giro e fora da etapa", async () => 
   assert.equal(raizDom.innerHTML.includes("vitória"), false);
   assert.equal(raizDom.innerHTML.includes("pódio"), false);
   assert.equal((raizDom.querySelectorAll("#favoritos-prelargada .gv-pos")).length, 0);
-  location.hash = "#/giro/2026/etapa/4";
+  location.hash = "#/giro/2026/etapa/5";
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
   assert.equal(raizDom.innerHTML.includes("Favoritos pré-largada"), false);
   assert.equal(raizDom.innerHTML.includes("Jonas Vingegaard"), false);
@@ -256,7 +256,7 @@ test("resumo sintético só na etapa liberada e sem html livre", () => {
   assert.equal(liberado.includes("<b>marca</b>"), false);
 });
 
-test("giro real: etapas 1, 2 e 3 liberadas pedem o próprio snapshot estático", async () => {
+test("giro real: etapas 1, 2, 3 e 4 liberadas pedem o próprio snapshot estático", async () => {
   const raizDom = document.getElementById("gv-app");
   const pedidos = [];
   location.hash = "#/giro/2026/etapa/1";
@@ -296,7 +296,19 @@ test("giro real: etapas 1, 2 e 3 liberadas pedem o próprio snapshot estático",
   assert.equal(pedidos.slice(antes3).some((url) => /firestore|googleapis|firebase/i.test(url)), false);
   assert.equal(globalThis.__GV_LEITOR_CARREGADO__, false);
 
-  for (let n = 4; n <= 21; n += 1) {
+  const antes4 = pedidos.length;
+  location.hash = "#/giro/2026/etapa/4";
+  await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
+  const snapshots4 = pedidos.slice(antes4).filter((url) => /snapshots\//.test(url));
+  assert.deepEqual(snapshots4, ["data/grandes-voltas/snapshots/2026_b7/apos-4.json", "data/grandes-voltas/snapshots/2026_b7/apos-3.json"]);
+  assert.match(raizDom.innerHTML, /data-resultados="visiveis"/);
+  assert.match(raizDom.innerHTML, /Depois da etapa 4/);
+  assert.match(raizDom.innerHTML, /Maglia Azzurra/);
+  assert.equal(raizDom.querySelectorAll(".gv-resultados .gv-bloco").length >= 6, true);
+  assert.equal(pedidos.slice(antes4).some((url) => /firestore|googleapis|firebase/i.test(url)), false);
+  assert.equal(globalThis.__GV_LEITOR_CARREGADO__, false);
+
+  for (let n = 5; n <= 21; n += 1) {
     const antes = pedidos.length;
     location.hash = `#/giro/2026/etapa/${n}`;
     await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
@@ -329,7 +341,7 @@ test("liberacoes.json, acesso.json e snapshots liberados são pedidos com cache 
     "data/grandes-voltas/snapshots/2026_b7/apos-1.json"
   ]);
   assert.equal(snapshots.every((item) => item.opcoes.cache === "no-store"), true);
-  assert.equal(pedidos.some((item) => /apos-4\.json|firestore|googleapis/i.test(item.url)), false);
+  assert.equal(pedidos.some((item) => /apos-5\.json|firestore|googleapis/i.test(item.url)), false);
 });
 
 test("só existe arquivo de snapshot para etapa liberada", () => {
@@ -344,7 +356,7 @@ test("só existe arquivo de snapshot para etapa liberada", () => {
       achados.push(`${prova}/${m[1]}`);
     }
   }
-  assert.deepEqual(achados, ["2026_b7/1", "2026_b7/2", "2026_b7/3"]);
+  assert.deepEqual(achados, ["2026_b7/1", "2026_b7/2", "2026_b7/3", "2026_b7/4"]);
 });
 
 
