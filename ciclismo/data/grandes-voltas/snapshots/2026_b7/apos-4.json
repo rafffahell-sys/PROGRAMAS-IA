@@ -1,0 +1,414 @@
+{
+  "provaId": "b7",
+  "ano": 2026,
+  "aposEtapa": 4,
+  "imutavel": true,
+  "fonte": {
+    "nome": "Giro d'Italia oficial (RCS) + ProCyclingStats",
+    "url": "https://www.giroditalia.it/en/classifiche/di-tappa/4/",
+    "urls": [
+      "https://www.giroditalia.it/en/tappe/stage-4-of-the-giro-ditalia-2026-catanzaro-cosenza/",
+      "https://www.giroditalia.it/en/classifiche/di-tappa/4/",
+      "https://www.giroditalia.it/en/news/jhonatan-narvaez-wins-stage-4-of-giro-ditalia-2026/",
+      "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-4",
+      "https://www.italpress.com/ordine-arrivo-risultati-classifiche-quarta-tappa-giro-italia-2026/"
+    ],
+    "coletadoEm": "2026-11-19T00:59:31-03:00"
+  },
+  "validacao": {
+    "ok": true,
+    "checagens": [
+      "top10_etapa",
+      "gc10",
+      "camisas_top5"
+    ],
+    "avisos": [
+      "O site oficial não publica em /en/classifiche/di-tappa/4/ a classificação geral acumulada após a etapa 4 (só ordem de chegada, pontos do dia, GPM, sprint, Red Bull KM, Super Team do dia e ritirati). O top 10 da GC foi montado com o comunicado oficial (top 3: CICCONE, CHRISTEN a 4 s, STORK a 4 s), Italpress e BBC (CICCONE 16:18:51; CHRISTEN, STORK e BERNAL a 4 s; ARENSMAN e PELLIZZARI a 6 s; VAN EETVELT, MAS, BELOKI e HIRT a 10 s) e a coluna GC do PCS, e conferido por aritmética: tempo oficial de etapa 3:08:46 somado aos tempos após a etapa 3, com os abbuoni oficiais.",
+      "Aritmética da GC a partir da etapa 3 (tempos 13:10:05 a 13:10:15 no top 10) + 3:08:46 − abbuoni: CICCONE 13:10:11 + 3:08:46 − 0:06 = 16:18:51; CHRISTEN 13:10:15 + 3:08:46 − 0:06 = 16:18:55 (+0:04); STORK e BERNAL 13:10:09 + 3:08:46 = 16:18:55 (+0:04); ARENSMAN 13:10:11 + 3:08:46 = 16:18:57 (+0:06). PELLIZZARI, VAN EETVELT, MAS, BELOKI e HIRT fecham com o mesmo esquema (PELLIZZARI − 0:04 de abbuono no Red Bull KM). O Cyclingnews confirma Rosa com 4 s sobre CHRISTEN e STORK.",
+      "ProCyclingUK acerta os líderes das maglias (CICCONE na Rosa, MAGNIER na Ciclamino, SEVILLA na Azzurra, CHRISTEN na Bianca), mas a tabela de GC do artigo está errada (líder em 16:23:30, sem STORK, BERNAL a 8 s, ARENSMAN a 10 s). Esses números não foram usados.",
+      "O comunicado oficial lista o top 3 da GC e os líderes implícitos da etapa; a página oficial da etapa 4, na aba de maglie, mostra Rosa CICCONE, Ciclamino MAGNIER, Azzurra SEVILLA e Bianca CHRISTEN, sem um campo separado de 'quem veste' vs líder. Como os quatro líderes são ciclistas distintos, quemVeste foi gravado igual ao líder em todas as maglias. O comunicado diz explicitamente que CICCONE veste a Maglia Rosa.",
+      "Desnível oficial: 1.800 m. PCS indica 1.600 m de vertical meters; Cyclingflash, 1.528 m. Foi gravado o valor oficial de 1.800 m.",
+      "Distância oficial: 138 km. Cyclingflash indica 138,8 km; Procyclist, 139 km. Foi gravada a distância oficial de 138 km.",
+      "Não há série oficial {xKm, elevM} do perfil; o campo pontos ficou vazio. Há imagem oficial de altimetria, conferida com a cópia local (JPEG 1280×852, 303.282 bytes). Planimetria oficial separada em HgCQMFOl0Z8IrLsqUxbh_140426-021507.jpg (não usada como perfil).",
+      "Velocidade média: comunicado oficial 43,863 km/h; PCS 43,864 km/h (arredondamento). Cálculo 138 km em 3:08:46 = 43,863 km/h. Cyclingflash publica 44,11 km/h (inconsistente com o tempo oficial); não foi usado.",
+      "O campo oficial de abbuono de CICCONE na ordem de chegada é 0:06 (soma do 3º lugar na chegada, 4 s, com os 2 s do Red Bull KM). AULAR tem 0:06 só da chegada; NARVAEZ, 0:10 da chegada; CHRISTEN (24º) e PELLIZZARI (38º) têm 0:06 e 0:04 do Red Bull KM. A classifica oficial do Red Bull KM (pontos 15-8-5-3-1) confirma CHRISTEN, PELLIZZARI, CICCONE, VINGEGAARD e HINDLEY; o comunicado e o Cyclingnews confirmam os abbuoni de tempo 6-4-2 para os três primeiros.",
+      "SILVA: array oficial e ordem de chegada SILVA Guillermo / Guillermo SILVA; comunicado e notícias usam (Guillermo) Thomas Silva. Foi gravado SILVA Guillermo Thomas. Chegada oficial: 130º, 3:21:02, a 12:16 (bate com o Cyclingnews).",
+      "Tipo de percurso gravado como ondulada, no mesmo critério da etapa 3 (uma 2ª categoria intermediária). O texto técnico oficial descreve etapa curta e rápida com uma longa subida intermediária pouco exigente e chegada em leve subida (450 m a 3,7%). PCS classifica como 'Mountains, flat finish'; Cyclingflash, Hill / false flat.",
+      "Abandonos oficiais da etapa 4: 3 (KELDERMAN Wilco, Team Visma - Lease a Bike; GROVES Kaden, Alpecin-Premier Tech; DE LIE Arnaud, Lotto Intermarché). Cyclingflash e o relato do Cyclingnews classificam KELDERMAN como DNS e GROVES e DE LIE como DNF (DE LIE abandonou na subida). O campo abandonos segue o oficial (3). Com 174 chegadas, 174+3=177; partentes foi gravado 177 (pelotão remanescente após as baixas das etapas 1-3), no mesmo critério da etapa 3.",
+      "Ciclamino após a etapa 4: MAGNIER 105, MILAN 64, NARVAEZ 50, ANDRESEN 42, CICCONE 37. O oficial só publica os pontos do dia (NARVAEZ 50 no sprint de chegada; BAIS 12 no intermediário). O acumulado foi cruzado com Italpress (top 3) e Cyclingflash/Cyclingstage (top 5) e confere com os totais após a etapa 3 mais os pontos oficiais do dia (MAGNIER e MILAN não pontuaram; NARVAEZ soma 50; ANDRESEN permanece com 42; CICCONE soma 25 da chegada e vai a 37).",
+      "Azzurra após a etapa 4: SEVILLA 42, OLIVEIRA 18, TAROZZI 12, VINGEGAARD 11, AULAR 8. SEVILLA não pontuou no único GPM (Cozzo Tunno, km 95). OLIVEIRA, AULAR, MAS, RUBIO, VINGEGAARD (+2, vai a 11) e CAMPENAERTS pontuaram 18-8-6-4-2-1. Cyclingstage coloca AULAR à frente de MAESTRI no desempate a 8 pts; foi gravada essa ordem.",
+      "Bianca: CHRISTEN 16:18:55, PELLIZZARI +0:02, VAN EETVELT, BELOKI e RONDEL +0:06. Italpress confirma o top 3 com tempos; Cyclingflash confirma o top 5. A regra de idade permanece a do comunicado oficial (nascidos depois de 1º de janeiro de 2001).",
+      "A classifica oficial de equipes é só a do dia (Super Team): LIDL-TREK, EF EDUCATION - EASYPOST, NETCOMPANY INEOS, MOVISTAR TEAM e TEAM VISMA - LEASE A BIKE empatadas em 9:26:18. Não há classifica geral de equipes após a etapa 4 nas páginas oficiais de tappa, no Italpress, no BBC nem no Cyclingstage. A página /en/classifiche/?tappa=4 serve a classifica geral corrente (pós-prova), não o snapshot após a etapa 4, e não foi usada. O top 5 acumulado de equipes ficou null.",
+      "Fuga: comunicado oficial e classifica oficial (6 nomes, cerca de 2 min 20 s de vantagem). Cyclingnews: teto de cerca de 2 min 20 s. Italpress: cerca de 2 min 30 s. O relato do PCS resume 'five-man breakaway'; o Cyclingstage nota que JACOBS ligou depois. O resumo usa seis ciclistas e cerca de 2 min 20 s.",
+      "Grupo da frente: 42 ciclistas no mesmo tempo oficial (0:00), coerente com o PCS ('Sprint of 42 riders') e com o Cyclingnews. Italpress e Cyclingstage falam em cerca de 40.",
+      "Captura do ataque de CHRISTEN: comunicado oficial em inglês, 500 m; Cyclingnews, menos de 500 m; Cyclingstage, 400 m. O resumo usa a formulação mais segura (dentro dos últimos 500 m) e registra a divergência aqui.",
+      "A página oficial /en/classifiche/ e as URLs com ?tappa=/?stage= parecem servir a classifica geral corrente (pós-prova), não o snapshot após a etapa 4. Não foram usadas.",
+      "Não foram usados resultados de etapas posteriores nem a classificação final da prova."
+    ]
+  },
+  "etapa": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "NARVAEZ Jhonatan",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": "0:10"
+      },
+      {
+        "pos": 2,
+        "ciclista": "AULAR Orluis",
+        "equipe": "Movistar Team",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": "0:06"
+      },
+      {
+        "pos": 3,
+        "ciclista": "CICCONE Giulio",
+        "equipe": "Lidl-Trek",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": "0:06"
+      },
+      {
+        "pos": 4,
+        "ciclista": "TURNER Ben",
+        "equipe": "Netcompany INEOS",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 5,
+        "ciclista": "PINARELLO Alessandro",
+        "equipe": "NSN Cycling Team",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 6,
+        "ciclista": "EULALIO Afonso",
+        "equipe": "Bahrain Victorious",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 7,
+        "ciclista": "VAN EETVELT Lennert",
+        "equipe": "Lotto Intermarché",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 8,
+        "ciclista": "ULISSI Diego",
+        "equipe": "XDS Astana Team",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 9,
+        "ciclista": "RACCAGNI NOVIERO Andrea",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 10,
+        "ciclista": "VALGREN Michael",
+        "equipe": "EF Education - EasyPost",
+        "tempo": "3:08:46",
+        "gap": "0:00",
+        "abbuono": null
+      }
+    ],
+    "vencedor": {
+      "ciclista": "NARVAEZ Jhonatan",
+      "equipe": "UAE Team Emirates XRG",
+      "tempo": "3:08:46"
+    },
+    "mediaKmH": 43.863,
+    "abandonos": 3,
+    "partentes": 177
+  },
+  "gc": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "CICCONE Giulio",
+        "equipe": "Lidl-Trek",
+        "tempo": "16:18:51",
+        "gap": "+0:00"
+      },
+      {
+        "pos": 2,
+        "ciclista": "CHRISTEN Jan",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "16:18:55",
+        "gap": "+0:04"
+      },
+      {
+        "pos": 3,
+        "ciclista": "STORK Florian",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "16:18:55",
+        "gap": "+0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "BERNAL Egan",
+        "equipe": "Netcompany INEOS",
+        "tempo": "16:18:55",
+        "gap": "+0:04"
+      },
+      {
+        "pos": 5,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "16:18:57",
+        "gap": "+0:06"
+      },
+      {
+        "pos": 6,
+        "ciclista": "PELLIZZARI Giulio",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "16:18:57",
+        "gap": "+0:06"
+      },
+      {
+        "pos": 7,
+        "ciclista": "VAN EETVELT Lennert",
+        "equipe": "Lotto Intermarché",
+        "tempo": "16:19:01",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 8,
+        "ciclista": "MAS Enric",
+        "equipe": "Movistar Team",
+        "tempo": "16:19:01",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 9,
+        "ciclista": "BELOKI Markel",
+        "equipe": "EF Education - EasyPost",
+        "tempo": "16:19:01",
+        "gap": "+0:10"
+      },
+      {
+        "pos": 10,
+        "ciclista": "HIRT Jan",
+        "equipe": "NSN Cycling Team",
+        "tempo": "16:19:01",
+        "gap": "+0:10"
+      }
+    ]
+  },
+  "camisas": {
+    "gc": {
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "CICCONE Giulio",
+          "equipe": "Lidl-Trek",
+          "tempo": "16:18:51",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "CHRISTEN Jan",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "16:18:55",
+          "gap": "+0:04"
+        },
+        {
+          "pos": 3,
+          "ciclista": "STORK Florian",
+          "equipe": "Tudor Pro Cycling Team",
+          "tempo": "16:18:55",
+          "gap": "+0:04"
+        },
+        {
+          "pos": 4,
+          "ciclista": "BERNAL Egan",
+          "equipe": "Netcompany INEOS",
+          "tempo": "16:18:55",
+          "gap": "+0:04"
+        },
+        {
+          "pos": 5,
+          "ciclista": "ARENSMAN Thymen",
+          "equipe": "Netcompany INEOS",
+          "tempo": "16:18:57",
+          "gap": "+0:06"
+        }
+      ],
+      "lider": "CICCONE Giulio",
+      "quemVeste": "CICCONE Giulio",
+      "fonteNaoDistingue": false
+    },
+    "pontos": {
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 105,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "MILAN Jonathan",
+          "equipe": "Lidl-Trek",
+          "pontos": 64,
+          "diff": 41
+        },
+        {
+          "pos": 3,
+          "ciclista": "NARVAEZ Jhonatan",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 50,
+          "diff": 55
+        },
+        {
+          "pos": 4,
+          "ciclista": "ANDRESEN Tobias Lund",
+          "equipe": "Decathlon CMA CGM Team",
+          "pontos": 42,
+          "diff": 63
+        },
+        {
+          "pos": 5,
+          "ciclista": "CICCONE Giulio",
+          "equipe": "Lidl-Trek",
+          "pontos": 37,
+          "diff": 68
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": "MAGNIER Paul",
+      "fonteNaoDistingue": false
+    },
+    "montanha": {
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 42,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "OLIVEIRA Nelson",
+          "equipe": "Movistar Team",
+          "pontos": 18,
+          "diff": 24
+        },
+        {
+          "pos": 3,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 12,
+          "diff": 30
+        },
+        {
+          "pos": 4,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "pontos": 11,
+          "diff": 31
+        },
+        {
+          "pos": 5,
+          "ciclista": "AULAR Orluis",
+          "equipe": "Movistar Team",
+          "pontos": 8,
+          "diff": 34
+        }
+      ],
+      "lider": "SEVILLA Diego Pablo",
+      "quemVeste": "SEVILLA Diego Pablo",
+      "fonteNaoDistingue": false
+    },
+    "jovem": {
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "regraOficialIdade": "nascidos depois de 1º de janeiro de 2001 (comunicado oficial)",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "CHRISTEN Jan",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "16:18:55",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "PELLIZZARI Giulio",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "tempo": "16:18:57",
+          "gap": "+0:02"
+        },
+        {
+          "pos": 3,
+          "ciclista": "VAN EETVELT Lennert",
+          "equipe": "Lotto Intermarché",
+          "tempo": "16:19:01",
+          "gap": "+0:06"
+        },
+        {
+          "pos": 4,
+          "ciclista": "BELOKI Markel",
+          "equipe": "EF Education - EasyPost",
+          "tempo": "16:19:01",
+          "gap": "+0:06"
+        },
+        {
+          "pos": 5,
+          "ciclista": "RONDEL Mathys",
+          "equipe": "Tudor Pro Cycling Team",
+          "tempo": "16:19:01",
+          "gap": "+0:06"
+        }
+      ],
+      "lider": "CHRISTEN Jan",
+      "quemVeste": "CHRISTEN Jan",
+      "fonteNaoDistingue": false
+    }
+  },
+  "equipes": {
+    "top5": null
+  },
+  "resumo": "Na etapa 4, primeira na Itália após o dia de deslocamento, 138 km ondulados de Catanzaro a Cosenza com 1.800 m de desnível oficial, seis ciclistas escaparam — Martin Marcellusi (Bardiani CSF 7 Saber), Darren Rafferty (EF Education - EasyPost), Johan Jacobs (Groupama-FDJ United), Warren Barguil (Team Picnic PostNL), Mattia Bais (Team Polti VisitMalta) e Niklas Larsen (Unibet Rose Rockets) — e chegaram a abrir cerca de 2min20s. Na subida do Cozzo Tunno (2ª categoria, km 95), a Movistar impôs um ritmo que alcançou a fuga, afastou os velocistas e distanciou a Maglia Rosa Guillermo Thomas Silva, 130º a 12min16s; Nelson Oliveira levou o único GPM. No Red Bull KM, Jan Christen ficou com os 6 segundos de abbuono, à frente de Giulio Pellizzari e Giulio Ciccone, e ainda atacou no final, sendo alcançado dentro dos últimos 500 m. Na reta de 450 m a 3,7%, Jhonatan Narváez (UAE Team Emirates XRG) venceu o sprint do grupo de 42 ciclistas em 3h08min46s, média oficial de 43,863 km/h, à frente de Orluis Aular e Ciccone. Com os abbuoni, Ciccone assumiu a Maglia Rosa; Christen ficou com a Bianca; Paul Magnier manteve a Ciclamino e Diego Pablo Sevilla, a Azzurra; baixas oficiais da etapa: Wilco Kelderman (não largou), Kaden Groves e Arnaud De Lie.",
+  "resumoFontes": [
+    "https://www.giroditalia.it/en/news/jhonatan-narvaez-wins-stage-4-of-giro-ditalia-2026/",
+    "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-4",
+    "https://www.cyclingnews.com/pro-cycling/racing/giro-d-italia-jhonatan-narvaez-sprints-to-stage-4-win-as-giulio-ciccone-grabs-bonus-seconds-to-seize-pink-jersey/"
+  ],
+  "pontuacao": {
+    "modo": "copia_oficial",
+    "recalculada": false,
+    "regrasDaEdicaoConfirmadas": true
+  },
+  "idempotencyKey": "2026_b7_etapa_4",
+  "sintetico": false
+}
