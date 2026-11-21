@@ -1,0 +1,414 @@
+{
+  "provaId": "b7",
+  "ano": 2026,
+  "aposEtapa": 5,
+  "imutavel": true,
+  "fonte": {
+    "nome": "Giro d'Italia oficial (RCS) + ProCyclingStats",
+    "url": "https://www.giroditalia.it/en/classifiche/di-tappa/5/",
+    "urls": [
+      "https://www.giroditalia.it/en/tappe/stage-5-of-the-giro-ditalia-2026-praia-a-mare-potenza/",
+      "https://www.giroditalia.it/en/classifiche/di-tappa/5/",
+      "https://www.giroditalia.it/en/news/igor-arrieta-wins-stage-5-of-giro-ditalia-2026/",
+      "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-5",
+      "https://www.italpress.com/ordine-arrivo-risultati-classifiche-quinta-tappa-giro-italia-2026/"
+    ],
+    "coletadoEm": "2026-11-21T01:21:00-03:00"
+  },
+  "validacao": {
+    "ok": true,
+    "checagens": [
+      "top10_etapa",
+      "gc10",
+      "camisas_top5"
+    ],
+    "avisos": [
+      "O site oficial não publica em /en/classifiche/di-tappa/5/ a classificação geral acumulada após a etapa 5 (só ordem de chegada, pontos do dia, GPM, sprint, Red Bull KM, Super Team do dia e ritirati). O top 10 da GC foi montado com o comunicado oficial (top 3: EULALIO, ARRIETA a 2 min 51 s, SCARONI a 3 min 34 s), Italpress e BBC (EULALIO 21:27:43; ARRIETA a 2:51; SCARONI a 3:34; RACCAGNI NOVIERO a 3:39; KULSET a 5:17; CICCONE a 6:12; CHRISTEN, STORK e BERNAL a 6:16; ARENSMAN a 6:18) e a coluna GC do PCS, e conferido por aritmética a partir dos tempos após a etapa 4, com os abbuoni oficiais.",
+      "Aritmética da GC a partir da etapa 4 + tempo oficial da etapa 5 − abbuoni: EULALIO 21:27:43 implica tempo prévio 16:20:02 (21:27:43 − (5:07:53 − 0:12)); isso o colocava a 1:11 de CICCONE após a etapa 4, valor confirmado pelo comunicado oficial em francês. CICCONE 16:18:51 + 5:15:04 = 21:33:55 (+6:12); CHRISTEN, STORK e BERNAL 16:18:55 + 5:15:04 = 21:33:59 (+6:16); ARENSMAN 16:18:57 + 5:15:04 = 21:34:01 (+6:18). ARRIETA 21:30:34 (+2:51) = 16:22:57 prévio + (5:07:51 − 0:14); SCARONI 21:31:17 (+3:34) = 16:21:56 + 5:09:21; RACCAGNI NOVIERO 21:31:22 (+3:39) = 16:20:02 + 5:11:20 (mesmo tempo prévio de EULALIO); KULSET 21:33:00 (+5:17) = 16:21:56 + 5:11:04 (mesmo tempo prévio de SCARONI). PELLIZZARI, 6º após a etapa 4 (16:18:57), cai para 11º com 21:34:01 (+6:18), igual a ARENSMAN; o PCS confirma essa posição e esse gap.",
+      "O BBC omite o gap de BERNAL no 9º da GC (tipografia), mas Italpress, ProCyclingUK e a aritmética a partir da etapa 4 confirmam o mesmo tempo de CHRISTEN e STORK (+6:16). ProCyclingUK, que na etapa 4 errou a tabela da GC, desta vez acerta os tempos do top 10; mesmo assim não foi usado como fonte primária.",
+      "A página oficial da etapa 5, na aba de maglie, mostra Rosa EULALIO, Ciclamino MAGNIER, Azzurra SEVILLA e Bianca EULALIO, sem um campo separado de 'quem veste' vs líder. O comunicado oficial diz que EULALIO veste a Maglia Rosa (terceiro português a fazê-lo, depois de Acácio da Silva e João Almeida) e que é a primeira Rosa da Bahrain Victorious. Como EULALIO lidera ao mesmo tempo a Rosa e a Bianca, quemVeste da Bianca ficou null e fonteNaoDistingue true. Nas outras três maglias, os líderes são ciclistas distintos e quemVeste foi gravado igual ao líder.",
+      "Desnível oficial: 4.100 m. PCS indica 3.724 m de vertical meters; Cyclingflash, 3.545 m. Foi gravado o valor oficial de 4.100 m.",
+      "Distância oficial: 203 km. Cyclingflash indica 203,8 km. Foi gravada a distância oficial de 203 km.",
+      "Não há série oficial {xKm, elevM} do perfil; o campo pontos ficou vazio. Há imagem oficial de altimetria, conferida com a cópia local (JPEG 1280×852, 366.492 bytes). Planimetria oficial separada em N5hxEYA9ueH6m0G6mVHu_140426-025119.jpg (não usada como perfil).",
+      "Velocidade média: comunicado oficial 39,564 km/h; PCS 39,565 km/h (arredondamento). Cálculo 203 km em 5:07:51 = 39,564 km/h. Cyclingflash publica 39,72 km/h, coerente com a distância extraoficial de 203,8 km; não foi usado.",
+      "Os abbuoni oficiais da ordem de chegada batem com chegada (10-6-4) + Red Bull KM (6-4-2): ARRIETA 0:14 (10+4), EULALIO 0:12 (6+6), SILVA 0:04 (só a chegada) e MILESI 0:02 (3º no Red Bull KM). A classifica oficial do Red Bull KM (pontos 15-8-5-3-1) confirma EULALIO, ARRIETA, MILESI, GAROFOLI e SCARONI.",
+      "SILVA: array oficial e ordem de chegada SILVA Guillermo / Guillermo SILVA; comunicado e notícias usam (Guillermo) Thomas Silva. Foi gravado SILVA Guillermo Thomas, como nas etapas anteriores.",
+      "Tipo de percurso gravado como ondulada, no mesmo critério das etapas 2 a 4 (subidas categorizadas intermediárias, sem chegada no alto). O texto técnico oficial descreve etapa muito movimentada, com a subida mais dura das primeiras etapas (Montagna Grande di Viggiano) e reta final de 700 m em leve subida. PCS classifica como 'Hills, flat finish'; Cyclingflash, 'Hill'; Cyclingstage diz que não é uma etapa de alta montanha, e sim um percurso ondulado com muito desnível.",
+      "Abandonos oficiais da etapa 5: 4 (MENTEN Milan, Lotto Intermarché; GIDDINGS Joshua, Lotto Intermarché; DE JONG Timo, Team Picnic PostNL; BATTISTELLA Samuele, EF Education - EasyPost). BikeRaceInfo classifica MENTEN como DNS (vírus estomacal), GIDDINGS e DE JONG como DNF (DE JONG com dor no pulso após a queda da etapa 3); não descreve BATTISTELLA. O campo abandonos segue o total oficial (4). Partentes: 174 (177 da etapa 4 menos os 3 abandonos daquela etapa).",
+      "Ciclamino após a etapa 5: MAGNIER 105, MILAN 64, NARVAEZ 50, ANDRESEN 42, SILVA 37 (CICCONE também 37, atrás no desempate). O oficial só publica os pontos do dia (chegada na escala 25-18-12-8-6-5-4-3-2-1 somada ao intermediário 12-8-5-3-1: ARRIETA 30, EULALIO 21, GAROFOLI 13, SILVA 12, TAROZZI 12). MAGNIER, MILAN, NARVAEZ e ANDRESEN não pontuaram. O acumulado do top 3 bate com o Italpress (105-64-50, inalterado em relação à etapa 4); o top 5 foi cruzado com o Cyclingflash, que coloca SILVA à frente de CICCONE no desempate a 37 pts (SILVA somou os 12 da chegada).",
+      "Azzurra após a etapa 5: SEVILLA 42, ARRIETA 18, OLIVEIRA 18, RUBIO 13, TAROZZI 12. SEVILLA não pontuou nos dois GPM. ARRIETA soma os 18 da Montagna Grande di Viggiano; RUBIO soma os 9 de Prestieri aos 4 que já tinha. Italpress confirma o top 3 (SEVILLA 42, ARRIETA e OLIVEIRA 18, com ARRIETA à frente no desempate). Cyclingflash e Cyclingstage confirmam o top 5.",
+      "Bianca: EULALIO 21:27:43, ARRIETA +2:51, RACCAGNI NOVIERO +3:39, KULSET +5:17, CHRISTEN +6:16. Italpress confirma o top 3, mas grava o tempo do líder como 1h27'43\" (erro de digitação; o 21h27'43\" da GC e do Cyclingflash é o valor usado). A regra de idade permanece a do comunicado oficial (nascidos depois de 1º de janeiro de 2001).",
+      "A classifica oficial de equipes é só a do dia (Super Team): XDS ASTANA TEAM 15:33:07, UAE TEAM EMIRATES XRG a 6:03, MOVISTAR TEAM a 6:21, UNO-X MOBILITY a 8:05 e RED BULL - BORA - HANSGROHE a 12:05 (empatada no tempo do dia com Tudor, Visma e Decathlon). Não há classifica geral de equipes após a etapa 5 nas páginas oficiais de tappa, no Italpress nem no BBC. equipes.top5 ficou null.",
+      "Fuga: comunicado oficial lista 12 ciclistas na aproximação do GPM de Prestieri, com RAFFERTY ligando depois (13 no total). Cyclingnews confirma o grupo de 12 após cerca de 40 km e a chegada de RAFFERTY a 126 km do fim. Italpress descreve a fuga 'partita intorno ai 50 chilometri' e já inclui RAFFERTY na lista (13 nomes). O resumo usa a formulação oficial (12, depois RAFFERTY).",
+      "Quedas e erro de percurso no finale: comunicado oficial em inglês, ARRIETA caiu a 12 km da chegada, EULALIO a 5 km, ARRIETA errou o caminho a 2 km e ultrapassou EULALIO nos últimos 50 m. O comunicado em francês fala em 14 km e 7 km; o BBC, em 14 km para ARRIETA; o Cyclingnews, em 13,5 km e 6,5 km, e 'final few hundred metres' na ultrapassagem. O resumo usa as distâncias do comunicado oficial em inglês.",
+      "Gap do grupo da Maglia Rosa na chegada: 7:13 oficial (de LOPEZ, 11º, a HIRT, 44º, no mesmo tempo, inclusive CICCONE, 28º). O comunicado oficial descreve o atraso do pelotão inflando de 2 min para 7 min em 50 km. Italpress fala em 'oltre 8 minuti' ainda na Montagna Grande di Viggiano, valor de passagem, não o gap de chegada. O Cyclingnews registra quase 7 min a 15 km do fim e 7:13 na linha.",
+      "A página oficial /en/classifiche/ e as URLs com ?tappa=/?stage= parecem servir a classifica geral corrente (pós-prova), não o snapshot após a etapa 5. Não foram usadas.",
+      "Não foram usados resultados de etapas posteriores nem a classificação final da prova."
+    ]
+  },
+  "etapa": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "ARRIETA Igor",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "5:07:51",
+        "gap": "0:00",
+        "abbuono": "0:14"
+      },
+      {
+        "pos": 2,
+        "ciclista": "EULALIO Afonso",
+        "equipe": "Bahrain Victorious",
+        "tempo": "5:07:53",
+        "gap": "0:02",
+        "abbuono": "0:12"
+      },
+      {
+        "pos": 3,
+        "ciclista": "SILVA Guillermo Thomas",
+        "equipe": "XDS Astana Team",
+        "tempo": "5:08:42",
+        "gap": "0:51",
+        "abbuono": "0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "MILESI Lorenzo",
+        "equipe": "Movistar Team",
+        "tempo": "5:09:20",
+        "gap": "1:29",
+        "abbuono": "0:02"
+      },
+      {
+        "pos": 5,
+        "ciclista": "SCARONI Christian",
+        "equipe": "XDS Astana Team",
+        "tempo": "5:09:21",
+        "gap": "1:30",
+        "abbuono": null
+      },
+      {
+        "pos": 6,
+        "ciclista": "GAROFOLI Gianmarco",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "5:09:21",
+        "gap": "1:30",
+        "abbuono": null
+      },
+      {
+        "pos": 7,
+        "ciclista": "BOUWMAN Koen",
+        "equipe": "Team Jayco Alula",
+        "tempo": "5:11:02",
+        "gap": "3:11",
+        "abbuono": null
+      },
+      {
+        "pos": 8,
+        "ciclista": "KULSET Johannes",
+        "equipe": "Uno-X Mobility",
+        "tempo": "5:11:04",
+        "gap": "3:13",
+        "abbuono": null
+      },
+      {
+        "pos": 9,
+        "ciclista": "RACCAGNI NOVIERO Andrea",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "5:11:20",
+        "gap": "3:29",
+        "abbuono": null
+      },
+      {
+        "pos": 10,
+        "ciclista": "CRESCIOLI Ludovico",
+        "equipe": "Team Polti VisitMalta",
+        "tempo": "5:12:33",
+        "gap": "4:42",
+        "abbuono": null
+      }
+    ],
+    "vencedor": {
+      "ciclista": "ARRIETA Igor",
+      "equipe": "UAE Team Emirates XRG",
+      "tempo": "5:07:51"
+    },
+    "mediaKmH": 39.564,
+    "abandonos": 4,
+    "partentes": 174
+  },
+  "gc": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "EULALIO Afonso",
+        "equipe": "Bahrain Victorious",
+        "tempo": "21:27:43",
+        "gap": "+0:00"
+      },
+      {
+        "pos": 2,
+        "ciclista": "ARRIETA Igor",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "21:30:34",
+        "gap": "+2:51"
+      },
+      {
+        "pos": 3,
+        "ciclista": "SCARONI Christian",
+        "equipe": "XDS Astana Team",
+        "tempo": "21:31:17",
+        "gap": "+3:34"
+      },
+      {
+        "pos": 4,
+        "ciclista": "RACCAGNI NOVIERO Andrea",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "21:31:22",
+        "gap": "+3:39"
+      },
+      {
+        "pos": 5,
+        "ciclista": "KULSET Johannes",
+        "equipe": "Uno-X Mobility",
+        "tempo": "21:33:00",
+        "gap": "+5:17"
+      },
+      {
+        "pos": 6,
+        "ciclista": "CICCONE Giulio",
+        "equipe": "Lidl-Trek",
+        "tempo": "21:33:55",
+        "gap": "+6:12"
+      },
+      {
+        "pos": 7,
+        "ciclista": "CHRISTEN Jan",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "21:33:59",
+        "gap": "+6:16"
+      },
+      {
+        "pos": 8,
+        "ciclista": "STORK Florian",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "21:33:59",
+        "gap": "+6:16"
+      },
+      {
+        "pos": 9,
+        "ciclista": "BERNAL Egan",
+        "equipe": "Netcompany INEOS",
+        "tempo": "21:33:59",
+        "gap": "+6:16"
+      },
+      {
+        "pos": 10,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "21:34:01",
+        "gap": "+6:18"
+      }
+    ]
+  },
+  "camisas": {
+    "gc": {
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "21:27:43",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "21:30:34",
+          "gap": "+2:51"
+        },
+        {
+          "pos": 3,
+          "ciclista": "SCARONI Christian",
+          "equipe": "XDS Astana Team",
+          "tempo": "21:31:17",
+          "gap": "+3:34"
+        },
+        {
+          "pos": 4,
+          "ciclista": "RACCAGNI NOVIERO Andrea",
+          "equipe": "Soudal Quick-Step",
+          "tempo": "21:31:22",
+          "gap": "+3:39"
+        },
+        {
+          "pos": 5,
+          "ciclista": "KULSET Johannes",
+          "equipe": "Uno-X Mobility",
+          "tempo": "21:33:00",
+          "gap": "+5:17"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": "EULALIO Afonso",
+      "fonteNaoDistingue": false
+    },
+    "pontos": {
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 105,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "MILAN Jonathan",
+          "equipe": "Lidl-Trek",
+          "pontos": 64,
+          "diff": 41
+        },
+        {
+          "pos": 3,
+          "ciclista": "NARVAEZ Jhonatan",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 50,
+          "diff": 55
+        },
+        {
+          "pos": 4,
+          "ciclista": "ANDRESEN Tobias Lund",
+          "equipe": "Decathlon CMA CGM Team",
+          "pontos": 42,
+          "diff": 63
+        },
+        {
+          "pos": 5,
+          "ciclista": "SILVA Guillermo Thomas",
+          "equipe": "XDS Astana Team",
+          "pontos": 37,
+          "diff": 68
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": "MAGNIER Paul",
+      "fonteNaoDistingue": false
+    },
+    "montanha": {
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 42,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 18,
+          "diff": 24
+        },
+        {
+          "pos": 3,
+          "ciclista": "OLIVEIRA Nelson",
+          "equipe": "Movistar Team",
+          "pontos": 18,
+          "diff": 24
+        },
+        {
+          "pos": 4,
+          "ciclista": "RUBIO Einer",
+          "equipe": "Movistar Team",
+          "pontos": 13,
+          "diff": 29
+        },
+        {
+          "pos": 5,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 12,
+          "diff": 30
+        }
+      ],
+      "lider": "SEVILLA Diego Pablo",
+      "quemVeste": "SEVILLA Diego Pablo",
+      "fonteNaoDistingue": false
+    },
+    "jovem": {
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "regraOficialIdade": "nascidos depois de 1º de janeiro de 2001 (comunicado oficial)",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "21:27:43",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "21:30:34",
+          "gap": "+2:51"
+        },
+        {
+          "pos": 3,
+          "ciclista": "RACCAGNI NOVIERO Andrea",
+          "equipe": "Soudal Quick-Step",
+          "tempo": "21:31:22",
+          "gap": "+3:39"
+        },
+        {
+          "pos": 4,
+          "ciclista": "KULSET Johannes",
+          "equipe": "Uno-X Mobility",
+          "tempo": "21:33:00",
+          "gap": "+5:17"
+        },
+        {
+          "pos": 5,
+          "ciclista": "CHRISTEN Jan",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "21:33:59",
+          "gap": "+6:16"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": null,
+      "fonteNaoDistingue": true
+    }
+  },
+  "equipes": {
+    "top5": null
+  },
+  "resumo": "Na etapa 5, 203 km de Praia a Mare a Potenza com 4.100 m de desnível oficial, a corrida foi disputada sob chuva constante. Uma fuga de 12 ciclistas se formou na aproximação do GPM de Prestieri (3ª categoria, km 27), depois alcançada por Darren Rafferty (EF Education - EasyPost). Na Montagna Grande di Viggiano (2ª categoria, km 154), Igor Arrieta (UAE Team Emirates XRG) e Afonso Eulálio (Bahrain Victorious) dispararam; no trecho final, Arrieta caiu a 12 km da chegada e Eulálio a 5 km, e Arrieta ainda errou o caminho a 2 km do fim, mas recuperou e ultrapassou Eulálio nos últimos 50 metros, vencendo em 5h07min51s, média oficial de 39,564 km/h, à frente de Eulálio (a 2 s) e Guillermo Thomas Silva (a 51 s). O grupo da Maglia Rosa, Giulio Ciccone, chegou a 7min13s. Com os abbuoni, Eulálio assumiu a Maglia Rosa e passou também a liderar a Bianca; Paul Magnier manteve a Ciclamino e Diego Pablo Sevilla, a Azzurra; baixas oficiais da etapa: Milan Menten, Joshua Giddings, Timo De Jong e Samuele Battistella.",
+  "resumoFontes": [
+    "https://www.giroditalia.it/en/news/igor-arrieta-wins-stage-5-of-giro-ditalia-2026/",
+    "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-5",
+    "https://www.cyclingnews.com/pro-cycling/racing/giro-d-italia-igor-arrietas-rainy-day-raid-delivers-stage-5-victory-for-uae-team-emirates-xrg/"
+  ],
+  "pontuacao": {
+    "modo": "copia_oficial",
+    "recalculada": false,
+    "regrasDaEdicaoConfirmadas": true
+  },
+  "idempotencyKey": "2026_b7_etapa_5",
+  "sintetico": false
+}
