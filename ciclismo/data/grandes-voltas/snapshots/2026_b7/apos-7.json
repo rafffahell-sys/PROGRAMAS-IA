@@ -1,0 +1,414 @@
+{
+  "provaId": "b7",
+  "ano": 2026,
+  "aposEtapa": 7,
+  "imutavel": true,
+  "fonte": {
+    "nome": "Giro d'Italia oficial (RCS) + ProCyclingStats",
+    "url": "https://www.giroditalia.it/en/classifiche/di-tappa/7/",
+    "urls": [
+      "https://www.giroditalia.it/en/tappe/stage-7-of-the-giro-ditalia-2026-formia-blockhaus/",
+      "https://www.giroditalia.it/en/classifiche/di-tappa/7/",
+      "https://www.giroditalia.it/en/news/jonas-vingegaard-wins-stage-7-of-the-giro-ditalia-2026/",
+      "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-7",
+      "https://www.italpress.com/risultati-classifica-ordine-arrivo-settima-tappa-giro-italia-2026/"
+    ],
+    "coletadoEm": "2026-11-22T16:15:00-03:00"
+  },
+  "validacao": {
+    "ok": true,
+    "checagens": [
+      "top10_etapa",
+      "gc10",
+      "camisas_top5"
+    ],
+    "avisos": [
+      "O site oficial não publica em /en/classifiche/di-tappa/7/ a GC acumulada (só ordem de chegada, pontos do dia, GPM, sprint, Red Bull KM, Super Team do dia, combatividade, fuga e ritirati). O top 10 da GC foi montado com Italpress, BBC e Gazzetta (EULALIO 30:59:23; VINGEGAARD +3:17; GALL +3:34; HINDLEY +4:25; PELLIZZARI +4:28; O'CONNOR +4:32; RONDEL +4:56; CICCONE +4:57; ARENSMAN +5:07; STORER +5:11), cruzado com PCS, TNT Sports e Cyclingflash, e conferido por aritmética a partir da etapa 6.",
+      "A notícia oficial em inglês resume a GC com EULALIO 'em 30h59', VINGEGAARD +3:17 e GALL +3:54. O +3:54 de GALL é typo: Italpress, BBC, Gazzetta, PCS, TNT e a aritmética dão +3:34 (17 s atrás de VINGEGAARD). O '30h59' oficial é o 30:59:23 truncado.",
+      "Aritmética da GC a partir da etapa 6 (tempo após a etapa 6 + tempo da etapa 7 − abbuono de chegada; sem penalidades publicadas no top 10). EULALIO 24:47:13 + 6:12:10 = 30:59:23. VINGEGAARD 24:53:35 + 6:09:15 − 0:10 = 31:02:40 (+3:17). GALL 24:53:35 + 6:09:28 − 0:06 = 31:02:57 (+3:34). HINDLEY 24:53:35 + 6:10:17 − 0:04 = 31:03:48 (+4:25). PELLIZZARI 24:53:31 + 6:10:20 = 31:03:51 (+4:28; o +6:18 após a etapa 6 bate com o aviso da etapa 6). O'CONNOR 24:53:35 + 6:10:20 = 31:03:55 (+4:32). RONDEL 24:53:35 + 6:10:44 = 31:04:19 (+4:56). CICCONE 24:53:25 + 6:10:55 = 31:04:20 (+4:57; o +6:12 após a etapa 6 bate). ARENSMAN 24:53:31 + 6:10:59 = 31:04:30 (+5:07; o +6:18 após a etapa 6 bate). STORER 24:53:35 + 6:10:59 = 31:04:34 (+5:11). O grupo a 24:53:35 (+6:22) após a etapa 6 inclui VINGEGAARD, GALL, HINDLEY, O'CONNOR, RONDEL e STORER (e PIGANZOLI, fora do top 10 da GC).",
+      "SCARONI, 3º na GC após a etapa 6 (+3:34), chegou a 6:13:59 (+4:44) e ficou 11º a +5:23 (24:50:47 + 6:13:59 = 31:04:46), fora do top 10. ARRIETA caiu para 14º na GC a +6:11; RACCAGNI NOVIERO, KULSET, CHRISTEN e BERNAL também saíram do top 10. GEE (8º na etapa, +1:42) é 13º na GC a +6:10 (PCS).",
+      "A página oficial da etapa 7 mostra Rosa EULALIO, Ciclamino MAGNIER, Azzurra VINGEGAARD e Bianca EULALIO. Como EULALIO lidera Rosa e Bianca, quemVeste da Bianca ficou null e fonteNaoDistingue true, como nas etapas 5 e 6. Nas outras três, quemVeste = líder.",
+      "Distância: o cabeçalho oficial da página da etapa, a notícia oficial e o perfil (245,0 km) dizem 245 km (valor gravado). Italpress, BBC e PCS usam 244 km; a prévia oficial também citou 244 km; Cyclingflash, 245,4 km. A média oficial 39,810 km/h fecha com 245 km em 6:09:15; 244 km dariam 39,648 km/h (Gazzetta e PCS).",
+      "Desnível oficial: 4.600 m. PCS: 4.467 m; Cyclingflash: 4.304 m. Gravado o oficial.",
+      "Não há série oficial {xKm, elevM}; pontos ficou vazio. Imagem oficial de altimetria (aba profile, .js-tab-info-altrimetria, PNG 1280×852, 161.843 bytes) conferida visualmente e byte a byte com a cópia local; JPEG 1280×852 gravado no padrão das etapas anteriores. Planimetria separada em SL3JKwxmAiI1wFCePkI1_140426-032615.jpg (não usada).",
+      "Velocidade média oficial 39,810 km/h = 245 km em 6:09:15. PCS e Gazzetta publicam 39,648 km/h (com 244 km); não usado.",
+      "Abbuoni da ordem de chegada oficial: chegada 10-6-4 (VINGEGAARD, GALL, HINDLEY) + Red Bull KM 6-4-2 (ZUKOWSKY, VAN DER LEE, SEVILLA). Ninguém do top 10 da GC recebeu o abbuono do Red Bull KM.",
+      "Tipo gravado como montanha (texto técnico oficial: 'Major Apennine mountain stage and the longest of the Giro'; chegada no alto do Blockhaus, 4.600 m de desnível). PCS: 'Mountains, uphill finish'.",
+      "Abandonos oficiais da etapa 7: 0 (Withdrawn: 0). Partentes: 169, coerente com os 169 classificados na ordem oficial (os mesmos 169 da etapa 6).",
+      "Ciclamino após a etapa 7: MAGNIER 130 (não pontuou), MILAN 76 (64+12 em Venafro), BALLERINI 58, NARVAEZ 53, TAROZZI 48. Italpress confirma o top 3; Cyclingflash, OA Sport e PCS confirmam o top 5. Pontos do dia oficiais da chegada em etapa de montanha: 15-12-9-7-6-5-4-3-2-1 + intermediário 12-8-5-3-1.",
+      "Azzurra após a etapa 7: VINGEGAARD 61 (50 no Blockhaus + 11 pts anteriores, fora do top 5 após a etapa 6), SEVILLA 60 (42+18 em Roccaraso), GALL 24, ARRIETA 18, OLIVEIRA 18. Italpress confirma o top 3 (VINGEGAARD à frente por 1 ponto, como a notícia oficial em francês); Cyclingflash confirma o top 5. A escala do Blockhaus é 50-24-16-9-6-4-2-1.",
+      "Bianca: EULALIO 30:59:23, PELLIZZARI +4:28, RONDEL +4:56, ARRIETA +6:11, PIGANZOLI +6:22 (Italpress top 3, Cyclingflash e PCS top 5, mais aritmética). PIGANZOLI chegou no mesmo tempo de EULALIO (6:12:10) e vinha a 24:53:35 após a etapa 6.",
+      "Classificação de equipes: o oficial só publica o Super Team do dia (VISMA 18:33:37; RED BULL - BORA - HANSGROHE +0:26; NETCOMPANY INEOS +6:37; PINARELLO-Q36.5 +7:09; TUDOR +10:44). Não há classificação geral de equipes confiável no oficial após a etapa 7. equipes.top5 ficou null.",
+      "Fuga: oficial cita VAN DER LEE, MILAN, ZUKOWSKY, NABERMAN e SEVILLA (5), com vantagem de mais de 6 minutos (Italpress). A notícia oficial em inglês diz que VAN DER LEE e ZUKOWSKY, os últimos, foram alcançados no sopé da subida; a versão francesa, a 7 km do cume; o PCS, 'on the slopes of Blockhaus'. O resumo usa a formulação do PCS/versão francesa (na subida final).",
+      "VINGEGAARD atacou a 5,5 km do cume (oficial, BBC, TNT, Cyclingnews); PELLIZZARI acompanhou cerca de 1 km (oficial). Tempo da subida oficial: VINGEGAARD 38:22, GALL 38:34.",
+      "A notícia oficial em inglês cita uma vez a equipe de GALL como 'Decathlon AG2R La Mondiale Team' (erro); oficial da ordem de chegada e demais fontes: Decathlon CMA CGM Team. BBC escreve GEE-WEST; o oficial lista GEE Derek.",
+      "A página oficial /en/classifiche/ e URLs com ?tappa= servem a classificação corrente; não foram usadas.",
+      "Não foram usados resultados de etapas posteriores nem a classificação final da prova."
+    ]
+  },
+  "etapa": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "VINGEGAARD Jonas",
+        "equipe": "Team Visma - Lease a Bike",
+        "tempo": "6:09:15",
+        "gap": "0:00",
+        "abbuono": "0:10"
+      },
+      {
+        "pos": 2,
+        "ciclista": "GALL Felix",
+        "equipe": "Decathlon CMA CGM Team",
+        "tempo": "6:09:28",
+        "gap": "0:13",
+        "abbuono": "0:06"
+      },
+      {
+        "pos": 3,
+        "ciclista": "HINDLEY Jai",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "6:10:17",
+        "gap": "01:02",
+        "abbuono": "0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "PELLIZZARI Giulio",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "6:10:20",
+        "gap": "01:05",
+        "abbuono": null
+      },
+      {
+        "pos": 5,
+        "ciclista": "O'CONNOR Ben",
+        "equipe": "Team Jayco Alula",
+        "tempo": "6:10:20",
+        "gap": "01:05",
+        "abbuono": null
+      },
+      {
+        "pos": 6,
+        "ciclista": "RONDEL Mathys",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "6:10:44",
+        "gap": "01:29",
+        "abbuono": null
+      },
+      {
+        "pos": 7,
+        "ciclista": "CICCONE Giulio",
+        "equipe": "Lidl-Trek",
+        "tempo": "6:10:55",
+        "gap": "01:40",
+        "abbuono": null
+      },
+      {
+        "pos": 8,
+        "ciclista": "GEE Derek",
+        "equipe": "Lidl-Trek",
+        "tempo": "6:10:57",
+        "gap": "01:42",
+        "abbuono": null
+      },
+      {
+        "pos": 9,
+        "ciclista": "STORER Michael",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "6:10:59",
+        "gap": "01:44",
+        "abbuono": null
+      },
+      {
+        "pos": 10,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "6:10:59",
+        "gap": "01:44",
+        "abbuono": null
+      }
+    ],
+    "vencedor": {
+      "ciclista": "VINGEGAARD Jonas",
+      "equipe": "Team Visma - Lease a Bike",
+      "tempo": "6:09:15"
+    },
+    "mediaKmH": 39.81,
+    "abandonos": 0,
+    "partentes": 169
+  },
+  "gc": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "EULALIO Afonso",
+        "equipe": "Bahrain Victorious",
+        "tempo": "30:59:23",
+        "gap": "+0:00"
+      },
+      {
+        "pos": 2,
+        "ciclista": "VINGEGAARD Jonas",
+        "equipe": "Team Visma - Lease a Bike",
+        "tempo": "31:02:40",
+        "gap": "+3:17"
+      },
+      {
+        "pos": 3,
+        "ciclista": "GALL Felix",
+        "equipe": "Decathlon CMA CGM Team",
+        "tempo": "31:02:57",
+        "gap": "+3:34"
+      },
+      {
+        "pos": 4,
+        "ciclista": "HINDLEY Jai",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "31:03:48",
+        "gap": "+4:25"
+      },
+      {
+        "pos": 5,
+        "ciclista": "PELLIZZARI Giulio",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "31:03:51",
+        "gap": "+4:28"
+      },
+      {
+        "pos": 6,
+        "ciclista": "O'CONNOR Ben",
+        "equipe": "Team Jayco Alula",
+        "tempo": "31:03:55",
+        "gap": "+4:32"
+      },
+      {
+        "pos": 7,
+        "ciclista": "RONDEL Mathys",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "31:04:19",
+        "gap": "+4:56"
+      },
+      {
+        "pos": 8,
+        "ciclista": "CICCONE Giulio",
+        "equipe": "Lidl-Trek",
+        "tempo": "31:04:20",
+        "gap": "+4:57"
+      },
+      {
+        "pos": 9,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "31:04:30",
+        "gap": "+5:07"
+      },
+      {
+        "pos": 10,
+        "ciclista": "STORER Michael",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "31:04:34",
+        "gap": "+5:11"
+      }
+    ]
+  },
+  "camisas": {
+    "gc": {
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "30:59:23",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "tempo": "31:02:40",
+          "gap": "+3:17"
+        },
+        {
+          "pos": 3,
+          "ciclista": "GALL Felix",
+          "equipe": "Decathlon CMA CGM Team",
+          "tempo": "31:02:57",
+          "gap": "+3:34"
+        },
+        {
+          "pos": 4,
+          "ciclista": "HINDLEY Jai",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "tempo": "31:03:48",
+          "gap": "+4:25"
+        },
+        {
+          "pos": 5,
+          "ciclista": "PELLIZZARI Giulio",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "tempo": "31:03:51",
+          "gap": "+4:28"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": "EULALIO Afonso",
+      "fonteNaoDistingue": false
+    },
+    "pontos": {
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 130,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "MILAN Jonathan",
+          "equipe": "Lidl-Trek",
+          "pontos": 76,
+          "diff": 54
+        },
+        {
+          "pos": 3,
+          "ciclista": "BALLERINI Davide",
+          "equipe": "XDS Astana Team",
+          "pontos": 58,
+          "diff": 72
+        },
+        {
+          "pos": 4,
+          "ciclista": "NARVAEZ Jhonatan",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 53,
+          "diff": 77
+        },
+        {
+          "pos": 5,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 48,
+          "diff": 82
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": "MAGNIER Paul",
+      "fonteNaoDistingue": false
+    },
+    "montanha": {
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "pontos": 61,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 60,
+          "diff": 1
+        },
+        {
+          "pos": 3,
+          "ciclista": "GALL Felix",
+          "equipe": "Decathlon CMA CGM Team",
+          "pontos": 24,
+          "diff": 37
+        },
+        {
+          "pos": 4,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 18,
+          "diff": 43
+        },
+        {
+          "pos": 5,
+          "ciclista": "OLIVEIRA Nelson",
+          "equipe": "Movistar Team",
+          "pontos": 18,
+          "diff": 43
+        }
+      ],
+      "lider": "VINGEGAARD Jonas",
+      "quemVeste": "VINGEGAARD Jonas",
+      "fonteNaoDistingue": false
+    },
+    "jovem": {
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "regraOficialIdade": "nascidos depois de 1º de janeiro de 2001 (comunicado oficial)",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "30:59:23",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "PELLIZZARI Giulio",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "tempo": "31:03:51",
+          "gap": "+4:28"
+        },
+        {
+          "pos": 3,
+          "ciclista": "RONDEL Mathys",
+          "equipe": "Tudor Pro Cycling Team",
+          "tempo": "31:04:19",
+          "gap": "+4:56"
+        },
+        {
+          "pos": 4,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "31:05:34",
+          "gap": "+6:11"
+        },
+        {
+          "pos": 5,
+          "ciclista": "PIGANZOLI Davide",
+          "equipe": "Team Visma - Lease a Bike",
+          "tempo": "31:05:45",
+          "gap": "+6:22"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": null,
+      "fonteNaoDistingue": true
+    }
+  },
+  "equipes": {
+    "top5": null
+  },
+  "resumo": "Na etapa 7, 245 km oficiais de Formia ao Blockhaus com 4.600 m de desnível, a etapa mais longa desta edição, a fuga de Jardi Christiaan Van der Lee, Jonathan Milan, Nickolas Zukowsky, Tim Naberman e Diego Pablo Sevilla chegou a mais de seis minutos; Milan venceu o sprint intermediário de Venafro, Sevilla passou à frente em Roccaraso e os últimos fugitivos foram alcançados na subida final. Jonas Vingegaard atacou a 5,5 km do cume, Giulio Pellizzari acompanhou por cerca de um quilômetro e Felix Gall cruzou a 13 s. Vingegaard venceu em 6h09min15s (média oficial 39,810 km/h), à frente de Gall e de Jai Hindley, e tornou-se o 115º ciclista a vencer etapas nas três Grandes Voltas. Afonso Eulálio chegou em 15º a 2min55s e manteve a Maglia Rosa; Vingegaard assumiu a Azzurra por 1 ponto sobre Sevilla, e Paul Magnier segue de Ciclamino.",
+  "resumoFontes": [
+    "https://www.giroditalia.it/en/news/jonas-vingegaard-wins-stage-7-of-the-giro-ditalia-2026/",
+    "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-7",
+    "https://www.cyclingnews.com/pro-cycling/racing/giro-d-italia-jonas-vingegaard-soars-to-victory-on-races-opening-summit-finish-at-blockhaus/"
+  ],
+  "pontuacao": {
+    "modo": "copia_oficial",
+    "recalculada": false,
+    "regrasDaEdicaoConfirmadas": true
+  },
+  "idempotencyKey": "2026_b7_etapa_7",
+  "sintetico": false
+}
