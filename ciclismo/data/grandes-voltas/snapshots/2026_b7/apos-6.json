@@ -1,0 +1,413 @@
+{
+  "provaId": "b7",
+  "ano": 2026,
+  "aposEtapa": 6,
+  "imutavel": true,
+  "fonte": {
+    "nome": "Giro d'Italia oficial (RCS) + ProCyclingStats",
+    "url": "https://www.giroditalia.it/en/classifiche/di-tappa/6/",
+    "urls": [
+      "https://www.giroditalia.it/en/tappe/stage-6-of-the-giro-ditalia-2026-paestum-napoli/",
+      "https://www.giroditalia.it/en/classifiche/di-tappa/6/",
+      "https://www.giroditalia.it/en/news/davide-ballerini-wins-stage-6-of-giro-ditalia-2026/",
+      "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-6",
+      "https://www.italpress.com/giro-ditalia-ballerini-vince-la-6tappa-eulalio-resta-in-maglia-rosa/"
+    ],
+    "coletadoEm": "2026-11-21T21:50:00-03:00"
+  },
+  "validacao": {
+    "ok": true,
+    "checagens": [
+      "top10_etapa",
+      "gc10",
+      "camisas_top5"
+    ],
+    "avisos": [
+      "O site oficial não publica em /en/classifiche/di-tappa/6/ a GC acumulada (só ordem de chegada, pontos do dia, GPM, sprint, Red Bull KM, Super Team do dia e ritirati). O top 10 da GC foi montado com Italpress e BBC (EULALIO 24:47:13; ARRIETA +2:51; SCARONI +3:34; RACCAGNI NOVIERO +3:39; KULSET +5:17; CICCONE +6:12; CHRISTEN, STORK e BERNAL +6:16; ARENSMAN +6:18), cruzado com Watts2Win e a coluna GC do PCS, e conferido por aritmética.",
+      "Aritmética da GC a partir da etapa 5: todos os 10 primeiros chegaram no tempo do vencedor (3:19:30, pelotão compacto; regra dos 3 km) e nenhum recebeu abbuono (os abbuoni foram de BALLERINI 0:10, STUYVEN 0:06, MAGNIER 0:04, MAGLI 0:06, CRESCIOLI 0:04 e VAN EETVELT 0:02). Assim, tempo = tempo após a etapa 5 + 3:19:30: EULALIO 21:27:43 + 3:19:30 = 24:47:13 (bate com Italpress, BBC e Cyclingflash). Gaps inalterados.",
+      "VAN EETVELT (12º, +6:20 com os 2 s do Red Bull KM) fica fora do top 10; PELLIZZARI segue 11º a +6:18, igual a ARENSMAN.",
+      "A página oficial da etapa 6 mostra Rosa EULALIO, Ciclamino MAGNIER, Azzurra SEVILLA e Bianca EULALIO. Como EULALIO lidera Rosa e Bianca, quemVeste da Bianca ficou null e fonteNaoDistingue true, como na etapa 5. Nas outras três, quemVeste = líder.",
+      "Distância: o cabeçalho oficial da página da etapa diz 142 km (valor gravado, como nas etapas anteriores), mas o perfil oficial termina em 141,0 km, o comunicado oficial fala em 141 km a 42,406 km/h e o PCS em 141 km; Cyclingflash, 141,4 km.",
+      "Desnível oficial: 500 m. PCS: 680 m; Cyclingflash: 614 m. Gravado o oficial.",
+      "Não há série oficial {xKm, elevM}; pontos ficou vazio. Imagem oficial de altimetria (aba profile, .js-tab-info-altrimetria) conferida visualmente com a cópia local (JPEG 1280×852, 270.688 bytes). Planimetria separada em lTtfgmeY4piaEie6ITCI_270426-101916.jpg (não usada).",
+      "Velocidade média oficial 42,406 km/h = 141 km em 3:19:30 (com 142 km daria 42,707). Cyclingflash publica 42,54 km/h; não usado.",
+      "Abbuoni da ordem de chegada oficial: chegada 10-6-4 + Red Bull KM 6-4-2 (MAGLI, CRESCIOLI, VAN EETVELT); batem com o comunicado (VAN EETVELT 2 s).",
+      "Tipo gravado como plana (texto técnico oficial: 'tappa breve e pianeggiante'; um só GPM de 4ª). PCS: 'Hills, flat finish'; Cyclingflash: Flat.",
+      "Abandonos oficiais da etapa 6: 1 (ENGELHARDT Felix, Team Jayco Alula), registrado como não partente (DNS). Partentes: 169 (174 menos esse 1, coerente com os 169 classificados na ordem oficial).",
+      "Ciclamino após a etapa 6: MAGNIER 130 (105+25), MILAN 64 (não pontuou), BALLERINI 58 (8+50), NARVAEZ 53 (50+3), TAROZZI 48 (36+12). Italpress confirma o top 3; Cyclingflash confirma o top 5. Pontos do dia oficiais (chegada 50-35-25-18-14-12-10-8-7-6... + intermediário).",
+      "Azzurra após a etapa 6: SEVILLA 42, ARRIETA 18, OLIVEIRA 18, TAROZZI 14 (12+2 em Cava de' Tirreni), RUBIO 13. Italpress confirma top 3; Cyclingflash, top 5.",
+      "Bianca: EULALIO 24:47:13, ARRIETA +2:51, RACCAGNI NOVIERO +3:39, KULSET +5:17, CHRISTEN +6:16 (Italpress top 3, Cyclingflash top 5, mais aritmética).",
+      "Classificação de equipes: o oficial só publica o Super Team do dia; não há classificação geral de equipes confiável após a etapa 6. equipes.top5 ficou null.",
+      "Fuga: oficial cita PLANCKAERT e VERGALLITO, depois MARCELLUSI, TAROZZI e BAIS (5); Italpress diz que PLANCKAERT se reergueu (4). Alcançada a 36 km (oficial) / 35 km (Italpress, PCS).",
+      "Queda no finale: oficial situa a última curva a 400 m; Cyclingnews fala em curva a 300 m. Resumo usa o oficial.",
+      "STUYVEN: Cyclingnews o lista uma vez como Lidl-Trek (erro); oficial e demais fontes: Soudal Quick-Step.",
+      "A página oficial /en/classifiche/ e URLs com ?tappa= servem a classificação corrente; não foram usadas.",
+      "Não foram usados resultados de etapas posteriores nem a classificação final da prova."
+    ]
+  },
+  "etapa": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "BALLERINI Davide",
+        "equipe": "XDS Astana Team",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": "0:10"
+      },
+      {
+        "pos": 2,
+        "ciclista": "STUYVEN Jasper",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": "0:06"
+      },
+      {
+        "pos": 3,
+        "ciclista": "MAGNIER Paul",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": "0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "PLOWRIGHT Jensen",
+        "equipe": "Alpecin-Premier Tech",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 5,
+        "ciclista": "TURNER Ben",
+        "equipe": "Netcompany INEOS",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 6,
+        "ciclista": "SEGAERT Alec",
+        "equipe": "Bahrain Victorious",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 7,
+        "ciclista": "MOZZATO Luca",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 8,
+        "ciclista": "MAGLI Filippo",
+        "equipe": "Bardiani CSF 7 Saber",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": "0:06"
+      },
+      {
+        "pos": 9,
+        "ciclista": "ZANONCELLO Enrico",
+        "equipe": "Bardiani CSF 7 Saber",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 10,
+        "ciclista": "VAN UDEN Casper",
+        "equipe": "Team Picnic PostNL",
+        "tempo": "3:19:30",
+        "gap": "0:00",
+        "abbuono": null
+      }
+    ],
+    "vencedor": {
+      "ciclista": "BALLERINI Davide",
+      "equipe": "XDS Astana Team",
+      "tempo": "3:19:30"
+    },
+    "mediaKmH": 42.406,
+    "abandonos": 1,
+    "partentes": 169
+  },
+  "gc": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "EULALIO Afonso",
+        "equipe": "Bahrain Victorious",
+        "tempo": "24:47:13",
+        "gap": "+0:00"
+      },
+      {
+        "pos": 2,
+        "ciclista": "ARRIETA Igor",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "24:50:04",
+        "gap": "+2:51"
+      },
+      {
+        "pos": 3,
+        "ciclista": "SCARONI Christian",
+        "equipe": "XDS Astana Team",
+        "tempo": "24:50:47",
+        "gap": "+3:34"
+      },
+      {
+        "pos": 4,
+        "ciclista": "RACCAGNI NOVIERO Andrea",
+        "equipe": "Soudal Quick-Step",
+        "tempo": "24:50:52",
+        "gap": "+3:39"
+      },
+      {
+        "pos": 5,
+        "ciclista": "KULSET Johannes",
+        "equipe": "Uno-X Mobility",
+        "tempo": "24:52:30",
+        "gap": "+5:17"
+      },
+      {
+        "pos": 6,
+        "ciclista": "CICCONE Giulio",
+        "equipe": "Lidl-Trek",
+        "tempo": "24:53:25",
+        "gap": "+6:12"
+      },
+      {
+        "pos": 7,
+        "ciclista": "CHRISTEN Jan",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "24:53:29",
+        "gap": "+6:16"
+      },
+      {
+        "pos": 8,
+        "ciclista": "STORK Florian",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "24:53:29",
+        "gap": "+6:16"
+      },
+      {
+        "pos": 9,
+        "ciclista": "BERNAL Egan",
+        "equipe": "Netcompany INEOS",
+        "tempo": "24:53:29",
+        "gap": "+6:16"
+      },
+      {
+        "pos": 10,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "24:53:31",
+        "gap": "+6:18"
+      }
+    ]
+  },
+  "camisas": {
+    "gc": {
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "24:47:13",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "24:50:04",
+          "gap": "+2:51"
+        },
+        {
+          "pos": 3,
+          "ciclista": "SCARONI Christian",
+          "equipe": "XDS Astana Team",
+          "tempo": "24:50:47",
+          "gap": "+3:34"
+        },
+        {
+          "pos": 4,
+          "ciclista": "RACCAGNI NOVIERO Andrea",
+          "equipe": "Soudal Quick-Step",
+          "tempo": "24:50:52",
+          "gap": "+3:39"
+        },
+        {
+          "pos": 5,
+          "ciclista": "KULSET Johannes",
+          "equipe": "Uno-X Mobility",
+          "tempo": "24:52:30",
+          "gap": "+5:17"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": "EULALIO Afonso",
+      "fonteNaoDistingue": false
+    },
+    "pontos": {
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 130,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "MILAN Jonathan",
+          "equipe": "Lidl-Trek",
+          "pontos": 64,
+          "diff": 66
+        },
+        {
+          "pos": 3,
+          "ciclista": "BALLERINI Davide",
+          "equipe": "XDS Astana Team",
+          "pontos": 58,
+          "diff": 72
+        },
+        {
+          "pos": 4,
+          "ciclista": "NARVAEZ Jhonatan",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 53,
+          "diff": 77
+        },
+        {
+          "pos": 5,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 48,
+          "diff": 82
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": "MAGNIER Paul",
+      "fonteNaoDistingue": false
+    },
+    "montanha": {
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 42,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 18,
+          "diff": 24
+        },
+        {
+          "pos": 3,
+          "ciclista": "OLIVEIRA Nelson",
+          "equipe": "Movistar Team",
+          "pontos": 18,
+          "diff": 24
+        },
+        {
+          "pos": 4,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 14,
+          "diff": 28
+        },
+        {
+          "pos": 5,
+          "ciclista": "RUBIO Einer",
+          "equipe": "Movistar Team",
+          "pontos": 13,
+          "diff": 29
+        }
+      ],
+      "lider": "SEVILLA Diego Pablo",
+      "quemVeste": "SEVILLA Diego Pablo",
+      "fonteNaoDistingue": false
+    },
+    "jovem": {
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "regraOficialIdade": "nascidos depois de 1º de janeiro de 2001 (comunicado oficial)",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "24:47:13",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "24:50:04",
+          "gap": "+2:51"
+        },
+        {
+          "pos": 3,
+          "ciclista": "RACCAGNI NOVIERO Andrea",
+          "equipe": "Soudal Quick-Step",
+          "tempo": "24:50:52",
+          "gap": "+3:39"
+        },
+        {
+          "pos": 4,
+          "ciclista": "KULSET Johannes",
+          "equipe": "Uno-X Mobility",
+          "tempo": "24:52:30",
+          "gap": "+5:17"
+        },
+        {
+          "pos": 5,
+          "ciclista": "CHRISTEN Jan",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "24:53:29",
+          "gap": "+6:16"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": null,
+      "fonteNaoDistingue": true
+    }
+  },
+  "equipes": {
+    "top5": null
+  },
+  "resumo": "Na etapa 6, 142 km oficiais (141 km na medição do perfil) de Paestum a Nápoles com 500 m de desnível, a fuga de Edward Planckaert, Luca Vergallito, Martin Marcellusi, Manuele Tarozzi e Mattia Bais nunca passou de um minuto e foi alcançada a 36 km da chegada. Filippo Magli venceu o Red Bull KM e Lennert Van Eetvelt pegou 2 s de bonificação. Na chuva, na última curva sobre o pavé a 400 m da chegada na Piazza del Plebiscito, Elmar Reinders caiu e levou Dylan Groenewegen, Jonathan Milan e outros. Davide Ballerini (XDS Astana Team) escapou da queda e venceu em 3h19min30s (média oficial 42,406 km/h), à frente de Jasper Stuyven e Paul Magnier (Soudal Quick-Step), a primeira vitória italiana desta edição. Afonso Eulálio manteve a Maglia Rosa e a Bianca sem mudanças na GC; Magnier segue de Ciclamino e Diego Pablo Sevilla de Azzurra.",
+  "resumoFontes": [
+    "https://www.giroditalia.it/en/news/davide-ballerini-wins-stage-6-of-giro-ditalia-2026/",
+    "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-6",
+    "https://www.cyclingnews.com/pro-cycling/racing/giro-d-italia-davide-ballerini-avoids-mass-crash-speeds-to-stage-6-sprint-victory-in-naples/"
+  ],
+  "pontuacao": {
+    "modo": "copia_oficial",
+    "recalculada": false,
+    "regrasDaEdicaoConfirmadas": true
+  },
+  "idempotencyKey": "2026_b7_etapa_6",
+  "sintetico": false
+}
