@@ -55,23 +55,40 @@ test("Passos pela Rambla e Aero Run ficam como não concluídas, sem medalha con
   assert.equal(earned(aero), false);
   assert.equal(futuras(aero), false);
   assert.equal(Boolean(agenda(aero)), false);
-  assert.equal(sesc.status, "previsto");
+  assert.equal(sesc.status, "concluido");
+  assert.equal(sesc.earned, true);
+  assert.equal(earned(sesc), true);
+  assert.equal(futuras(sesc), false);
+  assert.equal(Boolean(agenda(sesc)), false);
   assert.equal(sesc.registered, true);
   assert.equal(sesc.distance, "5 km");
-  assert.match(sesc.description, /Inscrições de Rafael e Victoria confirmadas/);
+  assert.equal(sesc.shirt, true);
+  assert.equal(sesc.medal, "img/sesc-medal.webp");
+  assert.equal(sesc.kit, "img/sesc-kit.webp");
+  assert.deepEqual(sesc.photos, [
+    "img/sesc-corrida-1.jpg",
+    "img/sesc-corrida-2.jpg",
+    "img/sesc-corrida-3.jpg",
+  ]);
+  assert.equal(sesc.time, "06:00");
+  assert.equal(sesc.location, "Portal da Amazônia");
+  assert.equal(sesc.date, "22/11/2026");
+  assert.match(sesc.description, /Portal da Amazônia/);
+  assert.match(sesc.description, /já na coleção/);
+  assert.equal("pace" in sesc || "ritmo" in sesc || "posicao" in sesc || "bib" in sesc, false);
 });
 
 test("totais não incluem provas não concluídas nas medalhas, concluídas, previstos nem na agenda", () => {
   const seed = extrairSeed(html);
   const calendario = seed.filter(agenda);
   const km = calendario.reduce((soma, e) => soma + parseKm(e.distance), 0);
-  assert.deepEqual(calendario.map((e) => e.id), ["sesc-2026", "marinheiro-2026", "belem-2027", "nb-2027"]);
-  assert.equal(calendario.length, 4);
-  assert.equal(km, 16);
-  assert.equal(calendario.some((e) => e.id === "aero-2026" || e.id === "montevideo"), false);
-  assert.equal(seed.filter((e) => e.status === "concluido").length, 3);
-  assert.equal(seed.filter(earned).length, 3);
-  assert.equal(seed.filter(futuras).length, 6);
+  assert.deepEqual(calendario.map((e) => e.id), ["marinheiro-2026", "belem-2027", "nb-2027"]);
+  assert.equal(calendario.length, 3);
+  assert.equal(km, 11);
+  assert.equal(calendario.some((e) => e.id === "aero-2026" || e.id === "montevideo" || e.id === "sesc-2026"), false);
+  assert.equal(seed.filter((e) => e.status === "concluido").length, 4);
+  assert.equal(seed.filter(earned).length, 4);
+  assert.equal(seed.filter(futuras).length, 5);
   assert.equal(seed.length, 11);
   assert.equal(seed.filter((e) => e.status === "naoConcluida").length, 2);
 });
@@ -85,6 +102,7 @@ test("a página reconhece o status naoConcluida e separa a medalha não conquist
   assert.match(html, /group\(all\.filter\(e=>e\.status==='naoConcluida'\),'unearned'\)/);
   assert.match(html, /Não conquistada/);
   assert.match(html, /rafael-victoria-calendar-v4/);
+  assert.match(html, /rafael-victoria-calendar-v5/);
   assert.equal(html.includes("A imagem não foi invertida nem convertida em pontos."), false);
 });
 
@@ -111,14 +129,15 @@ test("a página renderizada mostra os totais e o estado não concluído", async 
   });
   const doc = dom.window.document;
   assert.equal(doc.getElementById("total").textContent, "11");
-  assert.equal(doc.getElementById("done").textContent, "03");
-  assert.equal(doc.getElementById("future").textContent, "06");
-  assert.equal(doc.getElementById("medals").textContent, "03");
-  assert.equal(doc.getElementById("calendar-summary").textContent, "4 provas · 16 km · inscrições confirmadas");
+  assert.equal(doc.getElementById("done").textContent, "04");
+  assert.equal(doc.getElementById("future").textContent, "05");
+  assert.equal(doc.getElementById("medals").textContent, "04");
+  assert.equal(doc.getElementById("calendar-summary").textContent, "3 provas · 11 km · inscrições confirmadas");
   const agendaHtml = doc.getElementById("calendar-list").textContent;
   assert.equal(agendaHtml.includes("Aero Run"), false);
   assert.equal(agendaHtml.includes("Passos pela Rambla"), false);
-  assert.equal(agendaHtml.includes("Corrida do Sesc"), true);
+  assert.equal(agendaHtml.includes("Corrida do Sesc"), false);
+  assert.equal(agendaHtml.includes("Corrida do Marinheiro"), true);
   const vitrine = doc.getElementById("medal-showcase");
   assert.equal(vitrine.querySelector(".showcase-group.unearned") !== null, true);
   assert.match(vitrine.querySelector(".showcase-group.unearned").textContent, /Passos pela Rambla/);
@@ -133,7 +152,43 @@ test("a página renderizada mostra os totais e o estado não concluído", async 
   assert.equal(aero.querySelector(".badge")?.textContent, "Não concluída");
   assert.equal(aero.textContent.includes("Próxima largada"), false);
   assert.match(aero.textContent, /Não concluída/);
-  assert.equal(sesc.querySelector(".badge")?.textContent, "Inscrições confirmadas");
+  assert.equal(sesc.querySelector(".badge")?.textContent, "Medalha conquistada");
+  assert.equal(sesc.textContent.includes("Camisa em mãos"), true);
+  const abas = [...sesc.querySelectorAll(".product-switch button")].map((b) => b.textContent);
+  assert.deepEqual(abas, ["Medalha", "Camisa", "Fotos da corrida"]);
+  assert.equal(sesc.querySelector("img.medal")?.getAttribute("src")?.startsWith("data:image/webp"), true);
+  const conquistadas = vitrine.querySelector(".showcase-group:not(.upcoming):not(.unearned)");
+  assert.match(conquistadas.textContent, /Corrida do Sesc/);
+  assert.match(conquistadas.textContent, /Conquistada/);
+  assert.equal(vitrine.querySelector(".showcase-group.upcoming").textContent.includes("Corrida do Sesc"), false);
   assert.equal(rambla.querySelector(".event-visual")?.classList.contains("unearned-art"), true);
   dom.window.close();
+});
+
+test("Corrida do Sesc concluída entra na vitrine e usa as fotos reais nas abas", () => {
+  const seed = extrairSeed(html);
+  const sesc = seed.find((e) => e.id === "sesc-2026");
+  assert.equal(sesc.status, "concluido");
+  assert.equal(earned(sesc), true);
+  const inicio = html.indexOf("const ASSETS=");
+  const abre = html.indexOf("{", inicio);
+  let nivel = 0;
+  let assetsJson;
+  for (let i = abre; i < html.length; i += 1) {
+    if (html[i] === "{") nivel += 1;
+    else if (html[i] === "}") {
+      nivel -= 1;
+      if (nivel === 0) {
+        assetsJson = html.slice(abre, i + 1);
+        break;
+      }
+    }
+  }
+  const assets = JSON.parse(assetsJson);
+  for (const path of [sesc.medal, sesc.kit, ...sesc.photos]) {
+    assert.equal(typeof assets[path], "string");
+    assert.match(assets[path], /^data:image\/(webp|jpeg);base64,/);
+  }
+  assert.match(html, /rafael-victoria-calendar-v5/);
+  assert.match(html, /overrides\['sesc-2026'\]/);
 });
