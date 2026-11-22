@@ -2,10 +2,11 @@
   "versao": 1,
   "consultadoEm": "2026-11-09",
   "metodo": "Recorte do gráfico de altimetria nas páginas de perfil do roadbook interativo oficial de 16 de dezembro de 2025. O comentário editorial da mesma página não entra na imagem.",
-  "observacao": "Perfis altimétricos: 21 de 21, recortados do roadbook interativo oficial de 16 de dezembro de 2025. Não há série numérica e o desenho não foi convertido em pontos. O eixo do desenho usa a distância arredondada desse roadbook, anterior à homologação. A distância do card continua a da tabela do site consultada em 9 de novembro de 2026. O regulamento particular traz um terceiro conjunto, marcado como aproximado. As maiores divergências ficam no aviso das etapas 3, 15 e 21.",
+  "observacao": "Perfis altimétricos: 21 de 21, redesenhados no formato Giro a partir do perfil oficial do livro de rota (roadbook interativo de 16 de dezembro de 2025). A imagem oficial original permanece no repositório como fonte. O eixo do desenho usa a distância arredondada desse roadbook, anterior à homologação. A distância do card continua a da tabela do site consultada em 9 de novembro de 2026. O regulamento particular traz um terceiro conjunto, marcado como aproximado. As maiores divergências ficam no aviso das etapas 3, 15 e 21.",
   "etapas": {
     "1": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-01.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-01.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-01.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 1 da Vuelta a España 2026, Monaco–Monaco.",
@@ -15,7 +16,8 @@
       "avisos": []
     },
     "2": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-02.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-02.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-02.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 2 da Vuelta a España 2026, Monaco–Manosque.",
@@ -25,7 +27,8 @@
       "avisos": []
     },
     "3": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-03.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-03.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-03.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 3 da Vuelta a España 2026, Gruissan - Aude–Font Romeu.",
@@ -37,7 +40,8 @@
       ]
     },
     "4": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-04.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-04.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-04.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 4 da Vuelta a España 2026, Andorra la Vella–Andorra la Vella.",
@@ -47,7 +51,8 @@
       "avisos": []
     },
     "5": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-05.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-05.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-05.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 5 da Vuelta a España 2026, Falset . Costa Daurada–Roquetes. Terres de l'Ebre.",
@@ -57,7 +62,8 @@
       "avisos": []
     },
     "6": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-06.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-06.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-06.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 6 da Vuelta a España 2026, Alcossebre–Castelló.",
@@ -67,7 +73,8 @@
       "avisos": []
     },
     "7": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-07.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-07.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-07.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 7 da Vuelta a España 2026, vall d'Alba–Aramón Valdelinares.",
@@ -77,7 +84,8 @@
       "avisos": []
     },
     "8": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-08.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-08.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-08.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 8 da Vuelta a España 2026, Puçol–Xeraco.",
@@ -87,7 +95,8 @@
       "avisos": []
     },
     "9": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-09.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-09.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-09.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 9 da Vuelta a España 2026, La Vila Joiosa/ Villajoyosa–Alto de Aitana.Costa Blanca.",
@@ -97,7 +106,8 @@
       "avisos": []
     },
     "10": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-10.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-10.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-10.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 10 da Vuelta a España 2026, Alcaraz–Elche de la Sierra.",
@@ -107,7 +117,8 @@
       "avisos": []
     },
     "11": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-11.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-11.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-11.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 11 da Vuelta a España 2026, Cartagena–Lorca.",
@@ -117,7 +128,8 @@
       "avisos": []
     },
     "12": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-12.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-12.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-12.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 12 da Vuelta a España 2026, Vera–Calar Alto.",
@@ -127,7 +139,8 @@
       "avisos": []
     },
     "13": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-13.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-13.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-13.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 13 da Vuelta a España 2026, Almuñécar–Loja.",
@@ -137,7 +150,8 @@
       "avisos": []
     },
     "14": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-14.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-14.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-14.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 14 da Vuelta a España 2026, Jaén–Sierra de La Pandera.",
@@ -147,7 +161,8 @@
       "avisos": []
     },
     "15": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-15.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-15.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-15.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 15 da Vuelta a España 2026, Palma del Río–Córdoba.",
@@ -159,7 +174,8 @@
       ]
     },
     "16": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-16.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-16.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-16.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 16 da Vuelta a España 2026, Cortegana–La Rábida. Palos de la Frontera.",
@@ -169,7 +185,8 @@
       "avisos": []
     },
     "17": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-17.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-17.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-17.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 17 da Vuelta a España 2026, Dos Hermanas–Sevilla.",
@@ -179,7 +196,8 @@
       "avisos": []
     },
     "18": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-18.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-18.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-18.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 18 da Vuelta a España 2026, El Puerto de Santa María–Jerez de la Frontera.",
@@ -189,7 +207,8 @@
       "avisos": []
     },
     "19": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-19.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-19.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-19.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 19 da Vuelta a España 2026, Vélez-Málaga–Peñas Blancas. Estepona.",
@@ -199,7 +218,8 @@
       "avisos": []
     },
     "20": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-20.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-20.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-20.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 20 da Vuelta a España 2026, La Calahorra–Collado del Alguacil.",
@@ -209,7 +229,8 @@
       "avisos": []
     },
     "21": {
-      "arquivo": "img/perfis/vuelta-2026/etapa-21.jpg",
+      "arquivo": "img/perfis/vuelta-2026/etapa-21.png",
+      "fonteOriginal": "img/perfis/vuelta-2026/etapa-21.jpg",
       "fontePagina": "https://www.lavuelta.es/en/interactive-route-book",
       "fonteAsset": "https://storage-aso.lequipe.fr/ASO/cycling_vue/interactive-roadbook.pdf",
       "alt": "Perfil altimétrico da etapa 21 da Vuelta a España 2026, Carrefour Granada–Granada.",

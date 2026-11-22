@@ -105,7 +105,7 @@
   },
   "observacoes": [
     "Nenhuma etapa está liberada.",
-    "Perfis altimétricos: 21 de 21, imagem oficial da aba de perfil em letour.fr/fr/etape-N, copiada do Internet Archive entre novembro de 2025 e julho de 2026, com título da edição 2026. Mapas: 21 de 21, imagem oficial «Télécharger la carte» (GEOATLAS no rodapé). Não há GPX, então não há mapa interativo. O eixo não foi convertido em pontos. A distância do card não muda. A ficha ao vivo em 9 de novembro de 2026 já era 2027 e não foi usada. A etapa 21 não usa a captura de 26 de julho (88,7 km, mapa de urgência). A etapa 9 não usa a captura de 20 de julho (154,6 km).",
+    "Perfis altimétricos: 21 de 21, redesenhados no formato Giro a partir do perfil oficial da aba de perfil em letour.fr/fr/etape-N (ASO), copiado do Internet Archive entre novembro de 2025 e julho de 2026, com título da edição 2026. A imagem oficial original permanece no repositório como fonte. Mapas: 21 de 21, imagem oficial «Télécharger la carte» (GEOATLAS no rodapé). Não há GPX, então não há mapa interativo. A distância do card não muda. A ficha ao vivo em 9 de novembro de 2026 já era 2027 e não foi usada. A etapa 21 não usa a captura de 26 de julho (88,7 km, mapa de urgência). A etapa 9 não usa a captura de 20 de julho (154,6 km).",
     "O resumo oficial conta 7 planas, 4 onduladas, 8 de montanha, 1 contra-relógio por equipes e 1 individual. Só foram marcadas as etapas que o dossiê ou o resumo identificam: as cinco chegadas no alto, a etapa de montanha de Le Lioran, a etapa 2 descrita como muito ondulada e os dois contra-relógios.",
     "O dossiê de outubro de 2025 atribui 54.450 m de desnível ao Tour 2026. O folheto de cifras de 24 de junho de 2026, ainda antes da largada, publica 53.950 m e 3.320,7 km no total. Nenhum dos dois reparte o desnível por todas as etapas. Onde o dossiê dá o número de uma etapa, ele fica no card.",
     "A soma das distâncias do card mistura a página do Grand Départ, nas três primeiras, com o quadro anterior à homologação do dossiê, nas restantes. Não foi ajustada ao total de 3.320,7 km do folheto de junho."
@@ -126,7 +126,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-01.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-01.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-01.jpg",
           "fontePagina": "https://web.archive.org/web/20260608181459/https://www.letour.fr/fr/etape-1",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/tdf26-profils-web-fr-e-tape-1/71083/0:0,1004:602-960-0-90/f71aa",
           "alt": "Perfil altimétrico da etapa 1 do Tour de France 2026, Barcelona–Barcelona.",
@@ -136,7 +137,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância adotada: 19,6 km, no título da etapa na página Grand Départ Barcelona 2026. O parágrafo inicial dessa página cita 19,7 km, o resumo do percurso cita 19 km e o dossiê de 22 de outubro de 2025 também arredonda para 19 km.",
         "O cabeçalho da captura diz 19 km. O eixo do perfil marca 19,6 km, igual ao card."
       ],
@@ -167,7 +168,8 @@
           }
         ],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-02.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-02.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-02.jpg",
           "fontePagina": "https://web.archive.org/web/20260617092630/https://www.letour.fr/fr/etape-2",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/2-tdf26-profils-web-fr/70964/0:0,1004:602-960-0-90/cf268",
           "alt": "Perfil altimétrico da etapa 2 do Tour de France 2026, Tarragona–Barcelona.",
@@ -176,7 +178,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância adotada: 168,5 km na página Grand Départ Barcelona 2026. O parágrafo inicial dessa mesma página ainda cita 178 km. O dossiê de 22 de outubro de 2025 lista 182 km, antes da homologação."
       ],
       "mapa": {
@@ -201,7 +203,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-03.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-03.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-03.jpg",
           "fontePagina": "https://web.archive.org/web/20260617092630/https://www.letour.fr/fr/etape-3",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/3-tdf26-profils-web-fr/70962/0:0,1004:602-960-0-90/55d8b",
           "alt": "Perfil altimétrico da etapa 3 do Tour de France 2026, Granollers–Les Angles.",
@@ -210,7 +213,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância adotada: 195,9 km na página Grand Départ Barcelona 2026. O dossiê de 22 de outubro de 2025 arredonda para 196 km."
       ],
       "mapa": {
@@ -235,7 +238,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-04.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-04.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-04.jpg",
           "fontePagina": "https://web.archive.org/web/20260623140524/https://www.letour.fr/fr/etape-4",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/4-tdf26-profils-web-fr/70960/0:0,1004:602-960-0-90/6aaac",
           "alt": "Perfil altimétrico da etapa 4 do Tour de France 2026, Carcassonne–Foix.",
@@ -244,7 +248,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -269,7 +273,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-05.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-05.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-05.jpg",
           "fontePagina": "https://web.archive.org/web/20260616031230/https://www.letour.fr/fr/etape-5",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/5-tdf26-profils-web-fr/70961/0:0,1004:602-960-0-90/9c154",
           "alt": "Perfil altimétrico da etapa 5 do Tour de France 2026, Lannemezan–Pau.",
@@ -278,7 +283,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -308,7 +313,8 @@
           }
         ],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-06.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-06.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-06.jpg",
           "fontePagina": "https://web.archive.org/web/20260630073141/https://www.letour.fr/fr/etape-6",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/6-tdf26-profils-web-fr/70968/0:0,1004:602-960-0-90/c69fa",
           "alt": "Perfil altimétrico da etapa 6 do Tour de France 2026, Pau–Gavarnie-Gèdre.",
@@ -317,7 +323,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -342,7 +348,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-07.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-07.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-07.jpg",
           "fontePagina": "https://web.archive.org/web/20260630073123/https://www.letour.fr/fr/etape-7",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/7-tdf26-profils-web-fr/70963/0:0,1004:602-960-0-90/5d682",
           "alt": "Perfil altimétrico da etapa 7 do Tour de France 2026, Hagetmau–Bordeaux.",
@@ -351,7 +358,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -376,7 +383,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-08.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-08.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-08.jpg",
           "fontePagina": "https://web.archive.org/web/20260608181459/https://www.letour.fr/fr/etape-8",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/8-tdf26-profils-web-fr/70970/0:0,1004:602-960-0-90/11298",
           "alt": "Perfil altimétrico da etapa 8 do Tour de France 2026, Périgueux–Bergerac.",
@@ -386,7 +394,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação.",
         "O cabeçalho da captura diz 182 km, igual ao card. O eixo do perfil marca 180,4 km."
       ],
@@ -412,7 +420,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-09.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-09.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-09.jpg",
           "fontePagina": "https://web.archive.org/web/20260711151116/https://www.letour.fr/fr/etape-9",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/9-tdf26-profils-web-fr/74045/0:0,1005:604-960-0-90/2e6f0",
           "alt": "Perfil altimétrico da etapa 9 do Tour de France 2026, Malemort–Ussel.",
@@ -422,7 +431,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação.",
         "A captura de 11 de julho de 2026 indica 185,5 km. Uma captura de 20 de julho mostra outro desenho, de 154,6 km, e não foi usada. O card permanece em 185 km."
       ],
@@ -453,7 +462,8 @@
           }
         ],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-10.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-10.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-10.jpg",
           "fontePagina": "https://web.archive.org/web/20260617092630/https://www.letour.fr/fr/etape-10",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/10-tdf26-profils-web-fr/70969/0:0,1004:602-960-0-90/afe2a",
           "alt": "Perfil altimétrico da etapa 10 do Tour de France 2026, Aurillac–Le Lioran.",
@@ -462,7 +472,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -487,7 +497,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-11.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-11.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-11.jpg",
           "fontePagina": "https://web.archive.org/web/20260715114036/https://www.letour.fr/fr/etape-11",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/11-tdf26-profils-web-fr/74053/0:0,1005:603-960-0-90/6b4e7",
           "alt": "Perfil altimétrico da etapa 11 do Tour de France 2026, Vichy–Nevers.",
@@ -496,7 +507,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação.",
         "As capturas anteriores a julho não traziam o desenho. A imagem é a da captura de 15 de julho de 2026, dia da etapa, e só o percurso foi copiado."
       ],
@@ -522,7 +533,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-12.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-12.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-12.jpg",
           "fontePagina": "https://web.archive.org/web/20260609002120/https://www.letour.fr/fr/etape-12",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/12-tdf26-profils-web-fr/70971/0:0,1004:602-960-0-90/413dc",
           "alt": "Perfil altimétrico da etapa 12 do Tour de France 2026, Circuit Nevers Magny-Cours–Chalon-sur-Saône.",
@@ -531,7 +543,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -556,7 +568,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-13.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-13.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-13.jpg",
           "fontePagina": "https://web.archive.org/web/20260617092630/https://www.letour.fr/fr/etape-13",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/13-tdf26-profils-web-fr/70973/0:0,1004:602-960-0-90/bf2e6",
           "alt": "Perfil altimétrico da etapa 13 do Tour de France 2026, Dole–Belfort.",
@@ -565,7 +578,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -599,7 +612,8 @@
           }
         ],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-14.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-14.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-14.jpg",
           "fontePagina": "https://web.archive.org/web/20260702043608/https://www.letour.fr/fr/etape-14",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/14-tdf26-profils-web-fr/70972/0:0,1004:602-960-0-90/2c309",
           "alt": "Perfil altimétrico da etapa 14 do Tour de France 2026, Mulhouse–Le Markstein Fellering.",
@@ -608,7 +622,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -638,7 +652,8 @@
           }
         ],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-15.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-15.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-15.jpg",
           "fontePagina": "https://web.archive.org/web/20260617092630/https://www.letour.fr/fr/etape-15",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/15-tdf26-profils-web-fr/70976/0:0,1004:602-960-0-90/7345e",
           "alt": "Perfil altimétrico da etapa 15 do Tour de France 2026, Champagnole–Plateau de Solaison.",
@@ -647,7 +662,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -672,7 +687,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-16.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-16.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-16.jpg",
           "fontePagina": "https://web.archive.org/web/20260705155832/https://www.letour.fr/fr/etape-16",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/16-tdf26-profils-web-fr/70974/0:0,1004:602-960-0-90/e8ad8",
           "alt": "Perfil altimétrico da etapa 16 do Tour de France 2026, Évian-les-Bains–Thonon-les-Bains.",
@@ -681,7 +697,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota."
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota."
       ],
       "mapa": {
         "arquivo": "img/mapas/tour-2026/etapa-16.jpg",
@@ -705,7 +721,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-17.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-17.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-17.jpg",
           "fontePagina": "https://web.archive.org/web/20260617092630/https://www.letour.fr/fr/etape-17",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/17-tdf26-profils-web-fr/70979/0:0,1004:602-960-0-90/e7e70",
           "alt": "Perfil altimétrico da etapa 17 do Tour de France 2026, Chambéry–Voiron.",
@@ -714,7 +731,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -739,7 +756,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-18.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-18.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-18.jpg",
           "fontePagina": "https://web.archive.org/web/20260617092630/https://www.letour.fr/fr/etape-18",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/18-tdf26-profils-web-fr/70977/0:0,1004:602-960-0-90/970be",
           "alt": "Perfil altimétrico da etapa 18 do Tour de France 2026, Voiron–Orcières-Merlette.",
@@ -748,7 +766,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -773,7 +791,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-19.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-19.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-19.jpg",
           "fontePagina": "https://web.archive.org/web/20260608233251/https://www.letour.fr/fr/etape-19",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/19-tdf26-profils-web-fr/70975/0:0,1004:602-960-0-90/5575d",
           "alt": "Perfil altimétrico da etapa 19 do Tour de France 2026, Gap–Alpe d'Huez.",
@@ -782,7 +801,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -824,7 +843,8 @@
           }
         ],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-20.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-20.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-20.jpg",
           "fontePagina": "https://web.archive.org/web/20260630092256/https://www.letour.fr/fr/etape-20",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/20-tdf26-profils-web-fr/70978/0:0,1004:602-960-0-90/a780c",
           "alt": "Perfil altimétrico da etapa 20 do Tour de France 2026, Le Bourg d'Oisans–Alpe d'Huez.",
@@ -833,7 +853,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação."
       ],
       "mapa": {
@@ -858,7 +878,8 @@
         "sprints": [],
         "montanhas": [],
         "imagem": {
-          "arquivo": "img/perfis/tour-2026/etapa-21.jpg",
+          "arquivo": "img/perfis/tour-2026/etapa-21.png",
+          "fonteOriginal": "img/perfis/tour-2026/etapa-21.jpg",
           "fontePagina": "https://web.archive.org/web/20260706104437/https://www.letour.fr/fr/etape-21",
           "fonteAsset": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/tdf26-profils-web-fr-e-tape-21/71082/0:0,1004:602-960-0-90/f1fe2",
           "alt": "Perfil altimétrico da etapa 21 do Tour de France 2026, Thoiry–Paris.",
@@ -868,7 +889,7 @@
       },
       "perfilPublicado": true,
       "avisos": [
-        "O perfil e o mapa são as imagens oficiais da página da etapa em 2026. Não há GPX. O desenho não foi convertido em pontos nem em rota.",
+        "O perfil publicado foi redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr). O mapa continua sendo a imagem oficial da página da etapa. Não há GPX. O mapa não foi convertido em rota.",
         "Distância do dossiê de imprensa do percurso 2026, de 22 de outubro de 2025, no quadro marcado como total antes da homologação.",
         "A captura de 6 de julho de 2026 indica 133 km no cabeçalho e no eixo do perfil. O card permanece em 130 km. A captura de 26 de julho, com 88,7 km e um mapa marcado como urgência, não foi usada."
       ],
