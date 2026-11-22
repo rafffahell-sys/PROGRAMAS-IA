@@ -63,6 +63,7 @@ test("Passos pela Rambla e Aero Run ficam como não concluídas, sem medalha con
   assert.equal(sesc.registered, true);
   assert.equal(sesc.distance, "5 km");
   assert.equal(sesc.shirt, true);
+  assert.equal(sesc.reconstructed, true);
   assert.equal(sesc.medal, "img/sesc-medal.webp");
   assert.equal(sesc.kit, "img/sesc-kit.webp");
   assert.deepEqual(sesc.photos, [
@@ -103,6 +104,7 @@ test("a página reconhece o status naoConcluida e separa a medalha não conquist
   assert.match(html, /Não conquistada/);
   assert.match(html, /rafael-victoria-calendar-v4/);
   assert.match(html, /rafael-victoria-calendar-v5/);
+  assert.match(html, /rafael-victoria-calendar-v6/);
   assert.equal(html.includes("A imagem não foi invertida nem convertida em pontos."), false);
 });
 
@@ -170,6 +172,7 @@ test("Corrida do Sesc concluída entra na vitrine e usa as fotos reais nas abas"
   const sesc = seed.find((e) => e.id === "sesc-2026");
   assert.equal(sesc.status, "concluido");
   assert.equal(earned(sesc), true);
+  assert.equal(sesc.reconstructed, true);
   const inicio = html.indexOf("const ASSETS=");
   const abre = html.indexOf("{", inicio);
   let nivel = 0;
@@ -190,5 +193,10 @@ test("Corrida do Sesc concluída entra na vitrine e usa as fotos reais nas abas"
     assert.match(assets[path], /^data:image\/(webp|jpeg);base64,/);
   }
   assert.match(html, /rafael-victoria-calendar-v5/);
+  assert.match(html, /rafael-victoria-calendar-v6/);
+  assert.match(assets[sesc.medal], /^data:image\/webp;base64,/);
+  assert.match(assets[sesc.kit], /^data:image\/webp;base64,/);
   assert.match(html, /overrides\['sesc-2026'\]/);
+  assert.match(html, /Medalha e camisa em apresentação de catálogo, reconstruídas a partir das fotos dos kits\./);
+  assert.match(html, /e\.reconstructed\?'Medalha e camisa em apresentação de catálogo/);
 });
