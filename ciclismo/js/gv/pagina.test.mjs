@@ -104,14 +104,31 @@ test("tour com percurso não inventa perfil e não pede snapshot", async () => {
   await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
   assert.match(raizDom.innerHTML, /182 km/);
   assert.match(raizDom.innerHTML, /Carcassonne/);
-  assert.match(raizDom.innerHTML, /img\/perfis\/tour-2026\/etapa-04.jpg/);
+  assert.match(raizDom.innerHTML, /img\/perfis\/tour-2026\/etapa-04.png/);
   assert.match(raizDom.innerHTML, /img\/mapas\/tour-2026\/etapa-04.jpg/);
   assert.match(raizDom.innerHTML, /Ampliar mapa/);
   assert.match(raizDom.innerHTML, /Quilómetros que faltam/);
-  assert.match(raizDom.innerHTML, /não foi invertida/);
+  assert.match(raizDom.innerHTML, /não foi invertido/);
+  assert.match(raizDom.innerHTML, /Perfil redesenhado no formato Giro a partir do perfil oficial \(ASO\/letour\.fr\)/);
+  assert.equal(raizDom.innerHTML.includes("A imagem não foi invertida nem convertida em pontos."), false);
   assert.match(raizDom.innerHTML, /Até a chegada/);
   assert.equal(raizDom.innerHTML.includes("Perfil altimétrico a publicar"), false);
   assert.equal(raizDom.innerHTML.includes("img/trofeus/"), false);
+  assert.equal(raizDom.innerHTML.includes("<polyline"), false);
+  assert.match(raizDom.innerHTML, /data-resultados="ocultos"/);
+  assert.equal(pedidos.some((url) => /snapshot|firestore|analise/i.test(url)), false);
+});
+
+test("vuelta com percurso mostra o perfil redesenhado e não pede snapshot", async () => {
+  const pedidos = [];
+  location.hash = "#/vuelta/2026/etapa/1";
+  const raizDom = document.getElementById("gv-app");
+  await iniciarPagina(raizDom, { fetchFn: fetchLocal(pedidos) });
+  assert.match(raizDom.innerHTML, /img\/perfis\/vuelta-2026\/etapa-01.png/);
+  assert.match(raizDom.innerHTML, /Perfil redesenhado no formato Giro a partir do perfil oficial \(livro de rota oficial\)/);
+  assert.equal(raizDom.innerHTML.includes("A imagem não foi invertida nem convertida em pontos."), false);
+  assert.equal(raizDom.innerHTML.includes("img/mapas/"), false);
+  assert.equal(raizDom.innerHTML.includes("Perfil altimétrico a publicar"), false);
   assert.equal(raizDom.innerHTML.includes("<polyline"), false);
   assert.match(raizDom.innerHTML, /data-resultados="ocultos"/);
   assert.equal(pedidos.some((url) => /snapshot|firestore|analise/i.test(url)), false);
@@ -149,8 +166,11 @@ test("giro real filtra imagem de perfil e mantém o km do regulamento", () => {
   assert.match(html, /245 km até a chegada/);
   assert.match(html, /eixo do desenho/);
   assert.match(html, /não foi invertido/);
+  assert.match(html, /A imagem não foi invertida nem convertida em pontos/);
   assert.equal(html.includes("scaleX"), false);
   assert.match(html, /etapa-07\.jpg/);
+  assert.equal(html.includes("ASO/letour.fr"), false);
+  assert.equal(html.includes("livro de rota oficial"), false);
   assert.match(html, /distância até a chegada não informada/);
   assert.match(html, /data-resultados="ocultos"/);
   assert.equal(html.includes("<polyline"), false);

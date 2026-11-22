@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import struct
 import sys
 import unittest
 from pathlib import Path
@@ -18,6 +19,15 @@ PROIBIDOS = {
     "ciclista", "lider", "quemVeste", "top10", "top5", "gap", "vencedor",
     "snapshot", "autorizacaoTexto", "classificacao", "resumo", "analisePre",
 }
+
+
+
+def _dimensoes_png(caminho):
+    dados = Path(caminho).read_bytes()
+    if not dados.startswith(b"\x89PNG\r\n\x1a\n") or dados[12:16] != b"IHDR":
+        raise AssertionError(f"{caminho} não é um PNG com IHDR")
+    largura, altura = struct.unpack(">II", dados[16:24])
+    return largura, altura
 
 
 def _andar(valor, caminho, achados):
@@ -180,6 +190,33 @@ class Percurso(unittest.TestCase):
             self.assertTrue(mapa.is_file(), etapa["n"])
             self.assertEqual(etapa["perfil"]["pontos"], [])
             self.assertNotIn("urgencia", etapa["mapa"]["fonteAsset"])
+
+
+    def test_tour_e_vuelta_usam_perfis_redesenhados(self):
+        casos = (
+            ("tour", "img/perfis/tour-2026/", True),
+            ("vuelta", "img/perfis/vuelta-2026/", False),
+        )
+        for slug, prefixo, tem_mapa in casos:
+            prova = self.provas[slug]
+            self.assertTrue(any(obs.startswith("Perfis altimétricos: 21 de 21") for obs in prova["observacoes"]))
+            for etapa in prova["etapas"]:
+                img = etapa["perfil"]["imagem"]
+                esperado = f"{prefixo}etapa-{etapa['n']:02d}.png"
+                original = f"{prefixo}etapa-{etapa['n']:02d}.jpg"
+                self.assertEqual(img["arquivo"], esperado)
+                self.assertEqual(img["fonteOriginal"], original)
+                arquivo = RAIZ / img["arquivo"]
+                fonte = RAIZ / img["fonteOriginal"]
+                self.assertTrue(arquivo.is_file(), esperado)
+                self.assertTrue(fonte.is_file(), original)
+                self.assertGreater(arquivo.stat().st_size, 10_000)
+                self.assertEqual(_dimensoes_png(arquivo), (1280, 852))
+                if tem_mapa:
+                    self.assertTrue(etapa["mapa"]["arquivo"].endswith(f"etapa-{etapa['n']:02d}.jpg"))
+                    self.assertTrue((RAIZ / etapa["mapa"]["arquivo"]).is_file())
+                    self.assertNotIn("fonteOriginal", etapa["mapa"])
+
 
     def test_sem_chaves_de_resultado(self):
         achados = []

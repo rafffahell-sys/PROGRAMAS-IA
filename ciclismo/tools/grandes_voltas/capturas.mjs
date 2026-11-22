@@ -190,7 +190,7 @@ exigir(tourEtapa.includes("não foi invertida"), "perfil da etapa 8 descrito com
 exigir(tourEtapa.includes("Ampliar"), "etapa 8 do Tour sem ampliar o perfil");
 exigir(tourEtapa.includes("Ampliar mapa"), "etapa 8 do Tour sem ampliar o mapa");
 exigir(!tourEtapa.includes("Perfil altimétrico a publicar"), "etapa 8 ainda sem perfil");
-exigir(tourEtapaHtml.includes("img/perfis/tour-2026/etapa-08.jpg"), "etapa 8 sem arquivo do perfil");
+exigir(tourEtapaHtml.includes("img/perfis/tour-2026/etapa-08.png"), "etapa 8 sem arquivo do perfil");
 exigir(tourEtapaHtml.includes("img/mapas/tour-2026/etapa-08.jpg"), "etapa 8 sem arquivo do mapa");
 exigir(!tourEtapaHtml.includes("<polyline"), "Tour desenhou perfil");
 exigir(!tourEtapaHtml.includes("leaflet"), "Tour abriu mapa interativo sem GPX");
@@ -239,7 +239,7 @@ const vueltaHtml = await folhaVuelta.$eval("#gv-app", (el) => el.innerHTML);
 exigir(vuelta.includes("9,4 km"), "Vuelta etapa 1 sem 9,4 km");
 exigir(vuelta.includes("Monaco"), "Vuelta etapa 1 sem origem");
 exigir(vuelta.includes("Ampliar"), "Vuelta etapa 1 sem ampliar");
-exigir(vueltaHtml.includes("img/perfis/vuelta-2026/etapa-01.jpg"), "Vuelta etapa 1 sem arquivo");
+exigir(vueltaHtml.includes("img/perfis/vuelta-2026/etapa-01.png"), "Vuelta etapa 1 sem arquivo");
 exigir(!vueltaHtml.includes("<polyline"), "Vuelta converteu o perfil em pontos");
 exigir(vuelta.includes("Bloqueados"), "Vuelta etapa 1 mostrou resultado");
 await folhaVuelta.screenshot({ path: `${out}/gv-vuelta-etapa-desktop.png`, fullPage: true });

@@ -143,7 +143,19 @@ function htmlModoKm() {
   </fieldset>`;
 }
 
-function htmlPerfil(etapa) {
+function legendaPerfilImagem(prova, imagem) {
+  if (typeof imagem?.legenda === "string" && imagem.legenda.trim()) return imagem.legenda.trim();
+  const slug = prova?.slug;
+  if (slug === "tour") {
+    return "Perfil redesenhado no formato Giro a partir do perfil oficial (ASO/letour.fr).";
+  }
+  if (slug === "vuelta") {
+    return "Perfil redesenhado no formato Giro a partir do perfil oficial (livro de rota oficial).";
+  }
+  return "Perfil altimétrico do percurso, da largada para a chegada. A imagem não foi invertida nem convertida em pontos.";
+}
+
+function htmlPerfil(etapa, prova) {
   const pontos = etapa.perfil?.pontos || [];
   if (pontosValidos(pontos)) {
     const marcas = [...(etapa.perfil?.sprints || []), ...(etapa.perfil?.montanhas || [])];
@@ -162,10 +174,11 @@ function htmlPerfil(etapa) {
         ? `<a href="${esc(imagem.fonteAsset)}" rel="noopener noreferrer">arquivo original do perfil</a>`
         : ""
     ].filter(Boolean).join(" · ");
+    const figcaption = legendaPerfilImagem(prova, imagem);
     return `<figure class="gv-perfil gv-perfil-imagem">
       <img src="${esc(imagem.arquivo)}" alt="${esc(alt)}" width="1280" height="852">
       <button type="button" class="gv-botao-ampliar" data-perfil-ampliar>Ampliar</button>
-      <figcaption>Perfil altimétrico do percurso, da largada para a chegada. A imagem não foi invertida nem convertida em pontos.</figcaption>
+      <figcaption>${esc(figcaption)}</figcaption>
       ${links ? `<p class="gv-fonte">Fonte do perfil: ${links}</p>` : ""}
       <dialog class="gv-perfil-dialog">
         <form method="dialog"><button value="fechar">Fechar</button></form>
@@ -524,7 +537,7 @@ export function htmlEtapa(prova, etapa, liberacao, snap, snapAnterior, opcoes = 
       </div>
       ${htmlCena(prova.slug)}
     </header>
-    ${htmlPerfil(etapa)}
+    ${htmlPerfil(etapa, prova)}
     ${htmlMapa(etapa)}
     ${htmlAcompanhar(etapa)}
     ${htmlAnalisePre(etapa.n, liberacao, opcoes.analise || null, opcoes.acesso || { regrasComprovadas: false })}
