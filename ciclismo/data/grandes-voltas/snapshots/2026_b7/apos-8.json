@@ -1,0 +1,413 @@
+{
+  "provaId": "b7",
+  "ano": 2026,
+  "aposEtapa": 8,
+  "imutavel": true,
+  "fonte": {
+    "nome": "Giro d'Italia oficial (RCS) + ProCyclingStats",
+    "urls": [
+      "https://www.giroditalia.it/en/tappe/stage-8-of-the-giro-ditalia-2026-chieti-fermo/",
+      "https://www.giroditalia.it/en/classifiche/di-tappa/8/",
+      "https://www.giroditalia.it/en/news/jhonatan-narvaez-wins-stage-8-of-giro-ditalia-2026/",
+      "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-8",
+      "https://www.italpress.com/risultati-classifica-ordine-arrivo-ottava-tappa-giro-italia-2026/"
+    ],
+    "coletadoEm": "2026-11-24T00:26:00-03:00"
+  },
+  "validacao": {
+    "ok": true,
+    "checagens": [
+      "top10_etapa",
+      "gc10",
+      "camisas_top5"
+    ],
+    "avisos": [
+      "O site oficial não publica em /en/classifiche/di-tappa/8/ a GC acumulada (só ordem de chegada, pontos do dia, GPM, sprint, Red Bull KM, combatividade, fuga, Super Team do dia, salita cronometrata e ritirati). O top 10 da GC foi montado com Italpress e Gazzetta (EULALIO 34:28:42; VINGEGAARD +3:15; GALL +3:34; SCARONI +4:18; HINDLEY +4:23; PELLIZZARI +4:28; O'CONNOR +4:32; RONDEL +4:56; ARENSMAN +5:07; STORER +5:11), cruzado com a notícia oficial (top 3), PCS, Cyclingflash e ProCyclingUK, e conferido por aritmética a partir da etapa 7.",
+      "A Italpress, num trecho, grava o tempo da Rosa como 4h28’42”; o mesmo texto, na Bianca, e a Gazzetta publicam 34h28’42”. A notícia oficial não informa o tempo absoluto da GC, só os gaps do top 3, que batem com 34:28:42.",
+      "Aritmética da GC a partir da etapa 7 (tempo após a etapa 7 + tempo da etapa 8 − abbuono; sem penalidades de tempo no top 10 nem nos abbuoni da chegada/Red Bull KM, que não atingiram esse grupo). EULALIO 30:59:23 + 3:29:19 = 34:28:42. VINGEGAARD 31:02:40 + 3:29:17 = 34:31:57 (+3:15; ganhou 2 s). GALL 31:02:57 + 3:29:19 = 34:32:16 (+3:34). SCARONI 31:04:46 + 3:28:14 = 34:33:00 (+4:18; era 11º a +5:23 após a etapa 7 e entrou em 4º). HINDLEY 31:03:48 + 3:29:17 = 34:33:05 (+4:23; ganhou 2 s). PELLIZZARI 31:03:51 + 3:29:19 = 34:33:10 (+4:28). O'CONNOR 31:03:55 + 3:29:19 = 34:33:14 (+4:32). RONDEL 31:04:19 + 3:29:19 = 34:33:38 (+4:56). ARENSMAN 31:04:30 + 3:29:19 = 34:33:49 (+5:07). STORER 31:04:34 + 3:29:19 = 34:33:53 (+5:11).",
+      "CICCONE, 8º na GC após a etapa 7 (+4:57, 31:04:20), chegou em 68º a 3:34:04 (+6:38) e saiu do top 10 (31:04:20 + 3:34:04 = 34:38:24, +9:42). A notícia oficial diz que ele 'conceded almost five minutes': o +6:38 é sobre o vencedor; sobre o grupo da Rosa a diferença é +4:45 (3:34:04 − 3:29:19).",
+      "A notícia oficial em inglês diz que VINGEGAARD e HINDLEY 'picked up a couple of seconds in the final sprint'. Isso é o gap de 2 s na chegada (3:29:17 contra 3:29:19 do grupo de EULALIO, GALL, PELLIZZARI, O'CONNOR, RONDEL, ARENSMAN e STORER), não abbuono: os dois fecharam em 23º e 24º. A versão francesa e a Gazzetta descrevem o sprint de HINDLEY nos 300 m finais, com VINGEGAARD à roda.",
+      "A página oficial da etapa 8 mostra Rosa EULALIO, Ciclamino MAGNIER, Azzurra VINGEGAARD e Bianca EULALIO. Como EULALIO lidera Rosa e Bianca, quemVeste da Bianca ficou null e fonteNaoDistingue true, como nas etapas 5 a 7. Nas outras três, quemVeste = líder.",
+      "Distância: o cabeçalho oficial da página da etapa, a notícia oficial e a classifica (KOM Fermo km 156) dizem 156 km (valor gravado). O perfil oficial termina em 157,0 km. A média oficial 45,122 km/h fecha com 156 km em 3:27:26 (cálculo 45,123 km/h); 157 km dariam 45,412 km/h. Gazzetta publica 45,123 km/h; PCS e Cyclingflash, 45,12. mediaKmH gravado 45,12, arredondado do oficial 45,122.",
+      "Desnível oficial: 1.900 m. PCS e Cyclingflash: 1.735 m. Gravado o oficial.",
+      "Não há série oficial {xKm, elevM}; pontos ficou vazio. Imagem oficial de altimetria (aba profile, .js-tab-info-altrimetria, alt=\"Altimetria/Profile tappa 8 Giro d'Italia 2026\", JPEG 1280×852, 304.630 bytes, sha256 801e62d991c8121f3aede372b13b729a…) conferida visualmente (Chieti 0,0 / 20 m → Fermo 157,0 / 318 m; sprint Cupra Marittima km 96,0; GPM Montefiore dell'Aso km 107,0; Monterubbiano km 118,8; Red Bull KM km 131,7; Capodarco km 150,1). Planimetria separada em LI3MXoDWX7qBF9gjucEw_140426-034403.jpg (não usada).",
+      "Abbuoni da ordem de chegada oficial: chegada 10-6-4 (NARVAEZ, LEKNESSUND, TJOTTA) + Red Bull KM 6-4-2 (BJERG, LEKNESSUND, NARVAEZ). O oficial soma os dois na coluna da chegada: NARVAEZ 0:12, LEKNESSUND 0:10, TJOTTA 0:04 e BJERG 0:06 (16º). Ninguém do top 10 da GC recebeu esses abbuoni. A Gazzetta, na ordem de chegada, cita só os 10” e 6” da chegada.",
+      "Tipo gravado como ondulada (texto técnico oficial: 'Mixed stage' / 'Tappa mista'; primeira parte adriática plana e segunda com saliscendi e muri no entroterra fermano; 1.900 m de desnível). PCS/Cyclingflash: Hill, finish Hill.",
+      "Abandonos oficiais da etapa 8: 2 (Withdrawn: Fabio CHRISTEN, Pinarello-Q36.5 Pro Cycling Team; Jake STEWART, NSN Cycling Team). Partentes: 169, coerente com os 169 classificados da etapa 7 e com os 167 classificados na ordem oficial desta etapa.",
+      "Ciclamino após a etapa 8: MAGNIER 130 (não pontuou), NARVAEZ 86 (53+33), MILAN 76, BALLERINI 58, TAROZZI 48. Italpress confirma o top 3; ProCyclingUK, o top 5. Pontos do dia oficiais: NARVAEZ 33 (25 da chegada + 8 no intermediário) e LEKNESSUND 30 (18+12). A escala oficial de chegada nesta etapa mista foi 25-18-12-8-6-5-4-3-2-1, mais o intermediário 12-8-5-3-1. Os pontos do Red Bull KM são classificação à parte e não entraram na Ciclamino.",
+      "Azzurra após a etapa 8 permanece 61-60-24-18-18 (VINGEGAARD, SEVILLA, GALL, ARRIETA, OLIVEIRA): os GPM do dia ficaram com a fuga (NARVAEZ 13 pts, BJERG 12, LEKNESSUND 7, TJOTTA 1, LARSEN 1). Italpress confirma o top 3; Cyclingflash, Cyclingstage e ProCyclingUK, o top 5.",
+      "Bianca: EULALIO 34:28:42, PELLIZZARI +4:28, RONDEL +4:56, BELOKI +5:31, ARRIETA +5:54 (Italpress top 3; Cyclingflash e PCS top 5). ARRIETA: 31:05:34 + 3:29:02 = 34:34:36 (+5:54). PIGANZOLI chegou no mesmo tempo de EULALIO (3:29:19) e segue a +6:22, 6º da Bianca. BELOKI foi 10º na etapa a 3:28:26.",
+      "Classificação de equipes: o oficial só publica o Super Team do dia (UAE TEAM EMIRATES XRG 10:24:32, soma de 3:27:26 + 3:28:28 + 3:28:38; XDS ASTANA TEAM +1:11; MOVISTAR TEAM +1:18; UNO-X MOBILITY +1:21; TEAM POLTI VISITMALTA +2:17). Não há classificação geral de equipes confiável no oficial após a etapa 8. equipes.top5 ficou null.",
+      "Fuga decisiva: a notícia oficial cita NARVAEZ, BJERG e LEKNESSUND a 75 km da chegada, depois do vento cruzado que partiu o pelotão (EULALIO e HINDLEY no primeiro grupo; VINGEGAARD no segundo, que voltou com 20 s de atraso sob o comando da Visma). GANNA e BETTIOL haviam escapado na primeira parte e foram alcançados (Italpress: km 53). O oficial da Fuga pontua NARVAEZ 74, BJERG 50, BETTIOL 47, GANNA 47 e LEKNESSUND 45. Combatividade oficial: BJERG.",
+      "A notícia oficial em inglês afirma que NARVAEZ deixou LEKNESSUND em Capodarco, a 10 km da chegada; a versão francesa, a 2,2 km do cume, com o norueguês voltando a cerca de 15 s na descida. O resumo segue a formulação oficial em inglês (Capodarco, 10 km do fim). NARVAEZ igualou Carapaz como o equatoriano com mais vitórias de etapa no Giro (4), a segunda nesta edição e a terceira da UAE em oito etapas.",
+      "A manchete oficial em inglês escreve 'Eláulio'; o corpo do texto e as demais fontes usam Afonso Eulálio. O array oficial lista SILVA Guillermo; gravado SILVA Guillermo Thomas, como nas etapas anteriores. Grafia oficial TJOTTA (Tjøtta em PCS e na notícia oficial em inglês).",
+      "Penalidades da etapa 8 (PCS, comunicados): apenas multas (REINDERS, descarte fora da zona, 500 CHF e 25 pts UCI; CAMPENAERTS, comportamento inadequado, 200 CHF). Sem penalidades de tempo no top 10 da GC.",
+      "A página oficial /en/classifiche/ e URLs com ?tappa= servem a classificação corrente; não foram usadas. A aba overall do site oficial também não foi usada. Não foram usados resultados de etapas posteriores nem a classificação final da prova. A menção oficial a 'tomorrow' / Corno alle Scale não entrou no resumo nem nos dados."
+    ]
+  },
+  "etapa": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "NARVAEZ Jhonatan",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "3:27:26",
+        "gap": "0:00",
+        "abbuono": "0:12"
+      },
+      {
+        "pos": 2,
+        "ciclista": "LEKNESSUND Andreas",
+        "equipe": "Uno-X Mobility",
+        "tempo": "3:27:58",
+        "gap": "0:32",
+        "abbuono": "0:10"
+      },
+      {
+        "pos": 3,
+        "ciclista": "TJOTTA Martin",
+        "equipe": "Uno-X Mobility",
+        "tempo": "3:28:08",
+        "gap": "0:42",
+        "abbuono": "0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "SILVA Guillermo Thomas",
+        "equipe": "XDS Astana Team",
+        "tempo": "3:28:10",
+        "gap": "0:44",
+        "abbuono": null
+      },
+      {
+        "pos": 5,
+        "ciclista": "MILESI Lorenzo",
+        "equipe": "Movistar Team",
+        "tempo": "3:28:10",
+        "gap": "0:44",
+        "abbuono": null
+      },
+      {
+        "pos": 6,
+        "ciclista": "SCARONI Christian",
+        "equipe": "XDS Astana Team",
+        "tempo": "3:28:14",
+        "gap": "0:48",
+        "abbuono": null
+      },
+      {
+        "pos": 7,
+        "ciclista": "STRONG Corbin",
+        "equipe": "NSN Cycling Team",
+        "tempo": "3:28:21",
+        "gap": "0:55",
+        "abbuono": null
+      },
+      {
+        "pos": 8,
+        "ciclista": "LOPEZ Juan Pedro",
+        "equipe": "Movistar Team",
+        "tempo": "3:28:21",
+        "gap": "0:55",
+        "abbuono": null
+      },
+      {
+        "pos": 9,
+        "ciclista": "POELS Wout",
+        "equipe": "Unibet Rose Rockets",
+        "tempo": "3:28:24",
+        "gap": "0:58",
+        "abbuono": null
+      },
+      {
+        "pos": 10,
+        "ciclista": "BELOKI Markel",
+        "equipe": "EF Education - EasyPost",
+        "tempo": "3:28:26",
+        "gap": "01:00",
+        "abbuono": null
+      }
+    ],
+    "vencedor": {
+      "ciclista": "NARVAEZ Jhonatan",
+      "equipe": "UAE Team Emirates XRG",
+      "tempo": "3:27:26"
+    },
+    "mediaKmH": 45.12,
+    "abandonos": 2,
+    "partentes": 169
+  },
+  "gc": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "EULALIO Afonso",
+        "equipe": "Bahrain Victorious",
+        "tempo": "34:28:42",
+        "gap": "+0:00"
+      },
+      {
+        "pos": 2,
+        "ciclista": "VINGEGAARD Jonas",
+        "equipe": "Team Visma - Lease a Bike",
+        "tempo": "34:31:57",
+        "gap": "+3:15"
+      },
+      {
+        "pos": 3,
+        "ciclista": "GALL Felix",
+        "equipe": "Decathlon CMA CGM Team",
+        "tempo": "34:32:16",
+        "gap": "+3:34"
+      },
+      {
+        "pos": 4,
+        "ciclista": "SCARONI Christian",
+        "equipe": "XDS Astana Team",
+        "tempo": "34:33:00",
+        "gap": "+4:18"
+      },
+      {
+        "pos": 5,
+        "ciclista": "HINDLEY Jai",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "34:33:05",
+        "gap": "+4:23"
+      },
+      {
+        "pos": 6,
+        "ciclista": "PELLIZZARI Giulio",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "34:33:10",
+        "gap": "+4:28"
+      },
+      {
+        "pos": 7,
+        "ciclista": "O'CONNOR Ben",
+        "equipe": "Team Jayco Alula",
+        "tempo": "34:33:14",
+        "gap": "+4:32"
+      },
+      {
+        "pos": 8,
+        "ciclista": "RONDEL Mathys",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "34:33:38",
+        "gap": "+4:56"
+      },
+      {
+        "pos": 9,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "34:33:49",
+        "gap": "+5:07"
+      },
+      {
+        "pos": 10,
+        "ciclista": "STORER Michael",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "34:33:53",
+        "gap": "+5:11"
+      }
+    ]
+  },
+  "camisas": {
+    "gc": {
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "34:28:42",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "tempo": "34:31:57",
+          "gap": "+3:15"
+        },
+        {
+          "pos": 3,
+          "ciclista": "GALL Felix",
+          "equipe": "Decathlon CMA CGM Team",
+          "tempo": "34:32:16",
+          "gap": "+3:34"
+        },
+        {
+          "pos": 4,
+          "ciclista": "SCARONI Christian",
+          "equipe": "XDS Astana Team",
+          "tempo": "34:33:00",
+          "gap": "+4:18"
+        },
+        {
+          "pos": 5,
+          "ciclista": "HINDLEY Jai",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "tempo": "34:33:05",
+          "gap": "+4:23"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": "EULALIO Afonso",
+      "fonteNaoDistingue": false
+    },
+    "pontos": {
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 130,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "NARVAEZ Jhonatan",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 86,
+          "diff": 44
+        },
+        {
+          "pos": 3,
+          "ciclista": "MILAN Jonathan",
+          "equipe": "Lidl-Trek",
+          "pontos": 76,
+          "diff": 54
+        },
+        {
+          "pos": 4,
+          "ciclista": "BALLERINI Davide",
+          "equipe": "XDS Astana Team",
+          "pontos": 58,
+          "diff": 72
+        },
+        {
+          "pos": 5,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 48,
+          "diff": 82
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": "MAGNIER Paul",
+      "fonteNaoDistingue": false
+    },
+    "montanha": {
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "pontos": 61,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 60,
+          "diff": 1
+        },
+        {
+          "pos": 3,
+          "ciclista": "GALL Felix",
+          "equipe": "Decathlon CMA CGM Team",
+          "pontos": 24,
+          "diff": 37
+        },
+        {
+          "pos": 4,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 18,
+          "diff": 43
+        },
+        {
+          "pos": 5,
+          "ciclista": "OLIVEIRA Nelson",
+          "equipe": "Movistar Team",
+          "pontos": 18,
+          "diff": 43
+        }
+      ],
+      "lider": "VINGEGAARD Jonas",
+      "quemVeste": "VINGEGAARD Jonas",
+      "fonteNaoDistingue": false
+    },
+    "jovem": {
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "regraOficialIdade": "nascidos depois de 1º de janeiro de 2001 (comunicado oficial)",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "34:28:42",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "PELLIZZARI Giulio",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "tempo": "34:33:10",
+          "gap": "+4:28"
+        },
+        {
+          "pos": 3,
+          "ciclista": "RONDEL Mathys",
+          "equipe": "Tudor Pro Cycling Team",
+          "tempo": "34:33:38",
+          "gap": "+4:56"
+        },
+        {
+          "pos": 4,
+          "ciclista": "BELOKI Markel",
+          "equipe": "EF Education - EasyPost",
+          "tempo": "34:34:13",
+          "gap": "+5:31"
+        },
+        {
+          "pos": 5,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "tempo": "34:34:36",
+          "gap": "+5:54"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": null,
+      "fonteNaoDistingue": true
+    }
+  },
+  "equipes": {
+    "top5": null
+  },
+  "resumo": "Na etapa 8, 156 km oficiais de Chieti a Fermo com 1.900 m de desnível, a primeira metade plana ao longo do Adriático foi marcada por tentativas de fuga em ritmos de cerca de 50 km/h; Filippo Ganna e Alberto Bettiol chegaram a escapar, mas foram alcançados. A cerca de 75 km da chegada, o vento cruzado partiu o pelotão e a fuga decisiva de Jhonatan Narváez, Mikkel Bjerg e Andreas Leknessund se estabeleceu; Bjerg conduziu o trio e Narváez deixou Leknessund na subida de Capodarco, a 10 km do fim, seguindo sozinho pelo muro de Via Reputolo até o Piazzale del Girfalco. Narváez venceu em 3h27min26s (média oficial 45,122 km/h), à frente de Leknessund, a 32 s, e de Martin Tjøtta, a 42 s, e chegou à quarta vitória de etapa no Giro, a segunda nesta edição, igualando Richard Carapaz como o equatoriano com mais triunfos na prova. No grupo dos favoritos, Jonas Vingegaard e Jai Hindley anteciparam-se por 2 s no final; Afonso Eulálio atacou nas ruas de Fermo, manteve a Maglia Rosa, e Giulio Ciccone chegou a 6min38s, deixando o top 10 da geral. Paul Magnier segue de Ciclamino e Jonas Vingegaard, de Azzurra.",
+  "resumoFontes": [
+    "https://www.giroditalia.it/en/news/jhonatan-narvaez-wins-stage-8-of-giro-ditalia-2026/",
+    "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-8",
+    "https://www.cyclingnews.com/pro-cycling/racing/giro-d-italia-jhonatan-narvaez-delivers-powerful-solo-attack-to-win-stage-8/"
+  ],
+  "pontuacao": {
+    "modo": "copia_oficial",
+    "recalculada": false,
+    "regrasDaEdicaoConfirmadas": true
+  },
+  "idempotencyKey": "2026_b7_etapa_8",
+  "sintetico": false
+}
