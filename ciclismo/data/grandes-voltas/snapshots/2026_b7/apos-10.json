@@ -1,0 +1,411 @@
+{
+  "provaId": "b7",
+  "ano": 2026,
+  "aposEtapa": 10,
+  "imutavel": true,
+  "fonte": {
+    "nome": "Giro d'Italia (site oficial) e fontes cruzadas da etapa 10",
+    "urls": [
+      "https://www.giroditalia.it/en/tappe/stage-10-of-the-giro-ditalia-2026-viareggio-massa-tudor-itt/",
+      "https://www.giroditalia.it/en/classifiche/di-tappa/10/",
+      "https://www.giroditalia.it/en/news/filippo-ganna-wins-stage-10-of-giro-ditalia-2026/",
+      "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-10",
+      "https://www.italpress.com/giro-ditalia-risultati-classifiche-decima-tappa-cronometro-vince-ganna/"
+    ],
+    "coletadoEm": "2026-11-25T20:40:00-03:00"
+  },
+  "validacao": {
+    "ok": true,
+    "checagens": [
+      "top10_etapa",
+      "gc10",
+      "camisas_top5"
+    ],
+    "avisos": [
+      "O site oficial não publica em /en/classifiche/di-tappa/10/ a GC acumulada (só ordem de chegada, pontos do dia e Super Team do dia; não há GPM, sprint intermediário, Red Bull KM, combatividade, fuga, salita cronometrata nem aba de ritirati). O top 10 da GC foi montado com a notícia oficial da classificação (top 10 dos intervalos, sem o tempo do líder), a notícia oficial da etapa (top 3), Italpress, Il Fatto Quotidiano, Eurosport e Sky (EULALIO 39:40:34; VINGEGAARD +0:27; ARENSMAN +1:57; GALL +2:24; O'CONNOR +2:48; HINDLEY +3:06; STORER +3:28; GEE +3:34; PELLIZZARI +3:36; BELOKI +4:16), cruzado com os tempos oficiais da etapa e conferido por aritmética a partir da etapa 9. A aba overall e o seletor Roma–Roma da página de classifiche não foram usados.",
+      "Aritmética da GC a partir da etapa 9 (tempo após a etapa 9 + tempo da etapa 10; sem abbuoni e sem penalidades de tempo no top 10). EULALIO 38:49:44 + 50:50 = 39:40:34. VINGEGAARD 38:52:08 + 48:53 = 39:41:01 (+0:27). ARENSMAN 38:54:44 + 47:47 = 39:42:31 (+1:57). GALL 38:52:43 + 50:15 = 39:42:58 (+2:24). O'CONNOR 38:54:47 + 48:35 = 39:43:22 (+2:48). HINDLEY 38:54:16 + 49:24 = 39:43:40 (+3:06). STORER 38:55:04 + 48:58 = 39:44:02 (+3:28). GEE: o tempo após a etapa 9 não estava no top 10 gravado; foi obtido por retrocálculo a partir do oficial após a etapa 10 (39:40:34 + 3:34 = 39:44:08; menos 48:09 = 38:55:59) e fecha 38:55:59 + 48:09 = 39:44:08 (+3:34). PELLIZZARI 38:54:59 + 49:11 = 39:44:10 (+3:36). BELOKI 38:55:46 + 49:04 = 39:44:50 (+4:16).",
+      "SCARONI, 5º na GC após a etapa 9 (+4:43, 38:54:27), chegou em 97º a 53:06 (+7:13) e saiu do top 10 (39:47:33, +6:59). RONDEL, 7º após a etapa 9 (+5:01, 38:54:45), chegou em 37º a 50:34 (+4:41) e caiu para 11º (39:45:19, +4:45), 4º da Bianca. ARENSMAN subiu de 6º para 3º, GALL caiu de 3º para 4º, O'CONNOR subiu de 8º para 5º, HINDLEY caiu de 4º para 6º, STORER subiu de 10º para 7º, GEE entrou em 8º, PELLIZZARI manteve o 9º e BELOKI entrou em 10º (era 4º da Bianca após a etapa 9, a +6:02).",
+      "A página oficial da etapa 10 mostra Rosa EULALIO, Ciclamino MAGNIER, Azzurra VINGEGAARD e Bianca EULALIO. Como EULALIO lidera Rosa e Bianca, quemVeste da Bianca ficou null e fonteNaoDistingue true, como nas etapas 5 a 9. Nas outras três, quemVeste = líder.",
+      "Distância: o cabeçalho oficial da página da etapa (42,0 km), a notícia oficial, a classifica e o perfil oficial coincidem em 42 km (o perfil termina em 42,0 km). A média oficial 54,921 km/h fecha com 42 km em 45:53 (cálculo 54,9219… km/h). mediaKmH gravado 54,92, arredondado do oficial 54,921. Apresentações anteriores citaram 40,2 km; o regulamento de 4 de maio de 2026 e o oficial da etapa listam 42 km. O PCS, consultado por trechos da URL específica da etapa 10 (o site bloqueou a descarga direta), publica 45:53,87 e média 54,905. Agregadores que seguem os centésimos do PCS (p. ex. Watts2Win) chegam a gravar intervalos como +1:53 e +2:03; o oficial registra 01:54 e 02:04. Gravados os oficiais.",
+      "Desnível oficial: 50 m (Altitude Gain 50m no cabeçalho). O perfil é praticamente plano, com uma ondulação visível junto ao intermediário de Rinchiostra (km 38,4). Gravado o oficial.",
+      "Não há série oficial {xKm, elevM}; pontos ficou vazio. Não há sprint de Ciclamino, Red Bull KM nem GPM nesta cronometro; sprints e montanhas ficaram vazios. Imagem oficial de altimetria (aba profile, .js-tab-info-altrimetria, alt=\"Altimetria/Profile tappa 10 Giro d'Italia 2026\", JPEG 1280×852, 235.150 bytes, sha256 3b852c79076e7683c58fedffb482a100f1ee0eb7b64ca0a2461b115d77d1ea4a) conferida visualmente (Viareggio 0,0 → Massa 42,0; intermediários de cronometro com ícone de cronômetro em Viale Regina Margherita km 16,7, Forte dei Marmi km 28,9 e Rinchiostra km 38,4). Planimetria separada em hAYRmgXlT8uxuGUlcafZ_150426-082838.jpg (não usada).",
+      "Abbuoni: a coluna oficial da ordem de chegada marca “-” nos 167 classificados. Não há bonificações de chegada nem Red Bull KM numa cronometro individual. Ninguém do top 10 da GC recebeu abbuono.",
+      "Tipo gravado como crono (texto técnico oficial: 'Flat individual time trial, almost entirely straight, with two U-turns'; chegada em Massa, 50 m de desnível). A notícia oficial descreve a etapa como the only time trial of the 2026 Giro d’Italia. PCS: Stage 10 (ITT).",
+      "Abandonos oficiais da etapa 10: 0 (Withdrawn: 0 no cabeçalho da página da etapa; a classifica /en/classifiche/di-tappa/10/ não tem aba de ritirati). Partentes: 167, coerente com os 167 classificados da etapa 9 e com os 167 classificados na ordem oficial desta etapa.",
+      "Ciclamino após a etapa 10: MAGNIER 130 (chegou em 127º a 53:57 e não pontuou), NARVAEZ 86, MILAN 76, BALLERINI 70, TAROZZI 48, inalterada em relação à etapa 9. Italpress confirma o top 3; Cyclingstage, o top 5. A escala oficial de chegada nesta cronometro foi 15-12-9-7-6-5-4-3-2-1 (GANNA, ARENSMAN, CAVAGNA, BAX, GEE, WALSCHEID, PRICE PEJTERSEN, BJERG, MILESI, LARSEN); não houve intermediário. Os 15 pontos do dia de GANNA não entraram no top 5 acumulado.",
+      "Azzurra após a etapa 10: inalterada, porque não houve GPM. VINGEGAARD 111, SEVILLA 60, GALL 48, RUBIO 22, ARRIETA 18. Italpress confirma o top 3; Cyclingstage, o top 5 (OLIVEIRA permanece com 18 pts, 6º). O oficial não publica a Azzurra acumulada.",
+      "Bianca: EULALIO 39:40:34, PELLIZZARI +3:36 (era 3º após a etapa 9 e passou RONDEL), BELOKI +4:16 (38:55:46 + 49:04 = 39:44:50), RONDEL +4:45 (era 2º após a etapa 9; 38:54:45 + 50:34 = 39:45:19), PIGANZOLI +5:27 (38:55:55 + 50:06 = 39:46:01). Italpress confirma o top 3; o PCS (trechos da página embed da etapa 10) confirma o top 5.",
+      "Classificação de equipes: o oficial só publica o Super Team do dia (NETCOMPANY INEOS 2:23:20, soma de 45:53 + 47:47 + 49:40; PINARELLO-Q36.5 PRO CYCLING TEAM +2:44; LIDL-TREK +3:42; GROUPAMA-FDJ UNITED +4:23; TUDOR PRO CYCLING TEAM +5:07). Não há classificação geral de equipes confiável no oficial após a etapa 10. equipes.top5 ficou null.",
+      "A notícia oficial detalha a cronometro assim: GANNA impôs 1’54” ao 2º, ARENSMAN, e 1’59” ao 3º, CAVAGNA, com média 54,921 km/h, a cronometro mais rápida já registrada numa Grande Volta em percurso de mais de 40 km, 40ª vitória profissional e oitava no Giro (sétima numa cronometro), igualando Merckx nas cronos da Corsa Rosa (Moser tem 12). EULALIO manteve a Rosa por 27 s; VINGEGAARD, 13º a 3:00, perdeu 1’06” para ARENSMAN, 44 s para GEE e 18 s para O'CONNOR. GALL, 33º a 4:22, ficou 2’28” atrás de ARENSMAN; entre os homens da GC, só RONDEL teve prova pior do que a de GALL (2’47” atrás de ARENSMAN). A Italpress registra o domínio desde o primeiro intertempo, mas inverte o sentido do percurso ('Massa-Viareggio') e atribui a GALL 'circa 30″' sobre VINGEGAARD; o oficial é 1:22 (50:15 contra 48:53).",
+      "A URL e o corpo das notícias oficiais são de 2026; o <title> HTML traz o sufixo 'Giro d’Italia 2027', artefato do CMS, já visto no chrome de páginas oficiais. O array oficial lista CAVAGNA Remi (Rémi em várias notícias), PRICE PEJTERSEN Johan, WALSCHEID Maximilian (Max em alguns textos) e GEE Derek; a notícia oficial da GC e várias agências usam Derek Gee-West; foi gravado GEE Derek, na grafia oficial, como nas etapas anteriores.",
+      "Penalidades da etapa 10 (PCS, página específica /stage-10/info/penalties-fines, consultada por busca porque o site bloqueou a descarga direta): cartões amarelos a VINJEBO Emil Mielke (Uno-X Mobility) e ao motorista Claudio Aldegheri, por infração às regras de circulação de veículos; sem multa em dinheiro registrada nesse comunicado e sem penalidades de tempo no top 10 da GC. Não foram usadas coletâneas de júri de etapas posteriores.",
+      "A página oficial /en/classifiche/ e URLs com ?tappa= servem a classificação corrente; não foram usadas. A aba overall do site oficial também não foi usada. Não foram usados resultados de etapas posteriores nem a classificação final da prova. Os intermediários de cronometro do perfil (km 16,7 / 28,9 / 38,4) não pontuam para a Ciclamino e não entraram no array de sprints.",
+      "Programa oficial: START OF FIRST GIRO D’ITALIA RIDER 13:15 e FINISH OF GIRO D’ITALIA 17:14 (FINISH AREA, Piazza Francesco Betti, também às 17:14). A prévia oficial da véspera indicava o primeiro a partir às 13:15 e a chegada prevista do último por volta das 17:15. A lista de partenza oficial (PDF da etapa 10) marca o primeiro às 13:15:00."
+    ]
+  },
+  "etapa": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "GANNA Filippo",
+        "equipe": "Netcompany INEOS",
+        "tempo": "45:53",
+        "gap": "0:00",
+        "abbuono": null
+      },
+      {
+        "pos": 2,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "47:47",
+        "gap": "1:54",
+        "abbuono": null
+      },
+      {
+        "pos": 3,
+        "ciclista": "CAVAGNA Remi",
+        "equipe": "Groupama-FDJ United",
+        "tempo": "47:52",
+        "gap": "1:59",
+        "abbuono": null
+      },
+      {
+        "pos": 4,
+        "ciclista": "BAX Sjoerd",
+        "equipe": "Pinarello-Q36.5 Pro Cycling Team",
+        "tempo": "47:57",
+        "gap": "2:04",
+        "abbuono": null
+      },
+      {
+        "pos": 5,
+        "ciclista": "GEE Derek",
+        "equipe": "Lidl-Trek",
+        "tempo": "48:09",
+        "gap": "2:16",
+        "abbuono": null
+      },
+      {
+        "pos": 6,
+        "ciclista": "WALSCHEID Maximilian",
+        "equipe": "Lidl-Trek",
+        "tempo": "48:10",
+        "gap": "2:17",
+        "abbuono": null
+      },
+      {
+        "pos": 7,
+        "ciclista": "PRICE PEJTERSEN Johan",
+        "equipe": "Alpecin-Premier Tech",
+        "tempo": "48:22",
+        "gap": "2:29",
+        "abbuono": null
+      },
+      {
+        "pos": 8,
+        "ciclista": "BJERG Mikkel",
+        "equipe": "UAE Team Emirates XRG",
+        "tempo": "48:26",
+        "gap": "2:33",
+        "abbuono": null
+      },
+      {
+        "pos": 9,
+        "ciclista": "MILESI Lorenzo",
+        "equipe": "Movistar Team",
+        "tempo": "48:33",
+        "gap": "2:40",
+        "abbuono": null
+      },
+      {
+        "pos": 10,
+        "ciclista": "LARSEN Niklas",
+        "equipe": "Unibet Rose Rockets",
+        "tempo": "48:35",
+        "gap": "2:42",
+        "abbuono": null
+      }
+    ],
+    "vencedor": {
+      "ciclista": "GANNA Filippo",
+      "equipe": "Netcompany INEOS",
+      "tempo": "45:53"
+    },
+    "mediaKmH": 54.92,
+    "abandonos": 0,
+    "partentes": 167
+  },
+  "gc": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "EULALIO Afonso",
+        "equipe": "Bahrain Victorious",
+        "tempo": "39:40:34",
+        "gap": "+0:00"
+      },
+      {
+        "pos": 2,
+        "ciclista": "VINGEGAARD Jonas",
+        "equipe": "Team Visma - Lease a Bike",
+        "tempo": "39:41:01",
+        "gap": "+0:27"
+      },
+      {
+        "pos": 3,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "39:42:31",
+        "gap": "+1:57"
+      },
+      {
+        "pos": 4,
+        "ciclista": "GALL Felix",
+        "equipe": "Decathlon CMA CGM Team",
+        "tempo": "39:42:58",
+        "gap": "+2:24"
+      },
+      {
+        "pos": 5,
+        "ciclista": "O'CONNOR Ben",
+        "equipe": "Team Jayco Alula",
+        "tempo": "39:43:22",
+        "gap": "+2:48"
+      },
+      {
+        "pos": 6,
+        "ciclista": "HINDLEY Jai",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "39:43:40",
+        "gap": "+3:06"
+      },
+      {
+        "pos": 7,
+        "ciclista": "STORER Michael",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "39:44:02",
+        "gap": "+3:28"
+      },
+      {
+        "pos": 8,
+        "ciclista": "GEE Derek",
+        "equipe": "Lidl-Trek",
+        "tempo": "39:44:08",
+        "gap": "+3:34"
+      },
+      {
+        "pos": 9,
+        "ciclista": "PELLIZZARI Giulio",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "39:44:10",
+        "gap": "+3:36"
+      },
+      {
+        "pos": 10,
+        "ciclista": "BELOKI Markel",
+        "equipe": "EF Education - EasyPost",
+        "tempo": "39:44:50",
+        "gap": "+4:16"
+      }
+    ]
+  },
+  "camisas": {
+    "gc": {
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "39:40:34",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "tempo": "39:41:01",
+          "gap": "+0:27"
+        },
+        {
+          "pos": 3,
+          "ciclista": "ARENSMAN Thymen",
+          "equipe": "Netcompany INEOS",
+          "tempo": "39:42:31",
+          "gap": "+1:57"
+        },
+        {
+          "pos": 4,
+          "ciclista": "GALL Felix",
+          "equipe": "Decathlon CMA CGM Team",
+          "tempo": "39:42:58",
+          "gap": "+2:24"
+        },
+        {
+          "pos": 5,
+          "ciclista": "O'CONNOR Ben",
+          "equipe": "Team Jayco Alula",
+          "tempo": "39:43:22",
+          "gap": "+2:48"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": "EULALIO Afonso",
+      "fonteNaoDistingue": false
+    },
+    "pontos": {
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 130,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "NARVAEZ Jhonatan",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 86,
+          "diff": 44
+        },
+        {
+          "pos": 3,
+          "ciclista": "MILAN Jonathan",
+          "equipe": "Lidl-Trek",
+          "pontos": 76,
+          "diff": 54
+        },
+        {
+          "pos": 4,
+          "ciclista": "BALLERINI Davide",
+          "equipe": "XDS Astana Team",
+          "pontos": 70,
+          "diff": 60
+        },
+        {
+          "pos": 5,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 48,
+          "diff": 82
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": "MAGNIER Paul",
+      "fonteNaoDistingue": false
+    },
+    "montanha": {
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "pontos": 111,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 60,
+          "diff": 51
+        },
+        {
+          "pos": 3,
+          "ciclista": "GALL Felix",
+          "equipe": "Decathlon CMA CGM Team",
+          "pontos": 48,
+          "diff": 63
+        },
+        {
+          "pos": 4,
+          "ciclista": "RUBIO Einer",
+          "equipe": "Movistar Team",
+          "pontos": 22,
+          "diff": 89
+        },
+        {
+          "pos": 5,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 18,
+          "diff": 93
+        }
+      ],
+      "lider": "VINGEGAARD Jonas",
+      "quemVeste": "VINGEGAARD Jonas",
+      "fonteNaoDistingue": false
+    },
+    "jovem": {
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "regraOficialIdade": "nascidos depois de 1º de janeiro de 2001 (comunicado oficial)",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "39:40:34",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "PELLIZZARI Giulio",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "tempo": "39:44:10",
+          "gap": "+3:36"
+        },
+        {
+          "pos": 3,
+          "ciclista": "BELOKI Markel",
+          "equipe": "EF Education - EasyPost",
+          "tempo": "39:44:50",
+          "gap": "+4:16"
+        },
+        {
+          "pos": 4,
+          "ciclista": "RONDEL Mathys",
+          "equipe": "Tudor Pro Cycling Team",
+          "tempo": "39:45:19",
+          "gap": "+4:45"
+        },
+        {
+          "pos": 5,
+          "ciclista": "PIGANZOLI Davide",
+          "equipe": "Team Visma - Lease a Bike",
+          "tempo": "39:46:01",
+          "gap": "+5:27"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": null,
+      "fonteNaoDistingue": true
+    }
+  },
+  "equipes": {
+    "top5": null
+  },
+  "resumo": "Na etapa 10, contra-relógio individual oficial de 42 km de Viareggio a Massa, com 50 m de desnível, traçado praticamente plano e retilíneo com duas retornadas, Filippo Ganna venceu em 45min53s (média oficial 54,921 km/h), com 1min54s de vantagem sobre o companheiro Thymen Arensman e 1min59s sobre Rémi Cavagna. Foi a cronometro mais rápida já registrada numa Grande Volta em percurso de mais de 40 km, a 40ª vitória profissional de Ganna e a oitava no Giro, a sétima numa cronometro, igualando Eddy Merckx nas provas contra o relógio da Corsa Rosa. Afonso Eulálio chegou em 41º, a 4min57s, e manteve a Maglia Rosa por 27 s sobre Jonas Vingegaard, 13º na etapa a 3min00s, que perdeu 1min06s para Arensman. Arensman subiu ao terceiro lugar da geral; Felix Gall, 33º a 4min22s, caiu para quarto. Paul Magnier segue de Ciclamino e Jonas Vingegaard, de Azzurra.",
+  "resumoFontes": [
+    "https://www.giroditalia.it/en/news/filippo-ganna-wins-stage-10-of-giro-ditalia-2026/",
+    "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-10",
+    "https://www.cyclingnews.com/pro-cycling/racing/giro-d-italia-filippo-ganna-smashes-stage-10-individual-time-trial-as-gc-surprises-shake-up-standings/"
+  ],
+  "pontuacao": {
+    "modo": "copia_oficial",
+    "recalculada": false,
+    "regrasDaEdicaoConfirmadas": true
+  },
+  "idempotencyKey": "2026_b7_etapa_10",
+  "sintetico": false
+}
