@@ -1,0 +1,413 @@
+{
+  "provaId": "b7",
+  "ano": 2026,
+  "aposEtapa": 9,
+  "imutavel": true,
+  "fonte": {
+    "nome": "Giro d'Italia (site oficial) e fontes cruzadas da etapa 9",
+    "urls": [
+      "https://www.giroditalia.it/en/tappe/stage-9-of-the-giro-ditalia-2026-cervia-corno-alle-scale/",
+      "https://www.giroditalia.it/en/classifiche/di-tappa/9/",
+      "https://www.giroditalia.it/en/news/jonas-vingegard-wins-stage-9-of-giro-ditalia-2026/",
+      "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-9",
+      "https://www.italpress.com/giro-ditalia-risultati-classifiche-nona-tappa-vince-vingegaard/"
+    ],
+    "coletadoEm": "2026-11-24T23:27:43-03:00"
+  },
+  "validacao": {
+    "ok": true,
+    "checagens": [
+      "top10_etapa",
+      "gc10",
+      "camisas_top5"
+    ],
+    "avisos": [
+      "O site oficial não publica em /en/classifiche/di-tappa/9/ a GC acumulada (só ordem de chegada, pontos do dia, GPM, sprint, Red Bull KM, combatividade, fuga, Super Team do dia e salita cronometrata; não há aba de ritirati). O top 10 da GC foi montado com Italpress, Gazzetta e Eurosport (EULALIO 38:49:44; VINGEGAARD +2:24; GALL +2:59; HINDLEY +4:32; SCARONI +4:43; ARENSMAN +5:00; RONDEL +5:01; O'CONNOR +5:03; PELLIZZARI +5:15; STORER +5:20), cruzado com a notícia oficial (top 3) e o PCS, e conferido por aritmética a partir da etapa 8.",
+      "Aritmética da GC a partir da etapa 8 (tempo após a etapa 8 + tempo da etapa 9 − abbuono; sem penalidades de tempo no top 10). EULALIO 34:28:42 + 4:21:02 = 38:49:44. VINGEGAARD 34:31:57 + 4:20:21 − 0:10 = 38:52:08 (+2:24). GALL 34:32:16 + 4:20:33 − 0:06 = 38:52:43 (+2:59). HINDLEY 34:33:05 + 4:21:11 = 38:54:16 (+4:32). SCARONI 34:33:00 + 4:21:27 = 38:54:27 (+4:43). ARENSMAN 34:33:49 + 4:20:55 = 38:54:44 (+5:00). RONDEL 34:33:38 + 4:21:07 = 38:54:45 (+5:01). O'CONNOR 34:33:14 + 4:21:33 = 38:54:47 (+5:03). PELLIZZARI 34:33:10 + 4:21:49 = 38:54:59 (+5:15). STORER 34:33:53 + 4:21:11 = 38:55:04 (+5:20).",
+      "PELLIZZARI, 6º na GC após a etapa 8 (+4:28, 34:33:10), chegou em 22º a 4:21:49 (+1:28) e caiu para 9º. ARENSMAN subiu de 9º para 6º, RONDEL de 8º para 7º, O'CONNOR de 7º para 8º, HINDLEY de 5º para 4º e SCARONI de 4º para 5º. A notícia oficial e a Italpress registram os 1’28” de PELLIZZARI.",
+      "A página oficial da etapa 9 mostra Rosa EULALIO, Ciclamino MAGNIER, Azzurra VINGEGAARD e Bianca EULALIO. Como EULALIO lidera Rosa e Bianca, quemVeste da Bianca ficou null e fonteNaoDistingue true, como nas etapas 5 a 8. Nas outras três, quemVeste = líder.",
+      "Distância: o cabeçalho oficial da página da etapa, a notícia oficial, a classifica (KOM Corno alle Scale km 184) e o perfil oficial coincidem em 184 km (o perfil termina em 184,0 km). A média oficial 42,404 km/h fecha com 184 km em 4:20:21 (cálculo 42,404 km/h). Gazzetta e PCS também publicam 42,404. mediaKmH gravado 42,40, arredondado do oficial 42,404.",
+      "Desnível oficial: 2.400 m. PCS: 2.351 m. Gravado o oficial.",
+      "Não há série oficial {xKm, elevM}; pontos ficou vazio. Imagem oficial de altimetria (aba profile, .js-tab-info-altrimetria, alt=\"Altimetria/Profile tappa 9 Giro d'Italia 2026\", JPEG 1280×852, 333.505 bytes, sha256 10ae7686318c1dc27bceb7bc250c4e9b3fc268d6b99d353aacc603bc7fce314d) conferida visualmente (Cervia 0,0 → Corno alle Scale 184,0 / 1.471 m; sprint Marzabotto km 125,2, 133 m; GPM Querciola km 167,4, 823 m, 3ª categoria; Red Bull KM km 172,6, 812 m, Vidiciatico; subida final 10,8 km a 6,1%, máximo 15%, Madonna dell'Acero 1.198 m). Planimetria separada em ANkpOUBef8GYIyxyjE4v_150426-080229.jpg (não usada).",
+      "Abbuoni da ordem de chegada oficial: chegada 10-6-4 (VINGEGAARD, GALL, PIGANZOLI) + Red Bull KM 6-4-2 (RUBIO, CICCONE, ULISSI). O oficial soma os dois na coluna da chegada: VINGEGAARD 0:10, GALL 0:06, PIGANZOLI 0:04, CICCONE 0:04 (11º, só o Red Bull KM), RUBIO 0:06 (24º) e ULISSI 0:02 (39º). Ninguém do top 10 da GC recebeu os abbuoni do Red Bull KM; no top 10 da GC, só VINGEGAARD e GALL receberam os da chegada.",
+      "Tipo gravado como montanha (texto técnico oficial: 'Stage that is essentially one long climb' / 'Tappa praticamente monosalita'; chegada no cume, 2.400 m de desnível). PCS: Mountains, uphill finish.",
+      "Abandonos oficiais da etapa 9: 0 (Ritirati: 0 na página da etapa; a classifica /en/classifiche/di-tappa/9/ não tem aba de ritirati). Partentes: 167, coerente com os 167 classificados da etapa 8 e com os 167 classificados na ordem oficial desta etapa.",
+      "Ciclamino após a etapa 9: MAGNIER 130 (não pontuou), NARVAEZ 86, MILAN 76, BALLERINI 70 (58+12 no intermediário de Marzabotto), TAROZZI 48. Italpress confirma o top 3; PCS, o top 5. A escala oficial de chegada nesta etapa de montanha foi 15-12-9-7-6-5-4-3-2-1, mais o intermediário 12-8-5-3-1. Os pontos do Red Bull KM são classificação à parte e não entraram na Ciclamino.",
+      "Azzurra após a etapa 9: VINGEGAARD 111 (61+50 no Corno alle Scale), SEVILLA 60 (não pontuou), GALL 48 (24+24), RUBIO 22 (PCS: era 8º após a etapa 8 e somou 9 pts em Querciola), ARRIETA 18. Italpress confirma o top 3; o oficial não publica a Azzurra acumulada; o top 5 segue o PCS. OLIVEIRA permanece com 18 pts, 6º no PCS.",
+      "Bianca: EULALIO 38:49:44, RONDEL +5:01 (era 3º após a etapa 8 e passou PELLIZZARI), PELLIZZARI +5:15, BELOKI +6:02 (34:34:13 + 4:21:33 = 38:55:46), PIGANZOLI +6:11 (era 6º da Bianca após a etapa 8, a +6:22; 3º na etapa com 4 s de abbuono: 34:35:04 + 4:20:51 = 38:55:55). Italpress confirma o top 3; PCS, o top 5; a Gazzetta confirma BELOKI 11º da GC a +6:02 e PIGANZOLI 13º a +6:11. ARRIETA: 34:34:36 + 4:23:35 = 38:58:11 (+8:27), 7º da Bianca no PCS.",
+      "Classificação de equipes: o oficial só publica o Super Team do dia (TEAM VISMA - LEASE A BIKE 13:02:23, soma de 4:20:21 + 4:20:55 + 4:21:07; RED BULL - BORA - HANSGROHE +3:13; NETCOMPANY INEOS +3:15; TEAM JAYCO ALULA +5:34; XDS ASTANA TEAM +6:07). Não há classificação geral de equipes confiável no oficial após a etapa 9. equipes.top5 ficou null.",
+      "Fuga: a notícia oficial cita o octeto (GEENS, MARCELLUSI, MILESI, RUBIO, NABERMAN, BAIS, LOLAND e BALLERINI) após uma hora de ataques; a Italpress fala em cerca de 2 minutos de vantagem. Na subida suave rumo ao Monte della Capanna, com a fuga a cerca de dois minutos, CICCONE contra-atacou com ULISSI e AERTS e os três alcançaram o grupo da frente. O oficial da Fuga pontua MILESI 133, BALLERINI 122, RUBIO 109, depois 92 para GEENS, NABERMAN, BAIS, LOLAND e MARCELLUSI, e CICCONE 24. Combatividade oficial: CICCONE.",
+      "A notícia oficial em inglês detalha o final assim: GALL atacou nos 3 km finais e só VINGEGAARD o acompanhou; CICCONE foi alcançado a 1.600 m do cume; VINGEGAARD disparou a 800 m. A versão francesa fala em ataque de GALL a um pouco mais de 2 km e aceleração a 700 m. A Italpress: 2,2 km e 700 m. A Gazzetta: CICCONE alcançado a 2 km e aceleração a 900 m. O PCS descreve a vitória como '0.9 km solo'. A Cyclingnews situa o ataque de GALL nos 3 km finais, a captura de CICCONE a 1,7 km e o golpe decisivo sob o flamme rouge. O resumo segue a formulação oficial em inglês (3 km / 1.600 m / 800 m).",
+      "A URL oficial da notícia em inglês escreve 'vingegard' (falta um 'a'); o título, o corpo e as demais fontes usam Vingegaard. O array oficial lista EULALIO Afonso; o corpo da notícia usa Eulálio. Grafia oficial GEE Derek (GEE-WEST no PCS). Grafia oficial LOLAND (Løland na notícia oficial em inglês).",
+      "A Italpress, no texto, diz que EULALIO foi 'perdendo circa 40″'; o oficial, a Gazzetta e a ordem de chegada publicam 41″.",
+      "Penalidades da etapa 9 (PCS, comunicados): apenas multas (MAESTRI, sticky bottle, 200 CHF, e a Team Polti VisitMalta, 500 CHF; JUUL-JENSEN, descarte fora da zona, 500 CHF e 25 pts UCI; VAN EETVELT, comportamento inadequado, 200 CHF; DE LA CRUZ, comportamento inadequado, 500 CHF). Sem penalidades de tempo no top 10 da GC.",
+      "A página oficial /en/classifiche/ e URLs com ?tappa= servem a classificação corrente; não foram usadas. A aba overall do site oficial também não foi usada. Não foram usados resultados de etapas posteriores nem a classificação final da prova. As menções oficiais ao dia de descanso e à cronometro da etapa 10 não entraram no resumo nem nos dados. O endereço de Giroland na página da etapa 9 (Viareggio) é residual e foi ignorado.",
+      "Programa oficial: partenza 12:35 e chegada prevista 17:00; signing-in 11:05–12:35. O PCS informa start time 12:50, tratado como km 0 (15 min após a partenza oficial, padrão já visto em etapas anteriores)."
+    ]
+  },
+  "etapa": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "VINGEGAARD Jonas",
+        "equipe": "Team Visma - Lease a Bike",
+        "tempo": "4:20:21",
+        "gap": "0:00",
+        "abbuono": "0:10"
+      },
+      {
+        "pos": 2,
+        "ciclista": "GALL Felix",
+        "equipe": "Decathlon CMA CGM Team",
+        "tempo": "4:20:33",
+        "gap": "0:12",
+        "abbuono": "0:06"
+      },
+      {
+        "pos": 3,
+        "ciclista": "PIGANZOLI Davide",
+        "equipe": "Team Visma - Lease a Bike",
+        "tempo": "4:20:55",
+        "gap": "0:34",
+        "abbuono": "0:04"
+      },
+      {
+        "pos": 4,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "4:20:55",
+        "gap": "0:34",
+        "abbuono": null
+      },
+      {
+        "pos": 5,
+        "ciclista": "EULALIO Afonso",
+        "equipe": "Bahrain Victorious",
+        "tempo": "4:21:02",
+        "gap": "0:41",
+        "abbuono": null
+      },
+      {
+        "pos": 6,
+        "ciclista": "GEE Derek",
+        "equipe": "Lidl-Trek",
+        "tempo": "4:21:07",
+        "gap": "0:46",
+        "abbuono": null
+      },
+      {
+        "pos": 7,
+        "ciclista": "RONDEL Mathys",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "4:21:07",
+        "gap": "0:46",
+        "abbuono": null
+      },
+      {
+        "pos": 8,
+        "ciclista": "KUSS Sepp",
+        "equipe": "Team Visma - Lease a Bike",
+        "tempo": "4:21:07",
+        "gap": "0:46",
+        "abbuono": null
+      },
+      {
+        "pos": 9,
+        "ciclista": "HINDLEY Jai",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "4:21:11",
+        "gap": "0:50",
+        "abbuono": null
+      },
+      {
+        "pos": 10,
+        "ciclista": "STORER Michael",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "4:21:11",
+        "gap": "0:50",
+        "abbuono": null
+      }
+    ],
+    "vencedor": {
+      "ciclista": "VINGEGAARD Jonas",
+      "equipe": "Team Visma - Lease a Bike",
+      "tempo": "4:20:21"
+    },
+    "mediaKmH": 42.4,
+    "abandonos": 0,
+    "partentes": 167
+  },
+  "gc": {
+    "top10": [
+      {
+        "pos": 1,
+        "ciclista": "EULALIO Afonso",
+        "equipe": "Bahrain Victorious",
+        "tempo": "38:49:44",
+        "gap": "+0:00"
+      },
+      {
+        "pos": 2,
+        "ciclista": "VINGEGAARD Jonas",
+        "equipe": "Team Visma - Lease a Bike",
+        "tempo": "38:52:08",
+        "gap": "+2:24"
+      },
+      {
+        "pos": 3,
+        "ciclista": "GALL Felix",
+        "equipe": "Decathlon CMA CGM Team",
+        "tempo": "38:52:43",
+        "gap": "+2:59"
+      },
+      {
+        "pos": 4,
+        "ciclista": "HINDLEY Jai",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "38:54:16",
+        "gap": "+4:32"
+      },
+      {
+        "pos": 5,
+        "ciclista": "SCARONI Christian",
+        "equipe": "XDS Astana Team",
+        "tempo": "38:54:27",
+        "gap": "+4:43"
+      },
+      {
+        "pos": 6,
+        "ciclista": "ARENSMAN Thymen",
+        "equipe": "Netcompany INEOS",
+        "tempo": "38:54:44",
+        "gap": "+5:00"
+      },
+      {
+        "pos": 7,
+        "ciclista": "RONDEL Mathys",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "38:54:45",
+        "gap": "+5:01"
+      },
+      {
+        "pos": 8,
+        "ciclista": "O'CONNOR Ben",
+        "equipe": "Team Jayco Alula",
+        "tempo": "38:54:47",
+        "gap": "+5:03"
+      },
+      {
+        "pos": 9,
+        "ciclista": "PELLIZZARI Giulio",
+        "equipe": "Red Bull - BORA - hansgrohe",
+        "tempo": "38:54:59",
+        "gap": "+5:15"
+      },
+      {
+        "pos": 10,
+        "ciclista": "STORER Michael",
+        "equipe": "Tudor Pro Cycling Team",
+        "tempo": "38:55:04",
+        "gap": "+5:20"
+      }
+    ]
+  },
+  "camisas": {
+    "gc": {
+      "rotulo": "Maglia Rosa",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "38:49:44",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "tempo": "38:52:08",
+          "gap": "+2:24"
+        },
+        {
+          "pos": 3,
+          "ciclista": "GALL Felix",
+          "equipe": "Decathlon CMA CGM Team",
+          "tempo": "38:52:43",
+          "gap": "+2:59"
+        },
+        {
+          "pos": 4,
+          "ciclista": "HINDLEY Jai",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "tempo": "38:54:16",
+          "gap": "+4:32"
+        },
+        {
+          "pos": 5,
+          "ciclista": "SCARONI Christian",
+          "equipe": "XDS Astana Team",
+          "tempo": "38:54:27",
+          "gap": "+4:43"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": "EULALIO Afonso",
+      "fonteNaoDistingue": false
+    },
+    "pontos": {
+      "rotulo": "Maglia Ciclamino",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "MAGNIER Paul",
+          "equipe": "Soudal Quick-Step",
+          "pontos": 130,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "NARVAEZ Jhonatan",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 86,
+          "diff": 44
+        },
+        {
+          "pos": 3,
+          "ciclista": "MILAN Jonathan",
+          "equipe": "Lidl-Trek",
+          "pontos": 76,
+          "diff": 54
+        },
+        {
+          "pos": 4,
+          "ciclista": "BALLERINI Davide",
+          "equipe": "XDS Astana Team",
+          "pontos": 70,
+          "diff": 60
+        },
+        {
+          "pos": 5,
+          "ciclista": "TAROZZI Manuele",
+          "equipe": "Bardiani CSF 7 Saber",
+          "pontos": 48,
+          "diff": 82
+        }
+      ],
+      "lider": "MAGNIER Paul",
+      "quemVeste": "MAGNIER Paul",
+      "fonteNaoDistingue": false
+    },
+    "montanha": {
+      "rotulo": "Maglia Azzurra",
+      "oficialConfirmado": true,
+      "unidade": "pontos",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "VINGEGAARD Jonas",
+          "equipe": "Team Visma - Lease a Bike",
+          "pontos": 111,
+          "diff": 0
+        },
+        {
+          "pos": 2,
+          "ciclista": "SEVILLA Diego Pablo",
+          "equipe": "Team Polti VisitMalta",
+          "pontos": 60,
+          "diff": 51
+        },
+        {
+          "pos": 3,
+          "ciclista": "GALL Felix",
+          "equipe": "Decathlon CMA CGM Team",
+          "pontos": 48,
+          "diff": 63
+        },
+        {
+          "pos": 4,
+          "ciclista": "RUBIO Einer",
+          "equipe": "Movistar Team",
+          "pontos": 22,
+          "diff": 89
+        },
+        {
+          "pos": 5,
+          "ciclista": "ARRIETA Igor",
+          "equipe": "UAE Team Emirates XRG",
+          "pontos": 18,
+          "diff": 93
+        }
+      ],
+      "lider": "VINGEGAARD Jonas",
+      "quemVeste": "VINGEGAARD Jonas",
+      "fonteNaoDistingue": false
+    },
+    "jovem": {
+      "rotulo": "Maglia Bianca",
+      "oficialConfirmado": true,
+      "unidade": "tempo",
+      "regraOficialIdade": "nascidos depois de 1º de janeiro de 2001 (comunicado oficial)",
+      "top5": [
+        {
+          "pos": 1,
+          "ciclista": "EULALIO Afonso",
+          "equipe": "Bahrain Victorious",
+          "tempo": "38:49:44",
+          "gap": "+0:00"
+        },
+        {
+          "pos": 2,
+          "ciclista": "RONDEL Mathys",
+          "equipe": "Tudor Pro Cycling Team",
+          "tempo": "38:54:45",
+          "gap": "+5:01"
+        },
+        {
+          "pos": 3,
+          "ciclista": "PELLIZZARI Giulio",
+          "equipe": "Red Bull - BORA - hansgrohe",
+          "tempo": "38:54:59",
+          "gap": "+5:15"
+        },
+        {
+          "pos": 4,
+          "ciclista": "BELOKI Markel",
+          "equipe": "EF Education - EasyPost",
+          "tempo": "38:55:46",
+          "gap": "+6:02"
+        },
+        {
+          "pos": 5,
+          "ciclista": "PIGANZOLI Davide",
+          "equipe": "Team Visma - Lease a Bike",
+          "tempo": "38:55:55",
+          "gap": "+6:11"
+        }
+      ],
+      "lider": "EULALIO Afonso",
+      "quemVeste": null,
+      "fonteNaoDistingue": true
+    }
+  },
+  "equipes": {
+    "top5": null
+  },
+  "resumo": "Na etapa 9, 184 km oficiais de Cervia ao Corno alle Scale com 2.400 m de desnível, etapa praticamente monosalita, a primeira parte plana até Silla foi marcada por uma hora de ataques até se formar uma fuga de oito (Jonas Geens, Martin Marcellusi, Lorenzo Milesi, Einer Rubio, Tim Naberman, Mattia Bais, Sakarias Koller Løland e Davide Ballerini). A Decathlon CMA CGM controlou a vantagem. Na subida suave rumo ao Monte della Capanna, com a fuga a cerca de dois minutos, Giulio Ciccone contra-atacou, acompanhado por Diego Ulissi e Toon Aerts, e os três alcançaram o grupo da frente. Na subida final, Ciccone partiu sozinho, deixou Rubio e chegou ao trecho mais duro com 1min30s de vantagem, insuficiente diante do ritmo da Decathlon e da Visma. Felix Gall atacou nos quilômetros finais, só Jonas Vingegaard o acompanhou; os dois alcançaram Ciccone a 1.600 m do cume. Vingegaard, que tinha rodado à roda de Gall, disparou a 800 m e venceu em 4h20min21s (média oficial 42,404 km/h), à frente de Gall, a 12 s, e de Davide Piganzoli, a 34 s, na 50ª vitória profissional. Afonso Eulálio chegou em 5º a 41 s e manteve a Maglia Rosa; Giulio Pellizzari concedeu 1min28s. Paul Magnier segue de Ciclamino e Jonas Vingegaard, de Azzurra.",
+  "resumoFontes": [
+    "https://www.giroditalia.it/en/news/jonas-vingegard-wins-stage-9-of-giro-ditalia-2026/",
+    "https://www.procyclingstats.com/race/giro-d-italia/2026/stage-9",
+    "https://www.cyclingnews.com/pro-cycling/racing/giro-d-italia-jonas-vingegaard-sends-signal-to-rivals-with-solo-stage-9-victory-atop-corno-alle-scale/"
+  ],
+  "pontuacao": {
+    "modo": "copia_oficial",
+    "recalculada": false,
+    "regrasDaEdicaoConfirmadas": true
+  },
+  "idempotencyKey": "2026_b7_etapa_9",
+  "sintetico": false
+}
