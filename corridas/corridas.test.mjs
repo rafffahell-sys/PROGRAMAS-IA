@@ -83,14 +83,14 @@ test("totais não incluem provas não concluídas nas medalhas, concluídas, pre
   const seed = extrairSeed(html);
   const calendario = seed.filter(agenda);
   const km = calendario.reduce((soma, e) => soma + parseKm(e.distance), 0);
-  assert.deepEqual(calendario.map((e) => e.id), ["marinheiro-2026", "reveillon-2026", "belem-2027", "nb-2027"]);
-  assert.equal(calendario.length, 4);
-  assert.equal(km, 15);
+  assert.deepEqual(calendario.map((e) => e.id), ["marinheiro-2026", "reveillon-2026", "belem-2027", "estacoes-outono-2027", "nb-2027"]);
+  assert.equal(calendario.length, 5);
+  assert.equal(km, 20);
   assert.equal(calendario.some((e) => e.id === "aero-2026" || e.id === "montevideo" || e.id === "sesc-2026"), false);
   assert.equal(seed.filter((e) => e.status === "concluido").length, 4);
   assert.equal(seed.filter(earned).length, 4);
-  assert.equal(seed.filter(futuras).length, 6);
-  assert.equal(seed.length, 12);
+  assert.equal(seed.filter(futuras).length, 7);
+  assert.equal(seed.length, 13);
   assert.equal(seed.filter((e) => e.status === "naoConcluida").length, 2);
 });
 
@@ -106,6 +106,7 @@ test("a página reconhece o status naoConcluida e separa a medalha não conquist
   assert.match(html, /rafael-victoria-calendar-v5/);
   assert.match(html, /rafael-victoria-calendar-v6/);
   assert.match(html, /rafael-victoria-calendar-v7/);
+  assert.match(html, /rafael-victoria-calendar-v8/);
   assert.equal(html.includes("A imagem não foi invertida nem convertida em pontos."), false);
 });
 
@@ -131,11 +132,11 @@ test("a página renderizada mostra os totais e o estado não concluído", async 
     pretendToBeVisual: true,
   });
   const doc = dom.window.document;
-  assert.equal(doc.getElementById("total").textContent, "12");
+  assert.equal(doc.getElementById("total").textContent, "13");
   assert.equal(doc.getElementById("done").textContent, "04");
-  assert.equal(doc.getElementById("future").textContent, "06");
+  assert.equal(doc.getElementById("future").textContent, "07");
   assert.equal(doc.getElementById("medals").textContent, "04");
-  assert.equal(doc.getElementById("calendar-summary").textContent, "4 provas · 15 km · inscrições confirmadas");
+  assert.equal(doc.getElementById("calendar-summary").textContent, "5 provas · 20 km · inscrições confirmadas");
   const agendaHtml = doc.getElementById("calendar-list").textContent;
   assert.equal(agendaHtml.includes("Aero Run"), false);
   assert.equal(agendaHtml.includes("Passos pela Rambla"), false);
@@ -148,8 +149,11 @@ test("a página renderizada mostra os totais e o estado não concluído", async 
     "Corrida do Marinheiro",
     "2ª Corrida Réveillon Run 2026",
     "Corrida de Belém 2027",
+    "Circuito das Estações · Outono 2027",
     "+B RUN · 4ª Edição",
   ]);
+  assert.equal(agendaHtml.includes("Circuito das Estações · Outono 2027"), true);
+  assert.equal(agendaHtml.includes("Belém/PA"), true);
   assert.equal(agendaHtml.includes("+B RUN · 4ª Edição"), true);
   assert.equal(agendaHtml.includes("+B Run · edição 2027"), false);
   assert.equal(agendaHtml.includes("Shopping Bosque Grão-Pará, Belém/PA"), true);
@@ -282,6 +286,46 @@ test("2ª Corrida Réveillon Run 2026 entra como prevista, só com a inscrição
   const ordem = calendario
     .slice()
     .sort((a, b) => toISO(a.date).localeCompare(toISO(b.date)) || (a.time || "").localeCompare(b.time || ""));
-  assert.deepEqual(ordem.map((e) => e.id), ["marinheiro-2026", "reveillon-2026", "belem-2027", "nb-2027"]);
+  assert.deepEqual(ordem.map((e) => e.id), ["marinheiro-2026", "reveillon-2026", "belem-2027", "estacoes-outono-2027", "nb-2027"]);
   assert.equal(html.includes("formatClockLabel"), true);
+});
+
+test("Circuito das Estações Outono 2027 entra como prevista, com inscrição confirmada e sem dados pessoais", () => {
+  const seed = extrairSeed(html);
+  const prova = seed.find((e) => e.id === "estacoes-outono-2027");
+  assert.equal(prova.name, "Circuito das Estações · Outono 2027");
+  assert.equal(prova.date, "28/03/2027");
+  assert.equal(toISO(prova.date), "2027-03-28");
+  assert.equal(new Date(`${toISO(prova.date)}T12:00:00Z`).toLocaleDateString("pt-BR", { weekday: "long", timeZone: "UTC" }), "domingo");
+  assert.equal(prova.time || "", "");
+  assert.equal(prova.timeEnd || "", "");
+  assert.equal(prova.location, "Local de largada a confirmar · Belém/PA");
+  assert.equal(prova.distance, "5 km");
+  assert.equal(prova.status, "previsto");
+  assert.equal(prova.registered, true);
+  assert.equal(prova.earned, false);
+  assert.equal(prova.type, "presencial");
+  assert.equal(prova.shirt, false);
+  assert.equal(prova.medal, "");
+  assert.equal(prova.kit, "");
+  assert.match(prova.description, /Etapa Outono/);
+  assert.match(prova.description, /Running Land/);
+  assert.match(prova.description, /Inscrição confirmada/);
+  assert.match(prova.description, /Kit com camiseta/);
+  assert.match(prova.description, /Horário e local de largada a confirmar/);
+  assert.equal(prova.description.includes("Victoria"), false);
+  assert.equal(/pedido|QR|R\$|Pix|pagamento|tamanho/i.test(prova.description), false);
+  assert.equal("pace" in prova || "ritmo" in prova || "posicao" in prova || "bib" in prova || "pedido" in prova, false);
+  assert.equal(Boolean(agenda(prova)), true);
+  assert.equal(futuras(prova), true);
+  assert.equal(earned(prova), false);
+  const calendario = seed.filter(agenda);
+  const ordem = calendario
+    .slice()
+    .sort((a, b) => toISO(a.date).localeCompare(toISO(b.date)) || (a.time || "").localeCompare(b.time || ""));
+  assert.deepEqual(ordem.map((e) => e.id), ["marinheiro-2026", "reveillon-2026", "belem-2027", "estacoes-outono-2027", "nb-2027"]);
+  assert.match(html, /rafael-victoria-calendar-v8/);
+  assert.match(html, /overrides\['estacoes-outono-2027'\]/);
+  assert.equal(html.includes("Número do pedido"), false);
+  assert.equal(html.includes("QR code"), false);
 });
